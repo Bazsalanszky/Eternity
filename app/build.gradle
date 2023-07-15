@@ -5,7 +5,7 @@ plugins {
 android {
     compileSdk 33
     defaultConfig {
-        applicationId "ml.docilealligator.infinityforreddit"
+        applicationId "eu.toldi.infinityforlemmy"
         minSdk 21
         targetSdk 33
         versionCode 121
@@ -13,7 +13,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [eventBusIndex: 'ml.docilealligator.infinityforreddit.EventBusIndex']
+                arguments = [eventBusIndex: 'eu.toldi.infinityforlemmy.EventBusIndex']
             }
         }
     }
@@ -52,6 +52,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'eu.toldi.infinityforlemmy'
 }
 
 dependencies {
@@ -151,7 +152,7 @@ dependencies {
     implementation 'com.github.santalu:aspect-ratio-imageview:1.0.9'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
     def bivVersion = "1.8.1"
-    implementation "com.github.piasy:BigImageViewer:$bivVersion"
+    implementation "com.github.piasy:BigImageViewer:bivVersion"
     implementation "com.github.piasy:GlideImageLoader:$bivVersion"
     implementation "com.github.piasy:GlideImageViewFactory:$bivVersion"
 
