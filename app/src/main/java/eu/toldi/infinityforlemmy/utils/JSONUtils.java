@@ -30,7 +30,7 @@ public class JSONUtils {
     public static final String LIKES_KEY = "likes";
     public static final String NSFW_KEY = "over_18";
     public static final String PERMALINK_KEY = "permalink";
-    public static final String CREATED_UTC_KEY = "created_utc";
+    public static final String PUBLISHED = "published";
     public static final String PREVIEW_KEY = "preview";
     public static final String IMAGES_KEY = "images";
     public static final String WIDTH_KEY = "width";
@@ -59,8 +59,8 @@ public class JSONUtils {
     public static final String ICON_IMG_KEY = "icon_img";
     public static final String ICON_URL_KEY = "icon_url";
     public static final String COMMUNITY_ICON_KEY = "community_icon";
-    public static final String LINK_KARMA_KEY = "link_karma";
-    public static final String COMMENT_KARMA_KEY = "comment_karma";
+    public static final String POST_SCORE_KEY = "post_score";
+    public static final String COMMENT_SCORE_KEY = "comment_score";
     public static final String DISPLAY_NAME_KEY = "display_name";
     public static final String SUBREDDIT_TYPE_KEY = "subreddit_type";
     public static final String SUBREDDIT_TYPE_VALUE_USER = "user";

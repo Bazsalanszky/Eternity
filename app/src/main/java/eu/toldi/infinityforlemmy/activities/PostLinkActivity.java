@@ -42,6 +42,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
@@ -126,7 +127,7 @@ public class PostLinkActivity extends BaseActivity implements FlairBottomSheetFr
     EditText linkEditText;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -355,7 +356,7 @@ public class PostLinkActivity extends BaseActivity implements FlairBottomSheetFr
             if (!URLUtil.isHttpsUrl(url) && !URLUtil.isHttpUrl(url)) {
                 url = "https://" + url;
             }
-            mRetrofit.newBuilder()
+            mRetrofit.getRetrofit().newBuilder()
                     .baseUrl("http://localhost/")
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build().create(TitleSuggestion.class).getHtml(url).enqueue(new Callback<String>() {
@@ -465,7 +466,7 @@ public class PostLinkActivity extends BaseActivity implements FlairBottomSheetFr
 
     private void loadSubredditIcon() {
         LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditName,
-                mAccessToken, mOauthRetrofit, mRetrofit, iconImageUrl -> {
+                mAccessToken, mOauthRetrofit, mRetrofit.getRetrofit(), iconImageUrl -> {
             iconUrl = iconImageUrl;
             displaySubredditIcon();
             loadSubredditIconSuccessful = true;

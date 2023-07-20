@@ -70,7 +70,7 @@ public class ParseMessage {
         boolean isNew = rawMessageJSON.getBoolean(JSONUtils.NEW_KEY);
         int score = rawMessageJSON.getInt(JSONUtils.SCORE_KEY);
         int nComments = rawMessageJSON.isNull(JSONUtils.NUM_COMMENTS_KEY) ? -1 : rawMessageJSON.getInt(JSONUtils.NUM_COMMENTS_KEY);
-        long timeUTC = rawMessageJSON.getLong(JSONUtils.CREATED_UTC_KEY) * 1000;
+        long timeUTC = rawMessageJSON.getLong(JSONUtils.PUBLISHED) * 1000;
 
         Calendar submitTimeCalendar = Calendar.getInstance();
         submitTimeCalendar.setTimeInMillis(timeUTC);

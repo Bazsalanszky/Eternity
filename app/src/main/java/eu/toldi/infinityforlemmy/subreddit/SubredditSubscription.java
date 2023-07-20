@@ -13,6 +13,7 @@ import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -115,8 +116,8 @@ public class SubredditSubscription {
                                            SubredditData subredditData, String accountName,
                                            SubredditSubscriptionListener subredditSubscriptionListener) {
         executor.execute(() -> {
-            SubscribedSubredditData subscribedSubredditData = new SubscribedSubredditData(subredditData.getId(), subredditData.getName(),
-                    subredditData.getIconUrl(), accountName, false);
+            SubscribedSubredditData subscribedSubredditData = new SubscribedSubredditData(subredditData.getId(), LemmyUtils.actorID2FullName(subredditData.getActorId()), subredditData.getName(),
+                    subredditData.getIconUrl(), accountName);
             if (accountName.equals("-")) {
                 if (!redditDataRoomDatabase.accountDao().isAnonymousAccountInserted()) {
                     redditDataRoomDatabase.accountDao().insert(Account.getAnonymousAccount());

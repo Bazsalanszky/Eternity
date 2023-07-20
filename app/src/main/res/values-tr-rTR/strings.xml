@@ -732,7 +732,7 @@ Amoled Tema Şablonu Oluştur"</string>
     <string name="report_reason_general_child_pornography">"Çocuk Pornografisi İçeriyor"</string>
     <string name="report_reason_general_abusive_content">"Kötüye Kullanım Amaçlı İçerik İçeriyor"</string>
     <string name="home">"Ana Sayfa"</string>
-    <string name="popular">"Popüler"</string>
+    <string name="local">"Popüler"</string>
     <string name="notifications">"Bildirimler"</string>
     <string name="messages">"Mesajlar"</string>
     <string name="message">"Mesaj"</string>

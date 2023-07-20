@@ -72,6 +72,7 @@ import eu.toldi.infinityforlemmy.FragmentCommunicator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
@@ -146,7 +147,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     TextView mFetchPostInfoTextView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("pushshift")
     Retrofit pushshiftRetrofit;
@@ -593,13 +594,13 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             setupMenu();
 
             mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
-                    this, mExecutor, mCustomThemeWrapper, mRetrofit, mOauthRetrofit, mGfycatRetrofit,
+                    this, mExecutor, mCustomThemeWrapper, mRetrofit.getRetrofit(), mOauthRetrofit, mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mRedditDataRoomDatabase, mGlide,
                     mSeparatePostAndComments, mAccessToken, mAccountName, mPost, mLocale,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostDetailsSharedPreferences,
                     mExoCreator, post -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
-                    this, mCustomThemeWrapper, mExecutor, mRetrofit, mOauthRetrofit,
+                    this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(), mOauthRetrofit,
                     mAccessToken, mAccountName, mPost, mLocale, mSingleCommentId,
                     isSingleCommentThreadMode, mSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
@@ -699,11 +700,6 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
                 MenuItem spoilerItem = mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment);
                 spoilerItem.setVisible(true);
-                if (mPost.isSpoiler()) {
-                    Utils.setTitleWithCustomFontToMenuItem(activity.typeface, spoilerItem, activity.getString(R.string.action_unmark_spoiler));
-                } else {
-                    Utils.setTitleWithCustomFontToMenuItem(activity.typeface, spoilerItem, activity.getString(R.string.action_mark_spoiler));
-                }
 
                 mMenu.findItem(R.id.action_edit_flair_view_post_detail_fragment).setVisible(true);
             }
@@ -823,7 +819,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @NonNull
     private SortType.Type loadSortType() {
         String sortTypeName = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_POST_COMMENT, SortType.Type.CONFIDENCE.name());
-        if (SortType.Type.BEST.name().equals(sortTypeName)) {
+        if (SortType.Type.ACTIVE.name().equals(sortTypeName)) {
             // migrate from BEST to CONFIDENCE
             // key guaranteed to exist because got non-default value
             mSortTypeSharedPreferences.edit()
@@ -906,7 +902,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             loadIconListener.loadIconSuccess(authorName, activity.authorIcons.get(authorName));
         } else {
             LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, authorName,
-                    mRetrofit, iconImageUrl -> {
+                    mRetrofit.getRetrofit(), iconImageUrl -> {
                         activity.authorIcons.put(authorName, iconImageUrl);
                         loadIconListener.loadIconSuccess(authorName, iconImageUrl);
                     });
@@ -1104,11 +1100,6 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             }
             return true;
         } else if (itemId == R.id.action_spoiler_view_post_detail_fragment) {
-            if (mPost.isSpoiler()) {
-                unmarkSpoiler();
-            } else {
-                markSpoiler();
-            }
             return true;
         } else if (itemId == R.id.action_edit_flair_view_post_detail_fragment) {
             FlairBottomSheetFragment flairBottomSheetFragment = new FlairBottomSheetFragment();
@@ -1265,10 +1256,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         Call<String> postAndComments;
         if (mAccessToken == null) {
             if (isSingleCommentThreadMode && mSingleCommentId != null) {
-                postAndComments = mRetrofit.create(RedditAPI.class).getPostAndCommentsSingleThreadById(
+                postAndComments = mRetrofit.getRetrofit().create(RedditAPI.class).getPostAndCommentsSingleThreadById(
                         subredditId, mSingleCommentId, sortType, mContextNumber);
             } else {
-                postAndComments = mRetrofit.create(RedditAPI.class).getPostAndCommentsById(subredditId,
+                postAndComments = mRetrofit.getRetrofit().create(RedditAPI.class).getPostAndCommentsById(subredditId,
                         sortType);
             }
         } else {
@@ -1299,7 +1290,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
                             mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
                                     ViewPostDetailFragment.this, mExecutor, mCustomThemeWrapper,
-                                    mRetrofit, mOauthRetrofit, mGfycatRetrofit, mRedgifsRetrofit,
+                                    mRetrofit.getRetrofit(), mOauthRetrofit, mGfycatRetrofit, mRedgifsRetrofit,
                                     mStreamableApiProvider, mRedditDataRoomDatabase, mGlide, mSeparatePostAndComments,
                                     mAccessToken, mAccountName, mPost, mLocale, mSharedPreferences,
                                     mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences,
@@ -1308,7 +1299,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
                             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                                     ViewPostDetailFragment.this, mCustomThemeWrapper, mExecutor,
-                                    mRetrofit, mOauthRetrofit, mAccessToken, mAccountName, mPost, mLocale,
+                                    mRetrofit.getRetrofit(), mOauthRetrofit, mAccessToken, mAccountName, mPost, mLocale,
                                     mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences,
                                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                                         @Override
@@ -1436,11 +1427,11 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     e.printStackTrace();
                 }
             }
-            FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit, mPost.getSubredditName(), mAccessToken,
+            FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit.getRetrofit(), mPost.getSubredditNamePrefixed(), mAccessToken,
                     new FetchSubredditData.FetchSubredditDataListener() {
                         @Override
                         public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
-                            String suggestedCommentSort = subredditData.getSuggestedCommentSort();
+                            String suggestedCommentSort = "top";
                             SortType.Type sortTypeType;
                             if (suggestedCommentSort == null || suggestedCommentSort.equals("null") || suggestedCommentSort.equals("")) {
                                 mRespectSubredditRecommendedSortType = false;
@@ -1480,8 +1471,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             commentId = mSingleCommentId;
         }
 
-        Retrofit retrofit = mAccessToken == null ? mRetrofit : mOauthRetrofit;
-        FetchComment.fetchComments(mExecutor, new Handler(), retrofit, mAccessToken, mPost.getId(), commentId, sortType,
+        Retrofit retrofit = mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit;
+        FetchComment.fetchComments(mExecutor, new Handler(), retrofit, mAccessToken, String.valueOf(mPost.getId()), commentId, sortType,
                 mContextNumber, mExpandChildren, mLocale, new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments,
@@ -1567,7 +1558,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         isLoadingMoreChildren = true;
 
-        Retrofit retrofit = mAccessToken == null ? mRetrofit : mOauthRetrofit;
+        Retrofit retrofit = mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit;
         FetchComment.fetchMoreComment(mExecutor, new Handler(), retrofit, mAccessToken, children,
                 mExpandChildren, mPost.getFullName(), sortType, new FetchComment.FetchMoreCommentListener() {
                     @Override
@@ -1604,11 +1595,11 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             if (fetchPost) {
                 Retrofit retrofit;
                 if (mAccessToken == null) {
-                    retrofit = mRetrofit;
+                    retrofit = mRetrofit.getRetrofit();
                 } else {
                     retrofit = mOauthRetrofit;
                 }
-                FetchPost.fetchPost(mExecutor, new Handler(), retrofit, mPost.getId(), mAccessToken,
+                FetchPost.fetchPost(mExecutor, new Handler(), retrofit, String.valueOf(mPost.getId()), mAccessToken,
                         new FetchPost.FetchPostListener() {
                             @Override
                             public void fetchPostSuccess(Post post) {
@@ -1930,7 +1921,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
     @Subscribe
     public void onPostUpdateEvent(PostUpdateEventToPostDetailFragment event) {
-        if (mPost.getId().equals(event.post.getId())) {
+        if (mPost.getId() == event.post.getId()) {
             mPost.setVoteType(event.post.getVoteType());
             mPost.setSaved(event.post.isSaved());
             if (mMenu != null) {

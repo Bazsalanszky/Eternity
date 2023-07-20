@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.dto.VoteDTO;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,16 +23,13 @@ import retrofit2.Retrofit;
 public class VoteThing {
 
     public static void voteThing(Context context, final Retrofit retrofit, String accessToken,
-                                 final VoteThingListener voteThingListener, final String fullName,
-                                 final String point, final int position) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+                                 final VoteThingListener voteThingListener, final int postID,
+                                 final int point, final int position) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.DIR_KEY, point);
-        params.put(APIUtils.ID_KEY, fullName);
-        params.put(APIUtils.RANK_KEY, APIUtils.RANK);
 
-        Call<String> voteThingCall = api.voteThing(APIUtils.getOAuthHeader(accessToken), params);
+
+        Call<String> voteThingCall = api.postLike(new VoteDTO(postID,point,accessToken));
         voteThingCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {

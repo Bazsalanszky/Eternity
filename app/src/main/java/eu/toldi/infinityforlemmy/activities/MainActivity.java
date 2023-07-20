@@ -78,6 +78,7 @@ import eu.toldi.infinityforlemmy.PullNotificationWorker;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
 import eu.toldi.infinityforlemmy.account.AccountViewModel;
@@ -91,7 +92,6 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.FABMoreOptionsBottomSheetF
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostLayoutBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.RandomBottomSheetFragment;
-import eu.toldi.infinityforlemmy.bottomsheetfragments.RedditAPIInfoBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTimeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     AccountViewModel accountViewModel;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -323,6 +323,10 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        String instance = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
+        if(instance != null) {
+            mRetrofit.setBaseURL(instance);
+        }
 
         if (savedInstanceState != null) {
             mFetchUserInfoSuccess = savedInstanceState.getBoolean(FETCH_USER_INFO_STATE);
@@ -336,11 +340,6 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             mNewAccountName = getIntent().getStringExtra(EXTRA_NEW_ACCOUNT_NAME);
         }
 
-        if (!mInternalSharedPreferences.getBoolean(SharedPreferencesUtils.DO_NOT_SHOW_REDDIT_API_INFO_AGAIN, false)) {
-            RedditAPIInfoBottomSheetFragment fragment = new RedditAPIInfoBottomSheetFragment();
-            fragment.setCancelable(false);
-            fragment.show(getSupportFragmentManager(), fragment.getTag());
-        }
 
         initializeNotificationAndBindView();
     }
@@ -385,7 +384,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
         if (mNewAccountName != null) {
             if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase, mCurrentAccountSharedPreferences,
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
                         mExecutor, new Handler(), mNewAccountName, newAccount -> {
                             EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
                             Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
@@ -453,6 +452,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             case SharedPreferencesUtils.MAIN_ACTIVITY_BOTTOM_APP_BAR_OPTION_PROFILE: {
                 Intent intent = new Intent(this, ViewUserDetailActivity.class);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
+                intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountName);
                 startActivity(intent);
                 break;
             }
@@ -786,6 +786,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         if (stringId == R.string.profile) {
                             intent = new Intent(MainActivity.this, ViewUserDetailActivity.class);
                             intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
+                            intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountName);
                         } else if (stringId == R.string.subscriptions) {
                             intent = new Intent(MainActivity.this, SubscribedThingListingActivity.class);
                         } else if (stringId == R.string.multi_reddit) {
@@ -867,7 +868,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
                     @Override
                     public void onAccountClick(String accountName) {
-                        SwitchAccount.switchAccount(mRedditDataRoomDatabase, mCurrentAccountSharedPreferences,
+                        SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
                                 mExecutor, new Handler(), accountName, newAccount -> {
                             Intent intent = new Intent(MainActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -901,7 +902,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_TITLE, getString(R.string.home)));
                         break;
                     case 1:
-                        Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_TITLE, getString(R.string.popular)));
+                        Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_TITLE, getString(R.string.local)));
                         break;
                     case 2:
                         Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_3_TITLE, getString(R.string.all)));
@@ -977,20 +978,19 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         sectionsPagerAdapter.setSubscribedSubreddits(subscribedSubredditData);
                     }
                 });
-        subscribedSubredditViewModel.getAllFavoriteSubscribedSubreddits().observe(this, subscribedSubredditData -> {
+        /*subscribedSubredditViewModel.getAllFavoriteSubscribedSubreddits().observe(this, subscribedSubredditData -> {
             adapter.setFavoriteSubscribedSubreddits(subscribedSubredditData);
             if (mShowFavoriteSubscribedSubreddits && sectionsPagerAdapter != null) {
                 sectionsPagerAdapter.setFavoriteSubscribedSubreddits(subscribedSubredditData);
             }
-        });
+        });*/
 
         accountViewModel = new ViewModelProvider(this,
                 new AccountViewModel.Factory(mRedditDataRoomDatabase)).get(AccountViewModel.class);
         accountViewModel.getAccountsExceptCurrentAccountLiveData().observe(this, adapter::changeAccountsDataset);
         accountViewModel.getCurrentAccountLiveData().observe(this, account -> {
             if (account != null) {
-                adapter.updateAccountInfo(account.getProfileImageUrl(), account.getBannerImageUrl(),
-                        account.getKarma());
+                adapter.updateAccountInfo(account.getProfileImageUrl(), account.getBannerImageUrl());
             }
         });
 
@@ -1015,7 +1015,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
     private void loadSubscriptions() {
         if (mAccessToken != null && !mFetchSubscriptionsSuccess) {
-            FetchSubscribedThing.fetchSubscribedThing(mOauthRetrofit, mAccessToken, mAccountName, null,
+            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountName, null,
                     new ArrayList<>(), new ArrayList<>(),
                     new ArrayList<>(),
                     new FetchSubscribedThing.FetchSubscribedThingListener() {
@@ -1653,7 +1653,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             } else if (postType == SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_ALL) {
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_SUBREDDIT);
+                bundle.putInt(PostFragment.EXTRA_POST_TYPE, mAccessToken == null ? PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE : PostPagingSource.TYPE_FRONT_PAGE);
                 bundle.putString(PostFragment.EXTRA_NAME, "all");
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
@@ -1717,8 +1717,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             } else {
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_SUBREDDIT);
-                bundle.putString(PostFragment.EXTRA_NAME, "popular");
+                bundle.putInt(PostFragment.EXTRA_POST_TYPE, mAccessToken == null ? PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE : PostPagingSource.TYPE_FRONT_PAGE);
+                bundle.putString(PostFragment.EXTRA_NAME, "local");
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
                 fragment.setArguments(bundle);

@@ -30,6 +30,7 @@ import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.ReportReason;
 import eu.toldi.infinityforlemmy.ReportThing;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.Rule;
 import eu.toldi.infinityforlemmy.adapters.ReportReasonRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -57,7 +58,7 @@ public class ReportActivity extends BaseActivity {
     Retrofit mOauthRetrofit;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("default")
     SharedPreferences mSharedPreferences;
@@ -119,7 +120,7 @@ public class ReportActivity extends BaseActivity {
         recyclerView.setAdapter(mAdapter);
 
         if (rulesReasons == null) {
-            FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
+            FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
                 @Override
                 public void success(ArrayList<Rule> rules) {
                     mAdapter.setRules(ReportReason.convertRulesToReasons(rules));

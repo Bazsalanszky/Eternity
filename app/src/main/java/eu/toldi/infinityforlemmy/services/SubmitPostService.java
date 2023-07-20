@@ -46,6 +46,7 @@ import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -88,7 +89,7 @@ public class SubmitPostService extends Service {
     private static final String EXTRA_MEDIA_URI = "EU";
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -137,7 +138,7 @@ public class SubmitPostService extends Service {
             boolean receivePostReplyNotifications = bundle.getBoolean(EXTRA_RECEIVE_POST_REPLY_NOTIFICATIONS, true);
             int postType = bundle.getInt(EXTRA_POST_TYPE, EXTRA_POST_TEXT_OR_LINK);
 
-            Retrofit newAuthenticatorOauthRetrofit = mOauthRetrofit.newBuilder().client(new OkHttpClient.Builder().authenticator(new AnyAccountAccessTokenAuthenticator(mRetrofit, mRedditDataRoomDatabase, account, mCurrentAccountSharedPreferences))
+            Retrofit newAuthenticatorOauthRetrofit = mOauthRetrofit.newBuilder().client(new OkHttpClient.Builder().authenticator(new AnyAccountAccessTokenAuthenticator(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, account, mCurrentAccountSharedPreferences))
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)

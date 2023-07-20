@@ -716,7 +716,7 @@ Chodí popředu."</string>
     <string name="report_reason_general_child_pornography">"Obsahuje dětskou pornografii"</string>
     <string name="report_reason_general_abusive_content">"Obsahuje zneužívající obsah"</string>
     <string name="home">"Domů"</string>
-    <string name="popular">"Populární"</string>
+    <string name="local">"Populární"</string>
     <string name="notifications">"Oznámení"</string>
     <string name="messages">"Zprávy"</string>
     <string name="message">"Zpráva"</string>

@@ -24,7 +24,7 @@ public class FetchRemovedComment {
                                            FetchRemovedCommentListener listener) {
         executor.execute(() -> {
             try {
-                Response<String> response = retrofit.create(PushshiftAPI.class).getRemovedComment(comment.getId()).execute();
+                Response<String> response = retrofit.create(PushshiftAPI.class).getRemovedComment(String.valueOf(comment.getId())).execute();
                 if (response.isSuccessful()) {
                     Comment removedComment = parseComment(response.body(), comment);
                     handler.post(() -> {

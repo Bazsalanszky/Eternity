@@ -26,36 +26,44 @@ public class ParseUserData {
             return null;
         }
 
-        userDataJson = userDataJson.getJSONObject(JSONUtils.DATA_KEY);
-        String userName = userDataJson.getString(JSONUtils.NAME_KEY);
-        String iconImageUrl = userDataJson.getString(JSONUtils.ICON_IMG_KEY);
-        String bannerImageUrl = "";
-        boolean canBeFollowed;
-        if (userDataJson.has(JSONUtils.SUBREDDIT_KEY) && !userDataJson.isNull(JSONUtils.SUBREDDIT_KEY)) {
-            bannerImageUrl = userDataJson.getJSONObject(JSONUtils.SUBREDDIT_KEY).getString(JSONUtils.BANNER_IMG_KEY);
-            canBeFollowed = true;
-        } else {
-            canBeFollowed = false;
-        }
-        int linkKarma = userDataJson.getInt(JSONUtils.LINK_KARMA_KEY);
-        int commentKarma = userDataJson.getInt(JSONUtils.COMMENT_KARMA_KEY);
-        int awarderKarma = 0;
-        int awardeeKarma = 0;
-        int totalKarma = linkKarma + commentKarma;
-        if (parseFullKarma) {
-            awarderKarma = userDataJson.getInt(JSONUtils.AWARDER_KARMA_KEY);
-            awardeeKarma = userDataJson.getInt(JSONUtils.AWARDEE_KARMA_KEY);
-            totalKarma = userDataJson.getInt(JSONUtils.TOTAL_KARMA_KEY);
-        }
-        long cakeday = userDataJson.getLong(JSONUtils.CREATED_UTC_KEY) * 1000;
-        boolean isGold = userDataJson.getBoolean(JSONUtils.IS_GOLD_KEY);
-        boolean isFriend = userDataJson.getBoolean(JSONUtils.IS_FRIEND_KEY);
-        boolean isNsfw = userDataJson.getJSONObject(JSONUtils.SUBREDDIT_KEY).getBoolean(JSONUtils.OVER_18_KEY);
-        String description = userDataJson.getJSONObject(JSONUtils.SUBREDDIT_KEY).getString(JSONUtils.PUBLIC_DESCRIPTION_KEY);
-        String title = userDataJson.getJSONObject(JSONUtils.SUBREDDIT_KEY).getString(JSONUtils.TITLE_KEY);
 
-        return new UserData(userName, iconImageUrl, bannerImageUrl, linkKarma, commentKarma, awarderKarma,
-                awardeeKarma, totalKarma, cakeday, isGold, isFriend, canBeFollowed, isNsfw, description, title);
+        JSONObject personJson = userDataJson.getJSONObject("person_view").getJSONObject("person");
+        String userName = personJson.getString(JSONUtils.NAME_KEY);
+        String actor_id = personJson.getString("actor_id");
+        String iconImageUrl = "";
+        String bannerImageUrl = "";
+        if (!personJson.isNull("avatar")) {
+            iconImageUrl = personJson.getString("avatar");
+        }
+        if (!personJson.isNull("banner")) {
+            bannerImageUrl = personJson.getString("banner");
+        }
+        JSONObject countsJson = userDataJson.getJSONObject("person_view").getJSONObject("counts");
+
+        int linkKarma = countsJson.getInt(JSONUtils.POST_SCORE_KEY);
+        int commentKarma = countsJson.getInt(JSONUtils.COMMENT_SCORE_KEY);
+        int account_id = personJson.getInt("id");
+        int instance_id = personJson.getInt("instance_id");
+
+        String cakeday = personJson.getString(JSONUtils.PUBLISHED);
+        boolean isBot = personJson.getBoolean("bot_account");
+        boolean isBanned = personJson.getBoolean("banned");
+        boolean isLocal = personJson.getBoolean("local");
+        boolean isAdmin = personJson.getBoolean("admin");
+        boolean isDeleted = personJson.getBoolean("deleted");
+
+        String description = "";
+
+        if (!personJson.isNull("bio")) {
+            description = personJson.getString("bio");
+        }
+        String title = "";
+        if (!personJson.isNull("display_name")) {
+            title = personJson.getString("display_name");
+        }
+
+
+        return new UserData(account_id,userName,title, iconImageUrl,isBanned,cakeday,actor_id,isLocal,isDeleted,isAdmin,isBot,instance_id);
     }
 
     interface ParseUserDataListener {
@@ -96,10 +104,7 @@ public class ParseUserData {
                 try {
                     userData = parseUserDataBase(jsonResponse, true);
                     if (redditDataRoomDatabase != null) {
-                        redditDataRoomDatabase.accountDao().updateAccountInfo(userData.getName(), userData.getIconUrl(), userData.getBanner(), userData.getTotalKarma());
-                    }
-                    if (jsonResponse.getJSONObject(JSONUtils.DATA_KEY).has(JSONUtils.INBOX_COUNT_KEY)) {
-                        inboxCount = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getInt(JSONUtils.INBOX_COUNT_KEY);
+                        redditDataRoomDatabase.accountDao().updateAccountInfo(userData.getName(), userData.getIconUrl(), userData.getBanner());
                     }
                 } catch (JSONException e) {
                     parseFailed = true;

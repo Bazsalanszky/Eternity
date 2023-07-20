@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.SortType;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
@@ -19,13 +20,13 @@ public class FetchUserData {
 
     public static void fetchUserData(RedditDataRoomDatabase redditDataRoomDatabase, Retrofit retrofit,
                                      String accessToken, String userName, FetchUserDataListener fetchUserDataListener) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
         Call<String> userInfo;
         if (redditDataRoomDatabase == null) {
-            userInfo = api.getUserData(userName);
+            userInfo = api.userInfo(userName,null);
         } else {
-            userInfo = api.getUserDataOauth(APIUtils.getOAuthHeader(accessToken), userName);
+            userInfo = api.userInfo(userName,accessToken);
         }
         userInfo.enqueue(new Callback<>() {
             @Override

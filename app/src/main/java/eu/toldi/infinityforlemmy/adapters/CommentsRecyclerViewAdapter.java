@@ -359,7 +359,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         if (holder instanceof CommentViewHolder) {
             Comment comment = getCurrentComment(position);
             if (comment != null) {
-                if (mIsSingleCommentThreadMode && comment.getId().equals(mSingleCommentId)) {
+                if (mIsSingleCommentThreadMode && String.valueOf(comment.getId()).equals(mSingleCommentId)) {
                     holder.itemView.setBackgroundColor(mSingleCommentThreadBackgroundColor);
                 } else if (comment.getAwards() != null && !comment.getAwards().equals("")) {
                     holder.itemView.setBackgroundColor(mAwardedCommentBackgroundColor);
@@ -1396,21 +1396,21 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 Comment comment = getCurrentComment(this);
                 if (comment != null) {
                     int previousVoteType = comment.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != Comment.VOTE_TYPE_UPVOTE) {
                         //Not upvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
-                        newVoteType = APIUtils.DIR_UPVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UPVOTE);
                         upvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mUpvotedColor);
                         topScoreTextView.setTextColor(mUpvotedColor);
                     } else {
                         //Upvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                         topScoreTextView.setTextColor(mSecondaryTextColor);
@@ -1428,7 +1428,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         @Override
                         public void onVoteThingSuccess(int position) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_UPVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
                                 if (currentPosition == position) {
                                     upvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
@@ -1459,7 +1459,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         @Override
                         public void onVoteThingFail(int position) {
                         }
-                    }, comment.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 
@@ -1477,21 +1477,21 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 Comment comment = getCurrentComment(this);
                 if (comment != null) {
                     int previousVoteType = comment.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != Comment.VOTE_TYPE_DOWNVOTE) {
                         //Not downvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
-                        newVoteType = APIUtils.DIR_DOWNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mDownvotedColor);
                         topScoreTextView.setTextColor(mDownvotedColor);
                     } else {
                         //Downvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                         topScoreTextView.setTextColor(mSecondaryTextColor);
@@ -1510,7 +1510,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_DOWNVOTE)) {
+                            if (newVoteType  == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
@@ -1541,7 +1541,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         @Override
                         public void onVoteThingFail(int position1) {
                         }
-                    }, comment.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 

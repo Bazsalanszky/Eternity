@@ -50,7 +50,7 @@ public class PullNotificationWorker extends Worker {
     Retrofit mOauthWithoutAuthenticatorRetrofit;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -227,49 +227,7 @@ public class PullNotificationWorker extends Worker {
         if (response.isSuccessful()) {
             return response;
         } else {
-            if (response.code() == 401) {
-                String accessToken = refreshAccessToken(account);
-                if (!accessToken.equals("")) {
-                    account.setAccessToken(accessToken);
-                    return fetchMessages(account, retryCount - 1);
-                }
-
-            }
             return null;
         }
-    }
-
-    private String refreshAccessToken(Account account) {
-        String refreshToken = account.getRefreshToken();
-
-        RedditAPI api = mRetrofit.create(RedditAPI.class);
-
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.GRANT_TYPE_KEY, APIUtils.GRANT_TYPE_REFRESH_TOKEN);
-        params.put(APIUtils.REFRESH_TOKEN_KEY, refreshToken);
-
-        Call<String> accessTokenCall = api.getAccessToken(APIUtils.getHttpBasicAuthHeader(), params);
-        try {
-            Response<String> response = accessTokenCall.execute();
-            if (response.isSuccessful() && response.body() != null) {
-                JSONObject jsonObject = new JSONObject(response.body());
-                String newAccessToken = jsonObject.getString(APIUtils.ACCESS_TOKEN_KEY);
-                String newRefreshToken = jsonObject.has(APIUtils.REFRESH_TOKEN_KEY) ? jsonObject.getString(APIUtils.REFRESH_TOKEN_KEY) : null;
-                if (newRefreshToken == null) {
-                    mRedditDataRoomDatabase.accountDao().updateAccessToken(account.getAccountName(), newAccessToken);
-                } else {
-                    mRedditDataRoomDatabase.accountDao().updateAccessTokenAndRefreshToken(account.getAccountName(), newAccessToken, newRefreshToken);
-                }
-                if (mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, "").equals(account.getAccountName())) {
-                    mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, newAccessToken).apply();
-                }
-                return newAccessToken;
-            }
-            return "";
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
-        return "";
     }
 }

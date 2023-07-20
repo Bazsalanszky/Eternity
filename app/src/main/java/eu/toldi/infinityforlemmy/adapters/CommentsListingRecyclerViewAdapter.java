@@ -67,7 +67,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
     private static final DiffUtil.ItemCallback<Comment> DIFF_CALLBACK = new DiffUtil.ItemCallback<Comment>() {
         @Override
         public boolean areItemsTheSame(@NonNull Comment comment, @NonNull Comment t1) {
-            return comment.getId().equals(t1.getId());
+            return comment.getId() == t1.getId();
         }
 
         @Override
@@ -538,21 +538,21 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 Comment comment = getItem(getBindingAdapterPosition());
                 if (comment != null) {
                     int previousVoteType = comment.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != Comment.VOTE_TYPE_UPVOTE) {
                         //Not upvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
-                        newVoteType = APIUtils.DIR_UPVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UPVOTE);
                         upvoteButton
                                 .setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mUpvotedColor);
                     } else {
                         //Upvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                     }
@@ -566,7 +566,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_UPVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
                                 if (currentPosition == position) {
                                     upvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
@@ -592,7 +592,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         @Override
                         public void onVoteThingFail(int position) {
                         }
-                    }, comment.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 
@@ -609,20 +609,20 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 Comment comment = getItem(getBindingAdapterPosition());
                 if (comment != null) {
                     int previousVoteType = comment.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != Comment.VOTE_TYPE_DOWNVOTE) {
                         //Not downvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
-                        newVoteType = APIUtils.DIR_DOWNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mDownvotedColor);
                     } else {
                         //Downvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                     }
@@ -636,7 +636,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_DOWNVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
@@ -662,7 +662,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         @Override
                         public void onVoteThingFail(int position1) {
                         }
-                    }, comment.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 

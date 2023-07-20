@@ -312,7 +312,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
 
         tab1AddImageView.setOnClickListener(view -> selectName(0));
 
-        tab2CurrentTitle = mainActivityTabsSharedPreferences.getString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_TITLE, getString(R.string.popular));
+        tab2CurrentTitle = mainActivityTabsSharedPreferences.getString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_TITLE, getString(R.string.local));
         tab2CurrentPostType = mainActivityTabsSharedPreferences.getInt((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_POST_TYPE, SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_POPULAR);
         tab2CurrentName = mainActivityTabsSharedPreferences.getString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_NAME, "");
         tab2TypeSummaryTextView.setText(typeValues[tab2CurrentPostType]);

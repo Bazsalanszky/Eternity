@@ -70,6 +70,7 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.adapters.HistoryPostRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.adapters.Paging3LoadingStateAdapter;
@@ -159,7 +160,7 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
     HistoryPostViewModel mHistoryPostViewModel;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -655,11 +656,11 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
     private void initializeAndBindPostViewModel(String accessToken) {
         if (postType == HistoryPostPagingSource.TYPE_READ_POSTS) {
             mHistoryPostViewModel = new ViewModelProvider(HistoryPostFragment.this, new HistoryPostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
+                    accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
                     accountName, mSharedPreferences, HistoryPostPagingSource.TYPE_READ_POSTS, postFilter)).get(HistoryPostViewModel.class);
         } else {
             mHistoryPostViewModel = new ViewModelProvider(HistoryPostFragment.this, new HistoryPostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
+                    accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
                     accountName, mSharedPreferences, HistoryPostPagingSource.TYPE_READ_POSTS, postFilter)).get(HistoryPostViewModel.class);
         }
 
@@ -932,14 +933,14 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
         } else {
             if (isSubreddit) {
                 LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase,
-                        subredditOrUserName, accessToken, mOauthRetrofit, mRetrofit,
+                        subredditOrUserName, accessToken, mOauthRetrofit, mRetrofit.getRetrofit(),
                         iconImageUrl -> {
                             subredditOrUserIcons.put(subredditOrUserName, iconImageUrl);
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
                         });
             } else {
                 LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditOrUserName,
-                        mRetrofit, iconImageUrl -> {
+                        mRetrofit.getRetrofit(), iconImageUrl -> {
                             subredditOrUserIcons.put(subredditOrUserName, iconImageUrl);
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
                         });
@@ -1036,8 +1037,6 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
                 post.setNComments(event.post.getNComments());
                 post.setNSFW(event.post.isNSFW());
                 post.setHidden(event.post.isHidden());
-                post.setSpoiler(event.post.isSpoiler());
-                post.setFlair(event.post.getFlair());
                 post.setSaved(event.post.isSaved());
                 if (event.post.isRead()) {
                     post.markAsRead();

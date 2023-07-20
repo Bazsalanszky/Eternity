@@ -21,19 +21,19 @@ public class FetchRemovedCommentReveddit {
                                            long postCreatedUtc, int nComments, FetchRemovedCommentListener listener) {
         executor.execute(() -> {
             String parentIdWithoutPrefix = comment.getParentId().substring(3);
-            String rootCommentId = parentIdWithoutPrefix.equals(comment.getLinkId()) ? comment.getId() : parentIdWithoutPrefix;
+            String rootCommentId = parentIdWithoutPrefix.equals(comment.getLinkId()) ? String.valueOf(comment.getId()) : parentIdWithoutPrefix;
             try {
                 Response<String> response = retrofit.create(RevedditAPI.class).getRemovedComments(
                         APIUtils.getRevedditHeader(),
                         comment.getLinkId(),
                         (comment.getCommentTimeMillis() / 1000) - 1,
                         rootCommentId,
-                        comment.getId(),
+                        String.valueOf(comment.getId()),
                         nComments,
                         postCreatedUtc / 1000,
                         true).execute();
                 if (response.isSuccessful()) {
-                    Comment removedComment = parseRemovedComment(new JSONObject(response.body()).getJSONObject(comment.getId()), comment);
+                    Comment removedComment = parseRemovedComment(new JSONObject(response.body()).getJSONObject(String.valueOf(comment.getId())), comment);
                     handler.post(() -> {
                         if (removedComment != null) {
                             listener.fetchSuccess(removedComment, comment);

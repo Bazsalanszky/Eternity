@@ -38,6 +38,7 @@ import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.SearchUsersResultActivity;
@@ -77,7 +78,7 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
     UserListingViewModel mUserListingViewModel;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -142,7 +143,7 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
         sortType = new SortType(SortType.Type.valueOf(sort.toUpperCase()));
         boolean nsfw = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.NSFW_BASE, false);
 
-        mAdapter = new UserListingRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRetrofit,
+        mAdapter = new UserListingRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRetrofit.getRetrofit(),
                 mCustomThemeWrapper, accessToken, accountName, mRedditDataRoomDatabase,
                 getArguments().getBoolean(EXTRA_IS_MULTI_SELECTION, false),
                 new UserListingRecyclerViewAdapter.Callback() {
@@ -178,7 +179,7 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
             });
         }
 
-        UserListingViewModel.Factory factory = new UserListingViewModel.Factory(mRetrofit, mQuery,
+        UserListingViewModel.Factory factory = new UserListingViewModel.Factory(mRetrofit.getRetrofit(), mQuery,
                 sortType, nsfw);
         mUserListingViewModel = new ViewModelProvider(this, factory).get(UserListingViewModel.class);
         mUserListingViewModel.getUsers().observe(getViewLifecycleOwner(), UserData -> mAdapter.submitList(UserData));

@@ -752,7 +752,7 @@ Nu e bolnavă sau ceva de genul, dar cu siguranță ar putea să se facă bine."
     <string name="report_reason_general_child_pornography">"Conține Pornografie Infantilă"</string>
     <string name="report_reason_general_abusive_content">"Conține Conținut Abuziv"</string>
     <string name="home">"Acasă"</string>
-    <string name="popular">"Popular"</string>
+    <string name="local">"Popular"</string>
     <string name="notifications">"Notificări"</string>
     <string name="messages">"Mesaje"</string>
     <string name="message">"Mesaj"</string>

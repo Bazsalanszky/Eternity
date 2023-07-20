@@ -53,7 +53,7 @@ public class PostViewModel extends ViewModel {
     public PostViewModel(Executor executor, Retrofit retrofit, String accessToken, String accountName,
                          SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                          @Nullable SharedPreferences postHistorySharedPreferences, int postType,
-                         SortType sortType, PostFilter postFilter, List<String> readPostList) {
+                         SortType sortType, PostFilter postFilter, List<String> readPostList,String option) {
         this.executor = executor;
         this.retrofit = retrofit;
         this.accessToken = accessToken;
@@ -64,6 +64,7 @@ public class PostViewModel extends ViewModel {
         this.sortType = sortType;
         this.postFilter = postFilter;
         this.readPostList = readPostList;
+        this.name = option;
 
         sortTypeLiveData = new MutableLiveData<>();
         sortTypeLiveData.postValue(sortType);
@@ -72,7 +73,7 @@ public class PostViewModel extends ViewModel {
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
-        Pager<String, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
+        Pager<Integer, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
 
         posts = Transformations.switchMap(sortTypeAndPostFilterLiveData, sortAndPostFilter -> {
             changeSortTypeAndPostFilter(
@@ -114,7 +115,7 @@ public class PostViewModel extends ViewModel {
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
-        Pager<String, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
+        Pager<Integer, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
 
         posts = Transformations.switchMap(sortTypeAndPostFilterLiveData, sortAndPostFilter -> {
             changeSortTypeAndPostFilter(
@@ -159,7 +160,7 @@ public class PostViewModel extends ViewModel {
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
-        Pager<String, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
+        Pager<Integer, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
 
         posts = Transformations.switchMap(sortTypeAndPostFilterLiveData, sortAndPostFilter -> {
             changeSortTypeAndPostFilter(
@@ -204,7 +205,7 @@ public class PostViewModel extends ViewModel {
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
-        Pager<String, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
+        Pager<Integer, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
 
         posts = Transformations.switchMap(sortTypeAndPostFilterLiveData, sortAndPostFilter -> {
             changeSortTypeAndPostFilter(
@@ -237,7 +238,7 @@ public class PostViewModel extends ViewModel {
             case PostPagingSource.TYPE_FRONT_PAGE:
                 paging3PagingSource = new PostPagingSource(executor, retrofit, accessToken, accountName,
                         sharedPreferences, postFeedScrolledPositionSharedPreferences, postType, sortType,
-                        postFilter, readPostList);
+                        postFilter, readPostList,name);
                 break;
             case PostPagingSource.TYPE_SUBREDDIT:
             case PostPagingSource.TYPE_MULTI_REDDIT:
@@ -294,7 +295,7 @@ public class PostViewModel extends ViewModel {
         public Factory(Executor executor, Retrofit retrofit, String accessToken, String accountName,
                        SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                        SharedPreferences postHistorySharedPreferences, int postType, SortType sortType,
-                       PostFilter postFilter, List<String> readPostList) {
+                       PostFilter postFilter, List<String> readPostList, String option) {
             this.executor = executor;
             this.retrofit = retrofit;
             this.accessToken = accessToken;
@@ -306,6 +307,7 @@ public class PostViewModel extends ViewModel {
             this.sortType = sortType;
             this.postFilter = postFilter;
             this.readPostList = readPostList;
+            this.name = option;
         }
 
         public Factory(Executor executor, Retrofit retrofit, String accessToken, String accountName,
@@ -368,7 +370,7 @@ public class PostViewModel extends ViewModel {
 
         //Anonymous Front Page
         public Factory(Executor executor, Retrofit retrofit, SharedPreferences sharedPreferences,
-                       String concatenatedSubredditNames, int postType, SortType sortType, PostFilter postFilter) {
+                       String concatenatedSubredditNames, int postType, SortType sortType, PostFilter postFilter, String opt) {
             this.executor = executor;
             this.retrofit = retrofit;
             this.sharedPreferences = sharedPreferences;
@@ -376,6 +378,7 @@ public class PostViewModel extends ViewModel {
             this.postType = postType;
             this.sortType = sortType;
             this.postFilter = postFilter;
+            this.name = opt;
         }
 
         @NonNull
@@ -384,7 +387,7 @@ public class PostViewModel extends ViewModel {
             if (postType == PostPagingSource.TYPE_FRONT_PAGE) {
                 return (T) new PostViewModel(executor, retrofit, accessToken, accountName, sharedPreferences,
                         postFeedScrolledPositionSharedPreferences, postHistorySharedPreferences, postType,
-                        sortType, postFilter, readPostList);
+                        sortType, postFilter, readPostList,name);
             } else if (postType == PostPagingSource.TYPE_SEARCH) {
                 return (T) new PostViewModel(executor, retrofit, accessToken, accountName, sharedPreferences,
                         postFeedScrolledPositionSharedPreferences, postHistorySharedPreferences, name, query,

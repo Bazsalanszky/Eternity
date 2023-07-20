@@ -13,28 +13,28 @@ import eu.toldi.infinityforlemmy.account.Account;
 public class SubscribedSubredditData {
     @NonNull
     @ColumnInfo(name = "id")
-    private String id;
+    private int id;
     @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "qualified_name")
+    private String qualified_name;
     @ColumnInfo(name = "icon")
     private String iconUrl;
     @NonNull
     @ColumnInfo(name = "username")
     private String username;
-    @ColumnInfo(name = "is_favorite")
-    private boolean favorite;
 
-    public SubscribedSubredditData(@NonNull String id, String name, String iconUrl, @NonNull String username,
-                                   boolean favorite) {
+    public SubscribedSubredditData(@NonNull int id, String name,@NonNull String qualified_name, String iconUrl, @NonNull String username) {
         this.id = id;
         this.name = name;
         this.iconUrl = iconUrl;
         this.username = username;
-        this.favorite = favorite;
+        this.qualified_name =qualified_name;
     }
 
     @NonNull
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -51,15 +51,16 @@ public class SubscribedSubredditData {
         return username;
     }
 
+    @NonNull
+    public String getQualified_name() {
+        return qualified_name;
+    }
+
+    public void setQualified_name(String qualified_name) {
+        this.qualified_name = qualified_name;
+    }
+
     public void setUsername(@NonNull String username) {
         this.username = username;
-    }
-
-    public boolean isFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
     }
 }

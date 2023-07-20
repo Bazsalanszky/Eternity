@@ -757,7 +757,7 @@ No está enferma ni nada, pero definitivamente podría mejorar."</string>
     <string name="report_reason_general_child_pornography">"Contiene pornografía infantil"</string>
     <string name="report_reason_general_abusive_content">"Contiene contenido abusivo"</string>
     <string name="home">"Inicio"</string>
-    <string name="popular">"Popular"</string>
+    <string name="local">"Popular"</string>
     <string name="notifications">"Notificaciones"</string>
     <string name="messages">"Mensajes"</string>
     <string name="message">"Mensaje"</string>

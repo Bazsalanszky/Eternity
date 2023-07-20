@@ -15,18 +15,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import retrofit2.HttpException;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class PostPagingSource extends ListenableFuturePagingSource<String, Post> {
+public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post> {
     public static final int TYPE_FRONT_PAGE = 0;
     public static final int TYPE_SUBREDDIT = 1;
     public static final int TYPE_USER = 2;
@@ -59,18 +59,21 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
     private String multiRedditPath;
     private LinkedHashSet<Post> postLinkedHashSet;
 
+    private int page = 1;
+
     PostPagingSource(Executor executor, Retrofit retrofit, String accessToken, String accountName,
                      SharedPreferences sharedPreferences,
                      SharedPreferences postFeedScrolledPositionSharedPreferences, int postType,
-                     SortType sortType, PostFilter postFilter, List<String> readPostList) {
+                     SortType sortType, PostFilter postFilter, List<String> readPostList,String option) {
         this.executor = executor;
         this.retrofit = retrofit;
         this.accessToken = accessToken;
         this.accountName = accountName;
+        this.subredditOrUserName = option;
         this.sharedPreferences = sharedPreferences;
         this.postFeedScrolledPositionSharedPreferences = postFeedScrolledPositionSharedPreferences;
         this.postType = postType;
-        this.sortType = sortType == null ? new SortType(SortType.Type.BEST) : sortType;
+        this.sortType = sortType == null ? new SortType(SortType.Type.ACTIVE) : sortType;
         this.postFilter = postFilter;
         this.readPostList = readPostList;
         postLinkedHashSet = new LinkedHashSet<>();
@@ -101,10 +104,10 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
         }
         this.postType = postType;
         if (sortType == null) {
-            if (path.equals("popular") || path.equals("all")) {
+            if (path.equals("local") || path.equals("all")) {
                 this.sortType = new SortType(SortType.Type.HOT);
             } else {
-                this.sortType = new SortType(SortType.Type.BEST);
+                this.sortType = new SortType(SortType.Type.ACTIVE);
             }
         } else {
             this.sortType = sortType;
@@ -155,44 +158,46 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
 
     @Nullable
     @Override
-    public String getRefreshKey(@NonNull PagingState<String, Post> pagingState) {
+    public Integer getRefreshKey(@NonNull PagingState<Integer, Post> pagingState) {
         return null;
     }
 
     @NonNull
     @Override
-    public ListenableFuture<LoadResult<String, Post>> loadFuture(@NonNull LoadParams<String> loadParams) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+    public ListenableFuture<LoadResult<Integer, Post>> loadFuture(@NonNull LoadParams<Integer> loadParams) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
         switch (postType) {
+            default:
             case TYPE_FRONT_PAGE:
                 return loadHomePosts(loadParams, api);
             case TYPE_SUBREDDIT:
                 return loadSubredditPosts(loadParams, api);
             case TYPE_USER:
                 return loadUserPosts(loadParams, api);
-            case TYPE_SEARCH:
+         /*   case TYPE_SEARCH:
                 return loadSearchPosts(loadParams, api);
             case TYPE_MULTI_REDDIT:
                 return loadMultiRedditPosts(loadParams, api);
             default:
-                return loadAnonymousHomePosts(loadParams, api);
+                return loadAnonymousHomePosts(loadParams, api);*/
         }
     }
 
-    public LoadResult<String, Post> transformData(Response<String> response) {
+    public LoadResult<Integer, Post> transformData(Response<String> response) {
         if (response.isSuccessful()) {
             String responseString = response.body();
             LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, readPostList);
-            String lastItem = ParsePost.getLastItem(responseString);
+
             if (newPosts == null) {
                 return new LoadResult.Error<>(new Exception("Error parsing posts"));
             } else {
                 int currentPostsSize = postLinkedHashSet.size();
                 postLinkedHashSet.addAll(newPosts);
+                int nextKey = (postLinkedHashSet.size()+1) / 25+1;
                 if (currentPostsSize == postLinkedHashSet.size()) {
-                    return new LoadResult.Page<>(new ArrayList<>(), null, lastItem);
+                    return new LoadResult.Page<>(new ArrayList<>(), null, nextKey);
                 } else {
-                    return new LoadResult.Page<>(new ArrayList<>(postLinkedHashSet).subList(currentPostsSize, postLinkedHashSet.size()), null, lastItem);
+                    return new LoadResult.Page<>(new ArrayList<>(postLinkedHashSet).subList(currentPostsSize, postLinkedHashSet.size()), null, nextKey);
                 }
             }
         } else {
@@ -200,26 +205,28 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
         }
     }
 
-    private ListenableFuture<LoadResult<String, Post>> loadHomePosts(@NonNull LoadParams<String> loadParams, RedditAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadHomePosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> bestPost;
-        String afterKey;
+        Integer page;
         if (loadParams.getKey() == null) {
-            boolean savePostFeedScrolledPosition = sortType != null && sortType.getType() == SortType.Type.BEST && sharedPreferences.getBoolean(SharedPreferencesUtils.SAVE_FRONT_PAGE_SCROLLED_POSITION, false);
+            boolean savePostFeedScrolledPosition = sortType != null && sortType.getType() == SortType.Type.ACTIVE && sharedPreferences.getBoolean(SharedPreferencesUtils.SAVE_FRONT_PAGE_SCROLLED_POSITION, false);
             if (savePostFeedScrolledPosition) {
                 String accountNameForCache = accountName == null ? SharedPreferencesUtils.FRONT_PAGE_SCROLLED_POSITION_ANONYMOUS : accountName;
-                afterKey = postFeedScrolledPositionSharedPreferences.getString(accountNameForCache + SharedPreferencesUtils.FRONT_PAGE_SCROLLED_POSITION_FRONT_PAGE_BASE, null);
+                // TODO: Fix this. Save the page number?
+                page = null ; // postFeedScrolledPositionSharedPreferences.getString(accountNameForCache + SharedPreferencesUtils.FRONT_PAGE_SCROLLED_POSITION_FRONT_PAGE_BASE, null);
             } else {
-                afterKey = null;
+                page = null;
             }
         } else {
-            afterKey = loadParams.getKey();
+            page = loadParams.getKey();
         }
-        bestPost = api.getBestPostsListenableFuture(sortType.getType(), sortType.getTime(), afterKey,
-                APIUtils.getOAuthHeader(accessToken));
+        String feed_type = Objects.equals(subredditOrUserName, "all") ? "All" : Objects.equals(subredditOrUserName, "local") ? "Local" : "Subscribed";
 
-        ListenableFuture<LoadResult<String, Post>> pageFuture = Futures.transform(bestPost, this::transformData, executor);
+        bestPost = api.getPosts(feed_type,sortType.getType().value,page,25,null,null,false,accessToken);
 
-        ListenableFuture<LoadResult<String, Post>> partialLoadResultFuture =
+        ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(bestPost, this::transformData, executor);
+
+        ListenableFuture<LoadResult<Integer, Post>> partialLoadResultFuture =
                 Futures.catching(pageFuture, HttpException.class,
                         LoadResult.Error::new, executor);
 
@@ -227,18 +234,15 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<String, Post>> loadSubredditPosts(@NonNull LoadParams<String> loadParams, RedditAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> subredditPost;
-        if (accessToken == null) {
-            subredditPost = api.getSubredditBestPostsListenableFuture(subredditOrUserName, sortType.getType(), sortType.getTime(), loadParams.getKey());
-        } else {
-            subredditPost = api.getSubredditBestPostsOauthListenableFuture(subredditOrUserName, sortType.getType(),
-                    sortType.getTime(), loadParams.getKey(), APIUtils.getOAuthHeader(accessToken));
-        }
 
-        ListenableFuture<LoadResult<String, Post>> pageFuture = Futures.transform(subredditPost, this::transformData, executor);
+        subredditPost = api.getPosts(null,sortType.getType().value,loadParams.getKey(),25,null,subredditOrUserName,false,null);
 
-        ListenableFuture<LoadResult<String, Post>> partialLoadResultFuture =
+
+        ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(subredditPost, this::transformData, executor);
+
+        ListenableFuture<LoadResult<Integer, Post>> partialLoadResultFuture =
                 Futures.catching(pageFuture, HttpException.class,
                         LoadResult.Error::new, executor);
 
@@ -246,27 +250,22 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<String, Post>> loadUserPosts(@NonNull LoadParams<String> loadParams, RedditAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadUserPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> userPosts;
-        if (accessToken == null) {
-            userPosts = api.getUserPostsListenableFuture(subredditOrUserName, loadParams.getKey(), sortType.getType(),
-                    sortType.getTime());
-        } else {
-            userPosts = api.getUserPostsOauthListenableFuture(subredditOrUserName, userWhere, loadParams.getKey(), sortType.getType(),
-                    sortType.getTime(), APIUtils.getOAuthHeader(accessToken));
-        }
+        userPosts = api.getUserPosts(subredditOrUserName, sortType.getType().value,loadParams.getKey(),25,accessToken);
 
-        ListenableFuture<LoadResult<String, Post>> pageFuture = Futures.transform(userPosts, this::transformData, executor);
 
-        ListenableFuture<LoadResult<String, Post>> partialLoadResultFuture =
+        ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(userPosts, this::transformData, executor);
+
+        ListenableFuture<LoadResult<Integer, Post>> partialLoadResultFuture =
                 Futures.catching(pageFuture, HttpException.class,
                         LoadResult.Error::new, executor);
 
         return Futures.catching(partialLoadResultFuture,
                 IOException.class, LoadResult.Error::new, executor);
     }
-
-    private ListenableFuture<LoadResult<String, Post>> loadSearchPosts(@NonNull LoadParams<String> loadParams, RedditAPI api) {
+/*
+    private ListenableFuture<LoadResult<String, Post>> loadSearchPosts(@NonNull LoadParams<String> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> searchPosts;
         if (subredditOrUserName == null) {
             if (accessToken == null) {
@@ -297,7 +296,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<String, Post>> loadMultiRedditPosts(@NonNull LoadParams<String> loadParams, RedditAPI api) {
+    private ListenableFuture<LoadResult<String, Post>> loadMultiRedditPosts(@NonNull LoadParams<String> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> multiRedditPosts;
         if (accessToken == null) {
             multiRedditPosts = api.getMultiRedditPostsListenableFuture(multiRedditPath, loadParams.getKey(), sortType.getTime());
@@ -316,7 +315,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<String, Post>> loadAnonymousHomePosts(@NonNull LoadParams<String> loadParams, RedditAPI api) {
+    private ListenableFuture<LoadResult<String, Post>> loadAnonymousHomePosts(@NonNull LoadParams<String> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> anonymousHomePosts;
         anonymousHomePosts = api.getSubredditBestPostsListenableFuture(subredditOrUserName, sortType.getType(), sortType.getTime(), loadParams.getKey());
 
@@ -328,5 +327,11 @@ public class PostPagingSource extends ListenableFuturePagingSource<String, Post>
 
         return Futures.catching(partialLoadResultFuture,
                 IOException.class, LoadResult.Error::new, executor);
+    }*/
+
+    @Override
+    public boolean getKeyReuseSupported() {
+        //TODO: Figure out why this is needed
+        return true;
     }
 }

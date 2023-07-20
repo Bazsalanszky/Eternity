@@ -770,7 +770,7 @@ Sie ist nicht krank oder so, aber sie könnte sich definitiv bessern."</string>
     <string name="report_reason_general_child_pornography">"Es enthält Kinderpornografie"</string>
     <string name="report_reason_general_abusive_content">"Es enthält gewalttätiges Material"</string>
     <string name="home">"Home"</string>
-    <string name="popular">"Beliebt"</string>
+    <string name="local">"Beliebt"</string>
     <string name="notifications">"Benachrichtigungen"</string>
     <string name="messages">"Nachrichten"</string>
     <string name="message">"Nachricht"</string>

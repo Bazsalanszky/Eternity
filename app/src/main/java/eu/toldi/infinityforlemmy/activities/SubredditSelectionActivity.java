@@ -38,6 +38,7 @@ import eu.toldi.infinityforlemmy.FetchSubscribedThing;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.asynctasks.InsertSubscribedThings;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -74,7 +75,7 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
     Toolbar toolbar;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -141,7 +142,7 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
                 mAccountName = specifiedAccount.getAccountName();
                 mAccountProfileImageUrl = specifiedAccount.getProfileImageUrl();
 
-                mOauthRetrofit = mOauthRetrofit.newBuilder().client(new OkHttpClient.Builder().authenticator(new AnyAccountAccessTokenAuthenticator(mRetrofit, mRedditDataRoomDatabase, specifiedAccount, mCurrentAccountSharedPreferences))
+                mOauthRetrofit = mOauthRetrofit.newBuilder().client(new OkHttpClient.Builder().authenticator(new AnyAccountAccessTokenAuthenticator(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, specifiedAccount, mCurrentAccountSharedPreferences))
                         .connectTimeout(30, TimeUnit.SECONDS)
                         .readTimeout(30, TimeUnit.SECONDS)
                         .writeTimeout(30, TimeUnit.SECONDS)
@@ -211,7 +212,7 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
 
     private void loadSubscriptions() {
         if (!mInsertSuccess) {
-            FetchSubscribedThing.fetchSubscribedThing(mOauthRetrofit, mAccessToken, mAccountName, null,
+            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountName, null,
                     new ArrayList<>(), new ArrayList<>(),
                     new ArrayList<>(),
                     new FetchSubscribedThing.FetchSubscribedThingListener() {

@@ -195,7 +195,7 @@
 
     <string-array name="settings_tab_post_type">
         <item>@string/home</item>
-        <item>@string/popular</item>
+        <item>@string/local</item>
         <item>@string/all</item>
         <item>@string/subreddit</item>
         <item>@string/multi_reddit</item>
@@ -209,7 +209,7 @@
 
     <string-array name="settings_tab_post_type_anonymous">
         <item>@string/home</item>
-        <item>@string/popular</item>
+        <item>@string/local</item>
         <item>@string/all</item>
         <item>@string/subreddit</item>
         <item>@string/multi_reddit</item>

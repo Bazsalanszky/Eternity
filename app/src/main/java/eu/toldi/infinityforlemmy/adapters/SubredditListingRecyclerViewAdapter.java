@@ -27,6 +27,7 @@ import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
@@ -46,7 +47,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
     private static final DiffUtil.ItemCallback<SubredditData> DIFF_CALLBACK = new DiffUtil.ItemCallback<SubredditData>() {
         @Override
         public boolean areItemsTheSame(@NonNull SubredditData oldItem, @NonNull SubredditData newItem) {
-            return oldItem.getId().equals(newItem.getId());
+            return oldItem.getId() == newItem.getId();
         }
 
         @Override
@@ -124,7 +125,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
                     if (isMultiSelection) {
                         ((DataViewHolder) holder).checkBox.performClick();
                     } else {
-                        callback.subredditSelected(subredditData.getName(), subredditData.getIconUrl());
+                        callback.subredditSelected(subredditData.getName(), LemmyUtils.actorID2FullName(subredditData.getActorId()), subredditData.getIconUrl());
                     }
                 });
 
@@ -251,7 +252,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
     public interface Callback {
         void retryLoadingMore();
 
-        void subredditSelected(String subredditName, String iconUrl);
+        void subredditSelected(String subredditName, String communityFullName,String iconUrl);
     }
 
     class DataViewHolder extends RecyclerView.ViewHolder {

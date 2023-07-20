@@ -143,12 +143,6 @@ public class PostFilterPreferenceActivity extends BaseActivity {
                                 case 1:
                                     intent.putExtra(CustomizePostFilterActivity.EXTRA_EXCLUDE_USER, post.getAuthor());
                                     break;
-                                case 2:
-                                    intent.putExtra(CustomizePostFilterActivity.EXTRA_EXCLUDE_FLAIR, post.getFlair());
-                                    break;
-                                case 3:
-                                    intent.putExtra(CustomizePostFilterActivity.EXTRA_CONTAIN_FLAIR, post.getFlair());
-                                    break;
                                 case 4:
                                     intent.putExtra(CustomizePostFilterActivity.EXTRA_EXCLUDE_DOMAIN, post.getUrl());
                                     break;

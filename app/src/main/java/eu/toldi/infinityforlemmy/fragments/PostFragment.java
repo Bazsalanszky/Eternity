@@ -74,6 +74,7 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.AccountPostsActivity;
 import eu.toldi.infinityforlemmy.activities.AccountSavedThingActivity;
@@ -180,7 +181,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
     PostViewModel mPostViewModel;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -462,7 +463,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SEARCH_POST, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -530,7 +531,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                 sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SUBREDDIT_POST_BASE + subredditName,
                         mSharedPreferences.getString(SharedPreferencesUtils.SUBREDDIT_DEFAULT_SORT_TIME, SortType.Time.ALL.name()));
             }
-            boolean displaySubredditName = subredditName != null && (subredditName.equals("popular") || subredditName.equals("all"));
+            boolean displaySubredditName = subredditName != null && (subredditName.equals("local") || subredditName.equals("all"));
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SUBREDDIT_POST_BASE + subredditName, defaultPostLayout);
 
             if (sortTime != null) {
@@ -539,7 +540,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                 sortType = new SortType(SortType.Type.valueOf(sort));
             }
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, displaySubredditName,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -610,7 +611,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                 sortType = new SortType(SortType.Type.valueOf(sort));
             }
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -675,7 +676,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             }
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_USER_POST_BASE + username, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -725,6 +726,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
         } else if (postType == PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE) {
             usage = PostFilterUsage.HOME_TYPE;
             nameOfUsage = PostFilterUsage.NO_USAGE;
+            subredditName = getArguments().getString(EXTRA_NAME);
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SUBREDDIT_POST_BASE + "-", SortType.Type.HOT.name());
             if (sort.equals(SortType.Type.CONTROVERSIAL.name()) || sort.equals(SortType.Type.TOP.name())) {
@@ -736,7 +738,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_FRONT_PAGE_POST, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -796,7 +798,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_MULTI_REDDIT_POST_BASE + multiRedditPath, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -843,8 +845,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
         } else {
             usage = PostFilterUsage.HOME_TYPE;
             nameOfUsage = PostFilterUsage.NO_USAGE;
-
-            String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_BEST_POST, SortType.Type.BEST.name());
+            subredditName = getArguments().getString(EXTRA_NAME);
+            String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_BEST_POST, SortType.Type.ACTIVE.name());
             if (sort.equals(SortType.Type.CONTROVERSIAL.name()) || sort.equals(SortType.Type.TOP.name())) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_BEST_POST, SortType.Time.ALL.name());
                 sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
@@ -853,7 +855,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             }
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_FRONT_PAGE_POST, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mOauthRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -1206,33 +1208,33 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
     private void initializeAndBindPostViewModel(String accessToken) {
         if (postType == PostPagingSource.TYPE_SEARCH) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit : mOauthRetrofit, accessToken,
+                    mRetrofit.getRetrofit() , accessToken,
                     accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, mPostHistorySharedPreferences, subredditName,
                     query, trendingSource, postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_SUBREDDIT) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit : mOauthRetrofit, accessToken,
+                    mRetrofit.getRetrofit() , accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
                     mPostHistorySharedPreferences, subredditName, postType, sortType, postFilter, readPosts))
                     .get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_MULTI_REDDIT) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit : mOauthRetrofit, accessToken,
+                    mRetrofit.getRetrofit(), accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
                     mPostHistorySharedPreferences, multiRedditPath, postType, sortType, postFilter, readPosts))
                     .get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_USER) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit : mOauthRetrofit, accessToken,
+                    mRetrofit.getRetrofit(), accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
                     mPostHistorySharedPreferences, username, postType, sortType, postFilter, where, readPosts))
                     .get(PostViewModel.class);
         } else {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    mOauthRetrofit, accessToken,
+                    mRetrofit.getRetrofit(), accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
-                    mPostHistorySharedPreferences, postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
+                    mPostHistorySharedPreferences, postType, sortType, postFilter, readPosts,subredditName)).get(PostViewModel.class);
         }
 
         bindPostViewModel();
@@ -1242,28 +1244,28 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
         //For anonymous user
         if (postType == PostPagingSource.TYPE_SEARCH) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    mRetrofit, null, accountName, mSharedPreferences,
+                    mRetrofit.getRetrofit(), null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, subredditName, query, trendingSource,
                     postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_SUBREDDIT) {
             mPostViewModel = new ViewModelProvider(this, new PostViewModel.Factory(mExecutor,
-                    mRetrofit, null, accountName, mSharedPreferences,
+                    mRetrofit.getRetrofit(), null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, subredditName, postType, sortType,
                     postFilter, readPosts)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_MULTI_REDDIT) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    mRetrofit, null, accountName, mSharedPreferences,
+                    mRetrofit.getRetrofit(), null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, multiRedditPath,
                     postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_USER) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    mRetrofit, null, accountName, mSharedPreferences,
+                    mRetrofit.getRetrofit(), null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, username, postType, sortType, postFilter,
                     where, readPosts)).get(PostViewModel.class);
         } else {
             //Anonymous Front Page
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    mRetrofit, mSharedPreferences, concatenatedSubredditNames, postType, sortType, postFilter))
+                    mRetrofit.getRetrofit(), mSharedPreferences, concatenatedSubredditNames, postType, sortType, postFilter,subredditName))
                     .get(PostViewModel.class);
         }
 
@@ -1468,7 +1470,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
     }
 
     private void saveCache() {
-        if (savePostFeedScrolledPosition && postType == PostPagingSource.TYPE_FRONT_PAGE && sortType != null && sortType.getType() == SortType.Type.BEST && mAdapter != null) {
+        if (savePostFeedScrolledPosition && postType == PostPagingSource.TYPE_FRONT_PAGE && sortType != null && sortType.getType() == SortType.Type.ACTIVE && mAdapter != null) {
             Post currentPost = mAdapter.getItemByPosition(maxPosition);
             if (currentPost != null) {
                 String accountNameForCache = accountName == null ? SharedPreferencesUtils.FRONT_PAGE_SCROLLED_POSITION_ANONYMOUS : accountName;
@@ -1746,14 +1748,14 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
         } else {
             if (isSubreddit) {
                 LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase,
-                        subredditOrUserName, accessToken, mOauthRetrofit, mRetrofit,
+                        subredditOrUserName, accessToken, mRetrofit.getRetrofit(), mRetrofit.getRetrofit(),
                         iconImageUrl -> {
                             subredditOrUserIcons.put(subredditOrUserName, iconImageUrl);
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
                         });
             } else {
                 LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditOrUserName,
-                        mRetrofit, iconImageUrl -> {
+                        mRetrofit.getRetrofit(), iconImageUrl -> {
                             subredditOrUserIcons.put(subredditOrUserName, iconImageUrl);
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
                         });
@@ -1765,7 +1767,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
         if (readPosts == null) {
             readPosts = new ArrayList<>();
         }
-        readPosts.add(post.getId());
+        readPosts.add(String.valueOf(post.getId()));
     }
 
     @Subscribe
@@ -1780,8 +1782,6 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                 post.setNComments(event.post.getNComments());
                 post.setNSFW(event.post.isNSFW());
                 post.setHidden(event.post.isHidden());
-                post.setSpoiler(event.post.isSpoiler());
-                post.setFlair(event.post.getFlair());
                 post.setSaved(event.post.isSaved());
                 if (event.post.isRead()) {
                     post.markAsRead();

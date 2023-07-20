@@ -30,9 +30,9 @@ public class SortType {
     }
 
     public enum Type {
-        BEST("best", "Best"),
-        HOT("hot", "Hot"),
-        NEW("new", "New"),
+        ACTIVE("Active", "Active"),
+        HOT("Hot", "Hot"),
+        NEW("New", "New"),
         RANDOM("random", "Random"),
         RISING("rising", "Rising"),
         TOP("top", "Top"),

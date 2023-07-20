@@ -38,6 +38,7 @@ import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.adapters.PrivateMessagesDetailRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.asynctasks.LoadUserData;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -77,7 +78,7 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
     Retrofit mOauthRetrofit;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -248,7 +249,7 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
             mProvideUserAvatarCallbacks.add(provideUserAvatarCallback);
             if (!isLoadingUserAvatar) {
                 LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase,
-                        username, mRetrofit, iconImageUrl -> {
+                        username, mRetrofit.getRetrofit(), iconImageUrl -> {
                     isLoadingUserAvatar = false;
                     mUserAvatar = iconImageUrl == null ? "" : iconImageUrl;
                     for (ProvideUserAvatarCallback provideUserAvatarCallbackInArrayList : mProvideUserAvatarCallbacks) {

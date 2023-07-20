@@ -26,7 +26,7 @@ public class Comment implements Parcelable {
             return new Comment[size];
         }
     };
-    private String id;
+    private int id;
     private String fullName;
     private String author;
     private String authorFlair;
@@ -60,7 +60,7 @@ public class Comment implements Parcelable {
     private boolean loadMoreChildrenFailed;
     private long editedTimeMillis;
 
-    public Comment(String id, String fullName, String author, String authorFlair,
+    public Comment(int id, String fullName, String author, String authorFlair,
                    String authorFlairHTML, String linkAuthor,
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
                    String linkId, String subredditName, String parentId, int score,
@@ -114,7 +114,7 @@ public class Comment implements Parcelable {
     }
 
     protected Comment(Parcel in) {
-        id = in.readString();
+        id = in.readInt();
         fullName = in.readString();
         author = in.readString();
         authorFlair = in.readString();
@@ -149,7 +149,7 @@ public class Comment implements Parcelable {
         loadMoreChildrenFailed = in.readByte() != 0;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -405,7 +405,7 @@ public class Comment implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
+        parcel.writeInt(id);
         parcel.writeString(fullName);
         parcel.writeString(author);
         parcel.writeString(authorFlair);

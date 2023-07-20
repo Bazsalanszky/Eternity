@@ -54,6 +54,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
@@ -140,7 +141,7 @@ public class PostVideoActivity extends BaseActivity implements FlairBottomSheetF
     PlayerView videoPlayerView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -512,7 +513,7 @@ public class PostVideoActivity extends BaseActivity implements FlairBottomSheetF
 
     private void loadSubredditIcon() {
         LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditName,
-                mAccessToken, mOauthRetrofit, mRetrofit, iconImageUrl -> {
+                mAccessToken, mOauthRetrofit, mRetrofit.getRetrofit(), iconImageUrl -> {
             iconUrl = iconImageUrl;
             displaySubredditIcon();
             loadSubredditIconSuccessful = true;

@@ -61,6 +61,13 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="?attr/font_family" />
 
+                    <TextView
+                        android:id="@+id/community_fulname_text_view_view_subreddit_detail_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="TextView" />
+
                     <com.google.android.material.chip.Chip
                         android:id="@+id/subscribe_subreddit_chip_view_subreddit_detail_activity"
                         android:layout_width="wrap_content"

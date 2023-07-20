@@ -713,7 +713,7 @@ Ela não está doente nem nada, mas certamente poderá melhorar."</string>
     <string name="report_reason_general_child_pornography">"Contém Pornografia Infantil"</string>
     <string name="report_reason_general_abusive_content">"Contém Conteúdo Abusivo"</string>
     <string name="home">"Início"</string>
-    <string name="popular">"Popular"</string>
+    <string name="local">"Popular"</string>
     <string name="notifications">"Notificações"</string>
     <string name="messages">"Mensagens"</string>
     <string name="message">"Mensagem"</string>

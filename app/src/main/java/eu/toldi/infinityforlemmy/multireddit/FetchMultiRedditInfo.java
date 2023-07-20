@@ -89,7 +89,7 @@ public class FetchMultiRedditInfo {
                 String visibility = object.getString(JSONUtils.VISIBILITY_KEY);
                 String owner = object.getString(JSONUtils.OWNER_KEY);
                 int nSubscribers = object.getInt(JSONUtils.NUM_SUBSCRIBERS_KEY);
-                long createdUTC = object.getLong(JSONUtils.CREATED_UTC_KEY);
+                long createdUTC = object.getLong(JSONUtils.PUBLISHED);
                 boolean over18 = object.getBoolean(JSONUtils.OVER_18_KEY);
                 boolean isSubscriber = object.getBoolean(JSONUtils.IS_SUBSCRIBER_KEY);
                 boolean isFavorite = object.getBoolean(JSONUtils.IS_FAVORITED_KEY);

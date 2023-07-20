@@ -42,6 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.TrendingSearch;
 import eu.toldi.infinityforlemmy.adapters.TrendingSearchRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
@@ -83,7 +84,7 @@ public class TrendingActivity extends BaseActivity {
     TextView errorTextView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -207,7 +208,7 @@ public class TrendingActivity extends BaseActivity {
         Handler handler = new Handler();
         Call<String> trendingCall;
         if (mAccessToken == null) {
-            trendingCall = mRetrofit.create(RedditAPI.class).getTrendingSearches();
+            trendingCall = mRetrofit.getRetrofit().create(RedditAPI.class).getTrendingSearches();
         } else {
             trendingCall = mOauthRetrofit.create(RedditAPI.class).getTrendingSearchesOauth(APIUtils.getOAuthHeader(mAccessToken));
         }

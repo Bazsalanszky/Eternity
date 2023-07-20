@@ -35,6 +35,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -88,7 +89,7 @@ public class WikiActivity extends BaseActivity {
 
     @Inject
     @Named("no_oauth")
-    Retrofit retrofit;
+    RetrofitHolder retrofit;
     @Inject
     @Named("default")
     SharedPreferences mSharedPreferences;
@@ -221,7 +222,7 @@ public class WikiActivity extends BaseActivity {
         Glide.with(this).clear(mFetchWikiInfoImageView);
         mFetchWikiInfoLinearLayout.setVisibility(View.GONE);
 
-        retrofit.create(RedditAPI.class).getWikiPage(getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME), getIntent().getStringExtra(EXTRA_WIKI_PATH)).enqueue(new Callback<String>() {
+        retrofit.getRetrofit().create(RedditAPI.class).getWikiPage(getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME), getIntent().getStringExtra(EXTRA_WIKI_PATH)).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {

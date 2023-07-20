@@ -43,6 +43,7 @@ import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.adapters.CommentsListingRecyclerViewAdapter;
@@ -79,7 +80,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
     CommentViewModel mCommentViewModel;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -294,7 +295,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
             CommentViewModel.Factory factory;
 
             if (mAccessToken == null) {
-                factory = new CommentViewModel.Factory(mRetrofit,
+                factory = new CommentViewModel.Factory(mRetrofit.getRetrofit(),
                         resources.getConfiguration().locale, null, username, sortType,
                         getArguments().getBoolean(EXTRA_ARE_SAVED_COMMENTS));
             } else {

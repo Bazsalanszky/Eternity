@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 public class FetchRemovedPost {
 
     public static void fetchRemovedPost(Retrofit retrofit, Post post, FetchRemovedPostListener listener) {
-        retrofit.create(PushshiftAPI.class).getRemovedPost(post.getId())
+        retrofit.create(PushshiftAPI.class).getRemovedPost(String.valueOf(post.getId()))
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

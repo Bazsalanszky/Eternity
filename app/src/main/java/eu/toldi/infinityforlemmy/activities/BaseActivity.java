@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -369,6 +370,11 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomFo
         tabLayout.setSelectedTabIndicatorColor(customThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTabIndicator());
         tabLayout.setTabTextColors(customThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTextColor(),
                 customThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTextColor());
+    }
+
+    protected void applyButtonTheme(Button button){
+        button.setBackgroundTintList(ColorStateList.valueOf(customThemeWrapper.getColorAccent()));
+        button.setTextColor(customThemeWrapper.getFABIconColor());
     }
 
     protected void applyFABTheme(FloatingActionButton fab) {

@@ -50,6 +50,7 @@ import eu.toldi.infinityforlemmy.FragmentCommunicator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.asynctasks.DeleteMultiredditInDatabase;
 import eu.toldi.infinityforlemmy.asynctasks.InsertMultireddit;
 import eu.toldi.infinityforlemmy.asynctasks.InsertSubscribedThings;
@@ -99,6 +100,10 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
+
+    @Inject
+    @Named("no_oauth")
+    RetrofitHolder mRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -317,7 +322,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
 
     public void loadSubscriptions(boolean forceLoad) {
         if (mAccessToken != null && !(!forceLoad && mInsertSuccess)) {
-            FetchSubscribedThing.fetchSubscribedThing(mOauthRetrofit, mAccessToken, mAccountName, null,
+            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountName, null,
                     new ArrayList<>(), new ArrayList<>(),
                     new ArrayList<>(),
                     new FetchSubscribedThing.FetchSubscribedThingListener() {

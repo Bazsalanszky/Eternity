@@ -49,7 +49,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.Executor;
@@ -59,6 +58,8 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -126,6 +127,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     public static final String EXTRA_MESSAGE_FULLNAME = "ENF";
     public static final String EXTRA_NEW_ACCOUNT_NAME = "ENAN";
     public static final String EXTRA_VIEW_SIDEBAR = "EVSB";
+    public static final String EXTRA_COMMUNITY_FULL_NAME_KEY = "ECFNK";
 
     private static final String FETCH_SUBREDDIT_INFO_STATE = "FSIS";
     private static final String CURRENT_ONLINE_SUBSCRIBERS_STATE = "COSS";
@@ -155,6 +157,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     Chip subscribeSubredditChip;
     @BindView(R.id.subreddit_name_text_view_view_subreddit_detail_activity)
     TextView subredditNameTextView;
+
+    @BindView(R.id.community_fulname_text_view_view_subreddit_detail_activity)
+    TextView communityFullNameTextView;
     @BindView(R.id.subscriber_count_text_view_view_subreddit_detail_activity)
     TextView nSubscribersTextView;
     @BindView(R.id.online_subscriber_count_text_view_view_subreddit_detail_activity)
@@ -167,7 +172,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     TextView descriptionTextView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -203,6 +208,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private String mAccountName;
     private String subredditName;
     private String description;
+
+    private String qualifiedName;
     private boolean mFetchSubredditInfoSuccess = false;
     private int mNCurrentOnlineSubscribers = 0;
     private boolean isNsfwSubreddit = false;
@@ -331,6 +338,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         boolean hideSubredditDescription = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_DESCRIPTION, false);
 
         subredditName = getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME_KEY);
+        qualifiedName =  getIntent().getStringExtra(EXTRA_COMMUNITY_FULL_NAME_KEY);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -355,10 +363,11 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
         fetchSubredditData();
 
-        String title = "r/" + subredditName;
-        subredditNameTextView.setText(title);
 
-        toolbar.setTitle(title);
+        subredditNameTextView.setText(subredditName);
+        communityFullNameTextView.setText(qualifiedName);
+
+        toolbar.setTitle(subredditName);
         setSupportActionBar(toolbar);
         setToolbarGoToTop(toolbar);
 
@@ -438,16 +447,18 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     });
                 }
 
-                String subredditFullName = "r/" + subredditData.getName();
-                if (!title.equals(subredditFullName)) {
+                String subredditFullName = subredditData.getTitle();
+                if (!subredditName.equals(subredditFullName)) {
                     getSupportActionBar().setTitle(subredditFullName);
                 }
                 subredditNameTextView.setText(subredditFullName);
+                qualifiedName = LemmyUtils.actorID2FullName(subredditData.getActorId());
+                communityFullNameTextView.setText(qualifiedName);
                 String nSubscribers = getString(R.string.subscribers_number_detail, subredditData.getNSubscribers());
                 nSubscribersTextView.setText(nSubscribers);
-                creationTimeTextView.setText(new SimpleDateFormat("MMM d, yyyy",
-                        locale).format(subredditData.getCreatedUTC()));
+                creationTimeTextView.setText(subredditData.getCreatedUTC());
                 description = subredditData.getDescription();
+
                 if (hideSubredditDescription || description.equals("")) {
                     descriptionTextView.setVisibility(View.GONE);
                 } else {
@@ -537,7 +548,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private void checkNewAccountAndBindView() {
         if (mNewAccountName != null) {
             if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase, mCurrentAccountSharedPreferences,
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
                         mExecutor, new Handler(), mNewAccountName, newAccount -> {
                             EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
                             Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
@@ -560,9 +571,10 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
     private void fetchSubredditData() {
         if (!mFetchSubredditInfoSuccess) {
-            FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit, subredditName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
+            FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit.getRetrofit(), qualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
                 @Override
                 public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
+                    qualifiedName = LemmyUtils.actorID2FullName(subredditData.getActorId());
                     mNCurrentOnlineSubscribers = nCurrentOnlineSubscribers;
                     nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, nCurrentOnlineSubscribers));
                     InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
@@ -945,7 +957,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     subscriptionReady = false;
                     if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
                         SubredditSubscription.anonymousSubscribeToSubreddit(mExecutor, new Handler(),
-                                mRetrofit, mRedditDataRoomDatabase, subredditName,
+                                mRetrofit.getRetrofit(), mRedditDataRoomDatabase, subredditName,
                                 new SubredditSubscription.SubredditSubscriptionListener() {
                                     @Override
                                     public void onSubredditSubscriptionSuccess() {
@@ -986,7 +998,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     subscriptionReady = false;
                     if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
                         SubredditSubscription.subscribeToSubreddit(mExecutor, new Handler(), mOauthRetrofit,
-                                mRetrofit, mAccessToken, subredditName, mAccountName, mRedditDataRoomDatabase,
+                                mRetrofit.getRetrofit(), mAccessToken, subredditName, mAccountName, mRedditDataRoomDatabase,
                                 new SubredditSubscription.SubredditSubscriptionListener() {
                                     @Override
                                     public void onSubredditSubscriptionSuccess() {
@@ -1144,7 +1156,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         } else if (itemId == R.id.action_share_view_subreddit_detail_activity) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.reddit.com/r/" + subredditName);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, qualifiedName);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             } else {
@@ -1560,7 +1572,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             if (position == 0) {
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString(PostFragment.EXTRA_NAME, subredditName);
+                bundle.putString(PostFragment.EXTRA_NAME, qualifiedName);
                 bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_SUBREDDIT);
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
@@ -1571,6 +1583,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             Bundle bundle = new Bundle();
             bundle.putString(SidebarFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             bundle.putString(SidebarFragment.EXTRA_SUBREDDIT_NAME, subredditName);
+            bundle.putString(SidebarFragment.EXTRA_COMMUNITY_QUALIFIED_NAME, qualifiedName);
             fragment.setArguments(bundle);
             return fragment;
         }

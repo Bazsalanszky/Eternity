@@ -12,7 +12,7 @@ import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserData;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
-import eu.toldi.infinityforlemmy.utils.Utils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
 class ParseSubscribedThing {
     static void parseSubscribedSubreddits(String response, String accountName,
@@ -28,7 +28,7 @@ class ParseSubscribedThing {
         void onParseSubscribedSubredditsSuccess(ArrayList<SubscribedSubredditData> subscribedSubredditData,
                                                 ArrayList<SubscribedUserData> subscribedUserData,
                                                 ArrayList<SubredditData> subredditData,
-                                                String lastItem);
+                                                boolean lastItem);
 
         void onParseSubscribedSubredditsFail();
     }
@@ -37,7 +37,7 @@ class ParseSubscribedThing {
         private JSONObject jsonResponse;
         private String accountName;
         private boolean parseFailed;
-        private String lastItem;
+        private boolean lastItem;
         private ArrayList<SubscribedSubredditData> subscribedSubredditData;
         private ArrayList<SubscribedUserData> subscribedUserData;
         private ArrayList<SubredditData> subredditData;
@@ -73,46 +73,48 @@ class ParseSubscribedThing {
                     parseFailed = true;
                     return null;
                 }
-                JSONArray children = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getJSONArray(JSONUtils.CHILDREN_KEY);
-                for (int i = 0; i < children.length(); i++) {
-                    JSONObject data = children.getJSONObject(i).getJSONObject(JSONUtils.DATA_KEY);
-                    String name = data.getString(JSONUtils.DISPLAY_NAME_KEY);
-                    String bannerImageUrl = data.getString(JSONUtils.BANNER_BACKGROUND_IMAGE_KEY);
-                    if (bannerImageUrl.equals("") || bannerImageUrl.equals("null")) {
-                        bannerImageUrl = data.getString(JSONUtils.BANNER_IMG_KEY);
-                        if (bannerImageUrl.equals("null")) {
-                            bannerImageUrl = "";
-                        }
-                    }
-                    String iconUrl = data.getString(JSONUtils.COMMUNITY_ICON_KEY);
-                    if (iconUrl.equals("") || iconUrl.equals("null")) {
-                        iconUrl = data.getString(JSONUtils.ICON_IMG_KEY);
-                        if (iconUrl.equals("null")) {
-                            iconUrl = "";
-                        }
-                    }
-                    String id = data.getString(JSONUtils.NAME_KEY);
-                    boolean isFavorite = data.getBoolean(JSONUtils.USER_HAS_FAVORITED_KEY);
-
-                    if (data.getString(JSONUtils.SUBREDDIT_TYPE_KEY)
-                            .equals(JSONUtils.SUBREDDIT_TYPE_VALUE_USER)) {
-                        //It's a user
-                        newSubscribedUserData.add(new SubscribedUserData(name.substring(2), iconUrl, accountName, isFavorite));
-                    } else {
-                        String subredditFullName = data.getString(JSONUtils.DISPLAY_NAME_KEY);
-                        String description = data.getString(JSONUtils.PUBLIC_DESCRIPTION_KEY).trim();
-                        String sidebarDescription = Utils.modifyMarkdown(data.getString(JSONUtils.DESCRIPTION_KEY).trim());
-                        int nSubscribers = data.getInt(JSONUtils.SUBSCRIBERS_KEY);
-                        long createdUTC = data.getLong(JSONUtils.CREATED_UTC_KEY) * 1000;
-                        String suggestedCommentSort = data.getString(JSONUtils.SUGGESTED_COMMENT_SORT_KEY);
-                        boolean isNSFW = data.getBoolean(JSONUtils.OVER18_KEY);
-                        newSubscribedSubredditData.add(new SubscribedSubredditData(id, name, iconUrl, accountName, isFavorite));
-                        newSubredditData.add(new SubredditData(id, subredditFullName, iconUrl,
-                                bannerImageUrl, description, sidebarDescription, nSubscribers, createdUTC,
-                                suggestedCommentSort, isNSFW));
-                    }
+                JSONArray children = jsonResponse.getJSONArray("communities");
+                if(children.length() ==0){
+                    lastItem = true;
                 }
-                lastItem = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getString(JSONUtils.AFTER_KEY);
+                for (int i = 0; i < children.length(); i++) {
+                    JSONObject data = children.getJSONObject(i);
+                    JSONObject community = data.getJSONObject("community");
+                    String title = community.getString(JSONUtils.TITLE_KEY);
+                    String bannerImageUrl = "";
+                    if(!community.isNull("banner")){
+                        bannerImageUrl = community.getString("banner");
+                    }
+
+                    String iconUrl = "";
+                    if(!community.isNull("icon")){
+                        iconUrl = community.getString("icon");
+                    }
+                    int id = community.getInt("id");
+                    String name = community.getString("name");
+                    String description = "";
+                    if(!community.isNull("description")) {
+                        description = community.getString("description");
+                    }
+                    boolean removed = community.getBoolean("removed");
+                    String published = community.getString("published");
+                    String updated = "";
+                    if(!community.isNull("updated")) {
+                        updated = community.getString("updated");
+                    }
+                    boolean deleted = community.getBoolean("deleted");
+                    boolean nsfw = community.getBoolean("nsfw");
+                    String actorId = community.getString("actor_id");
+                    boolean local = community.getBoolean("local");
+                    boolean hidden = community.getBoolean("hidden");
+                    boolean postingRestrictedToMods = community.getBoolean("posting_restricted_to_mods");
+                    int instanceId = community.getInt("instance_id");
+                    int subscribers = data.getJSONObject("counts").getInt("subscribers");
+
+                    newSubscribedSubredditData.add(new SubscribedSubredditData(id, title, LemmyUtils.actorID2FullName(actorId), iconUrl, accountName));
+                    newSubredditData.add(new SubredditData(id,name,title,description,removed,published,updated,deleted,nsfw,actorId,local,iconUrl,bannerImageUrl,hidden,postingRestrictedToMods,instanceId,subscribers));
+
+                }
             } catch (JSONException e) {
                 parseFailed = true;
                 e.printStackTrace();

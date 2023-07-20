@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.FetchRules;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.Rule;
 import eu.toldi.infinityforlemmy.adapters.RulesRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -63,7 +64,7 @@ public class RulesActivity extends BaseActivity {
     TextView errorTextView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -134,7 +135,7 @@ public class RulesActivity extends BaseActivity {
         mAdapter = new RulesRecyclerViewAdapter(this, mCustomThemeWrapper, sliderPanel);
         recyclerView.setAdapter(mAdapter);
 
-        FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
+        FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
             @Override
             public void success(ArrayList<Rule> rules) {
                 progressBar.setVisibility(View.GONE);
@@ -183,7 +184,7 @@ public class RulesActivity extends BaseActivity {
         errorTextView.setOnClickListener(view -> {
             progressBar.setVisibility(View.VISIBLE);
             errorTextView.setVisibility(View.GONE);
-            FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
+            FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
                 @Override
                 public void success(ArrayList<Rule> rules) {
                     progressBar.setVisibility(View.GONE);

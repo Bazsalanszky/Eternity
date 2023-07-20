@@ -46,6 +46,7 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -87,6 +88,11 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
     ViewPager2 viewPager2;
     @BindView(R.id.fab_inbox_activity)
     FloatingActionButton fab;
+
+    @Inject
+    @Named("base")
+    RetrofitHolder mRetrofit;
+
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -233,7 +239,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
     private void getCurrentAccountAndFetchMessage(Bundle savedInstanceState) {
         if (mNewAccountName != null) {
             if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase, mCurrentAccountSharedPreferences,
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
                         mExecutor, new Handler(), mNewAccountName, newAccount -> {
                             EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
                             Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();

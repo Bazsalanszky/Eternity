@@ -4,25 +4,24 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserData;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FetchSubscribedThing {
-    public static void fetchSubscribedThing(final Retrofit oauthRetrofit, String accessToken, String accountName,
-                                            final String lastItem, final ArrayList<SubscribedSubredditData> subscribedSubredditData,
+    public static void fetchSubscribedThing(final Retrofit retrofit, String accessToken, String accountName,
+                                            final Integer page, final ArrayList<SubscribedSubredditData> subscribedSubredditData,
                                             final ArrayList<SubscribedUserData> subscribedUserData,
                                             final ArrayList<SubredditData> subredditData,
                                             final FetchSubscribedThingListener fetchSubscribedThingListener) {
-        RedditAPI api = oauthRetrofit.create(RedditAPI.class);
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Call<String> subredditDataCall = api.getSubscribedThing(lastItem, APIUtils.getOAuthHeader(accessToken));
+        Call<String> subredditDataCall = api.listCommunities("Subscribed",null,page,null,accessToken);
         subredditDataCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -35,12 +34,12 @@ public class FetchSubscribedThing {
                                 public void onParseSubscribedSubredditsSuccess(ArrayList<SubscribedSubredditData> subscribedSubredditData,
                                                                                ArrayList<SubscribedUserData> subscribedUserData,
                                                                                ArrayList<SubredditData> subredditData,
-                                                                               String lastItem) {
-                                    if (lastItem.equals("null")) {
+                                                                               boolean lastItem) {
+                                    if (lastItem) {
                                         fetchSubscribedThingListener.onFetchSubscribedThingSuccess(
                                                 subscribedSubredditData, subscribedUserData, subredditData);
                                     } else {
-                                        fetchSubscribedThing(oauthRetrofit, accessToken, accountName, lastItem,
+                                        fetchSubscribedThing(retrofit, accessToken, accountName, (page == null) ? 2 : page+1,
                                                 subscribedSubredditData, subscribedUserData, subredditData,
                                                 fetchSubscribedThingListener);
                                     }

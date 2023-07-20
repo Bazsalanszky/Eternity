@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.RandomBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.post.FetchPost;
@@ -29,7 +30,7 @@ public class FetchRandomSubredditOrPostActivity extends BaseActivity {
     RelativeLayout relativeLayout;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("default")
     SharedPreferences mSharedPreferences;
@@ -49,7 +50,7 @@ public class FetchRandomSubredditOrPostActivity extends BaseActivity {
 
         int option = getIntent().getIntExtra(EXTRA_RANDOM_OPTION, RandomBottomSheetFragment.RANDOM_SUBREDDIT);
 
-        FetchPost.fetchRandomPost(mExecutor, new Handler(), mRetrofit, option == RandomBottomSheetFragment.RANDOM_NSFW_SUBREDDIT
+        FetchPost.fetchRandomPost(mExecutor, new Handler(), mRetrofit.getRetrofit(), option == RandomBottomSheetFragment.RANDOM_NSFW_SUBREDDIT
                 || option == RandomBottomSheetFragment.RANDOM_NSFW_POST, new FetchPost.FetchRandomPostListener() {
             @Override
             public void fetchRandomPostSuccess(String postId, String subredditName) {

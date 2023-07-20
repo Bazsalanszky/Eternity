@@ -46,6 +46,7 @@ import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
 import eu.toldi.infinityforlemmy.adapters.SubredditAutocompleteRecyclerViewAdapter;
@@ -99,7 +100,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
     Toolbar toolbar;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;

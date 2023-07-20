@@ -391,7 +391,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         switch (mPost.getPostType()) {
             case Post.VIDEO_TYPE:
                 if (mAutoplay && !mSeparatePostAndComments) {
-                    if ((!mAutoplayNsfwVideos && mPost.isNSFW()) || mPost.isSpoiler()) {
+                    if ((!mAutoplayNsfwVideos && mPost.isNSFW()) ) {
                         return VIEW_TYPE_POST_DETAIL_VIDEO_AND_GIF_PREVIEW;
                     }
                     return VIEW_TYPE_POST_DETAIL_VIDEO_AUTOPLAY;
@@ -400,12 +400,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 }
             case Post.GIF_TYPE:
                 if (mAutoplay) {
-                    if ((!mAutoplayNsfwVideos && mPost.isNSFW()) || mPost.isSpoiler()) {
+                    if ((!mAutoplayNsfwVideos && mPost.isNSFW()) ) {
                         return VIEW_TYPE_POST_DETAIL_NO_PREVIEW_LINK;
                     }
                     return VIEW_TYPE_POST_DETAIL_GIF_AUTOPLAY;
                 } else {
-                    if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (mPost.isSpoiler() && mNeedBlurSpoiler)) {
+                    if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()))) {
                         return VIEW_TYPE_POST_DETAIL_NO_PREVIEW_LINK;
                     }
                     return VIEW_TYPE_POST_DETAIL_VIDEO_AND_GIF_PREVIEW;
@@ -536,13 +536,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 }
             }
 
-            if (mPost.getAuthorFlairHTML() != null && !mPost.getAuthorFlairHTML().equals("")) {
-                ((PostDetailBaseViewHolder) holder).mAuthorFlairTextView.setVisibility(View.VISIBLE);
-                Utils.setHTMLWithImageToTextView(((PostDetailBaseViewHolder) holder).mAuthorFlairTextView, mPost.getAuthorFlairHTML(), true);
-            } else if (mPost.getAuthorFlair() != null && !mPost.getAuthorFlair().equals("")) {
-                ((PostDetailBaseViewHolder) holder).mAuthorFlairTextView.setVisibility(View.VISIBLE);
-                ((PostDetailBaseViewHolder) holder).mAuthorFlairTextView.setText(mPost.getAuthorFlair());
-            }
 
             switch (mPost.getVoteType()) {
                 case 1:
@@ -573,7 +566,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             }
 
             if (!mHideSubredditAndUserPrefix) {
-                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText("r/" + mPost.getSubredditName());
+                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditNamePrefixed());
                 ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthorNamePrefixed());
             } else {
                 ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditName());
@@ -602,19 +595,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailBaseViewHolder) holder).mLockedImageView.setVisibility(View.VISIBLE);
             }
 
-            if (mPost.isSpoiler()) {
-                ((PostDetailBaseViewHolder) holder).mSpoilerTextView.setVisibility(View.VISIBLE);
-            }
-
-            if (!mHidePostFlair && mPost.getFlair() != null && !mPost.getFlair().equals("")) {
-                ((PostDetailBaseViewHolder) holder).mFlairTextView.setVisibility(View.VISIBLE);
-                Utils.setHTMLWithImageToTextView(((PostDetailBaseViewHolder) holder).mFlairTextView, mPost.getFlair(), false);
-            }
-
-            if (!mHideTheNumberOfAwards && mPost.getAwards() != null && !mPost.getAwards().equals("")) {
-                ((PostDetailBaseViewHolder) holder).mAwardsTextView.setVisibility(View.VISIBLE);
-                Utils.setHTMLWithImageToTextView(((PostDetailBaseViewHolder) holder).mAwardsTextView, mPost.getAwards(), true);
-            }
 
             if (mHideUpvoteRatio) {
                 ((PostDetailBaseViewHolder) holder).mUpvoteRatioTextView.setVisibility(View.GONE);
@@ -805,7 +785,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     }
                     ((PostDetailGalleryViewHolder) holder).adapter.setGalleryImages(mPost.getGallery());
                     ((PostDetailGalleryViewHolder) holder).adapter.setBlurImage(
-                            (mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (mPost.isSpoiler() && mNeedBlurSpoiler));
+                            (mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) );
                 }
             }
         }
@@ -839,7 +819,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
     private void loadImage(PostDetailBaseViewHolder holder, @NonNull Post.Preview preview) {
         if (holder instanceof PostDetailImageAndGifAutoplayViewHolder) {
-            boolean blurImage = (mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mPost.getPostType() == Post.GIF_TYPE && mAutoplayNsfwVideos)) || (mPost.isSpoiler() && mNeedBlurSpoiler);
+            boolean blurImage = (mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mPost.getPostType() == Post.GIF_TYPE && mAutoplayNsfwVideos));
             String url = mPost.getPostType() == Post.IMAGE_TYPE || blurImage ? preview.getPreviewUrl() : mPost.getUrl();
             RequestBuilder<Drawable> imageRequestBuilder = mGlide.load(url)
                     .listener(new RequestListener<>() {
@@ -889,7 +869,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         }
                     });
 
-            if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (mPost.isSpoiler() && mNeedBlurSpoiler)) {
+            if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()))) {
                 imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
                         .into(((PostDetailVideoAndGifPreviewHolder) holder).mImageView);
             } else {
@@ -917,7 +897,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         }
                     });
 
-            if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (mPost.isSpoiler() && mNeedBlurSpoiler)) {
+            if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()))) {
                 imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
                         .into(((PostDetailLinkViewHolder) holder).mImageView);
             } else {
@@ -966,13 +946,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         }
     }
 
-    public void giveAward(String awardsHTML, int awardCount) {
-        if (mPost != null) {
-            mPost.addAwards(awardsHTML);
-            mPost.addAwards(awardCount);
-            notifyItemChanged(0);
-        }
-    }
 
     public void addOneComment() {
         if (mPost != null) {
@@ -1157,17 +1130,8 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 mTypeTextView.setVisibility(View.GONE);
             }
 
-            if (!mHidePostFlair) {
-                mFlairTextView.setOnClickListener(view -> {
-                    Intent intent = new Intent(mActivity, FilteredPostsActivity.class);
-                    intent.putExtra(FilteredPostsActivity.EXTRA_NAME, mSubredditNamePrefixed.substring(2));
-                    intent.putExtra(FilteredPostsActivity.EXTRA_POST_TYPE, PostPagingSource.TYPE_SUBREDDIT);
-                    intent.putExtra(FilteredPostsActivity.EXTRA_CONTAIN_FLAIR, mPost.getFlair());
-                    mActivity.startActivity(intent);
-                });
-            } else {
-                mFlairTextView.setVisibility(View.GONE);
-            }
+            mFlairTextView.setVisibility(View.GONE);
+
 
             mNSFWTextView.setOnClickListener(view -> {
                 Intent intent = new Intent(mActivity, FilteredPostsActivity.class);
@@ -2060,7 +2024,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         Intent intent = new Intent(mActivity, ViewImageOrGifActivity.class);
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_IMAGE_URL_KEY, mPost.getUrl());
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_FILE_NAME_KEY, mPost.getSubredditNamePrefixed().substring(2)
-                                + "-" + mPost.getId().substring(3) + ".jpg");
+                                + "-" + mPost.getId() + ".jpg");
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_POST_TITLE_KEY, mPost.getTitle());
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_SUBREDDIT_OR_USERNAME_KEY, mPost.getSubredditName());
                         mActivity.startActivity(intent);

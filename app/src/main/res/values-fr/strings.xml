@@ -807,7 +807,7 @@ Basé sur le thème sombre Indigo"</string>
     <string name="report_reason_general_child_pornography">"Ça contient de la pédopornographie"</string>
     <string name="report_reason_general_abusive_content">"Ça contient du contenu abusif"</string>
     <string name="home">"Accueil"</string>
-    <string name="popular">"Populaire"</string>
+    <string name="local">"Populaire"</string>
     <string name="notifications">"Notifications"</string>
     <string name="messages">"Messages"</string>
     <string name="message">"Message"</string>

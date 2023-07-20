@@ -25,9 +25,6 @@ public interface SubscribedSubredditDao {
     @Query("SELECT * from subscribed_subreddits WHERE username = :accountName COLLATE NOCASE ORDER BY name COLLATE NOCASE ASC")
     List<SubscribedSubredditData> getAllSubscribedSubredditsList(String accountName);
 
-    @Query("SELECT * from subscribed_subreddits WHERE username = :accountName AND name LIKE '%' || :searchQuery || '%' COLLATE NOCASE AND is_favorite = 1 ORDER BY name COLLATE NOCASE ASC")
-    LiveData<List<SubscribedSubredditData>> getAllFavoriteSubscribedSubredditsWithSearchQuery(String accountName, String searchQuery);
-
     @Query("SELECT * from subscribed_subreddits WHERE name = :subredditName COLLATE NOCASE AND username = :accountName COLLATE NOCASE LIMIT 1")
     SubscribedSubredditData getSubscribedSubreddit(String subredditName, String accountName);
 

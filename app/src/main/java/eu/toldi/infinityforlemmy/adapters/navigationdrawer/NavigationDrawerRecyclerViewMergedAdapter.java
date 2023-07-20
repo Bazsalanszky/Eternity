@@ -103,8 +103,8 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
         headerSectionRecyclerViewAdapter.closeAccountSectionWithoutChangeIconResource(checkIsInMainPage);
     }
 
-    public void updateAccountInfo(String profileImageUrl, String bannerImageUrl, int karma) {
-        headerSectionRecyclerViewAdapter.updateAccountInfo(profileImageUrl, bannerImageUrl, karma);
+    public void updateAccountInfo(String profileImageUrl, String bannerImageUrl) {
+        headerSectionRecyclerViewAdapter.updateAccountInfo(profileImageUrl, bannerImageUrl);
     }
 
     public void setRequireAuthToAccountSection(boolean requireAuthToAccountSection) {

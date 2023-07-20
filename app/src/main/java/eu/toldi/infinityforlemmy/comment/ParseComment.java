@@ -292,7 +292,7 @@ public class ParseComment {
             voteType = singleCommentData.getBoolean(JSONUtils.LIKES_KEY) ? VOTE_TYPE_UPVOTE : VOTE_TYPE_DOWNVOTE;
             score -= voteType;
         }
-        long submitTime = singleCommentData.getLong(JSONUtils.CREATED_UTC_KEY) * 1000;
+        long submitTime = singleCommentData.getLong(JSONUtils.PUBLISHED) * 1000;
         boolean scoreHidden = singleCommentData.getBoolean(JSONUtils.SCORE_HIDDEN_KEY);
         boolean saved = singleCommentData.getBoolean(JSONUtils.SAVED_KEY);
 
@@ -306,7 +306,7 @@ public class ParseComment {
         // this key can either be a bool (false) or a long (edited timestamp)
         long edited = singleCommentData.optLong(JSONUtils.EDITED_KEY) * 1000;
 
-        return new Comment(id, fullName, author, authorFlair, authorFlairHTMLBuilder.toString(),
+        return new Comment(Integer.parseInt(id), fullName, author, authorFlair, authorFlairHTMLBuilder.toString(),
                 linkAuthor, submitTime, commentMarkdown, commentRawText,
                 linkId, subredditName, parentId, score, voteType, isSubmitter, distinguished,
                 permalink, awardingsBuilder.toString(), depth, collapsed, hasReply, scoreHidden, saved, edited);

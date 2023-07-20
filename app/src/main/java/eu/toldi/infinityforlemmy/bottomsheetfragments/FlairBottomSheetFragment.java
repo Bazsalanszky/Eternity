@@ -28,6 +28,7 @@ import eu.toldi.infinityforlemmy.FetchFlairs;
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.adapters.FlairBottomSheetRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -56,7 +57,7 @@ public class FlairBottomSheetFragment extends LandscapeExpandedBottomSheetDialog
     Retrofit mOauthRetrofit;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     CustomThemeWrapper mCustomThemeWrapper;
     private String mAccessToken;

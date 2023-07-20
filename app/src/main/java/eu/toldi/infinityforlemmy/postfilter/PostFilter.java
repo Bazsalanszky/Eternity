@@ -137,22 +137,13 @@ public class PostFilter implements Parcelable {
         if (postFilter.minComments > 0 && post.getNComments() < postFilter.minComments) {
             return false;
         }
-        if (postFilter.maxAwards > 0 && post.getNAwards() > postFilter.maxAwards) {
-            return false;
-        }
-        if (postFilter.minAwards > 0 && post.getNAwards() < postFilter.minAwards) {
-            return false;
-        }
         if (postFilter.onlyNSFW && !post.isNSFW()) {
-            if (postFilter.onlySpoiler) {
-                return post.isSpoiler();
-            }
             return false;
         }
-        if (postFilter.onlySpoiler && !post.isSpoiler()) {
-            if (postFilter.onlyNSFW) {
+        if (postFilter.onlySpoiler /*&& !post.isSpoiler()*/) {
+            /*if (postFilter.onlyNSFW) {
                 return post.isNSFW();
-            }
+            }*/
             return false;
         }
         if (!postFilter.containTextType && post.getPostType() == Post.TEXT_TYPE) {
@@ -230,14 +221,7 @@ public class PostFilter implements Parcelable {
                 }
             }
         }
-        if (postFilter.excludeFlairs != null && !postFilter.excludeFlairs.equals("")) {
-            String[] flairs = postFilter.excludeFlairs.split(",", 0);
-            for (String f : flairs) {
-                if (!f.trim().equals("") && post.getFlair().equalsIgnoreCase(f.trim())) {
-                    return false;
-                }
-            }
-        }
+
         if (post.getUrl() != null && postFilter.excludeDomains != null && !postFilter.excludeDomains.equals("")) {
             String[] domains = postFilter.excludeDomains.split(",", 0);
             String url = post.getUrl().toLowerCase();
@@ -259,24 +243,6 @@ public class PostFilter implements Parcelable {
             }
             if (!hasRequiredDomain) {
                 return false;
-            }
-        }
-        if (postFilter.containFlairs != null && !postFilter.containFlairs.equals("")) {
-            String[] flairs = postFilter.containFlairs.split(",", 0);
-            if (flairs.length > 0) {
-                boolean match = false;
-                for (int i = 0; i < flairs.length; i++) {
-                    String flair = flairs[i].trim();
-                    if (flair.equals("") && i == flairs.length - 1) {
-                       return false;
-                    }
-                    if (!flair.equals("") && post.getFlair().equalsIgnoreCase(flair)) {
-                        match = true;
-                        break;
-                    }
-                }
-
-                return match;
             }
         }
 

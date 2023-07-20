@@ -15,31 +15,33 @@ public class Account implements Parcelable {
     @NonNull
     @ColumnInfo(name = "username")
     private String accountName;
+
+    @ColumnInfo(name = "display_name")
+    private String display_name;
     @ColumnInfo(name = "profile_image_url")
     private String profileImageUrl;
     @ColumnInfo(name = "banner_image_url")
     private String bannerImageUrl;
-    @ColumnInfo(name = "karma")
-    private int karma;
     @ColumnInfo(name = "access_token")
     private String accessToken;
-    @ColumnInfo(name = "refresh_token")
-    private String refreshToken;
     @ColumnInfo(name = "code")
     private String code;
     @ColumnInfo(name = "is_current_user")
     private boolean isCurrentUser;
 
+    @ColumnInfo(name = "instance_url")
+    private String instance_url;
+
     @Ignore
     protected Account(Parcel in) {
         accountName = in.readString();
+        display_name = in.readString();
         profileImageUrl = in.readString();
         bannerImageUrl = in.readString();
-        karma = in.readInt();
         accessToken = in.readString();
-        refreshToken = in.readString();
         code = in.readString();
         isCurrentUser = in.readByte() != 0;
+        instance_url = in.readString();
     }
 
     public static final Creator<Account> CREATOR = new Creator<Account>() {
@@ -56,24 +58,28 @@ public class Account implements Parcelable {
 
     @Ignore
     public static Account getAnonymousAccount() {
-        return new Account("-", null, null, null, null, null, 0, false);
+        return new Account("-",null, null, null, null, null, false,null);
     }
 
-    public Account(@NonNull String accountName, String accessToken, String refreshToken, String code,
-                   String profileImageUrl, String bannerImageUrl, int karma, boolean isCurrentUser) {
+    public Account(@NonNull String accountName, String display_name, String accessToken, String code,
+                   String profileImageUrl, String bannerImageUrl, boolean isCurrentUser,String instance_url) {
         this.accountName = accountName;
+        this.display_name = display_name;
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
         this.code = code;
         this.profileImageUrl = profileImageUrl;
         this.bannerImageUrl = bannerImageUrl;
-        this.karma = karma;
         this.isCurrentUser = isCurrentUser;
+        this.instance_url = instance_url;
     }
 
     @NonNull
     public String getAccountName() {
         return accountName;
+    }
+
+    public String getDisplay_name() {
+        return display_name;
     }
 
     public String getProfileImageUrl() {
@@ -84,9 +90,6 @@ public class Account implements Parcelable {
         return bannerImageUrl;
     }
 
-    public int getKarma() {
-        return karma;
-    }
 
     public String getAccessToken() {
         return accessToken;
@@ -94,10 +97,6 @@ public class Account implements Parcelable {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
     }
 
     public String getCode() {
@@ -113,15 +112,19 @@ public class Account implements Parcelable {
         return 0;
     }
 
+    public String getInstance_url() {
+        return instance_url;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(accountName);
+        dest.writeString(display_name);
         dest.writeString(profileImageUrl);
         dest.writeString(bannerImageUrl);
-        dest.writeInt(karma);
         dest.writeString(accessToken);
-        dest.writeString(refreshToken);
         dest.writeString(code);
         dest.writeByte((byte) (isCurrentUser ? 1 : 0));
+        dest.writeString(instance_url);
     }
 }

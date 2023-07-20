@@ -725,7 +725,7 @@ Cô ta không ốm hay gì cả, nhưng cô ấy chắc chắn có thể khá h�
     <string name="report_reason_general_child_pornography">"Nó chứa porn trẻ em"</string>
     <string name="report_reason_general_abusive_content">"Nó chứa nội dung lạm dụng"</string>
     <string name="home">"Trang chủ"</string>
-    <string name="popular">"Phổ biến"</string>
+    <string name="local">"Phổ biến"</string>
     <string name="notifications">"Thông báo"</string>
     <string name="messages">"Tin nhắn"</string>
     <string name="message">"Tin nhắn"</string>

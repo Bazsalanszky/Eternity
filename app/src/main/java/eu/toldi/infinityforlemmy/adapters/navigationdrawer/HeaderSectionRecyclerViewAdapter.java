@@ -185,10 +185,9 @@ public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         return false;
     }
 
-    public void updateAccountInfo(String profileImageUrl, String bannerImageUrl, int karma) {
+    public void updateAccountInfo(String profileImageUrl, String bannerImageUrl) {
         this.profileImageUrl = profileImageUrl;
         this.bannerImageUrl = bannerImageUrl;
-        this.karma = karma;
         notifyItemChanged(0);
     }
 

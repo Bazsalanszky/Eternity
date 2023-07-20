@@ -46,9 +46,8 @@ public interface AccountDao {
     @Query("SELECT * FROM accounts WHERE is_current_user = 1 AND username != '-' LIMIT 1")
     LiveData<Account> getCurrentAccountLiveData();
 
-    @Query("UPDATE accounts SET profile_image_url = :profileImageUrl, banner_image_url = :bannerImageUrl, " +
-            "karma = :karma WHERE username = :username")
-    void updateAccountInfo(String username, String profileImageUrl, String bannerImageUrl, int karma);
+    @Query("UPDATE accounts SET profile_image_url = :profileImageUrl, banner_image_url = :bannerImageUrl WHERE username = :username")
+    void updateAccountInfo(String username, String profileImageUrl, String bannerImageUrl);
 
     @Query("SELECT * FROM accounts WHERE is_current_user = 0 AND username != '-' ORDER BY username COLLATE NOCASE ASC")
     LiveData<List<Account>> getAccountsExceptCurrentAccountLiveData();
@@ -56,8 +55,8 @@ public interface AccountDao {
     @Query("UPDATE accounts SET is_current_user = 1 WHERE username = :username")
     void markAccountCurrent(String username);
 
-    @Query("UPDATE accounts SET access_token = :accessToken, refresh_token = :refreshToken WHERE username = :username")
-    void updateAccessTokenAndRefreshToken(String username, String accessToken, String refreshToken);
+    @Query("UPDATE accounts SET access_token = :accessToken WHERE username = :username")
+    void updateAccessTokenAndRefreshToken(String username, String accessToken);
 
     @Query("UPDATE accounts SET access_token = :accessToken WHERE username = :username")
     void updateAccessToken(String username, String accessToken);

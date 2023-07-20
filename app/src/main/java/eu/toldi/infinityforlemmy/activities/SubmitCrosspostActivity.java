@@ -50,6 +50,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
@@ -137,7 +138,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
     ImageView playButton;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -273,11 +274,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
                     .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0)))
                     .into(iconGifImageView);
 
-            if (post.isSpoiler()) {
-                spoilerTextView.setBackgroundColor(spoilerBackgroundColor);
-                spoilerTextView.setBorderColor(spoilerBackgroundColor);
-                spoilerTextView.setTextColor(spoilerTextColor);
-            }
             if (post.isNSFW()) {
                 nsfwTextView.setBackgroundColor(nsfwBackgroundColor);
                 nsfwTextView.setBorderColor(nsfwBackgroundColor);
@@ -499,7 +495,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
 
     private void loadSubredditIcon() {
         LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditName,
-                mAccessToken, mOauthRetrofit, mRetrofit, iconImageUrl -> {
+                mAccessToken, mOauthRetrofit, mRetrofit.getRetrofit(), iconImageUrl -> {
             iconUrl = iconImageUrl;
             displaySubredditIcon();
             loadSubredditIconSuccessful = true;

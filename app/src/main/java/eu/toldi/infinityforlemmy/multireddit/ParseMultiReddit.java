@@ -38,7 +38,7 @@ public class ParseMultiReddit {
         int nSubscribers = singleMultiRedditJSON.getInt(JSONUtils.NUM_SUBSCRIBERS_KEY);
         String copiedFrom = singleMultiRedditJSON.getString(JSONUtils.COPIED_FROM_KEY);
         String iconUrl = singleMultiRedditJSON.getString(JSONUtils.ICON_URL_KEY);
-        long createdUTC = singleMultiRedditJSON.getLong(JSONUtils.CREATED_UTC_KEY);
+        long createdUTC = singleMultiRedditJSON.getLong(JSONUtils.PUBLISHED);
         String visibility = singleMultiRedditJSON.getString(JSONUtils.VISIBILITY_KEY);
         boolean over18 = singleMultiRedditJSON.getBoolean(JSONUtils.OVER_18_KEY);
         String path = singleMultiRedditJSON.getString(JSONUtils.PATH_KEY);

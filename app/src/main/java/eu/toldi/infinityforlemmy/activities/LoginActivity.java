@@ -3,37 +3,26 @@ package eu.toldi.infinityforlemmy.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.SpannableString;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.MenuItem;
-import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -41,16 +30,16 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.FetchMyInfo;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.asynctasks.ParseAndInsertNewAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -71,13 +60,22 @@ public class LoginActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.two_fa_infO_text_view_login_activity)
     TextView twoFAInfoTextView;
-    @BindView(R.id.webview_login_activity)
-    WebView webView;
-    @BindView(R.id.fab_login_activity)
-    FloatingActionButton fab;
+
+    @BindView(R.id.instance_url_input)
+    TextInputEditText instance_input;
+    @BindView(R.id.username_input)
+    TextInputEditText username_input;
+    @BindView(R.id.user_password_input)
+    TextInputEditText password_input;
+    @BindView(R.id.user_2fa_token_input)
+    TextInputEditText token_2fa_input;
+
+    @BindView(R.id.user_login_button)
+    Button loginButton;
+
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -131,167 +129,78 @@ public class LoginActivity extends BaseActivity {
             isAgreeToUserAgreement = savedInstanceState.getBoolean(IS_AGREE_TO_USER_AGGREMENT_STATE);
         }
 
-        fab.setOnClickListener(view -> {
-            new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                    .setTitle(R.string.have_trouble_login_title)
-                    .setMessage(R.string.have_trouble_login_message)
-                    .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                        enableDom = !enableDom;
-                        ActivityCompat.recreate(this);
-                    })
-                    .setNegativeButton(R.string.no, null)
-                    .show();
-        });
+        loginButton.setOnClickListener(view -> {
+            String username = username_input.getText().toString();
+            String instance = instance_input.getText().toString();
+            AccountLoginDTO accountLoginDTO = new AccountLoginDTO(username,password_input.getText().toString(),token_2fa_input.getText().toString());
+            mRetrofit.setBaseURL(instance);
+            LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
+            Call<String> accessTokenCall = api.userLogin(accountLoginDTO);
+            accessTokenCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
 
-        if (enableDom) {
-            twoFAInfoTextView.setVisibility(View.GONE);
-        }
+                    if (response.isSuccessful()) {
+                        Log.i("test", "WIN");
+                        String accountResponse = response.body();
+                        if (accountResponse == null) {
+                            //Handle error
+                            return;
+                        }
+                        Log.i("test", accountResponse);
+                        try {
+                            JSONObject responseJSON = new JSONObject(accountResponse);
+                            String accessToken = responseJSON.getString("jwt");
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(enableDom);
-
-        Uri baseUri = Uri.parse(APIUtils.OAUTH_URL);
-        Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter(APIUtils.CLIENT_ID_KEY, APIUtils.CLIENT_ID);
-        uriBuilder.appendQueryParameter(APIUtils.RESPONSE_TYPE_KEY, APIUtils.RESPONSE_TYPE);
-        uriBuilder.appendQueryParameter(APIUtils.STATE_KEY, APIUtils.STATE);
-        uriBuilder.appendQueryParameter(APIUtils.REDIRECT_URI_KEY, APIUtils.REDIRECT_URI);
-        uriBuilder.appendQueryParameter(APIUtils.DURATION_KEY, APIUtils.DURATION);
-        uriBuilder.appendQueryParameter(APIUtils.SCOPE_KEY, APIUtils.SCOPE);
-
-        String url = uriBuilder.toString();
-
-        CookieManager.getInstance().removeAllCookies(aBoolean -> {
-        });
-
-        webView.loadUrl(url);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.contains("&code=") || url.contains("?code=")) {
-                    Uri uri = Uri.parse(url);
-                    String state = uri.getQueryParameter("state");
-                    if (state.equals(APIUtils.STATE)) {
-                        authCode = uri.getQueryParameter("code");
-
-                        Map<String, String> params = new HashMap<>();
-                        params.put(APIUtils.GRANT_TYPE_KEY, "authorization_code");
-                        params.put("code", authCode);
-                        params.put("redirect_uri", APIUtils.REDIRECT_URI);
-
-                        RedditAPI api = mRetrofit.create(RedditAPI.class);
-                        Call<String> accessTokenCall = api.getAccessToken(APIUtils.getHttpBasicAuthHeader(), params);
-                        accessTokenCall.enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                                if (response.isSuccessful()) {
-                                    try {
-                                        String accountResponse = response.body();
-                                        if (accountResponse == null) {
-                                            //Handle error
-                                            return;
+                            FetchMyInfo.fetchAccountInfo(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, username,
+                                    accessToken, new FetchMyInfo.FetchMyInfoListener() {
+                                        @Override
+                                        public void onFetchMyInfoSuccess(String name,String display_name, String profileImageUrl, String bannerImageUrl) {
+                                            mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
+                                                    .putString(SharedPreferencesUtils.ACCOUNT_NAME, name)
+                                                    .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,instance)
+                                                    .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, profileImageUrl).apply();
+                                            ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance, mRedditDataRoomDatabase.accountDao(),
+                                                    () -> {
+                                                        Intent resultIntent = new Intent();
+                                                        setResult(Activity.RESULT_OK, resultIntent);
+                                                        finish();
+                                                    });
                                         }
 
-                                        JSONObject responseJSON = new JSONObject(accountResponse);
-                                        String accessToken = responseJSON.getString(APIUtils.ACCESS_TOKEN_KEY);
-                                        String refreshToken = responseJSON.getString(APIUtils.REFRESH_TOKEN_KEY);
+                                        @Override
+                                        public void onFetchMyInfoFailed(boolean parseFailed) {
+                                            if (parseFailed) {
+                                                Toast.makeText(LoginActivity.this, R.string.parse_user_info_error, Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
+                                            }
 
-                                        FetchMyInfo.fetchAccountInfo(mOauthRetrofit, mRedditDataRoomDatabase,
-                                                accessToken, new FetchMyInfo.FetchMyInfoListener() {
-                                                    @Override
-                                                    public void onFetchMyInfoSuccess(String name, String profileImageUrl, String bannerImageUrl, int karma) {
-                                                        mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
-                                                                .putString(SharedPreferencesUtils.ACCOUNT_NAME, name)
-                                                                .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, profileImageUrl).apply();
-                                                        ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name, accessToken, refreshToken, profileImageUrl, bannerImageUrl,
-                                                                karma, authCode, mRedditDataRoomDatabase.accountDao(),
-                                                                () -> {
-                                                                    Intent resultIntent = new Intent();
-                                                                    setResult(Activity.RESULT_OK, resultIntent);
-                                                                    finish();
-                                                                });
-                                                    }
+                                            finish();
+                                        }
+                                    });
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
 
-                                                    @Override
-                                                    public void onFetchMyInfoFailed(boolean parseFailed) {
-                                                        if (parseFailed) {
-                                                            Toast.makeText(LoginActivity.this, R.string.parse_user_info_error, Toast.LENGTH_SHORT).show();
-                                                        } else {
-                                                            Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
-                                                        }
-
-                                                        finish();
-                                                    }
-                                        });
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                        Toast.makeText(LoginActivity.this, R.string.parse_json_response_error, Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
-                                } else {
-                                    Toast.makeText(LoginActivity.this, R.string.retrieve_token_error, Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                                Toast.makeText(LoginActivity.this, R.string.retrieve_token_error, Toast.LENGTH_SHORT).show();
-                                t.printStackTrace();
-                                finish();
-                            }
-                        });
-                    } else {
-                        Toast.makeText(LoginActivity.this, R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
-                        finish();
+                        return;
                     }
 
-                } else if (url.contains("error=access_denied")) {
-                    Toast.makeText(LoginActivity.this, R.string.access_denied, Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    view.loadUrl(url);
+                    String accountResponse = response.body();
+                    if (accountResponse == null) {
+                        //Handle error
+                        return;
+                    }
+                    Log.i("test", accountResponse);
                 }
 
-                return true;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-            }
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.i("test", "LOSE");
+                }
+            });
         });
 
-        if (!isAgreeToUserAgreement) {
-            TextView messageTextView = new TextView(this);
-            int padding = (int) Utils.convertDpToPixel(24, this);
-            messageTextView.setPaddingRelative(padding, padding, padding, padding);
-            SpannableString message = new SpannableString(getString(R.string.user_agreement_message, "https://www.redditinc.com/policies/user-agreement-september-12-2021", "https://docile-alligator.github.io"));
-            Linkify.addLinks(message, Linkify.WEB_URLS);
-            messageTextView.setMovementMethod(BetterLinkMovementMethod.newInstance().setOnLinkClickListener(new BetterLinkMovementMethod.OnLinkClickListener() {
-                @Override
-                public boolean onClick(TextView textView, String url) {
-                    Intent intent = new Intent(LoginActivity.this, LinkResolverActivity.class);
-                    intent.setData(Uri.parse(url));
-                    startActivity(intent);
-                    return true;
-                }
-            }));
-            messageTextView.setLinkTextColor(getResources().getColor(R.color.colorAccent));
-            messageTextView.setText(message);
-            new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                    .setTitle(getString(R.string.user_agreement_dialog_title))
-                    .setView(messageTextView)
-                    .setPositiveButton(R.string.agree, (dialogInterface, i) -> isAgreeToUserAgreement = true)
-                    .setNegativeButton(R.string.do_not_agree, (dialogInterface, i) -> finish())
-                    .setCancelable(false)
-                    .show();
-        }
     }
 
     @Override
@@ -318,7 +227,7 @@ public class LoginActivity extends BaseActivity {
         twoFAInfoTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         Drawable infoDrawable = Utils.getTintedDrawable(this, R.drawable.ic_info_preference_24dp, mCustomThemeWrapper.getPrimaryIconColor());
         twoFAInfoTextView.setCompoundDrawablesWithIntrinsicBounds(infoDrawable, null, null, null);
-        applyFABTheme(fab);
+        applyButtonTheme(loginButton);
         if (typeface != null) {
             twoFAInfoTextView.setTypeface(typeface);
         }

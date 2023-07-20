@@ -38,6 +38,7 @@ import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.SearchSubredditsResultActivity;
@@ -77,7 +78,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
     SubredditListingViewModel mSubredditListingViewModel;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -142,7 +143,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         sortType = new SortType(SortType.Type.valueOf(sort.toUpperCase()));
         boolean nsfw = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.NSFW_BASE, false);
 
-        mAdapter = new SubredditListingRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRetrofit,
+        mAdapter = new SubredditListingRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRetrofit.getRetrofit(),
                 mCustomThemeWrapper, accessToken, accountName,
                 mRedditDataRoomDatabase, getArguments().getBoolean(EXTRA_IS_MULTI_SELECTION, false),
                 new SubredditListingRecyclerViewAdapter.Callback() {
@@ -152,12 +153,13 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
                     }
 
                     @Override
-                    public void subredditSelected(String subredditName, String iconUrl) {
+                    public void subredditSelected(String subredditName, String communityFullName,String iconUrl) {
                         if (isGettingSubredditInfo) {
                             ((SearchSubredditsResultActivity) mActivity).getSelectedSubreddit(subredditName, iconUrl);
                         } else {
                             Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                             intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, subredditName);
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, communityFullName);
                             mActivity.startActivity(intent);
                         }
                     }
@@ -179,7 +181,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         }
 
         SubredditListingViewModel.Factory factory = new SubredditListingViewModel.Factory(
-                accessToken == null ? mRetrofit : mOauthRetrofit, query, sortType, accessToken, nsfw);
+                accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, query, sortType, accessToken, nsfw);
         mSubredditListingViewModel = new ViewModelProvider(this, factory).get(SubredditListingViewModel.class);
         mSubredditListingViewModel.getSubreddits().observe(getViewLifecycleOwner(), subredditData -> mAdapter.submitList(subredditData));
 

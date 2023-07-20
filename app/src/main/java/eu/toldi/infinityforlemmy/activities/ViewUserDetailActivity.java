@@ -61,6 +61,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -131,6 +132,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     public static final String EXTRA_USER_NAME_KEY = "EUNK";
     public static final String EXTRA_MESSAGE_FULLNAME = "ENF";
     public static final String EXTRA_NEW_ACCOUNT_NAME = "ENAN";
+
+    public static final String EXTRA_QUALIFIED_USER_NAME_KEY = "EQUNK";
     public static final int GIVE_AWARD_REQUEST_CODE = 200;
     public static final int EDIT_COMMENT_REQUEST_CODE = 300;
     public static final int ADD_TO_MULTIREDDIT_REQUEST_CODE = 400;
@@ -159,6 +162,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     GifImageView iconGifImageView;
     @BindView(R.id.user_name_text_view_view_user_detail_activity)
     TextView userNameTextView;
+
+    @BindView(R.id.user_qualified_name_text_view_view_user_detail_activity)
+    TextView qualifiedNameTextView;
     @BindView(R.id.subscribe_user_chip_view_user_detail_activity)
     Chip subscribeUserChip;
     @BindView(R.id.karma_text_view_view_user_detail_activity)
@@ -169,7 +175,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     TextView descriptionTextView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -206,6 +212,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private String mAccessToken;
     private String mAccountName;
     private String username;
+    private String qualifiedName;
     private String description;
     private boolean subscriptionReady = false;
     private boolean mFetchUserInfoSuccess = false;
@@ -224,6 +231,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private boolean lockBottomAppBar;
     private String mMessageFullname;
     private String mNewAccountName;
+
     //private MaterialAlertDialogBuilder nsfwWarningBuilder;
 
     @Override
@@ -257,6 +265,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         mViewPager2 = viewPager2;
 
         username = getIntent().getStringExtra(EXTRA_USER_NAME_KEY);
+        qualifiedName = getIntent().getStringExtra(EXTRA_QUALIFIED_USER_NAME_KEY);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -283,8 +292,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
         Resources resources = getResources();
 
-        String title = "u/" + username;
+        String title = username;
         userNameTextView.setText(title);
+        qualifiedNameTextView.setText(qualifiedName);
         toolbar.setTitle(title);
 
         setSupportActionBar(toolbar);
@@ -441,7 +451,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                             subscriptionReady = false;
                             if (resources.getString(R.string.follow).contentEquals(subscribeUserChip.getText())) {
                                 if (mAccessToken == null) {
-                                    UserFollowing.anonymousFollowUser(mExecutor, new Handler(), mRetrofit,
+                                    UserFollowing.anonymousFollowUser(mExecutor, new Handler(), mRetrofit.getRetrofit(),
                                             username, mRedditDataRoomDatabase, new UserFollowing.UserFollowingListener() {
                                                 @Override
                                                 public void onUserFollowingSuccess() {
@@ -458,7 +468,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                                                 }
                                             });
                                 } else {
-                                    UserFollowing.followUser(mOauthRetrofit, mRetrofit, mAccessToken,
+                                    UserFollowing.followUser(mOauthRetrofit, mRetrofit.getRetrofit(), mAccessToken,
                                             username, mAccountName, mRedditDataRoomDatabase, new UserFollowing.UserFollowingListener() {
                                                 @Override
                                                 public void onUserFollowingSuccess() {
@@ -493,7 +503,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                                                 }
                                             });
                                 } else {
-                                    UserFollowing.unfollowUser(mOauthRetrofit, mRetrofit, mAccessToken,
+                                    UserFollowing.unfollowUser(mOauthRetrofit, mRetrofit.getRetrofit(), mAccessToken,
                                             username, mAccountName, mRedditDataRoomDatabase, new UserFollowing.UserFollowingListener() {
                                                 @Override
                                                 public void onUserFollowingSuccess() {
@@ -534,15 +544,14 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     subscribeUserChip.setVisibility(View.GONE);
                 }
 
-                String userFullName = "u/" + userData.getName();
+                String userFullName = userData.getName();
                 userNameTextView.setText(userFullName);
                 if (!title.equals(userFullName)) {
                     getSupportActionBar().setTitle(userFullName);
                 }
-                String karma = getString(R.string.karma_info_user_detail, userData.getTotalKarma(), userData.getLinkKarma(), userData.getCommentKarma());
+                String karma = "";//getString(R.string.karma_info_user_detail, userData.getTotalKarma(), userData.getLinkKarma(), userData.getCommentKarma());
                 karmaTextView.setText(karma);
-                cakedayTextView.setText(getString(R.string.cakeday_info, new SimpleDateFormat("MMM d, yyyy",
-                        locale).format(userData.getCakeday())));
+                cakedayTextView.setText(getString(R.string.cakeday_info, userData.getCakeday()));
 
                 if (userData.getDescription() == null || userData.getDescription().equals("")) {
                     descriptionTextView.setVisibility(View.GONE);
@@ -566,16 +575,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                         nsfwWarningBuilder.show();
                     }
                 }*/
-            }
-        });
-
-        karmaTextView.setOnClickListener(view -> {
-            UserData userData = userViewModel.getUserLiveData().getValue();
-            if (userData != null) {
-                KarmaInfoBottomSheetFragment karmaInfoBottomSheetFragment = KarmaInfoBottomSheetFragment.newInstance(
-                        userData.getLinkKarma(), userData.getCommentKarma(), userData.getAwarderKarma(), userData.getAwardeeKarma()
-                );
-                karmaInfoBottomSheetFragment.show(getSupportFragmentManager(), karmaInfoBottomSheetFragment.getTag());
             }
         });
     }
@@ -639,7 +638,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private void checkNewAccountAndInitializeViewPager() {
         if (mNewAccountName != null) {
             if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase, mCurrentAccountSharedPreferences,
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
                         mExecutor, new Handler(), mNewAccountName, newAccount -> {
                             EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
                             Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
@@ -1071,7 +1070,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
     private void fetchUserInfo() {
         if (!mFetchUserInfoSuccess) {
-            FetchUserData.fetchUserData(mRetrofit, username, new FetchUserData.FetchUserDataListener() {
+            FetchUserData.fetchUserData(mRetrofit.getRetrofit(), qualifiedName, new FetchUserData.FetchUserDataListener() {
                 @Override
                 public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
                     new ViewUserDetailActivity.InsertUserDataAsyncTask(mRedditDataRoomDatabase.userDao(), userData,
@@ -1624,7 +1623,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_USER);
-                bundle.putString(PostFragment.EXTRA_USER_NAME, username);
+                bundle.putString(PostFragment.EXTRA_USER_NAME, qualifiedName);
                 bundle.putString(PostFragment.EXTRA_USER_WHERE, PostPagingSource.USER_WHERE_SUBMITTED);
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
@@ -1633,7 +1632,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             }
             CommentsListingFragment fragment = new CommentsListingFragment();
             Bundle bundle = new Bundle();
-            bundle.putString(CommentsListingFragment.EXTRA_USERNAME, username);
+            bundle.putString(CommentsListingFragment.EXTRA_USERNAME, qualifiedName);
             bundle.putString(CommentsListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             bundle.putString(CommentsListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
             bundle.putBoolean(CommentsListingFragment.EXTRA_ARE_SAVED_COMMENTS, false);

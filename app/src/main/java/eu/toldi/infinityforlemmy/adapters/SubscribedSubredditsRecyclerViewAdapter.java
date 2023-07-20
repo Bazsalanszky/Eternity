@@ -148,20 +148,18 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof SubredditViewHolder) {
             String name;
+            String fullname = "";
             String iconUrl;
 
             if (hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 0) {
                 ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(R.string.all_subreddits);
-                ((SubredditViewHolder) viewHolder).favoriteImageView.setVisibility(View.GONE);
                 viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(null, null, false));
                 return;
             } else if (itemClickListener != null && !hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 0) {
-                ((SubredditViewHolder) viewHolder).favoriteImageView.setVisibility(View.GONE);
                 name = username;
                 iconUrl = userIconUrl;
                 viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, true));
             } else if (hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 1) {
-                ((SubredditViewHolder) viewHolder).favoriteImageView.setVisibility(View.GONE);
                 name = username;
                 iconUrl = userIconUrl;
                 if (itemClickListener != null) {
@@ -183,67 +181,8 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 }
 
                 name = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
+                fullname = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name();
                 iconUrl = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
-                if(mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
-                    ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                } else {
-                    ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                }
-
-                ((SubredditViewHolder) viewHolder).favoriteImageView.setOnClickListener(view -> {
-                    if(mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
-                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                        mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(false);
-                        FavoriteThing.unfavoriteSubreddit(mExecutor, new Handler(), mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
-                                mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset),
-                                new FavoriteThing.FavoriteThingListener() {
-                                    @Override
-                                    public void success() {
-                                        int position = viewHolder.getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedSubredditData.size() > position) {
-                                            mSubscribedSubredditData.get(position).setFavorite(false);
-                                        }
-                                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(mActivity, R.string.thing_unfavorite_failed, Toast.LENGTH_SHORT).show();
-                                        int position = viewHolder.getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedSubredditData.size() > position) {
-                                            mSubscribedSubredditData.get(position).setFavorite(true);
-                                        }
-                                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                    }
-                                });
-                    } else {
-                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                        mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(true);
-                        FavoriteThing.favoriteSubreddit(mExecutor, new Handler(), mOauthRetrofit,
-                                mRedditDataRoomDatabase, accessToken,
-                                mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset),
-                                new FavoriteThing.FavoriteThingListener() {
-                                    @Override
-                                    public void success() {
-                                        int position = viewHolder.getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedSubredditData.size() > position) {
-                                            mSubscribedSubredditData.get(position).setFavorite(true);
-                                        }
-                                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(mActivity, R.string.thing_favorite_failed, Toast.LENGTH_SHORT).show();
-                                        int position = viewHolder.getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedSubredditData.size() > position) {
-                                            mSubscribedSubredditData.get(position).setFavorite(false);
-                                        }
-                                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                    }
-                                });
-                    }
-                });
 
                 if (itemClickListener != null) {
                     viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, false));
@@ -251,9 +190,12 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             }
 
             if (itemClickListener == null) {
+                String finalFullname = fullname;
                 viewHolder.itemView.setOnClickListener(view -> {
                     Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                     intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, name);
+                    intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
+                            finalFullname);
                     mActivity.startActivity(intent);
                 });
             }
@@ -283,65 +225,6 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             }
             String name = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
             String iconUrl = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
-            if(mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
-                ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-            } else {
-                ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-            }
-
-            ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setOnClickListener(view -> {
-                if(mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
-                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                    mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(false);
-                    FavoriteThing.unfavoriteSubreddit(mExecutor, new Handler(), mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
-                            mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset),
-                            new FavoriteThing.FavoriteThingListener() {
-                                @Override
-                                public void success() {
-                                    int position = viewHolder.getBindingAdapterPosition() - 1;
-                                    if(position >= 0 && mFavoriteSubscribedSubredditData.size() > position) {
-                                        mFavoriteSubscribedSubredditData.get(position).setFavorite(false);
-                                    }
-                                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                }
-
-                                @Override
-                                public void failed() {
-                                    Toast.makeText(mActivity, R.string.thing_unfavorite_failed, Toast.LENGTH_SHORT).show();
-                                    int position = viewHolder.getBindingAdapterPosition() - 1;
-                                    if(position >= 0 && mFavoriteSubscribedSubredditData.size() > position) {
-                                        mFavoriteSubscribedSubredditData.get(position).setFavorite(true);
-                                    }
-                                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                }
-                            });
-                } else {
-                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                    mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(true);
-                    FavoriteThing.favoriteSubreddit(mExecutor, new Handler(), mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
-                            mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset),
-                            new FavoriteThing.FavoriteThingListener() {
-                                @Override
-                                public void success() {
-                                    int position = viewHolder.getBindingAdapterPosition() - 1;
-                                    if(position >= 0 && mFavoriteSubscribedSubredditData.size() > position) {
-                                        mFavoriteSubscribedSubredditData.get(position).setFavorite(true);
-                                    }
-                                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                }
-
-                                @Override
-                                public void failed() {
-                                    Toast.makeText(mActivity, R.string.thing_favorite_failed, Toast.LENGTH_SHORT).show();
-                                    int position = viewHolder.getBindingAdapterPosition() - 1;
-                                    if(position >= 0 && mFavoriteSubscribedSubredditData.size() > position) {
-                                        mFavoriteSubscribedSubredditData.get(position).setFavorite(false);
-                                    }
-                                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                }
-                            });
-                }
-            });
 
             if (itemClickListener != null) {
                 viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, false));
@@ -402,7 +285,6 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         if(holder instanceof SubredditViewHolder) {
             glide.clear(((SubredditViewHolder) holder).iconGifImageView);
-            ((SubredditViewHolder) holder).favoriteImageView.setVisibility(View.VISIBLE);
         } else if (holder instanceof FavoriteSubredditViewHolder) {
             glide.clear(((FavoriteSubredditViewHolder) holder).iconGifImageView);
         }
@@ -477,8 +359,6 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
-        @BindView(R.id.favorite_image_view_item_subscribed_thing)
-        ImageView favoriteImageView;
 
         SubredditViewHolder(View itemView) {
             super(itemView);
@@ -495,8 +375,6 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
-        @BindView(R.id.favorite_image_view_item_subscribed_thing)
-        ImageView favoriteImageView;
 
         FavoriteSubredditViewHolder(View itemView) {
             super(itemView);

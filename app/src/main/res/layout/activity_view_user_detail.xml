@@ -55,11 +55,19 @@
                         android:id="@+id/user_name_text_view_view_user_detail_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:textSize="?attr/font_18"
+                        android:layout_marginBottom="2dp"
                         android:fontFamily="?attr/font_family"
-                        android:layout_gravity="center_horizontal"/>
+                        android:textSize="?attr/font_18" />
+
+                    <TextView
+                        android:id="@+id/user_qualified_name_text_view_view_user_detail_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="16dp"
+                        android:text="TextView" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/subscribe_user_chip_view_user_detail_activity"

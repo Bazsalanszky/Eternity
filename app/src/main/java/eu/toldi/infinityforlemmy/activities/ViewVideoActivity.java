@@ -94,6 +94,7 @@ import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.StreamableVideo;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.apis.VReddIt;
@@ -200,7 +201,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
 
     @Inject
     @Named("no_oauth")
-    Retrofit retrofit;
+    RetrofitHolder retrofit;
 
     @Inject
     @Named("gfycat")
@@ -789,7 +790,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                     List<String> segments = redirectUri.getPathSegments();
                     int commentsIndex = segments.lastIndexOf("comments");
                     String postId = segments.get(commentsIndex + 1);
-                    FetchPost.fetchPost(mExecutor, new Handler(), retrofit, postId, null,
+                    FetchPost.fetchPost(mExecutor, new Handler(), retrofit.getRetrofit(), postId, null,
                             new FetchPost.FetchPostListener() {
                                 @Override
                                 public void fetchPostSuccess(Post post) {
@@ -839,7 +840,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                                         if (post.getVideoUrl() != null) {
                                             mVideoUri = Uri.parse(post.getVideoUrl());
                                             subredditName = post.getSubredditName();
-                                            id = post.getId();
+                                            id = String.valueOf(post.getId());
                                             videoDownloadUrl = post.getVideoDownloadUrl();
 
                                             videoFileName = subredditName + "-" + id + ".mp4";

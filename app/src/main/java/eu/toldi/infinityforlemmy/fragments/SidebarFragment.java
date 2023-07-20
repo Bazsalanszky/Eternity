@@ -25,6 +25,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -52,6 +53,7 @@ public class SidebarFragment extends Fragment {
 
     public static final String EXTRA_SUBREDDIT_NAME = "ESN";
     public static final String EXTRA_ACCESS_TOKEN = "EAT";
+    public static final String EXTRA_COMMUNITY_QUALIFIED_NAME = "ECQN";
     public SubredditViewModel mSubredditViewModel;
     @BindView(R.id.swipe_refresh_layout_sidebar_fragment)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -59,7 +61,7 @@ public class SidebarFragment extends Fragment {
     RecyclerView recyclerView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -72,6 +74,8 @@ public class SidebarFragment extends Fragment {
     private ViewSubredditDetailActivity activity;
     private String mAccessToken;
     private String subredditName;
+
+    private String communityQualifiedName;
     private LinearLayoutManagerBugFixed linearLayoutManager;
     private int markdownColor;
     private String sidebarDescription;
@@ -92,6 +96,7 @@ public class SidebarFragment extends Fragment {
 
         mAccessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         subredditName = getArguments().getString(EXTRA_SUBREDDIT_NAME);
+        communityQualifiedName = getArguments().getString(EXTRA_COMMUNITY_QUALIFIED_NAME);
         if (subredditName == null) {
             Toast.makeText(activity, R.string.error_getting_subreddit_name, Toast.LENGTH_SHORT).show();
             return rootView;
@@ -161,7 +166,7 @@ public class SidebarFragment extends Fragment {
         });
 
         mSubredditViewModel = new ViewModelProvider(activity,
-                new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, subredditName))
+                new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, communityQualifiedName))
                 .get(SubredditViewModel.class);
         mSubredditViewModel.getSubredditLiveData().observe(getViewLifecycleOwner(), subredditData -> {
             if (subredditData != null) {
@@ -189,7 +194,7 @@ public class SidebarFragment extends Fragment {
 
     public void fetchSubredditData() {
         swipeRefreshLayout.setRefreshing(true);
-        FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit, subredditName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
+        FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit.getRetrofit(), communityQualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
             @Override
             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 swipeRefreshLayout.setRefreshing(false);

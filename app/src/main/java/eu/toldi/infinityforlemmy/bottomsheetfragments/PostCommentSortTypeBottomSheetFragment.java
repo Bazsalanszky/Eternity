@@ -69,7 +69,7 @@ public class PostCommentSortTypeBottomSheetFragment extends LandscapeExpandedRou
         ButterKnife.bind(this, rootView);
 
         SortType.Type currentSortType = (SortType.Type) getArguments().getSerializable(EXTRA_CURRENT_SORT_TYPE);
-        if (currentSortType.equals(SortType.Type.BEST) || currentSortType.equals(SortType.Type.CONFIDENCE)) {
+        if (currentSortType.equals(SortType.Type.ACTIVE) || currentSortType.equals(SortType.Type.CONFIDENCE)) {
             confidenceTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(confidenceTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.TOP)) {
             topTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(topTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);

@@ -131,7 +131,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private static final DiffUtil.ItemCallback<Post> DIFF_CALLBACK = new DiffUtil.ItemCallback<Post>() {
         @Override
         public boolean areItemsTheSame(@NonNull Post post, @NonNull Post t1) {
-            return post.getId().equals(t1.getId());
+            return post.getId() == t1.getId();
         }
 
         @Override
@@ -379,7 +379,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 switch (post.getPostType()) {
                     case Post.VIDEO_TYPE:
                         if (mAutoplay) {
-                            if ((!mAutoplayNsfwVideos && post.isNSFW()) || post.isSpoiler()) {
+                            if ((!mAutoplayNsfwVideos && post.isNSFW())) {
                                 return VIEW_TYPE_POST_CARD_WITH_PREVIEW_TYPE;
                             }
                             return VIEW_TYPE_POST_CARD_VIDEO_AUTOPLAY_TYPE;
@@ -438,7 +438,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 switch (post.getPostType()) {
                     case Post.VIDEO_TYPE:
                         if (mAutoplay) {
-                            if ((!mAutoplayNsfwVideos && post.isNSFW()) || post.isSpoiler()) {
+                            if ((!mAutoplayNsfwVideos && post.isNSFW()) ) {
                                 return VIEW_TYPE_POST_CARD_2_WITH_PREVIEW_TYPE;
                             }
                             return VIEW_TYPE_POST_CARD_2_VIDEO_AUTOPLAY_TYPE;
@@ -523,13 +523,13 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                     ((PostBaseViewHolder) holder).titleTextView.setTextColor(mReadPostTitleColor);
                 }
-                String authorPrefixed = "u/" + post.getAuthor();
+                String authorPrefixed =  post.getAuthorNamePrefixed();
 
                 if (mHideSubredditAndUserPrefix) {
                     ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditName());
                     ((PostBaseViewHolder) holder).userTextView.setText(post.getAuthor());
                 } else {
-                    ((PostBaseViewHolder) holder).subredditTextView.setText("r/" + post.getSubredditName());
+                    ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditNamePrefixed());
                     ((PostBaseViewHolder) holder).userTextView.setText(authorPrefixed);
                 }
 
@@ -657,28 +657,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 if (post.isNSFW()) {
                     ((PostBaseViewHolder) holder).nsfwTextView.setVisibility(View.VISIBLE);
-                }
-
-                if (post.isSpoiler()) {
-                    ((PostBaseViewHolder) holder).spoilerTextView.setVisibility(View.VISIBLE);
-                }
-
-                if (post.getFlair() != null && !post.getFlair().equals("")) {
-                    if (mHidePostFlair) {
-                        ((PostBaseViewHolder) holder).flairTextView.setVisibility(View.GONE);
-                    } else {
-                        ((PostBaseViewHolder) holder).flairTextView.setVisibility(View.VISIBLE);
-                        Utils.setHTMLWithImageToTextView(((PostBaseViewHolder) holder).flairTextView, post.getFlair(), false);
-                    }
-                }
-
-                if (post.getNAwards() > 0 && !mHideTheNumberOfAwards) {
-                    ((PostBaseViewHolder) holder).awardsTextView.setVisibility(View.VISIBLE);
-                    if (post.getNAwards() == 1) {
-                        ((PostBaseViewHolder) holder).awardsTextView.setText(mActivity.getString(R.string.one_award));
-                    } else {
-                        ((PostBaseViewHolder) holder).awardsTextView.setText(mActivity.getString(R.string.n_awards, post.getNAwards()));
-                    }
                 }
 
                 switch (post.getVoteType()) {
@@ -844,7 +822,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         ((PostWithPreviewTypeViewHolder) holder).noPreviewLinkImageView.setImageResource(R.drawable.ic_outline_video_24dp);
                         ((PostWithPreviewTypeViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.GONE);
                     } else {
-                        if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)) || (post.isSpoiler() && mNeedBlurSpoiler))) {
+                        if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)))) {
                             ((PostWithPreviewTypeViewHolder) holder).noPreviewLinkImageView.setVisibility(View.VISIBLE);
                             ((PostWithPreviewTypeViewHolder) holder).noPreviewLinkImageView.setImageResource(R.drawable.ic_image_24dp);
                             ((PostWithPreviewTypeViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.GONE);
@@ -904,10 +882,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                         ((PostBaseGalleryTypeViewHolder) holder).adapter.setGalleryImages(post.getGallery());
                         ((PostBaseGalleryTypeViewHolder) holder).adapter.setBlurImage(
-                                (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (post.isSpoiler() && mNeedBlurSpoiler));
+                                (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())));
                     }
                 } else if (holder instanceof PostTextTypeViewHolder) {
-                    if (!mHideTextPostContent && !post.isSpoiler() && post.getSelfTextPlainTrimmed() != null && !post.getSelfTextPlainTrimmed().equals("")) {
+                    if (!mHideTextPostContent  && post.getSelfTextPlainTrimmed() != null && !post.getSelfTextPlainTrimmed().equals("")) {
                         ((PostTextTypeViewHolder) holder).contentTextView.setVisibility(View.VISIBLE);
                         if (post.isRead()) {
                             ((PostTextTypeViewHolder) holder).contentTextView.setTextColor(mReadPostContentColor);
@@ -1035,7 +1013,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         ((PostCard2WithPreviewViewHolder) holder).noPreviewImageView.setImageResource(R.drawable.ic_outline_video_24dp);
                         ((PostCard2WithPreviewViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.GONE);
                     } else {
-                        if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)) || (post.isSpoiler() && mNeedBlurSpoiler))) {
+                        if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)))) {
                             ((PostCard2WithPreviewViewHolder) holder).noPreviewImageView.setVisibility(View.VISIBLE);
                             ((PostCard2WithPreviewViewHolder) holder).noPreviewImageView.setImageResource(R.drawable.ic_image_24dp);
                             ((PostCard2WithPreviewViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.GONE);
@@ -1078,7 +1056,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                     }
                 } else if (holder instanceof PostCard2TextTypeViewHolder) {
-                    if (!mHideTextPostContent && !post.isSpoiler() && post.getSelfTextPlainTrimmed() != null && !post.getSelfTextPlainTrimmed().equals("")) {
+                    if (!mHideTextPostContent && post.getSelfTextPlainTrimmed() != null && !post.getSelfTextPlainTrimmed().equals("")) {
                         ((PostCard2TextTypeViewHolder) holder).contentTextView.setVisibility(View.VISIBLE);
                         if (post.isRead()) {
                             ((PostCard2TextTypeViewHolder) holder).contentTextView.setTextColor(mReadPostContentColor);
@@ -1099,13 +1077,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
                 final String subredditNamePrefixed = post.getSubredditNamePrefixed();
                 String subredditName = subredditNamePrefixed.substring(2);
-                String authorPrefixed = "u/" + post.getAuthor();
+                String authorPrefixed =  post.getAuthorNamePrefixed();
                 final String title = post.getTitle();
                 int voteType = post.getVoteType();
                 boolean nsfw = post.isNSFW();
-                boolean spoiler = post.isSpoiler();
-                String flair = post.getFlair();
-                int nAwards = post.getNAwards();
                 boolean isArchived = post.isArchived();
 
                 if (mDisplaySubredditName) {
@@ -1261,28 +1236,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 if (nsfw) {
                     ((PostCompactBaseViewHolder) holder).nsfwTextView.setVisibility(View.VISIBLE);
-                }
-
-                if (spoiler) {
-                    ((PostCompactBaseViewHolder) holder).spoilerTextView.setVisibility(View.VISIBLE);
-                }
-
-                if (flair != null && !flair.equals("")) {
-                    if (mHidePostFlair) {
-                        ((PostCompactBaseViewHolder) holder).flairTextView.setVisibility(View.GONE);
-                    } else {
-                        ((PostCompactBaseViewHolder) holder).flairTextView.setVisibility(View.VISIBLE);
-                        Utils.setHTMLWithImageToTextView(((PostCompactBaseViewHolder) holder).flairTextView, flair, false);
-                    }
-                }
-
-                if (nAwards > 0 && !mHideTheNumberOfAwards) {
-                    ((PostCompactBaseViewHolder) holder).awardsTextView.setVisibility(View.VISIBLE);
-                    if (nAwards == 1) {
-                        ((PostCompactBaseViewHolder) holder).awardsTextView.setText(mActivity.getString(R.string.one_award));
-                    } else {
-                        ((PostCompactBaseViewHolder) holder).awardsTextView.setText(mActivity.getString(R.string.n_awards, nAwards));
-                    }
                 }
 
                 switch (voteType) {
@@ -1469,7 +1422,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             break;
                         }
                         case Post.GIF_TYPE: {
-                            if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)) || (post.isSpoiler() && mNeedBlurSpoiler))) {
+                            if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)) )) {
                                 ((PostGalleryViewHolder) holder).noPreviewImageView.setVisibility(View.VISIBLE);
                                 ((PostGalleryViewHolder) holder).noPreviewImageView.setImageResource(R.drawable.ic_image_24dp);
                             } else {
@@ -1605,7 +1558,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
                     ((PostGalleryBaseGalleryTypeViewHolder) holder).adapter.setGalleryImages(post.getGallery());
                     ((PostGalleryBaseGalleryTypeViewHolder) holder).adapter.setBlurImage(
-                            (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (post.isSpoiler() && mNeedBlurSpoiler));
+                            (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())));
                 }
             }
         }
@@ -1642,7 +1595,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             Post.Preview preview = ((PostWithPreviewTypeViewHolder) holder).preview;
             if (preview != null) {
                 String url;
-                boolean blurImage = (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(post.getPostType() == Post.GIF_TYPE && mAutoplay && mAutoplayNsfwVideos)) || (post.isSpoiler() && mNeedBlurSpoiler);
+                boolean blurImage = (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(post.getPostType() == Post.GIF_TYPE && mAutoplay && mAutoplayNsfwVideos));
                 if (post.getPostType() == Post.GIF_TYPE && mAutoplay && !blurImage) {
                     url = post.getUrl();
                 } else {
@@ -1669,7 +1622,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 RequestBuilder<Drawable> imageRequestBuilder = mGlide.load(postCompactThumbnailPreviewUrl)
                         .error(R.drawable.ic_error_outline_black_24dp).listener(((PostCompactBaseViewHolder) holder).requestListener);
-                if ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())) || (post.isSpoiler() && mNeedBlurSpoiler)) {
+                if ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()))) {
                     imageRequestBuilder
                             .transform(new BlurTransformation(50, 2)).into(((PostCompactBaseViewHolder) holder).imageView);
                 } else {
@@ -1681,7 +1634,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             Post.Preview preview = ((PostGalleryViewHolder) holder).preview;
             if (preview != null) {
                 String url;
-                boolean blurImage = (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(post.getPostType() == Post.GIF_TYPE && mAutoplay && mAutoplayNsfwVideos)) || post.isSpoiler() && mNeedBlurSpoiler;
+                boolean blurImage = (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(post.getPostType() == Post.GIF_TYPE && mAutoplay && mAutoplayNsfwVideos));
                 if (post.getPostType() == Post.GIF_TYPE && mAutoplay && !blurImage) {
                     url = post.getUrl();
                 } else {
@@ -1701,7 +1654,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             Post.Preview preview = ((PostCard2WithPreviewViewHolder) holder).preview;
             if (preview != null) {
                 String url;
-                boolean blurImage = (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(post.getPostType() == Post.GIF_TYPE && mAutoplay && mAutoplayNsfwVideos)) || (post.isSpoiler() && mNeedBlurSpoiler);
+                boolean blurImage = (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(post.getPostType() == Post.GIF_TYPE && mAutoplay && mAutoplayNsfwVideos));
                 if (post.getPostType() == Post.GIF_TYPE && mAutoplay && !blurImage) {
                     url = post.getUrl();
                 } else {
@@ -2360,6 +2313,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 canStartActivity = false;
                 Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, post.getAuthor());
+                intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, post.getAuthorNamePrefixed());
                 mActivity.startActivity(intent);
             });
 
@@ -2376,6 +2330,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                             intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
                                     post.getSubredditName());
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
+                                    post.getSubredditNamePrefixed());
                             mActivity.startActivity(intent);
                         }
                     }
@@ -2395,6 +2351,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                             intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
                                     post.getSubredditName());
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
+                                    post.getSubredditNamePrefixed());
                             mActivity.startActivity(intent);
                         }
                     }
@@ -2422,17 +2380,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     Post post = getItem(position);
                     if (post != null) {
                         mCallback.typeChipClicked(post.getPostType());
-                    }
-                });
-
-                flairTextView.setOnClickListener(view -> {
-                    int position = getBindingAdapterPosition();
-                    if (position < 0) {
-                        return;
-                    }
-                    Post post = getItem(position);
-                    if (post != null) {
-                        mCallback.flairChipClicked(post.getFlair());
                     }
                 });
             }
@@ -2463,21 +2410,21 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     int previousScoreTextViewColor = scoreTextView.getCurrentTextColor();
 
                     int previousVoteType = post.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != 1) {
                         //Not upvoted before
                         post.setVoteType(1);
-                        newVoteType = APIUtils.DIR_UPVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UPVOTE);
                         upvoteButton
                                 .setColorFilter(mUpvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mUpvotedColor);
                     } else {
                         //Upvoted before
                         post.setVoteType(0);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mPostIconAndInfoColor);
                     }
@@ -2490,7 +2437,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_UPVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 post.setVoteType(1);
                                 if (currentPosition == position) {
                                     upvoteButton.setColorFilter(mUpvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -2529,7 +2476,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, post.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 
@@ -2559,21 +2506,21 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     int previousScoreTextViewColor = scoreTextView.getCurrentTextColor();
 
                     int previousVoteType = post.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != -1) {
                         //Not downvoted before
                         post.setVoteType(-1);
-                        newVoteType = APIUtils.DIR_DOWNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton
                                 .setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mDownvotedColor);
                     } else {
                         //Downvoted before
                         post.setVoteType(0);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mPostIconAndInfoColor);
                     }
@@ -2586,7 +2533,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_DOWNVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 post.setVoteType(-1);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -2625,7 +2572,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, post.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 
@@ -3743,10 +3690,13 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                         intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
                                 post.getSubredditName());
+                        intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
+                                post.getSubredditNamePrefixed());
                         mActivity.startActivity(intent);
                     } else if (!post.isAuthorDeleted()) {
                         Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
                         intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, post.getAuthor());
+                        intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, post.getAuthorNamePrefixed());
                         mActivity.startActivity(intent);
                     }
                 }
@@ -3776,16 +3726,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
             });
 
-            flairTextView.setOnClickListener(view -> {
-                int position = getBindingAdapterPosition();
-                if (position < 0) {
-                    return;
-                }
-                Post post = getItem(position);
-                if (post != null && !(mActivity instanceof FilteredPostsActivity)) {
-                    mCallback.flairChipClicked(post.getFlair());
-                }
-            });
 
             imageView.setOnClickListener(view -> {
                 int position = getBindingAdapterPosition();
@@ -3829,21 +3769,21 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     int previousScoreTextViewColor = scoreTextView.getCurrentTextColor();
 
                     int previousVoteType = post.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != 1) {
                         //Not upvoted before
                         post.setVoteType(1);
-                        newVoteType = APIUtils.DIR_UPVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UPVOTE);
                         upvoteButton
                                 .setColorFilter(mUpvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mUpvotedColor);
                     } else {
                         //Upvoted before
                         post.setVoteType(0);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mPostIconAndInfoColor);
                     }
@@ -3856,7 +3796,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_UPVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 post.setVoteType(1);
                                 if (currentPosition == position) {
                                     upvoteButton.setColorFilter(mUpvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -3895,7 +3835,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, post.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 
@@ -3925,21 +3865,21 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     int previousScoreTextViewColor = scoreTextView.getCurrentTextColor();
 
                     int previousVoteType = post.getVoteType();
-                    String newVoteType;
+                    int newVoteType;
 
                     upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
 
                     if (previousVoteType != -1) {
                         //Not downvoted before
                         post.setVoteType(-1);
-                        newVoteType = APIUtils.DIR_DOWNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton
                                 .setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mDownvotedColor);
                     } else {
                         //Downvoted before
                         post.setVoteType(0);
-                        newVoteType = APIUtils.DIR_UNVOTE;
+                        newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mPostIconAndInfoColor);
                     }
@@ -3952,7 +3892,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType.equals(APIUtils.DIR_DOWNVOTE)) {
+                            if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 post.setVoteType(-1);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -3992,7 +3932,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getFullName(), newVoteType, getBindingAdapterPosition());
+                    }, post.getId(), newVoteType, getBindingAdapterPosition());
                 }
             });
 

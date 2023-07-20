@@ -119,11 +119,6 @@ public class FollowedUsersRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
             ((UserViewHolder) viewHolder).userNameTextView.setText(mSubscribedUserData.get(viewHolder.getBindingAdapterPosition() - offset).getName());
 
-            if(mSubscribedUserData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
-                ((UserViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-            } else {
-                ((UserViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-            }
         } else if (viewHolder instanceof FavoriteUserViewHolder) {
             if (!mFavoriteSubscribedUserData.get(viewHolder.getBindingAdapterPosition() - 1).getIconUrl().equals("")) {
                 glide.load(mFavoriteSubscribedUserData.get(viewHolder.getBindingAdapterPosition() - 1).getIconUrl())
@@ -138,11 +133,6 @@ public class FollowedUsersRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
             ((FavoriteUserViewHolder) viewHolder).userNameTextView.setText(mFavoriteSubscribedUserData.get(viewHolder.getBindingAdapterPosition() - 1).getName());
 
-            if(mFavoriteSubscribedUserData.get(viewHolder.getBindingAdapterPosition() - 1).isFavorite()) {
-                ((FavoriteUserViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-            } else {
-                ((FavoriteUserViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-            }
         }
     }
 
@@ -196,8 +186,6 @@ public class FollowedUsersRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView userNameTextView;
-        @BindView(R.id.favorite_image_view_item_subscribed_thing)
-        ImageView favoriteImageView;
 
         FavoriteUserViewHolder(View itemView) {
             super(itemView);
@@ -216,64 +204,6 @@ public class FollowedUsersRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                 }
             });
 
-            favoriteImageView.setOnClickListener(view -> {
-                int position = getBindingAdapterPosition() - 1;
-                if(position >= 0 && mFavoriteSubscribedUserData.size() > position) {
-                    if(mFavoriteSubscribedUserData.get(position).isFavorite()) {
-                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                        mFavoriteSubscribedUserData.get(position).setFavorite(false);
-                        FavoriteThing.unfavoriteUser(mExecutor, new Handler(), mOauthRetrofit,
-                                mRedditDataRoomDatabase, mAccessToken,
-                                mFavoriteSubscribedUserData.get(position),
-                                new FavoriteThing.FavoriteThingListener() {
-                                    @Override
-                                    public void success() {
-                                        int position = getBindingAdapterPosition() - 1;
-                                        if(position >= 0 && mFavoriteSubscribedUserData.size() > position) {
-                                            mFavoriteSubscribedUserData.get(position).setFavorite(false);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(mActivity, R.string.thing_unfavorite_failed, Toast.LENGTH_SHORT).show();
-                                        int position = getBindingAdapterPosition() - 1;
-                                        if(position >= 0 && mFavoriteSubscribedUserData.size() > position) {
-                                            mFavoriteSubscribedUserData.get(position).setFavorite(true);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                    }
-                                });
-                    } else {
-                        favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                        mFavoriteSubscribedUserData.get(position).setFavorite(true);
-                        FavoriteThing.favoriteUser(mExecutor, new Handler(), mOauthRetrofit,
-                                mRedditDataRoomDatabase, mAccessToken,
-                                mFavoriteSubscribedUserData.get(position),
-                                new FavoriteThing.FavoriteThingListener() {
-                                    @Override
-                                    public void success() {
-                                        int position = getBindingAdapterPosition() - 1;
-                                        if(position >= 0 && mFavoriteSubscribedUserData.size() > position) {
-                                            mFavoriteSubscribedUserData.get(position).setFavorite(true);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(mActivity, R.string.thing_favorite_failed, Toast.LENGTH_SHORT).show();
-                                        int position = getBindingAdapterPosition() - 1;
-                                        if(position >= 0 && mFavoriteSubscribedUserData.size() > position) {
-                                            mFavoriteSubscribedUserData.get(position).setFavorite(false);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                    }
-                                });
-                    }
-                }
-            });
         }
     }
 
@@ -282,8 +212,6 @@ public class FollowedUsersRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView userNameTextView;
-        @BindView(R.id.favorite_image_view_item_subscribed_thing)
-        ImageView favoriteImageView;
 
         UserViewHolder(View itemView) {
             super(itemView);
@@ -304,67 +232,6 @@ public class FollowedUsersRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                 }
             });
 
-            favoriteImageView.setOnClickListener(view -> {
-                int offset = (mFavoriteSubscribedUserData != null && mFavoriteSubscribedUserData.size() > 0) ?
-                        mFavoriteSubscribedUserData.size() + 2 : 0;
-                int position = getBindingAdapterPosition() - offset;
-
-                if(position >= 0 && mSubscribedUserData.size() > position) {
-                    if(mSubscribedUserData.get(position).isFavorite()) {
-                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                        mSubscribedUserData.get(position).setFavorite(false);
-                        FavoriteThing.unfavoriteUser(mExecutor, new Handler(), mOauthRetrofit,
-                                mRedditDataRoomDatabase, mAccessToken,
-                                mSubscribedUserData.get(position),
-                                new FavoriteThing.FavoriteThingListener() {
-                                    @Override
-                                    public void success() {
-                                        int position = getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedUserData.size() > position) {
-                                            mSubscribedUserData.get(position).setFavorite(false);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(mActivity, R.string.thing_unfavorite_failed, Toast.LENGTH_SHORT).show();
-                                        int position = getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedUserData.size() > position) {
-                                            mSubscribedUserData.get(position).setFavorite(true);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                    }
-                                });
-                    } else {
-                        favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                        mSubscribedUserData.get(position).setFavorite(true);
-                        FavoriteThing.favoriteUser(mExecutor, new Handler(), mOauthRetrofit,
-                                mRedditDataRoomDatabase, mAccessToken,
-                                mSubscribedUserData.get(position),
-                                new FavoriteThing.FavoriteThingListener() {
-                                    @Override
-                                    public void success() {
-                                        int position = getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedUserData.size() > position) {
-                                            mSubscribedUserData.get(position).setFavorite(true);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(mActivity, R.string.thing_favorite_failed, Toast.LENGTH_SHORT).show();
-                                        int position = getBindingAdapterPosition() - offset;
-                                        if(position >= 0 && mSubscribedUserData.size() > position) {
-                                            mSubscribedUserData.get(position).setFavorite(false);
-                                        }
-                                        favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
-                                    }
-                                });
-                    }
-                }
-            });
         }
     }
 

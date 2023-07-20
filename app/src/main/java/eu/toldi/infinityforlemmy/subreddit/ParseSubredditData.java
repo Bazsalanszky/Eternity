@@ -24,44 +24,40 @@ public class ParseSubredditData {
 
     @Nullable
     private static SubredditData parseSubredditData(JSONObject subredditDataJsonObject, boolean nsfw) throws JSONException {
-        boolean isNSFW = !subredditDataJsonObject.isNull(JSONUtils.OVER18_KEY) && subredditDataJsonObject.getBoolean(JSONUtils.OVER18_KEY);
+        JSONObject community = subredditDataJsonObject.getJSONObject("community");
+        boolean isNSFW = community.getBoolean("nsfw");
         if (!nsfw && isNSFW) {
             return null;
         }
-        String id = subredditDataJsonObject.getString(JSONUtils.NAME_KEY);
-        String subredditFullName = subredditDataJsonObject.getString(JSONUtils.DISPLAY_NAME_KEY);
-        String description = subredditDataJsonObject.getString(JSONUtils.PUBLIC_DESCRIPTION_KEY).trim();
-        String sidebarDescription = Utils.modifyMarkdown(subredditDataJsonObject.getString(JSONUtils.DESCRIPTION_KEY).trim());
-        long createdUTC = subredditDataJsonObject.getLong(JSONUtils.CREATED_UTC_KEY) * 1000;
-        String suggestedCommentSort = subredditDataJsonObject.getString(JSONUtils.SUGGESTED_COMMENT_SORT_KEY);
 
-        String bannerImageUrl;
-        if (subredditDataJsonObject.isNull(JSONUtils.BANNER_BACKGROUND_IMAGE_KEY)) {
-            bannerImageUrl = "";
-        } else {
-            bannerImageUrl = subredditDataJsonObject.getString(JSONUtils.BANNER_BACKGROUND_IMAGE_KEY);
-        }
-        if (bannerImageUrl.equals("") && !subredditDataJsonObject.isNull(JSONUtils.BANNER_IMG_KEY)) {
-            bannerImageUrl = subredditDataJsonObject.getString(JSONUtils.BANNER_IMG_KEY);
+        String title = community.getString(JSONUtils.TITLE_KEY);
+        String bannerImageUrl = "";
+        if(!community.isNull("banner")){
+            bannerImageUrl = community.getString("banner");
         }
 
-        String iconUrl;
-        if (subredditDataJsonObject.isNull(JSONUtils.COMMUNITY_ICON_KEY)) {
-            iconUrl = "";
-        } else {
-            iconUrl = subredditDataJsonObject.getString(JSONUtils.COMMUNITY_ICON_KEY);
+        String iconUrl = "";
+        if(!community.isNull("banner")){
+            bannerImageUrl = community.getString("icon");
         }
-        if (iconUrl.equals("") && !subredditDataJsonObject.isNull(JSONUtils.ICON_IMG_KEY)) {
-            iconUrl = subredditDataJsonObject.getString(JSONUtils.ICON_IMG_KEY);
-        }
+        int id = community.getInt("id");
+        String name = community.getString("name");
+        String description = community.getString("description");
+        boolean removed = community.getBoolean("removed");
+        String published = community.getString("published");
+        String updated = community.getString("updated");
+        boolean deleted = community.getBoolean("deleted");
 
-        int nSubscribers = 0;
-        if (!subredditDataJsonObject.isNull(JSONUtils.SUBSCRIBERS_KEY)) {
-            nSubscribers = subredditDataJsonObject.getInt(JSONUtils.SUBSCRIBERS_KEY);
-        }
+        String actorId = community.getString("actor_id");
+        boolean local = community.getBoolean("local");
+        String icon = community.getString("icon");
+        String banner = community.getString("banner");
+        boolean hidden = community.getBoolean("hidden");
+        boolean postingRestrictedToMods = community.getBoolean("posting_restricted_to_mods");
+        int instanceId = community.getInt("instance_id");
+        int subscribers = subredditDataJsonObject.getJSONObject("counts").getInt("subscribers");
 
-        return new SubredditData(id, subredditFullName, iconUrl, bannerImageUrl, description,
-                sidebarDescription, nSubscribers, createdUTC, suggestedCommentSort, isNSFW);
+        return new SubredditData(id,name,title,description,removed,published,updated,deleted,nsfw,actorId,local,iconUrl,bannerImageUrl,hidden,postingRestrictedToMods,instanceId,subscribers);
     }
 
     interface ParseSubredditDataListener {
@@ -97,8 +93,8 @@ public class ParseSubredditData {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                JSONObject data = jsonResponse.getJSONObject(JSONUtils.DATA_KEY);
-                mNCurrentOnlineSubscribers = data.getInt(JSONUtils.ACTIVE_USER_COUNT_KEY);
+                JSONObject data = jsonResponse.getJSONObject("community_view");
+                mNCurrentOnlineSubscribers = 0;// data.getInt(JSONUtils.ACTIVE_USER_COUNT_KEY);
                 subredditData = parseSubredditData(data, true);
             } catch (JSONException e) {
                 parseFailed = true;

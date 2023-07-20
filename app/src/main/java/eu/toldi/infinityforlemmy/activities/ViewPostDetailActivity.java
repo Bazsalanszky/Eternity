@@ -62,6 +62,7 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.LoadingMorePostsStatus;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
@@ -128,7 +129,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     ImageView closeSearchPanelImageView;
     @Inject
     @Named("no_oauth")
-    Retrofit mRetrofit;
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -351,7 +352,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     private void checkNewAccountAndBindView(Bundle savedInstanceState) {
         if (mNewAccountName != null) {
             if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase, mCurrentAccountSharedPreferences,
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
                         mExecutor, new Handler(), mNewAccountName, newAccount -> {
                             EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
                             Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
@@ -528,7 +529,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
 
         if (postType != HistoryPostPagingSource.TYPE_READ_POSTS) {
             mExecutor.execute(() -> {
-                RedditAPI api = (mAccessToken == null ? mRetrofit : mOauthRetrofit).create(RedditAPI.class);
+                RedditAPI api = (mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit).create(RedditAPI.class);
                 Call<String> call;
                 String afterKey = posts.isEmpty() ? null : posts.get(posts.size() - 1).getFullName();
                 switch (postType) {
@@ -649,7 +650,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
             mExecutor.execute((Runnable) () -> {
                 long lastItem = 0;
                 if (!posts.isEmpty()) {
-                    lastItem = mRedditDataRoomDatabase.readPostDao().getReadPost(posts.get(posts.size() - 1).getId()).getTime();
+                    lastItem = mRedditDataRoomDatabase.readPostDao().getReadPost(String.valueOf(posts.get(posts.size() - 1).getId())).getTime();
                 }
                 List<ReadPost> readPosts = mRedditDataRoomDatabase.readPostDao().getAllReadPosts(mAccountName, lastItem);
                 StringBuilder ids = new StringBuilder();
@@ -664,7 +665,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                 if (mAccessToken != null && !mAccessToken.isEmpty()) {
                     historyPosts = mOauthRetrofit.create(RedditAPI.class).getInfoOauth(ids.toString(), APIUtils.getOAuthHeader(mAccessToken));
                 } else {
-                    historyPosts = mRetrofit.create(RedditAPI.class).getInfo(ids.toString());
+                    historyPosts = mRetrofit.getRetrofit().create(RedditAPI.class).getInfo(ids.toString());
                 }
 
                 try {

@@ -8,9 +8,11 @@ import androidx.annotation.NonNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -18,10 +20,10 @@ import retrofit2.Retrofit;
 public class FetchMyInfo {
 
     public static void fetchAccountInfo(final Retrofit retrofit, RedditDataRoomDatabase redditDataRoomDatabase,
-                                        String accessToken, final FetchMyInfoListener fetchMyInfoListener) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+                                        String username,String accessToken, final FetchMyInfoListener fetchMyInfoListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Call<String> userInfo = api.getMyInfo(APIUtils.getOAuthHeader(accessToken));
+        Call<String> userInfo = api.userInfo(username,accessToken);
         userInfo.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
@@ -40,7 +42,7 @@ public class FetchMyInfo {
     }
 
     public interface FetchMyInfoListener {
-        void onFetchMyInfoSuccess(String name, String profileImageUrl, String bannerImageUrl, int karma);
+        void onFetchMyInfoSuccess(String name, String display_name,String profileImageUrl, String bannerImageUrl);
 
         void onFetchMyInfoFailed(boolean parseFailed);
     }
@@ -54,7 +56,8 @@ public class FetchMyInfo {
         private String name;
         private String profileImageUrl;
         private String bannerImageUrl;
-        private int karma;
+
+        private String display_name;
 
         ParseAndSaveAccountInfoAsyncTask(String response, RedditDataRoomDatabase redditDataRoomDatabase,
                                          FetchMyInfoListener fetchMyInfoListener) {
@@ -71,14 +74,17 @@ public class FetchMyInfo {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                name = jsonResponse.getString(JSONUtils.NAME_KEY);
-                profileImageUrl = Html.fromHtml(jsonResponse.getString(JSONUtils.ICON_IMG_KEY)).toString();
-                if (!jsonResponse.isNull(JSONUtils.SUBREDDIT_KEY)) {
-                    bannerImageUrl = Html.fromHtml(jsonResponse.getJSONObject(JSONUtils.SUBREDDIT_KEY).getString(JSONUtils.BANNER_IMG_KEY)).toString();
-                }
-                karma = jsonResponse.getInt(JSONUtils.TOTAL_KARMA_KEY);
+                JSONObject person = jsonResponse.getJSONObject("person_view").getJSONObject("person");
 
-                redditDataRoomDatabase.accountDao().updateAccountInfo(name, profileImageUrl, bannerImageUrl, karma);
+                name = LemmyUtils.actorID2FullName(person.getString("actor_id"));
+                if (!person.isNull("avatar")) {
+                    profileImageUrl = person.getString("avatar");
+                }
+                if (!person.isNull("banner")) {
+                    bannerImageUrl = person.getString("banner");
+                }
+                display_name = person.getString("name");
+                redditDataRoomDatabase.accountDao().updateAccountInfo(name, profileImageUrl, bannerImageUrl);
             } catch (JSONException e) {
                 parseFailed = true;
             }
@@ -88,7 +94,7 @@ public class FetchMyInfo {
         @Override
         protected void onPostExecute(Void aVoid) {
             if (!parseFailed) {
-                fetchMyInfoListener.onFetchMyInfoSuccess(name, profileImageUrl, bannerImageUrl, karma);
+                fetchMyInfoListener.onFetchMyInfoSuccess(name,display_name, profileImageUrl, bannerImageUrl);
             } else {
                 fetchMyInfoListener.onFetchMyInfoFailed(true);
             }

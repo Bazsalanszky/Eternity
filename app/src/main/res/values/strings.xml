@@ -1009,7 +1009,7 @@
     <string name="report_reason_general_abusive_content">It Contains Abusive Content</string>
 
     <string name="home">Home</string>
-    <string name="popular">Popular</string>
+    <string name="local">Local</string>
     <string name="notifications">Notifications</string>
     <string name="messages">Messages</string>
     <string name="message">Message</string>
@@ -1052,7 +1052,7 @@
 
     <string name="top_score">%1$s pts</string>
 
-    <string name="login_activity_2fa_prompt">If you have 2-factor authentication enabled, kindly type your password like the following: &lt;password&gt;:&lt;2FA code&gt;.\nExample: yourpass:123456</string>
+    <string name="login_activity_2fa_prompt">If you have 2-factor authentication enabled, you need to fill the 2FA token filed. Leave empty otherwise</string>
 
     <string name="block_user">Block User</string>
     <string name="block_user_success">Blocked</string>
@@ -1325,5 +1325,9 @@
     <string name="reddit_api_info_title">Important Notice Regarding Reddit API Changes</string>
     <string name="reddit_api_info">Starting from July 1st, 2023, Reddit API will be pay-per-use for 3rd-party clients, which include Infinity for Reddit. The announcement from Reddit can be found here: %1$s\n\nIn order to survive this change, Infinity will become a subscription-only app after July 1st. You can learn more about the changes in this post: %2$s\n\nIt\'s required for you to update Infinity after July 1st so that you will get the new version with subscription options. None of the previous versions (including this one) will work after July 1st. But due to a tight timeline Reddit gave, the update may not be available immediately on July 1st since it requires proper testing. Thank you for your understanding!</string>
     <string name="i_understand">I understand</string>
-
+    <string name="instance_url">Instance URL</string>
+    <string name="user_username">Username</string>
+    <string name="user_password">Password</string>
+    <string name="user_2fa_token">2FA token (if needed)</string>
+    <string name="user_login">Login</string>
 </resources>

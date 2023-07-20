@@ -17,7 +17,6 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 public class SubscribedSubredditViewModel extends AndroidViewModel {
     private SubscribedSubredditRepository mSubscribedSubredditRepository;
     private LiveData<List<SubscribedSubredditData>> mAllSubscribedSubreddits;
-    private LiveData<List<SubscribedSubredditData>> mAllFavoriteSubscribedSubreddits;
     private MutableLiveData<String> searchQueryLiveData;
 
     public SubscribedSubredditViewModel(Application application, RedditDataRoomDatabase redditDataRoomDatabase, String accountName) {
@@ -27,15 +26,10 @@ public class SubscribedSubredditViewModel extends AndroidViewModel {
         searchQueryLiveData.postValue("");
 
         mAllSubscribedSubreddits = Transformations.switchMap(searchQueryLiveData, searchQuery -> mSubscribedSubredditRepository.getAllSubscribedSubredditsWithSearchQuery(searchQuery));
-        mAllFavoriteSubscribedSubreddits = Transformations.switchMap(searchQueryLiveData, searchQuery -> mSubscribedSubredditRepository.getAllFavoriteSubscribedSubredditsWithSearchQuery(searchQuery));
     }
 
     public LiveData<List<SubscribedSubredditData>> getAllSubscribedSubreddits() {
         return mAllSubscribedSubreddits;
-    }
-
-    public LiveData<List<SubscribedSubredditData>> getAllFavoriteSubscribedSubreddits() {
-        return mAllFavoriteSubscribedSubreddits;
     }
 
     public void insert(SubscribedSubredditData subscribedSubredditData) {

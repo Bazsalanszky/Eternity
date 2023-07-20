@@ -275,7 +275,7 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
                 getSupportActionBar().setTitle(R.string.search);
                 break;
             case PostPagingSource.TYPE_SUBREDDIT:
-                if (name.equals("popular") || name.equals("all")) {
+                if (name.equals("local") || name.equals("all")) {
                     getSupportActionBar().setTitle(name.substring(0, 1).toUpperCase() + name.substring(1));
                 } else {
                     String subredditNamePrefixed = "r/" + name;

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import eu.toldi.infinityforlemmy.SortType;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
@@ -19,15 +20,11 @@ import retrofit2.Retrofit;
 
 public class FetchSubredditData {
     public static void fetchSubredditData(Retrofit oauthRetrofit, Retrofit retrofit, String subredditName, String accessToken, final FetchSubredditDataListener fetchSubredditDataListener) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
         Call<String> subredditData;
-        if (oauthRetrofit == null || TextUtils.isEmpty(accessToken)) {
-            subredditData = api.getSubredditData(subredditName);
-        } else {
-            RedditAPI oauthApi = oauthRetrofit.create(RedditAPI.class);
-            subredditData = oauthApi.getSubredditDataOauth(subredditName, APIUtils.getOAuthHeader(accessToken));
-        }
+        subredditData = api.communityInfo(subredditName,accessToken);
+
         subredditData.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
