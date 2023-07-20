@@ -1,30 +1,18 @@
 <h1 align="center">
-  Infinity For Reddit <a href="https://www.patreon.com/docile_alligator"><img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon"></a>
+  LemmInfinity (Infinity For Lemmy) <a href="https://www.patreon.com/docile_alligator"><img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon"></a>
   
 </h1>
 
 <div align="center">
 
-A Reddit client on Android written in Java. It does not have any ads and it features a clean UI and smooth browsing experience
+A Lemmy client on Android written in Java. It does not have any ads and it features a clean UI and smooth browsing experience
 
-<img align="right" src="https://raw.githubusercontent.com/Docile-Alligator/Infinity-For-Reddit/master/fastlane/metadata/android/en-US/images/icon.png" width=200>
+<img align="right" src="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/raw/branch/master/fastlane/metadata/android/en-US/images/LemmInfinity.png" width=200>
 
 </div>
 
 <br>
 
-<div align="center">
-
-Infinity for Reddit is available on Google Play and F-Droid
-
-  <a href="https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy">
-      <img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
-      </a>  
-      <a href="https://f-droid.org/packages/eu.toldi.infinityforreddit/">
-          <img alt="Get it on F-Droid" height="80" src="https://f-droid.org/badge/get-it-on.png" />
-  </a>
-
-</div>
 
 <div align="center">
 
@@ -32,11 +20,11 @@ Infinity for Reddit is available on Google Play and F-Droid
     <a href="https://github.com/Docile-Alligator/Infinity-For-Reddit/wiki"><strong>Explore the docs »</strong></a>
 <br>
 
-<a href="https://github.com/Docile-Alligator/Infinity-For-Reddit/issues">Report a Bug</a>
+<a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues">Report a Bug</a>
 ·
-<a href="https://github.com/Docile-Alligator/Infinity-For-Reddit/discussions/categories/ideas">Request a Feature</a>
+<a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues">Request a Feature</a>
 ·
-<a href="https://github.com/Docile-Alligator/Infinity-For-Reddit/discussions/categories/q-a">Ask a Question</a>
+<a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues">Ask a Question</a>
 
 </div>
 
@@ -44,16 +32,8 @@ Infinity for Reddit is available on Google Play and F-Droid
 
 <div align="center">
 
-[![release](https://img.shields.io/github/v/release/Docile-Alligator/Infinity-For-Reddit)](https://github.com/Docile-Alligator/Infinity-For-Reddit/releases)
-[![license](https://img.shields.io/github/license/Docile-Alligator/Infinity-For-Reddit)](LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/Docile-Alligator/Infinity-For-Reddit)](https://github.com/Docile-Alligator/Infinity-For-Reddit/issues)
-
 </div>
 
-## Seeking Job Referrals!
-<h3>I am looking for entry-level/new grad software engineer (or related) jobs in both Canada and Australia and will be so grateful if you are willing to refer me to your company. Thank you!</h3>
-
-You can send me an email at docilealligator.app@gmail.com or message [u/Hostilenemy](https://www.reddit.com/user/Hostilenemy) on Reddit.
 
 ## Donation
 <p>Infinity for Reddit+:</p>
@@ -85,6 +65,20 @@ Bitcoin: bc1qxtkd5ap9na7uy8nr9qpt6jny6tdwaj4v43ddle
 </details>
 
 ---
+
+## Action Items for LemmInfinity
+
+- [x] Implementation of basic post browsing feature
+- [x] Support for multiple account handling
+- [x] Functionality for post upvotes/downvotes
+- [ ] Functionality to browse comments
+- [ ] Capability for creating a new post
+- [ ] Ability to create comments
+- [ ] Elimination of code/string references specific to Reddit
+- [ ] Incorporation of private messaging feature
+- [ ] Feature for saving posts
+- [ ] Account editing function
+- [ ] Multi community view?
 
 ## About The Project
 
