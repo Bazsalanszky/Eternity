@@ -38,7 +38,7 @@ public class InsertSubscribedThings {
             if (subscribedSubredditDataList != null) {
                 List<SubscribedSubredditData> existingSubscribedSubredditDataList =
                         subscribedSubredditDao.getAllSubscribedSubredditsList(accountName);
-                Collections.sort(subscribedSubredditDataList, (subscribedSubredditData, t1) -> subscribedSubredditData.getName().compareToIgnoreCase(t1.getName()));
+                Collections.sort(subscribedSubredditDataList, (subscribedSubredditData, t1) -> subscribedSubredditData.getQualified_name().compareToIgnoreCase(t1.getQualified_name()));
                 List<String> unsubscribedSubreddits = new ArrayList<>();
                 compareTwoSubscribedSubredditList(subscribedSubredditDataList, existingSubscribedSubredditDataList,
                         unsubscribedSubreddits);
@@ -48,6 +48,9 @@ public class InsertSubscribedThings {
                 }
 
                 for (SubscribedSubredditData s : subscribedSubredditDataList) {
+                    if (existingSubscribedSubredditDataList.contains(s)) {
+                        continue;
+                    }
                     subscribedSubredditDao.insert(s);
                 }
             }
@@ -79,7 +82,8 @@ public class InsertSubscribedThings {
         });
     }
 
-    public static void insertSubscribedThings(Executor executor, Handler handler, RedditDataRoomDatabase redditDataRoomDatabase,
+    public static void insertSubscribedThings(Executor executor, Handler
+            handler, RedditDataRoomDatabase redditDataRoomDatabase,
                                               SubscribedSubredditData singleSubscribedSubredditData,
                                               InsertSubscribedThingListener insertSubscribedThingListener) {
         executor.execute(() -> {
@@ -94,7 +98,8 @@ public class InsertSubscribedThings {
         });
     }
 
-    public static void insertSubscribedThings(Executor executor, Handler handler, RedditDataRoomDatabase redditDataRoomDatabase,
+    public static void insertSubscribedThings(Executor executor, Handler
+            handler, RedditDataRoomDatabase redditDataRoomDatabase,
                                               SubscribedUserData mSingleSubscribedUserData,
                                               InsertSubscribedThingListener insertSubscribedThingListener) {
         executor.execute(() -> {
@@ -109,35 +114,37 @@ public class InsertSubscribedThings {
         });
     }
 
-    private static void compareTwoSubscribedSubredditList(List<SubscribedSubredditData> newSubscribedSubreddits,
-                                                   List<SubscribedSubredditData> oldSubscribedSubreddits,
-                                                   List<String> unsubscribedSubredditNames) {
+    private static void compareTwoSubscribedSubredditList
+            (List<SubscribedSubredditData> newSubscribedSubreddits,
+             List<SubscribedSubredditData> oldSubscribedSubreddits,
+             List<String> unsubscribedSubredditNames) {
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldSubscribedSubreddits.size(); oldIndex++) {
             if (newIndex >= newSubscribedSubreddits.size()) {
                 for (; oldIndex < oldSubscribedSubreddits.size(); oldIndex++) {
-                    unsubscribedSubredditNames.add(oldSubscribedSubreddits.get(oldIndex).getName());
+                    unsubscribedSubredditNames.add(oldSubscribedSubreddits.get(oldIndex).getQualified_name());
                 }
                 return;
             }
 
             SubscribedSubredditData old = oldSubscribedSubreddits.get(oldIndex);
             for (; newIndex < newSubscribedSubreddits.size(); newIndex++) {
-                if (newSubscribedSubreddits.get(newIndex).getName().compareToIgnoreCase(old.getName()) == 0) {
+                if (newSubscribedSubreddits.get(newIndex).getQualified_name().compareToIgnoreCase(old.getQualified_name()) == 0) {
                     newIndex++;
                     break;
                 }
-                if (newSubscribedSubreddits.get(newIndex).getName().compareToIgnoreCase(old.getName()) > 0) {
-                    unsubscribedSubredditNames.add(old.getName());
+                if (newSubscribedSubreddits.get(newIndex).getQualified_name().compareToIgnoreCase(old.getQualified_name()) > 0) {
+                    unsubscribedSubredditNames.add(old.getQualified_name());
                     break;
                 }
             }
         }
     }
 
-    private static void compareTwoSubscribedUserList(List<SubscribedUserData> newSubscribedUsers,
-                                              List<SubscribedUserData> oldSubscribedUsers,
-                                              List<String> unsubscribedUserNames) {
+    private static void compareTwoSubscribedUserList
+            (List<SubscribedUserData> newSubscribedUsers,
+             List<SubscribedUserData> oldSubscribedUsers,
+             List<String> unsubscribedUserNames) {
         int newIndex = 0;
         for (int oldIndex = 0; oldIndex < oldSubscribedUsers.size(); oldIndex++) {
             if (newIndex >= newSubscribedUsers.size()) {

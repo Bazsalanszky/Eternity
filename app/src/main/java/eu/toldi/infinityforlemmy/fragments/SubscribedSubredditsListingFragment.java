@@ -157,16 +157,16 @@ public class SubscribedSubredditsListingFragment extends Fragment implements Fra
             adapter.setSubscribedSubreddits(subscribedSubredditData);
         });
 
-       /* mSubscribedSubredditViewModel.getAllFavoriteSubscribedSubreddits().observe(getViewLifecycleOwner(), favoriteSubscribedSubredditData -> {
-            mSwipeRefreshLayout.setRefreshing(false);
-            if (favoriteSubscribedSubredditData != null && favoriteSubscribedSubredditData.size() > 0) {
-                mLinearLayout.setVisibility(View.GONE);
-                mRecyclerView.setVisibility(View.VISIBLE);
-                mGlide.clear(mImageView);
-            }
+       mSubscribedSubredditViewModel.getAllFavoriteSubscribedSubreddits().observe(getViewLifecycleOwner(), favoriteSubscribedSubredditData -> {
+           mSwipeRefreshLayout.setRefreshing(false);
+           if (favoriteSubscribedSubredditData != null && favoriteSubscribedSubredditData.size() > 0) {
+               mLinearLayout.setVisibility(View.GONE);
+               mRecyclerView.setVisibility(View.VISIBLE);
+               mGlide.clear(mImageView);
+           }
 
-            adapter.setFavoriteSubscribedSubreddits(favoriteSubscribedSubredditData);
-        });*/
+           adapter.setFavoriteSubscribedSubreddits(favoriteSubscribedSubredditData);
+       });
 
         return rootView;
     }

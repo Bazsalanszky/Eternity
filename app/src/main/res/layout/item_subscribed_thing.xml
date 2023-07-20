@@ -24,4 +24,12 @@
         android:fontFamily="?attr/font_family"
         android:layout_gravity="center_vertical" />
 
+    <ImageView
+        android:id="@+id/favorite_image_view_item_subscribed_thing"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginStart="32dp" />
+
+
 </LinearLayout>

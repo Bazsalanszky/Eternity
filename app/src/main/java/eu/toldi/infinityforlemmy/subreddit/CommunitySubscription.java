@@ -112,7 +112,7 @@ public class CommunitySubscription {
                                            SubredditSubscriptionListener subredditSubscriptionListener) {
         executor.execute(() -> {
             SubscribedSubredditData subscribedSubredditData = new SubscribedSubredditData(subredditData.getId(), subredditData.getName(), LemmyUtils.actorID2FullName(subredditData.getActorId()),
-                    subredditData.getIconUrl(), accountName);
+                    subredditData.getIconUrl(), accountName, false);
             if (accountName.equals("-")) {
                 if (!redditDataRoomDatabase.accountDao().isAnonymousAccountInserted()) {
                     redditDataRoomDatabase.accountDao().insert(Account.getAnonymousAccount());

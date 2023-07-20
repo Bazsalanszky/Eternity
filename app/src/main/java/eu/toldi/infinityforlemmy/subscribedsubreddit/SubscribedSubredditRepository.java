@@ -21,6 +21,10 @@ public class SubscribedSubredditRepository {
         return mSubscribedSubredditDao.getAllSubscribedSubredditsWithSearchQuery(mAccountName, searchQuery);
     }
 
+    public LiveData<List<SubscribedSubredditData>> getAllFavoriteSubscribedSubredditsWithSearchQuery(String searchQuery) {
+        return mSubscribedSubredditDao.getAllFavoriteSubscribedSubredditsWithSearchQuery(mAccountName, searchQuery);
+    }
+
     public void insert(SubscribedSubredditData subscribedSubredditData) {
         new insertAsyncTask(mSubscribedSubredditDao).execute(subscribedSubredditData);
     }

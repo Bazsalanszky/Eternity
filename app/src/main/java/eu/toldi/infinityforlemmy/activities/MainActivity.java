@@ -1011,12 +1011,12 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         sectionsPagerAdapter.setSubscribedSubreddits(subscribedSubredditData);
                     }
                 });
-        /*subscribedSubredditViewModel.getAllFavoriteSubscribedSubreddits().observe(this, subscribedSubredditData -> {
+        subscribedSubredditViewModel.getAllFavoriteSubscribedSubreddits().observe(this, subscribedSubredditData -> {
             adapter.setFavoriteSubscribedSubreddits(subscribedSubredditData);
             if (mShowFavoriteSubscribedSubreddits && sectionsPagerAdapter != null) {
                 sectionsPagerAdapter.setFavoriteSubscribedSubreddits(subscribedSubredditData);
             }
-        });*/
+        });
 
         accountViewModel = new ViewModelProvider(this,
                 new AccountViewModel.Factory(mRedditDataRoomDatabase)).get(AccountViewModel.class);
