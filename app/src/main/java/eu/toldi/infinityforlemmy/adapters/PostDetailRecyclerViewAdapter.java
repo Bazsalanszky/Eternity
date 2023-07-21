@@ -59,15 +59,6 @@ import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import io.noties.markwon.recycler.MarkwonAdapter;
-import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
@@ -114,6 +105,15 @@ import eu.toldi.infinityforlemmy.videoautoplay.ToroPlayer;
 import eu.toldi.infinityforlemmy.videoautoplay.ToroUtil;
 import eu.toldi.infinityforlemmy.videoautoplay.media.PlaybackInfo;
 import eu.toldi.infinityforlemmy.videoautoplay.widget.Container;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import io.noties.markwon.recycler.MarkwonAdapter;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -1169,20 +1169,20 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 int previousScoreTextViewColor = mScoreTextView.getCurrentTextColor();
 
                 int previousVoteType = mPost.getVoteType();
-                String newVoteType;
+                int newVoteType;
 
                 mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
 
                 if (previousVoteType != 1) {
                     //Not upvoted before
                     mPost.setVoteType(1);
-                    newVoteType = APIUtils.DIR_UPVOTE;
+                    newVoteType = Integer.valueOf(APIUtils.DIR_UPVOTE);
                     mUpvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                     mScoreTextView.setTextColor(mUpvotedColor);
                 } else {
                     //Upvoted before
                     mPost.setVoteType(0);
-                    newVoteType = APIUtils.DIR_UNVOTE;
+                    newVoteType = Integer.valueOf(APIUtils.DIR_UNVOTE);
                     mUpvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                     mScoreTextView.setTextColor(mPostIconAndInfoColor);
                 }
@@ -1194,10 +1194,10 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
 
-                VoteThing.voteThing(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
+                VoteThing.votePost(mActivity, mRetrofit, mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
                     @Override
                     public void onVoteThingSuccess() {
-                        if (newVoteType.equals(APIUtils.DIR_UPVOTE)) {
+                        if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                             mPost.setVoteType(1);
                             mUpvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                             mScoreTextView.setTextColor(mUpvotedColor);
@@ -1230,7 +1230,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                         mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
                     }
-                }, mPost.getFullName(), newVoteType);
+                }, mPost.getId(), newVoteType);
             });
 
             mDownvoteButton.setOnClickListener(view -> {
@@ -1249,20 +1249,20 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 int previousScoreTextViewColor = mScoreTextView.getCurrentTextColor();
 
                 int previousVoteType = mPost.getVoteType();
-                String newVoteType;
+                int newVoteType;
 
                 mUpvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
 
                 if (previousVoteType != -1) {
                     //Not upvoted before
                     mPost.setVoteType(-1);
-                    newVoteType = APIUtils.DIR_DOWNVOTE;
+                    newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                     mDownvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
                     mScoreTextView.setTextColor(mDownvotedColor);
                 } else {
                     //Upvoted before
                     mPost.setVoteType(0);
-                    newVoteType = APIUtils.DIR_UNVOTE;
+                    newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                     mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                     mScoreTextView.setTextColor(mPostIconAndInfoColor);
                 }
@@ -1274,10 +1274,10 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
 
-                VoteThing.voteThing(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
+                VoteThing.votePost(mActivity, mRetrofit, mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
                     @Override
                     public void onVoteThingSuccess() {
-                        if (newVoteType.equals(APIUtils.DIR_DOWNVOTE)) {
+                        if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                             mPost.setVoteType(-1);
                             mDownvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
                             mScoreTextView.setTextColor(mDownvotedColor);
@@ -1310,7 +1310,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                         mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
                     }
-                }, mPost.getFullName(), newVoteType);
+                }, mPost.getId(), newVoteType);
             });
 
             if (!mHideTheNumberOfComments) {

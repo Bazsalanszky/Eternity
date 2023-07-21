@@ -1,12 +1,12 @@
 package eu.toldi.infinityforlemmy.dto;
 
-public class VoteDTO {
+public class PostVoteDTO {
 
     private final int post_id;
     private final int score;
     private final String auth;
 
-    public VoteDTO(int post_id, int vote, String auth) {
+    public PostVoteDTO(int post_id, int vote, String auth) {
         this.post_id = post_id;
         this.score = vote;
         this.auth = auth;

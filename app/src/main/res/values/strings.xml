@@ -261,7 +261,7 @@
     <string name="search_in">Search in</string>
     <string name="all_subreddits">All subreddits</string>
 
-    <string name="sort_best">Best</string>
+    <string name="sort_best">Active</string>
     <string name="sort_hot">Hot</string>
     <string name="sort_new">New</string>
     <string name="sort_random">Random</string>

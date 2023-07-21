@@ -193,7 +193,7 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
 
         reportTextView.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ReportActivity.class);
-            intent.putExtra(ReportActivity.EXTRA_SUBREDDIT_NAME, comment.getSubredditName());
+            intent.putExtra(ReportActivity.EXTRA_SUBREDDIT_NAME, comment.getCommunityName());
             intent.putExtra(ReportActivity.EXTRA_THING_FULLNAME, comment.getFullName());
             activity.startActivity(intent);
 

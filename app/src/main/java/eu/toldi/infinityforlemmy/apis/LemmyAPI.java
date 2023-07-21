@@ -3,7 +3,8 @@ package eu.toldi.infinityforlemmy.apis;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
-import eu.toldi.infinityforlemmy.dto.VoteDTO;
+import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
+import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -54,5 +55,24 @@ public interface LemmyAPI {
 
     @Headers("Content-Type: application/json")
     @POST("api/v3/post/like")
-    Call<String> postLike(@Body VoteDTO params);
+    Call<String> postLike(@Body PostVoteDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/comment/like")
+    Call<String> commentLike(@Body CommentVoteDTO params);
+
+    @GET("api/v3/comment/list")
+    Call<String> getComments(
+            @Query("type_") String type,
+            @Query("sort") String sort,
+            @Query("max_depth") Integer maxDepth,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("community_id") Integer communityId,
+            @Query("community_name") String communityName,
+            @Query("post_id") Integer postId,
+            @Query("parent_id") Integer parentId,
+            @Query("saved_only") Boolean savedOnly,
+            @Query("auth") String auth
+    );
 }

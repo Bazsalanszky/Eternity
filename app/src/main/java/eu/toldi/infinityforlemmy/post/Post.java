@@ -7,8 +7,6 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import eu.toldi.infinityforlemmy.utils.APIUtils;
-
 /**
  * Created by alex on 3/1/18.
  */
@@ -90,7 +88,7 @@ public class Post implements Parcelable {
         this.authorNamePrefixed = authorNamePrefixed;
         this.postTimeMillis = postTimeMillis;
         this.title = title;
-        this.permalink = APIUtils.API_BASE_URI + permalink;
+        this.permalink = permalink;
         this.score = score;
         this.postType = postType;
         this.voteType = voteType;
@@ -122,7 +120,7 @@ public class Post implements Parcelable {
         this.postTimeMillis = postTimeMillis;
         this.title = title;
         this.url = url;
-        this.permalink = APIUtils.API_BASE_URI + permalink;
+        this.permalink = permalink;
         this.score = score;
         this.postType = postType;
         this.voteType = voteType;

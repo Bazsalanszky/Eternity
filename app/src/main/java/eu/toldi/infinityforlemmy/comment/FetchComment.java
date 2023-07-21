@@ -6,10 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.SortType;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
@@ -19,36 +19,25 @@ import retrofit2.Retrofit;
 
 public class FetchComment {
     public static void fetchComments(Executor executor, Handler handler, Retrofit retrofit,
-                                     @Nullable String accessToken, String article,
-                                     String commentId, SortType.Type sortType, String contextNumber, boolean expandChildren,
-                                     Locale locale, FetchCommentListener fetchCommentListener) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+                                     @Nullable String accessToken, Integer article,
+                                     Integer commentId, SortType.Type sortType, boolean expandChildren,
+                                     Integer page, FetchCommentListener fetchCommentListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
         Call<String> comments;
-        if (accessToken == null) {
-            if (commentId == null) {
-                comments = api.getPostAndCommentsById(article, sortType);
-            } else {
-                comments = api.getPostAndCommentsSingleThreadById(article, commentId, sortType, contextNumber);
-            }
-        } else {
-            if (commentId == null) {
-                comments = api.getPostAndCommentsByIdOauth(article, sortType, APIUtils.getOAuthHeader(accessToken));
-            } else {
-                comments = api.getPostAndCommentsSingleThreadByIdOauth(article, commentId, sortType, contextNumber,
-                        APIUtils.getOAuthHeader(accessToken));
-            }
-        }
+
+        comments = api.getComments("All", sortType.value, 5, page, 25, null, null, article, commentId, false, accessToken);
+
 
         comments.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
-                    ParseComment.parseComment(executor, handler, response.body(),
+                    ParseComment.parseComments(executor, handler, response.body(),
                             expandChildren, new ParseComment.ParseCommentListener() {
                                 @Override
                                 public void onParseCommentSuccess(ArrayList<Comment> topLevelComments,
                                                                   ArrayList<Comment> expandedComments,
-                                                                  String parentId, ArrayList<String> moreChildrenIds) {
+                                                                  Integer parentId, ArrayList<Integer> moreChildrenIds) {
                                     fetchCommentListener.onFetchCommentSuccess(expandedComments, parentId,
                                             moreChildrenIds);
                                 }
@@ -72,7 +61,7 @@ public class FetchComment {
 
     public static void fetchMoreComment(Executor executor, Handler handler, Retrofit retrofit,
                                         @Nullable String accessToken,
-                                        ArrayList<String> allChildren,
+                                        ArrayList<Integer> allChildren,
                                         boolean expandChildren, String postFullName,
                                         SortType.Type sortType,
                                         FetchMoreCommentListener fetchMoreCommentListener) {
@@ -80,7 +69,7 @@ public class FetchComment {
             return;
         }
 
-        String childrenIds = String.join(",", allChildren);
+        String childrenIds = "";
 
         if (childrenIds.isEmpty()) {
             return;
@@ -104,9 +93,9 @@ public class FetchComment {
                                 @Override
                                 public void onParseCommentSuccess(ArrayList<Comment> topLevelComments,
                                                                   ArrayList<Comment> expandedComments,
-                                                                  String parentId, ArrayList<String> moreChildrenIds) {
+                                                                  Integer parentId, ArrayList<Integer> moreChildrenIds) {
                                     fetchMoreCommentListener.onFetchMoreCommentSuccess(
-                                            topLevelComments,expandedComments, moreChildrenIds);
+                                            topLevelComments, expandedComments, moreChildrenIds);
                                 }
 
                                 @Override
@@ -127,7 +116,7 @@ public class FetchComment {
     }
 
     public interface FetchCommentListener {
-        void onFetchCommentSuccess(ArrayList<Comment> expandedComments, String parentId, ArrayList<String> children);
+        void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children);
 
         void onFetchCommentFailed();
     }
@@ -135,7 +124,7 @@ public class FetchComment {
     public interface FetchMoreCommentListener {
         void onFetchMoreCommentSuccess(ArrayList<Comment> topLevelComments,
                                        ArrayList<Comment> expandedComments,
-                                       ArrayList<String> moreChildrenIds);
+                                       ArrayList<Integer> moreChildrenIds);
 
         void onFetchMoreCommentFailed();
     }

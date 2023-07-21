@@ -30,12 +30,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.SaveThing;
@@ -58,6 +52,12 @@ import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import retrofit2.Retrofit;
 
 public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment, RecyclerView.ViewHolder> {
@@ -189,17 +189,10 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
         if (holder instanceof CommentViewHolder) {
             Comment comment = getItem(holder.getBindingAdapterPosition());
             if (comment != null) {
-                String name = "r/" + comment.getSubredditName();
+                String name = "r/" + comment.getCommunityName();
                 ((CommentViewHolder) holder).authorTextView.setText(name);
                 ((CommentViewHolder) holder).authorTextView.setTextColor(mSubredditColor);
 
-                if (comment.getAuthorFlairHTML() != null && !comment.getAuthorFlairHTML().equals("")) {
-                    ((CommentViewHolder) holder).authorFlairTextView.setVisibility(View.VISIBLE);
-                    Utils.setHTMLWithImageToTextView(((CommentViewHolder) holder).authorFlairTextView, comment.getAuthorFlairHTML(), true);
-                } else if (comment.getAuthorFlair() != null && !comment.getAuthorFlair().equals("")) {
-                    ((CommentViewHolder) holder).authorFlairTextView.setVisibility(View.VISIBLE);
-                    ((CommentViewHolder) holder).authorFlairTextView.setText(comment.getAuthorFlair());
-                }
 
                 if (mShowElapsedTime) {
                     ((CommentViewHolder) holder).commentTimeTextView.setText(
@@ -208,22 +201,13 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                     ((CommentViewHolder) holder).commentTimeTextView.setText(Utils.getFormattedTime(mLocale, comment.getCommentTimeMillis(), mTimeFormatPattern));
                 }
 
-                if (comment.getAwards() != null && !comment.getAwards().equals("")) {
-                    ((CommentViewHolder) holder).awardsTextView.setVisibility(View.VISIBLE);
-                    Utils.setHTMLWithImageToTextView(((CommentViewHolder) holder).awardsTextView, comment.getAwards(), true);
-                }
-
                 ((CommentViewHolder) holder).markwonAdapter.setMarkdown(mMarkwon, comment.getCommentMarkdown());
                 // noinspection NotifyDataSetChanged
                 ((CommentViewHolder) holder).markwonAdapter.notifyDataSetChanged();
 
-                String commentText = "";
-                if (comment.isScoreHidden()) {
-                    commentText = mActivity.getString(R.string.hidden);
-                } else {
-                    commentText = Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                            comment.getScore() + comment.getVoteType());
-                }
+                String commentText = Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                        comment.getScore() + comment.getVoteType());
+
                 ((CommentViewHolder) holder).scoreTextView.setText(commentText);
 
                 switch (comment.getVoteType()) {
@@ -317,16 +301,6 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 } else if (swipeRightAction == SharedPreferencesUtils.SWIPE_ACITON_DOWNVOTE) {
                     ((CommentViewHolder) viewHolder).downvoteButton.performClick();
                 }
-            }
-        }
-    }
-
-    public void giveAward(String awardsHTML, int position) {
-        if (position >= 0 && position < getItemCount()) {
-            Comment comment = getItem(position);
-            if (comment != null) {
-                comment.addAwards(awardsHTML);
-                notifyItemChanged(position);
             }
         }
     }
@@ -461,7 +435,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 Comment comment = getItem(getBindingAdapterPosition());
                 if (comment != null) {
                     Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
-                    intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, comment.getSubredditName());
+                    intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, comment.getCommunityName());
                     mActivity.startActivity(intent);
                 }
             });
@@ -557,12 +531,12 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                     }
 
-                    if (!comment.isScoreHidden()) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                comment.getScore() + comment.getVoteType()));
-                    }
 
-                    VoteThing.voteThing(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                            comment.getScore() + comment.getVoteType()));
+
+
+                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -582,10 +556,10 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
 
                             if (currentPosition == position) {
                                 downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
-                                if (!comment.isScoreHidden()) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                            comment.getScore() + comment.getVoteType()));
-                                }
+
+                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                        comment.getScore() + comment.getVoteType()));
+
                             }
                         }
 
@@ -627,12 +601,12 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                     }
 
-                    if (!comment.isScoreHidden()) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                comment.getScore() + comment.getVoteType()));
-                    }
 
-                    VoteThing.voteThing(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                            comment.getScore() + comment.getVoteType()));
+
+
+                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -652,10 +626,9 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
 
                             if (currentPosition == position) {
                                 upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
-                                if (!comment.isScoreHidden()) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                            comment.getScore() + comment.getVoteType()));
-                                }
+                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                        comment.getScore() + comment.getVoteType()));
+
                             }
                         }
 

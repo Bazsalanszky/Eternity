@@ -423,14 +423,6 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
         }
     }
 
-    private void awardGiven(String awardsHTML, int awardCount, int position) {
-        if (sectionsPagerAdapter != null) {
-            ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
-            if (fragment != null) {
-                fragment.awardGiven(awardsHTML, awardCount, position);
-            }
-        }
-    }
 
     public void deleteComment(String fullName, int position) {
         if (sectionsPagerAdapter != null) {
@@ -778,14 +770,6 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                 editComment(null,
                         data.getStringExtra(EditCommentActivity.EXTRA_EDITED_COMMENT_CONTENT),
                         data.getExtras().getInt(EditCommentActivity.EXTRA_EDITED_COMMENT_POSITION));
-            }
-        } else if (requestCode == GIVE_AWARD_REQUEST_CODE) {
-            if (data != null && resultCode == Activity.RESULT_OK) {
-                Toast.makeText(this, R.string.give_award_success, Toast.LENGTH_SHORT).show();
-                int position = data.getIntExtra(GiveAwardActivity.EXTRA_RETURN_ITEM_POSITION, 0);
-                String newAwardsHTML = data.getStringExtra(GiveAwardActivity.EXTRA_RETURN_NEW_AWARDS);
-                int newAwardsCount = data.getIntExtra(GiveAwardActivity.EXTRA_RETURN_NEW_AWARDS_COUNT, 0);
-                awardGiven(newAwardsHTML, newAwardsCount, position);
             }
         } else if (requestCode == CommentActivity.WRITE_COMMENT_REQUEST_CODE) {
             if (data != null && resultCode == Activity.RESULT_OK) {

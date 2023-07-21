@@ -35,7 +35,7 @@ public class SortType {
         NEW("New", "New"),
         RANDOM("random", "Random"),
         RISING("rising", "Rising"),
-        TOP("top", "Top"),
+        TOP("Top", "Top"),
         CONTROVERSIAL("controversial", "Controversial"),
         RELEVANCE("relevance", "Relevance"),
         COMMENTS("comments", "Comments"),

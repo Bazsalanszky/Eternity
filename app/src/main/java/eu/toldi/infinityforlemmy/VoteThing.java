@@ -5,13 +5,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.dto.VoteDTO;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
+import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -22,14 +18,13 @@ import retrofit2.Retrofit;
 
 public class VoteThing {
 
-    public static void voteThing(Context context, final Retrofit retrofit, String accessToken,
-                                 final VoteThingListener voteThingListener, final int postID,
-                                 final int point, final int position) {
+    public static void votePost(Context context, final Retrofit retrofit, String accessToken,
+                                final VoteThingListener voteThingListener, final int postID,
+                                final int point, final int position) {
         LemmyAPI api = retrofit.create(LemmyAPI.class);
 
 
-
-        Call<String> voteThingCall = api.postLike(new VoteDTO(postID,point,accessToken));
+        Call<String> voteThingCall = api.postLike(new PostVoteDTO(postID, point, accessToken));
         voteThingCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
@@ -49,17 +44,65 @@ public class VoteThing {
         });
     }
 
-    public static void voteThing(Context context, final Retrofit retrofit, String accessToken,
-                                 final VoteThingWithoutPositionListener voteThingWithoutPositionListener,
-                                 final String fullName, final String point) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+    public static void votePost(Context context, final Retrofit retrofit, String accessToken,
+                                final VoteThingWithoutPositionListener voteThingWithoutPositionListener,
+                                final int postID, final int point) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.DIR_KEY, point);
-        params.put(APIUtils.ID_KEY, fullName);
-        params.put(APIUtils.RANK_KEY, APIUtils.RANK);
 
-        Call<String> voteThingCall = api.voteThing(APIUtils.getOAuthHeader(accessToken), params);
+        Call<String> voteThingCall = api.postLike(new PostVoteDTO(postID, point, accessToken));
+        voteThingCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
+                if (response.isSuccessful()) {
+                    voteThingWithoutPositionListener.onVoteThingSuccess();
+                } else {
+                    voteThingWithoutPositionListener.onVoteThingFail();
+                    Toast.makeText(context, "Code " + response.code() + " Body: " + response.body(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                voteThingWithoutPositionListener.onVoteThingFail();
+                Toast.makeText(context, "Network error " + "Body: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void voteComment(Context context, final Retrofit retrofit, String accessToken,
+                                   final VoteThingListener voteThingListener, final int commentId,
+                                   final int point, final int position) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+
+
+        Call<String> voteThingCall = api.commentLike(new CommentVoteDTO(commentId, point, accessToken));
+        voteThingCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
+                if (response.isSuccessful()) {
+                    voteThingListener.onVoteThingSuccess(position);
+                } else {
+                    voteThingListener.onVoteThingFail(position);
+                    Toast.makeText(context, "Code " + response.code() + " Body: " + response.body(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                voteThingListener.onVoteThingFail(position);
+                Toast.makeText(context, "Network error " + "Body: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void voteComment(Context context, final Retrofit retrofit, String accessToken,
+                                   final VoteThingWithoutPositionListener voteThingWithoutPositionListener,
+                                   final int commentId, final int point) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+
+
+        Call<String> voteThingCall = api.commentLike(new CommentVoteDTO(commentId, point, accessToken));
         voteThingCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {

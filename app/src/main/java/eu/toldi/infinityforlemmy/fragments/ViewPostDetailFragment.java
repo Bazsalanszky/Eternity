@@ -84,6 +84,7 @@ import eu.toldi.infinityforlemmy.activities.SubmitCrosspostActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.adapters.CommentsRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.adapters.PostDetailRecyclerViewAdapter;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.asynctasks.LoadUserData;
@@ -202,7 +203,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @State
     ArrayList<Comment> comments;
     @State
-    ArrayList<String> children;
+    ArrayList<Integer> children;
+
+    @State
+    int pages_loaded = 0;
     @State
     boolean loadMoreChildrenSuccess = true;
     @State
@@ -224,7 +228,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     private String mAccessToken;
     private String mAccountName;
     private int postListPosition = -1;
-    private String mSingleCommentId;
+    private Integer mSingleCommentId;
     private String mContextNumber;
     private boolean showToast = false;
     private boolean mIsSmoothScrolling = false;
@@ -541,7 +545,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             }
         };
 
-        mSingleCommentId = getArguments().getString(EXTRA_SINGLE_COMMENT_ID);
+        mSingleCommentId = (getArguments().getString(EXTRA_SINGLE_COMMENT_ID) == null) ? null : Integer.valueOf(getArguments().getString(EXTRA_SINGLE_COMMENT_ID));
         mContextNumber = getArguments().getString(EXTRA_CONTEXT_NUMBER, "8");
 
         if (savedInstanceState == null) {
@@ -767,12 +771,6 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             mCommentsAdapter.editComment(commentAuthor,
                     commentContentMarkdown,
                     position);
-        }
-    }
-
-    public void awardGiven(String awardsHTML, int awardCount, int position) {
-        if (mCommentsAdapter != null) {
-            mCommentsAdapter.giveAward(awardsHTML, awardCount, position);
         }
     }
 
@@ -1253,24 +1251,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         mSwipeRefreshLayout.setRefreshing(true);
         mGlide.clear(mFetchPostInfoImageView);
 
-        Call<String> postAndComments;
-        if (mAccessToken == null) {
-            if (isSingleCommentThreadMode && mSingleCommentId != null) {
-                postAndComments = mRetrofit.getRetrofit().create(RedditAPI.class).getPostAndCommentsSingleThreadById(
-                        subredditId, mSingleCommentId, sortType, mContextNumber);
-            } else {
-                postAndComments = mRetrofit.getRetrofit().create(RedditAPI.class).getPostAndCommentsById(subredditId,
-                        sortType);
-            }
-        } else {
-            if (isSingleCommentThreadMode && mSingleCommentId != null) {
-                postAndComments = mOauthRetrofit.create(RedditAPI.class).getPostAndCommentsSingleThreadByIdOauth(subredditId,
-                        mSingleCommentId, sortType, mContextNumber, APIUtils.getOAuthHeader(mAccessToken));
-            } else {
-                postAndComments = mOauthRetrofit.create(RedditAPI.class).getPostAndCommentsByIdOauth(subredditId,
-                        sortType, APIUtils.getOAuthHeader(mAccessToken));
-            }
-        }
+        Call<String> postAndComments = mRetrofit.getRetrofit().create(LemmyAPI.class).getComments("All", sortType.value, 5, 1, 25, null, null, Integer.valueOf(subredditId), mSingleCommentId, false, mAccessToken);
         postAndComments.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1331,10 +1312,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                             if (mRespectSubredditRecommendedSortType) {
                                 fetchCommentsRespectRecommendedSort(false);
                             } else {
-                                ParseComment.parseComment(mExecutor, new Handler(), response.body(),
+                                ParseComment.parseComments(mExecutor, new Handler(), response.body(),
                                         mExpandChildren, new ParseComment.ParseCommentListener() {
                                             @Override
-                                            public void onParseCommentSuccess(ArrayList<Comment> topLevelComments, ArrayList<Comment> expandedComments, String parentId, ArrayList<String> moreChildrenIds) {
+                                            public void onParseCommentSuccess(ArrayList<Comment> topLevelComments, ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> moreChildrenIds) {
                                                 ViewPostDetailFragment.this.children = moreChildrenIds;
 
                                                 hasMoreChildren = children.size() != 0;
@@ -1466,23 +1447,27 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         isFetchingComments = true;
         mCommentsAdapter.setSingleComment(mSingleCommentId, isSingleCommentThreadMode);
         mCommentsAdapter.initiallyLoading();
-        String commentId = null;
+        Integer commentId = null;
         if (isSingleCommentThreadMode) {
             commentId = mSingleCommentId;
         }
 
-        Retrofit retrofit = mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit;
-        FetchComment.fetchComments(mExecutor, new Handler(), retrofit, mAccessToken, String.valueOf(mPost.getId()), commentId, sortType,
-                mContextNumber, mExpandChildren, mLocale, new FetchComment.FetchCommentListener() {
+
+        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, mPost.getId(), commentId, sortType, mExpandChildren, pages_loaded + 1,
+                new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments,
-                                                      String parentId, ArrayList<String> children) {
+                                                      Integer parentId, ArrayList<Integer> children) {
                         ViewPostDetailFragment.this.children = children;
-
+                        pages_loaded++;
                         comments = expandedComments;
-                        hasMoreChildren = children.size() != 0;
+                        hasMoreChildren = expandedComments.size() != 0;
                         mCommentsAdapter.addComments(expandedComments, hasMoreChildren);
+                        if (hasMoreChildren) {
+                            fetchMoreComments();
+                        }
 
+/*
                         if (children.size() > 0) {
                             (mCommentsRecyclerView == null ? mRecyclerView : mCommentsRecyclerView).clearOnScrollListeners();
                             (mCommentsRecyclerView == null ? mRecyclerView : mCommentsRecyclerView).addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -1527,7 +1512,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                     }
                                 }
                             });
-                        }
+                        }*/
                         if (changeRefreshState) {
                             isRefreshing = false;
                         }
@@ -1559,13 +1544,11 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         isLoadingMoreChildren = true;
 
         Retrofit retrofit = mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit;
-        FetchComment.fetchMoreComment(mExecutor, new Handler(), retrofit, mAccessToken, children,
-                mExpandChildren, mPost.getFullName(), sortType, new FetchComment.FetchMoreCommentListener() {
+        FetchComment.fetchComments(mExecutor, new Handler(), retrofit, mAccessToken,
+                mPost.getId(), null, sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
                     @Override
-                    public void onFetchMoreCommentSuccess(ArrayList<Comment> topLevelComments,
-                                                          ArrayList<Comment> expandedComments,
-                                                          ArrayList<String> moreChildrenIds) {
-                        children = moreChildrenIds;
+                    public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
+                        pages_loaded++;
                         hasMoreChildren = !children.isEmpty();
                         mCommentsAdapter.addComments(expandedComments, hasMoreChildren);
                         isLoadingMoreChildren = false;
@@ -1573,7 +1556,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     }
 
                     @Override
-                    public void onFetchMoreCommentFailed() {
+                    public void onFetchCommentFailed() {
                         isLoadingMoreChildren = false;
                         loadMoreChildrenSuccess = false;
                         mCommentsAdapter.loadMoreCommentsFailed();
@@ -1593,12 +1576,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             }
 
             if (fetchPost) {
-                Retrofit retrofit;
-                if (mAccessToken == null) {
-                    retrofit = mRetrofit.getRetrofit();
-                } else {
-                    retrofit = mOauthRetrofit;
-                }
+                Retrofit retrofit = mRetrofit.getRetrofit();
+
                 FetchPost.fetchPost(mExecutor, new Handler(), retrofit, String.valueOf(mPost.getId()), mAccessToken,
                         new FetchPost.FetchPostListener() {
                             @Override

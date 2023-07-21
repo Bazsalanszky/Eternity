@@ -20,7 +20,7 @@ public class FetchRemovedCommentReveddit {
     public static void fetchRemovedComment(Executor executor, Handler handler, Retrofit retrofit, Comment comment,
                                            long postCreatedUtc, int nComments, FetchRemovedCommentListener listener) {
         executor.execute(() -> {
-            String parentIdWithoutPrefix = comment.getParentId().substring(3);
+            String parentIdWithoutPrefix = " comment.getParentId().substring(3)";
             String rootCommentId = parentIdWithoutPrefix.equals(comment.getLinkId()) ? String.valueOf(comment.getId()) : parentIdWithoutPrefix;
             try {
                 Response<String> response = retrofit.create(RevedditAPI.class).getRemovedComments(

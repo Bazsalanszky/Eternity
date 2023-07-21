@@ -51,7 +51,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.Executor;
@@ -61,14 +60,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
 import eu.toldi.infinityforlemmy.AppBarStateChangeListener;
 import eu.toldi.infinityforlemmy.DeleteThing;
@@ -77,6 +68,7 @@ import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
 import eu.toldi.infinityforlemmy.adapters.SubredditAutocompleteRecyclerViewAdapter;
@@ -86,7 +78,6 @@ import eu.toldi.infinityforlemmy.asynctasks.CheckIsFollowingUser;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CopyTextBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FABMoreOptionsBottomSheetFragment;
-import eu.toldi.infinityforlemmy.bottomsheetfragments.KarmaInfoBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostLayoutBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.RandomBottomSheetFragment;
@@ -118,6 +109,13 @@ import eu.toldi.infinityforlemmy.user.UserViewModel;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -1216,14 +1214,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == GIVE_AWARD_REQUEST_CODE) {
-                Toast.makeText(this, R.string.give_award_success, Toast.LENGTH_SHORT).show();
-                int position = data.getIntExtra(GiveAwardActivity.EXTRA_RETURN_ITEM_POSITION, 0);
-                String newAwardsHTML = data.getStringExtra(GiveAwardActivity.EXTRA_RETURN_NEW_AWARDS);
-                if (sectionsPagerAdapter != null) {
-                    sectionsPagerAdapter.giveAward(newAwardsHTML, position);
-                }
-            } else if (requestCode == EDIT_COMMENT_REQUEST_CODE) {
+            if (requestCode == EDIT_COMMENT_REQUEST_CODE) {
                 if (data != null) {
                     if (sectionsPagerAdapter != null) {
                         sectionsPagerAdapter.editComment(
@@ -1723,14 +1714,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             }
         }
 
-        void giveAward(String awardsHTML, int position) {
-            if (fragmentManager != null) {
-                Fragment fragment = fragmentManager.findFragmentByTag("f1");
-                if (fragment instanceof CommentsListingFragment) {
-                    ((CommentsListingFragment) fragment).giveAward(awardsHTML, position);
-                }
-            }
-        }
 
         void editComment(String commentMarkdown, int position) {
             if (fragmentManager != null) {
