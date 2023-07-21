@@ -2,15 +2,22 @@ package eu.toldi.infinityforlemmy.post;
 
 import static java.lang.Integer.max;
 
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -161,8 +168,10 @@ public class ParsePost {
         String distinguished = "";
         String suggestedSort = "";
         ArrayList <Post.Preview> previews = new ArrayList<>();
-        if(!post.isNull("thumbnail_url")){
-            previews.add(new Post.Preview(post.getString("thumbnail_url"),0,0,"",""));
+        if(!post.isNull("thumbnail_url")) {
+            String thumbnail = post.getString("thumbnail_url");
+            int[] wh_array = getImageDimension(thumbnail);
+            previews.add(new Post.Preview(thumbnail, wh_array[0], wh_array[1], "", ""));
         }
 
 
@@ -662,11 +671,41 @@ public class ParsePost {
 
     public interface ParsePostListener {
         void onParsePostSuccess(Post post);
+
         void onParsePostFail();
     }
 
     public interface ParseRandomPostListener {
         void onParseRandomPostSuccess(String postId, String subredditName);
+
         void onParseRandomPostFailed();
+    }
+
+    public static int[] getImageDimension(String imageUrl) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy); //Permit all for simplicity. You may want to revise this for your actual app.
+
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(imageUrl);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDoInput(true);
+            urlConnection.connect();
+            InputStream input = urlConnection.getInputStream();
+
+            //Just decode image size, not the image itself
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(input, null, options);
+
+            return new int[]{options.outWidth, options.outHeight};
+        } catch (IOException e) {
+            Log.e("getImageDimension", "Error reading image dimensions", e);
+            return new int[]{0, 0};
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
     }
 }
