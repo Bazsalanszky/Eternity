@@ -196,8 +196,8 @@ public class ParsePost {
         Uri uri = Uri.parse(url);
         String path = uri.getPath();
 
-        if (!data.has(JSONUtils.PREVIEW_KEY) && previews.isEmpty()) {
-            if (!data.getJSONObject("post").isNull("body")) {
+        if (!data.getJSONObject("post").has("thumbnail_url") && previews.isEmpty()) {
+            if (!data.getJSONObject("post").isNull("body") && url.equals("")) {
                 //Text post
                 int postType = Post.TEXT_TYPE;
                 post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
@@ -229,17 +229,17 @@ public class ParsePost {
                         String videoUrl = Html.fromHtml(redditVideoObject.getString(JSONUtils.HLS_URL_KEY)).toString();
                         String videoDownloadUrl = redditVideoObject.getString(JSONUtils.FALLBACK_URL_KEY);
 
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull, postTimeMillis, title, permalink, score, postType, voteType,
+                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, score, postType, voteType,
                                 nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
 
                         post.setVideoUrl(videoUrl);
                         post.setVideoDownloadUrl(videoDownloadUrl);
-                    } else {
+                    } else if (!url.equals("")) {
                         //No preview link post
                         int postType = Post.NO_PREVIEW_LINK_TYPE;
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
+                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
                                 postTimeMillis, title, url, permalink, score,
-                                postType, voteType, nComments, upvoteRatio, nsfw,  locked, saved, distinguished, suggestedSort);
+                                postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
                         if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
                             post.setSelfText("");
                         } else {
@@ -269,12 +269,22 @@ public class ParsePost {
                                 post.setStreamableShortCode(shortCode);
                             }
                         }
+                    } else {
+                        int postType = Post.TEXT_TYPE;
+                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
+                                postTimeMillis, title, permalink, score,
+                                postType, voteType, nComments, upvoteRatio, nsfw,
+                                locked, saved, distinguished, suggestedSort);
+                        String body = "";
+                        post.setSelfText(body);
+                        post.setSelfTextPlain(body);
+                        post.setSelfTextPlainTrimmed(body.trim());
                     }
                 }
             }
         } else {
             if (previews.isEmpty()) {
-                if (data.has(JSONUtils.PREVIEW_KEY)) {
+                if (data.getJSONObject("post").has("thumbnail_url")) {
                     JSONObject images = data.getJSONObject(JSONUtils.PREVIEW_KEY).getJSONArray(JSONUtils.IMAGES_KEY).getJSONObject(0);
                     String previewUrl = images.getJSONObject(JSONUtils.SOURCE_KEY).getString(JSONUtils.URL_KEY);
                     int previewWidth = images.getJSONObject(JSONUtils.SOURCE_KEY).getInt(JSONUtils.WIDTH_KEY);
@@ -300,146 +310,102 @@ public class ParsePost {
                 String videoUrl = Html.fromHtml(redditVideoObject.getString(JSONUtils.HLS_URL_KEY)).toString();
                 String videoDownloadUrl = redditVideoObject.getString(JSONUtils.FALLBACK_URL_KEY);
 
-                post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull, postTimeMillis, title, permalink, score, postType, voteType,
-                        nComments, upvoteRatio,  nsfw,  locked, saved, distinguished, suggestedSort);
+                post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, score, postType, voteType,
+                        nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
 
                 post.setPreviews(previews);
                 post.setVideoUrl(videoUrl);
                 post.setVideoDownloadUrl(videoDownloadUrl);
-            } else if (data.has(JSONUtils.PREVIEW_KEY)) {
-                if (data.getJSONObject(JSONUtils.PREVIEW_KEY).has(JSONUtils.REDDIT_VIDEO_PREVIEW_KEY)) {
-                    int postType = Post.VIDEO_TYPE;
-                    String authority = uri.getAuthority();
-                    // The hls stream inside REDDIT_VIDEO_PREVIEW_KEY can sometimes lack an audio track
-                    if (authority.contains("imgur.com") && (path.endsWith(".gifv") || path.endsWith(".mp4"))) {
-                        if (path.endsWith(".gifv")) {
-                            url = url.substring(0, url.length() - 5) + ".mp4";
-                        }
+            } else if (data.getJSONObject("post").has("thumbnail_url")) {
+                if (path.endsWith(".jpg") || path.endsWith(".png") || path.endsWith(".jpeg") || path.endsWith(".webp")) {
+                    //Image post
+                    int postType = Post.IMAGE_TYPE;
 
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,postTimeMillis, title, permalink, score, postType, voteType,
-                                nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
-                        post.setPreviews(previews);
-                        post.setVideoUrl(url);
-                        post.setVideoDownloadUrl(url);
-                        post.setIsImgur(true);
-                    } else {
-                        //Gif video post (HLS)
+                    post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,
+                            authorFull, postTimeMillis, title, url, permalink, score,
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                            distinguished, suggestedSort);
 
-                        String videoUrl = Html.fromHtml(data.getJSONObject(JSONUtils.PREVIEW_KEY)
-                                .getJSONObject(JSONUtils.REDDIT_VIDEO_PREVIEW_KEY).getString(JSONUtils.HLS_URL_KEY)).toString();
-                        String videoDownloadUrl = data.getJSONObject(JSONUtils.PREVIEW_KEY)
-                                .getJSONObject(JSONUtils.REDDIT_VIDEO_PREVIEW_KEY).getString(JSONUtils.FALLBACK_URL_KEY);
-
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull, postTimeMillis, title, permalink, score, postType, voteType,
-                                nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
-                        post.setPreviews(previews);
-                        post.setVideoUrl(videoUrl);
-                        post.setVideoDownloadUrl(videoDownloadUrl);
+                    if (previews.isEmpty()) {
+                        previews.add(new Post.Preview(url, 0, 0, "", ""));
                     }
+                    post.setPreviews(previews);
+                } else if (path.endsWith(".gif")) {
+                    //Gif post
+                    int postType = Post.GIF_TYPE;
+                    post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
+                            postTimeMillis, title, url, permalink, score,
+                            postType, voteType, nComments, upvoteRatio,
+                            nsfw, locked, saved,
+                            distinguished, suggestedSort);
+
+                    post.setPreviews(previews);
+                    post.setVideoUrl(url);
+                } else if (uri.getAuthority().contains("imgur.com") && (path.endsWith(".gifv") || path.endsWith(".mp4"))) {
+                    // Imgur gifv/mp4
+                    int postType = Post.VIDEO_TYPE;
+
+                    if (url.endsWith("gifv")) {
+                        url = url.substring(0, url.length() - 5) + ".mp4";
+                    }
+
+                    post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
+                            postTimeMillis, title, url, permalink, score,
+                            postType, voteType, nComments, upvoteRatio,
+                            nsfw, locked, saved,
+                            distinguished, suggestedSort);
+                    post.setPreviews(previews);
+                    post.setVideoUrl(url);
+                    post.setVideoDownloadUrl(url);
+                    post.setIsImgur(true);
+                } else if (path.endsWith(".mp4")) {
+                    //Video post
+                    int postType = Post.VIDEO_TYPE;
+
+                    post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
+                            postTimeMillis, title, url, permalink, score,
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                            distinguished, suggestedSort);
+                    post.setPreviews(previews);
+                    post.setVideoUrl(url);
+                    post.setVideoDownloadUrl(url);
                 } else {
-                    if (path.endsWith(".jpg") || path.endsWith(".png") || path.endsWith(".jpeg")|| path.endsWith(".webp")) {
-                        //Image post
-                        int postType = Post.IMAGE_TYPE;
+                    //Link post
+                    int postType = Post.LINK_TYPE;
 
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,
-                                authorFull,postTimeMillis, title, url, permalink, score,
-                                postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
-                                distinguished, suggestedSort);
-
-                        if (previews.isEmpty()) {
-                            previews.add(new Post.Preview(url, 0, 0, "", ""));
-                        }
-                        post.setPreviews(previews);
-                    } else if (path.endsWith(".gif")) {
-                        //Gif post
-                        int postType = Post.GIF_TYPE;
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                                 postTimeMillis, title, url, permalink, score,
-                                postType, voteType, nComments, upvoteRatio,
-                                nsfw,  locked, saved,
-                                distinguished, suggestedSort);
-
-                        post.setPreviews(previews);
-                        post.setVideoUrl(url);
-                    } else if (uri.getAuthority().contains("imgur.com") && (path.endsWith(".gifv") || path.endsWith(".mp4"))) {
-                        // Imgur gifv/mp4
-                        int postType = Post.VIDEO_TYPE;
-
-                        if (url.endsWith("gifv")) {
-                            url = url.substring(0, url.length() - 5) + ".mp4";
-                        }
-
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                                postTimeMillis, title, url, permalink, score,
-                                postType, voteType, nComments, upvoteRatio,
-                                 nsfw, locked, saved,
-                                distinguished, suggestedSort);
-                        post.setPreviews(previews);
-                        post.setVideoUrl(url);
-                        post.setVideoDownloadUrl(url);
-                        post.setIsImgur(true);
-                    } else if (path.endsWith(".mp4")) {
-                        //Video post
-                        int postType = Post.VIDEO_TYPE;
-
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                                 postTimeMillis, title, url, permalink, score,
-                                postType, voteType, nComments, upvoteRatio, nsfw,  locked, saved,
-                                distinguished, suggestedSort);
-                        post.setPreviews(previews);
-                        post.setVideoUrl(url);
-                        post.setVideoDownloadUrl(url);
+                    post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
+                            postTimeMillis, title, url, permalink, score,
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                            distinguished, suggestedSort);
+                    if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
+                        post.setSelfText("");
                     } else {
-                        if (url.contains(permalink)) {
-                            //Text post but with a preview
-                            int postType = Post.TEXT_TYPE;
+                        post.setSelfText(Utils.modifyMarkdown(Utils.trimTrailingWhitespace(data.getString(JSONUtils.SELFTEXT_KEY))));
+                    }
 
-                            post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                                    postTimeMillis, title, permalink, score,
-                                    postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
-                                    distinguished, suggestedSort);
+                    post.setPreviews(previews);
 
-                            //Need attention
-                            post.setPreviews(previews);
-                        } else {
-                            //Link post
-                            int postType = Post.LINK_TYPE;
+                    String authority = uri.getAuthority();
 
-                            post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                                    postTimeMillis, title, url, permalink, score,
-                                    postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
-                                    distinguished, suggestedSort);
-                            if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
-                                post.setSelfText("");
-                            } else {
-                                post.setSelfText(Utils.modifyMarkdown(Utils.trimTrailingWhitespace(data.getString(JSONUtils.SELFTEXT_KEY))));
-                            }
-
-                            post.setPreviews(previews);
-
-                            String authority = uri.getAuthority();
-
-                            if (authority != null) {
-                                if (authority.contains("gfycat.com")) {
-                                    String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
-                                    post.setPostType(Post.VIDEO_TYPE);
-                                    post.setIsGfycat(true);
-                                    post.setVideoUrl(url);
-                                    post.setGfycatId(gfycatId);
-                                } else if (authority.contains("redgifs.com")) {
-                                    String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
-                                    post.setPostType(Post.VIDEO_TYPE);
-                                    post.setIsRedgifs(true);
-                                    post.setVideoUrl(url);
-                                    post.setGfycatId(gfycatId);
-                                } else if (authority.equals("streamable.com")) {
-                                    String shortCode = url.substring(url.lastIndexOf("/") + 1);
-                                    post.setPostType(Post.VIDEO_TYPE);
-                                    post.setIsStreamable(true);
-                                    post.setVideoUrl(url);
-                                    post.setStreamableShortCode(shortCode);
-                                }
-                            }
+                    if (authority != null) {
+                        if (authority.contains("gfycat.com")) {
+                            String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
+                            post.setPostType(Post.VIDEO_TYPE);
+                            post.setIsGfycat(true);
+                            post.setVideoUrl(url);
+                            post.setGfycatId(gfycatId);
+                        } else if (authority.contains("redgifs.com")) {
+                            String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
+                            post.setPostType(Post.VIDEO_TYPE);
+                            post.setIsRedgifs(true);
+                            post.setVideoUrl(url);
+                            post.setGfycatId(gfycatId);
+                        } else if (authority.equals("streamable.com")) {
+                            String shortCode = url.substring(url.lastIndexOf("/") + 1);
+                            post.setPostType(Post.VIDEO_TYPE);
+                            post.setIsStreamable(true);
+                            post.setVideoUrl(url);
+                            post.setStreamableShortCode(shortCode);
                         }
                     }
                 }
@@ -572,7 +538,7 @@ public class ParsePost {
                         previews.add(new Post.Preview(galleryItemUrl, singleGalleryObject.getJSONObject(JSONUtils.S_KEY).getInt(JSONUtils.X_KEY),
                                 singleGalleryObject.getJSONObject(JSONUtils.S_KEY).getInt(JSONUtils.Y_KEY), galleryItemCaption, galleryItemCaptionUrl));
                     }
-                    
+
                     Post.Gallery postGalleryItem = new Post.Gallery(mimeType, galleryItemUrl, "", subredditName + "-" + galleryId + "." + mimeType.substring(mimeType.lastIndexOf("/") + 1), galleryItemCaption, galleryItemCaptionUrl);
 
                     // For issue #558
