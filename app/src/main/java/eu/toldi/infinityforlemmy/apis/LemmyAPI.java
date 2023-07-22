@@ -19,10 +19,13 @@ public interface LemmyAPI {
     Call<String> userLogin(@Body AccountLoginDTO params);
 
     @GET("api/v3/user")
-    Call<String> userInfo(@Query("username") String username,@Query("auth") String access_token);
+    Call<String> userInfo(@Query("username") String username, @Query("auth") String access_token);
 
     @GET("api/v3/community")
-    Call<String> communityInfo(@Query("name") String name,@Query("auth") String access_token);
+    Call<String> communityInfo(@Query("name") String name, @Query("auth") String access_token);
+
+    @GET("api/v3/post")
+    Call<String> postInfo(@Query("id") Integer postID, @Query("comment_id") Integer comment_id, @Query("auth") String access_token);
 
     @GET("api/v3/user")
     ListenableFuture<Response<String>> getUserPosts(

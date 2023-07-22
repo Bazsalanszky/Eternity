@@ -98,13 +98,13 @@ public class ParsePost {
 
         executor.execute(() -> {
             try {
-                JSONArray allData = new JSONArray(response).getJSONObject(0).getJSONObject(JSONUtils.DATA_KEY).getJSONArray(JSONUtils.CHILDREN_KEY);
+                JSONObject allData = new JSONObject(response).getJSONObject("post_view");
                 if (allData.length() == 0) {
                     handler.post(parsePostListener::onParsePostFail);
                     return;
                 }
-                JSONObject data = allData.getJSONObject(0).getJSONObject(JSONUtils.DATA_KEY);
-                Post post = parseBasicData(data);
+
+                Post post = parseBasicData(allData);
                 handler.post(() -> parsePostListener.onParsePostSuccess(post));
             } catch (JSONException e) {
                 e.printStackTrace();
