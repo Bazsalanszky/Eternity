@@ -15,11 +15,13 @@ A Lemmy client on Android written in Java. It's a fork of the [Infinity for Redd
 
 <div align="center">
 
-
+[![status-badge](https://ci.codeberg.org/api/badges/12474/status.svg)](https://ci.codeberg.org/12474)
 
 <a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues">Report a Bug</a>
 
 </div>
+
+
 
 <br>
 
