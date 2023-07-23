@@ -1,0 +1,7 @@
+pipeline:
+  build:
+    image: alvrme/alpine-android:android-33-jdk11
+    commands:
+      - ./gradlew :app:assemble
+    when:
+      path: [ app/**, build.gradle ]
