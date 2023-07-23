@@ -322,7 +322,7 @@ public class Comment implements Parcelable {
 
     public void addChild(Comment comment) {
         addChild(comment, 0);
-        childCount++;
+        //childCount++;
         assertChildrenDepth();
     }
 

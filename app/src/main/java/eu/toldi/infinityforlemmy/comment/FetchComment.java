@@ -25,7 +25,7 @@ public class FetchComment {
         LemmyAPI api = retrofit.create(LemmyAPI.class);
         Call<String> comments;
 
-        comments = api.getComments("All", sortType.value, 5, page, 25, null, null, article, commentId, false, accessToken);
+        comments = api.getComments("All", sortType.value, 8, page, 25, null, null, article, commentId, false, accessToken);
 
 
         comments.enqueue(new Callback<String>() {

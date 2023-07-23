@@ -13,7 +13,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
@@ -34,19 +36,35 @@ public class ParseComment {
                 ArrayList<Integer> moreChildrenIds = new ArrayList<>();
                 ArrayList<Comment> newComments = new ArrayList<>();
 
+
+                Map<Integer, Comment> parsedComments = new HashMap<>();
+                List<Comment> orderedComments = new ArrayList<>();
+                List<Comment> topLevelComments = new ArrayList<>();
                 for (int i = 0; i < childrenArray.length(); i++) {
                     Comment singleComment = parseSingleComment(childrenArray.getJSONObject(i));
-                    newComments.add(singleComment);
-                    if (singleComment.getDepth() > 0) {
-                        Comment parent = findDirectParent(newComments, singleComment);
-                        moreChildrenIds.add(singleComment.getId());
-                        if (parent != null)
-                            parent.addChild(singleComment);
+                    orderedComments.add(singleComment);
+                    parsedComments.put(singleComment.getId(), singleComment);
+                    if (singleComment.getDepth() == 0) {
+                        topLevelComments.add(singleComment);
                     }
                 }
 
+                for (int i = orderedComments.size() - 1; i >= 0; i--) {
+                    Comment c = orderedComments.get(i);
+                    //Add children to parent
+                    if (c.getParentId() != null) {
+                        Comment parent = parsedComments.get(c.getParentId());
+                        if (parent != null) {
+                            parent.addChild(c);
+                        }
+                    }
+                }
 
-                //parseCommentRecursion(childrenArray, newComments, moreChildrenIds, 0);
+                //Add all comments to newComments
+                for (int i = 0; i < topLevelComments.size(); i++) {
+                    newComments.add(topLevelComments.get(i));
+                }
+
                 expandChildren(newComments, expandedNewComments, expandChildren);
 
                 ArrayList<Comment> commentData;
@@ -62,10 +80,6 @@ public class ParseComment {
                 handler.post(parseCommentListener::onParseCommentFailed);
             }
         });
-    }
-
-    private static void getChildrenCountRecursive(List<Comment> commentList, Comment root) {
-
     }
 
     static void parseMoreComment(Executor executor, Handler handler, String response, boolean expandChildren,
@@ -116,7 +130,7 @@ public class ParseComment {
                             if (parentComment != null) {
                                 parentComment.setHasReply(true);
                                 parentComment.addChild(continueThreadPlaceholder, parentComment.getChildCount());
-                                parentComment.setChildCount(parentComment.getChildCount() + 1);
+                                parentComment.setChildCount(parentComment.getChildCount());
                             } else {
                                 // assume that it is parent of this call
                                 newComments.add(continueThreadPlaceholder);
@@ -130,7 +144,7 @@ public class ParseComment {
                         if (parentComment != null) {
                             parentComment.setHasReply(true);
                             parentComment.addChild(comment, parentComment.getChildCount());
-                            parentComment.setChildCount(parentComment.getChildCount() + 1);
+                            parentComment.setChildCount(parentComment.getChildCount());
                         } else {
                             // assume that it is parent of this call
                             newComments.add(comment);
@@ -230,7 +244,7 @@ public class ParseComment {
             } else {
                 c.setExpanded(true);
             }
-            if (c.hasMoreChildrenIds() && !c.getMoreChildrenIds().isEmpty()) {
+            if (c.getChildCount() > 0 && c.getChildCount() > getChildCount(c)) {
                 //Add a load more placeholder
                 Comment placeholder = new Comment(c.getFullName(), c.getDepth() + 1, Comment.PLACEHOLDER_LOAD_MORE_COMMENTS, c.getId());
                 visibleComments.add(placeholder);
@@ -238,6 +252,7 @@ public class ParseComment {
             }
         }
     }
+
 
     public static Comment parseSingleComment(JSONObject jsonObject) throws JSONException {
         JSONObject commentObj = jsonObject.getJSONObject("comment");
@@ -311,47 +326,6 @@ public class ParseComment {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static Comment findDirectParent(List<Comment> commentList, Comment child) {
-        for (int i = 0; i < commentList.size(); i++) {
-            Comment result = findDirectParentRecursive(commentList.get(i), child);
-            if (result != null)
-                return result;
-        }
-        return null;
-    }
-
-    public static Comment findDirectParentRecursive(Comment root, Comment child) {
-        // Base case: if root is null
-        if (root == null) {
-            return null;
-        }
-
-        if (root.getId() == child.getParentId()) {
-            return root;
-        }
-
-        // Check if any child of the root is the given child comment
-        List<Comment> children = root.getChildren();
-        if (children != null) {
-            for (Comment comment : children) {
-                if (comment.getId() == child.getId()) {
-                    return root;
-                }
-            }
-
-            // If the child comment is not an immediate child of the root,
-            // recursively call the function on the children of the root
-            for (Comment comment : children) {
-                Comment result = findDirectParentRecursive(comment, child);
-                if (result != null) {
-                    return result;
-                }
-            }
         }
 
         return null;
