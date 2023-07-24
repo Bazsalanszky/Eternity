@@ -667,7 +667,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
             }
         });
         new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.go_to_subreddit)
+                .setTitle(R.string.go_to_community)
                 .setView(rootView)
                 .setPositiveButton(R.string.ok, (dialogInterface, i)
                         -> {

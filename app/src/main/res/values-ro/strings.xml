@@ -4,19 +4,19 @@
     <string name="comment_activity_label">"Trimite Comentariu"</string>
     <string name="comment_activity_label_is_replying">"Răspunde"</string>
     <string name="post_text_activity_label">"Postare Text"</string>
-    <string name="subreddit_selection_activity_label">"Alege un Subreddit"</string>
+    <string name="community_selection_activity_label">"Alege un Subreddit"</string>
     <string name="post_link_activity_label">"Postare Link"</string>
     <string name="post_image_activity_label">"Postare Imagine"</string>
     <string name="post_video_activity_label">"Postare Video"</string>
     <string name="rules_activity_label">"Reguli"</string>
-    <string name="search_subreddits_activity_label">"Subreddit-uri"</string>
+    <string name="search_community_activity_label">"Subreddit-uri"</string>
     <string name="edit_post_activity_label">"Editare Postare"</string>
     <string name="edit_comment_activity_label">"Editare Comentariu"</string>
     <string name="view_message_activity_label">"Mesaje"</string>
     <string name="settings_activity_label">"Setări"</string>
     <string name="account_saved_thing_activity_label">"Salvate"</string>
     <string name="create_multi_reddit_activity_label">"Creează Multireddit"</string>
-    <string name="subreddit_multiselection_activity_label">"Selectează Subreddit-uri"</string>
+    <string name="community_multiselection_activity_label">"Selectează Subreddit-uri"</string>
     <string name="custom_theme_listing_activity_label">"Teme Personalizate"</string>
     <string name="customize_theme_activity_label">"Personalizează Tema"</string>
     <string name="customize_theme_activity_create_theme_label">"Creează Temă"</string>
@@ -83,13 +83,13 @@ Atinge pentru a reîncerca."</string>
     <string name="load_more_posts_error">"Eroare la încărcarea postărilor."</string>
     <string name="load_post_error">"Eroare la încărcarea postării.
 Atinge pentru a reîncerca."</string>
-    <string name="search_subreddits_error">"Eroare la căutarea subreddit-urilor.
+    <string name="search_communities_error">"Eroare la căutarea subreddit-urilor.
 Atinge pentru a reîncerca."</string>
     <string name="search_users_error">"Eroare la căutarea utilizatorilor.
 Atinge pentru a reîncerca."</string>
     <string name="no_posts">"Nicio postare găsită"</string>
     <string name="no_comments">"Niciun comentariu găsit"</string>
-    <string name="no_subreddits">"Niciun subreddit găsit"</string>
+    <string name="no_communities">"Niciun subreddit găsit"</string>
     <string name="no_users">"Niciun utilizator găsit"</string>
     <string name="no_multi_reddits">"Niciun Multireddit găsit"</string>
     <string name="no_storage_permission">"Nu există permisiunea de stocare pentru a salva acest fișier"</string>
@@ -130,7 +130,7 @@ Atinge pentru a reîncerca."</string>
 
     <!-- Fuzzy -->
     <string name="online_subscribers_number_detail">"Online: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"Nu s-au găsit informații despre subreddit"</string>
+    <string name="cannot_fetch_community_info">"Nu s-au găsit informații despre subreddit"</string>
     <string name="cannot_fetch_user_info">"Nu s-au găsit informații despre utilizator"</string>
     <string name="cannot_fetch_sidebar">"Nu s-a putut prelua bara laterală"</string>
     <string name="cannot_fetch_multireddit">"Nu s-a găsit informații despre multireddit"</string>
@@ -168,7 +168,7 @@ Atinge pentru a reîncerca."</string>
     <string name="sending_message">"Se trimite"</string>
     <string name="send_message_success">"Mesaj trimis"</string>
     <string name="send_message_failed">"Nu s-a putut trimite acest mesaj"</string>
-    <string name="select_a_subreddit">"Alege un subreddit mai întâi"</string>
+    <string name="select_a_community">"Alege un subreddit mai întâi"</string>
     <string name="title_required">"Postarea are nevoie de un titlu bun"</string>
     <string name="link_required">"Hei, unde-i linkul?"</string>
     <string name="select_an_image">"Selectează o imagine mai întâi"</string>
@@ -182,10 +182,10 @@ Atinge pentru a reîncerca."</string>
     <string name="loading">"Se încarcă"</string>
     <string name="post_title_hint">"Titlu"</string>
     <string name="post_text_content_hint">"Conținut"</string>
-    <string name="choose_a_subreddit">"Selectează un subreddit"</string>
+    <string name="choose_a_communities">"Selectează un subreddit"</string>
     <string name="rules">"Reguli"</string>
     <string name="post_link_hint">"Adresă"</string>
-    <string name="subreddits">"Subreddit-uri"</string>
+    <string name="communities">"Subreddit-uri"</string>
     <string name="users">"Utilizatori"</string>
     <string name="multi_reddits">"MultiReddit-uri"</string>
     <string name="bottom_sheet_post_text">"Text"</string>
@@ -213,7 +213,7 @@ Atinge pentru a reîncerca."</string>
 Atinge pentru a reîncerca."</string>
     <string name="error_loading_rules_without_retry">"Eroare la Încărcarea Regulilor"</string>
     <string name="search_in">"Caută în"</string>
-    <string name="all_subreddits">"Toate subreddit-urile"</string>
+    <string name="all_communities">"Toate subreddit-urile"</string>
     <string name="sort_best">"Cel mai bun"</string>
     <string name="sort_hot">"Popular"</string>
     <string name="sort_new">"Nou"</string>
@@ -296,7 +296,7 @@ Atinge pentru a reîncerca."</string>
     <string name="view_all_comments">"Apasă aici pentru a citi toate comentariile"</string>
     <string name="notification_summary_account">"Cont"</string>
     <string name="notification_summary_message">"Mesaj Nou"</string>
-    <string name="notification_summary_subreddit">"Subreddit"</string>
+    <string name="notification_summary_community">"Subreddit"</string>
     <string name="notification_summary_award">"Premiu"</string>
 
     <!-- Fuzzy -->
@@ -402,8 +402,8 @@ Atinge pentru a reîncerca."</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Cont Reddit"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Subreddit"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Subreddit"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"Distribuie"</string>
     <string name="settings_share_summary">"Distribuie această aplicație altor persoane dacă îți place"</string>
     <string name="settings_version_title">"Infinit Pentru Reddit"</string>
@@ -414,7 +414,7 @@ Atinge pentru a reîncerca."</string>
     <string name="settings_customize_amoled_theme_title">"Temă Amoled"</string>
     <string name="settings_manage_themes_title">"Gestionează Temele"</string>
     <string name="settings_advanced_master_title">"Avansat"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"Șterge Toate Subreddit-urile din Baza de Date"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"Șterge Toate Subreddit-urile din Baza de Date"</string>
     <string name="settings_delete_all_users_data_in_database_title">"Șterge Toți Utilizatorii din Baza de Date"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"Șterge Toate Tipurile de Sortare din Baza de Date"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"Șterge Toate Aspectele de Postare din Baza de Date"</string>
@@ -426,7 +426,7 @@ Atinge pentru a reîncerca."</string>
     <string name="settings_tab_3_summary">"Fila 3"</string>
     <string name="settings_tab_title">"Titlu"</string>
     <string name="settings_tab_post_type">"Tip"</string>
-    <string name="settings_tab_subreddit_name">"Numele Subreddit-ului (fără prefixul r/)"</string>
+    <string name="settings_tab_community_name">"Numele Subreddit-ului (fără prefixul r/)"</string>
     <string name="settings_tab_multi_reddit_name">"Cale MultiReddit (/user/numeutilizator/m/numelemultiredditului)"</string>
     <string name="settings_tab_username">"Nume de Utilizator (fără prefixul u/)"</string>
     <string name="no_developer_easter_egg">"Aici nu există opțiuni pentru dezvoltatori"</string>
@@ -480,7 +480,7 @@ Atinge pentru a reîncerca."</string>
     <string name="error_loading_subscriptions">"Nu s-a putut sincroniza abonamentele"</string>
     <string name="share_this_app">"Aruncă o privire la Infinit Pentru Reddit, un client Reddit grozav!
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"Eroare la obținerea numelui subreddit-ului"</string>
+    <string name="error_getting_community_name">"Eroare la obținerea numelui subreddit-ului"</string>
     <string name="share_post_link">"Distribuie Link-ul Postării"</string>
     <string name="share_image_link">"Distribuie Link-ul Imaginii"</string>
     <string name="share_gif_link">"Distribuie Link-ul Gif-ului"</string>
@@ -637,8 +637,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_unsubscribed_color_detail">"Aplicat pe: Butonul de abonare"</string>
     <string name="theme_item_username_color">"Culoarea Numelui de Utilizator"</string>
     <string name="theme_item_username_color_detail">"Aplicat pe: Nume de utilizator"</string>
-    <string name="theme_item_subreddit_color">"Culoare Subreddit"</string>
-    <string name="theme_item_subreddit_color_detail">"Aplicat pe: Numele subreddit-ului"</string>
+    <string name="theme_item_community_color">"Culoare Subreddit"</string>
+    <string name="theme_item_community_color_detail">"Aplicat pe: Numele subreddit-ului"</string>
     <string name="theme_item_author_flair_text_color">"Culoarea Insignei de Autor"</string>
     <string name="theme_item_author_flair_text_color_detail">"Aplicat pe: Culoarea insignei de autor în comentarii"</string>
     <string name="theme_item_submitter_color">"Autor"</string>
@@ -717,7 +717,7 @@ Bazat pe Tema Indigo Amoled"</string>
     <string name="override">"Înlocuiește"</string>
     <string name="color_picker">"Alegător de Culori"</string>
     <string name="invalid_color">"Culoare Invalidă"</string>
-    <string name="delete_all_subreddits_success">"Toate subreddit-urile au fost șterse cu succes"</string>
+    <string name="delete_all_communities_success">"Toate subreddit-urile au fost șterse cu succes"</string>
     <string name="delete_all_users_success">"Toți utilizatorii au fost șterși cu succes"</string>
     <string name="delete_all_sort_types_success">"Toate tipurile de sortare au fost șterse cu succes"</string>
     <string name="delete_all_post_layouts_success">"Toate aspectele de postare au fost șterse cu succes"</string>
@@ -725,7 +725,7 @@ Bazat pe Tema Indigo Amoled"</string>
     <string name="delete_all_front_page_scrolled_positions_success">"Toate pozițiile de derulare în pagina principală au fost șterse cu succes"</string>
     <string name="reset_all_settings_success">"Au fost resetate cu succes toate setările"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"Text Primar"</string>
     <string name="secondary_text_preview">"Text Secundar"</string>
     <string name="post_title_preview">"Aceasta este o postare"</string>
@@ -799,13 +799,13 @@ Exemplu: parolata:123456"</string>
     <string name="settings_more_tabs_summary">"Mai Multe File"</string>
     <string name="settings_more_tabs_info_summary">"Activarea următoarelor opțiuni va cauza un comportament neintenționat:
 Este posibil ca filele să piardă tot conținutul după trecerea la altele. Acest lucru se aseamănă cu reîmprospătarea paginii."</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"Afișează Subreddit-urile Abonate Favorite"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"Afișează Subreddit-urile Abonate"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Afișează Subreddit-urile Abonate Favorite"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"Afișează Subreddit-urile Abonate"</string>
     <string name="settings_download_location_title">"Locație de Descărcare"</string>
     <string name="settings_image_download_location_title">"Locația de Descărcare a Imaginilor"</string>
     <string name="settings_gif_download_location_title">"Locația de Descărcare a Gif-urilor"</string>
     <string name="settings_video_download_location_title">"Locația de Descărcare a Videoclipurilor"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Dosar Separat pentru Fiecare Subreddit"</string>
+    <string name="settings_separate_folder_for_each_community">"Dosar Separat pentru Fiecare Subreddit"</string>
     <string name="settings_swipe_action_title">"Acțiune de Glilsare"</string>
     <string name="settings_disable_swiping_between_tabs_title">"Dezactivează Glisarea între File"</string>
     <string name="settings_enable_swipe_action_title">"Activează Acțiunea de Glisare"</string>
@@ -861,30 +861,30 @@ Mesaj: %2$s"</string>
     <string name="give_award_success">"Premiu acordat"</string>
     <string name="give_award_failed">"A eșuat"</string>
     <string name="warning">"Avertisment"</string>
-    <string name="this_is_a_nsfw_subreddit">"Acesta este un subreddit NSFW."</string>
+    <string name="this_is_a_nsfw_community">"Acesta este un subreddit NSFW."</string>
     <string name="this_user_has_nsfw_content">"Acest utilizator are conținut NSFW"</string>
     <string name="dismiss">"Respinge"</string>
     <string name="leave">"Ieși"</string>
-    <string name="go_to_subreddit">"Merge la Subreddit"</string>
+    <string name="go_to_community">"Merge la Subreddit"</string>
     <string name="go_to_user">"Mergi la Utilizator"</string>
     <string name="go_to_thing_hint">"Nume"</string>
     <string name="random">"Aleatoriu"</string>
-    <string name="random_subreddit">"Subreddit aleatoriu"</string>
-    <string name="random_nsfw_subreddit">"Subreddit NSFW Aleatoriu"</string>
+    <string name="random_community">"Subreddit aleatoriu"</string>
+    <string name="random_nsfw_community">"Subreddit NSFW Aleatoriu"</string>
     <string name="random_post">"Postare Aleatorie"</string>
     <string name="random_nsfw_post">"Postare NSFW Aleatorie"</string>
     <string name="fetch_random_thing_failed">"Încearcă din nou mai târziu"</string>
     <string name="downloading">"Se descarcă"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all și r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all și r/popular"</string>
     <string name="settings_miscellaneous_title">"Diverse"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"Respectă Tipul Recomandat de Subreddit pentru Sortarea Comentariilor"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"Tipul de sortare a comentariilor nu va fi salvat"</string>
-    <string name="settings_subreddit_filter_category">"Ascunde Subreddit-urile"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"În r/popular și r/all"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"Respectă Tipul Recomandat de Subreddit pentru Sortarea Comentariilor"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"Tipul de sortare a comentariilor nu va fi salvat"</string>
+    <string name="settings_community_filter_category">"Ascunde Subreddit-urile"</string>
+    <string name="settings_community_filter_popular_and_all">"În r/popular și r/all"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"Animație de Capturare a OZN-urilor"</string>
     <string name="select_video_quality">"Selectează Calitatea Video"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"Răspuns Tactil"</string>
-    <string name="settings_hide_subreddit_description_title">"Ascunde Descrierea Subreddit-ului"</string>
+    <string name="settings_hide_community_description_title">"Ascunde Descrierea Subreddit-ului"</string>
     <string name="settings_disable_image_preview_title">"Dezactivarea Previzualizării Imaginilor în Regimul de Economisire a Datelor"</string>
     <string name="settings_swipe_action_swipe_left_title">"Glisează spre Stânga"</string>
     <string name="settings_swipe_action_swipe_right_title">"Glisează spre Dreapta"</string>
@@ -902,7 +902,7 @@ Mesaj: %2$s"</string>
     <string name="action_save_to_database">"Salvează în Baza de Date"</string>
     <string name="action_read_all_messages">"Citește Toate Mesajele"</string>
     <string name="action_add_to_multireddit">"Adaugă la Multireddit"</string>
-    <string name="search_only_subreddits_hint">"Caută subreddit-uri"</string>
+    <string name="search_only_communities_hint">"Caută subreddit-uri"</string>
     <string name="search_only_users_hint">"Caută utilizatori"</string>
     <string name="post_type_gif">"Gif"</string>
     <string name="post_type_gallery">"Galerie"</string>
@@ -919,12 +919,12 @@ Mesaj: %2$s"</string>
     <string name="settings_hide_read_posts_automatically_title">"Ascunde Automat Mesajele Citite"</string>
     <string name="settings_sort_type_title">"Tip de Sortare"</string>
     <string name="settings_save_sort_type_title">"Salvează Tipul de Sortare"</string>
-    <string name="settings_subreddit_default_sort_type_title">"Tip de Sortare Implicit pentru Subreddit"</string>
-    <string name="settings_subreddit_default_sort_time_title">"Timp de Sortare Implicit pentru Subreddit"</string>
+    <string name="settings_community_default_sort_type_title">"Tip de Sortare Implicit pentru Subreddit"</string>
+    <string name="settings_community_default_sort_time_title">"Timp de Sortare Implicit pentru Subreddit"</string>
     <string name="settings_user_default_sort_type_title">"Tip de Sortare Implicit pentru Utilizator"</string>
     <string name="settings_user_default_sort_time_title">"Timp de Sortare Implicit pentru utilizator"</string>
     <string name="open_link">"Deschide Link"</string>
-    <string name="select_subreddits_and_users">"Selectează Subreddit-urile și Utilizatorii"</string>
+    <string name="select_communities_and_users">"Selectează Subreddit-urile și Utilizatorii"</string>
     <string name="theme_item_read_post_title_color">"Culoarea Titlului Postărilor Citite"</string>
     <string name="theme_item_read_post_title_color_detail">"Aplicat pe: Titlul Postărilor Citite"</string>
     <string name="theme_item_read_post_content_color">"Culoarea Conținutului Postării Citite"</string>
@@ -938,7 +938,7 @@ Mesaj: %2$s"</string>
     <string name="only_spoiler">"Doar Spoiler"</string>
     <string name="title_excludes_strings_hint">"Titlu: exclude cuvintele cheie (cheie1,cheie2)"</string>
     <string name="title_excludes_regex_hint">"Titlu: exclude regex"</string>
-    <string name="exclude_subreddits_hint">"Exclude subreddit-uri (de ex. funny, AskReddit)"</string>
+    <string name="exclude_communities_hint">"Exclude subreddit-uri (de ex. funny, AskReddit)"</string>
     <string name="exclude_users_hint">"Exclude utilizatori (de ex. Hostilenemy, random)"</string>
     <string name="exclude_flairs_hint">"Exclude insigne (de ex. insigna1, insigna2)"</string>
     <string name="contain_flairs_hint">"Să conțină insignele (de ex. insigna1, insigna2)"</string>
@@ -954,26 +954,26 @@ Mesaj: %2$s"</string>
     <string name="duplicate_post_filter_dialog_message">"Îl înlocuiești?"</string>
     <string name="apply_post_filter_to">"Se aplică la"</string>
     <string name="post_filter_usage_home">"Acasă"</string>
-    <string name="post_filter_usage_subreddit">"Subreddit: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"Subreddit"</string>
+    <string name="post_filter_usage_community">"Subreddit: %1$s"</string>
+    <string name="post_filter_usage_community_all">"Subreddit"</string>
     <string name="post_filter_usage_user">"Utilizator: %1$s"</string>
     <string name="post_filter_usage_user_all">"Utilizator"</string>
     <string name="post_filter_usage_multireddit">"MultiReddit: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"MultiReddit"</string>
     <string name="post_filter_usage_search">"Căutare"</string>
-    <string name="subreddit">"Subreddit"</string>
+    <string name="community">"Subreddit"</string>
     <string name="user">"Utilizator"</string>
     <string name="edit_post_filter_name_of_usage_info">"Lasă-l gol pentru a aplica acest filtru de postări la toate subreddit-urile / utilizatorii / multireddit-uri"</string>
     <string name="read_all_messages_time_limit">"Prea des faci acest lucru. Încercă din nou mai târziu. Aceasta este limita de viteză al API-ului Reddit."</string>
     <string name="read_all_messages_success">"Toate mesajele au fost citite cu succes"</string>
     <string name="read_all_messages_failed">"Nu s-a putut citi toate mesajele"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s a fost adăugat la multireddit-ul %2$s"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"Nu s-a putut adăuga %1$s la multireddit-ul %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s a fost adăugat la multireddit-ul %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"Nu s-a putut adăuga %1$s la multireddit-ul %2$s"</string>
     <string name="choose_a_user">"Alege un utilizator"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Apăsă pentru a Afișa Fișierele Media din Galerie"</string>
     <string name="settings_hide_post_type">"Ascunde Tipul de Postare"</string>
     <string name="settings_hide_the_number_of_awards">"Ascunde Numărul de Premii"</string>
-    <string name="settings_hide_subreddit_and_user_prefix">"Ascunde  Prefixul Subreddit-urilor și Utilizatorilor"</string>
+    <string name="settings_hide_community_and_user_prefix">"Ascunde  Prefixul Subreddit-urilor și Utilizatorilor"</string>
     <string name="settings_hide_the_number_of_votes">"Ascunde Numărul de Voturi"</string>
     <string name="settings_hide_the_number_of_comments">"Ascunde Numărul de Comentarii"</string>
     <string name="post_layout_gallery">"Aspectul Galeriei"</string>
@@ -984,7 +984,7 @@ Mesaj: %2$s"</string>
     <string name="action_share_link">"Distribuie Link-ul"</string>
     <string name="action_copy_link">"Copie Link-ul"</string>
     <string name="action_add_to_post_filter">"Adaugă la Filtrul de Postări"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"Nu estompa imaginile NSFW în subreddit-urile NSFW"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"Nu estompa imaginile NSFW în subreddit-urile NSFW"</string>
     <string name="settings_show_avatar_on_the_right">"Afișează Avatarul în Dreapta"</string>
     <string name="settings_backup_settings_title">"Setări pentru Copie de Rezervă"</string>
     <string name="settings_restore_settings_title">"Restabilirea Setărilor"</string>
@@ -994,10 +994,10 @@ Mesaj: %2$s"</string>
     <string name="settings_collapse_account_section_title">"Restrânge Secția de Cont"</string>
     <string name="settings_collapse_post_section_title">"Restrânge Secția de Postare"</string>
     <string name="settings_collapse_preferences_section_title">"Restrânge Secția de Preferințe"</string>
-    <string name="settings_collapse_favorite_subreddits_section_title">"Restrânge Secția Subreddit-urilor Favorite"</string>
-    <string name="settings_collapse_subscribed_subreddits_section_title">"Restrânge Secția Subreddit-urilor Abonate"</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">"Ascunde Secțiunea Subreddit-urilor Favorite"</string>
-    <string name="settings_hide_subscribed_subreddits_sections_title">"Ascunde Secțiunea Subreddit-urilor Abonate"</string>
+    <string name="settings_collapse_favorite_communities_section_title">"Restrânge Secția Subreddit-urilor Favorite"</string>
+    <string name="settings_collapse_subscribed_communities_section_title">"Restrânge Secția Subreddit-urilor Abonate"</string>
+    <string name="settings_hide_favorite_communities_sections_title">"Ascunde Secțiunea Subreddit-urilor Favorite"</string>
+    <string name="settings_hide_subscribed_communities_sections_title">"Ascunde Secțiunea Subreddit-urilor Abonate"</string>
     <string name="settings_default_search_result_tab">"Fila Implicită a Rezultatelor Căutării"</string>
     <string name="device_default">"Setare Implicită a Dispozitivului"</string>
     <string name="set_by_battery_saver">"Setat pe Regim de Economisire Baterie"</string>
@@ -1032,7 +1032,7 @@ Mesaj: %2$s"</string>
     <string name="upvote">"Vot în sus"</string>
     <string name="downvote">"Vot în jos"</string>
     <string name="select">"Selectează"</string>
-    <string name="exclude_subreddit">"Exclude acest subreddit"</string>
+    <string name="exclude_community">"Exclude acest subreddit"</string>
     <string name="exclude_user">"Exclude acest utilizator"</string>
     <string name="exclude_flair">"Exclude această insignă"</string>
     <string name="contain_flair">"Conține această insignă"</string>
@@ -1147,7 +1147,7 @@ Apasă pentru a reîncerca."</string>
     <string name="title_contains_strings_hint">"Titlu: conține cuvinte cheie (cheie1,cheie2)"</string>
     <string name="title_contains_regex_hint">"Titlu: conține regex"</string>
     <string name="contain_domains_hint">"Conține domeniile"</string>
-    <string name="anonymous_multireddit_no_subreddit">"Acest multireddit nu are un subreddit!"</string>
+    <string name="anonymous_multireddit_no_community">"Acest multireddit nu are un subreddit!"</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">"Eroare la obținerea videoclipului v.redd.it: Nu s-a putut obține adresa videoclipului"</string>
     <string name="contain_domain">"Conține acest domeniu"</string>
 

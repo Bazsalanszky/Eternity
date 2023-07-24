@@ -54,7 +54,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:text="@string/subreddit_preview"
+                            android:text="@string/community_preview"
                             android:textSize="?attr/font_18"
                             android:fontFamily="?attr/font_family" />
 

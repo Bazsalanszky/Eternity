@@ -84,7 +84,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_toStartOf="@id/rules_button_submit_crosspost_activity"
                     android:layout_toEndOf="@id/subreddit_icon_gif_image_view_submit_crosspost_activity"
-                    android:text="@string/choose_a_subreddit"
+                    android:text="@string/choose_a_communities"
                     android:textSize="?attr/font_default"
                     android:fontFamily="?attr/font_family" />
 

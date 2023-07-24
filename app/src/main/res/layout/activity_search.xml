@@ -101,7 +101,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="16dp"
                     android:layout_toEndOf="@id/search_in_text_view_search_activity"
-                    android:text="@string/all_subreddits"
+                    android:text="@string/all_communities"
                     android:textColor="?attr/primaryTextColor"
                     android:textSize="?attr/font_default"
                     android:fontFamily="?attr/font_family" />

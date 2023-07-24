@@ -582,7 +582,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="16dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/settings_more_tabs_show_favorite_subscribed_subreddits_title"
+                android:text="@string/settings_more_tabs_show_favorite_subscribed_communities_title"
                 android:textSize="?attr/font_16"
                 android:fontFamily="?attr/font_family" />
 
@@ -613,7 +613,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="16dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/settings_more_tabs_show_subscribed_subreddits_title"
+                android:text="@string/settings_more_tabs_show_subscribed_communities_title"
                 android:textSize="?attr/font_16"
                 android:fontFamily="?attr/font_family" />
 

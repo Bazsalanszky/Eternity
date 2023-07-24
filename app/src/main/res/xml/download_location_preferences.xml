@@ -14,7 +14,7 @@
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="separate_folder_for_each_subreddit"
-        app:title="@string/settings_separate_folder_for_each_subreddit" />
+        app:title="@string/settings_separate_folder_for_each_community" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceCategory
         app:title="@string/nsfw" />

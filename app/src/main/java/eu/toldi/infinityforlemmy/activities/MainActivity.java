@@ -1470,7 +1470,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             }
         });
         new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.go_to_subreddit)
+                .setTitle(R.string.go_to_community)
                 .setView(rootView)
                 .setPositiveButton(R.string.ok, (dialogInterface, i)
                         -> {

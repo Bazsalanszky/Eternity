@@ -136,10 +136,10 @@ public class PostFilterUsageListingActivity extends BaseActivity {
             textInputEditText.setText(nameOfUsage);
         }
         textInputEditText.requestFocus();
-        int titleStringId = R.string.subreddit;
+        int titleStringId = R.string.community;
         switch (type) {
             case PostFilterUsage.SUBREDDIT_TYPE:
-                textInputEditText.setHint(R.string.settings_tab_subreddit_name);
+                textInputEditText.setHint(R.string.settings_tab_community_name);
                 break;
             case PostFilterUsage.USER_TYPE:
                 textInputEditText.setHint(R.string.settings_tab_username);

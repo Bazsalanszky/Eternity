@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         app:key="delete_all_subreddits_data_in_database"
-        app:title="@string/settings_delete_all_subreddits_data_in_database_title" />
+        app:title="@string/settings_delete_all_communities_data_in_database_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         app:key="delete_all_users_data_in_database"

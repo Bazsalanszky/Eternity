@@ -40,7 +40,7 @@
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="hide_subreddit_and_user_prefix"
-        app:title="@string/settings_hide_subreddit_and_user_prefix" />
+        app:title="@string/settings_hide_community_and_user_prefix" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"

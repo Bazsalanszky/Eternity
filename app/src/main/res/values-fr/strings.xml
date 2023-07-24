@@ -4,14 +4,14 @@
     <string name="comment_activity_label">"Envoyer le commentaire"</string>
     <string name="comment_activity_label_is_replying">"Répondre"</string>
     <string name="post_text_activity_label">"Poster du texte"</string>
-    <string name="subreddit_selection_activity_label">"Sélectionner un subreddit"</string>
+    <string name="community_selection_activity_label">"Sélectionner un subreddit"</string>
     <string name="post_link_activity_label">"Poster un lien"</string>
     <string name="post_image_activity_label">"Poster une image"</string>
     <string name="post_video_activity_label">"Poster une vidéo"</string>
     <string name="rules_activity_label">"Règles"</string>
 
     <!-- Everyone in france uses the english word for subreddits -->
-    <string name="search_subreddits_activity_label">"Subreddits"</string>
+    <string name="search_community_activity_label">"Subreddits"</string>
     <string name="edit_post_activity_label">"Éditer le post"</string>
     <string name="edit_comment_activity_label">"Éditer le commentaire"</string>
     <string name="view_message_activity_label">"Boîte de réception"</string>
@@ -20,7 +20,7 @@
     <!-- Fuzzy -->
     <string name="account_saved_thing_activity_label">"Sauvegardé"</string>
     <string name="create_multi_reddit_activity_label">"Créer un multireddit"</string>
-    <string name="subreddit_multiselection_activity_label">"Sélectionner les subreddits"</string>
+    <string name="community_multiselection_activity_label">"Sélectionner les subreddits"</string>
     <string name="custom_theme_listing_activity_label">"Thèmes personnalisés"</string>
     <string name="customize_theme_activity_label">"Personnaliser le thème"</string>
     <string name="customize_theme_activity_create_theme_label">"Créer un Thème"</string>
@@ -86,11 +86,11 @@
     <string name="load_posts_error">"Erreur de chargement des publications. Appuyez pour réessayer."</string>
     <string name="load_more_posts_error">"Erreur de chargement des publications."</string>
     <string name="load_post_error">"Erreur de chargement cette publication. Appuyez pour réessayer."</string>
-    <string name="search_subreddits_error">"Erreur de recherche des subreddits. Appuyez pour réessayer."</string>
+    <string name="search_communities_error">"Erreur de recherche des subreddits. Appuyez pour réessayer."</string>
     <string name="search_users_error">"Erreur de recherche des utilisateurs. Appuyez pour réessayer."</string>
     <string name="no_posts">"Aucune publication trouvée"</string>
     <string name="no_comments">"Aucun commentaire trouvé"</string>
-    <string name="no_subreddits">"Aucun subreddit trouvé"</string>
+    <string name="no_communities">"Aucun subreddit trouvé"</string>
     <string name="no_users">"Aucun utilisateur trouvé"</string>
     <string name="no_multi_reddits">"Aucun Multireddit trouvé"</string>
     <string name="no_storage_permission">"Pas d'autorisation de stockage pour enregistrer ce fichier"</string>
@@ -120,7 +120,7 @@
     <string name="settings">"Paramètres"</string>
     <string name="subscribers_number_detail">"Abonnés: %1$d"</string>
     <string name="online_subscribers_number_detail">"En Ligne: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"Impossible d'obtenir des informations sur le subreddit"</string>
+    <string name="cannot_fetch_community_info">"Impossible d'obtenir des informations sur le subreddit"</string>
     <string name="cannot_fetch_user_info">"Impossible d'obtenir des informations sur l'utilisateur"</string>
     <string name="cannot_fetch_sidebar">"Impossible d'obtenir la barre latérale"</string>
     <string name="cannot_fetch_multireddit">"Impossible d'obtenir des informations sur le Multireddit"</string>
@@ -158,7 +158,7 @@
     <string name="sending_message">"Envoi"</string>
     <string name="send_message_success">"Message envoyé"</string>
     <string name="send_message_failed">"Échec de l'envoi de ce message"</string>
-    <string name="select_a_subreddit">"Veuillez d'abord sélectionner un subreddit"</string>
+    <string name="select_a_community">"Veuillez d'abord sélectionner un subreddit"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"Cette publication a besoin d'un bon titre"</string>
@@ -174,10 +174,10 @@
     <string name="loading">"Chargement"</string>
     <string name="post_title_hint">"Titre"</string>
     <string name="post_text_content_hint">"Contenu"</string>
-    <string name="choose_a_subreddit">"Choisir une subreddit"</string>
+    <string name="choose_a_communities">"Choisir une subreddit"</string>
     <string name="rules">"Règles"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="subreddits">"Subreddits"</string>
+    <string name="communities">"Subreddits"</string>
     <string name="users">"Utilisateurs"</string>
     <string name="multi_reddits">"Multireddits"</string>
     <string name="bottom_sheet_post_text">"Texte"</string>
@@ -203,7 +203,7 @@ Appuyez pour réessayer."</string>
 Appuyez pour réessayer."</string>
     <string name="error_loading_rules_without_retry">"Erreur de chargement des règles."</string>
     <string name="search_in">"Rechercher dans"</string>
-    <string name="all_subreddits">"Tous les subreddits."</string>
+    <string name="all_communities">"Tous les subreddits."</string>
     <string name="sort_best">"Meilleur"</string>
     <string name="sort_hot">"À la une"</string>
     <string name="sort_new">"Nouveau"</string>
@@ -314,7 +314,7 @@ Appuyez pour réessayer."</string>
     <string name="view_all_comments">"Appuyez ici pour parcourir tous les commentaires"</string>
     <string name="notification_summary_account">"Compte"</string>
     <string name="notification_summary_message">"Nouveau Message"</string>
-    <string name="notification_summary_subreddit">"Subreddit"</string>
+    <string name="notification_summary_community">"Subreddit"</string>
     <string name="notification_summary_award">"Prix"</string>
     <string name="notification_new_messages">"%1$d Nouveaux Messages"</string>
     <string name="label_account">"Compte"</string>
@@ -439,8 +439,8 @@ peut ne pas fonctionner sur Android 11"</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Compte Reddit"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Subreddit"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Subreddit"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"Partager"</string>
     <string name="settings_share_summary">"Partagez cette application avec d'autres si vous l'appréciez"</string>
     <string name="settings_version_title">"Infinity Pour Reddit"</string>
@@ -451,7 +451,7 @@ peut ne pas fonctionner sur Android 11"</string>
     <string name="settings_customize_amoled_theme_title">"Thème Amoled"</string>
     <string name="settings_manage_themes_title">"Gérer les Thèmes"</string>
     <string name="settings_advanced_master_title">"Avancés"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"Supprimer Tous les Subreddits de la Base de Données"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"Supprimer Tous les Subreddits de la Base de Données"</string>
     <string name="settings_delete_all_users_data_in_database_title">"Supprimer Tous les Utilisateurs de la Base de Données"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"Supprimer Tous les Types de Tri de la Base de Données"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"Supprimer Toutes les dispositions de Publications de la Base de Données"</string>
@@ -463,7 +463,7 @@ peut ne pas fonctionner sur Android 11"</string>
     <string name="settings_tab_3_summary">"Onglet 2"</string>
     <string name="settings_tab_title">"Titre"</string>
     <string name="settings_tab_post_type">"Type"</string>
-    <string name="settings_tab_subreddit_name">"Nom du Subreddit (Sans le préfixe r/)"</string>
+    <string name="settings_tab_community_name">"Nom du Subreddit (Sans le préfixe r/)"</string>
 
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"Nom du Multireddit (/user/votreutilisateur/m/votremultireddit)"</string>
@@ -513,7 +513,7 @@ peut ne pas fonctionner sur Android 11"</string>
     <string name="error_loading_subscriptions">"Impossible de synchroniser les abonnements"</string>
     <string name="share_this_app">"Essaie Infinity Pour Reddit, un super client Reddit !
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"Impossible de récupérer le nom du subreddit"</string>
+    <string name="error_getting_community_name">"Impossible de récupérer le nom du subreddit"</string>
     <string name="share_post_link">"Partager le Lien de la Publication"</string>
     <string name="share_image_link">"Partager le Lien de l'Image"</string>
     <string name="share_gif_link">"Partager le Lien du Gif"</string>
@@ -678,8 +678,8 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="theme_item_unsubscribed_color_detail">"Appliqué à : bouton d'abonnement"</string>
     <string name="theme_item_username_color">"Couleur de nom d'utilisateur"</string>
     <string name="theme_item_username_color_detail">"Appliqué à : nom d'utilisateur"</string>
-    <string name="theme_item_subreddit_color">"Couleur de subreddit"</string>
-    <string name="theme_item_subreddit_color_detail">"Appliqué à : Nom de Subreddit"</string>
+    <string name="theme_item_community_color">"Couleur de subreddit"</string>
+    <string name="theme_item_community_color_detail">"Appliqué à : Nom de Subreddit"</string>
     <string name="theme_item_author_flair_text_color">"Couleur du flair de l'auteur"</string>
     <string name="theme_item_author_flair_text_color_detail">"S'applique à : Flair de l'auteur dans les commentaires"</string>
     <string name="theme_item_submitter_color">"Auteur"</string>
@@ -759,7 +759,7 @@ Basé sur le thème sombre Indigo"</string>
     <string name="override">"Remplacer"</string>
     <string name="color_picker">"Sélecteur de couleurs"</string>
     <string name="invalid_color">"Couleur invalide"</string>
-    <string name="delete_all_subreddits_success">"Suppression de tous les subreddits réussie"</string>
+    <string name="delete_all_communities_success">"Suppression de tous les subreddits réussie"</string>
     <string name="delete_all_users_success">"Suppression de tous les utilisateurs réussie"</string>
 
     <!-- Fuzzy -->
@@ -777,7 +777,7 @@ Basé sur le thème sombre Indigo"</string>
     <!-- Fuzzy -->
     <string name="reset_all_settings_success">"Réinitialisation des paramètres réussie"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"Texte principal"</string>
     <string name="secondary_text_preview">"Texte secondaire"</string>
     <string name="post_title_preview">"C'est une publication"</string>
@@ -856,13 +856,13 @@ Exemple : motdepasse:123456"</string>
     <string name="settings_more_tabs_summary">"Plus d'onglets"</string>
     <string name="settings_more_tabs_info_summary">"Activer les options suivantes va causer un comportement inattendu :
 Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à l'autre, de même quand vous rafraîchissez les onglets"</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"Montrer les Subreddits favoris suivis"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"Montrer les Subreddits suivis"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Montrer les Subreddits favoris suivis"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"Montrer les Subreddits suivis"</string>
     <string name="settings_download_location_title">"Chemin du téléchargement"</string>
     <string name="settings_image_download_location_title">"Chemin du téléchargement d'image"</string>
     <string name="settings_gif_download_location_title">"Chemin du téléchargement de Gif"</string>
     <string name="settings_video_download_location_title">"Chemin du téléchargement de vidéos"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Dossier séparé pour chaque Subreddit"</string>
+    <string name="settings_separate_folder_for_each_community">"Dossier séparé pour chaque Subreddit"</string>
     <string name="settings_swipe_action_title">"Action de glissage"</string>
     <string name="settings_disable_swiping_between_tabs_title">"Désactiver le glissage entre les onglets"</string>
     <string name="settings_enable_swipe_action_title">"Activer l'action de glissage"</string>
@@ -920,34 +920,34 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="give_award_success">"Succès ! "</string>
     <string name="give_award_failed">"Échec de la récompense. "</string>
     <string name="warning">"Avertissement "</string>
-    <string name="this_is_a_nsfw_subreddit">"Cette Subreddit est PSPT (Pas Sécurisé Pour le Travail) "</string>
+    <string name="this_is_a_nsfw_community">"Cette Subreddit est PSPT (Pas Sécurisé Pour le Travail) "</string>
     <string name="this_user_has_nsfw_content">"Cet utilisateur poste du contenu NSFW"</string>
     <string name="dismiss">"Annuler"</string>
     <string name="leave">"Quitter"</string>
 
     <!-- Fuzzy -->
-    <string name="go_to_subreddit">"Aller au subreddit"</string>
+    <string name="go_to_community">"Aller au subreddit"</string>
 
     <!-- Fuzzy -->
     <string name="go_to_user">"Aller à l'utilisateur"</string>
     <string name="go_to_thing_hint">"Nom"</string>
     <string name="random">"Aléatoire"</string>
-    <string name="random_subreddit">"Subreddit aléatoire"</string>
-    <string name="random_nsfw_subreddit">"Subreddit NSFW aléatoire"</string>
+    <string name="random_community">"Subreddit aléatoire"</string>
+    <string name="random_nsfw_community">"Subreddit NSFW aléatoire"</string>
     <string name="random_post">"Post aléatoire"</string>
     <string name="random_nsfw_post">"Post NSFW aléatoire"</string>
     <string name="fetch_random_thing_failed">"Réessayer plus tard"</string>
     <string name="downloading">"Téléchargement"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all et r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all et r/popular"</string>
     <string name="settings_miscellaneous_title">"Divers"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"Respecter l'ordre de tri recommandé par le subreddit pour les commentaires "</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"L'ordre de tri des commentaires ne sera pas sauvegardé "</string>
-    <string name="settings_subreddit_filter_category">"Cacher des Subreddits"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"Dans r/popular et r/all"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"Respecter l'ordre de tri recommandé par le subreddit pour les commentaires "</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"L'ordre de tri des commentaires ne sera pas sauvegardé "</string>
+    <string name="settings_community_filter_category">"Cacher des Subreddits"</string>
+    <string name="settings_community_filter_popular_and_all">"Dans r/popular et r/all"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"Animation de capture de l'OVNI"</string>
     <string name="select_video_quality">"Sélectionner la qualité vidéo"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"Retour haptique"</string>
-    <string name="settings_hide_subreddit_description_title">"Cacher la description des subreddits"</string>
+    <string name="settings_hide_community_description_title">"Cacher la description des subreddits"</string>
     <string name="settings_disable_image_preview_title">"Désactiver l'aperçu de l'image en mode économie de données"</string>
     <string name="settings_swipe_action_swipe_left_title">"Glisser à gauche"</string>
     <string name="settings_swipe_action_swipe_right_title">"Glisser à droite"</string>
@@ -965,7 +965,7 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="action_save_to_database">"Sauvegarder dans la base de données"</string>
     <string name="action_read_all_messages">"Lire tous les messages"</string>
     <string name="action_add_to_multireddit">"Ajouter au Multireddit"</string>
-    <string name="search_only_subreddits_hint">"Chercher des subreddits"</string>
+    <string name="search_only_communities_hint">"Chercher des subreddits"</string>
     <string name="search_only_users_hint">"Chercher des utilisateurs"</string>
     <string name="post_type_gif">"Gif"</string>
     <string name="post_type_gallery">"Gallerie"</string>
@@ -982,7 +982,7 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="settings_hide_read_posts_automatically_title">"Cacher les posts lus automatiquement"</string>
     <string name="settings_sort_type_title">"Type de tri"</string>
     <string name="settings_save_sort_type_title">"Enregistrer le type de tri"</string>
-    <string name="settings_subreddit_default_sort_type_title">"Type de tri par défaut des subreddits"</string>
+    <string name="settings_community_default_sort_type_title">"Type de tri par défaut des subreddits"</string>
     <string name="open_link">"Ouvrir le lien"</string>
     <string name="theme_item_read_post_title_color_detail">"Lire le Titre du Post"</string>
     <string name="theme_item_read_post_content_color">"Lire la couleur du contenu du post"</string>
@@ -992,33 +992,33 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="filter_posts">"Filtrer les posts"</string>
     <string name="only_nsfw">"Seulement NSFW"</string>
     <string name="only_spoiler">"Seulement Spoiler"</string>
-    <string name="exclude_subreddits_hint">"Exclure des subreddits (e.g. funny, AskReddit)"</string>
+    <string name="exclude_communities_hint">"Exclure des subreddits (e.g. funny, AskReddit)"</string>
     <string name="exclude_users_hint">"Exclure des utilisateurs (e.g. Hostilenemy, random)"</string>
     <string name="post_filter_requires_a_name">"Quel est le nom de ce filtre de publication ?"</string>
     <string name="duplicate_post_filter_dialog_title">"'%1$s' Éxiste déjà"</string>
     <string name="duplicate_post_filter_dialog_message">"Le remplacer ?"</string>
     <string name="apply_post_filter_to">"Appliquer à"</string>
     <string name="post_filter_usage_home">"Accueil"</string>
-    <string name="post_filter_usage_subreddit">"Subreddit: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"Subreddit"</string>
+    <string name="post_filter_usage_community">"Subreddit: %1$s"</string>
+    <string name="post_filter_usage_community_all">"Subreddit"</string>
     <string name="post_filter_usage_user">"Utilisateur: %1$s"</string>
     <string name="post_filter_usage_user_all">"Utilisateur"</string>
     <string name="post_filter_usage_multireddit">"MultiReddit: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"Multireddit"</string>
     <string name="post_filter_usage_search">"Rechercher"</string>
-    <string name="subreddit">"Subreddit"</string>
+    <string name="community">"Subreddit"</string>
     <string name="user">"Utilisateur"</string>
     <string name="edit_post_filter_name_of_usage_info">"Laissez-le vide pour appliquer ce filtre de publication à tous les subreddits / utilisateurs / multireddits"</string>
     <string name="read_all_messages_time_limit">"Vous faites cela trop fréquemment. Essayez plus tard. C'est le taux limite de l'API Reddit."</string>
     <string name="read_all_messages_success">"Lecture de tous les messages avec succès"</string>
     <string name="read_all_messages_failed">"Impossible de lire tous les messages"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s est ajouté au multireddit %2$s"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"Impossible d'ajouter %1$s au multireddit %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s est ajouté au multireddit %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"Impossible d'ajouter %1$s au multireddit %2$s"</string>
     <string name="choose_a_user">"Choisir un utilisateur"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Cliquez pour afficher les médias dans la disposition de la galerie"</string>
     <string name="settings_hide_post_type">"Masquer le type de publication"</string>
     <string name="settings_hide_the_number_of_awards">"Masquer le nombre de récompenses"</string>
-    <string name="settings_hide_subreddit_and_user_prefix">"Masquer Subreddit et préfixe utilisateur"</string>
+    <string name="settings_hide_community_and_user_prefix">"Masquer Subreddit et préfixe utilisateur"</string>
     <string name="settings_hide_the_number_of_votes">"Cacher le Nombre de Votes"</string>
     <string name="settings_hide_the_number_of_comments">"Cacher le Nombre de Commentaires"</string>
     <string name="post_layout_gallery">"Disposition de la galerie"</string>
@@ -1029,7 +1029,7 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="action_share_link">"Partager le Lien"</string>
     <string name="action_copy_link">"Copier le Lien"</string>
     <string name="action_add_to_post_filter">"Ajouter aux Filtres de Post"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"Ne pas cacher les images NSFW dans les Subreddits"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"Ne pas cacher les images NSFW dans les Subreddits"</string>
     <string name="settings_show_avatar_on_the_right">"Voir l'avatar à droite"</string>
     <string name="settings_backup_settings_title">"Paramètres de Sauvegarde"</string>
     <string name="settings_restore_settings_title">"Restaurer les Paramètres"</string>
@@ -1037,7 +1037,7 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="settings_navigation_drawer_title">"Onglet de Navigation"</string>
     <string name="settings_collapse_account_section_title">"Réduire la section du compte"</string>
     <string name="settings_collapse_preferences_section_title">"Réduire la section des préférences"</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">"Cacher la section de subreddits favoris"</string>
+    <string name="settings_hide_favorite_communities_sections_title">"Cacher la section de subreddits favoris"</string>
     <string name="settings_default_search_result_tab">"Onglet Résultat de la recherche par défaut"</string>
     <string name="device_default">"Appareil par défaut"</string>
     <string name="set_by_battery_saver">"Défini par l'économiseur de batterie"</string>
@@ -1067,7 +1067,7 @@ Les onglets pourraient perdre tout leur contenu quand vous passez d'un onglet à
     <string name="upvote">"Upvote"</string>
     <string name="downvote">"Downvote"</string>
     <string name="select">"Sélectionner"</string>
-    <string name="exclude_subreddit">"Exclure ce subreddit"</string>
+    <string name="exclude_community">"Exclure ce subreddit"</string>
     <string name="exclude_user">"Exclure cet utilisateur"</string>
     <string name="exclude_flair">"Exclure ce flair"</string>
 

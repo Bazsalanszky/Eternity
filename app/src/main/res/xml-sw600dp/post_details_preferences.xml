@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="true"
@@ -32,7 +31,7 @@
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="hide_subreddit_and_user_prefix"
-        app:title="@string/settings_hide_subreddit_and_user_prefix" />
+        app:title="@string/settings_hide_community_and_user_prefix" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"

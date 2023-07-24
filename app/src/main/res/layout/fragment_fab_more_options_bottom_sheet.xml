@@ -115,7 +115,7 @@
             android:paddingBottom="16dp"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="@string/go_to_subreddit"
+            android:text="@string/go_to_community"
             android:textColor="?attr/primaryTextColor"
             android:textSize="?attr/font_default"
             android:fontFamily="?attr/font_family"

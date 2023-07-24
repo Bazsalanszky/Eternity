@@ -33,7 +33,7 @@
             android:id="@+id/subreddit_text_view_new_post_filter_usage_bottom_sheet_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/subreddit"
+            android:text="@string/community"
             android:textColor="?attr/primaryTextColor"
             android:textSize="?attr/font_default"
             android:fontFamily="?attr/font_family"

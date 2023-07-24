@@ -50,12 +50,11 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.asynctasks.LoadSubredditIcon;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.AccountChooserBottomSheetFragment;
@@ -66,6 +65,7 @@ import eu.toldi.infinityforlemmy.events.SubmitVideoOrGifPostEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.services.SubmitPostService;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
@@ -314,7 +314,7 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
 
         rulesButton.setOnClickListener(view -> {
             if (subredditName == null) {
-                Snackbar.make(coordinatorLayout, R.string.select_a_subreddit, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, R.string.select_a_community, Snackbar.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(this, RulesActivity.class);
                 if (subredditIsUser) {
@@ -539,7 +539,7 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
             return true;
         } else if (itemId == R.id.action_send_post_image_activity) {
             if (!subredditSelected) {
-                Snackbar.make(coordinatorLayout, R.string.select_a_subreddit, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, R.string.select_a_community, Snackbar.LENGTH_SHORT).show();
                 return true;
             }
 

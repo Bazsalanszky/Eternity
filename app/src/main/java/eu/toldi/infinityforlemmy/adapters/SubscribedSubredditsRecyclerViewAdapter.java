@@ -1,13 +1,10 @@
 package eu.toldi.infinityforlemmy.adapters;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,15 +18,14 @@ import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import me.zhanghai.android.fastscroll.PopupTextProvider;
-import eu.toldi.infinityforlemmy.FavoriteThing;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import me.zhanghai.android.fastscroll.PopupTextProvider;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
@@ -152,7 +148,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             String iconUrl;
 
             if (hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 0) {
-                ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(R.string.all_subreddits);
+                ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(R.string.all_communities);
                 viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(null, null, false));
                 return;
             } else if (itemClickListener != null && !hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 0) {

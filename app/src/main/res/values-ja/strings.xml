@@ -4,19 +4,19 @@
     <string name="comment_activity_label">"コメントを送信"</string>
     <string name="comment_activity_label_is_replying">"返信"</string>
     <string name="post_text_activity_label">"テキスト"</string>
-    <string name="subreddit_selection_activity_label">"Subredditを選択"</string>
+    <string name="community_selection_activity_label">"Subredditを選択"</string>
     <string name="post_link_activity_label">"リンク"</string>
     <string name="post_image_activity_label">"画像"</string>
     <string name="post_video_activity_label">"動画"</string>
     <string name="rules_activity_label">"ルール"</string>
-    <string name="search_subreddits_activity_label">"Subreddit"</string>
+    <string name="search_community_activity_label">"Subreddit"</string>
     <string name="edit_post_activity_label">"投稿を編集"</string>
     <string name="edit_comment_activity_label">"コメントを編集"</string>
     <string name="view_message_activity_label">"受信トレイ"</string>
     <string name="settings_activity_label">"設定"</string>
     <string name="account_saved_thing_activity_label">"保存した投稿"</string>
     <string name="create_multi_reddit_activity_label">"カスタムフィードを作成"</string>
-    <string name="subreddit_multiselection_activity_label">"カスタムフィードを選択"</string>
+    <string name="community_multiselection_activity_label">"カスタムフィードを選択"</string>
     <string name="custom_theme_listing_activity_label">"カスタムテーマ"</string>
     <string name="customize_theme_activity_label">"テーマを編集"</string>
     <string name="customize_theme_activity_create_theme_label">"テーマを作成"</string>
@@ -77,13 +77,13 @@
     <string name="load_more_posts_error">"投稿をロード中にエラーが発生しました。"</string>
     <string name="load_post_error">"投稿をロード中にエラーが発生しました。
 タップでリトライします。"</string>
-    <string name="search_subreddits_error">"Subredditを検索中にエラーが発生しました。
+    <string name="search_communities_error">"Subredditを検索中にエラーが発生しました。
 タップでリトライします。"</string>
     <string name="search_users_error">"ユーザーを検索中にエラーが発生しました。
 タップでリトライします。"</string>
     <string name="no_posts">"投稿が見つかりませんでした"</string>
     <string name="no_comments">"コメントが見つかりませんでした"</string>
-    <string name="no_subreddits">"Subredditが見つかりませんでした"</string>
+    <string name="no_communities">"Subredditが見つかりませんでした"</string>
     <string name="no_users">"ユーザーが見つかりませんでした"</string>
     <string name="no_multi_reddits">"カスタムフィードが見つかりませんでした"</string>
     <string name="no_storage_permission">"ファイルを保存するためのストレージアクセス許可がありません"</string>
@@ -125,7 +125,7 @@
     <string name="settings">"設定"</string>
     <string name="subscribers_number_detail">"登録者数: %1$d"</string>
     <string name="online_subscribers_number_detail">"オンライン: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"Subredditの情報が取得できませんでした"</string>
+    <string name="cannot_fetch_community_info">"Subredditの情報が取得できませんでした"</string>
     <string name="cannot_fetch_user_info">"ユーザー情報が取得できませんでした"</string>
     <string name="cannot_fetch_sidebar">"サイドバー情報が取得できませんでした"</string>
     <string name="cannot_fetch_multireddit">"カスタムフィードの情報が取得できませんでした"</string>
@@ -163,7 +163,7 @@
     <string name="sending_message">"送信中"</string>
     <string name="send_message_success">"送信しました"</string>
     <string name="send_message_failed">"送信できませんでした"</string>
-    <string name="select_a_subreddit">"Subredditを選択してください"</string>
+    <string name="select_a_community">"Subredditを選択してください"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"タイトルが必要です"</string>
@@ -179,10 +179,10 @@
     <string name="loading">"ロード中"</string>
     <string name="post_title_hint">"タイトル"</string>
     <string name="post_text_content_hint">"内容"</string>
-    <string name="choose_a_subreddit">"Subredditを選択"</string>
+    <string name="choose_a_communities">"Subredditを選択"</string>
     <string name="rules">"ルール"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="subreddits">"Subreddit"</string>
+    <string name="communities">"Subreddit"</string>
     <string name="users">"ユーザー"</string>
     <string name="multi_reddits">"カスタムフィード"</string>
     <string name="bottom_sheet_post_text">"テキスト"</string>
@@ -208,7 +208,7 @@
 タップでリトライします。"</string>
     <string name="error_loading_rules_without_retry">"ルールをロード中にエラーが発生しました"</string>
     <string name="search_in">"検索範囲"</string>
-    <string name="all_subreddits">"全てのSubreddit"</string>
+    <string name="all_communities">"全てのSubreddit"</string>
     <string name="sort_best">"ベスト"</string>
     <string name="sort_hot">"ホット"</string>
     <string name="sort_new">"新しい"</string>
@@ -316,7 +316,7 @@
     <string name="view_all_comments">"タップして全てのコメントを表示"</string>
     <string name="notification_summary_account">"アカウント"</string>
     <string name="notification_summary_message">"新しいメッセージ"</string>
-    <string name="notification_summary_subreddit">"Subreddit"</string>
+    <string name="notification_summary_community">"Subreddit"</string>
     <string name="notification_summary_award">"アワード"</string>
     <string name="notification_new_messages">"%1$d個の新しいメッセージ"</string>
     <string name="label_account">"アカウント"</string>
@@ -432,8 +432,8 @@
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Redditアカウント"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Subreddit"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Subreddit"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"共有"</string>
     <string name="settings_share_summary">"このアプリが気に入ったようでしたら、ぜひ他の方々にもご紹介ください"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>
@@ -444,7 +444,7 @@
     <string name="settings_customize_amoled_theme_title">"AMOLEDテーマ"</string>
     <string name="settings_manage_themes_title">"テーマの管理"</string>
     <string name="settings_advanced_master_title">"高度な設定"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"データベース中の全てのSubreddit情報を削除"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"データベース中の全てのSubreddit情報を削除"</string>
     <string name="settings_delete_all_users_data_in_database_title">"データベース中の全てのユーザー情報を削除"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"データベース中の全ての並べ替え情報を削除"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"データベース中の全ての表示レイアウト情報を削除"</string>
@@ -456,7 +456,7 @@
     <string name="settings_tab_3_summary">"タブ3"</string>
     <string name="settings_tab_title">"タブ名"</string>
     <string name="settings_tab_post_type">"表示内容"</string>
-    <string name="settings_tab_subreddit_name">"Subreddit名 (「r/」は不要)"</string>
+    <string name="settings_tab_community_name">"Subreddit名 (「r/」は不要)"</string>
 
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"カスタムフィード名 (/user/あなたのユーザー名/m/あなたのカスタムフィード名)"</string>
@@ -504,7 +504,7 @@
     <string name="error_loading_subscriptions">"登録済み情報を同期できませんでした"</string>
     <string name="share_this_app">"便利なRedditアプリを見つけました。Infinity for Redditを試してみて！
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"Subreddit名を取得中にエラーが発生しました"</string>
+    <string name="error_getting_community_name">"Subreddit名を取得中にエラーが発生しました"</string>
     <string name="share_post_link">"投稿リンクを共有"</string>
     <string name="share_image_link">"画像リンクを共有"</string>
     <string name="share_gif_link">"GIFリンクを共有"</string>
@@ -663,8 +663,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_unsubscribed_color_detail">"適用先: 登録ボタン"</string>
     <string name="theme_item_username_color">"ユーザー名"</string>
     <string name="theme_item_username_color_detail">"適用先: ユーザー名"</string>
-    <string name="theme_item_subreddit_color">"Subreddit"</string>
-    <string name="theme_item_subreddit_color_detail">"適用先: Subreddit名"</string>
+    <string name="theme_item_community_color">"Subreddit"</string>
+    <string name="theme_item_community_color_detail">"適用先: Subreddit名"</string>
     <string name="theme_item_author_flair_text_color">"投稿主 フレアー"</string>
     <string name="theme_item_author_flair_text_color_detail">"適用先: コメント内の投稿主フレアー"</string>
     <string name="theme_item_submitter_color">"投稿主"</string>
@@ -751,7 +751,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="invalid_color">"無効な色コードです"</string>
 
     <!-- Fuzzy -->
-    <string name="delete_all_subreddits_success">"全てのSubreddit情報を削除しました"</string>
+    <string name="delete_all_communities_success">"全てのSubreddit情報を削除しました"</string>
 
     <!-- Fuzzy -->
     <string name="delete_all_users_success">"全てのユーザー情報を削除しました"</string>
@@ -771,7 +771,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <!-- Fuzzy -->
     <string name="reset_all_settings_success">"全ての設定をリセットしました"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"プライマリーテキスト"</string>
     <string name="secondary_text_preview">"セカンダリーテキスト"</string>
     <string name="post_title_preview">"これが投稿タイトルです"</string>
@@ -848,13 +848,13 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="settings_more_tabs_info_summary">"以下の設定を有効にすると予期せぬ動作をすることがあります:
 表示タブを切り替える際、ページを更新する動作が行われます。そのためタブの内容がリセットされます。
 変更を適用するにはアプリを再起動してください。"</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"お気に入りの登録済みSubredditをタブとして表示"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"登録済みSubredditをタブとして表示"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"お気に入りの登録済みSubredditをタブとして表示"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"登録済みSubredditをタブとして表示"</string>
     <string name="settings_download_location_title">"ダウンロード先のフォルダー"</string>
     <string name="settings_image_download_location_title">"画像ダウンロード先のフォルダー"</string>
     <string name="settings_gif_download_location_title">"GIFダウンロード先のフォルダー"</string>
     <string name="settings_video_download_location_title">"動画ダウンロード先のフォルダー"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Subreddit毎にフォルダーを分ける"</string>
+    <string name="settings_separate_folder_for_each_community">"Subreddit毎にフォルダーを分ける"</string>
     <string name="settings_swipe_action_title">"スワイプアクション"</string>
     <string name="settings_disable_swiping_between_tabs_title">"スワイプによるタブ切り替えを無効化"</string>
     <string name="settings_enable_swipe_action_title">"スワイプアクションを有効化"</string>
@@ -913,34 +913,34 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="give_award_success">"アワードを贈りました"</string>
     <string name="give_award_failed">"失敗しました"</string>
     <string name="warning">"警告"</string>
-    <string name="this_is_a_nsfw_subreddit">"このSubredditはNSFWです"</string>
+    <string name="this_is_a_nsfw_community">"このSubredditはNSFWです"</string>
     <string name="this_user_has_nsfw_content">"このユーザーはNSFWの投稿を含んでいます"</string>
     <string name="dismiss">"無視する"</string>
     <string name="leave">"離れる"</string>
 
     <!-- Fuzzy -->
-    <string name="go_to_subreddit">"Subredditに移動"</string>
+    <string name="go_to_community">"Subredditに移動"</string>
 
     <!-- Fuzzy -->
     <string name="go_to_user">"ユーザーに移動"</string>
     <string name="go_to_thing_hint">"名前"</string>
     <string name="random">"ランダム"</string>
-    <string name="random_subreddit">"ランダムなSubredditに移動"</string>
-    <string name="random_nsfw_subreddit">"ランダムなNSFW Subredditに移動"</string>
+    <string name="random_community">"ランダムなSubredditに移動"</string>
+    <string name="random_nsfw_community">"ランダムなNSFW Subredditに移動"</string>
     <string name="random_post">"ランダムな投稿に移動"</string>
     <string name="random_nsfw_post">"ランダムなNSFW投稿に移動"</string>
     <string name="fetch_random_thing_failed">"後ほど再度お試しください"</string>
     <string name="downloading">"ダウンロード中"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all と r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all と r/popular"</string>
     <string name="settings_miscellaneous_title">"その他の設定"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"Subredditで推奨されているコメントの並び順を使用"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"コメントの並び順は保存されません"</string>
-    <string name="settings_subreddit_filter_category">"Subredditを非表示"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"r/all と r/popular 内"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"Subredditで推奨されているコメントの並び順を使用"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"コメントの並び順は保存されません"</string>
+    <string name="settings_community_filter_category">"Subredditを非表示"</string>
+    <string name="settings_community_filter_popular_and_all">"r/all と r/popular 内"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"UFO捕獲アニメーション"</string>
     <string name="select_video_quality">"動画の品質を選択"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"触覚フィードバック"</string>
-    <string name="settings_hide_subreddit_description_title">"Subredditの説明文を非表示にする"</string>
+    <string name="settings_hide_community_description_title">"Subredditの説明文を非表示にする"</string>
     <string name="settings_disable_image_preview_title">"データ節約モードでは画像プレビューを無効化"</string>
     <string name="settings_swipe_action_swipe_left_title">"左にスワイプ"</string>
     <string name="settings_swipe_action_swipe_right_title">"右にスワイプ"</string>
@@ -958,7 +958,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="action_save_to_database">"データベースに保存"</string>
     <string name="action_read_all_messages">"全てのメッセージを既読にする"</string>
     <string name="action_add_to_multireddit">"Multiredditに追加"</string>
-    <string name="search_only_subreddits_hint">"Subredditを検索"</string>
+    <string name="search_only_communities_hint">"Subredditを検索"</string>
     <string name="search_only_users_hint">"ユーザーを検索"</string>
     <string name="post_type_gif">"GIF"</string>
     <string name="settings_disable_immersive_interface_in_landscape_mode">"横画面では没入型インターフェースを無効にする"</string>
@@ -980,7 +980,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="only_spoiler">"ネタバレのみ"</string>
     <string name="title_excludes_strings_hint">"タイトル: 除外するキーワード (key1,key2)"</string>
     <string name="title_excludes_regex_hint">"タイトル: 除外する正規表現"</string>
-    <string name="exclude_subreddits_hint">"除外するSubreddit (例: funny,AskReddit)"</string>
+    <string name="exclude_communities_hint">"除外するSubreddit (例: funny,AskReddit)"</string>
     <string name="exclude_users_hint">"除外するユーザー（例: Hostilenemy,random)"</string>
     <string name="exclude_flairs_hint">"除外するFlair (例: flair1,flair2)"</string>
     <string name="contain_flairs_hint">"含めるFlair (例: flair1,flair2)"</string>
@@ -991,7 +991,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="duplicate_post_filter_dialog_message">"上書きしますか？"</string>
     <string name="apply_post_filter_to">"適用"</string>
     <string name="post_filter_usage_home">"ホーム"</string>
-    <string name="post_filter_usage_subreddit_all">"Subreddit"</string>
+    <string name="post_filter_usage_community_all">"Subreddit"</string>
     <string name="post_filter_usage_user">"ユーザー: %1$s"</string>
     <string name="post_filter_usage_user_all">"ユーザー"</string>
     <string name="user">"ユーザー"</string>
@@ -999,8 +999,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="read_all_messages_time_limit">"頻繁にこの操作を行っています。後ほどまたお試しください。これはRedditのAPIの制限です。"</string>
     <string name="read_all_messages_success">"全てのメッセージを正常に既読にしました"</string>
     <string name="read_all_messages_failed">"全てのメッセージを既読にできません"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s は Multireddit「%2$s」に追加されました"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"%1$s を Multireddit「%2$s」に追加できません"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s は Multireddit「%2$s」に追加されました"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"%1$s を Multireddit「%2$s」に追加できません"</string>
     <string name="choose_a_user">"ユーザーを選択"</string>
     <string name="settings_hide_post_type">"投稿の種類を非表示にする"</string>
     <string name="settings_hide_the_number_of_awards">"Awardsの数を非表示にする"</string>
@@ -1011,7 +1011,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="action_share_link">"リンクを共有"</string>
     <string name="action_copy_link">"リンクをコピー"</string>
     <string name="action_add_to_post_filter">"投稿フィルターに追加"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"NSFWのSubredditではNSFW画像をぼかさない"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"NSFWのSubredditではNSFW画像をぼかさない"</string>
     <string name="settings_show_avatar_on_the_right">"アバターを右側に表示"</string>
     <string name="settings_backup_settings_title">"設定をバックアップ"</string>
     <string name="settings_restore_settings_title">"設定を復元"</string>
@@ -1020,8 +1020,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="settings_collapse_account_section_title">"「アカウント」セクションを折り畳む"</string>
     <string name="settings_collapse_post_section_title">"「投稿」セクションを折り畳む"</string>
     <string name="settings_collapse_preferences_section_title">"「環境設定」セクションを折り畳む"</string>
-    <string name="settings_collapse_favorite_subreddits_section_title">"「お気に入りのSubreddit」セクションを折り畳む"</string>
-    <string name="settings_collapse_subscribed_subreddits_section_title">"「登録済みSubreddit」セクションを折り畳む"</string>
+    <string name="settings_collapse_favorite_communities_section_title">"「お気に入りのSubreddit」セクションを折り畳む"</string>
+    <string name="settings_collapse_subscribed_communities_section_title">"「登録済みSubreddit」セクションを折り畳む"</string>
     <string name="settings_default_search_result_tab">"検索時デフォルトで表示するタブ"</string>
     <string name="device_default">"デバイスの設定に従う"</string>
     <string name="exclude_domains_hint">"除外するドメイン"</string>
@@ -1044,7 +1044,7 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="default_in_array">"デフォルト"</string>
     <string name="off">"オフ"</string>
     <string name="only_on_cellular_data">"モバイルデータ通信時のみ"</string>
-    <string name="exclude_subreddit">"このSubredditを除外"</string>
+    <string name="exclude_community">"このSubredditを除外"</string>
     <string name="exclude_user">"このユーザーを除外"</string>
     <string name="exclude_flair">"このFlairを除外"</string>
     <string name="contain_flair">"このFlairを含む"</string>

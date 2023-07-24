@@ -197,7 +197,7 @@
         <item>@string/home</item>
         <item>@string/local</item>
         <item>@string/all</item>
-        <item>@string/subreddit</item>
+        <item>@string/community</item>
         <item>@string/multi_reddit</item>
         <item>@string/user</item>
         <item>@string/upvoted</item>
@@ -211,7 +211,7 @@
         <item>@string/home</item>
         <item>@string/local</item>
         <item>@string/all</item>
-        <item>@string/subreddit</item>
+        <item>@string/community</item>
         <item>@string/multi_reddit</item>
         <item>@string/user</item>
     </string-array>
@@ -294,7 +294,7 @@
         <item>@string/change_sort_type</item>
         <item>@string/change_post_layout</item>
         <item>@string/search</item>
-        <item>@string/go_to_subreddit</item>
+        <item>@string/go_to_community</item>
         <item>@string/go_to_user</item>
         <item>@string/random</item>
         <item>@string/hide_read_posts</item>
@@ -314,7 +314,7 @@
         <item>@string/change_sort_type</item>
         <item>@string/change_post_layout</item>
         <item>@string/search</item>
-        <item>@string/go_to_subreddit</item>
+        <item>@string/go_to_community</item>
         <item>@string/go_to_user</item>
         <item>@string/random</item>
         <item>@string/filter_posts</item>
@@ -346,7 +346,7 @@
         <item>@string/change_sort_type</item>
         <item>@string/change_post_layout</item>
         <item>@string/search</item>
-        <item>@string/go_to_subreddit</item>
+        <item>@string/go_to_community</item>
         <item>@string/go_to_user</item>
         <item>@string/random</item>
         <item>@string/hide_read_posts</item>
@@ -367,7 +367,7 @@
         <item>@string/change_sort_type</item>
         <item>@string/change_post_layout</item>
         <item>@string/search</item>
-        <item>@string/go_to_subreddit</item>
+        <item>@string/go_to_community</item>
         <item>@string/go_to_user</item>
         <item>@string/random</item>
         <item>@string/filter_posts</item>
@@ -395,7 +395,7 @@
         <item>@string/change_sort_type</item>
         <item>@string/change_post_layout</item>
         <item>@string/search</item>
-        <item>@string/go_to_subreddit</item>
+        <item>@string/go_to_community</item>
         <item>@string/go_to_user</item>
         <item>@string/random</item>
         <item>@string/hide_read_posts</item>
@@ -408,7 +408,7 @@
         <item>@string/change_sort_type</item>
         <item>@string/change_post_layout</item>
         <item>@string/search</item>
-        <item>@string/go_to_subreddit</item>
+        <item>@string/go_to_community</item>
         <item>@string/go_to_user</item>
         <item>@string/random</item>
         <item>@string/filter_posts</item>
@@ -548,7 +548,7 @@
 
     <string-array name="settings_default_search_result_tab">
         <item>@string/posts</item>
-        <item>@string/subreddits</item>
+        <item>@string/communities</item>
         <item>@string/users</item>
     </string-array>
 
@@ -559,7 +559,7 @@
     </string-array>
 
     <string-array name="add_to_post_filter_options">
-        <item>@string/exclude_subreddit</item>
+        <item>@string/exclude_community</item>
         <item>@string/exclude_user</item>
         <item>@string/exclude_flair</item>
         <item>@string/contain_flair</item>

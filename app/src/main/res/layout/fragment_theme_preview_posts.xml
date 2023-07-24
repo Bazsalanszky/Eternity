@@ -40,7 +40,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/subreddit_preview"
+                    android:text="@string/community_preview"
                     android:textSize="?attr/font_default"
                     android:fontFamily="?attr/font_family"
                     app:layout_constraintBottom_toTopOf="@id/user_text_view_theme_preview_posts_fragment"

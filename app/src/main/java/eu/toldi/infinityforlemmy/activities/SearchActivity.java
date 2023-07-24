@@ -161,7 +161,7 @@ public class SearchActivity extends BaseActivity {
         searchOnlyUsers = getIntent().getBooleanExtra(EXTRA_SEARCH_ONLY_USERS, false);
 
         if (searchOnlySubreddits) {
-            searchEditText.setHint(getText(R.string.search_only_subreddits_hint));
+            searchEditText.setHint(getText(R.string.search_only_communities_hint));
         } else if (searchOnlyUsers) {
             searchEditText.setHint(getText(R.string.search_only_users_hint));
         }
@@ -274,7 +274,7 @@ public class SearchActivity extends BaseActivity {
             subredditIsUser = savedInstanceState.getBoolean(SUBREDDIT_IS_USER_STATE);
 
             if (subredditName == null) {
-                subredditNameTextView.setText(R.string.all_subreddits);
+                subredditNameTextView.setText(R.string.all_communities);
             } else {
                 subredditNameTextView.setText(subredditName);
             }
@@ -427,7 +427,7 @@ public class SearchActivity extends BaseActivity {
                 subredditIsUser = data.getBooleanExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_IS_USER, false);
 
                 if (subredditName == null) {
-                    subredditNameTextView.setText(R.string.all_subreddits);
+                    subredditNameTextView.setText(R.string.all_communities);
                 } else {
                     subredditNameTextView.setText(subredditName);
                 }

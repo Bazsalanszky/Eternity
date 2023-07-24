@@ -38,8 +38,8 @@
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         android:key="subreddit"
-        app:title="@string/settings_subreddit_title"
-        app:summary="@string/settings_subreddit_summary" />
+        app:title="@string/settings_community_title"
+        app:summary="@string/settings_community_summary" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         android:key="share"

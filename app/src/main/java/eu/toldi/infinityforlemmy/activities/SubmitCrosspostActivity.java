@@ -50,12 +50,11 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.asynctasks.LoadSubredditIcon;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.AccountChooserBottomSheetFragment;
@@ -67,6 +66,7 @@ import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.services.SubmitPostService;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
@@ -332,7 +332,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
 
         rulesButton.setOnClickListener(view -> {
             if (subredditName == null) {
-                Snackbar.make(coordinatorLayout, R.string.select_a_subreddit, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, R.string.select_a_community, Snackbar.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(this, RulesActivity.class);
                 if (subredditIsUser) {
@@ -541,7 +541,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             return true;
         } else if (itemId == R.id.action_send_submit_crosspost_activity) {
             if (!subredditSelected) {
-                Snackbar.make(coordinatorLayout, R.string.select_a_subreddit, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, R.string.select_a_community, Snackbar.LENGTH_SHORT).show();
                 return true;
             }
 

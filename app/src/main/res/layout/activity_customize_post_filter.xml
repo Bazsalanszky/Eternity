@@ -409,7 +409,7 @@
                         android:layout_weight="1"
                         android:fontFamily="?attr/font_family"
                         android:textSize="?attr/font_default"
-                        android:hint="@string/exclude_subreddits_hint"
+                        android:hint="@string/exclude_communities_hint"
                         android:maxLines="10" />
 
                 </com.google.android.material.textfield.TextInputLayout>

@@ -325,8 +325,8 @@ public class CustomThemeSettingsItem implements Parcelable {
                 context.getString(R.string.theme_item_username_color_detail),
                 customTheme.username));
         customThemeSettingsItems.add(new CustomThemeSettingsItem(
-                context.getString(R.string.theme_item_subreddit_color),
-                context.getString(R.string.theme_item_subreddit_color_detail),
+                context.getString(R.string.theme_item_community_color),
+                context.getString(R.string.theme_item_community_color_detail),
                 customTheme.subreddit));
         customThemeSettingsItems.add(new CustomThemeSettingsItem(
                 context.getString(R.string.theme_item_author_flair_text_color),

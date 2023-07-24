@@ -37,7 +37,7 @@
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="hide_subreddit_description"
-        app:title="@string/settings_hide_subreddit_description_title" />
+        app:title="@string/settings_hide_community_description_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"

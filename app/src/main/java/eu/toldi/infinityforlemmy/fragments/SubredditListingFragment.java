@@ -191,7 +191,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
                 mFetchSubredditListingInfoLinearLayout.setVisibility(View.GONE);
             } else {
                 mFetchSubredditListingInfoLinearLayout.setOnClickListener(null);
-                showErrorView(R.string.no_subreddits);
+                showErrorView(R.string.no_communities);
             }
         });
 
@@ -201,7 +201,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
             } else if (networkState.getStatus().equals(NetworkState.Status.FAILED)) {
                 mSwipeRefreshLayout.setRefreshing(false);
                 mFetchSubredditListingInfoLinearLayout.setOnClickListener(view -> refresh());
-                showErrorView(R.string.search_subreddits_error);
+                showErrorView(R.string.search_communities_error);
             } else {
                 mSwipeRefreshLayout.setRefreshing(true);
             }

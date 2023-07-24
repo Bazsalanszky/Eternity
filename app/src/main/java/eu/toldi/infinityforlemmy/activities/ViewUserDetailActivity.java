@@ -1232,13 +1232,13 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                                     @Override
                                     public void success() {
                                         Toast.makeText(ViewUserDetailActivity.this,
-                                                getString(R.string.add_subreddit_or_user_to_multireddit_success, username, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
+                                                getString(R.string.add_community_or_user_to_multireddit_success, username, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
                                     }
 
                                     @Override
                                     public void failed(int code) {
                                         Toast.makeText(ViewUserDetailActivity.this,
-                                                getString(R.string.add_subreddit_or_user_to_multireddit_failed, username, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
+                                                getString(R.string.add_community_or_user_to_multireddit_failed, username, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
                                     }
                                 });
                     }
@@ -1420,7 +1420,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             }
         });
         new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.go_to_subreddit)
+                .setTitle(R.string.go_to_community)
                 .setView(rootView)
                 .setPositiveButton(R.string.ok, (dialogInterface, i)
                         -> {

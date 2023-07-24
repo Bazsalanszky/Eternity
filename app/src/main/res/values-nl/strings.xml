@@ -4,19 +4,19 @@
     <string name="comment_activity_label">"Reactie plaatsen"</string>
     <string name="comment_activity_label_is_replying">"Antwoord"</string>
     <string name="post_text_activity_label">"Tekst plaatsen"</string>
-    <string name="subreddit_selection_activity_label">"Kies een subreddit"</string>
+    <string name="community_selection_activity_label">"Kies een subreddit"</string>
     <string name="post_link_activity_label">"Link plaatsen"</string>
     <string name="post_image_activity_label">"Afbeelding plaatsen"</string>
     <string name="post_video_activity_label">"Video plaatsen"</string>
     <string name="rules_activity_label">"Regels"</string>
-    <string name="search_subreddits_activity_label">"Subreddits"</string>
+    <string name="search_community_activity_label">"Subreddits"</string>
     <string name="edit_post_activity_label">"Bericht aanpassen"</string>
     <string name="edit_comment_activity_label">"Reactie aanpassen"</string>
     <string name="view_message_activity_label">"Postvak IN"</string>
     <string name="settings_activity_label">"Instellingen"</string>
     <string name="account_saved_thing_activity_label">"Opgeslagen"</string>
     <string name="create_multi_reddit_activity_label">"Multireddit aanmaken"</string>
-    <string name="subreddit_multiselection_activity_label">"Selecteer subreddits"</string>
+    <string name="community_multiselection_activity_label">"Selecteer subreddits"</string>
     <string name="custom_theme_listing_activity_label">"Aangepaste thema's"</string>
     <string name="customize_theme_activity_label">"Thema aanpassen"</string>
     <string name="customize_theme_activity_create_theme_label">"Thema maken"</string>
@@ -72,11 +72,11 @@
     <string name="load_more_posts_error">"De berichten kunnen niet worden geladen."</string>
     <string name="load_post_error">"Dit bericht kan niet worden geladen.
 Druk om opnieuw te proberen."</string>
-    <string name="search_subreddits_error">"Er kan niet worden gezocht naar subreddits. Druk om opnieuw te proberen."</string>
+    <string name="search_communities_error">"Er kan niet worden gezocht naar subreddits. Druk om opnieuw te proberen."</string>
     <string name="search_users_error">"Er kan niet worden gezocht naar gebruikers. Druk om opnieuw te proberen."</string>
     <string name="no_posts">"Geen berichten gevonden"</string>
     <string name="no_comments">"Geen reacties gevonden"</string>
-    <string name="no_subreddits">"Geen subreddits gevonden"</string>
+    <string name="no_communities">"Geen subreddits gevonden"</string>
     <string name="no_users">"Geen gebruikers gevonden"</string>
     <string name="no_multi_reddits">"Geen multireddits gevonden"</string>
     <string name="no_storage_permission">"Geen toestemming om bestand op te slaan"</string>
@@ -109,7 +109,7 @@ Druk om opnieuw te proberen."</string>
     <string name="settings">"Instellingen"</string>
     <string name="subscribers_number_detail">"Aantal abonnees: %1$d"</string>
     <string name="online_subscribers_number_detail">"Aantal online: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"De subreddit-informatie kan niet worden opgehaald"</string>
+    <string name="cannot_fetch_community_info">"De subreddit-informatie kan niet worden opgehaald"</string>
     <string name="cannot_fetch_user_info">"De gebruikersinformatie kan niet worden opgehaald"</string>
     <string name="cannot_fetch_sidebar">"De zijbalk kan niet worden geopend"</string>
     <string name="cannot_fetch_multireddit">"De multireddit-informatie kan niet worden opgehaald"</string>
@@ -147,7 +147,7 @@ Druk om opnieuw te proberen."</string>
     <string name="sending_message">"Bezig met versturen…"</string>
     <string name="send_message_success">"Het bericht is verstuurd"</string>
     <string name="send_message_failed">"Dit bericht kan niet worden verstuurd"</string>
-    <string name="select_a_subreddit">"Kies eerst een subreddit"</string>
+    <string name="select_a_community">"Kies eerst een subreddit"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"Dit bericht heeft een goede titel nodig"</string>
@@ -163,10 +163,10 @@ Druk om opnieuw te proberen."</string>
     <string name="loading">"Bezig met laden…"</string>
     <string name="post_title_hint">"Titel"</string>
     <string name="post_text_content_hint">"Inhoud"</string>
-    <string name="choose_a_subreddit">"Kies een subreddit"</string>
+    <string name="choose_a_communities">"Kies een subreddit"</string>
     <string name="rules">"Regels"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="subreddits">"Subreddits"</string>
+    <string name="communities">"Subreddits"</string>
     <string name="users">"Gebruikers"</string>
     <string name="multi_reddits">"MultiReddits"</string>
     <string name="bottom_sheet_post_text">"Tekst"</string>
@@ -192,7 +192,7 @@ Druk om opnieuw te proberen."</string>
 Druk om opnieuw te proberen."</string>
     <string name="error_loading_rules_without_retry">"De regels kunnen niet worden geladen"</string>
     <string name="search_in">"Doorzoeken:"</string>
-    <string name="all_subreddits">"Alle subreddits"</string>
+    <string name="all_communities">"Alle subreddits"</string>
     <string name="sort_best">"Beste"</string>
     <string name="sort_hot">"Actueel"</string>
     <string name="sort_new">"Nieuw"</string>
@@ -277,7 +277,7 @@ Druk om opnieuw te proberen."</string>
     <string name="view_all_comments">"Druk hier om alle reacties te tonen"</string>
     <string name="notification_summary_account">"Account"</string>
     <string name="notification_summary_message">"Nieuw bericht"</string>
-    <string name="notification_summary_subreddit">"Subreddit"</string>
+    <string name="notification_summary_community">"Subreddit"</string>
     <string name="notification_summary_award">"Prijs"</string>
     <string name="notification_new_messages">"%1$d nieuwe berichten"</string>
     <string name="label_account">"Account"</string>
@@ -383,8 +383,8 @@ Druk om opnieuw te proberen."</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Reddit-account"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Subreddit"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Subreddit"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"Delen"</string>
     <string name="settings_share_summary">"Deel deze app met anderen als je hem graag gebruikt"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>
@@ -395,7 +395,7 @@ Druk om opnieuw te proberen."</string>
     <string name="settings_customize_amoled_theme_title">"Amoled-thema"</string>
     <string name="settings_manage_themes_title">"Thema's beheren"</string>
     <string name="settings_advanced_master_title">"Geavanceerd"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"Alle subreddits verwijderen uit databank"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"Alle subreddits verwijderen uit databank"</string>
     <string name="settings_delete_all_users_data_in_database_title">"Alle gebruikers verwijderen uit databank"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"Alle sorteertypen verwijderen uit databank"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"Alle berichtindelingen verwijderen uit databank"</string>
@@ -407,7 +407,7 @@ Druk om opnieuw te proberen."</string>
     <string name="settings_tab_3_summary">"Tabblad 3"</string>
     <string name="settings_tab_title">"Titel"</string>
     <string name="settings_tab_post_type">"Type"</string>
-    <string name="settings_tab_subreddit_name">"Subredditnaam (zonder r/-voorvoegsel)"</string>
+    <string name="settings_tab_community_name">"Subredditnaam (zonder r/-voorvoegsel)"</string>
 
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"Multiredditnaam (/user/gebruikersnaam/m/mijnmultiredditnaam)"</string>
@@ -459,7 +459,7 @@ not: "5 uren" -->
     <string name="error_loading_subscriptions">"De abonnementen kunnen niet worden gesynchroniseerd"</string>
     <string name="share_this_app">"Probeer Infinity voor Reddit, een geweldige Reddit-app!
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"De subredditnaam kan niet worden opgehaald"</string>
+    <string name="error_getting_community_name">"De subredditnaam kan niet worden opgehaald"</string>
     <string name="share_post_link">"Berichtlink delen"</string>
     <string name="share_image_link">"Afbeeldingslink delen"</string>
     <string name="share_gif_link">"GIF-link delen"</string>
@@ -614,8 +614,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_unsubscribed_color_detail">"Wordt toegepast op de abonneerknop"</string>
     <string name="theme_item_username_color">"Gebruikersnaamkleur"</string>
     <string name="theme_item_username_color_detail">"Wordt toegepast op de gebruikersnaam"</string>
-    <string name="theme_item_subreddit_color">"Subredditkleur"</string>
-    <string name="theme_item_subreddit_color_detail">"Wordt toegepast op de subredditnaam"</string>
+    <string name="theme_item_community_color">"Subredditkleur"</string>
+    <string name="theme_item_community_color_detail">"Wordt toegepast op de subredditnaam"</string>
     <string name="theme_item_author_flair_text_color">"Flairkleur van auteur"</string>
     <string name="theme_item_author_flair_text_color_detail">"Wordt toegepast op auteurflair van reacties"</string>
     <string name="theme_item_submitter_color">"Indiener"</string>
@@ -692,7 +692,7 @@ Gebaseerd op een Indigo Amoled Thema"</string>
     <string name="override">"Overschrijven"</string>
     <string name="color_picker">"Kleurenkiezer"</string>
     <string name="invalid_color">"Ongeldige Kleur"</string>
-    <string name="delete_all_subreddits_success">"Verwijder alle subreddits gelukt"</string>
+    <string name="delete_all_communities_success">"Verwijder alle subreddits gelukt"</string>
     <string name="delete_all_users_success">"Verwijder alle gebruikers gelukt"</string>
     <string name="delete_all_sort_types_success">"Verwijder alle sorteringstypen gelukt"</string>
     <string name="delete_all_post_layouts_success">"Verwijder alle layouts gelukt"</string>
@@ -700,7 +700,7 @@ Gebaseerd op een Indigo Amoled Thema"</string>
     <string name="delete_all_front_page_scrolled_positions_success">"Verwijder alle gescrolde posities op de voorpagina gelukt"</string>
     <string name="reset_all_settings_success">"Reset alle instellingen gelukt"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"Primaire Tekst"</string>
     <string name="secondary_text_preview">"Secundaire Tekst"</string>
     <string name="post_title_preview">"Dit is een post"</string>
@@ -773,13 +773,13 @@ Voorbeeld: yourpass:123456"</string>
     <string name="settings_show_tab_names">"Tabbladnamen Weergeven"</string>
     <string name="settings_more_tabs_summary">"Meer Tabbladen"</string>
     <string name="settings_more_tabs_info_summary">"Het inschakelen van de volgende opties zal onbedoeld gedrag veroorzaken: Tabbladen kunnen alle inhoud verliezen nadat ze naar andere zijn overgeschakeld. Dit is hetzelfde als het vernieuwen van de pagina."</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"Toon Favoriete Geabonneerde Subreddits"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"Toon Geabonneerde Subreddits"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Toon Favoriete Geabonneerde Subreddits"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"Toon Geabonneerde Subreddits"</string>
     <string name="settings_download_location_title">"Download Locatie"</string>
     <string name="settings_image_download_location_title">"Afbeeldingen Downloadlocatie"</string>
     <string name="settings_gif_download_location_title">"GIF Downloadlocatie"</string>
     <string name="settings_video_download_location_title">"Video Downloadlocatie"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Aparte Map Voor Elke Subreddit"</string>
+    <string name="settings_separate_folder_for_each_community">"Aparte Map Voor Elke Subreddit"</string>
     <string name="settings_swipe_action_title">"Swipe-actie"</string>
     <string name="settings_disable_swiping_between_tabs_title">"Schakel Swipen Tussen Tabbladen Uit"</string>
     <string name="settings_enable_swipe_action_title">"Schakel Swipen In"</string>
@@ -839,34 +839,34 @@ Bericht: %2$s"</string>
     <string name="give_award_success">"Award gegeven"</string>
     <string name="give_award_failed">"Mislukt"</string>
     <string name="warning">"Waarschuwing"</string>
-    <string name="this_is_a_nsfw_subreddit">"Dit is een NSFW subreddit."</string>
+    <string name="this_is_a_nsfw_community">"Dit is een NSFW subreddit."</string>
     <string name="this_user_has_nsfw_content">"Deze gebruiker heeft NSFW inhoud"</string>
     <string name="dismiss">"Afwijzgen"</string>
     <string name="leave">"Verlaten"</string>
 
     <!-- Fuzzy -->
-    <string name="go_to_subreddit">"Ga naar subreddit"</string>
+    <string name="go_to_community">"Ga naar subreddit"</string>
 
     <!-- Fuzzy -->
     <string name="go_to_user">"Ga naar gebruiker"</string>
     <string name="go_to_thing_hint">"Naam"</string>
     <string name="random">"Willekeurig"</string>
-    <string name="random_subreddit">"Willekeurige Subreddit"</string>
-    <string name="random_nsfw_subreddit">"Willekeurige NSFW Subreddit"</string>
+    <string name="random_community">"Willekeurige Subreddit"</string>
+    <string name="random_nsfw_community">"Willekeurige NSFW Subreddit"</string>
     <string name="random_post">"Willekeurige Post"</string>
     <string name="random_nsfw_post">"Willekeurige NSFW Post"</string>
     <string name="fetch_random_thing_failed">"Probeer later opnieuw"</string>
     <string name="downloading">"Downloaden"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all en r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all en r/popular"</string>
     <string name="settings_miscellaneous_title">"Diversen"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"Respecteer Subreddit Aanbevolen Sorteertype voor Reacties"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"Het sorteertype voor reacties wordt niet opgeslagen"</string>
-    <string name="settings_subreddit_filter_category">"Verberg Subreddits"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"In r/popular en r/all"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"Respecteer Subreddit Aanbevolen Sorteertype voor Reacties"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"Het sorteertype voor reacties wordt niet opgeslagen"</string>
+    <string name="settings_community_filter_category">"Verberg Subreddits"</string>
+    <string name="settings_community_filter_popular_and_all">"In r/popular en r/all"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"UFO ontvoering animatie"</string>
     <string name="select_video_quality">"Selecteer Videokwaliteit"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"Haptische Feedback"</string>
-    <string name="settings_hide_subreddit_description_title">"Verberg Subreddit Omschrijving"</string>
+    <string name="settings_hide_community_description_title">"Verberg Subreddit Omschrijving"</string>
     <string name="settings_disable_image_preview_title">"Schakel Afbeeldingsvoorbeeld uit in de Gegevensbesparingsmodus"</string>
     <string name="settings_swipe_action_swipe_left_title">"Swipe naar links"</string>
     <string name="settings_swipe_action_swipe_right_title">"Swipe naar rechts"</string>
@@ -884,7 +884,7 @@ Bericht: %2$s"</string>
     <string name="action_save_to_database">"Opslaan naar Database"</string>
     <string name="action_read_all_messages">"Lees Alle Berichten"</string>
     <string name="action_add_to_multireddit">"Toevoegen aan multireddit"</string>
-    <string name="search_only_subreddits_hint">"Zoek subreddits"</string>
+    <string name="search_only_communities_hint">"Zoek subreddits"</string>
     <string name="search_only_users_hint">"Zoek gebruikers"</string>
     <string name="post_type_gif">"Gif"</string>
     <string name="post_type_gallery">"Gallerij"</string>
@@ -901,11 +901,11 @@ Bericht: %2$s"</string>
     <string name="settings_hide_read_posts_automatically_title">"Verberg Gelezen Posts Automatisch"</string>
     <string name="settings_sort_type_title">"Sorteertype"</string>
     <string name="settings_save_sort_type_title">"Sla sorteertype op"</string>
-    <string name="settings_subreddit_default_sort_type_title">"Subreddit standaard sorteertype"</string>
-    <string name="settings_subreddit_default_sort_time_title">"Subreddit standaard sorteertijd"</string>
+    <string name="settings_community_default_sort_type_title">"Subreddit standaard sorteertype"</string>
+    <string name="settings_community_default_sort_time_title">"Subreddit standaard sorteertijd"</string>
     <string name="settings_user_default_sort_type_title">"Gebruiker standaard sorteertype"</string>
     <string name="open_link">"Open Link"</string>
-    <string name="select_subreddits_and_users">"Selecteer Subreddits en Gebruikers"</string>
+    <string name="select_communities_and_users">"Selecteer Subreddits en Gebruikers"</string>
     <string name="delete_all_read_posts_success">"Verwijder alle gelezen posts succesvol"</string>
     <string name="hide_read_posts">"Verberg Gelezen Posts"</string>
     <string name="filter_posts">"Filter Posts"</string>
@@ -922,21 +922,21 @@ Bericht: %2$s"</string>
     <string name="duplicate_post_filter_dialog_message">"Overschrijven?"</string>
     <string name="apply_post_filter_to">"Toepassen op"</string>
     <string name="post_filter_usage_home">"Thuis"</string>
-    <string name="post_filter_usage_subreddit">"Subreddit: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"Subreddit"</string>
+    <string name="post_filter_usage_community">"Subreddit: %1$s"</string>
+    <string name="post_filter_usage_community_all">"Subreddit"</string>
     <string name="post_filter_usage_user">"Gebruiker: %1$s"</string>
     <string name="post_filter_usage_user_all">"Gebruiker"</string>
     <string name="post_filter_usage_multireddit">"Multireddit: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"Multireddit"</string>
     <string name="post_filter_usage_search">"Zoeken"</string>
-    <string name="subreddit">"Subreddit"</string>
+    <string name="community">"Subreddit"</string>
     <string name="user">"Gebruiker"</string>
     <string name="edit_post_filter_name_of_usage_info">"Houd leeg om deze post filter toe te passen op subreddits / gebruikers / multireddits"</string>
     <string name="read_all_messages_time_limit">"Je doet dit te vaak. Probeer het later nog eens. Dit is de snelheidslimiet van Reddit API."</string>
     <string name="read_all_messages_success">"Alle berichten succesvol gelezen"</string>
     <string name="read_all_messages_failed">"Niet in staat all berichten te lezen"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s is toegevoegd aan multireddit %2$s"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"Niet in staat %1$s toe te voegen aan multireddit %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s is toegevoegd aan multireddit %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"Niet in staat %1$s toe te voegen aan multireddit %2$s"</string>
     <string name="choose_a_user">"Kies een gebruiker"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Klik om Media in Gallerij Lay-Out te Tonen"</string>
     <string name="settings_hide_post_type">"Verberg Post Type"</string>
@@ -950,15 +950,15 @@ Bericht: %2$s"</string>
     <string name="action_share_link">"Link Delen"</string>
     <string name="action_copy_link">"Link Kopiëren"</string>
     <string name="action_add_to_post_filter">"Toevoegen aan Post Filter"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"Vervaag NSFW Afbeeldingen niet in NSFW Subreddits"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"Vervaag NSFW Afbeeldingen niet in NSFW Subreddits"</string>
     <string name="settings_show_avatar_on_the_right">"Laat Avatar aan de Rechterkant Zien"</string>
     <string name="settings_backup_settings_title">"Backup Instellingen"</string>
     <string name="settings_restore_settings_title">"Instellingen Herstellen"</string>
     <string name="settings_credits_love_animation_title">"Liefde animatie"</string>
     <string name="settings_swipe_between_posts_title">"Swipen Tussen Posts"</string>
     <string name="settings_navigation_drawer_title">"Navigatielade"</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">"Verberg favoriete subreddits sectie"</string>
-    <string name="settings_hide_subscribed_subreddits_sections_title">"Verberg geaboneerde subreddits sectie"</string>
+    <string name="settings_hide_favorite_communities_sections_title">"Verberg favoriete subreddits sectie"</string>
+    <string name="settings_hide_subscribed_communities_sections_title">"Verberg geaboneerde subreddits sectie"</string>
     <string name="device_default">"Apparaatstandaard"</string>
     <string name="set_by_battery_saver">"Ingesteld door batterijbesparing"</string>
     <string name="theme_item_current_user_color">"Huidige Gebruiker"</string>
@@ -984,7 +984,7 @@ Bericht: %2$s"</string>
     <string name="upvote">"Upvote"</string>
     <string name="downvote">"Downvote"</string>
     <string name="select">"Selecteer"</string>
-    <string name="exclude_subreddit">"Sluit deze subreddit uit"</string>
+    <string name="exclude_community">"Sluit deze subreddit uit"</string>
     <string name="exclude_user">"Sluit deze gebruiker uit"</string>
     <string name="exclude_flair">"Sluit deze flair uit"</string>
     <string name="contain_flair">"Bevat deze flair"</string>

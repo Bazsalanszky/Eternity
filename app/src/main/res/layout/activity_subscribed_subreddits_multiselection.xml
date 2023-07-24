@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="@string/no_subreddits"
+            android:text="@string/no_communities"
             android:textSize="?attr/font_default"
             android:textColor="?attr/primaryTextColor"
             android:fontFamily="?attr/font_family" />

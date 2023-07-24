@@ -4,19 +4,19 @@
     <string name="comment_activity_label">"Yorum Gönder"</string>
     <string name="comment_activity_label_is_replying">"Cevapla"</string>
     <string name="post_text_activity_label">"Metin Gönderisi"</string>
-    <string name="subreddit_selection_activity_label">"Subreddit Seç"</string>
+    <string name="community_selection_activity_label">"Subreddit Seç"</string>
     <string name="post_link_activity_label">"Bağlantı Gönderisi"</string>
     <string name="post_image_activity_label">"Fotoğraf Gönderisi"</string>
     <string name="post_video_activity_label">"Video Gönderisi"</string>
     <string name="rules_activity_label">"Kurallar"</string>
-    <string name="search_subreddits_activity_label">"Subredditler"</string>
+    <string name="search_community_activity_label">"Subredditler"</string>
     <string name="edit_post_activity_label">"Gönderiyi Düzenle"</string>
     <string name="edit_comment_activity_label">"Yorumu Düzenle"</string>
     <string name="view_message_activity_label">"Gelen Kutusu"</string>
     <string name="settings_activity_label">"Ayarlar"</string>
     <string name="account_saved_thing_activity_label">"Kaydedilenler"</string>
     <string name="create_multi_reddit_activity_label">"Multireddit Oluştur"</string>
-    <string name="subreddit_multiselection_activity_label">"Subredditleri Seç"</string>
+    <string name="community_multiselection_activity_label">"Subredditleri Seç"</string>
     <string name="custom_theme_listing_activity_label">"Özel Temalar"</string>
     <string name="customize_theme_activity_label">"Temayı Özelleştir"</string>
     <string name="customize_theme_activity_create_theme_label">"Tema Oluştur"</string>
@@ -73,13 +73,13 @@ Tekrar denemek için tıklayın."</string>
     <string name="load_more_posts_error">"Gönderiler yüklenirken hata oluştu."</string>
     <string name="load_post_error">"Bu gönderi yüklenirken hata oluştu.
 Tekrar denemek için tıklayın."</string>
-    <string name="search_subreddits_error">"Subredditleri ararken hata oluştu.
+    <string name="search_communities_error">"Subredditleri ararken hata oluştu.
 Tekrar denemek için tıklayın."</string>
     <string name="search_users_error">"Kullanıcıları ararken hata oluştu.
 Tekrar denemek için tıklayın."</string>
     <string name="no_posts">"Hiç gönderi bulunamadı"</string>
     <string name="no_comments">"Hiç yorum bulunamadı"</string>
-    <string name="no_subreddits">"Hiç subreddit bulunamadı"</string>
+    <string name="no_communities">"Hiç subreddit bulunamadı"</string>
     <string name="no_users">"Hiç kullanıcı bulunamadı"</string>
     <string name="no_multi_reddits">"Hiç Multireddit bulunamadı"</string>
     <string name="no_storage_permission">"Bu dosyayı kaydetmek için depolama izni yok"</string>
@@ -117,7 +117,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings">"Ayarlar"</string>
     <string name="subscribers_number_detail">"Aboneler: %1$d"</string>
     <string name="online_subscribers_number_detail">"Çevrimiçi: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"Subreddit bilgisi getirilemiyor"</string>
+    <string name="cannot_fetch_community_info">"Subreddit bilgisi getirilemiyor"</string>
     <string name="cannot_fetch_user_info">"Kullanıcı bilgisi getirilemiyor"</string>
     <string name="cannot_fetch_sidebar">"Hakkındakiler getirilemiyor"</string>
     <string name="cannot_fetch_multireddit">"Multireddit bilgisi getirilemiyor"</string>
@@ -155,7 +155,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="sending_message">"Gönderiliyor"</string>
     <string name="send_message_success">"Mesaj gönderildi"</string>
     <string name="send_message_failed">"Bu mesaj gönderilemedi"</string>
-    <string name="select_a_subreddit">"Lütfen önce bir subreddit seçin"</string>
+    <string name="select_a_community">"Lütfen önce bir subreddit seçin"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"Gönderinin iyi bir başlığa ihtiyacı var"</string>
@@ -171,10 +171,10 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="loading">"Yükleniyor"</string>
     <string name="post_title_hint">"Başlık"</string>
     <string name="post_text_content_hint">"İçerik"</string>
-    <string name="choose_a_subreddit">"Bir subreddit seç"</string>
+    <string name="choose_a_communities">"Bir subreddit seç"</string>
     <string name="rules">"Kurallar"</string>
     <string name="post_link_hint">"Bağlantı Adresi"</string>
-    <string name="subreddits">"Subredditler"</string>
+    <string name="communities">"Subredditler"</string>
     <string name="users">"Kullanıcılar"</string>
     <string name="multi_reddits">"MultiRedditlr"</string>
     <string name="bottom_sheet_post_text">"Metin"</string>
@@ -200,7 +200,7 @@ Tekrar denemek için tıklayın."</string>
 Tekrar denemek için tıklayın."</string>
     <string name="error_loading_rules_without_retry">"Kuralllar Yüklenirken Hata Oluştu"</string>
     <string name="search_in">"Arama"</string>
-    <string name="all_subreddits">"Tüm subredditler"</string>
+    <string name="all_communities">"Tüm subredditler"</string>
     <string name="sort_best">"En iyi"</string>
     <string name="sort_hot">"Sıcak"</string>
     <string name="sort_new">"Yeni"</string>
@@ -287,7 +287,7 @@ Tekrar denemek için tıklayın."</string>
     <string name="view_all_comments">"Tüm yorumlara göz atmak için burayı tıklayın"</string>
     <string name="notification_summary_account">"Hesap"</string>
     <string name="notification_summary_message">"Yeni Mesaj"</string>
-    <string name="notification_summary_subreddit">"Subreddit"</string>
+    <string name="notification_summary_community">"Subreddit"</string>
     <string name="notification_summary_award">"Ödül"</string>
     <string name="notification_new_messages">"%1$d Yeni Mesaj"</string>
     <string name="label_account">"Hesap"</string>
@@ -395,8 +395,8 @@ Tekrar denemek için tıklayın."</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Reddit Hesabı"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Subreddit"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Subreddit"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"Paylaş"</string>
     <string name="settings_share_summary">"Bu uygulamayı beğendiyseniz başkalarıyla paylaşın"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>
@@ -407,7 +407,7 @@ Tekrar denemek için tıklayın."</string>
     <string name="settings_customize_amoled_theme_title">"Amoled Tema"</string>
     <string name="settings_manage_themes_title">"Temaları Yönetin"</string>
     <string name="settings_advanced_master_title">"Gelişmiş"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"Veritabanındaki Tüm Subredditleri Sil"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"Veritabanındaki Tüm Subredditleri Sil"</string>
     <string name="settings_delete_all_users_data_in_database_title">"Veritabanındaki Tüm Kullanıcıları Sil"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"Veritabanındaki Tüm Sıralama Türlerini Sil"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"Veritabanındaki Tüm Gönderi Düzenlerini Sil"</string>
@@ -419,7 +419,7 @@ Tekrar denemek için tıklayın."</string>
     <string name="settings_tab_3_summary">"Sekme 3"</string>
     <string name="settings_tab_title">"Başlık"</string>
     <string name="settings_tab_post_type">"Tür"</string>
-    <string name="settings_tab_subreddit_name">"Subreddit Adı (r/ öneksiz)"</string>
+    <string name="settings_tab_community_name">"Subreddit Adı (r/ öneksiz)"</string>
 
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"Multireddit Adı (/user/kullanıcıadın/m/multiredditadın)"</string>
@@ -465,7 +465,7 @@ Tekrar denemek için tıklayın."</string>
     <string name="error_loading_subscriptions">"Abonelikler senkronize edilemiyor"</string>
     <string name="share_this_app">"Harika bir Reddit uygulaması olan Infinity For Reddit'e bir göz atın!
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"Subreddit adı alınırken hata oluştu"</string>
+    <string name="error_getting_community_name">"Subreddit adı alınırken hata oluştu"</string>
     <string name="share_post_link">"Gönderi Bağlantısını Paylaş"</string>
     <string name="share_image_link">"Görüntü Bağlantısını Paylaş"</string>
     <string name="share_gif_link">"Gif Bağlantısını Paylaş"</string>
@@ -622,8 +622,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_unsubscribed_color_detail">"Uygulandığı yer: Abone ol düğmesi"</string>
     <string name="theme_item_username_color">"Kullanıcı Adı Rengi"</string>
     <string name="theme_item_username_color_detail">"Uygulandığı yer: Kullanıcı adı"</string>
-    <string name="theme_item_subreddit_color">"Subreddit Rengi"</string>
-    <string name="theme_item_subreddit_color_detail">"Uygulandığı yer: Subreddit adı"</string>
+    <string name="theme_item_community_color">"Subreddit Rengi"</string>
+    <string name="theme_item_community_color_detail">"Uygulandığı yer: Subreddit adı"</string>
     <string name="theme_item_author_flair_text_color">"Yazar Rozeti Rengi"</string>
     <string name="theme_item_author_flair_text_color_detail">"Uygulandığı yer: Yazar rozetli yorumlar"</string>
     <string name="theme_item_submitter_color">"Gönderen"</string>
@@ -700,7 +700,7 @@ Amoled Tema Şablonu Oluştur"</string>
     <string name="override">"Geçersizleştir"</string>
     <string name="color_picker">"Renk Seçici"</string>
     <string name="invalid_color">"Geçersiz Renk"</string>
-    <string name="delete_all_subreddits_success">"Tüm subredditler başarıyla silindi"</string>
+    <string name="delete_all_communities_success">"Tüm subredditler başarıyla silindi"</string>
     <string name="delete_all_users_success">"Tüm kullanıcılar başarıyla silindi"</string>
     <string name="delete_all_sort_types_success">"Tüm sıralama türleri başarıyla silindi"</string>
     <string name="delete_all_post_layouts_success">"Tüm gönderi düzenleri başarıyla silindi"</string>
@@ -708,7 +708,7 @@ Amoled Tema Şablonu Oluştur"</string>
     <string name="delete_all_front_page_scrolled_positions_success">"Ön sayfadaki tüm kaydırılmış pozisyonlar başarıyla silindi"</string>
     <string name="reset_all_settings_success">"Tüm ayarlar başarıyla sıfırlandı"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"Birincil Metin"</string>
     <string name="secondary_text_preview">"İkincil Metin"</string>
     <string name="post_title_preview">"Bu bir gönderidir"</string>
@@ -781,13 +781,13 @@ Amoled Tema Şablonu Oluştur"</string>
     <string name="settings_more_tabs_summary">"Daha Fazla Sekme"</string>
     <string name="settings_more_tabs_info_summary">"Aşağıdaki seçeneklerin etkinleştirilmesi şunun gibi istenmeyen bir davranışa neden olabilir:
 Sekmeler, diğerlerine geçtikten sonra tüm içeriği kaybedebilir. Bu, sayfayı yenilemekle aynıdır."</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"Favori Subreddit Aboneliklerini Göster"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"Subreddit Aboneliklerini Göster"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Favori Subreddit Aboneliklerini Göster"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"Subreddit Aboneliklerini Göster"</string>
     <string name="settings_download_location_title">"İndirme Konumu"</string>
     <string name="settings_image_download_location_title">"Fotoğraf İndirme Konumu"</string>
     <string name="settings_gif_download_location_title">"GIF İndirme Konumu"</string>
     <string name="settings_video_download_location_title">"Video İndirme Konumu"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Her Subreddit için Ayrı Klasör"</string>
+    <string name="settings_separate_folder_for_each_community">"Her Subreddit için Ayrı Klasör"</string>
     <string name="settings_swipe_action_title">"Kaydırma İşlemi"</string>
     <string name="settings_disable_swiping_between_tabs_title">"Sekmelerdeki Kaydırmayı Devre Dışı Bırak"</string>
     <string name="settings_enable_swipe_action_title">"Kaydırma İşlemini Etkinleştir"</string>
@@ -849,34 +849,34 @@ Mesaj: %2$s"</string>
     <string name="give_award_success">"Ödül verildi"</string>
     <string name="give_award_failed">"İşlem Başarısız Oldu"</string>
     <string name="warning">"Uyarı"</string>
-    <string name="this_is_a_nsfw_subreddit">"Bu bir NSFW subredditidir."</string>
+    <string name="this_is_a_nsfw_community">"Bu bir NSFW subredditidir."</string>
     <string name="this_user_has_nsfw_content">"Bu kullanıcının NSFW içeriği var"</string>
     <string name="dismiss">"Reddet"</string>
     <string name="leave">"Ayrıl"</string>
 
     <!-- Fuzzy -->
-    <string name="go_to_subreddit">"Subreddit'e Git"</string>
+    <string name="go_to_community">"Subreddit'e Git"</string>
 
     <!-- Fuzzy -->
     <string name="go_to_user">"Kullanıcıya Git"</string>
     <string name="go_to_thing_hint">"İsim"</string>
     <string name="random">"Rastgele"</string>
-    <string name="random_subreddit">"Rastgele Subreddit"</string>
-    <string name="random_nsfw_subreddit">"Rastgele NSFW Subreddit'i"</string>
+    <string name="random_community">"Rastgele Subreddit"</string>
+    <string name="random_nsfw_community">"Rastgele NSFW Subreddit'i"</string>
     <string name="random_post">"Rastgele Gönderi"</string>
     <string name="random_nsfw_post">"Rastgele NSFW Gönderisi"</string>
     <string name="fetch_random_thing_failed">"Daha sonra tekrar deneyin"</string>
     <string name="downloading">"İndiriliyor"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all ve r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all ve r/popular"</string>
     <string name="settings_miscellaneous_title">"Diğer"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"İlgili Subreddit Önerilen Yorum Sıralaması Türü"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"Yorum sıralaması türü kaydedilmez"</string>
-    <string name="settings_subreddit_filter_category">"Subredditleri Gizle"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"r/popular ve r/all"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"İlgili Subreddit Önerilen Yorum Sıralaması Türü"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"Yorum sıralaması türü kaydedilmez"</string>
+    <string name="settings_community_filter_category">"Subredditleri Gizle"</string>
+    <string name="settings_community_filter_popular_and_all">"r/popular ve r/all"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"UFO Yakalama Animasyonu"</string>
     <string name="select_video_quality">"Video Kalitesini Seç"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"Dokunsal Geribildirim"</string>
-    <string name="settings_hide_subreddit_description_title">"Subreddit Açıklamasını Gizle"</string>
+    <string name="settings_hide_community_description_title">"Subreddit Açıklamasını Gizle"</string>
     <string name="settings_disable_image_preview_title">"Veri Tasarrufu Modunda Görüntüleri Önizlemeyi Devre Dışı Bırak"</string>
     <string name="settings_swipe_action_swipe_left_title">"Sola Kaydır"</string>
     <string name="settings_swipe_action_swipe_right_title">"Sağa Kaydır"</string>
@@ -894,7 +894,7 @@ Mesaj: %2$s"</string>
     <string name="action_save_to_database">"Veritabanına Kaydet"</string>
     <string name="action_read_all_messages">"Tümünü Okundu Olarak İşaretle"</string>
     <string name="action_add_to_multireddit">"Multireddit'e Ekle"</string>
-    <string name="search_only_subreddits_hint">"Subredditleri ara"</string>
+    <string name="search_only_communities_hint">"Subredditleri ara"</string>
     <string name="search_only_users_hint">"Kullanıcıları ara"</string>
     <string name="post_type_gif">"Gif"</string>
     <string name="post_type_gallery">"Galeri"</string>
@@ -913,12 +913,12 @@ Mesaj: %2$s"</string>
     <string name="settings_hide_read_posts_automatically_title">"Görüntülenmiş Gönderileri Otomatik Olarak Gizle"</string>
     <string name="settings_sort_type_title">"Sıralama Türü"</string>
     <string name="settings_save_sort_type_title">"Sıralama Türünü Kaydet"</string>
-    <string name="settings_subreddit_default_sort_type_title">"Subreddit Varsayılan Sıralama Türü"</string>
-    <string name="settings_subreddit_default_sort_time_title">"Subreddit Varsayılan Sıralama Zamanı"</string>
+    <string name="settings_community_default_sort_type_title">"Subreddit Varsayılan Sıralama Türü"</string>
+    <string name="settings_community_default_sort_time_title">"Subreddit Varsayılan Sıralama Zamanı"</string>
     <string name="settings_user_default_sort_type_title">"Kullanıcı Varsayılan Sıralama Türü"</string>
     <string name="settings_user_default_sort_time_title">"Kullanıcı Varsayılan Sıralama Zamanı"</string>
     <string name="open_link">"Bağlantıyı Aç"</string>
-    <string name="select_subreddits_and_users">"Subredditleri ve Kullanıcıları Seç"</string>
+    <string name="select_communities_and_users">"Subredditleri ve Kullanıcıları Seç"</string>
     <string name="theme_item_read_post_title_color">"Görüntülenmiş Gönderi Başlığı"</string>
     <string name="theme_item_read_post_title_color_detail">"Uygulandığı yer: Görüntülenmiş Gönderi Başlığı"</string>
     <string name="theme_item_read_post_content_color">"Görüntülenmiş Gönderi İçeriği Rengi"</string>
@@ -934,7 +934,7 @@ Mesaj: %2$s"</string>
     <!-- What is it? -->
     <string name="title_excludes_strings_hint">"Başlık: anahtar kelimeleri hariç tut (anahtar 1, anahtar 2)"</string>
     <string name="title_excludes_regex_hint">"Başlık: ifadeyi hariç tut"</string>
-    <string name="exclude_subreddits_hint">"Subredditleri hariç tut (örn: Burdurland, SorReddite)"</string>
+    <string name="exclude_communities_hint">"Subredditleri hariç tut (örn: Burdurland, SorReddite)"</string>
     <string name="exclude_users_hint">"Kullanıcıları hariç tut (örn: KerimDemirkaynak, rastgele)"</string>
     <string name="exclude_flairs_hint">"Etiketleri hariç tut (örn: etiket 1, etiket 2)"</string>
     <string name="contain_flairs_hint">"Etiketleri kapsa (örn: etiket 1, etiket 2)"</string>
@@ -950,26 +950,26 @@ Mesaj: %2$s"</string>
     <string name="duplicate_post_filter_dialog_message">"Geçersiz kılınsın mı?"</string>
     <string name="apply_post_filter_to">"Uygulanan:"</string>
     <string name="post_filter_usage_home">"Ana Sayfa"</string>
-    <string name="post_filter_usage_subreddit">"Subreddit: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"Subreddit"</string>
+    <string name="post_filter_usage_community">"Subreddit: %1$s"</string>
+    <string name="post_filter_usage_community_all">"Subreddit"</string>
     <string name="post_filter_usage_user">"Kullanıcı: %1$s"</string>
     <string name="post_filter_usage_user_all">"Kullanıcı"</string>
     <string name="post_filter_usage_multireddit">"MultiReddit: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"MultiReddit"</string>
     <string name="post_filter_usage_search">"Ara"</string>
-    <string name="subreddit">"Subreddit"</string>
+    <string name="community">"Subreddit"</string>
     <string name="user">"Kullanıcı"</string>
     <string name="edit_post_filter_name_of_usage_info">"Bu gönderi filtresini tüm subredditlere / kullanıcılara / multiredditlere uygulamak için boş bırakın"</string>
     <string name="read_all_messages_time_limit">"Bunu çok fazla yaptınız.  Daha sonra tekrar deneyin.  Bu, Reddit API'sinin limit sınırıdır."</string>
     <string name="read_all_messages_success">"Tüm mesajlar başarıyla okundu"</string>
     <string name="read_all_messages_failed">"Tüm mesajlar okunamadı"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s, %2$s multireddit'ine eklendi"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"%1$s, %2$s multireddit'ine eklenemedi"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s, %2$s multireddit'ine eklendi"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"%1$s, %2$s multireddit'ine eklenemedi"</string>
     <string name="choose_a_user">"Bir kullanıcı seç"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Medyayı Galeri Düzeninde Göstermek İçin Tıkla"</string>
     <string name="settings_hide_post_type">"Gönderi Türünü Gizle"</string>
     <string name="settings_hide_the_number_of_awards">"Ödül Sayısını Gizle"</string>
-    <string name="settings_hide_subreddit_and_user_prefix">"Subreddit ve Kullanıcı Önekini Gizle"</string>
+    <string name="settings_hide_community_and_user_prefix">"Subreddit ve Kullanıcı Önekini Gizle"</string>
     <string name="settings_hide_the_number_of_votes">"Oy Sayısını Gizle"</string>
     <string name="settings_hide_the_number_of_comments">"Yorum Sayısını Gizle"</string>
     <string name="post_layout_gallery">"Galeri Düzeni"</string>
@@ -980,7 +980,7 @@ Mesaj: %2$s"</string>
     <string name="action_share_link">"Bağlantıyı Paylaş"</string>
     <string name="action_copy_link">"Bağlantıyı Kopyala"</string>
     <string name="action_add_to_post_filter">"Gönderi Filtresine Ekle"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"NSFW Subredditlerindeki NSFW Görüntülerini bulanıklaştırma"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"NSFW Subredditlerindeki NSFW Görüntülerini bulanıklaştırma"</string>
 
     <!-- Fuzzy -->
     <string name="settings_show_avatar_on_the_right">"Avatarı Solda Göster"</string>
@@ -992,10 +992,10 @@ Mesaj: %2$s"</string>
     <string name="settings_collapse_account_section_title">"Hesap Bölümünü Daralt"</string>
     <string name="settings_collapse_post_section_title">"Gönderi Bölümünü Daralt"</string>
     <string name="settings_collapse_preferences_section_title">"Tercihler Bölümünü Daralt"</string>
-    <string name="settings_collapse_favorite_subreddits_section_title">"Favori Subredditler Bölümünü Daralt"</string>
-    <string name="settings_collapse_subscribed_subreddits_section_title">"Abone Olunan Subredditler Bölümünü Daralt"</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">"Favori Subredditler Bölümünü Gizle"</string>
-    <string name="settings_hide_subscribed_subreddits_sections_title">"Abone Olunan Subredditler Bölümünü Gizle"</string>
+    <string name="settings_collapse_favorite_communities_section_title">"Favori Subredditler Bölümünü Daralt"</string>
+    <string name="settings_collapse_subscribed_communities_section_title">"Abone Olunan Subredditler Bölümünü Daralt"</string>
+    <string name="settings_hide_favorite_communities_sections_title">"Favori Subredditler Bölümünü Gizle"</string>
+    <string name="settings_hide_subscribed_communities_sections_title">"Abone Olunan Subredditler Bölümünü Gizle"</string>
     <string name="settings_default_search_result_tab">"Varsayılan Arama Sonucu Sekmesi"</string>
     <string name="device_default">"Cihaz Varsayılanı"</string>
     <string name="set_by_battery_saver">"Pil Tasarruflu Olarak Ayarla"</string>
@@ -1032,7 +1032,7 @@ Mesaj: %2$s"</string>
     <string name="upvote">"Olumlu oy"</string>
     <string name="downvote">"Olumsuz oy"</string>
     <string name="select">"Seç"</string>
-    <string name="exclude_subreddit">"Bu subreddit'i hariç tut"</string>
+    <string name="exclude_community">"Bu subreddit'i hariç tut"</string>
     <string name="exclude_user">"Bu kullanıcıyı hariç tut"</string>
     <string name="exclude_flair">"Bu etiketi hariç tut"</string>
     <string name="contain_flair">"Bu etiketi içer"</string>
@@ -1145,7 +1145,7 @@ Tekrar denemek için tıklayın."</string>
     <string name="title_contains_strings_hint">"Başlık: anahtar kelimeleri içer (key1,key2)"</string>
     <string name="title_contains_regex_hint">"Başlık: normal ifade içer"</string>
     <string name="contain_domains_hint">"Alan adlarını içer"</string>
-    <string name="anonymous_multireddit_no_subreddit">"Bu multireddit'in bir subreddit'i yok!"</string>
+    <string name="anonymous_multireddit_no_community">"Bu multireddit'in bir subreddit'i yok!"</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">"v.redd.it videosu alınırken hata oluştu: video bağlantısı alınamıyor"</string>
     <string name="contain_domain">"Bu alan adını içer"</string>
     <string name="lock_screen_text">"Vay canına!!!"</string>

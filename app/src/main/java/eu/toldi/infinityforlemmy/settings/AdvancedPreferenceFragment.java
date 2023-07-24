@@ -107,7 +107,7 @@ public class AdvancedPreferenceFragment extends CustomFontPreferenceFragmentComp
                         .setTitle(R.string.are_you_sure)
                         .setPositiveButton(R.string.yes, (dialogInterface, i)
                                 -> DeleteAllSubreddits.deleteAllSubreddits(executor, new Handler(), mRedditDataRoomDatabase,
-                                        () -> Toast.makeText(activity, R.string.delete_all_subreddits_success, Toast.LENGTH_SHORT).show()))
+                                () -> Toast.makeText(activity, R.string.delete_all_communities_success, Toast.LENGTH_SHORT).show()))
                         .setNegativeButton(R.string.no, null)
                         .show();
                 return true;

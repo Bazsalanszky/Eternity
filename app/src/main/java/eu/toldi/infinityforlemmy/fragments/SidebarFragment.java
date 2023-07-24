@@ -25,17 +25,10 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import io.noties.markwon.recycler.MarkwonAdapter;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
 import eu.toldi.infinityforlemmy.asynctasks.InsertSubredditData;
@@ -47,6 +40,13 @@ import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditViewModel;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import io.noties.markwon.recycler.MarkwonAdapter;
+import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import retrofit2.Retrofit;
 
 public class SidebarFragment extends Fragment {
@@ -98,7 +98,7 @@ public class SidebarFragment extends Fragment {
         subredditName = getArguments().getString(EXTRA_SUBREDDIT_NAME);
         communityQualifiedName = getArguments().getString(EXTRA_COMMUNITY_QUALIFIED_NAME);
         if (subredditName == null) {
-            Toast.makeText(activity, R.string.error_getting_subreddit_name, Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.error_getting_community_name, Toast.LENGTH_SHORT).show();
             return rootView;
         }
 

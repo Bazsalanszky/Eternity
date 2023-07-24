@@ -473,7 +473,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                             && mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) || !mNsfwAndSpoilerSharedPreferences.getBoolean((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.NSFW_BASE, false)) {
                         nsfwWarningBuilder = new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
                                 .setTitle(R.string.warning)
-                                .setMessage(R.string.this_is_a_nsfw_subreddit)
+                                .setMessage(R.string.this_is_a_nsfw_community)
                                 .setPositiveButton(R.string.leave, (dialogInterface, i)
                                         -> {
                                     finish();
@@ -585,7 +585,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
                 @Override
                 public void onFetchSubredditDataFail(boolean isQuarantined) {
-                    makeSnackbar(R.string.cannot_fetch_subreddit_info, true);
+                    makeSnackbar(R.string.cannot_fetch_community_info, true);
                     mFetchSubredditInfoSuccess = false;
                 }
             });
@@ -1193,13 +1193,13 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                                 @Override
                                 public void success() {
                                     Toast.makeText(ViewSubredditDetailActivity.this,
-                                            getString(R.string.add_subreddit_or_user_to_multireddit_success, subredditName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
+                                            getString(R.string.add_community_or_user_to_multireddit_success, subredditName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
                                 }
 
                                 @Override
                                 public void failed(int code) {
                                     Toast.makeText(ViewSubredditDetailActivity.this,
-                                            getString(R.string.add_subreddit_or_user_to_multireddit_failed, subredditName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
+                                            getString(R.string.add_community_or_user_to_multireddit_failed, subredditName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
                                 }
                             });
                 }
@@ -1476,7 +1476,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
         });
         new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.go_to_subreddit)
+                .setTitle(R.string.go_to_community)
                 .setView(rootView)
                 .setPositiveButton(R.string.ok, (dialogInterface, i)
                         -> {

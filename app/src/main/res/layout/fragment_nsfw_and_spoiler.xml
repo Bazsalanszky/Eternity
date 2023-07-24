@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -99,7 +98,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="16dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/settings_do_not_blur_nsfw_in_nsfw_subreddits_title"
+                android:text="@string/settings_do_not_blur_nsfw_in_nsfw_communities_title"
                 android:textColor="?attr/primaryTextColor"
                 android:textSize="?attr/font_16"
                 android:fontFamily="?attr/font_family" />

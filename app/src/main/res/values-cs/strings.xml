@@ -4,19 +4,19 @@
     <string name="comment_activity_label">"Poslat komentář"</string>
     <string name="comment_activity_label_is_replying">"Odpovědět"</string>
     <string name="post_text_activity_label">"Text"</string>
-    <string name="subreddit_selection_activity_label">"Vybrat subreddit"</string>
+    <string name="community_selection_activity_label">"Vybrat subreddit"</string>
     <string name="post_link_activity_label">"Odkaz"</string>
     <string name="post_image_activity_label">"Obrázek"</string>
     <string name="post_video_activity_label">"Video"</string>
     <string name="rules_activity_label">"Pravidla"</string>
-    <string name="search_subreddits_activity_label">"Subreddity"</string>
+    <string name="search_community_activity_label">"Subreddity"</string>
     <string name="edit_post_activity_label">"Upravit příspěvek"</string>
     <string name="edit_comment_activity_label">"Upravit komentář"</string>
     <string name="view_message_activity_label">"Pošta"</string>
     <string name="settings_activity_label">"Nastavení"</string>
     <string name="account_saved_thing_activity_label">"Uložené"</string>
     <string name="create_multi_reddit_activity_label">"Vytvořit multireddit"</string>
-    <string name="subreddit_multiselection_activity_label">"Vybrat subreddity"</string>
+    <string name="community_multiselection_activity_label">"Vybrat subreddity"</string>
     <string name="custom_theme_listing_activity_label">"Vlastní motivy"</string>
     <string name="customize_theme_activity_label">"Přizpůsobit motiv"</string>
     <string name="customize_theme_activity_create_theme_label">"Vytvořit motiv"</string>
@@ -73,13 +73,13 @@
     <string name="load_more_posts_error">"Chyba při načítání příspěvků."</string>
     <string name="load_post_error">"Chyba při načítání příspěvků.
 Ťukněte pro opakování."</string>
-    <string name="search_subreddits_error">"Chyba při hledání subredditů.
+    <string name="search_communities_error">"Chyba při hledání subredditů.
 Ťukněte pro opakování."</string>
     <string name="search_users_error">"Chyba při hledání uživatelů.
 Ťukněte pro opakování."</string>
     <string name="no_posts">"Nenalezeny žádné příspěvky"</string>
     <string name="no_comments">"Nenalezeny žádné komentáře"</string>
-    <string name="no_subreddits">"Nenalezeny žádné subreddity"</string>
+    <string name="no_communities">"Nenalezeny žádné subreddity"</string>
     <string name="no_users">"Nenalezeni žádní uživatelé"</string>
     <string name="no_multi_reddits">"Nenalezeny žádné multireddity"</string>
     <string name="no_storage_permission">"Chybí oprávnění k přístupu k úložišti pro uložení tohoto souboru"</string>
@@ -112,7 +112,7 @@
     <string name="settings">"Nastavení"</string>
     <string name="subscribers_number_detail">"Odběratelů: %1$d"</string>
     <string name="online_subscribers_number_detail">"Online: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"Nepodařilo se získat informace o subredditu"</string>
+    <string name="cannot_fetch_community_info">"Nepodařilo se získat informace o subredditu"</string>
     <string name="cannot_fetch_user_info">"Nepodařilo se získat informace o uživateli"</string>
     <string name="cannot_fetch_sidebar">"Nepodařilo se získat postranní menu"</string>
     <string name="cannot_fetch_multireddit">"Nepodařilo se získat informace o multiredditu"</string>
@@ -150,7 +150,7 @@
     <string name="sending_message">"Odesílání"</string>
     <string name="send_message_success">"Zpráva odeslána"</string>
     <string name="send_message_failed">"Nepodařilo se odeslat zprávu"</string>
-    <string name="select_a_subreddit">"Nejprve prosím vyberte subreddit"</string>
+    <string name="select_a_community">"Nejprve prosím vyberte subreddit"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"Příspěvek potřebuje dobrý název"</string>
@@ -166,10 +166,10 @@
     <string name="loading">"Načítání"</string>
     <string name="post_title_hint">"Název"</string>
     <string name="post_text_content_hint">"Obsah"</string>
-    <string name="choose_a_subreddit">"Vyberte subreddit"</string>
+    <string name="choose_a_communities">"Vyberte subreddit"</string>
     <string name="rules">"Pravidla"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="subreddits">"Subreddity"</string>
+    <string name="communities">"Subreddity"</string>
     <string name="users">"Uživatelé"</string>
     <string name="multi_reddits">"Multireddity"</string>
     <string name="bottom_sheet_post_text">"Text"</string>
@@ -195,7 +195,7 @@
 Ťukněte pro opakování."</string>
     <string name="error_loading_rules_without_retry">"Chyba při načítání pravidel"</string>
     <string name="search_in">"Hledat v"</string>
-    <string name="all_subreddits">"Všechny subreddity"</string>
+    <string name="all_communities">"Všechny subreddity"</string>
     <string name="sort_best">"Nejlepší"</string>
     <string name="sort_hot">"Žhavé"</string>
     <string name="sort_new">"Nové"</string>
@@ -280,7 +280,7 @@
     <string name="view_all_comments">"Klikněte sem pro prohlížení všech komentářů"</string>
     <string name="notification_summary_account">"Účet"</string>
     <string name="notification_summary_message">"Nová zpráva"</string>
-    <string name="notification_summary_subreddit">"Subreddit"</string>
+    <string name="notification_summary_community">"Subreddit"</string>
     <string name="notification_summary_award">"Ocenění"</string>
     <string name="notification_new_messages">"%1$d nových zpráv"</string>
     <string name="label_account">"Účet"</string>
@@ -380,8 +380,8 @@
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Reddit účet"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Subreddit"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Subreddit"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"Sdílet"</string>
     <string name="settings_share_summary">"Pokud máte rádi tuto aplikaci, sdílejte ji s ostatními lidmi"</string>
     <string name="settings_version_title">"Infinity pro Reddit"</string>
@@ -392,7 +392,7 @@
     <string name="settings_customize_amoled_theme_title">"Amoled"</string>
     <string name="settings_manage_themes_title">"Spravovat motivy"</string>
     <string name="settings_advanced_master_title">"Pokročilé"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"Odstranit všechny subreddity v databázi"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"Odstranit všechny subreddity v databázi"</string>
     <string name="settings_delete_all_users_data_in_database_title">"Odstranit všechny uživatele v databázi"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"Odstranit všechny typy řazení v databázi"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"Odstranit všechna rozložení příspěvků v databázi"</string>
@@ -404,7 +404,7 @@
     <string name="settings_tab_3_summary">"Karta 3"</string>
     <string name="settings_tab_title">"Název"</string>
     <string name="settings_tab_post_type">"Typ"</string>
-    <string name="settings_tab_subreddit_name">"Název subredditu (bez předpony r/)"</string>
+    <string name="settings_tab_community_name">"Název subredditu (bez předpony r/)"</string>
 
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"Název multiredditu (/user/vašejméno/m/názevmultiredditu)"</string>
@@ -450,7 +450,7 @@
     <string name="error_loading_subscriptions">"Nelze synchronizovat odběry"</string>
     <string name="share_this_app">"Mrkni na Infinity pro Reddit, úžasný Reddit klient!
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"Chyba při získávání názvu subredditu"</string>
+    <string name="error_getting_community_name">"Chyba při získávání názvu subredditu"</string>
     <string name="share_post_link">"Sdílet odkaz příspěvku"</string>
     <string name="share_image_link">"Sdílet odkaz obrázku"</string>
     <string name="share_gif_link">"Sdílet odkaz GIFu"</string>
@@ -605,8 +605,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_unsubscribed_color_detail">"Použito na: tlačítko odběru"</string>
     <string name="theme_item_username_color">"Barva uživatelského jména"</string>
     <string name="theme_item_username_color_detail">"Použito na: uživatelské jméno"</string>
-    <string name="theme_item_subreddit_color">"Barva subredditu"</string>
-    <string name="theme_item_subreddit_color_detail">"Použito na: název subredditu"</string>
+    <string name="theme_item_community_color">"Barva subredditu"</string>
+    <string name="theme_item_community_color_detail">"Použito na: název subredditu"</string>
     <string name="theme_item_author_flair_text_color">"Barva štítku autora"</string>
     <string name="theme_item_author_flair_text_color_detail">"Použito na: štítek autora v komentářích"</string>
     <string name="theme_item_submitter_color">"Odesílatel"</string>
@@ -683,7 +683,7 @@ Založené na amoled indigovém motivu"</string>
     <string name="override">"Nahradit"</string>
     <string name="color_picker">"Výběr barvy"</string>
     <string name="invalid_color">"Neplatná barva"</string>
-    <string name="delete_all_subreddits_success">"Všechny subreddity úspěšně odstraněny"</string>
+    <string name="delete_all_communities_success">"Všechny subreddity úspěšně odstraněny"</string>
     <string name="delete_all_users_success">"Všichni uživatelé úspěšně odstraněni"</string>
     <string name="delete_all_sort_types_success">"Všechny typy řazení úspěšně odstraněny"</string>
     <string name="delete_all_post_layouts_success">"Všechna rozložení příspěvků úspěšně odstraněna"</string>
@@ -691,7 +691,7 @@ Založené na amoled indigovém motivu"</string>
     <string name="delete_all_front_page_scrolled_positions_success">"Všechny pozice posouvání na hlavní straně úspěšně odstraněny"</string>
     <string name="reset_all_settings_success">"Všechna nastavení úspěšně obnovena"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"Primární text"</string>
     <string name="secondary_text_preview">"Sekundární text"</string>
     <string name="post_title_preview">"Toto je příspěvek"</string>
@@ -763,13 +763,13 @@ Příklad: mojeheslo:123456"</string>
     <string name="settings_more_tabs_summary">"Více karet"</string>
     <string name="settings_more_tabs_info_summary">"Povolení následujících možností způsobí nechtěné chování:
 Karty mohou po přepnutí na jiné ztratit veškerý obsah. To je stejné jako obnovení stránky."</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"Zobrazit oblíbené odebírané subreddity"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"Zobrazit odebírané subreddity"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Zobrazit oblíbené odebírané subreddity"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"Zobrazit odebírané subreddity"</string>
     <string name="settings_download_location_title">"Lokace stahování"</string>
     <string name="settings_image_download_location_title">"Lokace stahování obrázků"</string>
     <string name="settings_gif_download_location_title">"Lokace stahování GIFů"</string>
     <string name="settings_video_download_location_title">"Lokace stahování videí"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Různé složky pro každý subreddit"</string>
+    <string name="settings_separate_folder_for_each_community">"Různé složky pro každý subreddit"</string>
     <string name="settings_swipe_action_title">"Akce posouvání"</string>
     <string name="settings_disable_swiping_between_tabs_title">"Zakázat posouvání mezi kartami"</string>
     <string name="settings_enable_swipe_action_title">"Povolit akci posouvání"</string>
@@ -823,30 +823,30 @@ Zpráva: %2$s"</string>
     <string name="give_award_success">"Ocenění uděleno"</string>
     <string name="give_award_failed">"Selhání"</string>
     <string name="warning">"Varování"</string>
-    <string name="this_is_a_nsfw_subreddit">"Toto je NSFW subreddit."</string>
+    <string name="this_is_a_nsfw_community">"Toto je NSFW subreddit."</string>
     <string name="this_user_has_nsfw_content">"Tento uživatel má NSFW obsah"</string>
     <string name="dismiss">"Zavřít"</string>
     <string name="leave">"Opustit"</string>
-    <string name="go_to_subreddit">"Navštívit subreddit"</string>
+    <string name="go_to_community">"Navštívit subreddit"</string>
     <string name="go_to_user">"Navštívit uživatele"</string>
     <string name="go_to_thing_hint">"Název"</string>
     <string name="random">"Náhodný"</string>
-    <string name="random_subreddit">"Náhodný subreddit"</string>
-    <string name="random_nsfw_subreddit">"Náhodný NSFW subreddit"</string>
+    <string name="random_community">"Náhodný subreddit"</string>
+    <string name="random_nsfw_community">"Náhodný NSFW subreddit"</string>
     <string name="random_post">"Náhodný příspěvek"</string>
     <string name="random_nsfw_post">"Náhodný NSFW příspěvek"</string>
     <string name="fetch_random_thing_failed">"Zkuste to znovu později"</string>
     <string name="downloading">"Stahování"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all a r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all a r/popular"</string>
     <string name="settings_miscellaneous_title">"Různé"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"Respektovat doporučené řazení komentářů subredditu"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"Typ řazení komentářů nebude uložen"</string>
-    <string name="settings_subreddit_filter_category">"Skrýt subreddity"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"V r/popular a r/all"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"Respektovat doporučené řazení komentářů subredditu"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"Typ řazení komentářů nebude uložen"</string>
+    <string name="settings_community_filter_category">"Skrýt subreddity"</string>
+    <string name="settings_community_filter_popular_and_all">"V r/popular a r/all"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"Animace chycení UFO"</string>
     <string name="select_video_quality">"Vybrat kvalitu videa"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"Haptická zpětná vazba"</string>
-    <string name="settings_hide_subreddit_description_title">"Skrýt popis subredditu"</string>
+    <string name="settings_hide_community_description_title">"Skrýt popis subredditu"</string>
     <string name="settings_disable_image_preview_title">"Skrýt náhled obrázků v režimu úspory dat"</string>
     <string name="settings_swipe_action_swipe_left_title">"Posouvání doleva"</string>
     <string name="settings_swipe_action_swipe_right_title">"Posouvání doprava"</string>
@@ -864,7 +864,7 @@ Zpráva: %2$s"</string>
     <string name="action_save_to_database">"Uložit do databáze"</string>
     <string name="action_read_all_messages">"Přečíst všechny zprávy"</string>
     <string name="action_add_to_multireddit">"Přidat do multiredditu"</string>
-    <string name="search_only_subreddits_hint">"Hledat subreddity"</string>
+    <string name="search_only_communities_hint">"Hledat subreddity"</string>
     <string name="search_only_users_hint">"Hledat uživatele"</string>
     <string name="post_type_gif">"GIF"</string>
     <string name="post_type_gallery">"Galerie"</string>
@@ -881,12 +881,12 @@ Zpráva: %2$s"</string>
     <string name="settings_hide_read_posts_automatically_title">"Automaticky skrývat přečtené příspěvky"</string>
     <string name="settings_sort_type_title">"Typ řazení"</string>
     <string name="settings_save_sort_type_title">"Uložit typ řazení"</string>
-    <string name="settings_subreddit_default_sort_type_title">"Výchozí typ řazení subredditů"</string>
-    <string name="settings_subreddit_default_sort_time_title">"Výchozí čas řazení subredditů"</string>
+    <string name="settings_community_default_sort_type_title">"Výchozí typ řazení subredditů"</string>
+    <string name="settings_community_default_sort_time_title">"Výchozí čas řazení subredditů"</string>
     <string name="settings_user_default_sort_type_title">"Výchozí typ řazení uživatelů"</string>
     <string name="settings_user_default_sort_time_title">"Výchozí čas řazení uživatelů"</string>
     <string name="open_link">"Otevřít odkaz"</string>
-    <string name="select_subreddits_and_users">"Hledat subreddity a uživatele"</string>
+    <string name="select_communities_and_users">"Hledat subreddity a uživatele"</string>
     <string name="theme_item_read_post_title_color">"Barva názvu přečteného příspěvku"</string>
     <string name="theme_item_read_post_title_color_detail">"Použito na: název přečteného příspěvku"</string>
     <string name="theme_item_read_post_content_color">"Barva obsahu přečteného příspěvku"</string>
@@ -900,7 +900,7 @@ Zpráva: %2$s"</string>
     <string name="only_spoiler">"Pouze spoilery"</string>
     <string name="title_excludes_strings_hint">"Název: vyloučení klíčových slov (slovo1,slovo2)"</string>
     <string name="title_excludes_regex_hint">"Název: vyloučení regexu"</string>
-    <string name="exclude_subreddits_hint">"Vyloučit subreddity (např. funny,AskReddit)"</string>
+    <string name="exclude_communities_hint">"Vyloučit subreddity (např. funny,AskReddit)"</string>
     <string name="exclude_users_hint">"Vyloučit uživatele (např. Hostilenemy,random)"</string>
     <string name="exclude_flairs_hint">"Vyloučit štítky (např. štítek1,štítek2)"</string>
     <string name="contain_flairs_hint">"Obsahuje štítky (např. štítek1,štítek2)"</string>
@@ -916,26 +916,26 @@ Zpráva: %2$s"</string>
     <string name="duplicate_post_filter_dialog_message">"Chcete jej přepsat?"</string>
     <string name="apply_post_filter_to">"Použít na"</string>
     <string name="post_filter_usage_home">"Domů"</string>
-    <string name="post_filter_usage_subreddit">"Subreddit: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"Subreddit"</string>
+    <string name="post_filter_usage_community">"Subreddit: %1$s"</string>
+    <string name="post_filter_usage_community_all">"Subreddit"</string>
     <string name="post_filter_usage_user">"Uživatel: %1$s"</string>
     <string name="post_filter_usage_user_all">"Uživatel"</string>
     <string name="post_filter_usage_multireddit">"Multireddit: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"Multireddit"</string>
     <string name="post_filter_usage_search">"Hledat"</string>
-    <string name="subreddit">"Subreddit"</string>
+    <string name="community">"Subreddit"</string>
     <string name="user">"Uživatel"</string>
     <string name="edit_post_filter_name_of_usage_info">"Ponechte prázdné pro použití tohoto filtru příspěvků na všechny subreddity / uživatele / multireddity"</string>
     <string name="read_all_messages_time_limit">"Toto děláte příliš často. Zkuste to znovu později. Toto je limit přístupů k API Redditu."</string>
     <string name="read_all_messages_success">"Všechny zprávy úspěšně přečteny"</string>
     <string name="read_all_messages_failed">"Nepodařilo se přečíst všechny zprávy"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s byl přidán do multiredditu %2$s"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"Nepodařilo se přidat %1$s do multiredditu %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s byl přidán do multiredditu %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"Nepodařilo se přidat %1$s do multiredditu %2$s"</string>
     <string name="choose_a_user">"Vybrat uživatele"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Klikněte pro zobrazení médií v rozložení galerie"</string>
     <string name="settings_hide_post_type">"Skrýt typ příspěvků"</string>
     <string name="settings_hide_the_number_of_awards">"Skrýt počet ocenění"</string>
-    <string name="settings_hide_subreddit_and_user_prefix">"Skrýt předponu subredditů a uživatelů"</string>
+    <string name="settings_hide_community_and_user_prefix">"Skrýt předponu subredditů a uživatelů"</string>
     <string name="settings_hide_the_number_of_votes">"Skrýt počet hlasů"</string>
     <string name="settings_hide_the_number_of_comments">"Skrýt počet komentářů"</string>
     <string name="post_layout_gallery">"Rozložení galerie"</string>
@@ -946,7 +946,7 @@ Zpráva: %2$s"</string>
     <string name="action_share_link">"Sdílet odkaz"</string>
     <string name="action_copy_link">"Zkopírovat odkaz"</string>
     <string name="action_add_to_post_filter">"Přidat do filtru příspěvků"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"Nerozmazávat NSFW obrázky v NSFW subredditech"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"Nerozmazávat NSFW obrázky v NSFW subredditech"</string>
     <string name="settings_show_avatar_on_the_right">"Zobrazit avatar napravo"</string>
     <string name="settings_backup_settings_title">"Nastavení zálohování"</string>
     <string name="settings_restore_settings_title">"Obnovit nastavení"</string>
@@ -956,10 +956,10 @@ Zpráva: %2$s"</string>
     <string name="settings_collapse_account_section_title">"Sbalit sekci účtů"</string>
     <string name="settings_collapse_post_section_title">"Sbalit sekci příspěvků"</string>
     <string name="settings_collapse_preferences_section_title">"Sbalit sekci možností"</string>
-    <string name="settings_collapse_favorite_subreddits_section_title">"Sbalit sekci oblíbených subredditů"</string>
-    <string name="settings_collapse_subscribed_subreddits_section_title">"Sbalit sekci odebíraných subredditů"</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">"Skrýt sekci oblíbených subredditů"</string>
-    <string name="settings_hide_subscribed_subreddits_sections_title">"Skrýt sekci odebíraných subredditů"</string>
+    <string name="settings_collapse_favorite_communities_section_title">"Sbalit sekci oblíbených subredditů"</string>
+    <string name="settings_collapse_subscribed_communities_section_title">"Sbalit sekci odebíraných subredditů"</string>
+    <string name="settings_hide_favorite_communities_sections_title">"Skrýt sekci oblíbených subredditů"</string>
+    <string name="settings_hide_subscribed_communities_sections_title">"Skrýt sekci odebíraných subredditů"</string>
     <string name="settings_default_search_result_tab">"Výchozí karta výsledků hledání"</string>
     <string name="device_default">"Dle zařízení"</string>
     <string name="set_by_battery_saver">"Nastaveno spořičem baterie"</string>
@@ -994,7 +994,7 @@ Zpráva: %2$s"</string>
     <string name="upvote">"Hlas pro"</string>
     <string name="downvote">"Hlas proti"</string>
     <string name="select">"Vybrat"</string>
-    <string name="exclude_subreddit">"Vyloučit tento subreddit"</string>
+    <string name="exclude_community">"Vyloučit tento subreddit"</string>
     <string name="exclude_user">"Vyloučit tohoto uživatele"</string>
     <string name="exclude_flair">"Vyloučit tento štítek"</string>
     <string name="contain_flair">"Obsahovat tento štítek"</string>
@@ -1103,7 +1103,7 @@ Pokud ano, přejmenujte je, než povolíte Material You."</string>
     <string name="title_contains_strings_hint">"Název: obsahuje klíčová slova (slovo1,slovo2)"</string>
     <string name="title_contains_regex_hint">"Název: obsahuje regex"</string>
     <string name="contain_domains_hint">"Obsahuje domény"</string>
-    <string name="anonymous_multireddit_no_subreddit">"Tento multireddit nemá subreddit!"</string>
+    <string name="anonymous_multireddit_no_community">"Tento multireddit nemá subreddit!"</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">"Chyba při získávání v.redd.it videa: nelze získat URL videa"</string>
     <string name="contain_domain">"Obsahovat tuto doménu"</string>
     <string name="lock_screen_text">"Dávej pozor!!!"</string>

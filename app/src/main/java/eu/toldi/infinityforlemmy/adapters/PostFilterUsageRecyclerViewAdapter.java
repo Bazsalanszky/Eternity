@@ -47,9 +47,9 @@ public class PostFilterUsageRecyclerViewAdapter extends RecyclerView.Adapter<Rec
                 break;
             case PostFilterUsage.SUBREDDIT_TYPE:
                 if (postFilterUsage.nameOfUsage.equals(PostFilterUsage.NO_USAGE)) {
-                    ((PostFilterUsageViewHolder) holder).usageTextView.setText(R.string.post_filter_usage_subreddit_all);
+                    ((PostFilterUsageViewHolder) holder).usageTextView.setText(R.string.post_filter_usage_community_all);
                 } else {
-                    ((PostFilterUsageViewHolder) holder).usageTextView.setText(activity.getString(R.string.post_filter_usage_subreddit, postFilterUsage.nameOfUsage));
+                    ((PostFilterUsageViewHolder) holder).usageTextView.setText(activity.getString(R.string.post_filter_usage_community, postFilterUsage.nameOfUsage));
                 }
                 break;
             case PostFilterUsage.USER_TYPE:

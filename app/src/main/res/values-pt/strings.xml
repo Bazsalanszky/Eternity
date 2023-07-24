@@ -4,19 +4,19 @@
     <string name="comment_activity_label">"Enviar Comentário"</string>
     <string name="comment_activity_label_is_replying">"Responder"</string>
     <string name="post_text_activity_label">"Publicação de texto"</string>
-    <string name="subreddit_selection_activity_label">"Selecione uma Comunidade"</string>
+    <string name="community_selection_activity_label">"Selecione uma Comunidade"</string>
     <string name="post_link_activity_label">"Publicação de Ligação"</string>
     <string name="post_image_activity_label">"Publicação de Imagem"</string>
     <string name="post_video_activity_label">"Publicação de vídeo"</string>
     <string name="rules_activity_label">"Regras"</string>
-    <string name="search_subreddits_activity_label">"Comunidades"</string>
+    <string name="search_community_activity_label">"Comunidades"</string>
     <string name="edit_post_activity_label">"Editar publicação"</string>
     <string name="edit_comment_activity_label">"Editar Comentário"</string>
     <string name="view_message_activity_label">"Caixa de Entrada"</string>
     <string name="settings_activity_label">"Definições"</string>
     <string name="account_saved_thing_activity_label">"Guardado"</string>
     <string name="create_multi_reddit_activity_label">"Criar Multireddit"</string>
-    <string name="subreddit_multiselection_activity_label">"Selecionar Comunidades"</string>
+    <string name="community_multiselection_activity_label">"Selecionar Comunidades"</string>
     <string name="custom_theme_listing_activity_label">"Temas Personalizados"</string>
     <string name="customize_theme_activity_label">"Personalizar Tema"</string>
     <string name="customize_theme_activity_create_theme_label">"Criar Tema"</string>
@@ -73,13 +73,13 @@ Toque para tentar novamente."</string>
     <string name="load_more_posts_error">"Erro ao carregar publicações."</string>
     <string name="load_post_error">"Erro ao carregar publicação.
 Toque para tentar novamente."</string>
-    <string name="search_subreddits_error">"Ocorreu um erro ao pesquisar por comunidades.
+    <string name="search_communities_error">"Ocorreu um erro ao pesquisar por comunidades.
 Toque para tentar novamente."</string>
     <string name="search_users_error">"Ocorreu um erro ao pesquisar por utilizadores.
 Toque para tentar novamente."</string>
     <string name="no_posts">"Sem publicações encontradas"</string>
     <string name="no_comments">"Sem comentários encontrados"</string>
-    <string name="no_subreddits">"Nenhuma comunidade encontrada"</string>
+    <string name="no_communities">"Nenhuma comunidade encontrada"</string>
     <string name="no_users">"Nenhum utilizador encontrado"</string>
     <string name="no_multi_reddits">"Nenhum Multireddit encontrado"</string>
     <string name="no_storage_permission">"Sem permissão de armazenamento para guardar este ficheiro"</string>
@@ -112,7 +112,7 @@ Toque para tentar novamente."</string>
     <string name="settings">"Definições"</string>
     <string name="subscribers_number_detail">"Membros: %1$d"</string>
     <string name="online_subscribers_number_detail">"Online: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"Não é possível obter informações da comunidade"</string>
+    <string name="cannot_fetch_community_info">"Não é possível obter informações da comunidade"</string>
     <string name="cannot_fetch_user_info">"Não é possível obter informações do utilizador"</string>
     <string name="cannot_fetch_sidebar">"Não é possível obter informações da barra lateral"</string>
     <string name="cannot_fetch_multireddit">"Não é possível obter informações do multireddit"</string>
@@ -150,7 +150,7 @@ Toque para tentar novamente."</string>
     <string name="sending_message">"A enviar"</string>
     <string name="send_message_success">"Mensagem enviada"</string>
     <string name="send_message_failed">"Não foi possível enviar esta mensagem"</string>
-    <string name="select_a_subreddit">"Por favor escolha uma comunidade primeiro"</string>
+    <string name="select_a_community">"Por favor escolha uma comunidade primeiro"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"A publicação precisa de um bom título"</string>
@@ -166,10 +166,10 @@ Toque para tentar novamente."</string>
     <string name="loading">"A carregar"</string>
     <string name="post_title_hint">"Título"</string>
     <string name="post_text_content_hint">"Conteúdo"</string>
-    <string name="choose_a_subreddit">"Escolha uma comunidade"</string>
+    <string name="choose_a_communities">"Escolha uma comunidade"</string>
     <string name="rules">"Regras"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="subreddits">"Comunidades"</string>
+    <string name="communities">"Comunidades"</string>
     <string name="users">"Utilizadores"</string>
     <string name="multi_reddits">"MultiReddits"</string>
     <string name="bottom_sheet_post_text">"Texto"</string>
@@ -195,7 +195,7 @@ Toque para tentar novamente."</string>
 Toque para tentar novamente."</string>
     <string name="error_loading_rules_without_retry">"Erro ao Carregar Regras"</string>
     <string name="search_in">"Pesquisar em"</string>
-    <string name="all_subreddits">"Todas as comunidades"</string>
+    <string name="all_communities">"Todas as comunidades"</string>
     <string name="sort_best">"Melhor"</string>
     <string name="sort_hot">"Em Destaque"</string>
     <string name="sort_new">"Novos"</string>
@@ -286,7 +286,7 @@ Toque para tentar novamente."</string>
     <string name="view_all_comments">"Clique aqui para explorar todos os comentários"</string>
     <string name="notification_summary_account">"Conta"</string>
     <string name="notification_summary_message">"Nova Mensagem"</string>
-    <string name="notification_summary_subreddit">"Comunidade"</string>
+    <string name="notification_summary_community">"Comunidade"</string>
     <string name="notification_summary_award">"Prémio"</string>
     <string name="notification_new_messages">"%1$d Mensagens Novas"</string>
     <string name="label_account">"Conta"</string>
@@ -387,8 +387,8 @@ Toque para tentar novamente."</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Conta do Reddit"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"Comunidade"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">"Comunidade"</string>
+    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"Partilhar"</string>
     <string name="settings_share_summary">"Se aprecia esta aplicação, partilhe-a com outros"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>
@@ -399,7 +399,7 @@ Toque para tentar novamente."</string>
     <string name="settings_customize_amoled_theme_title">"Tema Amoled"</string>
     <string name="settings_manage_themes_title">"Gerir Temas"</string>
     <string name="settings_advanced_master_title">"Avançado"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"Eliminar Todas as Comunidades da BD"</string>
+    <string name="settings_delete_all_communities_data_in_database_title">"Eliminar Todas as Comunidades da BD"</string>
     <string name="settings_delete_all_users_data_in_database_title">"Eliminar Todos os Utilizadores da BD"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"Eliminar Todos os Tipos de Ordenação da BD"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"Eliminar Todas as Visualizações de Publicações da BD"</string>
@@ -411,7 +411,7 @@ Toque para tentar novamente."</string>
     <string name="settings_tab_3_summary">"Separador 3"</string>
     <string name="settings_tab_title">"Título"</string>
     <string name="settings_tab_post_type">"Tipo"</string>
-    <string name="settings_tab_subreddit_name">"Nome da Comunidade (sem prefixo r/)"</string>
+    <string name="settings_tab_community_name">"Nome da Comunidade (sem prefixo r/)"</string>
 
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"Nome MultiReddit (/utilizador/oseunomedeutilizador/m/oseunomemultireddit)"</string>
@@ -457,7 +457,7 @@ Toque para tentar novamente."</string>
     <string name="error_loading_subscriptions">"Não foi possível sincronizar as subscrições"</string>
     <string name="share_this_app">"Check out Infinity for Reddit, an awesome Reddit client!
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
-    <string name="error_getting_subreddit_name">"Erro ao obter o nome da comunidade"</string>
+    <string name="error_getting_community_name">"Erro ao obter o nome da comunidade"</string>
     <string name="share_post_link">"Partilhar Endereço da Publicação"</string>
     <string name="share_image_link">"Partilhar Endereço da Imagem"</string>
     <string name="share_gif_link">"Partilhar Endereço do Gif"</string>
@@ -600,8 +600,8 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_unsubscribed_color_detail">"Aplicado a: Botão aderir"</string>
     <string name="theme_item_username_color">"Cor do Nome de Utilizador"</string>
     <string name="theme_item_username_color_detail">"Aplicado a: Nome de Utilizador"</string>
-    <string name="theme_item_subreddit_color">"Cor das Comunidades"</string>
-    <string name="theme_item_subreddit_color_detail">"Aplicado a: Nome da Comunidade"</string>
+    <string name="theme_item_community_color">"Cor das Comunidades"</string>
+    <string name="theme_item_community_color_detail">"Aplicado a: Nome da Comunidade"</string>
     <string name="theme_item_author_flair_text_color">"Cor de Flair de Autor"</string>
     <string name="theme_item_author_flair_text_color_detail">"Aplicado a: Flair de Autor nos Comentários"</string>
     <string name="theme_item_submitter_color">"Autor"</string>
@@ -680,7 +680,7 @@ com base no Tema Indigo Amoled"</string>
     <string name="invalid_color">"Cor Inválida"</string>
 
     <!-- Fuzzy -->
-    <string name="delete_all_subreddits_success">"Todas as comunidades foram eliminados com sucesso"</string>
+    <string name="delete_all_communities_success">"Todas as comunidades foram eliminados com sucesso"</string>
     <string name="delete_all_users_success">"Todos os utilizadores eliminados com sucesso"</string>
     <string name="delete_all_sort_types_success">"Todos os tipos de ordenação eliminados com sucesso"</string>
     <string name="delete_all_post_layouts_success">"Todas as visualizações eliminadas com sucesso"</string>
@@ -688,7 +688,7 @@ com base no Tema Indigo Amoled"</string>
     <string name="delete_all_front_page_scrolled_positions_success">"Eliminação das posições de deslizamento com sucesso"</string>
     <string name="reset_all_settings_success">"Todas as definições repostas com sucesso"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="subreddit_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">"r/Infinity_For_Reddit"</string>
     <string name="primary_text_preview">"Texto Principal"</string>
     <string name="secondary_text_preview">"Texto Secundário"</string>
     <string name="post_title_preview">"Isto é uma publicação"</string>
@@ -760,13 +760,13 @@ Exemplo: asuapasse:123456"</string>
     <string name="settings_more_tabs_summary">"Mais Separadores"</string>
     <string name="settings_more_tabs_info_summary">"Ativar as seguintes opções poderá causar um comportamento inesperado:
 Os separadores poderão perder todo o conteúdo após alternar entre outros. É o mesmo que recarregar a página."</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">"Mostrar Comunidades Subscritas Favoritas"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"Mostrar Comunidades Subscritas"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Mostrar Comunidades Subscritas Favoritas"</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">"Mostrar Comunidades Subscritas"</string>
     <string name="settings_download_location_title">"Localização para Transferências"</string>
     <string name="settings_image_download_location_title">"Localização de Transferência de Imagens"</string>
     <string name="settings_gif_download_location_title">"Localização para Transferência de GIFs"</string>
     <string name="settings_video_download_location_title">"Localização para Transferência de Vídeos"</string>
-    <string name="settings_separate_folder_for_each_subreddit">"Separar por Pasta de Cada Comunidade"</string>
+    <string name="settings_separate_folder_for_each_community">"Separar por Pasta de Cada Comunidade"</string>
     <string name="settings_swipe_action_title">"Ação de Deslizamento"</string>
     <string name="settings_disable_swiping_between_tabs_title">"Desativar Deslizar entre Separadores"</string>
     <string name="settings_enable_swipe_action_title">"Ativar Ação Deslizar"</string>
@@ -820,30 +820,30 @@ Mensagem: %2$s"</string>
     <string name="give_award_success">"Prémio oferecido"</string>
     <string name="give_award_failed">"Falhou"</string>
     <string name="warning">"Aviso"</string>
-    <string name="this_is_a_nsfw_subreddit">"Esta é uma comunidade 18+."</string>
+    <string name="this_is_a_nsfw_community">"Esta é uma comunidade 18+."</string>
     <string name="this_user_has_nsfw_content">"Este utilizador tem conteúdo 18+"</string>
     <string name="dismiss">"Descartar"</string>
     <string name="leave">"Sair"</string>
-    <string name="go_to_subreddit">"Ir para a Comunidade"</string>
+    <string name="go_to_community">"Ir para a Comunidade"</string>
     <string name="go_to_user">"Ir para o Utilizador"</string>
     <string name="go_to_thing_hint">"Nome"</string>
     <string name="random">"Aleatório"</string>
-    <string name="random_subreddit">"Comunidade Aleatória"</string>
-    <string name="random_nsfw_subreddit">"Comunidade 18+ Aleatória"</string>
+    <string name="random_community">"Comunidade Aleatória"</string>
+    <string name="random_nsfw_community">"Comunidade 18+ Aleatória"</string>
     <string name="random_post">"Publicação Aleatória"</string>
     <string name="random_nsfw_post">"Publicação 18+ Aleatória"</string>
     <string name="fetch_random_thing_failed">"Tente novamente mais tarde"</string>
     <string name="downloading">"A transferir"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all e r/popular"</string>
+    <string name="community_filter_popular_and_all_activity_label">"r/all e r/popular"</string>
     <string name="settings_miscellaneous_title">"Diversos"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">"Respeitar Tipo de Ordenação de Comentários Recomendada pela Comunidade"</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">"Tipo de ordenação de comentários não será guardada"</string>
-    <string name="settings_subreddit_filter_category">"Esconder Comunidades"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"Em r/popular e r/all"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">"Respeitar Tipo de Ordenação de Comentários Recomendada pela Comunidade"</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">"Tipo de ordenação de comentários não será guardada"</string>
+    <string name="settings_community_filter_category">"Esconder Comunidades"</string>
+    <string name="settings_community_filter_popular_and_all">"Em r/popular e r/all"</string>
     <string name="settings_credits_ufo_capturing_animation_title">"Animação UFO Capturing"</string>
     <string name="select_video_quality">"Escolher Qualidade de Vídeo"</string>
     <string name="settings_swipe_action_haptic_feedback_title">"Feedback táctil"</string>
-    <string name="settings_hide_subreddit_description_title">"Esconder Descrição da Comunidade"</string>
+    <string name="settings_hide_community_description_title">"Esconder Descrição da Comunidade"</string>
     <string name="settings_disable_image_preview_title">"Desativar Pré-visualização de Imagens no Modo de Poupança de Dados"</string>
     <string name="settings_swipe_action_swipe_left_title">"Deslizar para a Esquerda"</string>
     <string name="settings_swipe_action_swipe_right_title">"Deslizar para a Direita"</string>
@@ -859,7 +859,7 @@ Mensagem: %2$s"</string>
     <string name="action_save_to_database">"Guardar na Base de Dados"</string>
     <string name="action_read_all_messages">"Ler Todas as Mensagens"</string>
     <string name="action_add_to_multireddit">"Adicionar ao Multireddit"</string>
-    <string name="search_only_subreddits_hint">"Pesquisar comunidades"</string>
+    <string name="search_only_communities_hint">"Pesquisar comunidades"</string>
     <string name="search_only_users_hint">"Pesquisar utilizadores"</string>
     <string name="post_type_gif">"Gif"</string>
     <string name="post_type_gallery">"Galeria"</string>
@@ -876,12 +876,12 @@ Mensagem: %2$s"</string>
     <string name="settings_hide_read_posts_automatically_title">"Esconder Publicações Lidas Automaticamente"</string>
     <string name="settings_sort_type_title">"Tipo de Ordenação"</string>
     <string name="settings_save_sort_type_title">"Guardar Tipo de Ordenação"</string>
-    <string name="settings_subreddit_default_sort_type_title">"Ordenação Padrão das Comunidades"</string>
-    <string name="settings_subreddit_default_sort_time_title">"Ordenação Temporal Padrão das Comunidades"</string>
+    <string name="settings_community_default_sort_type_title">"Ordenação Padrão das Comunidades"</string>
+    <string name="settings_community_default_sort_time_title">"Ordenação Temporal Padrão das Comunidades"</string>
     <string name="settings_user_default_sort_type_title">"Ordenação Padrão de Utilizador"</string>
     <string name="settings_user_default_sort_time_title">"Ordenação Temporal Padrão do Utilizador"</string>
     <string name="open_link">"Abrir Ligação"</string>
-    <string name="select_subreddits_and_users">"Selecione Comunidades e Utilizadores"</string>
+    <string name="select_communities_and_users">"Selecione Comunidades e Utilizadores"</string>
     <string name="theme_item_read_post_title_color">"Cor do Título de Publicação Lida"</string>
     <string name="theme_item_read_post_title_color_detail">"Aplicado a: Título de publicação lida"</string>
     <string name="theme_item_read_post_content_color">"Cor de Conteúdo de Publicação Lida"</string>
@@ -895,7 +895,7 @@ Mensagem: %2$s"</string>
     <string name="only_spoiler">"Apenas Spoiler"</string>
     <string name="title_excludes_strings_hint">"Título: excluir palavras-chave (palavra1,palavra2)"</string>
     <string name="title_excludes_regex_hint">"Título: excluir expressões regulares"</string>
-    <string name="exclude_subreddits_hint">"Excluir comunidades (ex.: funny,AskReddit)"</string>
+    <string name="exclude_communities_hint">"Excluir comunidades (ex.: funny,AskReddit)"</string>
     <string name="exclude_users_hint">"Excluir utilizadores (ex.: Hostilenemy,random)"</string>
     <string name="exclude_flairs_hint">"Excluir flairs (ex.: flair1, flair2)"</string>
     <string name="contain_flairs_hint">"Contém flairs (ex.: flair1, flair2)"</string>
@@ -911,26 +911,26 @@ Mensagem: %2$s"</string>
     <string name="duplicate_post_filter_dialog_message">"Substituir?"</string>
     <string name="apply_post_filter_to">"Aplicar a"</string>
     <string name="post_filter_usage_home">"Início"</string>
-    <string name="post_filter_usage_subreddit">"Comunidade: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"Comunidade"</string>
+    <string name="post_filter_usage_community">"Comunidade: %1$s"</string>
+    <string name="post_filter_usage_community_all">"Comunidade"</string>
     <string name="post_filter_usage_user">"Utilizador: %1$s"</string>
     <string name="post_filter_usage_user_all">"Utilizador"</string>
     <string name="post_filter_usage_multireddit">"MultiReddit: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"MultiReddit"</string>
     <string name="post_filter_usage_search">"Pesquisar"</string>
-    <string name="subreddit">"Comunidade"</string>
+    <string name="community">"Comunidade"</string>
     <string name="user">"Utilizador"</string>
     <string name="edit_post_filter_name_of_usage_info">"Deixar em branco para aplicar este filtro de publicação a todos os utilizadores / comunidades / multireddit"</string>
     <string name="read_all_messages_time_limit">"Está a repetir esta ação com demasiada frequência. Tente novamente mais tarde. Este é o valor limite da API do Reddit."</string>
     <string name="read_all_messages_success">"Todas as mensagens lidas com sucesso"</string>
     <string name="read_all_messages_failed">"Não é possível ler todas as mensagens"</string>
-    <string name="add_subreddit_or_user_to_multireddit_success">"%1$s foi adicionado ao multireddit %2$s"</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">"Não é possível adicionar %1$s ao multireddit %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_success">"%1$s foi adicionado ao multireddit %2$s"</string>
+    <string name="add_community_or_user_to_multireddit_failed">"Não é possível adicionar %1$s ao multireddit %2$s"</string>
     <string name="choose_a_user">"Escolher um utilizador"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Clicar para Mostrar Média na Visualização Galeria"</string>
     <string name="settings_hide_post_type">"Esconder Tipo de Publicação"</string>
     <string name="settings_hide_the_number_of_awards">"Esconder Número de Prémios"</string>
-    <string name="settings_hide_subreddit_and_user_prefix">"Esconder Prefixos de Comunidades e Utilizador"</string>
+    <string name="settings_hide_community_and_user_prefix">"Esconder Prefixos de Comunidades e Utilizador"</string>
     <string name="settings_hide_the_number_of_votes">"Esconder Número de Votos"</string>
     <string name="settings_hide_the_number_of_comments">"Esconder Número de Comentários"</string>
     <string name="post_layout_gallery">"Galeria"</string>
@@ -941,7 +941,7 @@ Mensagem: %2$s"</string>
     <string name="action_share_link">"Partilhar Ligação"</string>
     <string name="action_copy_link">"Copiar Ligação"</string>
     <string name="action_add_to_post_filter">"Adicionar ao Filtro de Publicações"</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">"Não desfocar Imagens 18+ em Comunidades 18+"</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">"Não desfocar Imagens 18+ em Comunidades 18+"</string>
 
     <!-- Fuzzy -->
     <string name="settings_show_avatar_on_the_right">"Mostrar Avatar à Esquerda"</string>
@@ -953,10 +953,10 @@ Mensagem: %2$s"</string>
     <string name="settings_collapse_account_section_title">"Colapsar Secção de Conta"</string>
     <string name="settings_collapse_post_section_title">"Colapsar Secção de Publicações"</string>
     <string name="settings_collapse_preferences_section_title">"Colapsar Secção de Preferências"</string>
-    <string name="settings_collapse_favorite_subreddits_section_title">"Colapsar Secção de Comunidades Favoritas"</string>
-    <string name="settings_collapse_subscribed_subreddits_section_title">"Colapsar Secção de Comunidades Subscritas"</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">"Esconder Secção de Comunidades Favoritas"</string>
-    <string name="settings_hide_subscribed_subreddits_sections_title">"Esconder Secção de Comunidades Subscritas"</string>
+    <string name="settings_collapse_favorite_communities_section_title">"Colapsar Secção de Comunidades Favoritas"</string>
+    <string name="settings_collapse_subscribed_communities_section_title">"Colapsar Secção de Comunidades Subscritas"</string>
+    <string name="settings_hide_favorite_communities_sections_title">"Esconder Secção de Comunidades Favoritas"</string>
+    <string name="settings_hide_subscribed_communities_sections_title">"Esconder Secção de Comunidades Subscritas"</string>
     <string name="settings_default_search_result_tab">"Separador do Resultado de Pesquisas Padrão"</string>
     <string name="device_default">"Padrão do dispositivo"</string>
     <string name="set_by_battery_saver">"Definido por Poupança de Bateria"</string>
@@ -991,7 +991,7 @@ Mensagem: %2$s"</string>
     <string name="upvote">"Voto Positivo"</string>
     <string name="downvote">"Voto Negativo"</string>
     <string name="select">"Selecionar"</string>
-    <string name="exclude_subreddit">"Excluir esta comunidade"</string>
+    <string name="exclude_community">"Excluir esta comunidade"</string>
     <string name="exclude_user">"Excluir este utilizador"</string>
     <string name="exclude_flair">"Excluir esta flair"</string>
     <string name="contain_flair">"Contém esta flair"</string>
@@ -1074,7 +1074,7 @@ Toque para tentar novamente."</string>
     <string name="go_to_top">"Ir para Cima"</string>
     <string name="title_contains_regex_hint">"Título: contém regex"</string>
     <string name="contain_domains_hint">"Contém domínios"</string>
-    <string name="anonymous_multireddit_no_subreddit">"Este multireddit não tem nenhum subreddit!"</string>
+    <string name="anonymous_multireddit_no_community">"Este multireddit não tem nenhum subreddit!"</string>
     <string name="contain_domain">"Contém este domínio"</string>
     <string name="app_lock_timeout_immediately">"Imediatamente"</string>
     <string name="app_lock_timeout_1_min">"1 minuto"</string>

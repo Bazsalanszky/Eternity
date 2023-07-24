@@ -34,22 +34,22 @@
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="collapse_favorite_subreddits_section"
-        app:title="@string/settings_collapse_favorite_subreddits_section_title" />
+        app:title="@string/settings_collapse_favorite_communities_section_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="collapse_subscribed_subreddits_section"
-        app:title="@string/settings_collapse_subscribed_subreddits_section_title" />
+        app:title="@string/settings_collapse_subscribed_communities_section_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="hide_favorite_subreddits_sections"
-        app:title="@string/settings_hide_favorite_subreddits_sections_title" />
+        app:title="@string/settings_hide_favorite_communities_sections_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="hide_subscribed_subreddits_sections"
-        app:title="@string/settings_hide_subscribed_subreddits_sections_title" />
+        app:title="@string/settings_hide_subscribed_communities_sections_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"

@@ -258,7 +258,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                     Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.posts));
                     break;
                 case 1:
-                    Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.subreddits));
+                    Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.communities));
                     break;
                 case 2:
                     Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.users));
@@ -647,7 +647,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
             }
         });
         new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.go_to_subreddit)
+                .setTitle(R.string.go_to_community)
                 .setView(rootView)
                 .setPositiveButton(R.string.ok, (dialogInterface, i)
                         -> {

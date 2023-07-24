@@ -20,9 +20,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -134,7 +132,7 @@ public class PullNotificationWorker extends Worker {
                                 } else if (kind.equals(Message.TYPE_MESSAGE)) {
                                     summary = context.getString(R.string.notification_summary_message);
                                 } else if (kind.equals(Message.TYPE_SUBREDDIT)) {
-                                    summary = context.getString(R.string.notification_summary_subreddit);
+                                    summary = context.getString(R.string.notification_summary_community);
                                 } else {
                                     summary = context.getString(R.string.notification_summary_award);
                                 }

@@ -276,7 +276,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
             int titleId;
             switch (tab1CurrentPostType) {
                 case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_SUBREDDIT:
-                    titleId = R.string.settings_tab_subreddit_name;
+                    titleId = R.string.settings_tab_community_name;
                     break;
                 case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_MULTIREDDIT:
                     titleId = R.string.settings_tab_multi_reddit_name;
@@ -362,7 +362,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
             int titleId;
             switch (tab2CurrentPostType) {
                 case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_SUBREDDIT:
-                    titleId = R.string.settings_tab_subreddit_name;
+                    titleId = R.string.settings_tab_community_name;
                     break;
                 case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_MULTIREDDIT:
                     titleId = R.string.settings_tab_multi_reddit_name;
@@ -448,7 +448,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
             int titleId;
             switch (tab3CurrentPostType) {
                 case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_SUBREDDIT:
-                    titleId = R.string.settings_tab_subreddit_name;
+                    titleId = R.string.settings_tab_community_name;
                     break;
                 case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_MULTIREDDIT:
                     titleId = R.string.settings_tab_multi_reddit_name;
@@ -559,7 +559,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
         switch (postType) {
             case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_SUBREDDIT:
                 constraintLayout.setVisibility(View.VISIBLE);
-                titleTextView.setText(R.string.settings_tab_subreddit_name);
+                titleTextView.setText(R.string.settings_tab_community_name);
                 break;
             case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_MULTIREDDIT:
                 constraintLayout.setVisibility(View.VISIBLE);
@@ -578,7 +578,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
         switch (postType) {
             case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_SUBREDDIT:
                 linearLayout.setVisibility(View.VISIBLE);
-                titleTextView.setText(R.string.settings_tab_subreddit_name);
+                titleTextView.setText(R.string.settings_tab_community_name);
                 break;
             case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_MULTIREDDIT:
                 linearLayout.setVisibility(View.VISIBLE);
@@ -597,7 +597,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
         switch (postType) {
             case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_SUBREDDIT:
                 constraintLayout.setVisibility(View.VISIBLE);
-                titleTextView.setText(R.string.settings_tab_subreddit_name);
+                titleTextView.setText(R.string.settings_tab_community_name);
                 break;
             case SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_MULTIREDDIT:
                 constraintLayout.setVisibility(View.VISIBLE);

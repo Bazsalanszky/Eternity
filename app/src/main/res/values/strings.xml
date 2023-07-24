@@ -5,25 +5,25 @@
     <string name="comment_activity_label">Send Comment</string>
     <string name="comment_activity_label_is_replying">Reply</string>
     <string name="post_text_activity_label">Text Post</string>
-    <string name="subreddit_selection_activity_label">Select a Subreddit</string>
+    <string name="community_selection_activity_label">Select a Community</string>
     <string name="post_link_activity_label">Link Post</string>
     <string name="post_image_activity_label">Image Post</string>
     <string name="post_video_activity_label">Video Post</string>
     <string name="rules_activity_label">Rules</string>
-    <string name="search_subreddits_activity_label">Subreddits</string>
+    <string name="search_community_activity_label">Communities</string>
     <string name="edit_post_activity_label">Edit Post</string>
     <string name="edit_comment_activity_label">Edit Comment</string>
     <string name="view_message_activity_label">Inbox</string>
     <string name="settings_activity_label">Settings</string>
     <string name="account_saved_thing_activity_label">Saved</string>
     <string name="create_multi_reddit_activity_label">Create Multireddit</string>
-    <string name="subreddit_multiselection_activity_label">Select Subreddits</string>
+    <string name="community_multiselection_activity_label">Select Communities</string>
     <string name="custom_theme_listing_activity_label">Custom Themes</string>
     <string name="customize_theme_activity_label">Customize Theme</string>
     <string name="customize_theme_activity_create_theme_label">Create Theme</string>
     <string name="theme_preview_activity_label">Theme Preview</string>
     <string name="edit_multi_reddit_activity_label">Edit Multireddit</string>
-    <string name="selected_subeddits_activity_label">Selected Subreddits</string>
+    <string name="selected_subeddits_activity_label">Selected Communities</string>
     <string name="report_activity_label">Report</string>
     <string name="view_imgur_media_activity_image_label">Image %1$d/%2$d</string>
     <string name="view_imgur_media_activity_video_label">Video %1$d/%2$d</string>
@@ -33,7 +33,7 @@
     <string name="view_reddit_gallery_activity_video_label">Video %1$d/%2$d</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
     <string name="give_award_activity_label">Give Award</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">r/all and r/popular</string>
+    <string name="community_filter_popular_and_all_activity_label">r/all and r/popular</string>
     <string name="customize_post_filter_activity_label">Customize Post Filter</string>
     <string name="filtered_posts_activity_subtitle">Filtered Posts</string>
     <string name="post_filter_preference_activity_label">Post Filter</string>
@@ -108,11 +108,11 @@
     <string name="load_posts_error">Error loading posts.\nTap to retry.</string>
     <string name="load_more_posts_error">Error loading posts.</string>
     <string name="load_post_error">Error loading this post.\nTap to retry.</string>
-    <string name="search_subreddits_error">Error searching subreddits.\nTap to retry.</string>
+    <string name="search_communities_error">Error searching communities.\nTap to retry.</string>
     <string name="search_users_error">Error searching users.\nTap to retry.</string>
     <string name="no_posts">No posts found</string>
     <string name="no_comments">No comments found</string>
-    <string name="no_subreddits">No subreddits found</string>
+    <string name="no_communities">No communities found</string>
     <string name="no_users">No users found</string>
     <string name="no_multi_reddits">No Multireddits found</string>
     <string name="no_storage_permission">No storage permission to save this file</string>
@@ -147,7 +147,7 @@
     <string name="settings">Settings</string>
     <string name="subscribers_number_detail">Subscribers: %1$,d</string>
     <string name="online_subscribers_number_detail">Online: %1$,d</string>
-    <string name="cannot_fetch_subreddit_info">Cannot fetch subreddit info</string>
+    <string name="cannot_fetch_community_info">Cannot fetch community info</string>
     <string name="cannot_fetch_user_info">Cannot fetch user info</string>
     <string name="cannot_fetch_sidebar">Cannot fetch sidebar</string>
     <string name="cannot_fetch_multireddit">Cannot fetch multireddit info</string>
@@ -166,11 +166,11 @@
     <string name="unfollowed">Unfollowed</string>
     <string name="unfollow_failed">Unfollowing Failed</string>
 
-    <string name="content_description_banner_imageview">Subreddit Banner Image</string>
+    <string name="content_description_banner_imageview">Community Banner Image</string>
 
     <string name="app_label">Infinity</string>
     <string name="search_hint">Search anything</string>
-    <string name="search_only_subreddits_hint">Search subreddits</string>
+    <string name="search_only_communities_hint">Search communities</string>
     <string name="search_only_users_hint">Search users</string>
 
     <string name="no_posts_no_lazy_mode">No posts available</string>
@@ -195,7 +195,7 @@
     <string name="send_message_success">Message sent</string>
     <string name="send_message_failed">Could not send this message</string>
 
-    <string name="select_a_subreddit">Please select a subreddit first</string>
+    <string name="select_a_community">Please select a community first</string>
     <string name="title_required">The post needs a good title</string>
     <string name="link_required">Hey where is the link?</string>
     <string name="select_an_image">Please select an image first</string>
@@ -216,12 +216,12 @@
 
     <string name="post_title_hint">Title</string>
     <string name="post_text_content_hint">Content</string>
-    <string name="choose_a_subreddit">Choose a subreddit</string>
+    <string name="choose_a_communities">Choose a community</string>
     <string name="rules">Rules</string>
     <string name="post_link_hint">URL</string>
     <string name="receive_post_reply_notifications">Receive post reply notifications</string>
 
-    <string name="subreddits">Subreddits</string>
+    <string name="communities">Communities</string>
     <string name="users">Users</string>
     <string name="multi_reddits">MultiReddits</string>
     <string name="posts">Posts</string>
@@ -259,7 +259,7 @@
     <string name="error_loading_rules_without_retry">Error Loading Rules</string>
 
     <string name="search_in">Search in</string>
-    <string name="all_subreddits">All subreddits</string>
+    <string name="all_communities">All communities</string>
 
     <string name="sort_best">Active</string>
     <string name="sort_hot">Hot</string>
@@ -354,12 +354,12 @@
 
     <string name="notification_summary_account">Account</string>
     <string name="notification_summary_message">New Message</string>
-    <string name="notification_summary_subreddit">Subreddit</string>
+    <string name="notification_summary_community">Community</string>
     <string name="notification_summary_award">Award</string>
     <string name="notification_new_messages">%1$d New Messages</string>
 
     <string name="label_account">Account</string>
-    <string name="label_reddit">Reddit</string>
+    <string name="label_reddit">Lemmy</string>
     <string name="label_post">Post</string>
     <string name="label_preferences">Preferences</string>
 
@@ -445,7 +445,7 @@
     <string name="settings_enable_nsfw_title">Enable NSFW</string>
     <string name="settings_blur_nsfw_title">Blur NSFW Images</string>
     <string name="settings_blur_spoiler_title">Blur Spoiler Images</string>
-    <string name="settings_do_not_blur_nsfw_in_nsfw_subreddits_title">Don\'t blur NSFW Images in NSFW Subreddits</string>
+    <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">Don\'t blur NSFW Images in NSFW Communities</string>
     <string name="settings_about_master_title">About</string>
     <string name="settings_acknowledgement_master_title">Acknowledgement</string>
     <string name="settings_credits_master_title">Credits</string>
@@ -470,14 +470,14 @@
     <string name="settings_rate_summary">Give me a 5-star rating and I will be really happy</string>
     <string name="settings_email_title">Email</string>
     <string name="settings_email_summary">docilealligator.app@gmail.com</string>
-    <string name="settings_reddit_account_title">Reddit Account</string>
+    <string name="settings_reddit_account_title">Lemmy Account</string>
     <string name="settings_reddit_account_summary">u/Hostilenemy</string>
-    <string name="settings_subreddit_title">Subreddit</string>
-    <string name="settings_subreddit_summary">r/Infinity_For_Reddit</string>
+    <string name="settings_community_title">Community</string>
+    <string name="settings_community_summary">r/Infinity_For_Reddit</string>
     <string name="settings_share_title">Share</string>
     <string name="settings_share_summary">Share this app to other people if you enjoy it</string>
     <string name="settings_privacy_policy_title">Privacy Policy</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Infinity For Lemmy</string>
     <string name="settings_version_summary">Version %s</string>
     <string name="settings_category_customization_title">Customization</string>
     <string name="settings_customize_light_theme_title">Light Theme</string>
@@ -491,7 +491,7 @@
     <string name="settings_apply_material_you_title">Apply Material You</string>
     <string name="settings_apply_material_you_summary">In case Infinity did not change the theme</string>
     <string name="settings_advanced_master_title">Advanced</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">Delete All Subreddits in Database</string>
+    <string name="settings_delete_all_communities_data_in_database_title">Delete All Communities in Database</string>
     <string name="settings_delete_all_users_data_in_database_title">Delete All Users in Database</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">Delete All Sort Types in Database</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">Delete All Post Layouts in Database</string>
@@ -510,11 +510,11 @@
     <string name="settings_more_tabs_info_summary">Enabling the following options will cause an unintended behaviour:\nTabs may lose all the content after switching to others. This is the same as refreshing the page.</string>
     <string name="settings_more_tabs_show_favorite_multireddits_title">Show Favorite Multireddits</string>
     <string name="settings_more_tabs_show_multireddits_title">Show Multireddits</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_subreddits_title">Show Favorite Subscribed Subreddits</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">Show Subscribed Subreddits</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">Show Favorite Subscribed Communities</string>
+    <string name="settings_more_tabs_show_subscribed_communities_title">Show Subscribed Communities</string>
     <string name="settings_tab_title">Title</string>
     <string name="settings_tab_post_type">Type</string>
-    <string name="settings_tab_subreddit_name">Subreddit Name (Without r/ prefix)</string>
+    <string name="settings_tab_community_name">Community Name (Without @ instance tag)</string>
     <string name="settings_tab_multi_reddit_name">MultiReddit Path (/user/yourusername/m/yourmultiredditname) (only lowercase characters)</string>
     <string name="settings_tab_username">Username (Without u/ prefix)</string>
     <string name="no_developer_easter_egg">There\'s no developer options here</string>
@@ -522,7 +522,7 @@
     <string name="settings_image_download_location_title">Image Download Location</string>
     <string name="settings_gif_download_location_title">Gif Download Location</string>
     <string name="settings_video_download_location_title">Video Download Location</string>
-    <string name="settings_separate_folder_for_each_subreddit">Separate Folder for Each Subreddit</string>
+    <string name="settings_separate_folder_for_each_community">Separate Folder for Each Community</string>
     <string name="settings_save_nsfw_media_in_different_folder_title">Save NSFW Media in Different Location</string>
     <string name="settings_nsfw_download_location_title">NSFW Download Location</string>
     <string name="settings_swipe_action_title">Swipe Action</string>
@@ -551,13 +551,13 @@
     <string name="settings_credits_national_flags">National Flags</string>
     <string name="settings_credits_national_flags_summary">Icon made by Freepik from www.flaticon.com</string>
     <string name="settings_miscellaneous_title">Miscellaneous</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_title">Respect Subreddit Recommended Comment Sort Type</string>
-    <string name="settings_respect_subreddit_recommended_comment_sort_type_summary">Comment sort type will not be saved</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_title">Respect Community Recommended Comment Sort Type</string>
+    <string name="settings_respect_community_recommended_comment_sort_type_summary">Comment sort type will not be saved</string>
     <string name="settings_post_filter_title">Post Filter</string>
-    <string name="settings_subreddit_filter_category">Hide Subreddits</string>
-    <string name="settings_subreddit_filter_popular_and_all">In r/popular and r/all</string>
+    <string name="settings_community_filter_category">Hide Communities</string>
+    <string name="settings_community_filter_popular_and_all">In r/popular and r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">UFO Capturing Animation</string>
-    <string name="settings_hide_subreddit_description_title">Hide Subreddit Description</string>
+    <string name="settings_hide_community_description_title">Hide Community Description</string>
     <string name="settings_disable_image_preview_title">Disable Image Preview in Data Saving Mode</string>
     <string name="settings_only_disable_preview_in_video_and_gif_posts_title">Only Disable Preview in Video and Gif Posts</string>
     <string name="settings_swipe_action_swipe_left_title">Swipe Left</string>
@@ -572,15 +572,15 @@
     <string name="settings_hide_read_posts_automatically_title">Hide Read Posts Automatically</string>
     <string name="settings_sort_type_title">Sort Type</string>
     <string name="settings_save_sort_type_title">Save Sort Type</string>
-    <string name="settings_subreddit_default_sort_type_title">Subreddit Default Sort Type</string>
-    <string name="settings_subreddit_default_sort_time_title">Subreddit Default Sort Time</string>
+    <string name="settings_community_default_sort_type_title">Community Default Sort Type</string>
+    <string name="settings_community_default_sort_time_title">Community Default Sort Time</string>
     <string name="settings_user_default_sort_type_title">User Default Sort Type</string>
     <string name="settings_user_default_sort_time_title">User Default Sort Time</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Click to Show Media in Gallery Layout</string>
     <string name="settings_hide_post_type">Hide Post Type</string>
     <string name="settings_hide_post_flair">Hide Post Flair</string>
     <string name="settings_hide_the_number_of_awards">Hide the Number of Awards</string>
-    <string name="settings_hide_subreddit_and_user_prefix">Hide Subreddit and User Prefix</string>
+    <string name="settings_hide_community_and_user_prefix">Hide Community and User Prefix</string>
     <string name="settings_hide_the_number_of_votes">Hide the Number of Votes</string>
     <string name="settings_hide_the_number_of_comments">Hide the Number of Comments</string>
     <string name="settings_show_avatar_on_the_right">Show Avatar on the Right</string>
@@ -594,10 +594,10 @@
     <string name="settings_collapse_reddit_section_title">Collapse Reddit Section</string>
     <string name="settings_collapse_post_section_title">Collapse Post Section</string>
     <string name="settings_collapse_preferences_section_title">Collapse Preferences Section</string>
-    <string name="settings_collapse_favorite_subreddits_section_title">Collapse Favorite Subreddits Section</string>
-    <string name="settings_collapse_subscribed_subreddits_section_title">Collapse Subscribed Subreddits Section</string>
-    <string name="settings_hide_favorite_subreddits_sections_title">Hide Favorite Subreddits Section</string>
-    <string name="settings_hide_subscribed_subreddits_sections_title">Hide Subscribed Subreddits Section</string>
+    <string name="settings_collapse_favorite_communities_section_title">Collapse Favorite Communities Section</string>
+    <string name="settings_collapse_subscribed_communities_section_title">Collapse Subscribed Communities Section</string>
+    <string name="settings_hide_favorite_communities_sections_title">Hide Favorite Communities Section</string>
+    <string name="settings_hide_subscribed_communities_sections_title">Hide Subscribed Communities Section</string>
     <string name="settings_default_search_result_tab">Default Search Result Tab</string>
     <string name="settings_crash_reports_title">Crash Reports</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Dangerous</string>
@@ -701,9 +701,9 @@
     <string name="error_loading_multi_reddit_list">Cannot sync multireddits</string>
     <string name="error_loading_subscriptions">Cannot sync subscriptions</string>
 
-    <string name="share_this_app">Check out Infinity for Reddit, an awesome Reddit client!\nhttps://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy</string>
+    <string name="share_this_app">Check out Infinity for Lemmy, an awesome Lemmy client!\nhttps://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy</string>
 
-    <string name="error_getting_subreddit_name">Error getting subreddit name</string>
+    <string name="error_getting_community_name">Error getting community name</string>
 
     <string name="share_post_link">Share Post Link</string>
     <string name="share_image_link">Share Image Link</string>
@@ -737,7 +737,7 @@
     <string name="multi_reddit_name_hint">Name (Max 50 Characters)</string>
     <string name="multi_reddit_description_hint">Description</string>
     <string name="private_multi_reddit">Private</string>
-    <string name="select_subreddits_and_users">Select Subreddits and Users</string>
+    <string name="select_communities_and_users">Select Communities and Users</string>
     <string name="no_multi_reddit_name">Where is the name?</string>
     <string name="create_multi_reddit_failed">Cannot create this multireddit</string>
     <string name="duplicate_multi_reddit">This multireddit already exists</string>
@@ -885,8 +885,8 @@
     <string name="theme_item_unsubscribed_color_detail">Applied to: Subscribe button</string>
     <string name="theme_item_username_color">Username Color</string>
     <string name="theme_item_username_color_detail">Applied to: Username</string>
-    <string name="theme_item_subreddit_color">Subreddit Color</string>
-    <string name="theme_item_subreddit_color_detail">Applied to: Subreddit name</string>
+    <string name="theme_item_community_color">Community Color</string>
+    <string name="theme_item_community_color_detail">Applied to: Community name</string>
     <string name="theme_item_author_flair_text_color">Author Flair Color</string>
     <string name="theme_item_author_flair_text_color_detail">Applied to: Author flair in comments</string>
     <string name="theme_item_submitter_color">Submitter</string>
@@ -967,7 +967,7 @@
     <string name="color_picker">Color Picker</string>
     <string name="invalid_color">Invalid Color</string>
 
-    <string name="delete_all_subreddits_success">Delete all subreddits successfully</string>
+    <string name="delete_all_communities_success">Delete all communities successfully</string>
     <string name="delete_all_users_success">Delete all users successfully</string>
     <string name="delete_all_sort_types_success">Delete all sort types successfully</string>
     <string name="delete_all_post_layouts_success">Delete all post layouts successfully</string>
@@ -978,7 +978,7 @@
     <string name="reset_all_settings_success">Reset all settings successfully</string>
 
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="subreddit_preview">r/Infinity_For_Reddit</string>
+    <string name="community_preview">r/Infinity_For_Reddit</string>
     <string name="primary_text_preview">Primary Text</string>
     <string name="secondary_text_preview">Secondary Text</string>
     <string name="post_title_preview">This is a post</string>
@@ -1088,18 +1088,18 @@
     <string name="edited_time">Edited on %s</string>
 
     <string name="warning">Warning</string>
-    <string name="this_is_a_nsfw_subreddit">This is a NSFW subreddit.</string>
+    <string name="this_is_a_nsfw_community">This is a NSFW community.</string>
     <string name="this_user_has_nsfw_content">This user has NSFW content</string>
     <string name="dismiss">Dismiss</string>
     <string name="leave">Leave</string>
 
-    <string name="go_to_subreddit">Go to Subreddit</string>
+    <string name="go_to_community">Go to Community</string>
     <string name="go_to_user">Go to User</string>
     <string name="go_to_thing_hint">Name</string>
     <string name="go_to_top">Go To Top</string>
     <string name="random">Random</string>
-    <string name="random_subreddit">Random Subreddit</string>
-    <string name="random_nsfw_subreddit">Random NSFW Subreddit</string>
+    <string name="random_community">Random Community</string>
+    <string name="random_nsfw_community">Random NSFW Community</string>
     <string name="random_post">Random Post</string>
     <string name="random_nsfw_post">Random NSFW post</string>
     <string name="fetch_random_thing_failed">Try again later</string>
@@ -1115,7 +1115,7 @@
     <string name="title_contains_strings_hint">Title: contains keywords (key1,key2)</string>
     <string name="title_excludes_regex_hint">Title: excludes regex</string>
     <string name="title_contains_regex_hint">Title: contains regex</string>
-    <string name="exclude_subreddits_hint">Exclude subreddits (e.g. funny,AskReddit)</string>
+    <string name="exclude_communities_hint">Exclude communities (e.g. memes,AskLemmy)</string>
     <string name="exclude_users_hint">Exclude users (e.g. Hostilenemy,random)</string>
     <string name="exclude_flairs_hint">Exclude flairs (e.g. flair1,flair2)</string>
     <string name="contain_flairs_hint">Contain flairs (e.g. flair1,flair2)</string>
@@ -1133,23 +1133,23 @@
     <string name="duplicate_post_filter_dialog_message">Override it?</string>
     <string name="apply_post_filter_to">Apply to</string>
     <string name="post_filter_usage_home">Home</string>
-    <string name="post_filter_usage_subreddit">Subreddit: %1$s</string>
-    <string name="post_filter_usage_subreddit_all">Subreddit</string>
+    <string name="post_filter_usage_community">Community: %1$s</string>
+    <string name="post_filter_usage_community_all">Community</string>
     <string name="post_filter_usage_user">User: %1$s</string>
     <string name="post_filter_usage_user_all">User</string>
     <string name="post_filter_usage_multireddit">MultiReddit: %1$s</string>
     <string name="post_filter_usage_multireddit_all">MultiReddit</string>
     <string name="post_filter_usage_search">Search</string>
-    <string name="subreddit">Subreddit</string>
+    <string name="community">Community</string>
     <string name="user">User</string>
-    <string name="edit_post_filter_name_of_usage_info">Leave it blank to apply this post filter to all the subreddits / users / multireddits</string>
+    <string name="edit_post_filter_name_of_usage_info">Leave it blank to apply this post filter to all the communities / users / multireddits</string>
 
     <string name="read_all_messages_time_limit">You are doing this too frequently. Try again later. This is Reddit API\'s rate limit.</string>
     <string name="read_all_messages_success">Read all messages successfully</string>
     <string name="read_all_messages_failed">Unable to read all messages</string>
 
-    <string name="add_subreddit_or_user_to_multireddit_success">%1$s is added to multireddit %2$s</string>
-    <string name="add_subreddit_or_user_to_multireddit_failed">Unable to add %1$s to multireddit %2$s</string>
+    <string name="add_community_or_user_to_multireddit_success">%1$s is added to multireddit %2$s</string>
+    <string name="add_community_or_user_to_multireddit_failed">Unable to add %1$s to multireddit %2$s</string>
 
     <string name="choose_a_user">Choose a user</string>
 
@@ -1158,8 +1158,8 @@
 
     <string name="vote">Vote</string>
 
-    <string name="anonymous_front_page_no_subscriptions">Start by joining a subreddit!</string>
-    <string name="anonymous_multireddit_no_subreddit">This multireddit does not have a subreddit!</string>
+    <string name="anonymous_front_page_no_subscriptions">Start by joining a community!</string>
+    <string name="anonymous_multireddit_no_community">This multireddit does not have a community!</string>
 
     <string name="backup_settings_success">Successfully exported settings to the destination directory. The password of the generated zip file is 123321. Please don\'t modify the zip file.</string>
     <string name="create_zip_in_destination_directory_failed">Could not create backup zip in the destination directory</string>
@@ -1192,7 +1192,7 @@
     <string name="downvote">Downvote</string>
 
     <string name="select">Select</string>
-    <string name="exclude_subreddit">Exclude this subreddit</string>
+    <string name="exclude_community">Exclude this community</string>
     <string name="exclude_user">Exclude this user</string>
     <string name="exclude_flair">Exclude this flair</string>
     <string name="contain_flair">Contain this flair</string>
@@ -1225,7 +1225,7 @@
     <string name="no_trending_search">No trending searches found.\nTap to retry.</string>
 
     <string name="error_loading_wiki">Error loading wiki</string>
-    <string name="no_wiki">This subreddit has no wiki page</string>
+    <string name="no_wiki">This community has no wiki page</string>
 
     <string name="material_you_notification_title">Applying Material You</string>
 
