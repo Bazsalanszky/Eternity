@@ -18,12 +18,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 
 public class FavoriteSubscribedSubredditsSectionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -108,7 +108,7 @@ public class FavoriteSubscribedSubredditsSectionRecyclerViewAdapter extends Recy
             }
 
             holder.itemView.setOnClickListener(view -> {
-                itemClickListener.onSubscribedSubredditClick(subredditName);
+                itemClickListener.onSubscribedSubredditClick(subredditName, subreddit.getQualified_name());
             });
         }
     }

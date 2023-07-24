@@ -29,7 +29,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 import eu.toldi.infinityforlemmy.FragmentCommunicator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
@@ -42,6 +41,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditViewModel;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 import retrofit2.Retrofit;
 
 
@@ -55,6 +55,7 @@ public class SubscribedSubredditsListingFragment extends Fragment implements Fra
     public static final String EXTRA_ACCOUNT_PROFILE_IMAGE_URL = "EAPIU";
     public static final String EXTRA_IS_SUBREDDIT_SELECTION = "EISS";
     public static final String EXTRA_EXTRA_CLEAR_SELECTION = "EECS";
+    public static final String EXTRA_ACCOUNT_QUALIFIED_NAME = "EAQN";
 
     @BindView(R.id.swipe_refresh_layout_subscribed_subreddits_listing_fragment)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -110,6 +111,7 @@ public class SubscribedSubredditsListingFragment extends Fragment implements Fra
         }
 
         String accountName = getArguments().getString(EXTRA_ACCOUNT_NAME, "-");
+        String accountQualifiedName = getArguments().getString(EXTRA_ACCOUNT_QUALIFIED_NAME, "-");
         String accessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
 
         if (accessToken == null) {
@@ -135,7 +137,7 @@ public class SubscribedSubredditsListingFragment extends Fragment implements Fra
         new FastScrollerBuilder(mRecyclerView).useMd2Style().build();
 
         mSubscribedSubredditViewModel = new ViewModelProvider(this,
-                new SubscribedSubredditViewModel.Factory(mActivity.getApplication(), mRedditDataRoomDatabase, accountName))
+                new SubscribedSubredditViewModel.Factory(mActivity.getApplication(), mRedditDataRoomDatabase, accountQualifiedName))
                 .get(SubscribedSubredditViewModel.class);
         mSubscribedSubredditViewModel.getAllSubscribedSubreddits().observe(getViewLifecycleOwner(), subscribedSubredditData -> {
             mSwipeRefreshLayout.setRefreshing(false);

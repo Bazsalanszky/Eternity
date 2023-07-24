@@ -10,9 +10,9 @@ public class SubredditRepository {
     private SubredditDao mSubredditDao;
     private LiveData<SubredditData> mSubredditLiveData;
 
-    SubredditRepository(RedditDataRoomDatabase redditDataRoomDatabase, String subredditName) {
+    SubredditRepository(RedditDataRoomDatabase redditDataRoomDatabase, String actor_id) {
         mSubredditDao = redditDataRoomDatabase.subredditDao();
-        mSubredditLiveData = mSubredditDao.getSubredditLiveDataByName(subredditName);
+        mSubredditLiveData = mSubredditDao.getSubredditLiveDataByActorId(actor_id);
     }
 
     LiveData<SubredditData> getSubredditLiveData() {

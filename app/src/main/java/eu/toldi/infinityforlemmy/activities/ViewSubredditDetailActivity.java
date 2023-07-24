@@ -58,15 +58,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.utils.LemmyUtils;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
 import eu.toldi.infinityforlemmy.AppBarStateChangeListener;
 import eu.toldi.infinityforlemmy.Infinity;
@@ -74,6 +65,7 @@ import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
 import eu.toldi.infinityforlemmy.adapters.SubredditAutocompleteRecyclerViewAdapter;
@@ -110,8 +102,16 @@ import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditSubscription;
 import eu.toldi.infinityforlemmy.subreddit.SubredditViewModel;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -406,7 +406,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         });
 
         mSubredditViewModel = new ViewModelProvider(this,
-                new SubredditViewModel.Factory(getApplication(), mRedditDataRoomDatabase, subredditName))
+                new SubredditViewModel.Factory(getApplication(), mRedditDataRoomDatabase, LemmyUtils.qualifiedCommunityName2ActorId(qualifiedName)))
                 .get(SubredditViewModel.class);
         mSubredditViewModel.getSubredditLiveData().observe(this, subredditData -> {
             if (subredditData != null) {

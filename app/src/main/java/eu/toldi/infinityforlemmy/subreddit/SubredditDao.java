@@ -17,6 +17,9 @@ public interface SubredditDao {
     @Query("SELECT * from subreddits WHERE name = :namePrefixed COLLATE NOCASE LIMIT 1")
     LiveData<SubredditData> getSubredditLiveDataByName(String namePrefixed);
 
+    @Query("SELECT * from subreddits WHERE actor_id = :actor_id COLLATE NOCASE LIMIT 1")
+    LiveData<SubredditData> getSubredditLiveDataByActorId(String actor_id);
+
     @Query("SELECT * from subreddits WHERE name = :namePrefixed COLLATE NOCASE LIMIT 1")
     SubredditData getSubredditData(String namePrefixed);
 }

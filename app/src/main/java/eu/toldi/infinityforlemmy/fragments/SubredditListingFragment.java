@@ -181,7 +181,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         }
 
         SubredditListingViewModel.Factory factory = new SubredditListingViewModel.Factory(
-                accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, query, sortType, accessToken, nsfw);
+                mRetrofit.getRetrofit(), query, sortType, accessToken, nsfw);
         mSubredditListingViewModel = new ViewModelProvider(this, factory).get(SubredditListingViewModel.class);
         mSubredditListingViewModel.getSubreddits().observe(getViewLifecycleOwner(), subredditData -> mAdapter.submitList(subredditData));
 

@@ -1098,6 +1098,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
                         mPost.getSubredditName());
+                intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, mPost.getSubredditNamePrefixed());
                 mActivity.startActivity(intent);
             });
 
@@ -1107,6 +1108,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 }
                 Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mPost.getAuthor());
+                intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mPost.getAuthorNamePrefixed());
                 mActivity.startActivity(intent);
             });
 

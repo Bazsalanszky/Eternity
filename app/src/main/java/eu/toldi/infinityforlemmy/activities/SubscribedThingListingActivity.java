@@ -118,6 +118,8 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
     Executor mExecutor;
     private String mAccessToken;
     private String mAccountName;
+
+    private String mAccountQualifiedName;
     private boolean mInsertSuccess = false;
     private boolean mInsertMultiredditSuccess = false;
     private boolean showMultiReddits = false;
@@ -172,6 +174,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, "-");
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, "-");
 
         if (savedInstanceState != null) {
             mInsertSuccess = savedInstanceState.getBoolean(INSERT_SUBSCRIBED_SUBREDDIT_STATE);
@@ -322,7 +325,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
 
     public void loadSubscriptions(boolean forceLoad) {
         if (mAccessToken != null && !(!forceLoad && mInsertSuccess)) {
-            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountName, null,
+            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, null,
                     new ArrayList<>(), new ArrayList<>(),
                     new ArrayList<>(),
                     new FetchSubscribedThing.FetchSubscribedThingListener() {
@@ -334,7 +337,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                                     mExecutor,
                                     new Handler(),
                                     mRedditDataRoomDatabase,
-                                    mAccountName,
+                                    mAccountQualifiedName,
                                     subscribedSubredditData,
                                     subscribedUserData,
                                     subredditData,
@@ -479,6 +482,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                     Bundle bundle = new Bundle();
                     bundle.putBoolean(SubscribedSubredditsListingFragment.EXTRA_IS_SUBREDDIT_SELECTION, false);
                     bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                    bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_QUALIFIED_NAME, mAccountQualifiedName);
                     bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                     fragment.setArguments(bundle);
                     return fragment;

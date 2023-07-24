@@ -7,4 +7,18 @@ public class LemmyUtils {
         String domain = splitURL[2];
         return userName + "@" + domain;
     }
+
+    public static String qualifiedCommunityName2ActorId(String qualifiedName) {
+        String[] splitQualifiedName = qualifiedName.split("@");
+        String userName = splitQualifiedName[0];
+        String domain = splitQualifiedName[1];
+        return "https://" + domain + "/c/" + userName;
+    }
+
+    public static String qualifiedUserName2ActorId(String qualifiedName) {
+        String[] splitQualifiedName = qualifiedName.split("@");
+        String userName = splitQualifiedName[0];
+        String domain = splitQualifiedName[1];
+        return "https://" + domain + "/u/" + userName;
+    }
 }

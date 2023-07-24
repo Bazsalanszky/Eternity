@@ -123,6 +123,7 @@ import eu.toldi.infinityforlemmy.user.FetchUserData;
 import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.CustomThemeSharedPreferencesUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -864,12 +865,13 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         drawer.closeDrawers();
                     }
 
-                    @Override
-                    public void onSubscribedSubredditClick(String subredditName) {
-                        Intent intent = new Intent(MainActivity.this, ViewSubredditDetailActivity.class);
-                        intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, subredditName);
-                        startActivity(intent);
-                    }
+            @Override
+            public void onSubscribedSubredditClick(String subredditName, String communityQualifiedName) {
+                Intent intent = new Intent(MainActivity.this, ViewSubredditDetailActivity.class);
+                intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, subredditName);
+                intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, communityQualifiedName);
+                startActivity(intent);
+            }
 
                     @Override
                     public void onAccountClick(String accountName) {
@@ -974,7 +976,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         });
 
         subscribedSubredditViewModel = new ViewModelProvider(this,
-                new SubscribedSubredditViewModel.Factory(getApplication(), mRedditDataRoomDatabase, mAccountName == null ? "-" : mAccountName))
+                new SubscribedSubredditViewModel.Factory(getApplication(), mRedditDataRoomDatabase, mAccountQualifiedName == null ? "-" : mAccountQualifiedName))
                 .get(SubscribedSubredditViewModel.class);
         subscribedSubredditViewModel.getAllSubscribedSubreddits().observe(this,
                 subscribedSubredditData -> {
@@ -1405,6 +1407,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             Utils.hideKeyboard(this);
             Intent intent = new Intent(MainActivity.this, ViewSubredditDetailActivity.class);
             intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, subredditData.getName());
+            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, LemmyUtils.actorID2FullName(subredditData.getActorId()));
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
