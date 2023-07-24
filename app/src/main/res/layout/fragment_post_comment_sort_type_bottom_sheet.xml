@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/best_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
+            android:id="@+id/hot_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -60,22 +60,6 @@
             android:fontFamily="?attr/font_family" />
 
         <TextView
-            android:id="@+id/controversial_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:text="@string/sort_controversial"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="?attr/font_default"
-            android:fontFamily="?attr/font_family" />
-
-        <TextView
             android:id="@+id/old_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,54 +71,6 @@
             android:paddingEnd="32dp"
             android:paddingBottom="16dp"
             android:text="@string/sort_old"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="?attr/font_default"
-            android:fontFamily="?attr/font_family" />
-
-        <TextView
-            android:id="@+id/random_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:text="@string/sort_random"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="?attr/font_default"
-            android:fontFamily="?attr/font_family" />
-
-        <TextView
-            android:id="@+id/qa_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:text="@string/sort_qa"
-            android:textColor="?attr/primaryTextColor"
-            android:textSize="?attr/font_default"
-            android:fontFamily="?attr/font_family" />
-
-        <TextView
-            android:id="@+id/live_type_text_view_post_comment_sort_type_bottom_sheet_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingStart="32dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:text="@string/sort_live"
             android:textColor="?attr/primaryTextColor"
             android:textSize="?attr/font_default"
             android:fontFamily="?attr/font_family" />

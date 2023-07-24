@@ -30,22 +30,16 @@ public class PostCommentSortTypeBottomSheetFragment extends LandscapeExpandedRou
 
     public static final String EXTRA_CURRENT_SORT_TYPE = "ECST";
 
-    @BindView(R.id.best_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
-    TextView confidenceTypeTextView;
+    @BindView(R.id.hot_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
+    TextView hotTypeTextView;
     @BindView(R.id.top_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
     TextView topTypeTextView;
     @BindView(R.id.new_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
     TextView newTypeTextView;
-    @BindView(R.id.controversial_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
-    TextView controversialTypeTextView;
+
     @BindView(R.id.old_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
     TextView oldTypeTextView;
-    @BindView(R.id.random_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
-    TextView randomTypeTextView;
-    @BindView(R.id.qa_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
-    TextView qaTypeTextView;
-    @BindView(R.id.live_type_text_view_post_comment_sort_type_bottom_sheet_fragment)
-    TextView liveTypeTextView;
+
     private BaseActivity activity;
 
     public PostCommentSortTypeBottomSheetFragment() {
@@ -69,22 +63,14 @@ public class PostCommentSortTypeBottomSheetFragment extends LandscapeExpandedRou
         ButterKnife.bind(this, rootView);
 
         SortType.Type currentSortType = (SortType.Type) getArguments().getSerializable(EXTRA_CURRENT_SORT_TYPE);
-        if (currentSortType.equals(SortType.Type.ACTIVE) || currentSortType.equals(SortType.Type.CONFIDENCE)) {
-            confidenceTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(confidenceTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.TOP)) {
+        if (currentSortType.equals(SortType.Type.TOP)) {
             topTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(topTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.NEW)) {
             newTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(newTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.CONTROVERSIAL)) {
-            controversialTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(controversialTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+        } else if (currentSortType.equals(SortType.Type.HOT)) {
+            hotTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(hotTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.OLD)) {
             oldTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(oldTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.RANDOM)) {
-            randomTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(randomTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.QA)) {
-            qaTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(qaTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.LIVE)) {
-            liveTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(liveTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
@@ -92,8 +78,8 @@ public class PostCommentSortTypeBottomSheetFragment extends LandscapeExpandedRou
             rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         }
 
-        confidenceTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.CONFIDENCE));
+        hotTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.HOT));
             dismiss();
         });
 
@@ -107,28 +93,8 @@ public class PostCommentSortTypeBottomSheetFragment extends LandscapeExpandedRou
             dismiss();
         });
 
-        controversialTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.CONTROVERSIAL));
-            dismiss();
-        });
-
         oldTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.OLD));
-            dismiss();
-        });
-
-        randomTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.RANDOM));
-            dismiss();
-        });
-
-        qaTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.QA));
-            dismiss();
-        });
-
-        liveTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.LIVE));
             dismiss();
         });
 

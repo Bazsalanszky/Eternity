@@ -150,7 +150,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         this.query = query;
         this.trendingSource = trendingSource;
         this.postType = postType;
-        this.sortType = sortType == null ? new SortType(SortType.Type.RELEVANCE) : sortType;
+        this.sortType = sortType == null ? new SortType(SortType.Type.TOP) : sortType;
         this.postFilter = postFilter;
         postLinkedHashSet = new LinkedHashSet<>();
         this.readPostList = readPostList;

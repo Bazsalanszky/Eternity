@@ -31,17 +31,35 @@ public class SortTimeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
 
     @BindView(R.id.hour_text_view_sort_time_bottom_sheet_fragment)
     TextView hourTextView;
+
+    @BindView(R.id.six_hours_text_view_sort_time_bottom_sheet_fragment)
+    TextView sixHourTextView;
+
+    @BindView(R.id.twelve_hours_text_view_sort_time_bottom_sheet_fragment)
+    TextView twelveHourTextView;
+
     @BindView(R.id.day_text_view_sort_time_bottom_sheet_fragment)
     TextView dayTextView;
     @BindView(R.id.week_text_view_sort_time_bottom_sheet_fragment)
     TextView weekTextView;
     @BindView(R.id.month_text_view_sort_time_bottom_sheet_fragment)
     TextView monthTextView;
+
+    @BindView(R.id.three_months_text_view_sort_time_bottom_sheet_fragment)
+    TextView threeMonthTextView;
+
+    @BindView(R.id.six_months_text_view_sort_time_bottom_sheet_fragment)
+    TextView sixMonthTextView;
+
+    @BindView(R.id.nine_months_text_view_sort_time_bottom_sheet_fragment)
+    TextView nineMonthTextView;
+
     @BindView(R.id.year_text_view_sort_time_bottom_sheet_fragment)
     TextView yearTextView;
     @BindView(R.id.all_time_text_view_sort_time_bottom_sheet_fragment)
     TextView allTimeTextView;
     private BaseActivity activity;
+
     public SortTimeBottomSheetFragment() {
         // Required empty public constructor
     }
@@ -67,37 +85,67 @@ public class SortTimeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
 
         hourTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity)
-                    .sortTypeSelected(new SortType(SortType.Type.valueOf(sortType), SortType.Time.HOUR));
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_HOUR, SortType.Time.HOUR));
+            dismiss();
+        });
+
+        sixHourTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity)
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_SIX_HOURS, SortType.Time.SIX_HOURS));
+            dismiss();
+        });
+
+        twelveHourTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity)
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_TWELVE_HOURS, SortType.Time.TWELVE_HOURS));
             dismiss();
         });
 
         dayTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity)
-                    .sortTypeSelected(new SortType(SortType.Type.valueOf(sortType), SortType.Time.DAY));
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_DAY, SortType.Time.DAY));
             dismiss();
         });
 
         weekTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity)
-                    .sortTypeSelected(new SortType(SortType.Type.valueOf(sortType), SortType.Time.WEEK));
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_WEEK, SortType.Time.WEEK));
             dismiss();
         });
 
         monthTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity)
-                    .sortTypeSelected(new SortType(SortType.Type.valueOf(sortType), SortType.Time.MONTH));
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_MONTH, SortType.Time.MONTH));
+            dismiss();
+        });
+
+        threeMonthTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity)
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_THREE_MONTHS, SortType.Time.THREE_MONTHS));
+            dismiss();
+        });
+
+        sixMonthTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity)
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_SIX_MONTHS, SortType.Time.SIX_MONTHS));
+            dismiss();
+        });
+
+        nineMonthTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity)
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_NINE_MONTHS, SortType.Time.NINE_MONTHS));
             dismiss();
         });
 
         yearTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity)
-                    .sortTypeSelected(new SortType(SortType.Type.valueOf(sortType), SortType.Time.YEAR));
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_YEAR, SortType.Time.YEAR));
             dismiss();
         });
 
         allTimeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity)
-                    .sortTypeSelected(new SortType(SortType.Type.valueOf(sortType), SortType.Time.ALL));
+                    .sortTypeSelected(new SortType(SortType.Type.TOP_ALL, SortType.Time.ALL));
             dismiss();
         });
 

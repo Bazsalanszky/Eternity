@@ -33,17 +33,22 @@ public class SortType {
         ACTIVE("Active", "Active"),
         HOT("Hot", "Hot"),
         NEW("New", "New"),
-        RANDOM("random", "Random"),
-        RISING("rising", "Rising"),
+        OLD("Old", "Old"),
         TOP("Top", "Top"),
-        CONTROVERSIAL("controversial", "Controversial"),
-        RELEVANCE("relevance", "Relevance"),
-        COMMENTS("comments", "Comments"),
-        ACTIVITY("activity", "Activity"),
-        CONFIDENCE("confidence", "Best"),
-        OLD("old", "Old"),
-        QA("qa", "QA"),
-        LIVE("live", "Live");
+        MOST_COMMENTS("MostCommentes", "Most Commentes"),
+        NEW_COMMENTS("NewCommentes", "New Commentes"),
+
+        TOP_HOUR("TopHour", "Top"),
+        TOP_SIX_HOURS("TopSixHour", "Top"),
+        TOP_TWELVE_HOURS("TopTwelveHour", "Top"),
+        TOP_DAY("TopDay", "Top"),
+        TOP_WEEK("TopWeek", "Top"),
+        TOP_MONTH("month", "Top"),
+        TOP_THREE_MONTHS("TopThreeMonths", "Top"),
+        TOP_SIX_MONTHS("TopSixMonths", "Top"),
+        TOP_NINE_MONTHS("TopNineMonths", "Top"),
+        TOP_YEAR("TopYear", "Top"),
+        TOP_ALL("TopAll", "Top");
 
         public final String value;
         public final String fullName;
@@ -55,10 +60,15 @@ public class SortType {
     }
 
     public enum Time {
-        HOUR("hour", "Hour"),
+        HOUR("TopHour", "Top Hour"),
+        SIX_HOURS("TopSixHour", "Top Six Hours"),
+        TWELVE_HOURS("TopTwelveHour", "Top Twelve Hours"),
         DAY("day", "Day"),
         WEEK("week", "Week"),
         MONTH("month", "Month"),
+        THREE_MONTHS("TopThreeMonth", "Top Three Months"),
+        SIX_MONTHS("TopSixMonth", "Top Six Months"),
+        NINE_MONTHS("TopNineMonth", "Top Nine Months"),
         YEAR("year", "Year"),
         ALL("all", "All Time");
 

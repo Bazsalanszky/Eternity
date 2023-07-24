@@ -38,13 +38,13 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
     TextView hotTypeTextView;
     @BindView(R.id.new_type_text_view_sort_type_bottom_sheet_fragment)
     TextView newTypeTextView;
-    @BindView(R.id.rising_type_text_view_sort_type_bottom_sheet_fragment)
-    TextView risingTypeTextView;
+    @BindView(R.id.old_type_text_view_sort_type_bottom_sheet_fragment)
+    TextView oldTypeTextView;
     @BindView(R.id.top_type_text_view_sort_type_bottom_sheet_fragment)
     TextView topTypeTextView;
-    @BindView(R.id.controversial_type_text_view_sort_type_bottom_sheet_fragment)
-    TextView controversialTypeTextView;
+
     private BaseActivity activity;
+
     public SortTypeBottomSheetFragment() {
         // Required empty public constructor
     }
@@ -85,12 +85,10 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             hotTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(hotTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.NEW.fullName)) {
             newTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(newTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.RISING.fullName)) {
-            risingTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(risingTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+        } else if (currentSortType.equals(SortType.Type.OLD.fullName)) {
+            oldTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(oldTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.TOP.fullName)) {
             topTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(topTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.CONTROVERSIAL.fullName)) {
-            controversialTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(controversialTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
         hotTypeTextView.setOnClickListener(view -> {
@@ -103,8 +101,8 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             dismiss();
         });
 
-        risingTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.RISING));
+        oldTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.OLD));
             dismiss();
         });
 
@@ -113,10 +111,6 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             dismiss();
         });
 
-        controversialTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.CONTROVERSIAL.name());
-            dismiss();
-        });
 
         if (activity.typeface != null) {
             Utils.setFontToAllTextViews(rootView, activity.typeface);

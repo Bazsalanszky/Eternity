@@ -61,15 +61,13 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
         ButterKnife.bind(this, rootView);
 
         String currentSortType = getArguments().getString(EXTRA_CURRENT_SORT_TYPE);
-        if (currentSortType.equals(SortType.Type.RELEVANCE.fullName)) {
-            relevanceTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(relevanceTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.HOT.fullName)) {
+        if (currentSortType.equals(SortType.Type.HOT.fullName)) {
             hotTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(hotTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.TOP.fullName)) {
             topTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(topTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.NEW.fullName)) {
             newTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(newTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.RISING.fullName)) {
+        } else if (currentSortType.equals(SortType.Type.OLD.fullName)) {
             commentsTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(commentsTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
@@ -78,10 +76,10 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
             rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         }
 
-        relevanceTypeTextView.setOnClickListener(view -> {
+        /*relevanceTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.RELEVANCE.name());
             dismiss();
-        });
+        });*/
 
         hotTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.HOT.name());
@@ -99,7 +97,7 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
         });
 
         commentsTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.COMMENTS.name());
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.MOST_COMMENTS.name());
             dismiss();
         });
 

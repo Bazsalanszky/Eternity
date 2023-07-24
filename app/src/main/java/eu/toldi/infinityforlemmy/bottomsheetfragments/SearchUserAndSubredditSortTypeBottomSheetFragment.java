@@ -58,9 +58,9 @@ public class SearchUserAndSubredditSortTypeBottomSheetFragment extends Landscape
         ButterKnife.bind(this, rootView);
 
         String currentSortType = getArguments().getString(EXTRA_CURRENT_SORT_TYPE);
-        if (currentSortType.equals(SortType.Type.RELEVANCE.fullName)) {
+        if (currentSortType.equals(SortType.Type.TOP.fullName)) {
             relevanceTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(relevanceTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.ACTIVITY.fullName)) {
+        } else if (currentSortType.equals(SortType.Type.ACTIVE.fullName)) {
             activityTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(activityTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
@@ -75,13 +75,13 @@ public class SearchUserAndSubredditSortTypeBottomSheetFragment extends Landscape
             return rootView;
         }
 
-        relevanceTypeTextView.setOnClickListener(view -> {
+       /* relevanceTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).searchUserAndSubredditSortTypeSelected(new SortType(SortType.Type.RELEVANCE), position);
             dismiss();
-        });
+        });*/
 
         activityTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).searchUserAndSubredditSortTypeSelected(new SortType(SortType.Type.ACTIVITY), position);
+            ((SortTypeSelectionCallback) activity).searchUserAndSubredditSortTypeSelected(new SortType(SortType.Type.ACTIVE), position);
             dismiss();
         });
 

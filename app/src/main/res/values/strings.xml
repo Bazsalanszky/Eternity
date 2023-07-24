@@ -1330,4 +1330,9 @@
     <string name="user_password">Password</string>
     <string name="user_2fa_token">2FA token (if needed)</string>
     <string name="user_login">Login</string>
+    <string name="sort_time_6hours">6 Hours</string>
+    <string name="sort_time_12hours">12 Hours</string>
+    <string name="sort_time_3months">3 Months</string>
+    <string name="sort_time_6months">6 Months</string>
+    <string name="sort_time_9months">9 Months</string>
 </resources>
