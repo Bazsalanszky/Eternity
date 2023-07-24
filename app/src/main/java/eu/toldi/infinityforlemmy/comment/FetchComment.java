@@ -30,7 +30,7 @@ public class FetchComment {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
-                    ParseComment.parseComments(executor, handler, response.body(),
+                    ParseComment.parseComments(executor, handler, response.body(), commentId,
                             expandChildren, new ParseComment.ParseCommentListener() {
                                 @Override
                                 public void onParseCommentSuccess(ArrayList<Comment> topLevelComments,

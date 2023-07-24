@@ -11,7 +11,7 @@ import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 public class CheckIsSubscribedToSubreddit {
 
     public static void checkIsSubscribedToSubreddit(Executor executor, Handler handler, RedditDataRoomDatabase redditDataRoomDatabase,
-                                                    String subredditName, String accountName,
+                                                    String communityQualifiedName, String accountName,
                                                     CheckIsSubscribedToSubredditListener checkIsSubscribedToSubredditListener) {
         executor.execute(() -> {
             if (accountName == null) {
@@ -19,7 +19,7 @@ public class CheckIsSubscribedToSubreddit {
                     redditDataRoomDatabase.accountDao().insert(Account.getAnonymousAccount());
                 }
             }
-            SubscribedSubredditData subscribedSubredditData = redditDataRoomDatabase.subscribedSubredditDao().getSubscribedSubreddit(subredditName, accountName == null ? "-" : accountName);
+            SubscribedSubredditData subscribedSubredditData = redditDataRoomDatabase.subscribedSubredditDao().getSubscribedSubredditByQualifiedName(communityQualifiedName, accountName == null ? "-" : accountName);
             handler.post(() -> {
                 if (subscribedSubredditData != null) {
                     checkIsSubscribedToSubredditListener.isSubscribed();

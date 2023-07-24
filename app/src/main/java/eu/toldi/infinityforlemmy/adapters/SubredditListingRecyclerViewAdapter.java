@@ -27,8 +27,6 @@ import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.utils.LemmyUtils;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
@@ -37,6 +35,8 @@ import eu.toldi.infinityforlemmy.asynctasks.CheckIsSubscribedToSubreddit;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditSubscription;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
@@ -146,7 +146,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
 
                 if (!isMultiSelection) {
                     CheckIsSubscribedToSubreddit.checkIsSubscribedToSubreddit(executor, new Handler(),
-                            redditDataRoomDatabase, subredditData.getName(), accountName,
+                            redditDataRoomDatabase, LemmyUtils.actorID2FullName(subredditData.getActorId()), accountName,
                             new CheckIsSubscribedToSubreddit.CheckIsSubscribedToSubredditListener() {
                                 @Override
                                 public void isSubscribed() {

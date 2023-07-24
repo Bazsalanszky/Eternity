@@ -28,6 +28,9 @@ public interface SubscribedSubredditDao {
     @Query("SELECT * from subscribed_subreddits WHERE name = :subredditName COLLATE NOCASE AND username = :accountName COLLATE NOCASE LIMIT 1")
     SubscribedSubredditData getSubscribedSubreddit(String subredditName, String accountName);
 
+    @Query("SELECT * from subscribed_subreddits WHERE qualified_name = :qualified_name COLLATE NOCASE AND username = :accountName COLLATE NOCASE LIMIT 1")
+    SubscribedSubredditData getSubscribedSubredditByQualifiedName(String qualified_name, String accountName);
+
     @Query("DELETE FROM subscribed_subreddits WHERE name = :subredditName COLLATE NOCASE AND username = :accountName COLLATE NOCASE")
     void deleteSubscribedSubreddit(String subredditName, String accountName);
 }

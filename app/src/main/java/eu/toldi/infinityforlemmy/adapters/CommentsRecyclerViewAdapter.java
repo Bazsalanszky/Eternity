@@ -33,7 +33,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.Executor;
 
 import butterknife.BindView;
@@ -97,6 +100,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private String mAccountName;
     private Post mPost;
     private ArrayList<Comment> mVisibleComments;
+
+    private Set<Integer> loadedComments;
     private Locale mLocale;
     private RequestManager mGlide;
     private RecyclerView.RecycledViewPool recycledViewPool;
@@ -211,6 +216,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mAccountName = accountName;
         mPost = post;
         mVisibleComments = new ArrayList<>();
+        loadedComments = new HashSet<>();
         mLocale = locale;
         mSingleCommentId = singleCommentId;
         mIsSingleCommentThreadMode = isSingleCommentThreadMode;
@@ -632,12 +638,19 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                                     } else {
                                                         notifyItemRemoved(placeholderPosition);
                                                     }
-
-                                                    mVisibleComments.addAll(placeholderPosition, expandedComments);
+                                                    List<Comment> trulyNewComments = new ArrayList<>();
+                                                    for (int i = 0; i < expandedComments.size(); i++) {
+                                                        if (loadedComments.contains(expandedComments.get(i).getId()) || expandedComments.get(i).getDepth() != parentComment.getDepth() + 1) {
+                                                            continue;
+                                                        }
+                                                        trulyNewComments.add(expandedComments.get(i));
+                                                        loadedComments.add(expandedComments.get(i).getId());
+                                                    }
+                                                    mVisibleComments.addAll(placeholderPosition, trulyNewComments);
                                                     if (mIsSingleCommentThreadMode) {
-                                                        notifyItemRangeInserted(placeholderPosition + 1, expandedComments.size());
+                                                        notifyItemRangeInserted(placeholderPosition + 1, trulyNewComments.size());
                                                     } else {
-                                                        notifyItemRangeInserted(placeholderPosition, expandedComments.size());
+                                                        notifyItemRangeInserted(placeholderPosition, trulyNewComments.size());
                                                     }
                                                 }
 
@@ -648,8 +661,15 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                                     mVisibleComments.get(parentPosition).removeMoreChildrenIds();
                                                 }
                                             }
-
-                                            mVisibleComments.get(parentPosition).addChildren(expandedComments);
+                                            ArrayList<Comment> trulyNewComments = new ArrayList<>();
+                                            for (int i = 0; i < expandedComments.size(); i++) {
+                                                if (loadedComments.contains(expandedComments.get(i).getId()) || expandedComments.get(i).getDepth() != parentComment.getDepth() + 1) {
+                                                    continue;
+                                                }
+                                                trulyNewComments.add(expandedComments.get(i));
+                                                loadedComments.add(expandedComments.get(i).getId());
+                                            }
+                                            mVisibleComments.get(parentPosition).addChildren(trulyNewComments);
                                             if (mIsSingleCommentThreadMode) {
                                                 notifyItemChanged(parentPosition + 1);
                                             } else {
@@ -668,6 +688,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                                             ((LoadMoreChildCommentsViewHolder) holder).placeholderTextView.setText(R.string.comment_load_more_comments);
 
                                                             mVisibleComments.addAll(placeholderPosition, expandedComments);
+                                                            for (int j = 0; j < expandedComments.size(); j++) {
+                                                                loadedComments.add(expandedComments.get(j).getId());
+                                                            }
                                                             if (mIsSingleCommentThreadMode) {
                                                                 notifyItemRangeInserted(placeholderPosition + 1, expandedComments.size());
                                                             } else {
@@ -835,6 +858,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
         int sizeBefore = mVisibleComments.size();
         mVisibleComments.addAll(comments);
+        for (int i = 0; i < comments.size(); i++) {
+            loadedComments.add(comments.get(i).getId());
+        }
         if (mIsSingleCommentThreadMode) {
             notifyItemRangeInserted(sizeBefore, comments.size() + 1);
         } else {
@@ -865,7 +891,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         }
 
         mVisibleComments.add(0, comment);
-
+        loadedComments.add(comment.getId());
         if (isInitiallyLoading) {
             notifyItemInserted(1);
         } else {
@@ -890,6 +916,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             expandChildren(mVisibleComments.get(parentPosition).getChildren(), newList);
             mVisibleComments.get(parentPosition).setExpanded(true);
             mVisibleComments.addAll(parentPosition + 1, newList);
+            for (int i = 0; i < newList.size(); i++) {
+                loadedComments.add(newList.get(i).getId());
+            }
             if (mIsSingleCommentThreadMode) {
                 notifyItemChanged(parentPosition + 1);
                 notifyItemRangeInserted(parentPosition + 2, newList.size());
@@ -899,6 +928,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             }
         } else {
             mVisibleComments.add(parentPosition + 1, comment);
+
+            loadedComments.add(comment.getId());
+
             if (mIsSingleCommentThreadMode) {
                 notifyItemChanged(parentPosition + 1);
                 notifyItemInserted(parentPosition + 2);

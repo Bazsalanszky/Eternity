@@ -1312,7 +1312,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                             if (mRespectSubredditRecommendedSortType) {
                                 fetchCommentsRespectRecommendedSort(false);
                             } else {
-                                ParseComment.parseComments(mExecutor, new Handler(), response.body(),
+                                ParseComment.parseComments(mExecutor, new Handler(), response.body(), null,
                                         mExpandChildren, new ParseComment.ParseCommentListener() {
                                             @Override
                                             public void onParseCommentSuccess(ArrayList<Comment> topLevelComments, ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> moreChildrenIds) {

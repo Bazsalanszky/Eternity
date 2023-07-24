@@ -311,12 +311,35 @@ public class Comment implements Parcelable {
             children = moreChildren;
         } else {
             if (children.size() > 1 && children.get(children.size() - 1).placeholderType == PLACEHOLDER_LOAD_MORE_COMMENTS) {
-                children.addAll(children.size() - 2, moreChildren);
+                for (int i = 0; i < moreChildren.size(); i++) {
+                    boolean found = false;
+                    for (int j = 0; j < children.size(); j++) {
+                        if (children.get(j).id == moreChildren.get(i).id) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                        children.add(moreChildren.get(i));
+                }
+
             } else {
-                children.addAll(moreChildren);
+                // Add only unique children
+                for (int i = 0; i < moreChildren.size(); i++) {
+                    boolean found = false;
+                    for (int j = 0; j < children.size(); j++) {
+                        if (children.get(j).id == moreChildren.get(i).id) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        children.add(moreChildren.get(i));
+                    }
+                }
             }
         }
-        childCount += moreChildren == null ? 0 : moreChildren.size();
+        //childCount += moreChildren == null ? 0 : moreChildren.size();
         assertChildrenDepth();
     }
 

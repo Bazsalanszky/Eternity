@@ -24,7 +24,7 @@ import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
 
 public class ParseComment {
-    public static void parseComments(Executor executor, Handler handler, String response,
+    public static void parseComments(Executor executor, Handler handler, String response, Integer commentId,
                                      boolean expandChildren,
                                      ParseCommentListener parseCommentListener) {
         executor.execute(() -> {
@@ -48,8 +48,8 @@ public class ParseComment {
                         topLevelComments.add(singleComment);
                     }
                 }
-                Comment parentComment = orderedComments.get(0);
-                if (parentComment.getDepth() == 0)
+                Comment parentComment = (commentId != null) ? parsedComments.get(commentId) : null;
+                if (parentComment != null && parentComment.getDepth() == 0)
                     parentComment = null;
 
                 for (int i = orderedComments.size() - 1; i >= 0; i--) {
@@ -71,9 +71,9 @@ public class ParseComment {
                 expandChildren(newComments, expandedNewComments, expandChildren);
 
                 if (topLevelComments.isEmpty() && !parsedComments.isEmpty() && parentComment != null) {
-                    for (int i = orderedComments.size() - 1; i >= 0; i--) {
+                    for (int i = 0; i < orderedComments.size(); i++) {
                         Comment c = orderedComments.get(i);
-                        if (c.getDepth() > parentComment.getDepth())
+                        if (c.getParentId() == parentComment.getId())
                             expandedNewComments.add(c);
                     }
                 }

@@ -206,6 +206,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private Call<String> subredditAutocompleteCall;
     private String mAccessToken;
     private String mAccountName;
+    private String mAccountQualifiedName;
     private String subredditName;
     private String description;
 
@@ -344,6 +345,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState == null) {
             mMessageFullname = getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME);
@@ -1038,7 +1040,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         });
 
         CheckIsSubscribedToSubreddit.checkIsSubscribedToSubreddit(mExecutor, new Handler(),
-                mRedditDataRoomDatabase, subredditName, mAccountName,
+                mRedditDataRoomDatabase, qualifiedName, mAccountQualifiedName,
                 new CheckIsSubscribedToSubreddit.CheckIsSubscribedToSubredditListener() {
                     @Override
                     public void isSubscribed() {
