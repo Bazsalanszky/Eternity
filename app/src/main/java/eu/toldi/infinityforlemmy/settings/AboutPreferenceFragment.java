@@ -59,8 +59,8 @@ public class AboutPreferenceFragment extends CustomFontPreferenceFragmentCompat 
 
         if (emailPreference != null) {
             emailPreference.setOnPreferenceClickListener(preference -> {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:docilealligator.app@gmail.com"));
+                Intent intent = new Intent(activity, LinkResolverActivity.class);
+                intent.setData(Uri.parse("https://fosstodon.org/@bazsalanszky"));
                 try {
                     activity.startActivity(intent);
                 } catch (ActivityNotFoundException e) {
@@ -73,7 +73,7 @@ public class AboutPreferenceFragment extends CustomFontPreferenceFragmentCompat 
         if (redditAccountPreference != null) {
             redditAccountPreference.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(activity, LinkResolverActivity.class);
-                intent.setData(Uri.parse("https://www.reddit.com/user/Hostilenemy"));
+                intent.setData(Uri.parse("https://lemmy.toldi.eu/u/bazsalanszky"));
                 activity.startActivity(intent);
                 return true;
             });
