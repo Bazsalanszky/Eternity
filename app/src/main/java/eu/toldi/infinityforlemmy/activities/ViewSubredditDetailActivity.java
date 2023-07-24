@@ -1123,6 +1123,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         } else if (itemId == R.id.action_search_view_subreddit_detail_activity) {
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+            intent.putExtra(SearchActivity.EXTRA_COMMUNITY_FULL_NAME, qualifiedName);
             startActivity(intent);
             return true;
         } else if (itemId == R.id.action_refresh_view_subreddit_detail_activity) {

@@ -1130,6 +1130,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         } else if (itemId == R.id.action_search_view_user_detail_activity) {
             Intent intent = new Intent(this, SearchActivity.class);
             intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, username);
+            intent.putExtra(SearchActivity.EXTRA_COMMUNITY_FULL_NAME, qualifiedName);
             intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_IS_USER, true);
             startActivity(intent);
             return true;

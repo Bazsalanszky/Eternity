@@ -57,6 +57,15 @@ public class SortType {
             this.value = value;
             this.fullName = fullName;
         }
+
+        public static Type fromValue(String value) {
+            for (Type type : values()) {
+                if (type.value.equals(value)) {
+                    return type;
+                }
+            }
+            return null;
+        }
     }
 
     public enum Time {

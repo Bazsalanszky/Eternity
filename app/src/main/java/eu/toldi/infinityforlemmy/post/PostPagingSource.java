@@ -174,9 +174,9 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
                 return loadSubredditPosts(loadParams, api);
             case TYPE_USER:
                 return loadUserPosts(loadParams, api);
-         /*   case TYPE_SEARCH:
+            case TYPE_SEARCH:
                 return loadSearchPosts(loadParams, api);
-            case TYPE_MULTI_REDDIT:
+          /*  case TYPE_MULTI_REDDIT:
                 return loadMultiRedditPosts(loadParams, api);
             default:
                 return loadAnonymousHomePosts(loadParams, api);*/
@@ -264,38 +264,23 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         return Futures.catching(partialLoadResultFuture,
                 IOException.class, LoadResult.Error::new, executor);
     }
-/*
-    private ListenableFuture<LoadResult<String, Post>> loadSearchPosts(@NonNull LoadParams<String> loadParams, LemmyAPI api) {
+
+    private ListenableFuture<LoadResult<Integer, Post>> loadSearchPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> searchPosts;
-        if (subredditOrUserName == null) {
-            if (accessToken == null) {
-                searchPosts = api.searchPostsListenableFuture(query, loadParams.getKey(), sortType.getType(), sortType.getTime(),
-                        trendingSource);
-            } else {
-                searchPosts = api.searchPostsOauthListenableFuture(query, loadParams.getKey(), sortType.getType(),
-                        sortType.getTime(), trendingSource, APIUtils.getOAuthHeader(accessToken));
-            }
-        } else {
-            if (accessToken == null) {
-                searchPosts = api.searchPostsInSpecificSubredditListenableFuture(subredditOrUserName, query,
-                        sortType.getType(), sortType.getTime(), loadParams.getKey());
-            } else {
-                searchPosts = api.searchPostsInSpecificSubredditOauthListenableFuture(subredditOrUserName, query,
-                        sortType.getType(), sortType.getTime(), loadParams.getKey(),
-                        APIUtils.getOAuthHeader(accessToken));
-            }
-        }
 
-        ListenableFuture<LoadResult<String, Post>> pageFuture = Futures.transform(searchPosts, this::transformData, executor);
+        searchPosts = api.search(query, null, subredditOrUserName, null, "Posts", sortType.getType().value, "All", loadParams.getKey(), 25, accessToken);
 
-        ListenableFuture<LoadResult<String, Post>> partialLoadResultFuture =
+
+        ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(searchPosts, this::transformData, executor);
+
+        ListenableFuture<LoadResult<Integer, Post>> partialLoadResultFuture =
                 Futures.catching(pageFuture, HttpException.class,
                         LoadResult.Error::new, executor);
 
         return Futures.catching(partialLoadResultFuture,
                 IOException.class, LoadResult.Error::new, executor);
     }
-
+/*
     private ListenableFuture<LoadResult<String, Post>> loadMultiRedditPosts(@NonNull LoadParams<String> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> multiRedditPosts;
         if (accessToken == null) {

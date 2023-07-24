@@ -75,6 +75,7 @@ public class SearchActivity extends BaseActivity {
     public static final String EXTRA_RETURN_USER_ICON_URL = "ERUIU";
     public static final String EXTRA_IS_MULTI_SELECTION = "EIMS";
     public static final int SUICIDE_PREVENTION_ACTIVITY_REQUEST_CODE = 101;
+    public static final String EXTRA_COMMUNITY_FULL_NAME = "ECF";
 
     private static final String SUBREDDIT_NAME_STATE = "SNS";
     private static final String SUBREDDIT_IS_USER_STATE = "SIUS";
@@ -82,6 +83,7 @@ public class SearchActivity extends BaseActivity {
     private static final int SUBREDDIT_SELECTION_REQUEST_CODE = 0;
     private static final int SUBREDDIT_SEARCH_REQUEST_CODE = 1;
     private static final int USER_SEARCH_REQUEST_CODE = 2;
+    private static final String COMMUNITY_QUALIFIED_NAME = "CQN";
 
     @BindView(R.id.coordinator_layout_search_activity)
     CoordinatorLayout coordinatorLayout;
@@ -125,6 +127,8 @@ public class SearchActivity extends BaseActivity {
     private String mAccessToken;
     private String query;
     private String subredditName;
+
+    private String communityQualifiedName;
     private boolean subredditIsUser;
     private boolean searchOnlySubreddits;
     private boolean searchOnlyUsers;
@@ -296,6 +300,7 @@ public class SearchActivity extends BaseActivity {
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_SUBREDDIT_NAME)) {
             subredditName = intent.getStringExtra(EXTRA_SUBREDDIT_NAME);
+            communityQualifiedName = intent.getStringExtra(EXTRA_COMMUNITY_FULL_NAME);
             subredditNameTextView.setText(subredditName);
             subredditIsUser = intent.getBooleanExtra(EXTRA_SUBREDDIT_IS_USER, false);
         }
@@ -364,6 +369,7 @@ public class SearchActivity extends BaseActivity {
                     intent.putExtra(SearchResultActivity.EXTRA_SUBREDDIT_NAME, "u_" + subredditName);
                 } else {
                     intent.putExtra(SearchResultActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                    intent.putExtra(SearchResultActivity.EXTRA_COMMUNITY_QUALIFIED_NAME, communityQualifiedName);
                 }
             }
             startActivity(intent);
@@ -477,6 +483,7 @@ public class SearchActivity extends BaseActivity {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SUBREDDIT_NAME_STATE, subredditName);
+        outState.putString(COMMUNITY_QUALIFIED_NAME, communityQualifiedName);
         outState.putBoolean(SUBREDDIT_IS_USER_STATE, subredditIsUser);
     }
 

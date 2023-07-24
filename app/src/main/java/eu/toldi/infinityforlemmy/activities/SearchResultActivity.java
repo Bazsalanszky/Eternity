@@ -90,6 +90,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
     static final String EXTRA_SUBREDDIT_NAME = "ESN";
 
     private static final String INSERT_SEARCH_QUERY_SUCCESS_STATE = "ISQSS";
+    public static final String EXTRA_COMMUNITY_QUALIFIED_NAME = "ECQN";
     @BindView(R.id.coordinator_layout_search_result_activity)
     CoordinatorLayout coordinatorLayout;
     @BindView(R.id.appbar_layout_search_result_activity)
@@ -132,8 +133,11 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
     private Call<String> subredditAutocompleteCall;
     private String mAccessToken;
     private String mAccountName;
+
+    private String mAccountQualifiedName;
     private String mQuery;
     private String mSubredditName;
+    private String mCommunityQualifiedName;
     private boolean mInsertSearchQuerySuccess;
     private FragmentManager fragmentManager;
     private SectionsPagerAdapter sectionsPagerAdapter;
@@ -192,6 +196,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
         String query = intent.getStringExtra(EXTRA_QUERY);
 
         mSubredditName = intent.getStringExtra(EXTRA_SUBREDDIT_NAME);
+        mCommunityQualifiedName = intent.getStringExtra(EXTRA_COMMUNITY_QUALIFIED_NAME);
 
         if (query != null) {
             mQuery = query;
@@ -202,6 +207,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState != null) {
             mInsertSearchQuerySuccess = savedInstanceState.getBoolean(INSERT_SEARCH_QUERY_SUCCESS_STATE);
@@ -386,7 +392,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
         });
 
         if (mAccountName != null && mSharedPreferences.getBoolean(SharedPreferencesUtils.ENABLE_SEARCH_HISTORY, true) && !mInsertSearchQuerySuccess && mQuery != null) {
-            InsertRecentSearchQuery.insertRecentSearchQueryListener(mRedditDataRoomDatabase, mAccountName,
+            InsertRecentSearchQuery.insertRecentSearchQueryListener(mRedditDataRoomDatabase, mAccountQualifiedName,
                     mQuery, () -> mInsertSearchQuerySuccess = true);
         }
     }
@@ -768,7 +774,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                     PostFragment mFragment = new PostFragment();
                     Bundle bundle = new Bundle();
                     bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_SEARCH);
-                    bundle.putString(PostFragment.EXTRA_NAME, mSubredditName);
+                    bundle.putString(PostFragment.EXTRA_NAME, mCommunityQualifiedName);
                     bundle.putString(PostFragment.EXTRA_QUERY, mQuery);
                     bundle.putString(PostFragment.EXTRA_TRENDING_SOURCE, getIntent().getStringExtra(EXTRA_TRENDING_SOURCE));
                     bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
