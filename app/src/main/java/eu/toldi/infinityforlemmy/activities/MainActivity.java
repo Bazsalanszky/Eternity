@@ -217,6 +217,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     private Call<String> subredditAutocompleteCall;
     private String mAccessToken;
     private String mAccountName;
+
+    private String mAccountQualifiedName;
     private boolean mFetchUserInfoSuccess = false;
     private boolean mFetchSubscriptionsSuccess = false;
     private boolean mDrawerOnAccountSwitch = false;
@@ -323,6 +325,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         String instance = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
         if(instance != null) {
             mRetrofit.setBaseURL(instance);
@@ -383,8 +386,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         WorkManager workManager = WorkManager.getInstance(this);
 
         if (mNewAccountName != null) {
-            if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
+            if (mAccountQualifiedName == null || !mAccountName.equals(mNewAccountName)) {
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase, mRetrofit, mCurrentAccountSharedPreferences,
                         mExecutor, new Handler(), mNewAccountName, newAccount -> {
                             EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
                             Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
@@ -392,7 +395,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                             mNewAccountName = null;
                             if (newAccount != null) {
                                 mAccessToken = newAccount.getAccessToken();
-                                mAccountName = newAccount.getAccountName();
+                                mAccountName = newAccount.getDisplay_name();
+                                mAccountQualifiedName = newAccount.getAccountName();
                             }
 
                             setNotification(workManager, notificationInterval, timeUnit, enableNotification);
@@ -452,6 +456,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             case SharedPreferencesUtils.MAIN_ACTIVITY_BOTTOM_APP_BAR_OPTION_PROFILE: {
                 Intent intent = new Intent(this, ViewUserDetailActivity.class);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
+                intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountQualifiedName);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountName);
                 startActivity(intent);
                 break;
@@ -786,7 +791,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         if (stringId == R.string.profile) {
                             intent = new Intent(MainActivity.this, ViewUserDetailActivity.class);
                             intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
-                            intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountName);
+                            intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountQualifiedName);
                         } else if (stringId == R.string.subscriptions) {
                             intent = new Intent(MainActivity.this, SubscribedThingListingActivity.class);
                         } else if (stringId == R.string.multi_reddit) {

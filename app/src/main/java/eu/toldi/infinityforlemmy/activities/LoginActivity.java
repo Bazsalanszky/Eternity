@@ -30,16 +30,16 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.FetchMyInfo;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.asynctasks.ParseAndInsertNewAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
+import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -157,7 +157,8 @@ public class LoginActivity extends BaseActivity {
                                         @Override
                                         public void onFetchMyInfoSuccess(String name,String display_name, String profileImageUrl, String bannerImageUrl) {
                                             mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
-                                                    .putString(SharedPreferencesUtils.ACCOUNT_NAME, name)
+                                                    .putString(SharedPreferencesUtils.ACCOUNT_NAME, display_name)
+                                                    .putString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, name)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,instance)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, profileImageUrl).apply();
                                             ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance, mRedditDataRoomDatabase.accountDao(),
