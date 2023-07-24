@@ -40,7 +40,7 @@ LemmInfinity is currently in the early stages of development. Expect many unfini
 - [x] Implementation of basic post browsing feature
 - [x] Support for multiple account handling
 - [x] Functionality for post upvotes/downvotes
-- [ ] Functionality to browse comments
+- [x] Functionality to browse comments
 - [ ] Capability for creating a new post
 - [ ] Ability to create comments
 - [ ] Elimination of code/string references specific to Reddit
