@@ -48,6 +48,9 @@ public class ParseComment {
                         topLevelComments.add(singleComment);
                     }
                 }
+                Comment parentComment = orderedComments.get(0);
+                if (parentComment.getDepth() == 0)
+                    parentComment = null;
 
                 for (int i = orderedComments.size() - 1; i >= 0; i--) {
                     Comment c = orderedComments.get(i);
@@ -66,6 +69,14 @@ public class ParseComment {
                 }
 
                 expandChildren(newComments, expandedNewComments, expandChildren);
+
+                if (topLevelComments.isEmpty() && !parsedComments.isEmpty() && parentComment != null) {
+                    for (int i = orderedComments.size() - 1; i >= 0; i--) {
+                        Comment c = orderedComments.get(i);
+                        if (c.getDepth() > parentComment.getDepth())
+                            expandedNewComments.add(c);
+                    }
+                }
 
                 ArrayList<Comment> commentData;
                 if (expandChildren) {
@@ -86,8 +97,7 @@ public class ParseComment {
                                  ParseCommentListener parseCommentListener) {
         executor.execute(() -> {
             try {
-                JSONArray childrenArray = new JSONObject(response).getJSONObject(JSONUtils.JSON_KEY)
-                        .getJSONObject(JSONUtils.DATA_KEY).getJSONArray(JSONUtils.THINGS_KEY);
+                JSONArray childrenArray = new JSONObject(response).getJSONArray("comments");
 
                 ArrayList<Comment> newComments = new ArrayList<>();
                 ArrayList<Comment> expandedNewComments = new ArrayList<>();
@@ -221,7 +231,7 @@ public class ParseComment {
         }
     }
 
-    private static int getChildCount(Comment comment) {
+    public static int getChildCount(Comment comment) {
         if (comment.getChildren() == null) {
             return 0;
         }

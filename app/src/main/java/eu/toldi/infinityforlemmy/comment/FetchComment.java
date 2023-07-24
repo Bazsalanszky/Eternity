@@ -10,8 +10,6 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,29 +58,14 @@ public class FetchComment {
     }
 
     public static void fetchMoreComment(Executor executor, Handler handler, Retrofit retrofit,
-                                        @Nullable String accessToken,
-                                        ArrayList<Integer> allChildren,
-                                        boolean expandChildren, String postFullName,
-                                        SortType.Type sortType,
-                                        FetchMoreCommentListener fetchMoreCommentListener) {
-        if (allChildren == null) {
-            return;
-        }
-
-        String childrenIds = "";
-
-        if (childrenIds.isEmpty()) {
-            return;
-        }
-
-        RedditAPI api = retrofit.create(RedditAPI.class);
+                                        @Nullable String accessToken, int article,
+                                        int commentId, SortType.Type sortType, boolean expandChildren,
+                                        Integer page, FetchMoreCommentListener fetchMoreCommentListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
         Call<String> moreComments;
-        if (accessToken == null) {
-            moreComments = api.moreChildren(postFullName, childrenIds, sortType);
-        } else {
-            moreComments = api.moreChildrenOauth(postFullName, childrenIds,
-                    sortType, APIUtils.getOAuthHeader(accessToken));
-        }
+
+        moreComments = api.getComments("All", sortType.value, 8, page, 25, null, null, article, commentId, false, accessToken);
+
 
         moreComments.enqueue(new Callback<String>() {
             @Override
