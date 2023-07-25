@@ -5,3 +5,16 @@ pipeline:
       - ./gradlew :app:assemble
     when:
       path: [ app/**, build.gradle ]
+  publish:
+    image: woodpeckerci/plugin-gitea-release
+    settings:
+      base_url: https://codeberg.org
+      files:
+        - app/build/outputs/apk/release/app-release-unsigned.apk
+      api_key:
+        from_secret: GITEA_ACCESS_TOKEN
+      target: main
+      prerelease: true
+      note: "This is an alpha release. Expect many bugs and unfinished features!"
+      when:
+        event: [ tag ]
