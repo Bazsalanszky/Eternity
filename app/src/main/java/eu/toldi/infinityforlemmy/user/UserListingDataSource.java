@@ -10,7 +10,7 @@ import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.SortType;
 import retrofit2.Retrofit;
 
-public class UserListingDataSource extends PageKeyedDataSource<String, UserData> {
+public class UserListingDataSource extends PageKeyedDataSource<Integer, UserData> {
 
     private Retrofit retrofit;
     private String query;
@@ -21,8 +21,8 @@ public class UserListingDataSource extends PageKeyedDataSource<String, UserData>
     private MutableLiveData<NetworkState> initialLoadStateLiveData;
     private MutableLiveData<Boolean> hasUserLiveData;
 
-    private PageKeyedDataSource.LoadParams<String> params;
-    private PageKeyedDataSource.LoadCallback<String, UserData> callback;
+    private PageKeyedDataSource.LoadParams<Integer> params;
+    private PageKeyedDataSource.LoadCallback<Integer, UserData> callback;
 
     UserListingDataSource(Retrofit retrofit, String query, SortType sortType, boolean nsfw) {
         this.retrofit = retrofit;
@@ -47,7 +47,7 @@ public class UserListingDataSource extends PageKeyedDataSource<String, UserData>
     }
 
     @Override
-    public void loadInitial(@NonNull PageKeyedDataSource.LoadInitialParams<String> params, @NonNull PageKeyedDataSource.LoadInitialCallback<String, UserData> callback) {
+    public void loadInitial(@NonNull PageKeyedDataSource.LoadInitialParams<Integer> params, @NonNull PageKeyedDataSource.LoadInitialCallback<Integer, UserData> callback) {
         initialLoadStateLiveData.postValue(NetworkState.LOADING);
 
         FetchUserData.fetchUserListingData(retrofit, query, null, sortType.getType(), nsfw,
@@ -56,7 +56,7 @@ public class UserListingDataSource extends PageKeyedDataSource<String, UserData>
                     public void onFetchUserListingDataSuccess(ArrayList<UserData> UserData, String after) {
                         hasUserLiveData.postValue(UserData.size() != 0);
 
-                        callback.onResult(UserData, null, after);
+                        callback.onResult(UserData, null, 2);
                         initialLoadStateLiveData.postValue(NetworkState.LOADED);
                     }
 
@@ -68,12 +68,12 @@ public class UserListingDataSource extends PageKeyedDataSource<String, UserData>
     }
 
     @Override
-    public void loadBefore(@NonNull PageKeyedDataSource.LoadParams<String> params, @NonNull PageKeyedDataSource.LoadCallback<String, UserData> callback) {
+    public void loadBefore(@NonNull PageKeyedDataSource.LoadParams<Integer> params, @NonNull PageKeyedDataSource.LoadCallback<Integer, UserData> callback) {
 
     }
 
     @Override
-    public void loadAfter(@NonNull PageKeyedDataSource.LoadParams<String> params, @NonNull PageKeyedDataSource.LoadCallback<String, UserData> callback) {
+    public void loadAfter(@NonNull PageKeyedDataSource.LoadParams<Integer> params, @NonNull PageKeyedDataSource.LoadCallback<Integer, UserData> callback) {
         this.params = params;
         this.callback = callback;
 
@@ -85,7 +85,7 @@ public class UserListingDataSource extends PageKeyedDataSource<String, UserData>
                 new FetchUserData.FetchUserListingDataListener() {
                     @Override
                     public void onFetchUserListingDataSuccess(ArrayList<UserData> UserData, String after) {
-                        callback.onResult(UserData, after);
+                        callback.onResult(UserData, params.key + 1);
                         paginationNetworkStateLiveData.postValue(NetworkState.LOADED);
                     }
 

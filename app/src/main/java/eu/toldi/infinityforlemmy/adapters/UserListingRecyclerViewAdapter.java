@@ -27,7 +27,6 @@ import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
@@ -36,6 +35,8 @@ import eu.toldi.infinityforlemmy.asynctasks.CheckIsFollowingUser;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.user.UserFollowing;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
@@ -119,7 +120,7 @@ public class UserListingRecyclerViewAdapter extends PagedListAdapter<UserData, R
                     if (isMultiSelection) {
                         ((DataViewHolder) holder).checkBox.performClick();
                     } else {
-                        callback.userSelected(userData.getName(), userData.getIconUrl());
+                        callback.userSelected(userData.getName(), userData.getIconUrl(), LemmyUtils.actorID2FullName(userData.getActorId()));
                     }
                 });
 
@@ -226,7 +227,7 @@ public class UserListingRecyclerViewAdapter extends PagedListAdapter<UserData, R
     public interface Callback {
         void retryLoadingMore();
 
-        void userSelected(String username, String iconUrl);
+        void userSelected(String username, String iconUrl, String userQualifiedName);
     }
 
     class DataViewHolder extends RecyclerView.ViewHolder {

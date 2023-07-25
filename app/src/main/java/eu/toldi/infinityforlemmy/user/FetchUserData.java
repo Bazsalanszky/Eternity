@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -55,11 +53,11 @@ public class FetchUserData {
         });
     }
 
-    public static void fetchUserListingData(Retrofit retrofit, String query, String after, SortType.Type sortType, boolean nsfw,
+    public static void fetchUserListingData(Retrofit retrofit, String query, Integer page, SortType.Type sortType, boolean nsfw,
                                             FetchUserListingDataListener fetchUserListingDataListener) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Call<String> userInfo = api.searchUsers(query, after, sortType, nsfw ? 1 : 0);
+        Call<String> userInfo = api.search(query, null, null, null, "Users", sortType.value, "All", page, 25, null);
         userInfo.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {

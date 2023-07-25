@@ -27,7 +27,7 @@ public class ParseUserData {
         }
 
 
-        JSONObject personJson = userDataJson.getJSONObject("person_view").getJSONObject("person");
+        JSONObject personJson = (userDataJson.has("person_view")) ? userDataJson.getJSONObject("person_view").getJSONObject("person") : userDataJson.getJSONObject("person");
         String userName = personJson.getString(JSONUtils.NAME_KEY);
         String actor_id = personJson.getString("actor_id");
         String iconImageUrl = "";
@@ -38,7 +38,7 @@ public class ParseUserData {
         if (!personJson.isNull("banner")) {
             bannerImageUrl = personJson.getString("banner");
         }
-        JSONObject countsJson = userDataJson.getJSONObject("person_view").getJSONObject("counts");
+        JSONObject countsJson = (userDataJson.has("person_view")) ? userDataJson.getJSONObject("person_view").getJSONObject("counts") : userDataJson.getJSONObject("counts");
 
         int linkKarma = countsJson.getInt(JSONUtils.POST_SCORE_KEY);
         int commentKarma = countsJson.getInt(JSONUtils.COMMENT_SCORE_KEY);
@@ -150,8 +150,8 @@ public class ParseUserData {
         protected Void doInBackground(Void... voids) {
             try {
                 if (!parseFailed) {
-                    after = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getString(JSONUtils.AFTER_KEY);
-                    JSONArray children = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getJSONArray(JSONUtils.CHILDREN_KEY);
+
+                    JSONArray children = jsonResponse.getJSONArray("users");
                     for (int i = 0; i < children.length(); i++) {
                         try {
                             UserData userData = parseUserDataBase(children.getJSONObject(i), false);

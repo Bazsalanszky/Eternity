@@ -139,8 +139,8 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
         boolean isGettingUserInfo = getArguments().getBoolean(EXTRA_IS_GETTING_USER_INFO);
         String accessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         String accountName = getArguments().getString(EXTRA_ACCOUNT_NAME);
-        String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_USER, SortType.Type.TOP.value);
-        sortType = new SortType(SortType.Type.valueOf(sort.toUpperCase()));
+        String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_USER, SortType.Type.TOP_ALL.value);
+        sortType = new SortType(SortType.Type.fromValue(sort));
         boolean nsfw = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.NSFW_BASE, false);
 
         mAdapter = new UserListingRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRetrofit.getRetrofit(),
@@ -153,12 +153,13 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
                     }
 
                     @Override
-                    public void userSelected(String username, String iconUrl) {
+                    public void userSelected(String username, String iconUrl, String userQualifiedName) {
                         if (isGettingUserInfo) {
                             ((SearchUsersResultActivity) mActivity).getSelectedUser(username, iconUrl);
                         } else {
                             Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
                             intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, username);
+                            intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, userQualifiedName);
                             mActivity.startActivity(intent);
                         }
                     }
