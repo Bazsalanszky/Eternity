@@ -10,7 +10,7 @@ import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.SortType;
 import retrofit2.Retrofit;
 
-public class SubredditListingDataSource extends PageKeyedDataSource<String, SubredditData> {
+public class SubredditListingDataSource extends PageKeyedDataSource<Integer, SubredditData> {
 
     private Retrofit retrofit;
     private String query;
@@ -22,8 +22,8 @@ public class SubredditListingDataSource extends PageKeyedDataSource<String, Subr
     private MutableLiveData<NetworkState> initialLoadStateLiveData;
     private MutableLiveData<Boolean> hasSubredditLiveData;
 
-    private LoadParams<String> params;
-    private LoadCallback<String, SubredditData> callback;
+    private LoadParams<Integer> params;
+    private LoadCallback<Integer, SubredditData> callback;
 
     SubredditListingDataSource(Retrofit retrofit, String query, SortType sortType, String accessToken, boolean nsfw) {
         this.retrofit = retrofit;
@@ -49,7 +49,7 @@ public class SubredditListingDataSource extends PageKeyedDataSource<String, Subr
     }
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<String> params, @NonNull LoadInitialCallback<String, SubredditData> callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, SubredditData> callback) {
         initialLoadStateLiveData.postValue(NetworkState.LOADING);
 
         FetchSubredditData.fetchSubredditListingData(retrofit, query, null, sortType.getType(), accessToken, nsfw,
@@ -62,7 +62,7 @@ public class SubredditListingDataSource extends PageKeyedDataSource<String, Subr
                             hasSubredditLiveData.postValue(true);
                         }
 
-                        callback.onResult(subredditData, null, after);
+                        callback.onResult(subredditData, null, 2);
                         initialLoadStateLiveData.postValue(NetworkState.LOADED);
                     }
 
@@ -74,12 +74,12 @@ public class SubredditListingDataSource extends PageKeyedDataSource<String, Subr
     }
 
     @Override
-    public void loadBefore(@NonNull LoadParams<String> params, @NonNull LoadCallback<String, SubredditData> callback) {
+    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, SubredditData> callback) {
 
     }
 
     @Override
-    public void loadAfter(@NonNull LoadParams<String> params, @NonNull LoadCallback<String, SubredditData> callback) {
+    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, SubredditData> callback) {
         this.params = params;
         this.callback = callback;
 
@@ -91,7 +91,7 @@ public class SubredditListingDataSource extends PageKeyedDataSource<String, Subr
                 new FetchSubredditData.FetchSubredditListingDataListener() {
                     @Override
                     public void onFetchSubredditListingDataSuccess(ArrayList<SubredditData> subredditData, String after) {
-                        callback.onResult(subredditData, after);
+                        callback.onResult(subredditData, params.key + 1);
                         paginationNetworkStateLiveData.postValue(NetworkState.LOADED);
                     }
 

@@ -49,7 +49,6 @@ import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditListingViewModel;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
-import retrofit2.Retrofit;
 
 
 /**
@@ -79,9 +78,6 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
-    @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -139,11 +135,11 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         String accessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         String accountName = getArguments().getString(EXTRA_ACCOUNT_NAME);
 
-        String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_SUBREDDIT, SortType.Type.TOP.value);
-        sortType = new SortType(SortType.Type.valueOf(sort.toUpperCase()));
+        String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_SUBREDDIT, SortType.Type.TOP_ALL.value);
+        sortType = new SortType(SortType.Type.fromValue(sort));
         boolean nsfw = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.NSFW_BASE, false);
 
-        mAdapter = new SubredditListingRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRetrofit.getRetrofit(),
+        mAdapter = new SubredditListingRecyclerViewAdapter(mActivity, mExecutor, mRetrofit.getRetrofit(), mRetrofit.getRetrofit(),
                 mCustomThemeWrapper, accessToken, accountName,
                 mRedditDataRoomDatabase, getArguments().getBoolean(EXTRA_IS_MULTI_SELECTION, false),
                 new SubredditListingRecyclerViewAdapter.Callback() {
@@ -153,7 +149,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
                     }
 
                     @Override
-                    public void subredditSelected(String subredditName, String communityFullName,String iconUrl) {
+                    public void subredditSelected(String subredditName, String communityFullName, String iconUrl) {
                         if (isGettingSubredditInfo) {
                             ((SearchSubredditsResultActivity) mActivity).getSelectedSubreddit(subredditName, iconUrl);
                         } else {

@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
-import eu.toldi.infinityforlemmy.utils.Utils;
 
 public class ParseSubredditData {
     public static void parseSubredditData(String response, ParseSubredditDataListener parseSubredditDataListener) {
@@ -32,13 +31,13 @@ public class ParseSubredditData {
 
         String title = community.getString(JSONUtils.TITLE_KEY);
         String bannerImageUrl = "";
-        if(!community.isNull("banner")){
+        if (!community.isNull("banner")) {
             bannerImageUrl = community.getString("banner");
         }
 
         String iconUrl = "";
-        if(!community.isNull("banner")){
-            bannerImageUrl = community.getString("icon");
+        if (!community.isNull("icon")) {
+            iconUrl = community.getString("icon");
         }
         int id = community.getInt("id");
         String name = community.getString("name");
@@ -50,8 +49,6 @@ public class ParseSubredditData {
 
         String actorId = community.getString("actor_id");
         boolean local = community.getBoolean("local");
-        String icon = community.getString("icon");
-        String banner = community.getString("banner");
         boolean hidden = community.getBoolean("hidden");
         boolean postingRestrictedToMods = community.getBoolean("posting_restricted_to_mods");
         int instanceId = community.getInt("instance_id");
@@ -138,16 +135,15 @@ public class ParseSubredditData {
         protected Void doInBackground(Void... voids) {
             try {
                 if (!parseFailed) {
-                    JSONArray children = jsonResponse.getJSONObject(JSONUtils.DATA_KEY)
-                            .getJSONArray(JSONUtils.CHILDREN_KEY);
+                    JSONArray children = jsonResponse.getJSONArray("communities");
                     for (int i = 0; i < children.length(); i++) {
-                        JSONObject data = children.getJSONObject(i).getJSONObject(JSONUtils.DATA_KEY);
+                        JSONObject data = children.getJSONObject(i);
                         SubredditData subredditData = parseSubredditData(data, nsfw);
                         if (subredditData != null) {
                             subredditListingData.add(subredditData);
                         }
                     }
-                    after = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getString(JSONUtils.AFTER_KEY);
+                    //after = jsonResponse.getJSONObject(JSONUtils.DATA_KEY).getString(JSONUtils.AFTER_KEY);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

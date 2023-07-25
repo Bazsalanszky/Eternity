@@ -460,7 +460,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_POST, SortType.Type.TOP_ALL.value);
             String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SEARCH_POST, SortType.Time.ALL.name());
-            sortType = new SortType(SortType.Type.fromValue(sort), SortType.Time.valueOf(sortTime));
+            SortType.Type st = SortType.Type.fromValue(sort);
+            sortType = new SortType(st == null ? SortType.Type.TOP_ALL : st, SortType.Time.valueOf(sortTime));
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SEARCH_POST, defaultPostLayout);
 
             mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,

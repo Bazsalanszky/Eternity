@@ -268,7 +268,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
     private ListenableFuture<LoadResult<Integer, Post>> loadSearchPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> searchPosts;
 
-        searchPosts = api.search(query, null, subredditOrUserName, null, "Posts", sortType.getType().value, "All", loadParams.getKey(), 25, accessToken);
+        searchPosts = api.searchLive(query, null, subredditOrUserName, null, "Posts", sortType.getType().value, "All", loadParams.getKey(), 25, accessToken);
 
 
         ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(searchPosts, this::transformData, executor);

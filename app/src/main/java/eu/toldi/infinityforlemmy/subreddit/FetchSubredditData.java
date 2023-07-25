@@ -1,18 +1,11 @@
 package eu.toldi.infinityforlemmy.subreddit;
 
-import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,13 +45,14 @@ public class FetchSubredditData {
         });
     }
 
-    static void fetchSubredditListingData(Retrofit retrofit, String query, String after, SortType.Type sortType, String accessToken,
+    static void fetchSubredditListingData(Retrofit retrofit, String query, Integer page, SortType.Type sortType, String accessToken,
                                           boolean nsfw, final FetchSubredditListingDataListener fetchSubredditListingDataListener) {
-        RedditAPI api = retrofit.create(RedditAPI.class);
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Map<String, String> map = new HashMap<>();
-        Map<String, String> headers = accessToken != null ? APIUtils.getOAuthHeader(accessToken) : Collections.unmodifiableMap(map);
-        Call<String> subredditDataCall = api.searchSubreddits(query, after, sortType, nsfw ? 1 : 0, headers);
+
+        Call<String> subredditDataCall = api.search(query, null, null, null, "Communities", sortType.value, "All", page, 25, accessToken);
+
+
         subredditDataCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

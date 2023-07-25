@@ -80,7 +80,21 @@ public interface LemmyAPI {
     );
 
     @GET("api/v3/search")
-    ListenableFuture<Response<String>> search(
+    ListenableFuture<Response<String>> searchLive(
+            @Query("q") String q,
+            @Query("community_id") Integer communityId,
+            @Query("community_name") String communityName,
+            @Query("creator_id") Integer creatorId,
+            @Query("type_") String type,
+            @Query("sort") String sort,
+            @Query("listing_type") String listingType,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("auth") String auth
+    );
+
+    @GET("api/v3/search")
+    Call<String> search(
             @Query("q") String q,
             @Query("community_id") Integer communityId,
             @Query("community_name") String communityName,
