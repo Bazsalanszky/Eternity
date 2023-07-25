@@ -54,7 +54,7 @@ public class ParseSubredditData {
         int instanceId = community.getInt("instance_id");
         int subscribers = subredditDataJsonObject.getJSONObject("counts").getInt("subscribers");
 
-        return new SubredditData(id,name,title,description,removed,published,updated,deleted,nsfw,actorId,local,iconUrl,bannerImageUrl,hidden,postingRestrictedToMods,instanceId,subscribers);
+        return new SubredditData(id,name,title,description,removed,published,updated,deleted,isNSFW,actorId,local,iconUrl,bannerImageUrl,hidden,postingRestrictedToMods,instanceId,subscribers);
     }
 
     interface ParseSubredditDataListener {
