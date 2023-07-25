@@ -7,9 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.InflateException;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.textfield.TextInputEditText;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +75,9 @@ public class LoginActivity extends BaseActivity {
 
     @BindView(R.id.user_login_button)
     Button loginButton;
+
+    @BindView(R.id.login_progress)
+    ProgressBar progressBar;
 
     @Inject
     @Named("no_oauth")
@@ -130,8 +136,19 @@ public class LoginActivity extends BaseActivity {
         }
 
         loginButton.setOnClickListener(view -> {
+            Log.i("LoginActivity", "Login button clicked");
+            loginButton.setEnabled(false);
+            progressBar.setVisibility(ProgressBar.VISIBLE);
             String username = username_input.getText().toString();
-            String instance = instance_input.getText().toString();
+            String instance = correctURL(instance_input.getText().toString());
+            if(!Patterns.WEB_URL.matcher(instance).matches()){
+                instance_input.setError("Invalid instance URL");
+                Toast.makeText(LoginActivity.this, "Invalid instance URL", Toast.LENGTH_SHORT).show();
+                loginButton.setEnabled(true);
+                progressBar.setVisibility(ProgressBar.GONE);
+                return;
+            }
+            Log.i("LoginActivity", "Instance: " + instance);
             AccountLoginDTO accountLoginDTO = new AccountLoginDTO(username,password_input.getText().toString(),token_2fa_input.getText().toString());
             mRetrofit.setBaseURL(instance);
             LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
@@ -139,15 +156,16 @@ public class LoginActivity extends BaseActivity {
             accessTokenCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-
+                    progressBar.setVisibility(ProgressBar.GONE);
+                    loginButton.setEnabled(true);
+                    String accountResponse = response.body();
+                    if (accountResponse == null) {
+                        Log.e("LoginActivity", "Account response is null");
+                        Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
+                        //Handle error
+                        return;
+                    }
                     if (response.isSuccessful()) {
-                        Log.i("test", "WIN");
-                        String accountResponse = response.body();
-                        if (accountResponse == null) {
-                            //Handle error
-                            return;
-                        }
-                        Log.i("test", accountResponse);
                         try {
                             JSONObject responseJSON = new JSONObject(accountResponse);
                             String accessToken = responseJSON.getString("jwt");
@@ -187,22 +205,44 @@ public class LoginActivity extends BaseActivity {
                         return;
                     }
 
-                    String accountResponse = response.body();
-                    if (accountResponse == null) {
-                        //Handle error
-                        return;
+                    try {
+                        JSONObject responseObject = new JSONObject(accountResponse);
+                        if(responseObject.has("error")) {
+                            Toast.makeText(LoginActivity.this, "Error:"+responseObject.getString("error"), Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
                     }
-                    Log.i("test", accountResponse);
+
+                    Log.e("LoginActivity", "Failed to get access token: " + response.code() + " " + response.message() + " " + response.errorBody());
+
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Log.i("test", "LOSE");
+                    progressBar.setVisibility(ProgressBar.GONE);
+                    loginButton.setEnabled(true);
+                    Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
                 }
             });
         });
 
     }
+    private static String correctURL(String url) {
+        if (url == null || url.isEmpty()) {
+            throw new IllegalArgumentException("URL cannot be null or empty");
+        }
+
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+
+        return url;
+    }
+
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {

@@ -54,9 +54,18 @@
                     android:id="@+id/instance_url_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/instance_url" />
+                    android:hint="@string/instance_url"
+                    android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/login_instance_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="The URL of you prefered Lemmy instance with or without the https:// prefix" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -67,7 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/afs_md2_popup_margin_end"
-                    android:hint="@string/user_username" />
+                    android:hint="@string/user_username"
+                    android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/user_password"
+                    android:maxLines="1"
                     android:password="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -92,7 +103,8 @@
                     android:id="@+id/user_2fa_token_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/user_2fa_token" />
+                    android:hint="@string/user_2fa_token"
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -100,6 +112,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_login" />
+
+            <ProgressBar
+                android:id="@+id/login_progress"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
         </LinearLayout>
 
