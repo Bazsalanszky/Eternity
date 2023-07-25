@@ -3,6 +3,7 @@ package eu.toldi.infinityforlemmy.apis;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
+import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import retrofit2.Call;
@@ -106,4 +107,8 @@ public interface LemmyAPI {
             @Query("limit") Integer limit,
             @Query("auth") String auth
     );
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/comment")
+    Call<String> postComment(@Body CommentDTO params);
 }

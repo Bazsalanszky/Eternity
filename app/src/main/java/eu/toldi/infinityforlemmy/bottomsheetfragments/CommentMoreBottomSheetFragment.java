@@ -150,7 +150,8 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
                 intent.putExtra(CommentActivity.EXTRA_PARENT_DEPTH_KEY, comment.getDepth() + 1);
                 intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_BODY_MARKDOWN_KEY, comment.getCommentMarkdown());
                 intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_BODY_KEY, comment.getCommentRawText());
-                intent.putExtra(CommentActivity.EXTRA_PARENT_FULLNAME_KEY, comment.getFullName());
+                intent.putExtra(CommentActivity.EXTRA_POST_ID_KEY, comment.getPostId());
+                intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_ID_KEY, comment.getId());
                 intent.putExtra(CommentActivity.EXTRA_IS_REPLYING_KEY, true);
 
                 intent.putExtra(CommentActivity.EXTRA_PARENT_POSITION_KEY, bundle.getInt(EXTRA_POSITION));

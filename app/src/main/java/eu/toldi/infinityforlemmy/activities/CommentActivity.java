@@ -35,7 +35,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -48,7 +47,6 @@ import io.noties.markwon.MarkwonPlugin;
 import io.noties.markwon.core.MarkwonTheme;
 import io.noties.markwon.recycler.MarkwonAdapter;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-import eu.toldi.infinityforlemmy.AnyAccountAccessTokenAuthenticator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
@@ -68,8 +66,6 @@ import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
-import okhttp3.ConnectionPool;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 public class CommentActivity extends BaseActivity implements UploadImageEnabledActivity, AccountChooserBottomSheetFragment.AccountChooserListener {
@@ -77,7 +73,9 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
     public static final String EXTRA_COMMENT_PARENT_TITLE_KEY = "ECPTK";
     public static final String EXTRA_COMMENT_PARENT_BODY_KEY = "ECPBK";
     public static final String EXTRA_COMMENT_PARENT_BODY_MARKDOWN_KEY = "ECPBMK";
-    public static final String EXTRA_PARENT_FULLNAME_KEY = "EPFK";
+    public static final String EXTRA_POST_ID_KEY = "EPIK";
+
+    public static final String EXTRA_COMMENT_PARENT_ID_KEY = "ECPIDK";
     public static final String EXTRA_PARENT_DEPTH_KEY = "EPDK";
     public static final String EXTRA_PARENT_POSITION_KEY = "EPPK";
     public static final String EXTRA_IS_REPLYING_KEY = "EIRK";
@@ -93,9 +91,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
-    @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+
     @Inject
     @Named("upload_media")
     Retrofit mUploadMediaRetrofit;
@@ -114,7 +110,9 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
     private RequestManager mGlide;
     private Account selectedAccount;
     private String mAccessToken;
-    private String parentFullname;
+    private int postId;
+
+    private Integer parentId = null;
     private int parentDepth;
     private int parentPosition;
     private boolean isSubmitting = false;
@@ -215,11 +213,15 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
             // noinspection NotifyDataSetChanged
             markwonAdapter.notifyDataSetChanged();
         }
-        parentFullname = intent.getStringExtra(EXTRA_PARENT_FULLNAME_KEY);
+
+        postId = intent.getIntExtra(EXTRA_POST_ID_KEY,0);
+        if(postId == 0)
+            finish();
         parentDepth = intent.getExtras().getInt(EXTRA_PARENT_DEPTH_KEY);
         parentPosition = intent.getExtras().getInt(EXTRA_PARENT_POSITION_KEY);
         if (isReplying) {
             binding.commentToolbar.setTitle(getString(R.string.comment_activity_label_is_replying));
+            parentId = intent.getExtras().getInt(EXTRA_COMMENT_PARENT_ID_KEY);
         }
 
         setSupportActionBar(binding.commentToolbar);
@@ -388,15 +390,8 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
             Snackbar sendingSnackbar = Snackbar.make(binding.commentCoordinatorLayout, R.string.sending_comment, Snackbar.LENGTH_INDEFINITE);
             sendingSnackbar.show();
 
-            Retrofit newAuthenticatorOauthRetrofit = mOauthRetrofit.newBuilder().client(new OkHttpClient.Builder().authenticator(new AnyAccountAccessTokenAuthenticator(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, selectedAccount, mCurrentAccountSharedPreferences))
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .connectionPool(new ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
-                    .build())
-                    .build();
             SendComment.sendComment(mExecutor, new Handler(), binding.commentCommentEditText.getText().toString(),
-                    parentFullname, parentDepth, newAuthenticatorOauthRetrofit, selectedAccount,
+                   postId, parentId, mRetrofit.getRetrofit(), selectedAccount,
                     new SendComment.SendCommentListener() {
                         @Override
                         public void sendCommentSuccess(Comment comment) {
@@ -408,7 +403,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
                             Toast.makeText(CommentActivity.this, R.string.send_comment_success, Toast.LENGTH_SHORT).show();
                             Intent returnIntent = new Intent();
                             returnIntent.putExtra(RETURN_EXTRA_COMMENT_DATA_KEY, comment);
-                            returnIntent.putExtra(EXTRA_PARENT_FULLNAME_KEY, parentFullname);
+                            returnIntent.putExtra(EXTRA_POST_ID_KEY, postId);
                             if (isReplying) {
                                 returnIntent.putExtra(EXTRA_PARENT_POSITION_KEY, parentPosition);
                             }
@@ -454,10 +449,10 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
                     Toast.makeText(CommentActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit.getRetrofit(), mUploadMediaRetrofit,
                         mAccessToken, binding.commentCommentEditText, binding.commentCoordinatorLayout, data.getData(), uploadedImages);
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit.getRetrofit(), mUploadMediaRetrofit,
                         mAccessToken, binding.commentCommentEditText, binding.commentCoordinatorLayout, capturedImageUri, uploadedImages);
             } else if (requestCode == MARKDOWN_PREVIEW_REQUEST_CODE) {
                 sendComment(mMenu == null ? null : mMenu.findItem(R.id.action_send_comment_activity));

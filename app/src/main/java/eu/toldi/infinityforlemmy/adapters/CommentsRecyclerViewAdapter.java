@@ -899,10 +899,10 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
-    public void addChildComment(Comment comment, String parentFullname, int parentPosition) {
-        if (!parentFullname.equals(mVisibleComments.get(parentPosition).getFullName())) {
+    public void addChildComment(Comment comment, int parentFullname, int parentPosition) {
+        if (parentFullname == mVisibleComments.get(parentPosition).getId()) {
             for (int i = 0; i < mVisibleComments.size(); i++) {
-                if (parentFullname.equals(mVisibleComments.get(i).getFullName())) {
+                if (parentFullname == mVisibleComments.get(i).getId()) {
                     parentPosition = i;
                     break;
                 }
@@ -1358,7 +1358,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     intent.putExtra(CommentActivity.EXTRA_PARENT_DEPTH_KEY, comment.getDepth() + 1);
                     intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_BODY_MARKDOWN_KEY, comment.getCommentMarkdown());
                     intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_BODY_KEY, comment.getCommentRawText());
-                    intent.putExtra(CommentActivity.EXTRA_PARENT_FULLNAME_KEY, comment.getFullName());
+                    intent.putExtra(CommentActivity.EXTRA_POST_ID_KEY, mPost.getId());
+                    intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_ID_KEY, comment.getId());
                     intent.putExtra(CommentActivity.EXTRA_IS_REPLYING_KEY, true);
 
                     int parentPosition = mIsSingleCommentThreadMode ? getBindingAdapterPosition() - 1 : getBindingAdapterPosition();

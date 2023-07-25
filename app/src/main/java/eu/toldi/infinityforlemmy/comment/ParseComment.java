@@ -180,11 +180,11 @@ public class ParseComment {
         });
     }
 
-    static void parseSentComment(Executor executor, Handler handler, String response, int depth,
+    static void parseSentComment(Executor executor, Handler handler, String response,
                                  ParseSentCommentListener parseSentCommentListener) {
         executor.execute(() -> {
             try {
-                JSONObject sentCommentData = new JSONObject(response);
+                JSONObject sentCommentData = new JSONObject(response).getJSONObject("comment_view");
                 Comment comment = parseSingleComment(sentCommentData);
 
                 handler.post(() -> parseSentCommentListener.onParseSentCommentSuccess(comment));
@@ -272,6 +272,7 @@ public class ParseComment {
         JSONObject countsObj = jsonObject.getJSONObject("counts");
 
         int id = commentObj.getInt("id");
+        int postID = postObj.getInt("id");
         String fullName = creatorObj.getString("name");
         String author = creatorObj.getString("name");
         String authorQualifiedName = LemmyUtils.actorID2FullName(creatorObj.getString("actor_id"));
@@ -293,7 +294,7 @@ public class ParseComment {
         String distinguished = commentObj.getString("distinguished");
         String permalink = commentObj.getString("ap_id");
         String[] path = commentObj.getString("path").split(Pattern.quote("."));
-        ;
+
 
         int depth = path.length - 2;
 
@@ -303,7 +304,7 @@ public class ParseComment {
         boolean saved = jsonObject.getBoolean("saved");
         long edited = 0;
 
-        Comment comment = new Comment(id, fullName, author, authorQualifiedName, linkAuthor, commentTimeMillis,
+        Comment comment = new Comment(id,postID, fullName, author, authorQualifiedName, linkAuthor, commentTimeMillis,
                 commentMarkdown, commentRawText, linkId, communityName, communityQualifiedName, parentId,
                 score, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, edited, path);
         int child_count = countsObj.getInt("child_count");

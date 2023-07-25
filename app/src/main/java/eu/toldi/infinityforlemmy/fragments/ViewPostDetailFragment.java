@@ -756,7 +756,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition));
     }
 
-    public void addChildComment(Comment comment, String parentFullname, int parentPosition) {
+    public void addChildComment(Comment comment, int parentFullname, int parentPosition) {
         if (mCommentsAdapter != null) {
             mCommentsAdapter.addChildComment(comment, parentFullname, parentPosition);
         }
@@ -940,7 +940,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_TITLE_KEY, mPost.getTitle());
                 intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_BODY_MARKDOWN_KEY, mPost.getSelfText());
                 intent.putExtra(CommentActivity.EXTRA_COMMENT_PARENT_BODY_KEY, mPost.getSelfTextPlain());
-                intent.putExtra(CommentActivity.EXTRA_PARENT_FULLNAME_KEY, mPost.getFullName());
+                intent.putExtra(CommentActivity.EXTRA_POST_ID_KEY, mPost.getId());
                 intent.putExtra(CommentActivity.EXTRA_PARENT_DEPTH_KEY, 0);
                 intent.putExtra(CommentActivity.EXTRA_IS_REPLYING_KEY, false);
                 startActivityForResult(intent, WRITE_COMMENT_REQUEST_CODE);
@@ -1147,9 +1147,9 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     if (comment != null && comment.getDepth() == 0) {
                         addComment(comment);
                     } else {
-                        String parentFullname = data.getStringExtra(CommentActivity.EXTRA_PARENT_FULLNAME_KEY);
+                        int parentFullname = data.getIntExtra(CommentActivity.EXTRA_POST_ID_KEY,0);
                         int parentPosition = data.getIntExtra(CommentActivity.EXTRA_PARENT_POSITION_KEY, -1);
-                        if (parentFullname != null && parentPosition >= 0) {
+                        if (parentFullname > 0) {
                             addChildComment(comment, parentFullname, parentPosition);
                         }
                     }

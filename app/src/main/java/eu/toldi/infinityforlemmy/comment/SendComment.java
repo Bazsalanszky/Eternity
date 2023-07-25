@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.account.Account;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,21 +21,17 @@ import retrofit2.Retrofit;
 
 public class SendComment {
     public static void sendComment(Executor executor, Handler handler, String commentMarkdown,
-                                   String thingFullname, int parentDepth,
-                                   Retrofit newAuthenticatorOauthRetrofit, Account account,
+                                   Integer post_id, Integer parent_id,
+                                   Retrofit retrofit, Account account,
                                    SendCommentListener sendCommentListener) {
-        Map<String, String> headers = APIUtils.getOAuthHeader(account.getAccessToken());
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.API_TYPE_KEY, "json");
-        params.put(APIUtils.RETURN_RTJSON_KEY, "true");
-        params.put(APIUtils.TEXT_KEY, commentMarkdown);
-        params.put(APIUtils.THING_ID_KEY, thingFullname);
 
-        newAuthenticatorOauthRetrofit.create(RedditAPI.class).sendCommentOrReplyToMessage(headers, params).enqueue(new Callback<String>() {
+
+
+        retrofit.create(LemmyAPI.class).postComment(new CommentDTO(commentMarkdown, post_id,parent_id, null,null,account.getAccessToken())).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
-                    ParseComment.parseSentComment(executor, handler, response.body(), parentDepth, new ParseComment.ParseSentCommentListener() {
+                    ParseComment.parseSentComment(executor, handler, response.body(), new ParseComment.ParseSentCommentListener() {
                         @Override
                         public void onParseSentCommentSuccess(Comment comment) {
                             sendCommentListener.sendCommentSuccess(comment);

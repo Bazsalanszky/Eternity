@@ -780,9 +780,9 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                         if (comment != null && comment.getDepth() == 0) {
                             fragment.addComment(comment);
                         } else {
-                            String parentFullname = data.getStringExtra(CommentActivity.EXTRA_PARENT_FULLNAME_KEY);
+                            int parentFullname = data.getIntExtra(CommentActivity.EXTRA_POST_ID_KEY,0);
                             int parentPosition = data.getIntExtra(CommentActivity.EXTRA_PARENT_POSITION_KEY, -1);
-                            if (parentFullname != null && parentPosition >= 0) {
+                            if (parentFullname > 0) {
                                 fragment.addChildComment(comment, parentFullname, parentPosition);
                             }
                         }

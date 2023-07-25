@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import eu.toldi.infinityforlemmy.BuildConfig;
@@ -59,14 +60,16 @@ public class Comment implements Parcelable {
     private boolean loadMoreChildrenFailed;
     private long editedTimeMillis;
 
-    private String[] path;
+    private List<String> path;
+    private int postId;
 
-    public Comment(int id, String fullName, String author, String authorQualifiedName, String linkAuthor,
+    public Comment(int id, int postId, String fullName, String author, String authorQualifiedName, String linkAuthor,
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
                    String linkId, String communityName, String communityQualifiedName, Integer parentId, int score,
                    int voteType, boolean isSubmitter, String distinguished, String permalink,
                    int depth, boolean collapsed, boolean hasReply, boolean saved, long edited, String[] path) {
         this.id = id;
+        this.postId = postId;
         this.fullName = fullName;
         this.author = author;
         this.authorQualifiedName = authorQualifiedName;
@@ -90,7 +93,7 @@ public class Comment implements Parcelable {
         this.isExpanded = false;
         this.hasExpandedBefore = false;
         this.editedTimeMillis = edited;
-        this.path = path;
+        this.path = new ArrayList<>(Arrays.asList(path));
         placeholderType = NOT_PLACEHOLDER;
     }
 
@@ -113,6 +116,7 @@ public class Comment implements Parcelable {
 
     protected Comment(Parcel in) {
         id = in.readInt();
+        postId = in.readInt();
         fullName = in.readString();
         author = in.readString();
         authorQualifiedName = in.readString();
@@ -147,7 +151,8 @@ public class Comment implements Parcelable {
         placeholderType = in.readInt();
         isLoadingMoreChildren = in.readByte() != 0;
         loadMoreChildrenFailed = in.readByte() != 0;
-        in.readStringArray(path);
+        path = new ArrayList<>();
+        in.readStringList(path);
     }
 
     public int getId() {
@@ -411,6 +416,7 @@ public class Comment implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
+        parcel.writeInt(postId);
         parcel.writeString(fullName);
         parcel.writeString(author);
         parcel.writeString(authorQualifiedName);
@@ -445,10 +451,10 @@ public class Comment implements Parcelable {
         parcel.writeInt(placeholderType);
         parcel.writeByte((byte) (isLoadingMoreChildren ? 1 : 0));
         parcel.writeByte((byte) (loadMoreChildrenFailed ? 1 : 0));
-        parcel.writeStringArray(path);
+        parcel.writeStringList(path);
     }
 
-    public String[] getPath() {
+    public List<String> getPath() {
         return path;
     }
 
@@ -466,5 +472,9 @@ public class Comment implements Parcelable {
 
     public String getCommunityQualifiedName() {
         return communityQualifiedName;
+    }
+
+    public int getPostId() {
+        return postId;
     }
 }
