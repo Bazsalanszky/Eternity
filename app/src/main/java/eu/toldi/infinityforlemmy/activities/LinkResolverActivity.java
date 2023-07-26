@@ -38,7 +38,7 @@ public class LinkResolverActivity extends AppCompatActivity {
     private static final String POST_PATTERN_2 = "/(u|U|user)/[\\w-]+/comments/\\w+/?\\w+/?";
     private static final String POST_PATTERN_3 = "/[\\w-]+$";
     private static final String COMMENT_PATTERN = "/(r|u|U|user)/[\\w-]+/comments/\\w+/?[\\w-]+/\\w+/?";
-    private static final String SUBREDDIT_PATTERN = "/[rR]/[\\w-]+/?";
+    private static final String SUBREDDIT_PATTERN = "/[cC]/[\\w@.-]+/?";
     private static final String USER_PATTERN = "/(u|U|user)/[\\w-]+/?";
     private static final String SIDEBAR_PATTERN = "/[rR]/[\\w-]+/about/sidebar";
     private static final String MULTIREDDIT_PATTERN = "/user/[\\w-]+/m/\\w+/?";
@@ -221,7 +221,7 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if (path.matches(SUBREDDIT_PATTERN)) {
                                 Intent intent = new Intent(this, ViewSubredditDetailActivity.class);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, path.substring(3));
+                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, path.substring(3));
                                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
                                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                                 startActivity(intent);

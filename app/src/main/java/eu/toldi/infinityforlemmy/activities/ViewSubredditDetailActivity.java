@@ -233,6 +233,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private int fabOption;
     private MaterialAlertDialogBuilder nsfwWarningBuilder;
 
+    private boolean hideSubredditDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((Infinity) getApplication()).getAppComponent().inject(this);
@@ -336,7 +338,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         }
 
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
-        boolean hideSubredditDescription = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_DESCRIPTION, false);
+        hideSubredditDescription = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_DESCRIPTION, false);
 
         subredditName = getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME_KEY);
         qualifiedName =  getIntent().getStringExtra(EXTRA_COMMUNITY_FULL_NAME_KEY);
@@ -364,8 +366,97 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         checkNewAccountAndBindView();
 
         fetchSubredditData();
+        if (subredditName != null) {
+            setupVisibleElements();
+        }
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (sectionsPagerAdapter != null) {
+            return sectionsPagerAdapter.handleKeyDown(keyCode) || super.onKeyDown(keyCode, event);
+        }
 
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public SharedPreferences getDefaultSharedPreferences() {
+        return mSharedPreferences;
+    }
+
+    @Override
+    protected CustomThemeWrapper getCustomThemeWrapper() {
+        return mCustomThemeWrapper;
+    }
+
+    @Override
+    protected void applyCustomTheme() {
+        coordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
+        appBarLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                appBarLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                collapsingToolbarLayout.setScrimVisibleHeightTrigger(toolbar.getHeight() + tabLayout.getHeight() + getStatusBarHeight() * 2);
+            }
+        });
+        applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar, false);
+        expandedTabTextColor = mCustomThemeWrapper.getTabLayoutWithExpandedCollapsingToolbarTextColor();
+        expandedTabIndicatorColor = mCustomThemeWrapper.getTabLayoutWithExpandedCollapsingToolbarTabIndicator();
+        expandedTabBackgroundColor = mCustomThemeWrapper.getTabLayoutWithExpandedCollapsingToolbarTabBackground();
+        collapsedTabTextColor = mCustomThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTextColor();
+        collapsedTabIndicatorColor = mCustomThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTabIndicator();
+        collapsedTabBackgroundColor = mCustomThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTabBackground();
+        linearLayout.setBackgroundColor(expandedTabBackgroundColor);
+        subredditNameTextView.setTextColor(mCustomThemeWrapper.getSubreddit());
+        subscribeSubredditChip.setTextColor(mCustomThemeWrapper.getChipTextColor());
+        int primaryTextColor = mCustomThemeWrapper.getPrimaryTextColor();
+        nSubscribersTextView.setTextColor(primaryTextColor);
+        nOnlineSubscribersTextView.setTextColor(primaryTextColor);
+        sinceTextView.setTextColor(primaryTextColor);
+        creationTimeTextView.setTextColor(primaryTextColor);
+        descriptionTextView.setTextColor(primaryTextColor);
+        navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
+        applyTabLayoutTheme(tabLayout);
+        applyFABTheme(navigationWrapper.floatingActionButton);
+        if (typeface != null) {
+            subredditNameTextView.setTypeface(typeface);
+            subscribeSubredditChip.setTypeface(typeface);
+            nSubscribersTextView.setTypeface(typeface);
+            nOnlineSubscribersTextView.setTypeface(typeface);
+            sinceTextView.setTypeface(typeface);
+            creationTimeTextView.setTypeface(typeface);
+            descriptionTextView.setTypeface(typeface);
+        }
+        unsubscribedColor = mCustomThemeWrapper.getUnsubscribed();
+        subscribedColor = mCustomThemeWrapper.getSubscribed();
+    }
+
+    private void checkNewAccountAndBindView() {
+        if (mNewAccountName != null) {
+            if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
+                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
+                        mExecutor, new Handler(), mNewAccountName, newAccount -> {
+                            EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
+                            Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
+
+                            mNewAccountName = null;
+                            if (newAccount != null) {
+                                mAccessToken = newAccount.getAccessToken();
+                                mAccountName = newAccount.getAccountName();
+                            }
+
+                            bindView();
+                        });
+            } else {
+                bindView();
+            }
+        } else {
+            bindView();
+        }
+    }
+
+    private void setupVisibleElements() {
         subredditNameTextView.setText(subredditName);
         communityFullNameTextView.setText(qualifiedName);
 
@@ -486,97 +577,17 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         });
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (sectionsPagerAdapter != null) {
-            return sectionsPagerAdapter.handleKeyDown(keyCode) || super.onKeyDown(keyCode, event);
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public SharedPreferences getDefaultSharedPreferences() {
-        return mSharedPreferences;
-    }
-
-    @Override
-    protected CustomThemeWrapper getCustomThemeWrapper() {
-        return mCustomThemeWrapper;
-    }
-
-    @Override
-    protected void applyCustomTheme() {
-        coordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
-        appBarLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                appBarLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                collapsingToolbarLayout.setScrimVisibleHeightTrigger(toolbar.getHeight() + tabLayout.getHeight() + getStatusBarHeight() * 2);
-            }
-        });
-        applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar, false);
-        expandedTabTextColor = mCustomThemeWrapper.getTabLayoutWithExpandedCollapsingToolbarTextColor();
-        expandedTabIndicatorColor = mCustomThemeWrapper.getTabLayoutWithExpandedCollapsingToolbarTabIndicator();
-        expandedTabBackgroundColor = mCustomThemeWrapper.getTabLayoutWithExpandedCollapsingToolbarTabBackground();
-        collapsedTabTextColor = mCustomThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTextColor();
-        collapsedTabIndicatorColor = mCustomThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTabIndicator();
-        collapsedTabBackgroundColor = mCustomThemeWrapper.getTabLayoutWithCollapsedCollapsingToolbarTabBackground();
-        linearLayout.setBackgroundColor(expandedTabBackgroundColor);
-        subredditNameTextView.setTextColor(mCustomThemeWrapper.getSubreddit());
-        subscribeSubredditChip.setTextColor(mCustomThemeWrapper.getChipTextColor());
-        int primaryTextColor = mCustomThemeWrapper.getPrimaryTextColor();
-        nSubscribersTextView.setTextColor(primaryTextColor);
-        nOnlineSubscribersTextView.setTextColor(primaryTextColor);
-        sinceTextView.setTextColor(primaryTextColor);
-        creationTimeTextView.setTextColor(primaryTextColor);
-        descriptionTextView.setTextColor(primaryTextColor);
-        navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
-        applyTabLayoutTheme(tabLayout);
-        applyFABTheme(navigationWrapper.floatingActionButton);
-        if (typeface != null) {
-            subredditNameTextView.setTypeface(typeface);
-            subscribeSubredditChip.setTypeface(typeface);
-            nSubscribersTextView.setTypeface(typeface);
-            nOnlineSubscribersTextView.setTypeface(typeface);
-            sinceTextView.setTypeface(typeface);
-            creationTimeTextView.setTypeface(typeface);
-            descriptionTextView.setTypeface(typeface);
-        }
-        unsubscribedColor = mCustomThemeWrapper.getUnsubscribed();
-        subscribedColor = mCustomThemeWrapper.getSubscribed();
-    }
-
-    private void checkNewAccountAndBindView() {
-        if (mNewAccountName != null) {
-            if (mAccountName == null || !mAccountName.equals(mNewAccountName)) {
-                SwitchAccount.switchAccount(mRedditDataRoomDatabase,mRetrofit, mCurrentAccountSharedPreferences,
-                        mExecutor, new Handler(), mNewAccountName, newAccount -> {
-                            EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
-                            Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
-
-                            mNewAccountName = null;
-                            if (newAccount != null) {
-                                mAccessToken = newAccount.getAccessToken();
-                                mAccountName = newAccount.getAccountName();
-                            }
-
-                            bindView();
-                        });
-            } else {
-                bindView();
-            }
-        } else {
-            bindView();
-        }
-    }
-
     private void fetchSubredditData() {
         if (!mFetchSubredditInfoSuccess) {
             FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit.getRetrofit(), qualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
                 @Override
                 public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                     qualifiedName = LemmyUtils.actorID2FullName(subredditData.getActorId());
+                    if (subredditName == null) {
+                        subredditName = subredditData.getTitle();
+                        setupVisibleElements();
+                    }
+
                     mNCurrentOnlineSubscribers = nCurrentOnlineSubscribers;
                     nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, nCurrentOnlineSubscribers));
                     InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
