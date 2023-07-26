@@ -34,6 +34,7 @@ public interface LemmyAPI {
             @Query("sort") String sort,
             @Query("page") Integer page,
             @Query("limit") Integer limit,
+            @Query("saved_only") Boolean saved_only,
             @Query("auth") String access_token);
 
     @GET("api/v3/community/list")

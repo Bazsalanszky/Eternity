@@ -45,14 +45,10 @@ import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
-import retrofit2.Retrofit;
 
 public class AccountSavedThingActivity extends BaseActivity implements ActivityToolbarInterface,
         PostLayoutBottomSheetFragment.PostLayoutSelectionCallback, MarkPostAsReadInterface {
 
-    @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
