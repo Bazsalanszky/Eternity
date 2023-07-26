@@ -42,7 +42,7 @@ LemmInfinity is currently in the early stages of development. Expect many unfini
 - [x] Functionality for post upvotes/downvotes
 - [x] Functionality to browse comments
 - [ ] Capability for creating a new post
-- [ ] Ability to create comments
+- [x] Ability to create comments
 - [ ] Elimination of code/string references specific to Reddit
 - [ ] Incorporation of private messaging feature
 - [ ] Feature for saving posts

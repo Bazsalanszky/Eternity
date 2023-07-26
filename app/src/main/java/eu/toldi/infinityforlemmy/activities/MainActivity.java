@@ -71,6 +71,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
+import eu.toldi.infinityforlemmy.FetchMyInfo;
 import eu.toldi.infinityforlemmy.FetchSubscribedThing;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
@@ -1051,7 +1052,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
     private void loadUserData() {
         if (!mFetchUserInfoSuccess) {
-            FetchUserData.fetchUserData(mRedditDataRoomDatabase, mOauthRetrofit, mAccessToken,
+            FetchUserData.fetchUserData(mRedditDataRoomDatabase, mRetrofit.getRetrofit(), mAccessToken,
                     mAccountName, new FetchUserData.FetchUserDataListener() {
                 @Override
                 public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
@@ -1068,19 +1069,6 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                     mFetchUserInfoSuccess = false;
                 }
             });
-            /*FetchMyInfo.fetchAccountInfo(mOauthRetrofit, mRedditDataRoomDatabase, mAccessToken,
-                    new FetchMyInfo.FetchMyInfoListener() {
-                        @Override
-                        public void onFetchMyInfoSuccess(String name, String profileImageUrl, String bannerImageUrl, int karma) {
-                            mAccountName = name;
-                            mFetchUserInfoSuccess = true;
-                        }
-
-                        @Override
-                        public void onFetchMyInfoFailed(boolean parseFailed) {
-                            mFetchUserInfoSuccess = false;
-                        }
-                    });*/
         }
     }
 
