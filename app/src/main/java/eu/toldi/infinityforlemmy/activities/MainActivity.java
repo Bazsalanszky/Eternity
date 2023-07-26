@@ -1022,7 +1022,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
     private void loadSubscriptions() {
         if (mAccessToken != null && !mFetchSubscriptionsSuccess) {
-            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountName, null,
+            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, null,
                     new ArrayList<>(), new ArrayList<>(),
                     new ArrayList<>(),
                     new FetchSubscribedThing.FetchSubscribedThingListener() {
@@ -1034,7 +1034,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                                     mExecutor,
                                     new Handler(),
                                     mRedditDataRoomDatabase,
-                                    mAccountName,
+                                    mAccountQualifiedName,
                                     subscribedSubredditData,
                                     subscribedUserData,
                                     subredditData,
