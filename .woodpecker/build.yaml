@@ -2,15 +2,22 @@ pipeline:
   build:
     image: alvrme/alpine-android:android-33-jdk11
     commands:
-      - ./gradlew :app:assemble
+      - ./gradlew :app:assembleRelease
     when:
       path: [ app/**, build.gradle ]
+  sign:
+    image: alvrme/alpine-android:android-33-jdk11
+    commands:
+      - ./scripts/apk-sign.sh LemmInfinity-signed.apk app/build/outputs/apk/release/app-release-unsigned.apk
+    secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
+    when:
+      event: [ tag ]
   publish:
     image: woodpeckerci/plugin-gitea-release
     settings:
       base_url: https://codeberg.org
       files:
-        - app/build/outputs/apk/release/app-release-unsigned.apk
+        - LemmInfinity-signed.apk
       api_key:
         from_secret: GITEA_ACCESS_TOKEN
       target: main
