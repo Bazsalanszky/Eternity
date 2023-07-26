@@ -1,10 +1,10 @@
 <h1 align="center">
-  
+  Infinity for Lemmy
 </h1>
 
 <div align="center">
 
-A Lemmy client on Android written in Java. It's a fork of the [Infinity for Reddit](https://github.com/Docile-Alligator/Infinity-For-Reddit) project, currenty in early development.
+A Lemmy client for Android written in Java. It's a fork of the [Infinity for Reddit](https://github.com/Docile-Alligator/Infinity-For-Reddit) project, currenty in early development.
 
 <img align="right" src="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/raw/branch/master/fastlane/metadata/android/en-US/images/LemmInfinity.png" width=200>
 
@@ -33,9 +33,9 @@ A Lemmy client on Android written in Java. It's a fork of the [Infinity for Redd
 
 ---
 
-## Action Items for LemmInfinity
+## Action Items for Infinity for Lemmy
 
-LemmInfinity is currently in the early stages of development. Expect many unfinished features and bugs!
+Infinity for Lemmy is currently in the early stages of development. Expect many unfinished features and bugs!
 
 - [x] Implementation of basic post browsing feature
 - [x] Support for multiple account handling

@@ -1,1 +1,1 @@
-A beautiful, feature-rich Lemmy client.
+A Lemmy client for Android written in Java. It's a fork of the Infinity for Reddit project, currenty in early development.
