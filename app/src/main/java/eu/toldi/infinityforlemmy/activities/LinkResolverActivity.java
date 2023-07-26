@@ -26,6 +26,7 @@ import javax.inject.Named;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class LinkResolverActivity extends AppCompatActivity {
@@ -38,8 +39,8 @@ public class LinkResolverActivity extends AppCompatActivity {
     private static final String POST_PATTERN_2 = "/(u|U|user)/[\\w-]+/comments/\\w+/?\\w+/?";
     private static final String POST_PATTERN_3 = "/[\\w-]+$";
     private static final String COMMENT_PATTERN = "/(r|u|U|user)/[\\w-]+/comments/\\w+/?[\\w-]+/\\w+/?";
-    private static final String SUBREDDIT_PATTERN = "/[cC]/[\\w@.-]+/?";
-    private static final String USER_PATTERN = "/(u|U|user)/[\\w-]+/?";
+    private static final String SUBREDDIT_PATTERN = "(?:https?://[\\w.-]+)?/c/[\\w-]+(@[\\w.-]+)?";
+    private static final String USER_PATTERN = "(?:https?://[\\w.-]+)?/u(sers)?/[\\w-]+(@[\\w.-]+)?";
     private static final String SIDEBAR_PATTERN = "/[rR]/[\\w-]+/about/sidebar";
     private static final String MULTIREDDIT_PATTERN = "/user/[\\w-]+/m/\\w+/?";
     private static final String MULTIREDDIT_PATTERN_2 = "/[rR]/(\\w+\\+?)+/?";
@@ -156,6 +157,18 @@ public class LinkResolverActivity extends AppCompatActivity {
                             intent.putExtra(ViewImageOrGifActivity.EXTRA_IMAGE_URL_KEY, uri.toString());
                             intent.putExtra(ViewImageOrGifActivity.EXTRA_FILE_NAME_KEY, id + ".jpg");
                             startActivity(intent);
+                        } else if (uri.toString().matches(SUBREDDIT_PATTERN)) {
+                            Intent intent = new Intent(this, ViewSubredditDetailActivity.class);
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, uri.getScheme() != null ? LemmyUtils.actorID2FullName(uri.toString()) : path.substring(3));
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
+                            startActivity(intent);
+                        } else if (uri.toString().matches(USER_PATTERN)) {
+                            Intent intent = new Intent(this, ViewUserDetailActivity.class);
+                            intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, uri.getScheme() != null ? LemmyUtils.actorID2FullName(uri.toString()) : path.substring(3));
+                            intent.putExtra(ViewUserDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                            intent.putExtra(ViewUserDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
+                            startActivity(intent);
                         } else if (authority.equals("v.redd.it")) {
                             Intent intent = new Intent(this, ViewVideoActivity.class);
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_V_REDD_IT);
@@ -218,18 +231,6 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 Intent intent = new Intent(this, WikiActivity.class);
                                 intent.putExtra(WikiActivity.EXTRA_SUBREDDIT_NAME, segments.get(1));
                                 intent.putExtra(WikiActivity.EXTRA_WIKI_PATH, wikiPage);
-                                startActivity(intent);
-                            } else if (path.matches(SUBREDDIT_PATTERN)) {
-                                Intent intent = new Intent(this, ViewSubredditDetailActivity.class);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, path.substring(3));
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                startActivity(intent);
-                            } else if (path.matches(USER_PATTERN)) {
-                                Intent intent = new Intent(this, ViewUserDetailActivity.class);
-                                intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, segments.get(1));
-                                intent.putExtra(ViewUserDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                intent.putExtra(ViewUserDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                                 startActivity(intent);
                             } else if (path.matches(SIDEBAR_PATTERN)) {
                                 Intent intent = new Intent(this, ViewSubredditDetailActivity.class);

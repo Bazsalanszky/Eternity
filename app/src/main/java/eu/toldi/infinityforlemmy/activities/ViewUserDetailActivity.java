@@ -107,6 +107,7 @@ import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.user.UserFollowing;
 import eu.toldi.infinityforlemmy.user.UserViewModel;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import io.noties.markwon.AbstractMarkwonPlugin;
@@ -230,6 +231,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private String mMessageFullname;
     private String mNewAccountName;
 
+    private UserData mUserData;
+
     //private MaterialAlertDialogBuilder nsfwWarningBuilder;
 
     @Override
@@ -271,9 +274,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
 
-        if (username.equalsIgnoreCase("me")) {
-            username = mAccountName;
-        }
 
         if (savedInstanceState == null) {
             mMessageFullname = getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME);
@@ -288,8 +288,13 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
         fetchUserInfo();
 
-        Resources resources = getResources();
+        if (mUserData != null) {
+            setupVisibleElements();
+        }
+    }
 
+    private void setupVisibleElements() {
+        Resources resources = getResources();
         String title = username;
         userNameTextView.setText(title);
         qualifiedNameTextView.setText(qualifiedName);
@@ -404,7 +409,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             return true;
         });
 
-        userViewModel = new ViewModelProvider(this, new UserViewModel.Factory(getApplication(), mRedditDataRoomDatabase, username))
+        userViewModel = new ViewModelProvider(this, new UserViewModel.Factory(getApplication(), mRedditDataRoomDatabase, LemmyUtils.qualifiedUserName2ActorId(qualifiedName)))
                 .get(UserViewModel.class);
         userViewModel.getUserLiveData().observe(this, userData -> {
             if (userData != null) {
@@ -524,20 +529,20 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
                     CheckIsFollowingUser.checkIsFollowingUser(mExecutor, new Handler(), mRedditDataRoomDatabase,
                             username, mAccountName, new CheckIsFollowingUser.CheckIsFollowingUserListener() {
-                        @Override
-                        public void isSubscribed() {
-                            subscribeUserChip.setText(R.string.unfollow);
-                            subscribeUserChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
-                            subscriptionReady = true;
-                        }
+                                @Override
+                                public void isSubscribed() {
+                                    subscribeUserChip.setText(R.string.unfollow);
+                                    subscribeUserChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
+                                    subscriptionReady = true;
+                                }
 
-                        @Override
-                        public void isNotSubscribed() {
-                            subscribeUserChip.setText(R.string.follow);
-                            subscribeUserChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
-                            subscriptionReady = true;
-                        }
-                    });
+                                @Override
+                                public void isNotSubscribed() {
+                                    subscribeUserChip.setText(R.string.follow);
+                                    subscribeUserChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
+                                    subscriptionReady = true;
+                                }
+                            });
                 } else {
                     subscribeUserChip.setVisibility(View.GONE);
                 }
@@ -1071,6 +1076,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             FetchUserData.fetchUserData(mRetrofit.getRetrofit(), qualifiedName, new FetchUserData.FetchUserDataListener() {
                 @Override
                 public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
+                    mUserData = userData;
+                    username = userData.getName();
+                    setupVisibleElements();
                     new ViewUserDetailActivity.InsertUserDataAsyncTask(mRedditDataRoomDatabase.userDao(), userData,
                             () -> mFetchUserInfoSuccess = true).execute();
                 }

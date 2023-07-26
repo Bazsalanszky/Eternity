@@ -10,9 +10,9 @@ public class UserRepository {
     private UserDao mUserDao;
     private LiveData<UserData> mUserLiveData;
 
-    UserRepository(RedditDataRoomDatabase redditDataRoomDatabase, String userName) {
+    UserRepository(RedditDataRoomDatabase redditDataRoomDatabase, String actor_id) {
         mUserDao = redditDataRoomDatabase.userDao();
-        mUserLiveData = mUserDao.getUserLiveData(userName);
+        mUserLiveData = mUserDao.getUserLiveData(actor_id);
     }
 
     LiveData<UserData> getUserLiveData() {
