@@ -39,17 +39,10 @@ import java.util.concurrent.Executor;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import eu.toldi.infinityforlemmy.RetrofitHolder;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import io.noties.markwon.recycler.MarkwonAdapter;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
 import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.account.Account;
@@ -66,6 +59,13 @@ import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import io.noties.markwon.recycler.MarkwonAdapter;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import retrofit2.Retrofit;
 
 public class CommentActivity extends BaseActivity implements UploadImageEnabledActivity, AccountChooserBottomSheetFragment.AccountChooserListener {
@@ -449,10 +449,10 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
                     Toast.makeText(CommentActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Utils.uploadImageToReddit(this, mExecutor, mRetrofit.getRetrofit(), mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, binding.commentCommentEditText, binding.commentCoordinatorLayout, data.getData(), uploadedImages);
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
-                Utils.uploadImageToReddit(this, mExecutor, mRetrofit.getRetrofit(), mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, binding.commentCommentEditText, binding.commentCoordinatorLayout, capturedImageUri, uploadedImages);
             } else if (requestCode == MARKDOWN_PREVIEW_REQUEST_CODE) {
                 sendComment(mMenu == null ? null : mMenu.findItem(R.id.action_send_comment_activity));

@@ -12,13 +12,19 @@ public class RetrofitHolder {
 
     private Retrofit retrofit;
     private OkHttpClient okHttpClient;
+    private String baseURL = APIUtils.API_BASE_URI;
 
     public Retrofit getRetrofit() {
         return retrofit;
     }
 
-    public void setBaseURL(String baseURL){
-        retrofit = createRetrofit(okHttpClient,baseURL);
+    public void setBaseURL(String baseURL) {
+        retrofit = createRetrofit(okHttpClient, baseURL);
+        this.baseURL = baseURL;
+    }
+
+    public String getBaseURL() {
+        return baseURL;
     }
 
     public RetrofitHolder(OkHttpClient okHttpClient) {

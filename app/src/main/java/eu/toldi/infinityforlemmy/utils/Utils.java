@@ -53,11 +53,11 @@ import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.noties.markwon.core.spans.CustomTypefaceSpan;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.UploadedImage;
-import retrofit2.Retrofit;
+import io.noties.markwon.core.spans.CustomTypefaceSpan;
 
 public final class Utils {
     public static final int NETWORK_TYPE_OTHER = -1;
@@ -361,8 +361,8 @@ public final class Utils {
         return drawable;
     }
 
-    public static void uploadImageToReddit(Context context, Executor executor, Retrofit oauthRetrofit,
-                                           Retrofit uploadMediaRetrofit, String accessToken, EditText editText,
+    public static void uploadImageToReddit(Context context, Executor executor, RetrofitHolder retrofit,
+                                           String accessToken, EditText editText,
                                            CoordinatorLayout coordinatorLayout, Uri imageUri,
                                            ArrayList<UploadedImage> uploadedImages) {
         Toast.makeText(context, R.string.uploading_image, Toast.LENGTH_SHORT).show();
@@ -370,7 +370,7 @@ public final class Utils {
         executor.execute(() -> {
             try {
                 Bitmap bitmap = Glide.with(context).asBitmap().load(imageUri).submit().get();
-                String imageUrlOrError = UploadImageUtils.uploadImage(oauthRetrofit, uploadMediaRetrofit, accessToken, bitmap);
+                String imageUrlOrError = UploadImageUtils.uploadImage(retrofit, accessToken, bitmap);
                 handler.post(() -> {
                     if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {
                         String fileName = Utils.getFileName(context, imageUri);

@@ -492,7 +492,7 @@ public class PostGalleryActivity extends BaseActivity implements FlairBottomShee
         mExecutor.execute(() -> {
             try {
                 Bitmap resource = Glide.with(PostGalleryActivity.this).asBitmap().load(imageUri).submit().get();
-                String response = UploadImageUtils.uploadImage(mOauthRetrofit, mUploadMediaRetrofit, mAccessToken, resource, true);
+                String response = UploadImageUtils.uploadImage(mRetrofit, mAccessToken, resource, true);
                 String mediaId = new JSONObject(response).getJSONObject(JSONUtils.ASSET_KEY).getString(JSONUtils.ASSET_ID_KEY);
                 handler.post(() -> {
                     adapter.setImageAsUploaded(mediaId);

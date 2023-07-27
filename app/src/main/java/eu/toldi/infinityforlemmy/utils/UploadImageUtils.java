@@ -17,55 +17,41 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class UploadImageUtils {
     @Nullable
-    public static String uploadImage(Retrofit oauthRetrofit, Retrofit uploadMediaRetrofit,
+    public static String uploadImage(RetrofitHolder mRetrofit,
                                      String accessToken, Bitmap image) throws IOException, JSONException, XmlPullParserException {
-        return uploadImage(oauthRetrofit, uploadMediaRetrofit, accessToken, image, false);
+        return uploadImage(mRetrofit, accessToken, image, false);
     }
 
     @Nullable
-    public static String uploadImage(Retrofit oauthRetrofit, Retrofit uploadMediaRetrofit,
-                                      String accessToken, Bitmap image, boolean returnResponseForGallerySubmission) throws IOException, JSONException, XmlPullParserException {
-        RedditAPI api = oauthRetrofit.create(RedditAPI.class);
+    public static String uploadImage(RetrofitHolder mRetrofit,
+                                     String accessToken, Bitmap image, boolean returnResponseForGallerySubmission) throws IOException, JSONException, XmlPullParserException {
 
-        Map<String, String> uploadImageParams = new HashMap<>();
-        uploadImageParams.put(APIUtils.FILEPATH_KEY, "post_image.jpg");
-        uploadImageParams.put(APIUtils.MIMETYPE_KEY, "image/jpeg");
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
 
-        Call<String> uploadImageCall = api.uploadImage(APIUtils.getOAuthHeader(accessToken), uploadImageParams);
-        Response<String> uploadImageResponse = uploadImageCall.execute();
-        if (uploadImageResponse.isSuccessful()) {
-            Map<String, RequestBody> nameValuePairsMap = parseJSONResponseFromAWS(uploadImageResponse.body());
+        RequestBody fileBody = RequestBody.create(byteArray, MediaType.parse("application/octet-stream"));
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("images[]", "post_image.jpg", fileBody);
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-
-            RequestBody fileBody = RequestBody.create(byteArray, MediaType.parse("application/octet-stream"));
-            MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", "post_image.jpg", fileBody);
-
-            RedditAPI uploadMediaToAWSApi = uploadMediaRetrofit.create(RedditAPI.class);
-            Call<String> uploadMediaToAWS = uploadMediaToAWSApi.uploadMediaToAWS(nameValuePairsMap, fileToUpload);
-            Response<String> uploadMediaToAWSResponse = uploadMediaToAWS.execute();
-            if (uploadMediaToAWSResponse.isSuccessful()) {
-                if (returnResponseForGallerySubmission) {
-                    return uploadImageResponse.body();
-                }
-                return parseXMLResponseFromAWS(uploadMediaToAWSResponse.body());
-            } else {
-                return "Error: " + uploadMediaToAWSResponse.code();
-            }
+        LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
+        Call<String> uploadMedia = api.uploadImage("jwt=" + accessToken, fileToUpload);
+        Response<String> uploadMediaResponse = uploadMedia.execute();
+        if (uploadMediaResponse.isSuccessful()) {
+            JSONObject responseObject = new JSONObject(uploadMediaResponse.body());
+            String fileName = responseObject.getJSONArray("files").getJSONObject(0).getString("file");
+            return mRetrofit.getBaseURL() + "/pictrs/image/" + fileName;
         } else {
-            return "Error: " + uploadImageResponse.message();
+            return "Error: " + uploadMediaResponse.code();
         }
     }
 

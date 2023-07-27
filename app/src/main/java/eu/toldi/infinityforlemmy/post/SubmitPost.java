@@ -10,20 +10,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.Flair;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.UploadImageUtils;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -38,84 +35,20 @@ public class SubmitPost {
                 flair, isSpoiler, isNSFW, receivePostReplyNotifications, kind, null, submitPostListener);
     }
 
-    public static void submitImagePost(Executor executor, Handler handler, Retrofit oauthRetrofit, Retrofit uploadMediaRetrofit,
+    public static void submitImagePost(Executor executor, Handler handler, RetrofitHolder mRetrofit,
                                        String accessToken, String subredditName, String title, Bitmap image,
                                        Flair flair, boolean isSpoiler, boolean isNSFW,
                                        boolean receivePostReplyNotifications, SubmitPostListener submitPostListener) {
         try {
-            String imageUrlOrError = UploadImageUtils.uploadImage(oauthRetrofit, uploadMediaRetrofit, accessToken, image);
+            String imageUrlOrError = UploadImageUtils.uploadImage(mRetrofit, accessToken, image);
             if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {
-                submitPost(executor, handler, oauthRetrofit, accessToken,
+                submitPost(executor, handler, mRetrofit.getRetrofit(), accessToken,
                         subredditName, title, imageUrlOrError, flair, isSpoiler, isNSFW,
                         receivePostReplyNotifications, APIUtils.KIND_IMAGE, null, submitPostListener);
             } else {
                 submitPostListener.submitFailed(imageUrlOrError);
             }
         } catch (IOException | JSONException | XmlPullParserException e) {
-            e.printStackTrace();
-            submitPostListener.submitFailed(e.getMessage());
-        }
-    }
-
-    public static void submitVideoPost(Executor executor, Handler handler, Retrofit oauthRetrofit, Retrofit uploadMediaRetrofit,
-                                       Retrofit uploadVideoRetrofit, String accessToken,
-                                       String subredditName, String title, File buffer, String mimeType,
-                                       Bitmap posterBitmap, Flair flair, boolean isSpoiler, boolean isNSFW,
-                                       boolean receivePostReplyNotifications, SubmitPostListener submitPostListener) {
-        RedditAPI api = oauthRetrofit.create(RedditAPI.class);
-
-        String fileType = mimeType.substring(mimeType.indexOf("/") + 1);
-
-        Map<String, String> uploadImageParams = new HashMap<>();
-        uploadImageParams.put(APIUtils.FILEPATH_KEY, "post_video." + fileType);
-        uploadImageParams.put(APIUtils.MIMETYPE_KEY, mimeType);
-
-        Call<String> uploadImageCall = api.uploadImage(APIUtils.getOAuthHeader(accessToken), uploadImageParams);
-        try {
-            Response<String> uploadImageResponse = uploadImageCall.execute();
-            if (uploadImageResponse.isSuccessful()) {
-                Map<String, RequestBody> nameValuePairsMap = UploadImageUtils.parseJSONResponseFromAWS(uploadImageResponse.body());
-
-                RequestBody fileBody = RequestBody.create(buffer, MediaType.parse("application/octet-stream"));
-                MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", "post_video." + fileType, fileBody);
-
-                RedditAPI uploadVideoToAWSApi;
-                if (fileType.equals("gif")) {
-                    uploadVideoToAWSApi = uploadMediaRetrofit.create(RedditAPI.class);
-                } else {
-                    uploadVideoToAWSApi = uploadVideoRetrofit.create(RedditAPI.class);
-                }
-                Call<String> uploadMediaToAWS = uploadVideoToAWSApi.uploadMediaToAWS(nameValuePairsMap, fileToUpload);
-                Response<String> uploadMediaToAWSResponse = uploadMediaToAWS.execute();
-                if (uploadMediaToAWSResponse.isSuccessful()) {
-                    String url = UploadImageUtils.parseXMLResponseFromAWS(uploadMediaToAWSResponse.body());
-                    if (url == null) {
-                        submitPostListener.submitFailed(null);
-                        return;
-                    }
-                    String imageUrlOrError = UploadImageUtils.uploadImage(oauthRetrofit, uploadMediaRetrofit, accessToken, posterBitmap);
-                    if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {
-                        if (fileType.equals("gif")) {
-                            submitPost(executor, handler, oauthRetrofit, accessToken,
-                                    subredditName, title, url, flair, isSpoiler, isNSFW,
-                                    receivePostReplyNotifications, APIUtils.KIND_VIDEOGIF, imageUrlOrError,
-                                    submitPostListener);
-                        } else {
-                            submitPost(executor, handler, oauthRetrofit, accessToken,
-                                    subredditName, title, url, flair, isSpoiler, isNSFW,
-                                    receivePostReplyNotifications, APIUtils.KIND_VIDEO, imageUrlOrError,
-                                    submitPostListener);
-                        }
-                    } else {
-                        submitPostListener.submitFailed(imageUrlOrError);
-                    }
-                } else {
-                    submitPostListener.submitFailed(uploadMediaToAWSResponse.code() + " " + uploadMediaToAWSResponse.message());
-                }
-            } else {
-                submitPostListener.submitFailed(uploadImageResponse.code() + " " + uploadImageResponse.message());
-            }
-        } catch (IOException | XmlPullParserException | JSONException e) {
             e.printStackTrace();
             submitPostListener.submitFailed(e.getMessage());
         }

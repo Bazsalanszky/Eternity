@@ -44,6 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
 import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.adapters.MarkdownBottomBarRecyclerViewAdapter;
@@ -88,8 +89,8 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
     @BindView(R.id.markdown_bottom_bar_recycler_view_edit_post_activity)
     RecyclerView markdownBottomBarRecyclerView;
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+    @Named("no_oauth")
+    RetrofitHolder mRetrofit;
     @Inject
     @Named("upload_media")
     Retrofit mUploadMediaRetrofit;
@@ -241,7 +242,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
             params.put(APIUtils.THING_ID_KEY, mFullName);
             params.put(APIUtils.TEXT_KEY, contentEditText.getText().toString());
 
-            mOauthRetrofit.create(RedditAPI.class)
+            mRetrofit.getRetrofit().create(RedditAPI.class)
                     .editPostOrComment(APIUtils.getOAuthHeader(mAccessToken), params)
                     .enqueue(new Callback<String>() {
                         @Override
@@ -272,10 +273,10 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
                     Toast.makeText(EditPostActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, data.getData(), uploadedImages);
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, capturedImageUri, uploadedImages);
             } else if (requestCode == MARKDOWN_PREVIEW_REQUEST_CODE) {
                 editPost();

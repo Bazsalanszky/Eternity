@@ -28,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,7 +54,6 @@ import eu.toldi.infinityforlemmy.events.SubmitGalleryPostEvent;
 import eu.toldi.infinityforlemmy.events.SubmitImagePostEvent;
 import eu.toldi.infinityforlemmy.events.SubmitPollPostEvent;
 import eu.toldi.infinityforlemmy.events.SubmitTextOrLinkPostEvent;
-import eu.toldi.infinityforlemmy.events.SubmitVideoOrGifPostEvent;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.SubmitPost;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -157,11 +155,7 @@ public class SubmitPostService extends Service {
                         flair, isSpoiler, isNSFW, receivePostReplyNotifications);
             } else if (postType == EXTRA_POST_TYPE_IMAGE) {
                 Uri mediaUri = Uri.parse(bundle.getString(EXTRA_MEDIA_URI));
-                submitImagePost(newAuthenticatorOauthRetrofit, account, mediaUri, subredditName, title, flair, isSpoiler, isNSFW,
-                        receivePostReplyNotifications);
-            } else if (postType == EXTRA_POST_TYPE_VIDEO) {
-                Uri mediaUri = Uri.parse(bundle.getString(EXTRA_MEDIA_URI));
-                submitVideoPost(newAuthenticatorOauthRetrofit, account, mediaUri, subredditName, title, flair, isSpoiler, isNSFW,
+                submitImagePost(mRetrofit, account, mediaUri, subredditName, title, flair, isSpoiler, isNSFW,
                         receivePostReplyNotifications);
             } else if (postType == EXTRA_POST_TYPE_GALLERY) {
                 submitGalleryPost(newAuthenticatorOauthRetrofit, account, bundle.getString(EXTRA_REDDIT_GALLERY_PAYLOAD));
@@ -278,11 +272,11 @@ public class SubmitPostService extends Service {
                 });
     }
 
-    private void submitImagePost(Retrofit newAuthenticatorOauthRetrofit, Account selectedAccount, Uri mediaUri, String subredditName, String title,
+    private void submitImagePost(RetrofitHolder newAuthenticatorOauthRetrofit, Account selectedAccount, Uri mediaUri, String subredditName, String title,
                                  Flair flair, boolean isSpoiler, boolean isNSFW, boolean receivePostReplyNotifications) {
         try {
             Bitmap resource = Glide.with(this).asBitmap().load(mediaUri).submit().get();
-            SubmitPost.submitImagePost(mExecutor, handler, newAuthenticatorOauthRetrofit, mUploadMediaRetrofit,
+            SubmitPost.submitImagePost(mExecutor, handler, newAuthenticatorOauthRetrofit,
                     selectedAccount.getAccessToken(), subredditName, title, resource, flair, isSpoiler, isNSFW, receivePostReplyNotifications,
                     new SubmitPost.SubmitPostListener() {
                         @Override
@@ -309,61 +303,6 @@ public class SubmitPostService extends Service {
         }
     }
 
-    private void submitVideoPost(Retrofit newAuthenticatorOauthRetrofit, Account selectedAccount, Uri mediaUri, String subredditName, String title,
-                                 Flair flair, boolean isSpoiler, boolean isNSFW, boolean receivePostReplyNotifications) {
-        try {
-            InputStream in = getContentResolver().openInputStream(mediaUri);
-            String type = getContentResolver().getType(mediaUri);
-            String cacheFilePath;
-            if (type != null && type.contains("gif")) {
-                cacheFilePath = getExternalCacheDir() + "/" + mediaUri.getLastPathSegment() + ".gif";
-            } else {
-                cacheFilePath = getExternalCacheDir() + "/" + mediaUri.getLastPathSegment() + ".mp4";
-            }
-
-            copyFileToCache(in, cacheFilePath);
-
-            Bitmap resource = Glide.with(this).asBitmap().load(mediaUri).submit().get();
-
-            if (type != null) {
-                SubmitPost.submitVideoPost(mExecutor, handler, newAuthenticatorOauthRetrofit, mUploadMediaRetrofit,
-                        mUploadVideoRetrofit, selectedAccount.getAccessToken(), subredditName, title, new File(cacheFilePath),
-                        type, resource, flair, isSpoiler, isNSFW, receivePostReplyNotifications,
-                        new SubmitPost.SubmitPostListener() {
-                            @Override
-                            public void submitSuccessful(Post post) {
-                                handler.post(() -> {
-                                    EventBus.getDefault().post(new SubmitVideoOrGifPostEvent(true, false, null));
-                                    if (type.contains("gif")) {
-                                        Toast.makeText(SubmitPostService.this, R.string.gif_is_processing, Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(SubmitPostService.this, R.string.video_is_processing, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-
-                                stopService();
-                            }
-
-                            @Override
-                            public void submitFailed(@Nullable String errorMessage) {
-                                handler.post(() -> EventBus.getDefault().post(new SubmitVideoOrGifPostEvent(false, false, errorMessage)));
-
-                                stopService();
-                            }
-                        });
-            } else {
-                handler.post(() -> EventBus.getDefault().post(new SubmitVideoOrGifPostEvent(false, true, null)));
-
-                stopService();
-            }
-        } catch (IOException | InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-            handler.post(() -> EventBus.getDefault().post(new SubmitVideoOrGifPostEvent(false, true, null)));
-
-            stopService();
-        }
-    }
 
     private void submitGalleryPost(Retrofit newAuthenticatorOauthRetrofit, Account selectedAccount, String payload) {
         try {

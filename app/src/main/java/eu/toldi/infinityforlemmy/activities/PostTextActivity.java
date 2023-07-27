@@ -637,10 +637,10 @@ public class PostTextActivity extends BaseActivity implements FlairBottomSheetFr
                     Toast.makeText(PostTextActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, data.getData(), uploadedImages);
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, capturedImageUri, uploadedImages);
             } else if (requestCode == MARKDOWN_PREVIEW_REQUEST_CODE) {
                 submitPost(mMenu.findItem(R.id.action_send_post_text_activity));

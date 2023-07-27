@@ -10,13 +10,17 @@ import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface LemmyAPI {
@@ -133,4 +137,11 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @PUT("api/v3/comment")
     Call<String> commentEdit(@Body EditCommentDTO params);
+
+    @Multipart
+    @POST("/pictrs/image")
+    Call<String> uploadImage(
+            @Header("Cookie") String token,
+            @Part MultipartBody.Part filePart
+    );
 }

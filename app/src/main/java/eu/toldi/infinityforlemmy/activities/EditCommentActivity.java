@@ -275,10 +275,10 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
                     Toast.makeText(EditCommentActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Utils.uploadImageToReddit(this, mExecutor, retrofit.getRetrofit(), mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, retrofit,
                         mAccessToken, contentEditText, coordinatorLayout, data.getData(), uploadedImages);
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
-                Utils.uploadImageToReddit(this, mExecutor, retrofit.getRetrofit(), mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, retrofit,
                         mAccessToken, contentEditText, coordinatorLayout, capturedImageUri, uploadedImages);
             } else if (requestCode == MARKDOWN_PREVIEW_REQUEST_CODE) {
                 editComment();
