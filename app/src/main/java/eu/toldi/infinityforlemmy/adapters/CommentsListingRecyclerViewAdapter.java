@@ -32,6 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.SaveComment;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.VoteThing;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
@@ -646,9 +647,10 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 }
                 Comment comment = getItem(position);
                 if (comment != null) {
+                    SaveComment saveComment = new SaveComment();
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, comment.getFullName(), new SaveThing.SaveThingListener() {
+                        saveComment.unsaveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
@@ -669,7 +671,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         });
                     } else {
                         comment.setSaved(true);
-                        SaveThing.saveThing(mOauthRetrofit, mAccessToken, comment.getFullName(), new SaveThing.SaveThingListener() {
+                        saveComment.saveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(true);

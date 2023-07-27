@@ -63,6 +63,7 @@ import eu.toldi.infinityforlemmy.LoadingMorePostsStatus;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.SaveComment;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
@@ -443,9 +444,10 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     }
 
     public void saveComment(@NonNull Comment comment, int position) {
+        SaveComment saveComment = new SaveComment();
         if (comment.isSaved()) {
             comment.setSaved(false);
-            SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, comment.getFullName(), new SaveThing.SaveThingListener() {
+            saveComment.unsaveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                 @Override
                 public void success() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
@@ -466,7 +468,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
             });
         } else {
             comment.setSaved(true);
-            SaveThing.saveThing(mOauthRetrofit, mAccessToken, comment.getFullName(), new SaveThing.SaveThingListener() {
+            saveComment.saveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                 @Override
                 public void success() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();

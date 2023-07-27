@@ -73,6 +73,7 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.SavePost;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
@@ -948,9 +949,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             return true;
         } else if (itemId == R.id.action_save_view_post_detail_fragment) {
             if (mPost != null && mAccessToken != null) {
+                SavePost savePost = new SavePost();
                 if (mPost.isSaved()) {
                     item.setIcon(mUnsavedIcon);
-                    SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, mPost.getFullName(),
+                    savePost.unsaveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
@@ -974,7 +976,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                             });
                 } else {
                     item.setIcon(mSavedIcon);
-                    SaveThing.saveThing(mOauthRetrofit, mAccessToken, mPost.getFullName(),
+                    savePost.saveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {

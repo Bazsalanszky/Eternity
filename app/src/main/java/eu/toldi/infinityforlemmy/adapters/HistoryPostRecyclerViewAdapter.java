@@ -67,6 +67,7 @@ import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
+import eu.toldi.infinityforlemmy.SavePost;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.StreamableVideo;
 import eu.toldi.infinityforlemmy.VoteThing;
@@ -2476,10 +2477,10 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                         Toast.makeText(mActivity, R.string.login_first, Toast.LENGTH_SHORT).show();
                         return;
                     }
-
+                    SavePost savePost = new SavePost();
                     if (post.isSaved()) {
                         saveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, post.getFullName(),
+                        savePost.unsaveThing(mOauthRetrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -2503,7 +2504,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                 });
                     } else {
                         saveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                        SaveThing.saveThing(mOauthRetrofit, mAccessToken, post.getFullName(),
+                        savePost.saveThing(mOauthRetrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -3804,9 +3805,10 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                 }
                 Post post = getItem(position);
                 if (post != null) {
+                    SavePost savePost = new SavePost();
                     if (post.isSaved()) {
                         saveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, post.getFullName(),
+                        savePost.unsaveThing(mOauthRetrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -3830,7 +3832,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                 });
                     } else {
                         saveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                        SaveThing.saveThing(mOauthRetrofit, mAccessToken, post.getFullName(),
+                        savePost.saveThing(mOauthRetrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {

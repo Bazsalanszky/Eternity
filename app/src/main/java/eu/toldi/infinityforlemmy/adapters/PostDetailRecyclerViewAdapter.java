@@ -64,6 +64,7 @@ import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
+import eu.toldi.infinityforlemmy.SavePost;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.StreamableVideo;
 import eu.toldi.infinityforlemmy.VoteThing;
@@ -1350,10 +1351,10 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     Toast.makeText(mActivity, R.string.login_first, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                SavePost savePost = new SavePost();
                 if (mPost.isSaved()) {
                     mSaveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                    SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, mPost.getFullName(),
+                    savePost.unsaveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
@@ -1373,7 +1374,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                             });
                 } else {
                     mSaveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                    SaveThing.saveThing(mOauthRetrofit, mAccessToken, mPost.getFullName(),
+                    savePost.saveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {

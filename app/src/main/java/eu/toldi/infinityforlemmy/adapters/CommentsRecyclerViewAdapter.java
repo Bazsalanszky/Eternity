@@ -42,6 +42,7 @@ import java.util.concurrent.Executor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.SaveComment;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.VoteThing;
@@ -1545,9 +1546,10 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 Comment comment = getCurrentComment(this);
                 if (comment != null) {
                     int position = getBindingAdapterPosition();
+                    SaveComment saveComment = new SaveComment();
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        SaveThing.unsaveThing(mOauthRetrofit, mAccessToken, comment.getFullName(), new SaveThing.SaveThingListener() {
+                        saveComment.unsaveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
@@ -1568,7 +1570,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         });
                     } else {
                         comment.setSaved(true);
-                        SaveThing.saveThing(mOauthRetrofit, mAccessToken, comment.getFullName(), new SaveThing.SaveThingListener() {
+                        saveComment.saveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(true);

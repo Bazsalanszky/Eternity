@@ -7,12 +7,15 @@ import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
+import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
+import eu.toldi.infinityforlemmy.dto.SavePostDTO;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface LemmyAPI {
@@ -70,6 +73,14 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/community/follow")
     Call<String> communityFollow(@Body FollowCommunityDTO params);
+
+    @Headers("Content-Type: application/json")
+    @PUT("api/v3/post/save")
+    Call<String> postSave(@Body SavePostDTO params);
+
+    @Headers("Content-Type: application/json")
+    @PUT("api/v3/comment/save")
+    Call<String> commentSave(@Body SaveCommentDTO params);
 
     @GET("api/v3/comment/list")
     Call<String> getComments(
