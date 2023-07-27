@@ -191,9 +191,19 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
             if (newPosts == null) {
                 return new LoadResult.Error<>(new Exception("Error parsing posts"));
             } else {
+                List<Post> trulyNewPosts = new ArrayList<>();
+                for (Post post : newPosts) {
+                    if (!postLinkedHashSet.contains(post)) {
+                        trulyNewPosts.add(post);
+                    }
+                }
                 int currentPostsSize = postLinkedHashSet.size();
-                postLinkedHashSet.addAll(newPosts);
-                int nextKey = (postLinkedHashSet.size()+1) / 25+1;
+                postLinkedHashSet.addAll(trulyNewPosts);
+                int nextKey = ++page;
+                if (trulyNewPosts.size() == 0) {
+                    return new LoadResult.Page<>(new ArrayList<>(), null, null);
+                }
+
                 if (currentPostsSize == postLinkedHashSet.size()) {
                     return new LoadResult.Page<>(new ArrayList<>(), null, nextKey);
                 } else {
