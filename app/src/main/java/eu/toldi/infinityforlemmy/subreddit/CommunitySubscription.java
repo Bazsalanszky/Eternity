@@ -4,26 +4,24 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.account.Account;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 
-public class SubredditSubscription {
-    public static void subscribeToSubreddit(Executor executor, Handler handler, Retrofit oauthRetrofit,
-                                            Retrofit retrofit, String accessToken, String subredditName,
+public class CommunitySubscription {
+    public static void subscribeToCommunity(Executor executor, Handler handler,
+                                            Retrofit retrofit, String accessToken, int communityId, String communityQualifiedName,
                                             String accountName, RedditDataRoomDatabase redditDataRoomDatabase,
                                             SubredditSubscriptionListener subredditSubscriptionListener) {
-        subredditSubscription(executor, handler, oauthRetrofit, retrofit, accessToken, subredditName,
+        communitySubscription(executor, handler, retrofit, accessToken, communityId, communityQualifiedName,
                 accountName, "sub", redditDataRoomDatabase, subredditSubscriptionListener);
     }
 
@@ -31,7 +29,7 @@ public class SubredditSubscription {
                                                      RedditDataRoomDatabase redditDataRoomDatabase,
                                                      String subredditName,
                                                      SubredditSubscriptionListener subredditSubscriptionListener) {
-        FetchSubredditData.fetchSubredditData(null, retrofit, subredditName, "", new FetchSubredditData.FetchSubredditDataListener() {
+        FetchSubredditData.fetchSubredditData(retrofit, subredditName, "", new FetchSubredditData.FetchSubredditDataListener() {
             @Override
             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 insertSubscription(executor, handler, redditDataRoomDatabase,
@@ -45,11 +43,11 @@ public class SubredditSubscription {
         });
     }
 
-    public static void unsubscribeToSubreddit(Executor executor, Handler handler, Retrofit oauthRetrofit,
-                                              String accessToken, String subredditName, String accountName,
+    public static void unsubscribeToCommunity(Executor executor, Handler handler,
+                                              Retrofit retrofit, String accessToken, int communityId, String communityQualifiedName, String accountName,
                                               RedditDataRoomDatabase redditDataRoomDatabase,
                                               SubredditSubscriptionListener subredditSubscriptionListener) {
-        subredditSubscription(executor, handler, oauthRetrofit, null, accessToken, subredditName,
+        communitySubscription(executor, handler, retrofit, accessToken, communityId, communityQualifiedName,
                 accountName, "unsub", redditDataRoomDatabase, subredditSubscriptionListener);
     }
 
@@ -60,24 +58,21 @@ public class SubredditSubscription {
         removeSubscription(executor, handler, redditDataRoomDatabase, subredditName, "-", subredditSubscriptionListener);
     }
 
-    private static void subredditSubscription(Executor executor, Handler handler, Retrofit oauthRetrofit,
-                                              Retrofit retrofit, String accessToken, String subredditName,
+    private static void communitySubscription(Executor executor, Handler handler,
+                                              Retrofit retrofit, String accessToken, int communityId, String communityQualifiedName,
                                               String accountName, String action,
                                               RedditDataRoomDatabase redditDataRoomDatabase,
                                               SubredditSubscriptionListener subredditSubscriptionListener) {
-        RedditAPI api = oauthRetrofit.create(RedditAPI.class);
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
 
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.ACTION_KEY, action);
-        params.put(APIUtils.SR_NAME_KEY, subredditName);
 
-        Call<String> subredditSubscriptionCall = api.subredditSubscription(APIUtils.getOAuthHeader(accessToken), params);
+        Call<String> subredditSubscriptionCall = api.communityFollow(new FollowCommunityDTO(communityId, action.equals("sub"), accessToken));
         subredditSubscriptionCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
                 if (response.isSuccessful()) {
                     if (action.equals("sub")) {
-                        FetchSubredditData.fetchSubredditData(oauthRetrofit, retrofit, subredditName, accessToken, new FetchSubredditData.FetchSubredditDataListener() {
+                        FetchSubredditData.fetchSubredditData(retrofit, communityQualifiedName, accessToken, new FetchSubredditData.FetchSubredditDataListener() {
                             @Override
                             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                                 insertSubscription(executor, handler, redditDataRoomDatabase,
@@ -90,7 +85,7 @@ public class SubredditSubscription {
                             }
                         });
                     } else {
-                        removeSubscription(executor, handler, redditDataRoomDatabase, subredditName,
+                        removeSubscription(executor, handler, redditDataRoomDatabase, communityQualifiedName,
                                 accountName, subredditSubscriptionListener);
                     }
                 } else {

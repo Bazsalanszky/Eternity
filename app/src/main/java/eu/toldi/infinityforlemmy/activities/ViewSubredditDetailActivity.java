@@ -96,10 +96,10 @@ import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
+import eu.toldi.infinityforlemmy.subreddit.CommunitySubscription;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
-import eu.toldi.infinityforlemmy.subreddit.SubredditSubscription;
 import eu.toldi.infinityforlemmy.subreddit.SubredditViewModel;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
@@ -116,7 +116,6 @@ import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class ViewSubredditDetailActivity extends BaseActivity implements SortTypeSelectionCallback,
         PostTypeBottomSheetFragment.PostTypeSelectionCallback, PostLayoutBottomSheetFragment.PostLayoutSelectionCallback,
@@ -174,9 +173,6 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
-    @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
     @Named("default")
@@ -207,7 +203,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private String mAccessToken;
     private String mAccountName;
     private String mAccountQualifiedName;
-    private String subredditName;
+    private String communityName;
+
+    private int communityId;
     private String description;
 
     private String qualifiedName;
@@ -340,8 +338,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
         hideSubredditDescription = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_DESCRIPTION, false);
 
-        subredditName = getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME_KEY);
-        qualifiedName =  getIntent().getStringExtra(EXTRA_COMMUNITY_FULL_NAME_KEY);
+        communityName = getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME_KEY);
+        qualifiedName = getIntent().getStringExtra(EXTRA_COMMUNITY_FULL_NAME_KEY);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -366,7 +364,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         checkNewAccountAndBindView();
 
         fetchSubredditData();
-        if (subredditName != null) {
+        if (communityName != null) {
             setupVisibleElements();
         }
     }
@@ -457,10 +455,10 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     }
 
     private void setupVisibleElements() {
-        subredditNameTextView.setText(subredditName);
+        subredditNameTextView.setText(communityName);
         communityFullNameTextView.setText(qualifiedName);
 
-        toolbar.setTitle(subredditName);
+        toolbar.setTitle(communityName);
         setSupportActionBar(toolbar);
         setToolbarGoToTop(toolbar);
 
@@ -514,8 +512,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     bannerImageView.setOnClickListener(view -> {
                         Intent intent = new Intent(ViewSubredditDetailActivity.this, ViewImageOrGifActivity.class);
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_IMAGE_URL_KEY, subredditData.getBannerUrl());
-                        intent.putExtra(ViewImageOrGifActivity.EXTRA_FILE_NAME_KEY, subredditName + "-banner.jpg");
-                        intent.putExtra(ViewImageOrGifActivity.EXTRA_SUBREDDIT_OR_USERNAME_KEY, subredditName);
+                        intent.putExtra(ViewImageOrGifActivity.EXTRA_FILE_NAME_KEY, communityName + "-banner.jpg");
+                        intent.putExtra(ViewImageOrGifActivity.EXTRA_SUBREDDIT_OR_USERNAME_KEY, communityName);
                         startActivity(intent);
                     });
                 }
@@ -534,14 +532,14 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     iconGifImageView.setOnClickListener(view -> {
                         Intent intent = new Intent(ViewSubredditDetailActivity.this, ViewImageOrGifActivity.class);
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_IMAGE_URL_KEY, subredditData.getIconUrl());
-                        intent.putExtra(ViewImageOrGifActivity.EXTRA_FILE_NAME_KEY, subredditName + "-icon.jpg");
-                        intent.putExtra(ViewImageOrGifActivity.EXTRA_SUBREDDIT_OR_USERNAME_KEY, subredditName);
+                        intent.putExtra(ViewImageOrGifActivity.EXTRA_FILE_NAME_KEY, communityName + "-icon.jpg");
+                        intent.putExtra(ViewImageOrGifActivity.EXTRA_SUBREDDIT_OR_USERNAME_KEY, communityName);
                         startActivity(intent);
                     });
                 }
 
                 String subredditFullName = subredditData.getTitle();
-                if (!subredditName.equals(subredditFullName)) {
+                if (!communityName.equals(subredditFullName)) {
                     getSupportActionBar().setTitle(subredditFullName);
                 }
                 subredditNameTextView.setText(subredditFullName);
@@ -577,21 +575,130 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         });
     }
 
+    private void setupSubscribeChip() {
+        subscribeSubredditChip.setOnClickListener(view -> {
+            if (mAccessToken == null) {
+                if (subscriptionReady) {
+                    subscriptionReady = false;
+                    if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
+                        CommunitySubscription.anonymousSubscribeToSubreddit(mExecutor, new Handler(),
+                                mRetrofit.getRetrofit(), mRedditDataRoomDatabase, communityName,
+                                new CommunitySubscription.SubredditSubscriptionListener() {
+                                    @Override
+                                    public void onSubredditSubscriptionSuccess() {
+                                        subscribeSubredditChip.setText(R.string.unsubscribe);
+                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
+                                        makeSnackbar(R.string.subscribed, false);
+                                        subscriptionReady = true;
+                                    }
+
+                                    @Override
+                                    public void onSubredditSubscriptionFail() {
+                                        makeSnackbar(R.string.subscribe_failed, false);
+                                        subscriptionReady = true;
+                                    }
+                                });
+                    } else {
+                        CommunitySubscription.anonymousUnsubscribeToSubreddit(mExecutor, new Handler(),
+                                mRedditDataRoomDatabase, communityName,
+                                new CommunitySubscription.SubredditSubscriptionListener() {
+                                    @Override
+                                    public void onSubredditSubscriptionSuccess() {
+                                        subscribeSubredditChip.setText(R.string.subscribe);
+                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
+                                        makeSnackbar(R.string.unsubscribed, false);
+                                        subscriptionReady = true;
+                                    }
+
+                                    @Override
+                                    public void onSubredditSubscriptionFail() {
+                                        makeSnackbar(R.string.unsubscribe_failed, false);
+                                        subscriptionReady = true;
+                                    }
+                                });
+                    }
+                }
+            } else {
+                if (subscriptionReady) {
+                    subscriptionReady = false;
+                    if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
+                        CommunitySubscription.subscribeToCommunity(mExecutor, new Handler(),
+                                mRetrofit.getRetrofit(), mAccessToken, communityId, qualifiedName, mAccountQualifiedName, mRedditDataRoomDatabase,
+                                new CommunitySubscription.SubredditSubscriptionListener() {
+                                    @Override
+                                    public void onSubredditSubscriptionSuccess() {
+                                        subscribeSubredditChip.setText(R.string.unsubscribe);
+                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
+                                        makeSnackbar(R.string.subscribed, false);
+                                        subscriptionReady = true;
+                                    }
+
+                                    @Override
+                                    public void onSubredditSubscriptionFail() {
+                                        makeSnackbar(R.string.subscribe_failed, false);
+                                        subscriptionReady = true;
+                                    }
+                                });
+                    } else {
+                        CommunitySubscription.unsubscribeToCommunity(mExecutor, new Handler(),
+                                mRetrofit.getRetrofit(), mAccessToken, communityId, qualifiedName, mAccountName, mRedditDataRoomDatabase,
+                                new CommunitySubscription.SubredditSubscriptionListener() {
+                                    @Override
+                                    public void onSubredditSubscriptionSuccess() {
+                                        subscribeSubredditChip.setText(R.string.subscribe);
+                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
+                                        makeSnackbar(R.string.unsubscribed, false);
+                                        subscriptionReady = true;
+                                    }
+
+                                    @Override
+                                    public void onSubredditSubscriptionFail() {
+                                        makeSnackbar(R.string.unsubscribe_failed, false);
+                                        subscriptionReady = true;
+                                    }
+                                });
+                    }
+                }
+            }
+        });
+
+        CheckIsSubscribedToSubreddit.checkIsSubscribedToSubreddit(mExecutor, new Handler(),
+                mRedditDataRoomDatabase, qualifiedName, mAccountQualifiedName,
+                new CheckIsSubscribedToSubreddit.CheckIsSubscribedToSubredditListener() {
+                    @Override
+                    public void isSubscribed() {
+                        subscribeSubredditChip.setText(R.string.unsubscribe);
+                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
+                        subscriptionReady = true;
+                    }
+
+                    @Override
+                    public void isNotSubscribed() {
+                        subscribeSubredditChip.setText(R.string.subscribe);
+                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
+                        subscriptionReady = true;
+                    }
+                });
+    }
+
     private void fetchSubredditData() {
         if (!mFetchSubredditInfoSuccess) {
-            FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit.getRetrofit(), qualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
+            FetchSubredditData.fetchSubredditData(mRetrofit.getRetrofit(), qualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
                 @Override
-                public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
-                    qualifiedName = LemmyUtils.actorID2FullName(subredditData.getActorId());
-                    if (subredditName == null) {
-                        subredditName = subredditData.getTitle();
+                public void onFetchSubredditDataSuccess(SubredditData communityData, int nCurrentOnlineSubscribers) {
+                    qualifiedName = LemmyUtils.actorID2FullName(communityData.getActorId());
+                    if (communityName == null) {
+                        communityName = communityData.getTitle();
+
                         setupVisibleElements();
                     }
+                    communityId = communityData.getId();
+                    setupSubscribeChip();
 
                     mNCurrentOnlineSubscribers = nCurrentOnlineSubscribers;
                     nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, nCurrentOnlineSubscribers));
                     InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
-                            subredditData, () -> mFetchSubredditInfoSuccess = true);
+                            communityData, () -> mFetchSubredditInfoSuccess = true);
                 }
 
                 @Override
@@ -648,7 +755,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
             case SharedPreferencesUtils.OTHER_ACTIVITIES_BOTTOM_APP_BAR_OPTION_SEARCH: {
                 Intent intent = new Intent(this, SearchActivity.class);
-                intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             }
@@ -762,7 +869,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
     private void bindView() {
         if (mMessageFullname != null) {
-            ReadMessage.readMessage(mOauthRetrofit, mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
+            ReadMessage.readMessage(mRetrofit.getRetrofit(), mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
                 @Override
                 public void readSuccess() {
                     mMessageFullname = null;
@@ -920,7 +1027,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 }
                 case SharedPreferencesUtils.OTHER_ACTIVITIES_BOTTOM_APP_BAR_FAB_SEARCH: {
                     Intent intent = new Intent(this, SearchActivity.class);
-                    intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                    intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, communityName);
                     startActivity(intent);
                     break;
                 }
@@ -964,109 +1071,6 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         });
         navigationWrapper.floatingActionButton.setVisibility(hideFab ? View.GONE : View.VISIBLE);
 
-        subscribeSubredditChip.setOnClickListener(view -> {
-            if (mAccessToken == null) {
-                if (subscriptionReady) {
-                    subscriptionReady = false;
-                    if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
-                        SubredditSubscription.anonymousSubscribeToSubreddit(mExecutor, new Handler(),
-                                mRetrofit.getRetrofit(), mRedditDataRoomDatabase, subredditName,
-                                new SubredditSubscription.SubredditSubscriptionListener() {
-                                    @Override
-                                    public void onSubredditSubscriptionSuccess() {
-                                        subscribeSubredditChip.setText(R.string.unsubscribe);
-                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
-                                        makeSnackbar(R.string.subscribed, false);
-                                        subscriptionReady = true;
-                                    }
-
-                                    @Override
-                                    public void onSubredditSubscriptionFail() {
-                                        makeSnackbar(R.string.subscribe_failed, false);
-                                        subscriptionReady = true;
-                                    }
-                                });
-                    } else {
-                        SubredditSubscription.anonymousUnsubscribeToSubreddit(mExecutor, new Handler(),
-                                mRedditDataRoomDatabase, subredditName,
-                                new SubredditSubscription.SubredditSubscriptionListener() {
-                                    @Override
-                                    public void onSubredditSubscriptionSuccess() {
-                                        subscribeSubredditChip.setText(R.string.subscribe);
-                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
-                                        makeSnackbar(R.string.unsubscribed, false);
-                                        subscriptionReady = true;
-                                    }
-
-                                    @Override
-                                    public void onSubredditSubscriptionFail() {
-                                        makeSnackbar(R.string.unsubscribe_failed, false);
-                                        subscriptionReady = true;
-                                    }
-                                });
-                    }
-                }
-            } else {
-                if (subscriptionReady) {
-                    subscriptionReady = false;
-                    if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
-                        SubredditSubscription.subscribeToSubreddit(mExecutor, new Handler(), mOauthRetrofit,
-                                mRetrofit.getRetrofit(), mAccessToken, subredditName, mAccountName, mRedditDataRoomDatabase,
-                                new SubredditSubscription.SubredditSubscriptionListener() {
-                                    @Override
-                                    public void onSubredditSubscriptionSuccess() {
-                                        subscribeSubredditChip.setText(R.string.unsubscribe);
-                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
-                                        makeSnackbar(R.string.subscribed, false);
-                                        subscriptionReady = true;
-                                    }
-
-                                    @Override
-                                    public void onSubredditSubscriptionFail() {
-                                        makeSnackbar(R.string.subscribe_failed, false);
-                                        subscriptionReady = true;
-                                    }
-                                });
-                    } else {
-                        SubredditSubscription.unsubscribeToSubreddit(mExecutor, new Handler(), mOauthRetrofit,
-                                mAccessToken, subredditName, mAccountName, mRedditDataRoomDatabase,
-                                new SubredditSubscription.SubredditSubscriptionListener() {
-                                    @Override
-                                    public void onSubredditSubscriptionSuccess() {
-                                        subscribeSubredditChip.setText(R.string.subscribe);
-                                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
-                                        makeSnackbar(R.string.unsubscribed, false);
-                                        subscriptionReady = true;
-                                    }
-
-                                    @Override
-                                    public void onSubredditSubscriptionFail() {
-                                        makeSnackbar(R.string.unsubscribe_failed, false);
-                                        subscriptionReady = true;
-                                    }
-                                });
-                    }
-                }
-            }
-        });
-
-        CheckIsSubscribedToSubreddit.checkIsSubscribedToSubreddit(mExecutor, new Handler(),
-                mRedditDataRoomDatabase, qualifiedName, mAccountQualifiedName,
-                new CheckIsSubscribedToSubreddit.CheckIsSubscribedToSubredditListener() {
-                    @Override
-                    public void isSubscribed() {
-                        subscribeSubredditChip.setText(R.string.unsubscribe);
-                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(subscribedColor));
-                        subscriptionReady = true;
-                    }
-
-                    @Override
-                    public void isNotSubscribed() {
-                        subscribeSubredditChip.setText(R.string.subscribe);
-                        subscribeSubredditChip.setChipBackgroundColor(ColorStateList.valueOf(unsubscribedColor));
-                        subscriptionReady = true;
-                    }
-                });
 
         sectionsPagerAdapter = new SectionsPagerAdapter(this);
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -1133,7 +1137,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             return true;
         } else if (itemId == R.id.action_search_view_subreddit_detail_activity) {
             Intent intent = new Intent(this, SearchActivity.class);
-            intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+            intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, communityName);
             intent.putExtra(SearchActivity.EXTRA_COMMUNITY_FULL_NAME, qualifiedName);
             startActivity(intent);
             return true;
@@ -1152,7 +1156,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 return true;
             }
             Intent selectUserFlairIntent = new Intent(this, SelectUserFlairActivity.class);
-            selectUserFlairIntent.putExtra(SelectUserFlairActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+            selectUserFlairIntent.putExtra(SelectUserFlairActivity.EXTRA_SUBREDDIT_NAME, communityName);
             startActivity(selectUserFlairIntent);
             return true;
         } else if (itemId == R.id.action_add_to_multireddit_view_subreddit_detail_activity) {
@@ -1164,7 +1168,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             startActivityForResult(intent, ADD_TO_MULTIREDDIT_REQUEST_CODE);
         } else if (itemId == R.id.action_add_to_post_filter_view_subreddit_detail_activity) {
             Intent intent = new Intent(this, PostFilterPreferenceActivity.class);
-            intent.putExtra(PostFilterPreferenceActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+            intent.putExtra(PostFilterPreferenceActivity.EXTRA_SUBREDDIT_NAME, communityName);
             startActivity(intent);
             return true;
         } else if (itemId == R.id.action_share_view_subreddit_detail_activity) {
@@ -1179,13 +1183,13 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             return true;
         } else if (itemId == R.id.action_go_to_wiki_view_subreddit_detail_activity) {
             Intent wikiIntent = new Intent(this, WikiActivity.class);
-            wikiIntent.putExtra(WikiActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+            wikiIntent.putExtra(WikiActivity.EXTRA_SUBREDDIT_NAME, communityName);
             wikiIntent.putExtra(WikiActivity.EXTRA_WIKI_PATH, "index");
             startActivity(wikiIntent);
             return true;
         } else if (itemId == R.id.action_contact_mods_view_subreddit_detail_activity) {
             Intent intent = new Intent(this, SendPrivateMessageActivity.class);
-            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + subredditName);
+            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + communityName);
             startActivity(intent);
             return true;
         }
@@ -1199,19 +1203,19 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             if (data != null) {
                 MultiReddit multiReddit = data.getParcelableExtra(MultiredditSelectionActivity.EXTRA_RETURN_MULTIREDDIT);
                 if (multiReddit != null) {
-                    AddSubredditOrUserToMultiReddit.addSubredditOrUserToMultiReddit(mOauthRetrofit,
-                            mAccessToken, multiReddit.getPath(), subredditName,
+                    AddSubredditOrUserToMultiReddit.addSubredditOrUserToMultiReddit(mRetrofit.getRetrofit(),
+                            mAccessToken, multiReddit.getPath(), communityName,
                             new AddSubredditOrUserToMultiReddit.AddSubredditOrUserToMultiRedditListener() {
                                 @Override
                                 public void success() {
                                     Toast.makeText(ViewSubredditDetailActivity.this,
-                                            getString(R.string.add_community_or_user_to_multireddit_success, subredditName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
+                                            getString(R.string.add_community_or_user_to_multireddit_success, communityName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
                                 }
 
                                 @Override
                                 public void failed(int code) {
                                     Toast.makeText(ViewSubredditDetailActivity.this,
-                                            getString(R.string.add_community_or_user_to_multireddit_failed, subredditName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
+                                            getString(R.string.add_community_or_user_to_multireddit_failed, communityName, multiReddit.getDisplayName()), Toast.LENGTH_LONG).show();
                                 }
                             });
                 }
@@ -1274,39 +1278,39 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         switch (postType) {
             case PostTypeBottomSheetFragment.TYPE_TEXT:
                 intent = new Intent(this, PostTextActivity.class);
-                intent.putExtra(PostTextActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(PostTextActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_LINK:
                 intent = new Intent(this, PostLinkActivity.class);
-                intent.putExtra(PostLinkActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(PostLinkActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_IMAGE:
                 intent = new Intent(this, PostImageActivity.class);
-                intent.putExtra(PostImageActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(PostImageActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_VIDEO:
                 intent = new Intent(this, PostVideoActivity.class);
-                intent.putExtra(PostVideoActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(PostVideoActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_GALLERY:
                 intent = new Intent(this, PostGalleryActivity.class);
-                intent.putExtra(PostGalleryActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(PostGalleryActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_POLL:
                 intent = new Intent(this, PostPollActivity.class);
-                intent.putExtra(PostPollActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(PostPollActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
         }
     }
 
     @Override
     public void postLayoutSelected(int postLayout) {
-        mPostLayoutSharedPreferences.edit().putInt(SharedPreferencesUtils.POST_LAYOUT_SUBREDDIT_POST_BASE + subredditName, postLayout).apply();
+        mPostLayoutSharedPreferences.edit().putInt(SharedPreferencesUtils.POST_LAYOUT_SUBREDDIT_POST_BASE + communityName, postLayout).apply();
         sectionsPagerAdapter.changePostLayout(postLayout);
     }
 
@@ -1382,7 +1386,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 break;
             case FABMoreOptionsBottomSheetFragment.FAB_OPTION_SEARCH:
                 Intent intent = new Intent(this, SearchActivity.class);
-                intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+                intent.putExtra(SearchActivity.EXTRA_SUBREDDIT_NAME, communityName);
                 startActivity(intent);
                 break;
             case FABMoreOptionsBottomSheetFragment.FAB_OPTION_GO_TO_SUBREDDIT: {
@@ -1460,7 +1464,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 if (subredditAutocompleteCall != null) {
                     subredditAutocompleteCall.cancel();
                 }
-                subredditAutocompleteCall = mOauthRetrofit.create(RedditAPI.class).subredditAutocomplete(APIUtils.getOAuthHeader(mAccessToken),
+                subredditAutocompleteCall = mRetrofit.getRetrofit().create(RedditAPI.class).subredditAutocomplete(APIUtils.getOAuthHeader(mAccessToken),
                         editable.toString(), nsfw);
                 subredditAutocompleteCall.enqueue(new Callback<String>() {
                     @Override
@@ -1596,7 +1600,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             SidebarFragment fragment = new SidebarFragment();
             Bundle bundle = new Bundle();
             bundle.putString(SidebarFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-            bundle.putString(SidebarFragment.EXTRA_SUBREDDIT_NAME, subredditName);
+            bundle.putString(SidebarFragment.EXTRA_SUBREDDIT_NAME, communityName);
             bundle.putString(SidebarFragment.EXTRA_COMMUNITY_QUALIFIED_NAME, qualifiedName);
             fragment.setArguments(bundle);
             return fragment;

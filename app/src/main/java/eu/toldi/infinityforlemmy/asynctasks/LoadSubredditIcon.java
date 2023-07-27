@@ -23,7 +23,7 @@ public class LoadSubredditIcon {
                 String iconImageUrl = subredditDao.getSubredditData(subredditName).getIconUrl();
                 handler.post(() -> loadSubredditIconAsyncTaskListener.loadIconSuccess(iconImageUrl));
             } else {
-                handler.post(() -> FetchSubredditData.fetchSubredditData(oauthRetrofit, retrofit, subredditName, accessToken, new FetchSubredditData.FetchSubredditDataListener() {
+                handler.post(() -> FetchSubredditData.fetchSubredditData(retrofit, subredditName, accessToken, new FetchSubredditData.FetchSubredditDataListener() {
                     @Override
                     public void onFetchSubredditDataSuccess(SubredditData subredditData1, int nCurrentOnlineSubscribers) {
                         ArrayList<SubredditData> singleSubredditDataList = new ArrayList<>();

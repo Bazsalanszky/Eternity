@@ -64,6 +64,8 @@ public class SearchSubredditsResultActivity extends BaseActivity implements Acti
     private String mAccessToken;
     private String mAccountName;
 
+    private String mAccountQualifiedName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((Infinity) getApplication()).getAppComponent().inject(this);
@@ -107,6 +109,7 @@ public class SearchSubredditsResultActivity extends BaseActivity implements Acti
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState == null) {
             mFragment = new SubredditListingFragment();
@@ -114,7 +117,7 @@ public class SearchSubredditsResultActivity extends BaseActivity implements Acti
             bundle.putString(SubredditListingFragment.EXTRA_QUERY, query);
             bundle.putBoolean(SubredditListingFragment.EXTRA_IS_GETTING_SUBREDDIT_INFO, true);
             bundle.putString(SubredditListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-            bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+            bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
             bundle.putBoolean(SubredditListingFragment.EXTRA_IS_MULTI_SELECTION, getIntent().getBooleanExtra(EXTRA_IS_MULTI_SELECTION, false));
             mFragment.setArguments(bundle);
         } else {

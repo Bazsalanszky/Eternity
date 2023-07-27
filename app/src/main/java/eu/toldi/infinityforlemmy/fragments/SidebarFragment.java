@@ -194,7 +194,7 @@ public class SidebarFragment extends Fragment {
 
     public void fetchSubredditData() {
         swipeRefreshLayout.setRefreshing(true);
-        FetchSubredditData.fetchSubredditData(mOauthRetrofit, mRetrofit.getRetrofit(), communityQualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
+        FetchSubredditData.fetchSubredditData(mRetrofit.getRetrofit(), communityQualifiedName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
             @Override
             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 swipeRefreshLayout.setRefreshing(false);

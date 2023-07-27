@@ -12,11 +12,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FetchSubredditData {
-    public static void fetchSubredditData(Retrofit oauthRetrofit, Retrofit retrofit, String subredditName, String accessToken, final FetchSubredditDataListener fetchSubredditDataListener) {
+    public static void fetchSubredditData(Retrofit retrofit, String subredditName, String accessToken, final FetchSubredditDataListener fetchSubredditDataListener) {
         LemmyAPI api = retrofit.create(LemmyAPI.class);
 
         Call<String> subredditData;
-        subredditData = api.communityInfo(subredditName,accessToken);
+        subredditData = api.communityInfo(subredditName, accessToken);
 
         subredditData.enqueue(new Callback<>() {
             @Override

@@ -33,8 +33,8 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.asynctasks.CheckIsSubscribedToSubreddit;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.subreddit.CommunitySubscription;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
-import eu.toldi.infinityforlemmy.subreddit.SubredditSubscription;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
@@ -158,10 +158,10 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
                                     ((DataViewHolder) holder).subscribeButton.setVisibility(View.VISIBLE);
                                     ((DataViewHolder) holder).subscribeButton.setOnClickListener(view -> {
                                         if (accessToken != null) {
-                                            SubredditSubscription.subscribeToSubreddit(executor, new Handler(),
-                                                    oauthRetrofit, retrofit, accessToken, subredditData.getName(),
+                                            CommunitySubscription.subscribeToCommunity(executor, new Handler(),
+                                                    retrofit, accessToken, subredditData.getId(), LemmyUtils.actorID2FullName(subredditData.getActorId()),
                                                     accountName, redditDataRoomDatabase,
-                                                    new SubredditSubscription.SubredditSubscriptionListener() {
+                                                    new CommunitySubscription.SubredditSubscriptionListener() {
                                                         @Override
                                                         public void onSubredditSubscriptionSuccess() {
                                                             ((DataViewHolder) holder).subscribeButton.setVisibility(View.GONE);
@@ -174,9 +174,9 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
                                                         }
                                                     });
                                         } else {
-                                            SubredditSubscription.anonymousSubscribeToSubreddit(executor, new Handler(),
+                                            CommunitySubscription.anonymousSubscribeToSubreddit(executor, new Handler(),
                                                     retrofit, redditDataRoomDatabase, subredditData.getName(),
-                                                    new SubredditSubscription.SubredditSubscriptionListener() {
+                                                    new CommunitySubscription.SubredditSubscriptionListener() {
                                                         @Override
                                                         public void onSubredditSubscriptionSuccess() {
                                                             ((DataViewHolder) holder).subscribeButton.setVisibility(View.GONE);
