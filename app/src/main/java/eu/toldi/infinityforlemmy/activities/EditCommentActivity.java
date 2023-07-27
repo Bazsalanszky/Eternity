@@ -32,8 +32,6 @@ import org.greenrobot.eventbus.Subscribe;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -43,15 +41,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
 import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.adapters.MarkdownBottomBarRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UploadedImagesBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
+import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -84,8 +83,8 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
     @BindView(R.id.markdown_bottom_bar_recycler_view_edit_comment_activity)
     RecyclerView markdownBottomBarRecyclerView;
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+    @Named("no_oauth")
+    RetrofitHolder retrofit;
     @Inject
     @Named("upload_media")
     Retrofit mUploadMediaRetrofit;
@@ -99,7 +98,7 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
-    private String mFullName;
+    private int mCommentId;
     private String mAccessToken;
     private String mCommentContent;
     private boolean isSubmitting = false;
@@ -129,7 +128,10 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mFullName = getIntent().getStringExtra(EXTRA_FULLNAME);
+        mCommentId = getIntent().getIntExtra(EXTRA_FULLNAME, 0);
+        if (mCommentId == 0) {
+            finish();
+        }
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mCommentContent = getIntent().getStringExtra(EXTRA_CONTENT);
         contentEditText.setText(mCommentContent);
@@ -225,12 +227,7 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
 
             String content = contentEditText.getText().toString();
 
-            Map<String, String> params = new HashMap<>();
-            params.put(APIUtils.THING_ID_KEY, mFullName);
-            params.put(APIUtils.TEXT_KEY, content);
-
-            mOauthRetrofit.create(RedditAPI.class)
-                    .editPostOrComment(APIUtils.getOAuthHeader(mAccessToken), params)
+            retrofit.getRetrofit().create(LemmyAPI.class).commentEdit(new EditCommentDTO(mCommentId, content, null, null, mAccessToken))
                     .enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -278,10 +275,10 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
                     Toast.makeText(EditCommentActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, retrofit.getRetrofit(), mUploadMediaRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, data.getData(), uploadedImages);
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
-                Utils.uploadImageToReddit(this, mExecutor, mOauthRetrofit, mUploadMediaRetrofit,
+                Utils.uploadImageToReddit(this, mExecutor, retrofit.getRetrofit(), mUploadMediaRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, capturedImageUri, uploadedImages);
             } else if (requestCode == MARKDOWN_PREVIEW_REQUEST_CODE) {
                 editComment();

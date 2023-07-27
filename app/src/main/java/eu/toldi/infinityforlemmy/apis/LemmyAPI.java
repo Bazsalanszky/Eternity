@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
+import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
@@ -128,4 +129,8 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/comment")
     Call<String> postComment(@Body CommentDTO params);
+
+    @Headers("Content-Type: application/json")
+    @PUT("api/v3/comment")
+    Call<String> commentEdit(@Body EditCommentDTO params);
 }

@@ -112,7 +112,7 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
 
                 editTextView.setOnClickListener(view -> {
                     Intent intent = new Intent(activity, EditCommentActivity.class);
-                    intent.putExtra(EditCommentActivity.EXTRA_FULLNAME, comment.getFullName());
+                    intent.putExtra(EditCommentActivity.EXTRA_FULLNAME, comment.getId());
                     intent.putExtra(EditCommentActivity.EXTRA_CONTENT, comment.getCommentMarkdown());
                     intent.putExtra(EditCommentActivity.EXTRA_POSITION, bundle.getInt(EXTRA_POSITION));
                     if (activity instanceof ViewPostDetailActivity) {
