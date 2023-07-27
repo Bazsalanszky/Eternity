@@ -290,6 +290,8 @@ public class ParseComment {
 
         int score = countsObj.getInt("score");
         int voteType = (jsonObject.isNull("my_vote")) ? 0 : jsonObject.getInt("my_vote");
+        if (voteType != 0)
+            score -= 1;
         boolean isSubmitter = creatorObj.getInt("id") == postObj.getInt("creator_id");
         String distinguished = commentObj.getString("distinguished");
         String permalink = commentObj.getString("ap_id");
