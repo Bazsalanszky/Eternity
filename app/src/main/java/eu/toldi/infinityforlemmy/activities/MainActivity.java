@@ -71,7 +71,6 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
-import eu.toldi.infinityforlemmy.FetchMyInfo;
 import eu.toldi.infinityforlemmy.FetchSubscribedThing;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
@@ -1406,7 +1405,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             if (i == EditorInfo.IME_ACTION_DONE) {
                 Utils.hideKeyboard(this);
                 Intent subredditIntent = new Intent(this, ViewSubredditDetailActivity.class);
-                subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, thingEditText.getText().toString());
+                subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, thingEditText.getText().toString());
                 startActivity(subredditIntent);
                 return true;
             }
@@ -1464,7 +1463,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         -> {
                     Utils.hideKeyboard(this);
                     Intent subredditIntent = new Intent(this, ViewSubredditDetailActivity.class);
-                    subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, thingEditText.getText().toString());
+                    subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, thingEditText.getText().toString());
                     startActivity(subredditIntent);
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
@@ -1485,7 +1484,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             if (i == EditorInfo.IME_ACTION_DONE) {
                 Utils.hideKeyboard(this);
                 Intent userIntent = new Intent(this, ViewUserDetailActivity.class);
-                userIntent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, thingEditText.getText().toString());
+                userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, thingEditText.getText().toString());
                 startActivity(userIntent);
                 return true;
             }
@@ -1498,7 +1497,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         -> {
                     Utils.hideKeyboard(this);
                     Intent userIntent = new Intent(this, ViewUserDetailActivity.class);
-                    userIntent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, thingEditText.getText().toString());
+                    userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, thingEditText.getText().toString());
                     startActivity(userIntent);
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
