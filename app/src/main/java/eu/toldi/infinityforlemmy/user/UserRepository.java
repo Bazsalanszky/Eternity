@@ -12,7 +12,7 @@ public class UserRepository {
 
     UserRepository(RedditDataRoomDatabase redditDataRoomDatabase, String actor_id) {
         mUserDao = redditDataRoomDatabase.userDao();
-        mUserLiveData = mUserDao.getUserLiveData(actor_id);
+        mUserLiveData = mUserDao.getUserLiveDataByActorId(actor_id);
     }
 
     LiveData<UserData> getUserLiveData() {

@@ -21,7 +21,7 @@ public interface UserDao {
     LiveData<UserData> getUserLiveData(String userName);
 
     @Query("SELECT * FROM users WHERE actor_id = :actor_id COLLATE NOCASE LIMIT 1")
-    LiveData<UserData> getUserLiveDataByQualifiedName(String actor_id);
+    LiveData<UserData> getUserLiveDataByActorId(String actor_id);
 
     @Query("SELECT * FROM users WHERE name = :userName COLLATE NOCASE LIMIT 1")
     UserData getUserData(String userName);
