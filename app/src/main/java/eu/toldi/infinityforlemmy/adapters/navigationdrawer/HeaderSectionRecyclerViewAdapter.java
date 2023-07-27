@@ -26,11 +26,11 @@ import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 
 public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -65,7 +65,7 @@ public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         requireAuthToAccountSection = securitySharedPreferences.getBoolean(SharedPreferencesUtils.REQUIRE_AUTHENTICATION_TO_GO_TO_ACCOUNT_SECTION_IN_NAVIGATION_DRAWER, false);
         showAvatarOnTheRightInTheNavigationDrawer = sharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AVATAR_ON_THE_RIGHT, false);
         showAvatarOnTheRightInTheNavigationDrawer = navigationDrawerSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AVATAR_ON_THE_RIGHT, false);
-        this.hideKarma = navigationDrawerSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_ACCOUNT_KARMA_NAV_BAR, false);
+        this.hideKarma = true;
     }
 
     @NonNull
