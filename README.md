@@ -6,7 +6,7 @@
 
 A Lemmy client for Android written in Java. It's a fork of the [Infinity for Reddit](https://github.com/Docile-Alligator/Infinity-For-Reddit) project, currenty in early development.
 
-<img align="right" src="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/raw/branch/master/fastlane/metadata/android/en-US/images/LemmInfinity.png" width=200>
+<img align="right" src="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/raw/branch/master/fastlane/metadata/android/en-US/images/icon.png" width=200>
 
 </div>
 
