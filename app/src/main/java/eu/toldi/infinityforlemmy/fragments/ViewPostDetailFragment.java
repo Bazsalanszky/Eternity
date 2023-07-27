@@ -1408,16 +1408,11 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                             String suggestedCommentSort = "top";
                             SortType.Type sortTypeType;
-                            if (suggestedCommentSort == null || suggestedCommentSort.equals("null") || suggestedCommentSort.equals("")) {
-                                mRespectSubredditRecommendedSortType = false;
+                            try {
+                                sortTypeType = SortType.Type.fromValue(suggestedCommentSort);
+                            } catch (IllegalArgumentException e) {
+                                e.printStackTrace();
                                 sortTypeType = loadSortType();
-                            } else {
-                                try {
-                                    sortTypeType = SortType.Type.valueOf(suggestedCommentSort.toUpperCase(Locale.US));
-                                } catch (IllegalArgumentException e) {
-                                    e.printStackTrace();
-                                    sortTypeType = loadSortType();
-                                }
                             }
                             activity.setTitle(sortTypeType.fullName);
                             ViewPostDetailFragment.this.sortType = sortTypeType;
@@ -1582,6 +1577,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                     mSwipeRefreshLayout.setRefreshing(false);
 
                                     if (fetchComments) {
+                                        pages_loaded = 0;
+                                        mCommentsAdapter.clearLoadedComments();
                                         fetchCommentsRespectRecommendedSort(true);
                                     } else {
                                         isRefreshing = false;

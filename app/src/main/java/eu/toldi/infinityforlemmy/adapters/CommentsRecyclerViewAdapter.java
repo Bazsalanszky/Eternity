@@ -1937,4 +1937,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             ((TextView) itemView).setTextColor(mColorAccent);
         }
     }
+
+    public void clearLoadedComments() {
+        loadedComments.clear();
+    }
 }
