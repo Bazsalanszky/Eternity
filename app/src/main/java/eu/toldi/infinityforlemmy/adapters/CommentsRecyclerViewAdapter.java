@@ -856,6 +856,16 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             }
         }
 
+        List<Comment> newComments = new ArrayList<>();
+        for (int i = 0; i < comments.size(); i++) {
+            if (loadedComments.contains(comments.get(i).getId())) {
+                continue;
+            }
+            newComments.add(comments.get(i));
+            loadedComments.add(comments.get(i).getId());
+        }
+        comments = (ArrayList<Comment>) newComments;
+
         int sizeBefore = mVisibleComments.size();
         mVisibleComments.addAll(comments);
         for (int i = 0; i < comments.size(); i++) {

@@ -1450,6 +1450,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments,
                                                       Integer parentId, ArrayList<Integer> children) {
+                        isFetchingComments = false;
                         ViewPostDetailFragment.this.children = children;
                         pages_loaded++;
                         comments = expandedComments;
@@ -1508,8 +1509,6 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         if (changeRefreshState) {
                             isRefreshing = false;
                         }
-
-                        isFetchingComments = false;
                     }
 
                     @Override
@@ -1535,8 +1534,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         isLoadingMoreChildren = true;
 
-        Retrofit retrofit = mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit;
-        FetchComment.fetchComments(mExecutor, new Handler(), retrofit, mAccessToken,
+        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken,
                 mPost.getId(), null, sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
