@@ -392,7 +392,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
 
                 if (comment.getAuthorIconUrl() == null) {
-                    mFragment.loadIcon(comment.getAuthor(), (authorName, iconUrl) -> {
+                    mFragment.loadIcon(comment.getAuthorQualifiedName(), (authorName, iconUrl) -> {
                         if (authorName.equals(comment.getAuthor())) {
                             comment.setAuthorIconUrl(iconUrl);
                         }
@@ -537,7 +537,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 ((CommentFullyCollapsedViewHolder) holder).usernameTextView.setText(authorWithPrefix);
 
                 if (comment.getAuthorIconUrl() == null) {
-                    mFragment.loadIcon(comment.getAuthor(), (authorName, iconUrl) -> {
+                    mFragment.loadIcon(comment.getAuthorQualifiedName(), (authorName, iconUrl) -> {
                         if (authorName.equals(comment.getAuthor())) {
                             comment.setAuthorIconUrl(iconUrl);
                         }
