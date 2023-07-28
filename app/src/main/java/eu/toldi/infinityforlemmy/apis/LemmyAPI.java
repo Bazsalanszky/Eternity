@@ -46,6 +46,16 @@ public interface LemmyAPI {
             @Query("saved_only") Boolean saved_only,
             @Query("auth") String access_token);
 
+    @GET("api/v3/user")
+    Call<String> getUserComments(
+            @Query("username") String username,
+            @Query("sort") String sort,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("saved_only") Boolean saved_only,
+            @Query("auth") String access_token);
+
+
     @GET("api/v3/community/list")
     Call<String> listCommunities(
             @Query("type_") String type_,

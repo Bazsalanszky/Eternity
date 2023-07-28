@@ -16,16 +16,13 @@ import java.util.Locale;
 
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.post.PostPagingSource;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
-import eu.toldi.infinityforlemmy.utils.JSONUtils;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
+public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
 
     private Retrofit retrofit;
     private Locale locale;
@@ -39,8 +36,8 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
     private MutableLiveData<NetworkState> initialLoadStateLiveData;
     private MutableLiveData<Boolean> hasPostLiveData;
 
-    private LoadParams<String> params;
-    private LoadCallback<String, Comment> callback;
+    private LoadParams<Integer> params;
+    private LoadCallback<Integer, Comment> callback;
 
     CommentDataSource(Retrofit retrofit, Locale locale, @Nullable String accessToken, String username, SortType sortType,
                       boolean areSavedComments) {
@@ -72,42 +69,27 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
     }
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<String> params, @NonNull LoadInitialCallback<String, Comment> callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Comment> callback) {
         initialLoadStateLiveData.postValue(NetworkState.LOADING);
 
-        RedditAPI api = retrofit.create(RedditAPI.class);
-        Call<String> commentsCall;
-        if (areSavedComments) {
-            commentsCall = api.getUserSavedCommentsOauth(username, PostPagingSource.USER_WHERE_SAVED,
-                    null, sortType.getType(), sortType.getTime(),
-                    APIUtils.getOAuthHeader(accessToken));
-        } else {
-            if (accessToken == null) {
-                commentsCall = api.getUserComments(username, null, sortType.getType(),
-                        sortType.getTime());
-            } else {
-                commentsCall = api.getUserCommentsOauth(APIUtils.getOAuthHeader(accessToken), username,
-                        null, sortType.getType(), sortType.getTime());
-            }
-        }
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        Call<String> commentsCall = api.getUserComments(username, sortType.getType().value, 1, 25, areSavedComments, accessToken);
+
         commentsCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     new ParseCommentAsyncTask(response.body(), locale, new ParseCommentAsyncTask.ParseCommentAsyncTaskListener() {
                         @Override
-                        public void parseSuccessful(ArrayList<Comment> comments, String after) {
-                            if (comments.size() == 0) {
+                        public void parseSuccessful(ArrayList<Comment> comments, Integer after) {
+                            if (comments.isEmpty()) {
+                                callback.onResult(comments, null, null);
                                 hasPostLiveData.postValue(false);
                             } else {
                                 hasPostLiveData.postValue(true);
+                                callback.onResult(comments, null, 2);
                             }
 
-                            if (after == null || after.equals("") || after.equals("null")) {
-                                callback.onResult(comments, null, null);
-                            } else {
-                                callback.onResult(comments, null, after);
-                            }
                             initialLoadStateLiveData.postValue(NetworkState.LOADED);
                         }
 
@@ -129,39 +111,27 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
     }
 
     @Override
-    public void loadBefore(@NonNull LoadParams<String> params, @NonNull LoadCallback<String, Comment> callback) {
+    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Comment> callback) {
 
     }
 
     @Override
-    public void loadAfter(@NonNull LoadParams<String> params, @NonNull LoadCallback<String, Comment> callback) {
+    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Comment> callback) {
         this.params = params;
         this.callback = callback;
 
         paginationNetworkStateLiveData.postValue(NetworkState.LOADING);
 
-        RedditAPI api = retrofit.create(RedditAPI.class);
-        Call<String> commentsCall;
-        if (areSavedComments) {
-            commentsCall = api.getUserSavedCommentsOauth(username, PostPagingSource.USER_WHERE_SAVED, params.key,
-                    sortType.getType(), sortType.getTime(), APIUtils.getOAuthHeader(accessToken));
-        } else {
-            if (accessToken == null) {
-                commentsCall = api.getUserComments(username, params.key, sortType.getType(),
-                        sortType.getTime());
-            } else {
-                commentsCall = api.getUserCommentsOauth(APIUtils.getOAuthHeader(accessToken),
-                        username, params.key, sortType.getType(), sortType.getTime());
-            }
-        }
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        Call<String> commentsCall = api.getUserComments(username, sortType.getType().value, params.key, 25, areSavedComments, accessToken);
         commentsCall.enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     new ParseCommentAsyncTask(response.body(), locale, new ParseCommentAsyncTask.ParseCommentAsyncTaskListener() {
                         @Override
-                        public void parseSuccessful(ArrayList<Comment> comments, String after) {
-                            if (after == null || after.equals("") || after.equals("null")) {
+                        public void parseSuccessful(ArrayList<Comment> comments, Integer after) {
+                            if (comments.isEmpty()) {
                                 callback.onResult(comments, null);
                             } else {
                                 callback.onResult(comments, after);
@@ -187,7 +157,7 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
     }
 
     private static class ParseCommentAsyncTask extends AsyncTask<Void, ArrayList<Comment>, ArrayList<Comment>> {
-        private String after;
+        private Integer after;
         private Locale locale;
         private JSONArray commentsJSONArray;
         private boolean parseFailed;
@@ -197,9 +167,8 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
             this.locale = locale;
             this.parseCommentAsyncTaskListener = parseCommentAsyncTaskListener;
             try {
-                JSONObject data = new JSONObject(response).getJSONObject(JSONUtils.DATA_KEY);
-                commentsJSONArray = data.getJSONArray(JSONUtils.CHILDREN_KEY);
-                after = data.getString(JSONUtils.AFTER_KEY);
+                JSONObject data = new JSONObject(response);
+                commentsJSONArray = data.getJSONArray("comments");
                 parseFailed = false;
             } catch (JSONException e) {
                 parseFailed = true;
@@ -216,7 +185,7 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
             ArrayList<Comment> comments = new ArrayList<>();
             for (int i = 0; i < commentsJSONArray.length(); i++) {
                 try {
-                    JSONObject commentJSON = commentsJSONArray.getJSONObject(i).getJSONObject(JSONUtils.DATA_KEY);
+                    JSONObject commentJSON = commentsJSONArray.getJSONObject(i);
                     comments.add(ParseComment.parseSingleComment(commentJSON));
                 } catch (JSONException ignored) {
                 }
@@ -235,7 +204,7 @@ public class CommentDataSource extends PageKeyedDataSource<String, Comment> {
         }
 
         interface ParseCommentAsyncTaskListener {
-            void parseSuccessful(ArrayList<Comment> comments, String after);
+            void parseSuccessful(ArrayList<Comment> comments, Integer page);
 
             void parseFailed();
         }

@@ -52,7 +52,6 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
-import retrofit2.Retrofit;
 
 
 /**
@@ -81,9 +80,6 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
-    @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -253,6 +249,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
 
+
         new Handler().postDelayed(() -> bindView(resources), 0);
 
         return rootView;
@@ -263,7 +260,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
             mLinearLayoutManager = new LinearLayoutManagerBugFixed(mActivity);
             mCommentRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-            mAdapter = new CommentsListingRecyclerViewAdapter(mActivity, mOauthRetrofit, customThemeWrapper,
+            mAdapter = new CommentsListingRecyclerViewAdapter(mActivity, mRetrofit.getRetrofit(), customThemeWrapper,
                     getResources().getConfiguration().locale, mSharedPreferences,
                     getArguments().getString(EXTRA_ACCESS_TOKEN), getArguments().getString(EXTRA_ACCOUNT_NAME),
                     () -> mCommentViewModel.retryLoadingMore());
@@ -294,15 +291,11 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
 
             CommentViewModel.Factory factory;
 
-            if (mAccessToken == null) {
-                factory = new CommentViewModel.Factory(mRetrofit.getRetrofit(),
-                        resources.getConfiguration().locale, null, username, sortType,
-                        getArguments().getBoolean(EXTRA_ARE_SAVED_COMMENTS));
-            } else {
-                factory = new CommentViewModel.Factory(mOauthRetrofit,
-                        resources.getConfiguration().locale, mAccessToken, username, sortType,
-                        getArguments().getBoolean(EXTRA_ARE_SAVED_COMMENTS));
-            }
+
+            factory = new CommentViewModel.Factory(mRetrofit.getRetrofit(),
+                    resources.getConfiguration().locale, mAccessToken, username, sortType,
+                    getArguments().getBoolean(EXTRA_ARE_SAVED_COMMENTS));
+
 
             mCommentViewModel = new ViewModelProvider(this, factory).get(CommentViewModel.class);
             mCommentViewModel.getComments().observe(getViewLifecycleOwner(), comments -> mAdapter.submitList(comments));
