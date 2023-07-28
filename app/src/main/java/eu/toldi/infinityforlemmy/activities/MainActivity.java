@@ -60,6 +60,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -325,9 +327,10 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         fragmentManager = getSupportFragmentManager();
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
+
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
-        String instance = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
+        String instance = (mAccessToken == null) ? mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI) : mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
         if(instance != null) {
             mRetrofit.setBaseURL(instance);
         }
@@ -346,6 +349,17 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
 
         initializeNotificationAndBindView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mAccessToken == null) {
+            String instancePreference = mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI);
+            if (!mRetrofit.getBaseURL().equalsIgnoreCase(instancePreference)) {
+                this.recreate();
+            }
+        }
     }
 
     @Override
@@ -858,6 +872,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                                         startActivity(logOutIntent);
                                         finish();
                                     });
+                        } else if (stringId == R.string.anonymous_account_instance) {
+                            changeAnonymousAccountInstance();
                         }
                         if (intent != null) {
                             startActivity(intent);
@@ -1385,6 +1401,72 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         }
     }
 
+    private void changeAnonymousAccountInstance() {
+        View rootView = getLayoutInflater().inflate(R.layout.dialog_go_to_thing_edit_text, coordinatorLayout, false);
+        TextInputEditText thingEditText = rootView.findViewById(R.id.text_input_edit_text_go_to_thing_edit_text);
+
+        thingEditText.requestFocus();
+        thingEditText.setText(mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI));
+        Utils.showKeyboard(this, new Handler(), thingEditText);
+        thingEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                Utils.hideKeyboard(this);
+                String url = thingEditText.getText().toString();
+                if (url.isEmpty()) {
+                    thingEditText.setError("Instance URL cannot be empty");
+                    return false;
+                }
+                if (!url.startsWith("http://") || !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+                try {
+                    URL urlObj = new URL(url);
+                    url = urlObj.getProtocol() + "://" + urlObj.getHost() + "/";
+                    mSharedPreferences.edit().putString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, url).apply();
+                    mRetrofit.setBaseURL(url);
+                    sectionsPagerAdapter.getCurrentFragment().refresh();
+                } catch (MalformedURLException e) {
+                    thingEditText.setError("Invalid URL");
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        });
+
+        new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
+                .setTitle(R.string.anonymous_account_instance)
+                .setView(rootView)
+                .setPositiveButton(R.string.ok, (dialogInterface, i)
+                        -> {
+                    Utils.hideKeyboard(this);
+                    String url = thingEditText.getText().toString();
+                    if (url.isEmpty()) {
+                        thingEditText.setError("Instance URL cannot be empty");
+                        return;
+                    }
+                    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                        url = "https://" + url;
+                    }
+                    try {
+                        URL urlObj = new URL(url);
+                        url = urlObj.getProtocol() + "://" + urlObj.getHost() + "/";
+                        mSharedPreferences.edit().putString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, url).apply();
+                        mRetrofit.setBaseURL(url);
+                        sectionsPagerAdapter.getCurrentFragment().refresh();
+                    } catch (MalformedURLException e) {
+                        thingEditText.setError("Invalid URL");
+                    }
+                })
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
+                    Utils.hideKeyboard(this);
+                })
+                .setOnDismissListener(dialogInterface -> {
+                    Utils.hideKeyboard(this);
+                })
+                .show();
+    }
+
     private void goToSubreddit() {
         View rootView = getLayoutInflater().inflate(R.layout.dialog_go_to_thing_edit_text, coordinatorLayout, false);
         TextInputEditText thingEditText = rootView.findViewById(R.id.text_input_edit_text_go_to_thing_edit_text);
@@ -1648,7 +1730,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             } else if (postType == SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_ALL) {
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt(PostFragment.EXTRA_POST_TYPE, mAccessToken == null ? PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE : PostPagingSource.TYPE_FRONT_PAGE);
+                bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_FRONT_PAGE);
                 bundle.putString(PostFragment.EXTRA_NAME, "all");
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
@@ -1712,7 +1794,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             } else {
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt(PostFragment.EXTRA_POST_TYPE, mAccessToken == null ? PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE : PostPagingSource.TYPE_FRONT_PAGE);
+                bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_FRONT_PAGE);
                 bundle.putString(PostFragment.EXTRA_NAME, "local");
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);

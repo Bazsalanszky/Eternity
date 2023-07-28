@@ -29,7 +29,7 @@ public class CommunitySubscription {
                                                      RedditDataRoomDatabase redditDataRoomDatabase,
                                                      String subredditName,
                                                      SubredditSubscriptionListener subredditSubscriptionListener) {
-        FetchSubredditData.fetchSubredditData(retrofit, subredditName, "", new FetchSubredditData.FetchSubredditDataListener() {
+        FetchSubredditData.fetchSubredditData(retrofit, subredditName, null, new FetchSubredditData.FetchSubredditDataListener() {
             @Override
             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 insertSubscription(executor, handler, redditDataRoomDatabase,
@@ -111,7 +111,7 @@ public class CommunitySubscription {
                                            SubredditData subredditData, String accountName,
                                            SubredditSubscriptionListener subredditSubscriptionListener) {
         executor.execute(() -> {
-            SubscribedSubredditData subscribedSubredditData = new SubscribedSubredditData(subredditData.getId(), LemmyUtils.actorID2FullName(subredditData.getActorId()), subredditData.getName(),
+            SubscribedSubredditData subscribedSubredditData = new SubscribedSubredditData(subredditData.getId(), subredditData.getName(), LemmyUtils.actorID2FullName(subredditData.getActorId()),
                     subredditData.getIconUrl(), accountName);
             if (accountName.equals("-")) {
                 if (!redditDataRoomDatabase.accountDao().isAnonymousAccountInserted()) {

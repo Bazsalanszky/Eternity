@@ -15,7 +15,7 @@ import okhttp3.RequestBody;
 public class APIUtils {
     public static final String OAUTH_URL = "https://www.reddit.com/api/v1/authorize.compact";
     public static final String OAUTH_API_BASE_URI = "https://oauth.reddit.com";
-    public static final String API_BASE_URI = "https://lemmy.toldi.eu";
+    public static final String API_BASE_URI = "https://lemmy.world";
     public static final String API_UPLOAD_MEDIA_URI = "https://reddit-uploaded-media.s3-accelerate.amazonaws.com";
     public static final String API_UPLOAD_VIDEO_URI = "https://reddit-uploaded-video.s3-accelerate.amazonaws.com";
     public static final String GFYCAT_API_BASE_URI = "https://api.gfycat.com/v1/gfycats/";

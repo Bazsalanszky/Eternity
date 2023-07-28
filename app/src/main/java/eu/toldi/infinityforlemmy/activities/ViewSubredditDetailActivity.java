@@ -582,7 +582,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     subscriptionReady = false;
                     if (getResources().getString(R.string.subscribe).contentEquals(subscribeSubredditChip.getText())) {
                         CommunitySubscription.anonymousSubscribeToSubreddit(mExecutor, new Handler(),
-                                mRetrofit.getRetrofit(), mRedditDataRoomDatabase, communityName,
+                                mRetrofit.getRetrofit(), mRedditDataRoomDatabase, qualifiedName,
                                 new CommunitySubscription.SubredditSubscriptionListener() {
                                     @Override
                                     public void onSubredditSubscriptionSuccess() {
@@ -600,7 +600,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                                 });
                     } else {
                         CommunitySubscription.anonymousUnsubscribeToSubreddit(mExecutor, new Handler(),
-                                mRedditDataRoomDatabase, communityName,
+                                mRedditDataRoomDatabase, qualifiedName,
                                 new CommunitySubscription.SubredditSubscriptionListener() {
                                     @Override
                                     public void onSubredditSubscriptionSuccess() {

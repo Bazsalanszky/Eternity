@@ -21,14 +21,14 @@ import androidx.paging.PagingLiveData;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
-import retrofit2.Retrofit;
 
 public class PostViewModel extends ViewModel {
     private Executor executor;
-    private Retrofit retrofit;
+    private RetrofitHolder retrofit;
     private String accessToken;
     private String accountName;
     private SharedPreferences sharedPreferences;
@@ -50,10 +50,10 @@ public class PostViewModel extends ViewModel {
     private MutableLiveData<PostFilter> postFilterLiveData;
     private SortTypeAndPostFilterLiveData sortTypeAndPostFilterLiveData;
 
-    public PostViewModel(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    public PostViewModel(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                          SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                          @Nullable SharedPreferences postHistorySharedPreferences, int postType,
-                         SortType sortType, PostFilter postFilter, List<String> readPostList,String option) {
+                         SortType sortType, PostFilter postFilter, List<String> readPostList, String option) {
         this.executor = executor;
         this.retrofit = retrofit;
         this.accessToken = accessToken;
@@ -92,7 +92,7 @@ public class PostViewModel extends ViewModel {
                 && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false));
     }
 
-    public PostViewModel(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    public PostViewModel(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                          SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                          @Nullable SharedPreferences postHistorySharedPreferences, String subredditName, int postType,
                          SortType sortType, PostFilter postFilter, List<String> readPostList) {
@@ -134,7 +134,7 @@ public class PostViewModel extends ViewModel {
                 && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false));
     }
 
-    public PostViewModel(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    public PostViewModel(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                          SharedPreferences sharedPreferences,
                          SharedPreferences postFeedScrolledPositionSharedPreferences,
                          @Nullable SharedPreferences postHistorySharedPreferences, String username,
@@ -179,7 +179,7 @@ public class PostViewModel extends ViewModel {
                 && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false));
     }
 
-    public PostViewModel(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    public PostViewModel(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                          SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                          @Nullable SharedPreferences postHistorySharedPreferences, String subredditName, String query,
                          String trendingSource, int postType, SortType sortType, PostFilter postFilter,
@@ -277,7 +277,7 @@ public class PostViewModel extends ViewModel {
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
         private Executor executor;
-        private Retrofit retrofit;
+        private RetrofitHolder retrofit;
         private String accessToken;
         private String accountName;
         private SharedPreferences sharedPreferences;
@@ -292,7 +292,7 @@ public class PostViewModel extends ViewModel {
         private String userWhere;
         private List<String> readPostList;
 
-        public Factory(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+        public Factory(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                        SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                        SharedPreferences postHistorySharedPreferences, int postType, SortType sortType,
                        PostFilter postFilter, List<String> readPostList, String option) {
@@ -310,7 +310,7 @@ public class PostViewModel extends ViewModel {
             this.name = option;
         }
 
-        public Factory(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+        public Factory(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                        SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                        SharedPreferences postHistorySharedPreferences, String name, int postType, SortType sortType,
                        PostFilter postFilter, List<String> readPostList) {
@@ -329,7 +329,7 @@ public class PostViewModel extends ViewModel {
         }
 
         //User posts
-        public Factory(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+        public Factory(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                        SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                        SharedPreferences postHistorySharedPreferences, String username, int postType,
                        SortType sortType, PostFilter postFilter, String where, List<String> readPostList) {
@@ -348,7 +348,7 @@ public class PostViewModel extends ViewModel {
             this.readPostList = readPostList;
         }
 
-        public Factory(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+        public Factory(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                        SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                        SharedPreferences postHistorySharedPreferences, String name, String query, String trendingSource,
                        int postType, SortType sortType, PostFilter postFilter, List<String> readPostList) {
@@ -369,7 +369,7 @@ public class PostViewModel extends ViewModel {
         }
 
         //Anonymous Front Page
-        public Factory(Executor executor, Retrofit retrofit, SharedPreferences sharedPreferences,
+        public Factory(Executor executor, RetrofitHolder retrofit, SharedPreferences sharedPreferences,
                        String concatenatedSubredditNames, int postType, SortType sortType, PostFilter postFilter, String opt) {
             this.executor = executor;
             this.retrofit = retrofit;

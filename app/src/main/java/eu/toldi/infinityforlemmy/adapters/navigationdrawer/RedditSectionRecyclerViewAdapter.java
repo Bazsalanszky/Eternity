@@ -22,7 +22,8 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     private static final int VIEW_TYPE_MENU_GROUP_TITLE = 1;
     private static final int VIEW_TYPE_MENU_ITEM = 2;
-    private static final int REDDIT_SECTION_ITEMS = 1;
+    private static final int REDDIT_SECTION_ITEMS = 2;
+    private final boolean isLoggedIn;
 
     private BaseActivity baseActivity;
     private int primaryTextColor;
@@ -33,13 +34,14 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     public RedditSectionRecyclerViewAdapter(BaseActivity baseActivity, CustomThemeWrapper customThemeWrapper,
                                             SharedPreferences navigationDrawerSharedPreferences,
-                                            NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener itemClickListener) {
+                                            NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener itemClickListener, boolean isLoggedIn) {
         this.baseActivity = baseActivity;
         primaryTextColor = customThemeWrapper.getPrimaryTextColor();
         secondaryTextColor = customThemeWrapper.getSecondaryTextColor();
         primaryIconColor = customThemeWrapper.getPrimaryIconColor();
         collapseRedditSection = navigationDrawerSharedPreferences.getBoolean(SharedPreferencesUtils.COLLAPSE_REDDIT_SECTION, false);
         this.itemClickListener = itemClickListener;
+        this.isLoggedIn = isLoggedIn;
     }
 
     @Override
@@ -88,6 +90,9 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                     stringId = R.string.trending;
                     drawableId = R.drawable.ic_trending_24dp;
                     break;
+                case 2:
+                    stringId = R.string.anonymous_account_instance;
+                    drawableId = R.drawable.ic_account_circle_24dp;
             }
 
             ((MenuItemViewHolder) holder).menuTextView.setText(stringId);
@@ -99,7 +104,7 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemCount() {
-        return collapseRedditSection ? 1 : REDDIT_SECTION_ITEMS + 1;
+        return isLoggedIn ? (REDDIT_SECTION_ITEMS + 1) - 1 : collapseRedditSection ? 1 : REDDIT_SECTION_ITEMS + 1;
     }
 
     class MenuGroupTitleViewHolder extends RecyclerView.ViewHolder {

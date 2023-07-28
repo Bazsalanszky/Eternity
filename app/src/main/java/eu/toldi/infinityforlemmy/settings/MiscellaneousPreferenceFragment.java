@@ -40,6 +40,7 @@ public class MiscellaneousPreferenceFragment extends CustomFontPreferenceFragmen
         ListPreference mainPageBackButtonActionListPreference = findPreference(SharedPreferencesUtils.MAIN_PAGE_BACK_BUTTON_ACTION);
         SwitchPreference savePostFeedScrolledPositionSwitch = findPreference(SharedPreferencesUtils.SAVE_FRONT_PAGE_SCROLLED_POSITION);
         ListPreference languageListPreference = findPreference(SharedPreferencesUtils.LANGUAGE);
+        EditTextPreference anonymousAccountInstance = findPreference(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE);
         EditTextPreference postFeedMaxResolution = findPreference(SharedPreferencesUtils.POST_FEED_MAX_RESOLUTION);
 
         if (mainPageBackButtonActionListPreference != null) {
@@ -61,6 +62,25 @@ public class MiscellaneousPreferenceFragment extends CustomFontPreferenceFragmen
 
         if (languageListPreference != null) {
             languageListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                EventBus.getDefault().post(new RecreateActivityEvent());
+                return true;
+            });
+        }
+
+        if (anonymousAccountInstance != null) {
+            anonymousAccountInstance.setOnPreferenceChangeListener((preference, newValue) -> {
+                String url = (String) newValue;
+                if (url == null || url.equals("")) {
+                    Toast.makeText(activity, R.string.url_cannot_be_null_or_empty, Toast.LENGTH_SHORT).show();
+                    return false;
+
+                }
+
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    Toast.makeText(activity, "The url has to start with https:// or http://", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
                 EventBus.getDefault().post(new RecreateActivityEvent());
                 return true;
             });

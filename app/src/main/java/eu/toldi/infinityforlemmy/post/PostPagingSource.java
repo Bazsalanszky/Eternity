@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import retrofit2.HttpException;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post> {
     public static final int TYPE_FRONT_PAGE = 0;
@@ -43,7 +43,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
     public static final String USER_WHERE_GILDED = "gilded";
 
     private Executor executor;
-    private Retrofit retrofit;
+    private RetrofitHolder retrofit;
     private String accessToken;
     private String accountName;
     private SharedPreferences sharedPreferences;
@@ -61,10 +61,10 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
 
     private int page = 1;
 
-    PostPagingSource(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    PostPagingSource(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                      SharedPreferences sharedPreferences,
                      SharedPreferences postFeedScrolledPositionSharedPreferences, int postType,
-                     SortType sortType, PostFilter postFilter, List<String> readPostList,String option) {
+                     SortType sortType, PostFilter postFilter, List<String> readPostList, String option) {
         this.executor = executor;
         this.retrofit = retrofit;
         this.accessToken = accessToken;
@@ -79,7 +79,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         postLinkedHashSet = new LinkedHashSet<>();
     }
 
-    PostPagingSource(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    PostPagingSource(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                      SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                      String path, int postType, SortType sortType, PostFilter postFilter,
                      List<String> readPostList) {
@@ -117,7 +117,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         postLinkedHashSet = new LinkedHashSet<>();
     }
 
-    PostPagingSource(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    PostPagingSource(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                      SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                      String subredditOrUserName, int postType, SortType sortType, PostFilter postFilter,
                      String where, List<String> readPostList) {
@@ -136,7 +136,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         postLinkedHashSet = new LinkedHashSet<>();
     }
 
-    PostPagingSource(Executor executor, Retrofit retrofit, String accessToken, String accountName,
+    PostPagingSource(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
                      SharedPreferences sharedPreferences, SharedPreferences postFeedScrolledPositionSharedPreferences,
                      String subredditOrUserName, String query, String trendingSource, int postType,
                      SortType sortType, PostFilter postFilter, List<String> readPostList) {
@@ -165,17 +165,21 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
     @NonNull
     @Override
     public ListenableFuture<LoadResult<Integer, Post>> loadFuture(@NonNull LoadParams<Integer> loadParams) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyAPI api = retrofit.getRetrofit().create(LemmyAPI.class);
         switch (postType) {
-            default:
+
             case TYPE_FRONT_PAGE:
                 return loadHomePosts(loadParams, api);
-            case TYPE_SUBREDDIT:
-                return loadSubredditPosts(loadParams, api);
             case TYPE_USER:
                 return loadUserPosts(loadParams, api);
             case TYPE_SEARCH:
                 return loadSearchPosts(loadParams, api);
+            case TYPE_SUBREDDIT:
+                return loadSubredditPosts(loadParams, api);
+            default:
+            case TYPE_ANONYMOUS_FRONT_PAGE:
+                // Return a dummy result
+                return Futures.immediateFuture(new LoadResult.Page<>(new ArrayList<>(), null, null));
           /*  case TYPE_MULTI_REDDIT:
                 return loadMultiRedditPosts(loadParams, api);
             default:
