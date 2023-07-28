@@ -468,7 +468,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
             });
         } else {
             comment.setSaved(true);
-            saveComment.saveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+            saveComment.saveThing(mRetrofit.getRetrofit(), mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                 @Override
                 public void success() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();

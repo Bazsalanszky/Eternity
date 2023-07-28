@@ -1374,7 +1374,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                             });
                 } else {
                     mSaveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                    savePost.saveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
+                    savePost.saveThing(mRetrofit, mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {

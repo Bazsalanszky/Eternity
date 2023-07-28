@@ -141,7 +141,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
     private SharedPreferences mSharedPreferences;
     private SharedPreferences mCurrentAccountSharedPreferences;
     private Executor mExecutor;
-    private Retrofit mOauthRetrofit;
+    private Retrofit retrofit;
     private Retrofit mGfycatRetrofit;
     private Retrofit mRedgifsRetrofit;
     private Provider<StreamableAPI> mStreamableApiProvider;
@@ -237,7 +237,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
             mSharedPreferences = sharedPreferences;
             mCurrentAccountSharedPreferences = currentAccountSharedPreferences;
             mExecutor = executor;
-            mOauthRetrofit = oauthRetrofit;
+            retrofit = oauthRetrofit;
             mGfycatRetrofit = gfycatRetrofit;
             mRedgifsRetrofit = redgifsRetrofit;
             mStreamableApiProvider = streambleApiProvider;
@@ -2327,7 +2327,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -2419,7 +2419,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -2480,7 +2480,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                     SavePost savePost = new SavePost();
                     if (post.isSaved()) {
                         saveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        savePost.unsaveThing(mOauthRetrofit, mAccessToken, post.getId(),
+                        savePost.unsaveThing(retrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -2504,7 +2504,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                 });
                     } else {
                         saveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                        savePost.saveThing(mOauthRetrofit, mAccessToken, post.getId(),
+                        savePost.saveThing(retrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -3653,7 +3653,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -3745,7 +3745,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -3808,7 +3808,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                     SavePost savePost = new SavePost();
                     if (post.isSaved()) {
                         saveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        savePost.unsaveThing(mOauthRetrofit, mAccessToken, post.getId(),
+                        savePost.unsaveThing(retrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -3832,7 +3832,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                 });
                     } else {
                         saveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                        savePost.saveThing(mOauthRetrofit, mAccessToken, post.getId(),
+                        savePost.saveThing(retrofit, mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {

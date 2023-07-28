@@ -77,7 +77,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
         }
     };
     private BaseActivity mActivity;
-    private Retrofit mOauthRetrofit;
+    private Retrofit retrofit;
     private Locale mLocale;
     private Markwon mMarkwon;
     private RecyclerView.RecycledViewPool recycledViewPool;
@@ -110,7 +110,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                                               String accountName, RetryLoadingMoreCallback retryLoadingMoreCallback) {
         super(DIFF_CALLBACK);
         mActivity = activity;
-        mOauthRetrofit = oauthRetrofit;
+        retrofit = oauthRetrofit;
         mCommentColor = customThemeWrapper.getCommentColor();
         int commentSpoilerBackgroundColor = mCommentColor | 0xFF000000;
         mLocale = locale;
@@ -537,7 +537,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             comment.getScore() + comment.getVoteType()));
 
 
-                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -607,7 +607,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             comment.getScore() + comment.getVoteType()));
 
 
-                    VoteThing.votePost(mActivity, mOauthRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -650,7 +650,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                     SaveComment saveComment = new SaveComment();
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        saveComment.unsaveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        saveComment.unsaveThing(retrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
@@ -671,7 +671,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         });
                     } else {
                         comment.setSaved(true);
-                        saveComment.saveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        saveComment.saveThing(retrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(true);
