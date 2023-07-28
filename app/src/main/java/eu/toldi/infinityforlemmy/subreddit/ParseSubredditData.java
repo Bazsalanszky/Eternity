@@ -41,10 +41,18 @@ public class ParseSubredditData {
         }
         int id = community.getInt("id");
         String name = community.getString("name");
-        String description = community.getString("description");
+        String description = "";
+        if (!community.isNull("description")) {
+            description = community.getString("description");
+        }
+
         boolean removed = community.getBoolean("removed");
         String published = community.getString("published");
-        String updated = community.getString("updated");
+        String updated = "";
+        if (!community.isNull("updated")) {
+            updated = community.getString("updated");
+        }
+
         boolean deleted = community.getBoolean("deleted");
 
         String actorId = community.getString("actor_id");
