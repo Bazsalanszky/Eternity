@@ -209,6 +209,7 @@ public class LoginActivity extends BaseActivity {
 
                     try {
                         String errorBody = response.errorBody().string();
+                        Log.e("LoginActivity", "Error body: " + errorBody.trim());
                         JSONObject responseObject = new JSONObject(errorBody.trim());
                         if (responseObject.has("error")) {
                             if (responseObject.getString("error").equals("incorrect_login")) {
@@ -225,7 +226,7 @@ public class LoginActivity extends BaseActivity {
                         Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
                     }
 
-                    Log.e("LoginActivity", "Failed to get access token: " + response.code() + " " + response.message() + " " + response.errorBody());
+                    Log.e("LoginActivity", "Failed to get access token: " + response.code() + " " + response.message());
 
                 }
 
