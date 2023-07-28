@@ -21,11 +21,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.textfield.TextInputEditText;
-import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -158,14 +158,16 @@ public class LoginActivity extends BaseActivity {
                 public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                     progressBar.setVisibility(ProgressBar.GONE);
                     loginButton.setEnabled(true);
-                    String accountResponse = response.body();
-                    if (accountResponse == null) {
-                        Log.e("LoginActivity", "Account response is null");
-                        Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
-                        //Handle error
-                        return;
-                    }
+
+
                     if (response.isSuccessful()) {
+                        String accountResponse = response.body();
+                        if (accountResponse == null) {
+                            Log.e("LoginActivity", "Account response is null");
+                            Toast.makeText(LoginActivity.this, R.string.invalid_response, Toast.LENGTH_SHORT).show();
+                            //Handle error
+                            return;
+                        }
                         try {
                             JSONObject responseJSON = new JSONObject(accountResponse);
                             String accessToken = responseJSON.getString("jwt");
@@ -173,7 +175,7 @@ public class LoginActivity extends BaseActivity {
                             FetchMyInfo.fetchAccountInfo(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, username,
                                     accessToken, new FetchMyInfo.FetchMyInfoListener() {
                                         @Override
-                                        public void onFetchMyInfoSuccess(String name,String display_name, String profileImageUrl, String bannerImageUrl) {
+                                        public void onFetchMyInfoSuccess(String name, String display_name, String profileImageUrl, String bannerImageUrl) {
                                             mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_NAME, display_name)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, name)
@@ -206,14 +208,20 @@ public class LoginActivity extends BaseActivity {
                     }
 
                     try {
-                        JSONObject responseObject = new JSONObject(accountResponse);
-                        if(responseObject.has("error")) {
-                            Toast.makeText(LoginActivity.this, "Error:"+responseObject.getString("error"), Toast.LENGTH_SHORT).show();
-                        }
-                        else {
+                        String errorBody = response.errorBody().string();
+                        JSONObject responseObject = new JSONObject(errorBody.trim());
+                        if (responseObject.has("error")) {
+                            if (responseObject.getString("error").equals("incorrect_login")) {
+                                Toast.makeText(LoginActivity.this, R.string.invalid_username_or_password, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Error:" + responseObject.getString("error"), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
                             Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
+                        Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
                         Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
                     }
 

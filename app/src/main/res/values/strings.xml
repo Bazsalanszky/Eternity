@@ -149,6 +149,8 @@
     <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Cannot fetch community info</string>
     <string name="cannot_fetch_user_info">Cannot fetch user info</string>
+    <string name="invalid_response">Invalid response from the server</string>
+    <string name="invalid_username_or_password">Invalid username or password</string>
     <string name="cannot_fetch_sidebar">Cannot fetch sidebar</string>
     <string name="cannot_fetch_multireddit">Cannot fetch multireddit info</string>
 
