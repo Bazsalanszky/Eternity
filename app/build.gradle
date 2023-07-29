@@ -8,8 +8,8 @@ android {
         applicationId "eu.toldi.infinityforlemmy"
         minSdk 21
         targetSdk 33
-        versionCode 123
-        versionName "0.0.3"
+        versionCode 124
+        versionName "0.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
