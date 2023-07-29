@@ -9,13 +9,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
@@ -278,9 +280,19 @@ public class ParseComment {
         String authorQualifiedName = LemmyUtils.actorID2FullName(creatorObj.getString("actor_id"));
         String linkAuthor = creatorObj.getString("actor_id");
         long commentTimeMillis = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            commentTimeMillis = ZonedDateTime.parse(commentObj.getString("published"),
-                    DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.of("Z"))).toInstant().toEpochMilli();
+
+        String dateStr = commentObj.getString("published");
+
+        dateStr = dateStr.substring(0, dateStr.lastIndexOf(".") + 4) + 'Z';
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date date = sdf.parse(dateStr);
+            if (date != null) {
+                commentTimeMillis = date.getTime();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         String commentMarkdown = commentObj.getString("content");
         String commentRawText = commentObj.getString("content");

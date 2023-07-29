@@ -18,13 +18,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -151,16 +153,27 @@ public class ParsePost {
         String author = creator.getString("name");
         String authorFull = LemmyUtils.actorID2FullName(creator.getString("actor_id"));
         long postTimeMillis = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-           postTimeMillis = ZonedDateTime.parse(post.getString("published"),
-                    DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.of("Z"))).toInstant().toEpochMilli();
+
+        String dateStr = post.getString("published");
+
+        dateStr = dateStr.substring(0, dateStr.lastIndexOf(".") + 4) + 'Z';
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date date = sdf.parse(dateStr);
+            if (date != null) {
+                postTimeMillis = date.getTime();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
         String title = post.getString("name");
         String permalink = post.getString("ap_id");
         int score = counts.getInt("score");
         int voteType = 0;
         int nComments = counts.getInt("comments");
-        int upvoteRatio = 100 * counts.getInt("upvotes") / max(counts.getInt("upvotes") + counts.getInt("downvotes"),1);
+        int upvoteRatio = 100 * counts.getInt("upvotes") / max(counts.getInt("upvotes") + counts.getInt("downvotes"), 1);
         boolean hidden = community.getBoolean("hidden");
         boolean nsfw = post.getBoolean("nsfw");
         boolean locked = post.getBoolean("locked");
