@@ -298,7 +298,7 @@ public class ParseComment {
         String commentRawText = commentObj.getString("content");
         String linkId = postObj.getString("id");
         String communityName = communityObj.getString("name");
-        String communityQualifiedName = communityObj.getString("actor_id");
+        String communityQualifiedName = LemmyUtils.actorID2FullName(communityObj.getString("actor_id"));
 
         int score = countsObj.getInt("score");
         int voteType = (jsonObject.isNull("my_vote")) ? 0 : jsonObject.getInt("my_vote");

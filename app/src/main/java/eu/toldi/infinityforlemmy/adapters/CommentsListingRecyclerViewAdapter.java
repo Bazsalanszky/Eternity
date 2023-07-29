@@ -190,7 +190,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
         if (holder instanceof CommentViewHolder) {
             Comment comment = getItem(holder.getBindingAdapterPosition());
             if (comment != null) {
-                String name = "r/" + comment.getCommunityName();
+                String name = comment.getCommunityQualifiedName();
                 ((CommentViewHolder) holder).authorTextView.setText(name);
                 ((CommentViewHolder) holder).authorTextView.setTextColor(mSubredditColor);
 
