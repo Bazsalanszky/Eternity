@@ -38,12 +38,6 @@ public class PostTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
     TextView linkTypeTextView;
     @BindView(R.id.image_type_linear_layout_post_type_bottom_sheet_fragment)
     TextView imageTypeTextView;
-    @BindView(R.id.video_type_linear_layout_post_type_bottom_sheet_fragment)
-    TextView videoTypeTextView;
-    @BindView(R.id.gallery_type_linear_layout_post_type_bottom_sheet_fragment)
-    TextView galleryTypeTextView;
-    @BindView(R.id.poll_type_linear_layout_post_type_bottom_sheet_fragment)
-    TextView pollTypeTextView;
     private BaseActivity activity;
 
     public PostTypeBottomSheetFragment() {
@@ -76,20 +70,6 @@ public class PostTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             dismiss();
         });
 
-        videoTypeTextView.setOnClickListener(view -> {
-            ((PostTypeSelectionCallback) activity).postTypeSelected(TYPE_VIDEO);
-            dismiss();
-        });
-
-        galleryTypeTextView.setOnClickListener(view -> {
-            ((PostTypeSelectionCallback) activity).postTypeSelected(TYPE_GALLERY);
-            dismiss();
-        });
-
-        pollTypeTextView.setOnClickListener(view -> {
-            ((PostTypeSelectionCallback) activity).postTypeSelected(TYPE_POLL);
-            dismiss();
-        });
 
         if (activity.typeface != null) {
             Utils.setFontToAllTextViews(rootView, activity.typeface);
