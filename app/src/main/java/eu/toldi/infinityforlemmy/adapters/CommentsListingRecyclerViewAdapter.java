@@ -437,6 +437,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 if (comment != null) {
                     Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                     intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, comment.getCommunityName());
+                    intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, comment.getCommunityQualifiedName());
                     mActivity.startActivity(intent);
                 }
             });
@@ -469,7 +470,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 Comment comment = getItem(getBindingAdapterPosition());
                 if (comment != null) {
                     Intent intent = new Intent(mActivity, ViewPostDetailActivity.class);
-                    intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getLinkId());
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
                     intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
                     mActivity.startActivity(intent);
                 }

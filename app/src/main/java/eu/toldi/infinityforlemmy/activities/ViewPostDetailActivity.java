@@ -869,7 +869,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                 if (postListPosition == position && post != null) {
                     bundle.putParcelable(ViewPostDetailFragment.EXTRA_POST_DATA, post);
                     bundle.putInt(ViewPostDetailFragment.EXTRA_POST_LIST_POSITION, position);
-                    bundle.putString(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_ID, getIntent().getStringExtra(EXTRA_SINGLE_COMMENT_ID));
+                    bundle.putInt(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_ID, getIntent().getIntExtra(EXTRA_SINGLE_COMMENT_ID, 0));
                     bundle.putString(ViewPostDetailFragment.EXTRA_CONTEXT_NUMBER, getIntent().getStringExtra(EXTRA_CONTEXT_NUMBER));
                     bundle.putString(ViewPostDetailFragment.EXTRA_MESSAGE_FULLNAME, getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME));
                 } else {
@@ -885,12 +885,12 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                 }
             } else {
                 if (post == null) {
-                    bundle.putString(ViewPostDetailFragment.EXTRA_POST_ID, getIntent().getStringExtra(EXTRA_POST_ID));
+                    bundle.putInt(ViewPostDetailFragment.EXTRA_POST_ID, getIntent().getIntExtra(EXTRA_POST_ID, 0));
                 } else {
                     bundle.putParcelable(ViewPostDetailFragment.EXTRA_POST_DATA, post);
                     bundle.putInt(ViewPostDetailFragment.EXTRA_POST_LIST_POSITION, postListPosition);
                 }
-                bundle.putString(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_ID, getIntent().getStringExtra(EXTRA_SINGLE_COMMENT_ID));
+                bundle.putInt(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_ID, getIntent().getIntExtra(EXTRA_SINGLE_COMMENT_ID, 0));
                 bundle.putString(ViewPostDetailFragment.EXTRA_CONTEXT_NUMBER, getIntent().getStringExtra(EXTRA_CONTEXT_NUMBER));
                 bundle.putString(ViewPostDetailFragment.EXTRA_MESSAGE_FULLNAME, getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME));
             }

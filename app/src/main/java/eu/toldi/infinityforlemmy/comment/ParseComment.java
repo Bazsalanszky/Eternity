@@ -36,7 +36,6 @@ public class ParseComment {
 
                 ArrayList<Comment> expandedNewComments = new ArrayList<>();
                 ArrayList<Integer> moreChildrenIds = new ArrayList<>();
-                ArrayList<Comment> newComments = new ArrayList<>();
 
 
                 Map<Integer, Comment> parsedComments = new HashMap<>();
@@ -51,8 +50,13 @@ public class ParseComment {
                     }
                 }
                 Comment parentComment = (commentId != null) ? parsedComments.get(commentId) : null;
-                if (parentComment != null && parentComment.getDepth() == 0)
-                    parentComment = null;
+                if (parentComment != null) {
+                    if (parentComment.getDepth() == 0) {
+                        parentComment = null;
+                    } else {
+                        expandedNewComments.add(parentComment);
+                    }
+                }
 
                 for (int i = orderedComments.size() - 1; i >= 0; i--) {
                     Comment c = orderedComments.get(i);
@@ -66,9 +70,7 @@ public class ParseComment {
                 }
 
                 //Add all comments to newComments
-                for (int i = 0; i < topLevelComments.size(); i++) {
-                    newComments.add(topLevelComments.get(i));
-                }
+                ArrayList<Comment> newComments = new ArrayList<>(topLevelComments);
 
                 expandChildren(newComments, expandedNewComments, expandChildren);
 
