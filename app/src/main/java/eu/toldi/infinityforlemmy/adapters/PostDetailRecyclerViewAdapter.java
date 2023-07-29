@@ -508,7 +508,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             } else {
                 if (mPost.getSubredditIconUrl() == null) {
                     LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(),
-                            mRedditDataRoomDatabase, mPost.getSubredditNamePrefixed().substring(2),
+                            mRedditDataRoomDatabase, mPost.getSubredditNamePrefixed(),
                             mAccessToken, mOauthRetrofit, mRetrofit, iconImageUrl -> {
                                 if (iconImageUrl == null || iconImageUrl.equals("")) {
                                     mGlide.load(R.drawable.subreddit_default_icon)
