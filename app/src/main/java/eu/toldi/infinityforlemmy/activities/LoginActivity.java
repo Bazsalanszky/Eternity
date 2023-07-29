@@ -139,9 +139,9 @@ public class LoginActivity extends BaseActivity {
             Log.i("LoginActivity", "Login button clicked");
             loginButton.setEnabled(false);
             progressBar.setVisibility(ProgressBar.VISIBLE);
-            String username = username_input.getText().toString();
-            String instance = correctURL(instance_input.getText().toString());
-            if(!Patterns.WEB_URL.matcher(instance).matches()){
+            String username = username_input.getText().toString().trim();
+            String instance = correctURL(instance_input.getText().toString().trim());
+            if (!Patterns.WEB_URL.matcher(instance).matches()) {
                 instance_input.setError("Invalid instance URL");
                 Toast.makeText(LoginActivity.this, "Invalid instance URL", Toast.LENGTH_SHORT).show();
                 loginButton.setEnabled(true);
@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
             Log.i("LoginActivity", "Instance: " + instance);
-            AccountLoginDTO accountLoginDTO = new AccountLoginDTO(username,password_input.getText().toString(),token_2fa_input.getText().toString());
+            AccountLoginDTO accountLoginDTO = new AccountLoginDTO(username, password_input.getText().toString(), token_2fa_input.getText().toString());
             mRetrofit.setBaseURL(instance);
             LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
             Call<String> accessTokenCall = api.userLogin(accountLoginDTO);
