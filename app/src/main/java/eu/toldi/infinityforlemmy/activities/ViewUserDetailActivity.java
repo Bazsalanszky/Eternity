@@ -1154,7 +1154,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         } else if (itemId == R.id.action_share_view_user_detail_activity) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, mRetrofit.getBaseURL() + qualifiedName);
+            String baseURL = mRetrofit.getBaseURL().endsWith("/") ? mRetrofit.getBaseURL() : mRetrofit.getBaseURL() + "/";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + qualifiedName);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             } else {
