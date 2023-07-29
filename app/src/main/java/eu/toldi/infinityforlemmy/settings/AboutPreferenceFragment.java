@@ -36,26 +36,12 @@ public class AboutPreferenceFragment extends CustomFontPreferenceFragmentCompat 
         if (openSourcePreference != null) {
             openSourcePreference.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(activity, LinkResolverActivity.class);
-                intent.setData(Uri.parse("https://github.com/Docile-Alligator/Infinity-For-Reddit"));
+                intent.setData(Uri.parse("https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy"));
                 activity.startActivity(intent);
                 return true;
             });
         }
 
-        if (ratePreference != null) {
-            ratePreference.setOnPreferenceClickListener(preference -> {
-                Intent playStoreIntent = new Intent(Intent.ACTION_VIEW);
-                playStoreIntent.setData(Uri.parse("market://details?id=eu.toldi.infinityforlemmy"));
-                if (playStoreIntent.resolveActivity(activity.getPackageManager()) != null) {
-                    activity.startActivity(playStoreIntent);
-                } else {
-                    Intent intent = new Intent(activity, LinkResolverActivity.class);
-                    intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"));
-                    activity.startActivity(intent);
-                }
-                return true;
-            });
-        }
 
         if (emailPreference != null) {
             emailPreference.setOnPreferenceClickListener(preference -> {
@@ -82,7 +68,7 @@ public class AboutPreferenceFragment extends CustomFontPreferenceFragmentCompat 
         if (subredditPreference != null) {
             subredditPreference.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(activity, LinkResolverActivity.class);
-                intent.setData(Uri.parse("https://www.reddit.com/r/Infinity_For_Reddit"));
+                intent.setData(Uri.parse("https://lemdro.id/c/infinityforlemmy"));
                 activity.startActivity(intent);
                 return true;
             });

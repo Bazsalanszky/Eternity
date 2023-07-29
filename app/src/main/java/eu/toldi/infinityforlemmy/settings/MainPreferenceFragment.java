@@ -6,7 +6,6 @@ import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTI
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.biometric.BiometricManager;
@@ -17,7 +16,6 @@ import javax.inject.Named;
 
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
-import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
 import eu.toldi.infinityforlemmy.activities.PostFilterPreferenceActivity;
 import eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceFragmentCompat;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -48,27 +46,6 @@ public class MainPreferenceFragment extends CustomFontPreferenceFragmentCompat {
         if (postFilterPreference != null) {
             postFilterPreference.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(activity, PostFilterPreferenceActivity.class);
-                activity.startActivity(intent);
-                return true;
-            });
-        }
-
-        if (privacyPolicyPreference != null) {
-            privacyPolicyPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(activity, LinkResolverActivity.class);
-                    intent.setData(Uri.parse("https://docile-alligator.github.io/"));
-                    activity.startActivity(intent);
-                    return true;
-                }
-            });
-        }
-
-        if (redditUserAgreementPreference != null) {
-            redditUserAgreementPreference.setOnPreferenceClickListener(preference -> {
-                Intent intent = new Intent(activity, LinkResolverActivity.class);
-                intent.setData(Uri.parse("https://www.redditinc.com/policies/user-agreement-september-12-2021"));
                 activity.startActivity(intent);
                 return true;
             });

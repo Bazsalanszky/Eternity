@@ -22,11 +22,6 @@
         app:summary="@string/settings_open_source_summary" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
-        android:key="rate"
-        app:title="@string/settings_rate_title"
-        app:summary="@string/settings_rate_summary" />
-
-    <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         android:key="email"
         app:title="@string/settings_email_title"
         app:summary="@string/settings_email_summary" />

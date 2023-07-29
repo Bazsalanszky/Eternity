@@ -468,7 +468,7 @@
     <string name="settings_credits_best_rocket_icon_summary">Icon made by Freepik from www.flaticon.com</string>
     <string name="settings_credits_material_icons_title">Material Icons</string>
     <string name="settings_open_source_title">Open Source</string>
-    <string name="settings_open_source_summary">Star it on Github if you like this app</string>
+    <string name="settings_open_source_summary">Star it on Codeberg if you like this app</string>
     <string name="settings_rate_title">Rate on Google Play</string>
     <string name="settings_rate_summary">Give me a 5-star rating and I will be really happy</string>
     <string name="settings_email_title">Mastodon</string>
@@ -476,7 +476,7 @@
     <string name="settings_reddit_account_title">Lemmy Account</string>
     <string name="settings_reddit_account_summary">\@bazsalanszky@lemmy.toldi.eu</string>
     <string name="settings_community_title">Community</string>
-    <string name="settings_community_summary">r/Infinity_For_Reddit</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">Share</string>
     <string name="settings_share_summary">Share this app to other people if you enjoy it</string>
     <string name="settings_privacy_policy_title">Privacy Policy</string>
