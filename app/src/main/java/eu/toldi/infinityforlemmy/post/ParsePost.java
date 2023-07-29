@@ -514,8 +514,23 @@ public class ParsePost {
                         post.setStreamableShortCode(shortCode);
                     }
                 }
-            } catch (IllegalArgumentException ignore) { }
-        } else if (post.getPostType() == Post.LINK_TYPE || post.getPostType() == Post.NO_PREVIEW_LINK_TYPE) {
+            } catch (IllegalArgumentException ignore) {
+            }
+        } else if (post.getPostType() == Post.TEXT_TYPE) {
+            List<ImageInfo> images = extractImages(post.getSelfText());
+            if (images.size() == 1) {
+                post.setPostType(Post.IMAGE_TYPE);
+                post.setUrl(images.get(0).imageUrl);
+            } else if (images.size() > 1) {
+                post.setPostType(Post.GALLERY_TYPE);
+                ArrayList<Post.Gallery> gallery = new ArrayList<>();
+                for (ImageInfo image : images) {
+                    String[] imagePath = image.getImageUrl().split(Pattern.quote("/"));
+                    gallery.add(new Post.Gallery("image/jpg", image.getImageUrl(), "", imagePath[imagePath.length - 1], image.caption, ""));
+                }
+                post.setGallery(gallery);
+            }
+
             if (!data.isNull(JSONUtils.GALLERY_DATA_KEY)) {
                 JSONArray galleryIdsArray = data.getJSONObject(JSONUtils.GALLERY_DATA_KEY).getJSONArray(JSONUtils.ITEMS_KEY);
                 JSONObject galleryObject = data.getJSONObject(JSONUtils.MEDIA_METADATA_KEY);
@@ -686,5 +701,41 @@ public class ParsePost {
                 urlConnection.disconnect();
             }
         }
+    }
+
+    static class ImageInfo {
+        private String caption;
+        private String imageUrl;
+
+        public ImageInfo(String caption, String imageUrl) {
+            this.caption = caption;
+            this.imageUrl = imageUrl;
+        }
+
+        public String getCaption() {
+            return caption;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+    }
+
+
+    public static List<ImageInfo> extractImages(String markdown) {
+        List<ImageInfo> images = new ArrayList<>();
+
+        // Regular expression to match markdown image syntax ![alt text](image URL)
+        Pattern pattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
+        Matcher matcher = pattern.matcher(markdown);
+
+        // Find all matches and extract image URLs and captions
+        while (matcher.find()) {
+            String caption = matcher.group(1);
+            String imageUrl = matcher.group(2);
+            images.add(new ImageInfo(caption, imageUrl));
+        }
+
+        return images;
     }
 }
