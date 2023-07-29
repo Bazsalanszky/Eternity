@@ -8,7 +8,7 @@ pipeline:
   sign:
     image: alvrme/alpine-android:android-33-jdk11
     commands:
-      - ./scripts/apk-sign.sh LemmInfinity-signed.apk app/build/outputs/apk/release/app-release-unsigned.apk
+      - ./scripts/apk-sign.sh LemmInfinity-signed.apk app/build/outputs/apk/MinifiedRelease/app-MinifiedRelease-unsigned.apk
     secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
     when:
       event: [ tag ]
