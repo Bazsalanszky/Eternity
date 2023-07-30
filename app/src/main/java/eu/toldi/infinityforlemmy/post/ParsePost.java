@@ -31,6 +31,7 @@ import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
@@ -640,17 +641,17 @@ public class ParsePost {
                 }
             }
         }
-        if(data.getBoolean("read")){
+        if (data.getBoolean("read")) {
             post.markAsRead();
         }
-        if(!data.isNull("my_vote")){
+        if (!data.isNull("my_vote")) {
             post.setVoteType(data.getInt("my_vote"));
-            post.setScore(post.getScore()-1);
+            post.setScore(post.getScore() - 1);
         }
 
 
         if (!data.getJSONObject("post").isNull("body")) {
-            String body = data.getJSONObject("post").getString("body");
+            String body = MarkdownUtils.processImageCaptions(data.getJSONObject("post").getString("body"), "Image");
             post.setSelfText(body);
             post.setSelfTextPlain(body);
             post.setSelfTextPlainTrimmed(body.trim());

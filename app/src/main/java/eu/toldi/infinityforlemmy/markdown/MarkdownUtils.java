@@ -8,6 +8,11 @@ import androidx.annotation.Nullable;
 
 import org.commonmark.ext.gfm.tables.TableBlock;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.customviews.CustomMarkwonAdapter;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
@@ -20,8 +25,6 @@ import io.noties.markwon.recycler.MarkwonAdapter;
 import io.noties.markwon.recycler.table.TableEntry;
 import io.noties.markwon.recycler.table.TableEntryPlugin;
 import me.saket.bettermovementmethod.BetterLinkMovementMethod;
-import eu.toldi.infinityforlemmy.R;
-import eu.toldi.infinityforlemmy.customviews.CustomMarkwonAdapter;
 
 public class MarkdownUtils {
     /**
@@ -111,5 +114,40 @@ public class MarkdownUtils {
                         .tableLayout(R.layout.adapter_table_block, R.id.table_layout)
                         .textLayoutIsRoot(R.layout.view_table_entry_cell)))
                 .build();
+    }
+
+    private static final Pattern emptyPattern = Pattern.compile("!\\[\\]\\((.*?)\\)");
+    private static final Pattern nonEmptyPattern = Pattern.compile("!\\[(.*?)\\]\\((.*?)\\)");
+
+    public static String processImageCaptions(String markdown, String replacementCaption) {
+        // Pattern for Markdown images with empty captions
+
+        // Pattern for Markdown images with non-empty captions
+
+
+        Matcher emptyMatcher = emptyPattern.matcher(markdown);
+        StringBuffer sb = new StringBuffer();
+
+        while (emptyMatcher.find()) {
+            // Replace the matched pattern with the same URL, but with a caption
+            emptyMatcher.appendReplacement(sb, "[" + replacementCaption + "](" + emptyMatcher.group(1) + ")");
+        }
+
+        // Append the rest of the content
+        emptyMatcher.appendTail(sb);
+
+        // Now process non-empty captions
+        Matcher nonEmptyMatcher = nonEmptyPattern.matcher(sb.toString());
+        StringBuffer finalSb = new StringBuffer();
+
+        while (nonEmptyMatcher.find()) {
+            // Replace the matched pattern with the same URL and caption, but without the "!"
+            nonEmptyMatcher.appendReplacement(finalSb, "[" + nonEmptyMatcher.group(1) + "](" + nonEmptyMatcher.group(2) + ")");
+        }
+
+        // Append the rest of the content
+        nonEmptyMatcher.appendTail(finalSb);
+
+        return finalSb.toString();
     }
 }
