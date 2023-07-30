@@ -149,17 +149,17 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
 
             if (hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 0) {
                 ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(R.string.all_communities);
-                viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(null, null, false));
+                viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(null));
                 return;
             } else {
                 int offset = hasClearSelectionRow ? 1 : 0;
-
+                SubscribedSubredditData communityData = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset);
                 name = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
                 fullname = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name();
                 iconUrl = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
 
                 if (itemClickListener != null) {
-                    viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, false));
+                    viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(communityData));
                 }
             }
 
@@ -197,11 +197,12 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             } else {
                 offset = 1;
             }
+            SubscribedSubredditData communityData = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset);
             String name = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
             String iconUrl = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
 
             if (itemClickListener != null) {
-                viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, false));
+                viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(communityData));
             } else {
                 viewHolder.itemView.setOnClickListener(view -> {
                     Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
@@ -230,11 +231,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         if (mSubscribedSubredditData != null) {
 
             if (itemClickListener != null) {
-                if (hasClearSelectionRow) {
-                    return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
-                } else {
-                    return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
-                }
+                return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + ((hasClearSelectionRow) ? 1 : 0) : 0;
             }
 
             return mSubscribedSubredditData.size();
@@ -312,7 +309,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
     }
 
     public interface ItemClickListener {
-        void onClick(String name, String iconUrl, boolean subredditIsUser);
+        void onClick(SubscribedSubredditData subredditData);
     }
 
     class SubredditViewHolder extends RecyclerView.ViewHolder {

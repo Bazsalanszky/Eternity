@@ -35,6 +35,7 @@ import eu.toldi.infinityforlemmy.activities.SearchActivity;
 import eu.toldi.infinityforlemmy.activities.SettingsActivity;
 import eu.toldi.infinityforlemmy.activities.SubredditSelectionActivity;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
+import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 
@@ -683,8 +684,8 @@ public class CustomizeMainPageTabsFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK && data != null) {
             switch (requestCode) {
                 case 0:
-                    if (data.hasExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME)) {
-                        tab1CurrentName = data.getStringExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME);
+                    if (data.hasExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA)) {
+                        tab1CurrentName = ((SubscribedSubredditData) data.getParcelableExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA)).getName();
                         tab1NameSummaryTextView.setText(tab1CurrentName);
                         mainActivityTabsSharedPreferences.edit().putString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_NAME, tab1CurrentName).apply();
                     } else if (data.hasExtra(MultiredditSelectionActivity.EXTRA_RETURN_MULTIREDDIT)) {
@@ -701,8 +702,8 @@ public class CustomizeMainPageTabsFragment extends Fragment {
                     }
                     break;
                 case 1:
-                    if (data.hasExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME)) {
-                        tab2CurrentName = data.getStringExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME);
+                    if (data.hasExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA)) {
+                        tab2CurrentName = ((SubscribedSubredditData) data.getParcelableExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA)).getName();
                         tab2NameSummaryTextView.setText(tab2CurrentName);
                         mainActivityTabsSharedPreferences.edit().putString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_NAME, tab2CurrentName).apply();
                     } else if (data.hasExtra(MultiredditSelectionActivity.EXTRA_RETURN_MULTIREDDIT)) {
@@ -719,8 +720,8 @@ public class CustomizeMainPageTabsFragment extends Fragment {
                     }
                     break;
                 case 2:
-                    if (data.hasExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME)) {
-                        tab3CurrentName = data.getStringExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME);
+                    if (data.hasExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA)) {
+                        tab3CurrentName = ((SubscribedSubredditData) data.getParcelableExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA)).getName();
                         tab3NameSummaryTextView.setText(tab3CurrentName);
                         mainActivityTabsSharedPreferences.edit().putString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_3_NAME, tab3CurrentName).apply();
                     } else if (data.hasExtra(MultiredditSelectionActivity.EXTRA_RETURN_MULTIREDDIT)) {

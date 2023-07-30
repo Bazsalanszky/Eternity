@@ -64,6 +64,7 @@ import eu.toldi.infinityforlemmy.events.SubmitCrosspostEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.services.SubmitPostService;
+import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -87,6 +88,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
     private static final String IS_NSFW_STATE = "INS";
 
     private static final int SUBREDDIT_SELECTION_REQUEST_CODE = 0;
+    private static final String COMMUNITY_DATA_STATE = "CDS";
 
     @BindView(R.id.coordinator_layout_submit_crosspost_activity)
     CoordinatorLayout coordinatorLayout;
@@ -159,6 +161,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
     private Post post;
     private String iconUrl;
     private String subredditName;
+    private SubscribedSubredditData communityData;
     private boolean subredditSelected = false;
     private boolean subredditIsUser;
     private boolean loadSubredditIconSuccessful = true;
@@ -212,6 +215,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
 
         if (savedInstanceState != null) {
+            communityData = savedInstanceState.getParcelable(COMMUNITY_DATA_STATE);
             selectedAccount = savedInstanceState.getParcelable(SELECTED_ACCOUNT_STATE);
             subredditName = savedInstanceState.getString(SUBREDDIT_NAME_STATE);
             iconUrl = savedInstanceState.getString(SUBREDDIT_ICON_STATE);
@@ -566,7 +570,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
 
             Intent intent = new Intent(this, SubmitPostService.class);
             intent.putExtra(SubmitPostService.EXTRA_ACCOUNT, selectedAccount);
-            intent.putExtra(SubmitPostService.EXTRA_SUBREDDIT_NAME, subredditName);
+            intent.putExtra(SubmitPostService.EXTRA_SUBREDDIT_NAME, communityData.getId());
             intent.putExtra(SubmitPostService.EXTRA_TITLE, titleEditText.getText().toString());
             if (post.isCrosspost()) {
                 intent.putExtra(SubmitPostService.EXTRA_CONTENT, "t3_" + post.getCrosspostParentId());
@@ -604,6 +608,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(SELECTED_ACCOUNT_STATE, selectedAccount);
+        outState.putParcelable(COMMUNITY_DATA_STATE, communityData);
         outState.putString(SUBREDDIT_NAME_STATE, subredditName);
         outState.putString(SUBREDDIT_ICON_STATE, iconUrl);
         outState.putBoolean(SUBREDDIT_SELECTED_STATE, subredditSelected);
@@ -620,10 +625,11 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SUBREDDIT_SELECTION_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                subredditName = data.getExtras().getString(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME);
-                iconUrl = data.getExtras().getString(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_ICON_URL);
+                communityData = data.getParcelableExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA);
+                subredditName = communityData.getName();
+                iconUrl = communityData.getIconUrl();
                 subredditSelected = true;
-                subredditIsUser = data.getExtras().getBoolean(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_IS_USER);
+                subredditIsUser = false;
 
                 subredditNameTextView.setTextColor(primaryTextColor);
                 subredditNameTextView.setText(subredditName);

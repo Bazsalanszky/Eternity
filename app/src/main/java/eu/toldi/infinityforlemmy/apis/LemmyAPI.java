@@ -10,6 +10,7 @@ import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
+import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -36,6 +37,10 @@ public interface LemmyAPI {
 
     @GET("api/v3/post")
     Call<String> postInfo(@Query("id") Integer postID, @Query("comment_id") Integer comment_id, @Query("auth") String access_token);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/post")
+    Call<String> postCreate(@Body SubmitPostDTO params);
 
     @GET("api/v3/user")
     ListenableFuture<Response<String>> getUserPosts(

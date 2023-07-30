@@ -52,6 +52,7 @@ import eu.toldi.infinityforlemmy.recentsearchquery.RecentSearchQuery;
 import eu.toldi.infinityforlemmy.recentsearchquery.RecentSearchQueryViewModel;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
@@ -128,6 +129,8 @@ public class SearchActivity extends BaseActivity {
     private String query;
     private String subredditName;
 
+    private SubscribedSubredditData communityData;
+
     private String communityQualifiedName;
     private boolean subredditIsUser;
     private boolean searchOnlySubreddits;
@@ -183,7 +186,7 @@ public class SearchActivity extends BaseActivity {
                     subredditNameList.add(subredditData.getName());
                     returnIntent.putStringArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, subredditNameList);
                 } else {
-                    returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, subredditData.getName());
+                    returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, new SubscribedSubredditData(subredditData));
                     returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, subredditData.getIconUrl());
                 }
                 setResult(Activity.RESULT_OK, returnIntent);
@@ -429,8 +432,9 @@ public class SearchActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode == RESULT_OK && data != null) {
             if (requestCode == SUBREDDIT_SELECTION_REQUEST_CODE) {
-                subredditName = data.getStringExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_NAME);
-                subredditIsUser = data.getBooleanExtra(SubredditSelectionActivity.EXTRA_RETURN_SUBREDDIT_IS_USER, false);
+                communityData = data.getParcelableExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA);
+                subredditName = communityData.getName();
+                subredditIsUser = false;
 
                 if (subredditName == null) {
                     subredditNameTextView.setText(R.string.all_communities);
@@ -442,9 +446,9 @@ public class SearchActivity extends BaseActivity {
                 if (getIntent().getBooleanExtra(EXTRA_IS_MULTI_SELECTION, false)) {
                     returnIntent.putStringArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, data.getStringArrayListExtra(SearchSubredditsResultActivity.RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES));
                 } else {
-                    String name = data.getStringExtra(SearchSubredditsResultActivity.EXTRA_RETURN_SUBREDDIT_NAME);
+                    SubscribedSubredditData communityData = data.getParcelableExtra(SearchSubredditsResultActivity.EXTRA_RETURN_SUBREDDIT_NAME);
                     String iconUrl = data.getStringExtra(SearchSubredditsResultActivity.EXTRA_RETURN_SUBREDDIT_ICON_URL);
-                    returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, name);
+                    returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, communityData);
                     returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, iconUrl);
                 }
                 setResult(Activity.RESULT_OK, returnIntent);

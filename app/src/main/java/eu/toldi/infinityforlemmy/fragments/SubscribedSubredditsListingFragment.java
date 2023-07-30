@@ -127,7 +127,7 @@ public class SubscribedSubredditsListingFragment extends Fragment implements Fra
         if (getArguments().getBoolean(EXTRA_IS_SUBREDDIT_SELECTION)) {
             adapter = new SubscribedSubredditsRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRedditDataRoomDatabase,
                     mCustomThemeWrapper, accessToken, getArguments().getBoolean(EXTRA_EXTRA_CLEAR_SELECTION),
-                    (name, iconUrl, subredditIsUser) -> ((SubredditSelectionActivity) mActivity).getSelectedSubreddit(name, iconUrl, subredditIsUser));
+                    (communityData) -> ((SubredditSelectionActivity) mActivity).getSelectedSubreddit(communityData));
         } else {
             adapter = new SubscribedSubredditsRecyclerViewAdapter(mActivity, mExecutor, mOauthRetrofit, mRedditDataRoomDatabase,
                     mCustomThemeWrapper, accessToken);

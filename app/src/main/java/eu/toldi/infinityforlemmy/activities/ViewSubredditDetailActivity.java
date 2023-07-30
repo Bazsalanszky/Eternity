@@ -1279,7 +1279,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         switch (postType) {
             case PostTypeBottomSheetFragment.TYPE_TEXT:
                 intent = new Intent(this, PostTextActivity.class);
-                intent.putExtra(PostTextActivity.EXTRA_SUBREDDIT_NAME, communityName);
+                intent.putExtra(PostTextActivity.EXTRA_SUBREDDIT_NAME, qualifiedName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_LINK:

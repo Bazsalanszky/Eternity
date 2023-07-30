@@ -52,9 +52,7 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
 
     public static final String EXTRA_SPECIFIED_ACCOUNT = "ESA";
     public static final String EXTRA_EXTRA_CLEAR_SELECTION = "EECS";
-    public static final String EXTRA_RETURN_SUBREDDIT_NAME = "ERSN";
-    public static final String EXTRA_RETURN_SUBREDDIT_ICON_URL = "ERSIURL";
-    public static final String EXTRA_RETURN_SUBREDDIT_IS_USER = "ERSIU";
+    public static final String EXTRA_RETURN_COMMUNITY_DATA = "ERCD";
 
     private static final int SUBREDDIT_SEARCH_REQUEST_CODE = 0;
     private static final String INSERT_SUBSCRIBED_SUBREDDIT_STATE = "ISSS";
@@ -248,11 +246,9 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
         return false;
     }
 
-    public void getSelectedSubreddit(String name, String iconUrl, boolean subredditIsUser) {
+    public void getSelectedSubreddit(SubscribedSubredditData communityData) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, name);
-        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, iconUrl);
-        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_IS_USER, subredditIsUser);
+        returnIntent.putExtra(EXTRA_RETURN_COMMUNITY_DATA, communityData);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
@@ -261,13 +257,13 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == SUBREDDIT_SEARCH_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                String name = data.getStringExtra(SearchActivity.EXTRA_RETURN_SUBREDDIT_NAME);
-                String iconUrl = data.getStringExtra(SearchActivity.EXTRA_RETURN_SUBREDDIT_ICON_URL);
+
+                SubscribedSubredditData communityData = data.getParcelableExtra(SearchActivity.EXTRA_RETURN_SUBREDDIT_NAME);
+                String iconUrl = communityData.getIconUrl();
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, name);
-                returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, iconUrl);
-                returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_IS_USER, false);
+                returnIntent.putExtra(EXTRA_RETURN_COMMUNITY_DATA, communityData);
                 setResult(Activity.RESULT_OK, returnIntent);
+
                 finish();
             }
         }

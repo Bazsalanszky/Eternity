@@ -48,6 +48,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditListingViewModel;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 
@@ -149,13 +150,13 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
                     }
 
                     @Override
-                    public void subredditSelected(String subredditName, String communityFullName, String iconUrl) {
+                    public void subredditSelected(SubredditData communityData) {
                         if (isGettingSubredditInfo) {
-                            ((SearchSubredditsResultActivity) mActivity).getSelectedSubreddit(subredditName, iconUrl);
+                            ((SearchSubredditsResultActivity) mActivity).getSelectedSubreddit(communityData);
                         } else {
                             Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
-                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, subredditName);
-                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, communityFullName);
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, communityData.getName());
+                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, LemmyUtils.actorID2FullName(communityData.getActorId()));
                             mActivity.startActivity(intent);
                         }
                     }

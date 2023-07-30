@@ -34,6 +34,8 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.SubredditListingFragment;
+import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class SearchSubredditsResultActivity extends BaseActivity implements ActivityToolbarInterface {
@@ -144,10 +146,10 @@ public class SearchSubredditsResultActivity extends BaseActivity implements Acti
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, null, toolbar);
     }
 
-    public void getSelectedSubreddit(String name, String iconUrl) {
+    public void getSelectedSubreddit(SubredditData subredditData) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, name);
-        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, iconUrl);
+        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, new SubscribedSubredditData(subredditData));
+        returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, subredditData.getIconUrl());
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }

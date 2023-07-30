@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -31,7 +30,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.FetchRules;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
@@ -41,6 +39,8 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.customviews.slidr.widget.SliderPanel;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
+import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
+import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import retrofit2.Retrofit;
 
@@ -134,26 +134,27 @@ public class RulesActivity extends BaseActivity {
 
         mAdapter = new RulesRecyclerViewAdapter(this, mCustomThemeWrapper, sliderPanel);
         recyclerView.setAdapter(mAdapter);
-
-        FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
+        FetchSubredditData.fetchSubredditData(mRetrofit.getRetrofit(), mSubredditName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
             @Override
-            public void success(ArrayList<Rule> rules) {
+            public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 progressBar.setVisibility(View.GONE);
-                if (rules == null || rules.size() == 0) {
+                String description = subredditData.getDescription();
+                if (description == null || description.isEmpty()) {
                     errorTextView.setVisibility(View.VISIBLE);
                     errorTextView.setText(R.string.no_rule);
                     errorTextView.setOnClickListener(view -> {
                     });
                 }
+                ArrayList<Rule> rules = new ArrayList<>();
+                rules.add(new Rule("Rules", description));
                 mAdapter.changeDataset(rules);
             }
 
             @Override
-            public void failed() {
+            public void onFetchSubredditDataFail(boolean isQuarantined) {
                 displayError();
             }
         });
-
     }
 
     @Override
@@ -184,21 +185,24 @@ public class RulesActivity extends BaseActivity {
         errorTextView.setOnClickListener(view -> {
             progressBar.setVisibility(View.VISIBLE);
             errorTextView.setVisibility(View.GONE);
-            FetchRules.fetchRules(mExecutor, new Handler(), mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mAccessToken, mSubredditName, new FetchRules.FetchRulesListener() {
+            FetchSubredditData.fetchSubredditData(mRetrofit.getRetrofit(), mSubredditName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
                 @Override
-                public void success(ArrayList<Rule> rules) {
+                public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                     progressBar.setVisibility(View.GONE);
-                    if (rules == null || rules.size() == 0) {
+                    String description = subredditData.getDescription();
+                    if (description == null || description.isEmpty()) {
                         errorTextView.setVisibility(View.VISIBLE);
                         errorTextView.setText(R.string.no_rule);
                         errorTextView.setOnClickListener(view -> {
                         });
                     }
+                    ArrayList<Rule> rules = new ArrayList<>();
+                    rules.add(new Rule("Rules", description));
                     mAdapter.changeDataset(rules);
                 }
 
                 @Override
-                public void failed() {
+                public void onFetchSubredditDataFail(boolean isQuarantined) {
                     displayError();
                 }
             });

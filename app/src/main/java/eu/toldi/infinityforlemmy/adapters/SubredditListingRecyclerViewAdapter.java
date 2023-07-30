@@ -125,7 +125,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
                     if (isMultiSelection) {
                         ((DataViewHolder) holder).checkBox.performClick();
                     } else {
-                        callback.subredditSelected(subredditData.getName(), LemmyUtils.actorID2FullName(subredditData.getActorId()), subredditData.getIconUrl());
+                        callback.subredditSelected(subredditData);
                     }
                 });
 
@@ -252,7 +252,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
     public interface Callback {
         void retryLoadingMore();
 
-        void subredditSelected(String subredditName, String communityFullName,String iconUrl);
+        void subredditSelected(SubredditData communityData);
     }
 
     class DataViewHolder extends RecyclerView.ViewHolder {
