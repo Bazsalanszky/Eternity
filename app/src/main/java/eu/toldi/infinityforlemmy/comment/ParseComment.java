@@ -11,6 +11,9 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -283,19 +286,23 @@ public class ParseComment {
         String authorQualifiedName = LemmyUtils.actorID2FullName(creatorObj.getString("actor_id"));
         String linkAuthor = creatorObj.getString("actor_id");
         long commentTimeMillis = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            commentTimeMillis = ZonedDateTime.parse(commentObj.getString("published"),
+                    DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneId.of("Z"))).toInstant().toEpochMilli();
+        } else {
+            String dateStr = commentObj.getString("published");
 
-        String dateStr = commentObj.getString("published");
-
-        dateStr = dateStr.substring(0, dateStr.lastIndexOf(".") + 4) + 'Z';
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        try {
-            Date date = sdf.parse(dateStr);
-            if (date != null) {
-                commentTimeMillis = date.getTime();
+            dateStr = dateStr.substring(0, dateStr.lastIndexOf(".") + 4) + 'Z';
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            try {
+                Date date = sdf.parse(dateStr);
+                if (date != null) {
+                    commentTimeMillis = date.getTime();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         String content = MarkdownUtils.processImageCaptions(commentObj.getString("content"), "Image");
         String commentMarkdown = content;
