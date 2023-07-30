@@ -22,7 +22,9 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     private static final int VIEW_TYPE_MENU_GROUP_TITLE = 1;
     private static final int VIEW_TYPE_MENU_ITEM = 2;
-    private static final int REDDIT_SECTION_ITEMS = 2;
+    private static final int REDDIT_SECTION_ITEMS = 1;
+
+    private static final int REDDIT_SECTION_ANONYMOUS_ITEMS = 2;
     private final boolean isLoggedIn;
 
     private BaseActivity baseActivity;
@@ -104,7 +106,7 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemCount() {
-        return isLoggedIn ? (REDDIT_SECTION_ITEMS + 1) - 1 : collapseRedditSection ? 1 : REDDIT_SECTION_ITEMS + 1;
+        return !collapseRedditSection ? (isLoggedIn ? REDDIT_SECTION_ITEMS + 1 : REDDIT_SECTION_ANONYMOUS_ITEMS + 1) : 1;
     }
 
     class MenuGroupTitleViewHolder extends RecyclerView.ViewHolder {
