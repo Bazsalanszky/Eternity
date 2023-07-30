@@ -25,7 +25,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,7 +32,6 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
-import eu.toldi.infinityforlemmy.AnyAccountAccessTokenAuthenticator;
 import eu.toldi.infinityforlemmy.FetchSubscribedThing;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
@@ -49,9 +47,6 @@ import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
-import okhttp3.ConnectionPool;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 public class SubredditSelectionActivity extends BaseActivity implements ActivityToolbarInterface {
 
@@ -76,9 +71,6 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
-    @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -142,21 +134,14 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
                 mAccountName = specifiedAccount.getAccountName();
                 mAccountProfileImageUrl = specifiedAccount.getProfileImageUrl();
 
-                mOauthRetrofit = mOauthRetrofit.newBuilder().client(new OkHttpClient.Builder().authenticator(new AnyAccountAccessTokenAuthenticator(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, specifiedAccount, mCurrentAccountSharedPreferences))
-                        .connectTimeout(30, TimeUnit.SECONDS)
-                        .readTimeout(30, TimeUnit.SECONDS)
-                        .writeTimeout(30, TimeUnit.SECONDS)
-                        .connectionPool(new ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
-                        .build())
-                        .build();
             } else {
                 mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-                mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+                mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
                 mAccountProfileImageUrl = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, null);
             }
         } else {
             mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-            mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+            mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
             mAccountProfileImageUrl = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, null);
         }
 
@@ -198,6 +183,7 @@ public class SubredditSelectionActivity extends BaseActivity implements Activity
             mFragment = new SubscribedSubredditsListingFragment();
             Bundle bundle = new Bundle();
             bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+            bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_QUALIFIED_NAME, mAccountName);
             bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_PROFILE_IMAGE_URL, mAccountProfileImageUrl);
             bundle.putBoolean(SubscribedSubredditsListingFragment.EXTRA_IS_SUBREDDIT_SELECTION, true);

@@ -151,30 +151,8 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(R.string.all_communities);
                 viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(null, null, false));
                 return;
-            } else if (itemClickListener != null && !hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 0) {
-                name = username;
-                iconUrl = userIconUrl;
-                viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, true));
-            } else if (hasClearSelectionRow && viewHolder.getBindingAdapterPosition() == 1) {
-                name = username;
-                iconUrl = userIconUrl;
-                if (itemClickListener != null) {
-                    viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(name, iconUrl, true));
-                }
             } else {
-                int offset;
-                if (itemClickListener != null) {
-                    if (hasClearSelectionRow) {
-                        offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                mFavoriteSubscribedSubredditData.size() + 4 : 2;
-                    } else {
-                        offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                mFavoriteSubscribedSubredditData.size() + 3 : 1;
-                    }
-                } else {
-                    offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                            mFavoriteSubscribedSubredditData.size() + 2 : 0;
-                }
+                int offset = hasClearSelectionRow ? 1 : 0;
 
                 name = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
                 fullname = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name();
@@ -250,23 +228,10 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
     @Override
     public int getItemCount() {
         if (mSubscribedSubredditData != null) {
-            if(mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) {
-                if (itemClickListener != null) {
-                    if (hasClearSelectionRow) {
-                        return mSubscribedSubredditData.size() > 0 ?
-                                mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 4 : 0;
-                    } else {
-                        return mSubscribedSubredditData.size() > 0 ?
-                                mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 3 : 0;
-                    }
-                }
-                return mSubscribedSubredditData.size() > 0 ?
-                        mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 2 : 0;
-            }
 
             if (itemClickListener != null) {
                 if (hasClearSelectionRow) {
-                    return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 2 : 0;
+                    return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
                 } else {
                     return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
                 }
