@@ -67,6 +67,7 @@ import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.PostFragment;
 import eu.toldi.infinityforlemmy.multireddit.DeleteMultiReddit;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
+import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
@@ -131,8 +132,11 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+    @Inject
+    MarkPostAsRead markPostAsRead;
     private String mAccessToken;
     private String mAccountName;
+    private String mAccountQualifiedName;
     private String multiPath;
     private Fragment mFragment;
     private int fabOption;
@@ -221,6 +225,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
 
         if (savedInstanceState != null) {
@@ -868,7 +873,17 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
 
     @Override
     public void markPostAsRead(Post post) {
-        InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountName, post.getId());
+        markPostAsRead.markPostAsRead(post.getId(), mAccessToken, new MarkPostAsRead.MarkPostAsReadListener() {
+            @Override
+            public void onMarkPostAsReadSuccess() {
+                InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountQualifiedName, post.getId());
+            }
+
+            @Override
+            public void onMarkPostAsReadFailed() {
+                Toast.makeText(ViewMultiRedditDetailActivity.this, R.string.mark_post_as_read_failed, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

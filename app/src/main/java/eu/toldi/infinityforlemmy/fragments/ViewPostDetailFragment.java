@@ -107,6 +107,7 @@ import eu.toldi.infinityforlemmy.message.ReadMessage;
 import eu.toldi.infinityforlemmy.post.FetchPost;
 import eu.toldi.infinityforlemmy.post.FetchRemovedPost;
 import eu.toldi.infinityforlemmy.post.HidePost;
+import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
@@ -190,6 +191,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     ExoCreator mExoCreator;
     @Inject
     Executor mExecutor;
+    @Inject
+    MarkPostAsRead markPostAsRead;
     @State
     Post mPost;
     @State
@@ -225,6 +228,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     private Menu mMenu;
     private String mAccessToken;
     private String mAccountName;
+    private String mAccountQualifiedName;
     private int postListPosition = -1;
     private Integer mSingleCommentId;
     private String mContextNumber;
@@ -277,6 +281,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         mSavedIcon = getMenuItemIcon(R.drawable.ic_bookmark_toolbar_24dp);
         mUnsavedIcon = getMenuItemIcon(R.drawable.ic_bookmark_border_toolbar_24dp);
@@ -307,7 +312,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         mLockFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_JUMP_TO_NEXT_TOP_LEVEL_COMMENT_BUTTON, false);
         mSwipeUpToHideFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.SWIPE_UP_TO_HIDE_JUMP_TO_NEXT_TOP_LEVEL_COMMENT_BUTTON, false);
         mExpandChildren = !mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_TOP_LEVEL_COMMENTS_FIRST, false);
-        mMarkPostsAsRead = mPostHistorySharedPreferences.getBoolean(mAccountName + SharedPreferencesUtils.MARK_POSTS_AS_READ_BASE, false);
+        mMarkPostsAsRead = mPostHistorySharedPreferences.getBoolean(mAccountQualifiedName + SharedPreferencesUtils.MARK_POSTS_AS_READ_BASE, false);
         if (savedInstanceState == null) {
             mRespectSubredditRecommendedSortType = mSharedPreferences.getBoolean(SharedPreferencesUtils.RESPECT_SUBREDDIT_RECOMMENDED_COMMENT_SORT_TYPE, false);
             viewPostDetailFragmentId = System.currentTimeMillis();
@@ -1166,8 +1171,18 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     private void tryMarkingPostAsRead() {
         if (mMarkPostsAsRead && mPost != null && !mPost.isRead()) {
             mPost.markAsRead();
-            InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountName, mPost.getId());
-            EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition));
+            markPostAsRead.markPostAsRead(mPost.getId(), mAccessToken, new MarkPostAsRead.MarkPostAsReadListener() {
+                @Override
+                public void onMarkPostAsReadSuccess() {
+                    InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountQualifiedName, mPost.getId());
+                    EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition));
+                }
+
+                @Override
+                public void onMarkPostAsReadFailed() {
+                    Toast.makeText(activity, R.string.mark_post_as_read_failed, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

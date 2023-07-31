@@ -82,7 +82,6 @@ import eu.toldi.infinityforlemmy.fragments.ViewImgurVideoFragment;
 import eu.toldi.infinityforlemmy.fragments.ViewPostDetailFragment;
 import eu.toldi.infinityforlemmy.fragments.ViewRedditGalleryImageOrGifFragment;
 import eu.toldi.infinityforlemmy.fragments.ViewRedditGalleryVideoFragment;
-import eu.toldi.infinityforlemmy.post.ObjectResolver;
 import eu.toldi.infinityforlemmy.services.DownloadMediaService;
 import eu.toldi.infinityforlemmy.services.DownloadRedditVideoService;
 import eu.toldi.infinityforlemmy.services.EditProfileService;
@@ -307,8 +306,6 @@ public interface AppComponent {
     void inject(HistoryActivity historyActivity);
 
     void inject(MorePostsInfoFragment morePostsInfoFragment);
-
-    void inject(ObjectResolver mObjectResolver);
 
 
     @Component.Factory

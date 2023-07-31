@@ -8,6 +8,7 @@ import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
+import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
@@ -97,6 +98,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @PUT("api/v3/post/save")
     Call<String> postSave(@Body SavePostDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/post/mark_as_read")
+    Call<String> postRead(@Body ReadPostDTO params);
 
     @Headers("Content-Type: application/json")
     @PUT("api/v3/comment/save")

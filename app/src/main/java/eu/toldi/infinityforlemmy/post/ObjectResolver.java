@@ -5,9 +5,6 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.comment.Comment;
@@ -18,9 +15,11 @@ import retrofit2.Response;
 
 public class ObjectResolver {
 
-    @Inject
-    @Named("no_oauth")
     RetrofitHolder retrofitHolder;
+
+    public ObjectResolver(RetrofitHolder retrofitHolder) {
+        this.retrofitHolder = retrofitHolder;
+    }
 
     public void resolvePost(String query, String auth, ObjectResolverListener objectResolverListener) {
         LemmyAPI lemmyAPI = retrofitHolder.getRetrofit().create(LemmyAPI.class);

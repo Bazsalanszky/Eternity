@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ import eu.toldi.infinityforlemmy.events.ChangeNSFWEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.CommentsListingFragment;
 import eu.toldi.infinityforlemmy.fragments.PostFragment;
+import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
@@ -64,10 +66,15 @@ public class AccountSavedThingActivity extends BaseActivity implements ActivityT
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+
+    @Inject
+    MarkPostAsRead markPostAsRead;
     private FragmentManager fragmentManager;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private String mAccessToken;
     private String mAccountName;
+
+    private String mAccountQualifiedName;
     private PostLayoutBottomSheetFragment postLayoutBottomSheetFragment;
     private ActivityAccountSavedThingBinding binding;
 
@@ -116,6 +123,7 @@ public class AccountSavedThingActivity extends BaseActivity implements ActivityT
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         initializeViewPager();
     }
@@ -249,7 +257,17 @@ public class AccountSavedThingActivity extends BaseActivity implements ActivityT
 
     @Override
     public void markPostAsRead(Post post) {
-        InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountName, post.getId());
+        markPostAsRead.markPostAsRead(post.getId(), mAccessToken, new MarkPostAsRead.MarkPostAsReadListener() {
+            @Override
+            public void onMarkPostAsReadSuccess() {
+                InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountQualifiedName, post.getId());
+            }
+
+            @Override
+            public void onMarkPostAsReadFailed() {
+                Toast.makeText(AccountSavedThingActivity.this, R.string.mark_post_as_read_failed, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private class SectionsPagerAdapter extends FragmentStateAdapter {

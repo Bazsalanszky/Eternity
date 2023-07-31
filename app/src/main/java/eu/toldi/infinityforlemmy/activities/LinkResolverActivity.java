@@ -197,7 +197,6 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                                 startActivity(intent);
                             } else {
-                                ((Infinity) getApplication()).getAppComponent().inject(mObjectResolver);
                                 mObjectResolver.resolvePost(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
                                     @Override
                                     public void onResolveObjectSuccess(Object p) {
@@ -238,7 +237,6 @@ public class LinkResolverActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                ((Infinity) getApplication()).getAppComponent().inject(mObjectResolver);
                                 mObjectResolver.resolveComment(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
                                     @Override
                                     public void onResolveObjectSuccess(Object c) {

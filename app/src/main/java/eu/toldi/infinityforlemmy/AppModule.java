@@ -22,6 +22,7 @@ import dagger.Module;
 import dagger.Provides;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LoopAvailableExoCreator;
+import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.ObjectResolver;
 import eu.toldi.infinityforlemmy.utils.CustomThemeSharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -206,7 +207,13 @@ abstract class AppModule {
 
     @Provides
     @Singleton
-    static ObjectResolver provideObjectResolver() {
-        return new ObjectResolver();
+    static ObjectResolver provideObjectResolver(@Named("no_oauth") RetrofitHolder retrofitHolder) {
+        return new ObjectResolver(retrofitHolder);
+    }
+
+    @Provides
+    @Singleton
+    static MarkPostAsRead provideMarkPostAsRead(@Named("no_oauth") RetrofitHolder retrofitHolder) {
+        return new MarkPostAsRead(retrofitHolder);
     }
 }

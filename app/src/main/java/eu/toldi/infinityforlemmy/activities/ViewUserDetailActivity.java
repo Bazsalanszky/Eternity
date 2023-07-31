@@ -95,6 +95,7 @@ import eu.toldi.infinityforlemmy.fragments.PostFragment;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.message.ReadMessage;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
+import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
@@ -202,6 +203,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+
+    @Inject
+    MarkPostAsRead markPostAsRead;
     public UserViewModel userViewModel;
     private FragmentManager fragmentManager;
     private SectionsPagerAdapter sectionsPagerAdapter;
@@ -210,6 +214,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private Call<String> subredditAutocompleteCall;
     private String mAccessToken;
     private String mAccountName;
+    private String mAccountQualifiedName;
     private String username;
     private String qualifiedName;
     private String description;
@@ -272,6 +277,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
 
 
@@ -1550,7 +1556,17 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
     @Override
     public void markPostAsRead(Post post) {
-        InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountName, post.getId());
+        markPostAsRead.markPostAsRead(post.getId(), mAccessToken, new MarkPostAsRead.MarkPostAsReadListener() {
+            @Override
+            public void onMarkPostAsReadSuccess() {
+                InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountQualifiedName, post.getId());
+            }
+
+            @Override
+            public void onMarkPostAsReadFailed() {
+                Toast.makeText(ViewUserDetailActivity.this, R.string.mark_post_as_read_failed, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

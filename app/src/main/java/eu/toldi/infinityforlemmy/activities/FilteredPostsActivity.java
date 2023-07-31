@@ -103,6 +103,8 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
     public SubredditViewModel mSubredditViewModel;
     private String mAccessToken;
     private String mAccountName;
+
+    private String mAccountQualifiedName;
     private String name;
     private String userWhere;
     private int postType;
@@ -158,6 +160,7 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         name = getIntent().getStringExtra(EXTRA_NAME);
         postType = getIntent().getIntExtra(EXTRA_POST_TYPE, PostPagingSource.TYPE_FRONT_PAGE);
 
@@ -470,7 +473,7 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
 
     @Override
     public void markPostAsRead(Post post) {
-        InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountName, post.getId());
+        InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountQualifiedName, post.getId());
     }
 
     @Override

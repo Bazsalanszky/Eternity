@@ -93,6 +93,7 @@ import eu.toldi.infinityforlemmy.fragments.SidebarFragment;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.message.ReadMessage;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
+import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
@@ -196,6 +197,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+    @Inject
+    MarkPostAsRead markPostAsRead;
+
     private FragmentManager fragmentManager;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private NavigationWrapper navigationWrapper;
@@ -1562,7 +1566,18 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
     @Override
     public void markPostAsRead(Post post) {
-        InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountName, post.getId());
+        markPostAsRead.markPostAsRead(post.getId(), mAccessToken, new MarkPostAsRead.MarkPostAsReadListener() {
+            @Override
+            public void onMarkPostAsReadSuccess() {
+                InsertReadPost.insertReadPost(mRedditDataRoomDatabase, mExecutor, mAccountQualifiedName, post.getId());
+            }
+
+            @Override
+            public void onMarkPostAsReadFailed() {
+                Toast.makeText(ViewSubredditDetailActivity.this, R.string.mark_post_as_read_failed, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
