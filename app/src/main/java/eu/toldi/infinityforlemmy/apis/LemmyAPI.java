@@ -159,4 +159,10 @@ public interface LemmyAPI {
             @Header("Cookie") String token,
             @Part MultipartBody.Part filePart
     );
+
+    @GET("api/v3/resolve_object")
+    Call<String> resolveObject(
+            @Query("q") String query,
+            @Query("auth") String auth
+    );
 }

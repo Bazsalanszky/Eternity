@@ -1258,7 +1258,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 mPostDetailsSharedPreferences, mExoCreator,
                                 post1 -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
                         mSwipeRefreshLayout.setRefreshing(false);
-                        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, subredditId, mSingleCommentId, sortType, mExpandChildren, 1, new FetchComment.FetchCommentListener() {
+                        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, post.getId(), mSingleCommentId == 0 ? null : mSingleCommentId, sortType, mExpandChildren, 1, new FetchComment.FetchCommentListener() {
                             @Override
                             public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
                                 pages_loaded++;

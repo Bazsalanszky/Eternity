@@ -1341,4 +1341,5 @@
     <string name="sort_time_9months">9 Months</string>
     <string name="anonymous_account_instance">Anonymous Account Instance</string>
     <string name="url_cannot_be_null_or_empty">URL cannot be null or empty</string>
+    <string name="could_not_resolve_link">Could not resolve URL :(</string>
 </resources>

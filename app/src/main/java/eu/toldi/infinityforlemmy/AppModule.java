@@ -22,6 +22,7 @@ import dagger.Module;
 import dagger.Provides;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LoopAvailableExoCreator;
+import eu.toldi.infinityforlemmy.post.ObjectResolver;
 import eu.toldi.infinityforlemmy.utils.CustomThemeSharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.videoautoplay.Config;
@@ -192,8 +193,8 @@ abstract class AppModule {
     @Provides
     @Singleton
     static ExoCreator provideExoCreator(Config config,
-                                 ToroExo toroExo,
-                                 @Named("default") SharedPreferences sharedPreferences) {
+                                        ToroExo toroExo,
+                                        @Named("default") SharedPreferences sharedPreferences) {
         return new LoopAvailableExoCreator(toroExo, config, sharedPreferences);
     }
 
@@ -201,5 +202,11 @@ abstract class AppModule {
     @Singleton
     static Executor provideExecutor() {
         return Executors.newFixedThreadPool(4);
+    }
+
+    @Provides
+    @Singleton
+    static ObjectResolver provideObjectResolver() {
+        return new ObjectResolver();
     }
 }

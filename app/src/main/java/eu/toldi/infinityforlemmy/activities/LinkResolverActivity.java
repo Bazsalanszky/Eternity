@@ -25,7 +25,10 @@ import javax.inject.Named;
 
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.post.ObjectResolver;
+import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
@@ -35,8 +38,7 @@ public class LinkResolverActivity extends AppCompatActivity {
     public static final String EXTRA_NEW_ACCOUNT_NAME = "ENAN";
     public static final String EXTRA_IS_NSFW = "EIN";
 
-    private static final String POST_PATTERN = "/r/[\\w-]+/comments/\\w+/?\\w+/?";
-    private static final String POST_PATTERN_2 = "/(u|U|user)/[\\w-]+/comments/\\w+/?\\w+/?";
+    private static final String POST_PATTERN = "https?:\\/\\/\\S+\\/post\\/\\d+";
     private static final String POST_PATTERN_3 = "/[\\w-]+$";
     private static final String COMMENT_PATTERN = "/(r|u|U|user)/[\\w-]+/comments/\\w+/?[\\w-]+/\\w+/?";
     private static final String SUBREDDIT_PATTERN = "(?:https?://[\\w.-]+)?/c/[\\w-]+(@[\\w.-]+)?";
@@ -60,6 +62,19 @@ public class LinkResolverActivity extends AppCompatActivity {
     @Inject
     CustomThemeWrapper mCustomThemeWrapper;
 
+    @Inject
+    ObjectResolver mObjectResolver;
+
+    @Inject
+    @Named("current_account")
+    SharedPreferences mCurrentAccountSharedPreferences;
+
+    @Inject
+    @Named("no_oauth")
+    RetrofitHolder mRetrofit;
+
+    private String mAccessToken;
+
     private Uri getRedditUriByPath(String path) {
         if (path.charAt(0) != '/') {
             return Uri.parse("https://www.reddit.com/" + path);
@@ -73,6 +88,7 @@ public class LinkResolverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ((Infinity) getApplication()).getAppComponent().inject(this);
+        mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
 
         Uri uri = getIntent().getData();
         if (uri == null) {
@@ -169,6 +185,35 @@ public class LinkResolverActivity extends AppCompatActivity {
                             intent.putExtra(ViewUserDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
                             intent.putExtra(ViewUserDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                             startActivity(intent);
+                        } else if (uri.toString().matches(POST_PATTERN)) {
+                            if (mAccessToken == null) {
+                                // switch retrofit to use the current instance for anonymous requests
+                                mRetrofit.setBaseURL(uri.getScheme() + "://" + uri.getHost() + "/");
+                                Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                                intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, Integer.parseInt(segments.get(segments.size() - 1)));
+                                intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                                intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
+                                startActivity(intent);
+                            } else {
+                                ((Infinity) getApplication()).getAppComponent().inject(mObjectResolver);
+                                mObjectResolver.resolvePost(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
+                                    @Override
+                                    public void onResolveObjectSuccess(Object p) {
+                                        Post post = (Post) p;
+                                        Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, post.getId());
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onResolveObjectFailed() {
+                                        Toast.makeText(LinkResolverActivity.this, R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            }
                         } else if (authority.equals("v.redd.it")) {
                             Intent intent = new Intent(this, ViewVideoActivity.class);
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_V_REDD_IT);
@@ -187,17 +232,6 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 startActivity(intent);
                             } else if (path.equals("/report")) {
                                 openInWebView(uri);
-                            } else if (path.matches(POST_PATTERN) || path.matches(POST_PATTERN_2)) {
-                                int commentsIndex = segments.lastIndexOf("comments");
-                                if (commentsIndex >= 0 && commentsIndex < segments.size() - 1) {
-                                    Intent intent = new Intent(this, ViewPostDetailActivity.class);
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, segments.get(commentsIndex + 1));
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                    startActivity(intent);
-                                } else {
-                                    deepLinkError(uri);
-                                }
                             } else if (path.matches(POST_PATTERN_3)) {
                                 Intent intent = new Intent(this, ViewPostDetailActivity.class);
                                 intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, path.substring(1));
