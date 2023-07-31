@@ -64,7 +64,9 @@ public class SubmitPostService extends Service {
     public static final String EXTRA_ACCOUNT = "EA";
     public static final String EXTRA_SUBREDDIT_NAME = "ESN";
     public static final String EXTRA_TITLE = "ET";
-    public static final String EXTRA_CONTENT = "EC";
+    public static final String EXTRA_BODY = "EC";
+
+    public static final String EXTRA_URL = "EU";
     public static final String EXTRA_REDDIT_GALLERY_PAYLOAD = "ERGP";
     public static final String EXTRA_POLL_PAYLOAD = "EPP";
     public static final String EXTRA_KIND = "EK";
@@ -129,20 +131,20 @@ public class SubmitPostService extends Service {
             boolean isNSFW = bundle.getBoolean(EXTRA_IS_NSFW, false);
             boolean receivePostReplyNotifications = bundle.getBoolean(EXTRA_RECEIVE_POST_REPLY_NOTIFICATIONS, true);
             int postType = bundle.getInt(EXTRA_POST_TYPE, EXTRA_POST_TEXT_OR_LINK);
-
+            String body = bundle.getString(EXTRA_BODY);
+            String url = bundle.getString(EXTRA_URL);
 
             if (postType == EXTRA_POST_TEXT_OR_LINK) {
-                String content = bundle.getString(EXTRA_CONTENT);
+
                 String kind = bundle.getString(EXTRA_KIND);
-                submitTextOrLinkPost(mRetrofit.getRetrofit(), account, subredditName, title, content, flair, isSpoiler, isNSFW,
+                submitTextOrLinkPost(mRetrofit.getRetrofit(), account, subredditName, title, body, url, flair, isSpoiler, isNSFW,
                         receivePostReplyNotifications, kind);
             } else if (postType == EXTRA_POST_TYPE_CROSSPOST) {
-                String content = bundle.getString(EXTRA_CONTENT);
-                submitCrosspost(mExecutor, handler, mRetrofit.getRetrofit(), account, subredditName, title, content,
+                submitCrosspost(mExecutor, handler, mRetrofit.getRetrofit(), account, subredditName, title, body,
                         flair, isSpoiler, isNSFW, receivePostReplyNotifications);
             } else if (postType == EXTRA_POST_TYPE_IMAGE) {
                 Uri mediaUri = Uri.parse(bundle.getString(EXTRA_MEDIA_URI));
-                submitImagePost(mRetrofit, account, mediaUri, subredditName, title, flair, isSpoiler, isNSFW,
+                submitImagePost(mRetrofit, account, mediaUri, subredditName, title, body, flair, isSpoiler, isNSFW,
                         receivePostReplyNotifications);
             } else if (postType == EXTRA_POST_TYPE_GALLERY) {
                 submitGalleryPost(mRetrofit.getRetrofit(), account, bundle.getString(EXTRA_REDDIT_GALLERY_PAYLOAD));
@@ -214,11 +216,11 @@ public class SubmitPostService extends Service {
                 .build();
     }
 
-    private void submitTextOrLinkPost(Retrofit newAuthenticatorOauthRetrofit, Account selectedAccount, int communityId, String title, String content,
+    private void submitTextOrLinkPost(Retrofit newAuthenticatorOauthRetrofit, Account selectedAccount, int communityId, String title, String body, String url,
                                       Flair flair, boolean isSpoiler, boolean isNSFW, boolean receivePostReplyNotifications,
                                       String kind) {
         SubmitPost.submitTextOrLinkPost(mExecutor, handler, newAuthenticatorOauthRetrofit, selectedAccount.getAccessToken(),
-                communityId, title, content, flair, isSpoiler,
+                communityId, title, body, url, flair, isSpoiler,
                 isNSFW, receivePostReplyNotifications, kind, new SubmitPost.SubmitPostListener() {
                     @Override
                     public void submitSuccessful(Post post) {
@@ -259,12 +261,12 @@ public class SubmitPostService extends Service {
                 });
     }
 
-    private void submitImagePost(RetrofitHolder newAuthenticatorOauthRetrofit, Account selectedAccount, Uri mediaUri, int communityId, String title,
+    private void submitImagePost(RetrofitHolder newAuthenticatorOauthRetrofit, Account selectedAccount, Uri mediaUri, int communityId, String title, String body,
                                  Flair flair, boolean isSpoiler, boolean isNSFW, boolean receivePostReplyNotifications) {
         try {
             Bitmap resource = Glide.with(this).asBitmap().load(mediaUri).submit().get();
             SubmitPost.submitImagePost(mExecutor, handler, newAuthenticatorOauthRetrofit,
-                    selectedAccount.getAccessToken(), communityId, title, resource, flair, isSpoiler, isNSFW, receivePostReplyNotifications,
+                    selectedAccount.getAccessToken(), communityId, title, body, resource, flair, isSpoiler, isNSFW, receivePostReplyNotifications,
                     new SubmitPost.SubmitPostListener() {
                         @Override
                         public void submitSuccessful(Post post) {

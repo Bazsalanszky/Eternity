@@ -573,9 +573,9 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             intent.putExtra(SubmitPostService.EXTRA_SUBREDDIT_NAME, communityData.getId());
             intent.putExtra(SubmitPostService.EXTRA_TITLE, titleEditText.getText().toString());
             if (post.isCrosspost()) {
-                intent.putExtra(SubmitPostService.EXTRA_CONTENT, "t3_" + post.getCrosspostParentId());
+                intent.putExtra(SubmitPostService.EXTRA_BODY, "t3_" + post.getCrosspostParentId());
             } else {
-                intent.putExtra(SubmitPostService.EXTRA_CONTENT, post.getFullName());
+                intent.putExtra(SubmitPostService.EXTRA_BODY, post.getFullName());
             }
             intent.putExtra(SubmitPostService.EXTRA_KIND, APIUtils.KIND_CROSSPOST);
             intent.putExtra(SubmitPostService.EXTRA_FLAIR, flair);

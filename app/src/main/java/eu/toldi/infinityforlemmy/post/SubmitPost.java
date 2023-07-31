@@ -23,23 +23,23 @@ import retrofit2.Retrofit;
 
 public class SubmitPost {
     public static void submitTextOrLinkPost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,
-                                            int communityId, String title, String content,
+                                            int communityId, String title, String body, String url,
                                             Flair flair, boolean isSpoiler, boolean isNSFW,
                                             boolean receivePostReplyNotifications, String kind,
                                             SubmitPostListener submitPostListener) {
-        submitPost(executor, handler, oauthRetrofit, accessToken, communityId, title, content,
-                flair, isSpoiler, isNSFW, receivePostReplyNotifications, kind, null, submitPostListener);
+        submitPost(executor, handler, oauthRetrofit, accessToken, communityId, title, body,
+                isNSFW, receivePostReplyNotifications, kind, url, submitPostListener);
     }
 
     public static void submitImagePost(Executor executor, Handler handler, RetrofitHolder mRetrofit,
-                                       String accessToken, int communityId, String title, Bitmap image,
+                                       String accessToken, int communityId, String title, String body, Bitmap image,
                                        Flair flair, boolean isSpoiler, boolean isNSFW,
                                        boolean receivePostReplyNotifications, SubmitPostListener submitPostListener) {
         try {
             String imageUrlOrError = UploadImageUtils.uploadImage(mRetrofit, accessToken, image);
             if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {
                 submitPost(executor, handler, mRetrofit.getRetrofit(), accessToken,
-                        communityId, title, null, flair, isSpoiler, isNSFW,
+                        communityId, title, body, isNSFW,
                         receivePostReplyNotifications, APIUtils.KIND_IMAGE, imageUrlOrError, submitPostListener);
             } else {
                 submitPostListener.submitFailed(imageUrlOrError);
@@ -56,12 +56,12 @@ public class SubmitPost {
                                        boolean receivePostReplyNotifications, String kind,
                                        SubmitPostListener submitPostListener) {
         submitPost(executor, handler, oauthRetrofit, accessToken, communityId, title, crosspostFullname,
-                flair, isSpoiler, isNSFW, receivePostReplyNotifications, kind, null, submitPostListener);
+                isNSFW, receivePostReplyNotifications, kind, null, submitPostListener);
     }
 
     private static void submitPost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,
                                    int communityId, String title, String content,
-                                   Flair flair, boolean isSpoiler, boolean isNSFW,
+                                   boolean isNSFW,
                                    boolean receivePostReplyNotifications, String kind,
                                    @Nullable String posterUrl, SubmitPostListener submitPostListener) {
         LemmyAPI api = oauthRetrofit.create(LemmyAPI.class);

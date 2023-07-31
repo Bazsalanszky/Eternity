@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -43,6 +46,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -55,11 +59,16 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
+import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.account.Account;
+import eu.toldi.infinityforlemmy.adapters.MarkdownBottomBarRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.asynctasks.LoadSubredditIcon;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.AccountChooserBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FlairBottomSheetFragment;
+import eu.toldi.infinityforlemmy.bottomsheetfragments.UploadedImagesBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.events.SubmitImagePostEvent;
 import eu.toldi.infinityforlemmy.events.SubmitVideoOrGifPostEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
@@ -68,12 +77,13 @@ import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import eu.toldi.infinityforlemmy.utils.Utils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
 public class PostImageActivity extends BaseActivity implements FlairBottomSheetFragment.FlairSelectionCallback,
-        AccountChooserBottomSheetFragment.AccountChooserListener {
+        UploadImageEnabledActivity, AccountChooserBottomSheetFragment.AccountChooserListener {
 
     static final String EXTRA_SUBREDDIT_NAME = "ESN";
 
@@ -92,6 +102,9 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
     private static final int SUBREDDIT_SELECTION_REQUEST_CODE = 0;
     private static final int PICK_IMAGE_REQUEST_CODE = 1;
     private static final int CAPTURE_IMAGE_REQUEST_CODE = 2;
+
+    private static final int PICK_IMAGE_REQUEST_CODE_2 = 100;
+    private static final int CAPTURE_IMAGE_REQUEST_CODE_2 = 200;
     private static final String COMMUNITY_DATA_STATE = "CDS";
 
     @BindView(R.id.coordinator_layout_post_image_activity)
@@ -153,6 +166,11 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
     @Inject
     @Named("current_account")
     SharedPreferences mCurrentAccountSharedPreferences;
+
+    @BindView(R.id.post_text_content_edit_text_post_text_activity)
+    EditText contentEditText;
+    @BindView(R.id.markdown_bottom_bar_recycler_view_post_text_activity)
+    RecyclerView markdownBottomBarRecyclerView;
     @Inject
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
@@ -183,6 +201,9 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
     private RequestManager mGlide;
     private FlairBottomSheetFragment flairSelectionBottomSheetFragment;
     private Snackbar mPostingSnackbar;
+
+    private Uri capturedImageUri;
+    private ArrayList<UploadedImage> uploadedImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -376,6 +397,30 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
             imageView.setVisibility(View.GONE);
             constraintLayout.setVisibility(View.VISIBLE);
         });
+
+        MarkdownBottomBarRecyclerViewAdapter adapter = new MarkdownBottomBarRecyclerViewAdapter(
+                mCustomThemeWrapper, new MarkdownBottomBarRecyclerViewAdapter.ItemClickListener() {
+            @Override
+            public void onClick(int item) {
+                MarkdownBottomBarRecyclerViewAdapter.bindEditTextWithItemClickListener(
+                        PostImageActivity.this, contentEditText, item);
+            }
+
+            @Override
+            public void onUploadImage() {
+                Utils.hideKeyboard(PostImageActivity.this);
+                UploadedImagesBottomSheetFragment fragment = new UploadedImagesBottomSheetFragment();
+                Bundle arguments = new Bundle();
+                arguments.putParcelableArrayList(UploadedImagesBottomSheetFragment.EXTRA_UPLOADED_IMAGES,
+                        uploadedImages);
+                fragment.setArguments(arguments);
+                fragment.show(getSupportFragmentManager(), fragment.getTag());
+            }
+        });
+
+        markdownBottomBarRecyclerView.setLayoutManager(new LinearLayoutManagerBugFixed(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        markdownBottomBarRecyclerView.setAdapter(adapter);
     }
 
     private void loadCurrentAccount() {
@@ -544,6 +589,7 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
             intent.putExtra(SubmitPostService.EXTRA_ACCOUNT, selectedAccount);
             intent.putExtra(SubmitPostService.EXTRA_SUBREDDIT_NAME, communityData.getId());
             intent.putExtra(SubmitPostService.EXTRA_TITLE, titleEditText.getText().toString());
+            intent.putExtra(SubmitPostService.EXTRA_BODY, contentEditText.getText().toString());
             intent.putExtra(SubmitPostService.EXTRA_FLAIR, flair);
             intent.putExtra(SubmitPostService.EXTRA_IS_SPOILER, isSpoiler);
             intent.putExtra(SubmitPostService.EXTRA_IS_NSFW, isNSFW);
@@ -626,6 +672,16 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
             if (resultCode == RESULT_OK) {
                 loadImage();
             }
+        } else if (requestCode == PICK_IMAGE_REQUEST_CODE_2) {
+            if (data == null) {
+                Toast.makeText(PostImageActivity.this, R.string.error_getting_image, Toast.LENGTH_LONG).show();
+                return;
+            }
+            Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
+                    mAccessToken, contentEditText, coordinatorLayout, data.getData(), uploadedImages);
+        } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE_2) {
+            Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
+                    mAccessToken, contentEditText, coordinatorLayout, capturedImageUri, uploadedImages);
         }
     }
 
@@ -704,5 +760,38 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
                         + submitVideoOrGifPostEvent.errorMessage.substring(1), Snackbar.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void uploadImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                getResources().getString(R.string.select_from_gallery)), PICK_IMAGE_REQUEST_CODE_2);
+    }
+
+    @Override
+    public void captureImage() {
+        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            capturedImageUri = FileProvider.getUriForFile(this, "eu.toldi.infinityforlemmy.provider",
+                    File.createTempFile("captured_image", ".jpg", getExternalFilesDir(Environment.DIRECTORY_PICTURES)));
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
+            startActivityForResult(pictureIntent, CAPTURE_IMAGE_REQUEST_CODE_2);
+        } catch (IOException ex) {
+            Toast.makeText(this, R.string.error_creating_temp_file, Toast.LENGTH_SHORT).show();
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.no_camera_available, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void insertImageUrl(UploadedImage uploadedImage) {
+        int start = Math.max(contentEditText.getSelectionStart(), 0);
+        int end = Math.max(contentEditText.getSelectionEnd(), 0);
+        contentEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                "[" + uploadedImage.imageName + "](" + uploadedImage.imageUrl + ")",
+                0, "[]()".length() + uploadedImage.imageName.length() + uploadedImage.imageUrl.length());
     }
 }

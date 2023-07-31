@@ -533,7 +533,7 @@ public class PostTextActivity extends BaseActivity implements FlairBottomSheetFr
         intent.putExtra(SubmitPostService.EXTRA_ACCOUNT, selectedAccount);
         intent.putExtra(SubmitPostService.EXTRA_SUBREDDIT_NAME, communityData.getId());
         intent.putExtra(SubmitPostService.EXTRA_TITLE, titleEditText.getText().toString());
-        intent.putExtra(SubmitPostService.EXTRA_CONTENT, contentEditText.getText().toString());
+        intent.putExtra(SubmitPostService.EXTRA_BODY, contentEditText.getText().toString());
         intent.putExtra(SubmitPostService.EXTRA_KIND, APIUtils.KIND_SELF);
         intent.putExtra(SubmitPostService.EXTRA_FLAIR, flair);
         intent.putExtra(SubmitPostService.EXTRA_IS_SPOILER, isSpoiler);
