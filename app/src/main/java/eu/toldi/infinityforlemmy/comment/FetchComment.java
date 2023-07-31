@@ -5,6 +5,9 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
@@ -94,6 +97,32 @@ public class FetchComment {
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 fetchMoreCommentListener.onFetchMoreCommentFailed();
+            }
+        });
+    }
+
+    public static void fetchSingleComment(Retrofit retrofit, @Nullable String accessToken, int commentId,
+                                          FetchCommentListener fetchCommentListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        Call<String> comment = api.getComment(commentId, accessToken);
+        comment.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        Comment c = ParseComment.parseSingleComment(new JSONObject(response.body()).getJSONObject("comment_view"));
+                        ArrayList<Comment> comments = new ArrayList<>();
+                        comments.add(c);
+                        fetchCommentListener.onFetchCommentSuccess(comments, null, null);
+                    } catch (JSONException e) {
+                        fetchCommentListener.onFetchCommentFailed();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                fetchCommentListener.onFetchCommentFailed();
             }
         });
     }

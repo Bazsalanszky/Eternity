@@ -26,6 +26,8 @@ import javax.inject.Named;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.comment.Comment;
+import eu.toldi.infinityforlemmy.comment.FetchComment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.post.ObjectResolver;
 import eu.toldi.infinityforlemmy.post.Post;
@@ -40,7 +42,7 @@ public class LinkResolverActivity extends AppCompatActivity {
 
     private static final String POST_PATTERN = "https?:\\/\\/\\S+\\/post\\/\\d+";
     private static final String POST_PATTERN_3 = "/[\\w-]+$";
-    private static final String COMMENT_PATTERN = "/(r|u|U|user)/[\\w-]+/comments/\\w+/?[\\w-]+/\\w+/?";
+    private static final String COMMENT_PATTERN = "https?:\\/\\/\\S+\\/comment\\/\\d+";
     private static final String SUBREDDIT_PATTERN = "(?:https?://[\\w.-]+)?/c/[\\w-]+(@[\\w.-]+)?";
     private static final String USER_PATTERN = "(?:https?://[\\w.-]+)?/u(sers)?/[\\w-]+(@[\\w.-]+)?";
     private static final String SIDEBAR_PATTERN = "/[rR]/[\\w-]+/about/sidebar";
@@ -214,6 +216,48 @@ public class LinkResolverActivity extends AppCompatActivity {
                                     }
                                 });
                             }
+                        } else if (uri.toString().matches(COMMENT_PATTERN)) {
+                            if (mAccessToken == null) {
+                                mRetrofit.setBaseURL(uri.getScheme() + "://" + uri.getHost() + "/");
+                                FetchComment.fetchSingleComment(mRetrofit.getRetrofit(), null, Integer.parseInt(segments.get(segments.size() - 1)), new FetchComment.FetchCommentListener() {
+                                    @Override
+                                    public void onFetchCommentSuccess(ArrayList<Comment> comments, Integer parentId, ArrayList<Integer> moreChildrenIds) {
+                                        Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                                        Comment comment = comments.get(0);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onFetchCommentFailed() {
+                                        Toast.makeText(LinkResolverActivity.this, R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            } else {
+                                ((Infinity) getApplication()).getAppComponent().inject(mObjectResolver);
+                                mObjectResolver.resolveComment(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
+                                    @Override
+                                    public void onResolveObjectSuccess(Object c) {
+                                        Comment comment = (Comment) c;
+                                        Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
+                                        intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onResolveObjectFailed() {
+                                        Toast.makeText(LinkResolverActivity.this, R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
+                            }
                         } else if (authority.equals("v.redd.it")) {
                             Intent intent = new Intent(this, ViewVideoActivity.class);
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_V_REDD_IT);
@@ -238,18 +282,6 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
                                 intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                                 startActivity(intent);
-                            } else if (path.matches(COMMENT_PATTERN)) {
-                                int commentsIndex = segments.lastIndexOf("comments");
-                                if (commentsIndex >= 0 && commentsIndex < segments.size() - 1) {
-                                    Intent intent = new Intent(this, ViewPostDetailActivity.class);
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, segments.get(commentsIndex + 1));
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, segments.get(segments.size() - 1));
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                    intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                    startActivity(intent);
-                                } else {
-                                    deepLinkError(uri);
-                                }
                             } else if (path.matches(WIKI_PATTERN)) {
                                 String[] pathSegments = path.split("/");
                                 String wikiPage;

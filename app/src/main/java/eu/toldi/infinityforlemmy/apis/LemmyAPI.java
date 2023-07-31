@@ -165,4 +165,10 @@ public interface LemmyAPI {
             @Query("q") String query,
             @Query("auth") String auth
     );
+
+    @GET("api/v3/comment")
+    Call<String> getComment(
+            @Query("id") int commentId,
+            @Query("auth") String auth
+    );
 }
