@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -81,7 +80,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
     @BindView(R.id.toolbar_edit_post_activity)
     Toolbar toolbar;
     @BindView(R.id.post_title_text_view_edit_post_activity)
-    TextView titleTextView;
+    EditText titleEditText;
     @BindView(R.id.divider_edit_post_activity)
     View divider;
     @BindView(R.id.post_text_content_edit_text_edit_post_activity)
@@ -140,7 +139,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
 
         mFullName = getIntent().getStringExtra(EXTRA_FULLNAME);
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-        titleTextView.setText(getIntent().getStringExtra(EXTRA_TITLE));
+        titleEditText.setText(getIntent().getStringExtra(EXTRA_TITLE));
         mPostContent = getIntent().getStringExtra(EXTRA_CONTENT);
         contentEditText.setText(mPostContent);
 
@@ -190,12 +189,12 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
     protected void applyCustomTheme() {
         coordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, null, toolbar);
-        titleTextView.setTextColor(mCustomThemeWrapper.getPostTitleColor());
+        titleEditText.setTextColor(mCustomThemeWrapper.getPostTitleColor());
         divider.setBackgroundColor(mCustomThemeWrapper.getPostTitleColor());
         contentEditText.setTextColor(mCustomThemeWrapper.getPostContentColor());
 
         if (titleTypeface != null) {
-            titleTextView.setTypeface(titleTypeface);
+            titleEditText.setTypeface(titleTypeface);
         }
         if (contentTypeface != null) {
             contentEditText.setTypeface(contentTypeface);

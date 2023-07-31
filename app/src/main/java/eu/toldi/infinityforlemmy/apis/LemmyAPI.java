@@ -6,6 +6,7 @@ import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
+import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
@@ -42,6 +43,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/post")
     Call<String> postCreate(@Body SubmitPostDTO params);
+
+    @Headers("Content-Type: application/json")
+    @PUT("api/v3/post")
+    Call<String> postUpdate(@Body EditPostDTO params);
 
     @GET("api/v3/user")
     ListenableFuture<Response<String>> getUserPosts(
