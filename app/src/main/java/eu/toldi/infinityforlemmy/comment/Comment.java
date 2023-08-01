@@ -49,6 +49,8 @@ public class Comment implements Parcelable {
     private int depth;
     private int childCount;
     private boolean collapsed;
+
+    private boolean isDeleted;
     private boolean hasReply;
     private boolean saved;
     private boolean isExpanded;
@@ -67,7 +69,7 @@ public class Comment implements Parcelable {
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
                    String linkId, String communityName, String communityQualifiedName, Integer parentId, int score,
                    int voteType, boolean isSubmitter, String distinguished, String permalink,
-                   int depth, boolean collapsed, boolean hasReply, boolean saved, long edited, String[] path) {
+                   int depth, boolean collapsed, boolean hasReply, boolean saved, boolean deleted, long edited, String[] path) {
         this.id = id;
         this.postId = postId;
         this.fullName = fullName;
@@ -90,6 +92,7 @@ public class Comment implements Parcelable {
         this.collapsed = collapsed;
         this.hasReply = hasReply;
         this.saved = saved;
+        this.isDeleted = deleted;
         this.isExpanded = false;
         this.hasExpandedBefore = false;
         this.editedTimeMillis = edited;

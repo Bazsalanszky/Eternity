@@ -425,11 +425,11 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     }
 
 
-    public void deleteComment(String fullName, int position) {
+    public void deleteComment(int comment_id, int position) {
         if (sectionsPagerAdapter != null) {
             ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
             if (fragment != null) {
-                fragment.deleteComment(fullName, position);
+                fragment.deleteComment(comment_id, position);
             }
         }
     }

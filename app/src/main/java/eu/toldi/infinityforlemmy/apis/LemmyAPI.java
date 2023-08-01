@@ -5,6 +5,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
+import eu.toldi.infinityforlemmy.dto.DeleteCommentDTO;
+import eu.toldi.infinityforlemmy.dto.DeletePostDTO;
 import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
@@ -47,6 +49,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @PUT("api/v3/post")
     Call<String> postUpdate(@Body EditPostDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/post/delete")
+    Call<String> postDelete(@Body DeletePostDTO params);
 
     @GET("api/v3/user")
     ListenableFuture<Response<String>> getUserPosts(
@@ -158,6 +164,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/comment")
     Call<String> postComment(@Body CommentDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/comment/delete")
+    Call<String> commentDelete(@Body DeleteCommentDTO params);
 
     @Headers("Content-Type: application/json")
     @PUT("api/v3/comment")

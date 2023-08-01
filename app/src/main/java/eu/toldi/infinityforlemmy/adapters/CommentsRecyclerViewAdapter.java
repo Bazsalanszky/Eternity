@@ -161,7 +161,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public CommentsRecyclerViewAdapter(BaseActivity activity, ViewPostDetailFragment fragment,
                                        CustomThemeWrapper customThemeWrapper,
-                                       Executor executor, Retrofit retrofit, Retrofit oauthRetrofit,
+                                       Executor executor, Retrofit retrofit,
                                        String accessToken, String accountName,
                                        Post post, Locale locale, Integer singleCommentId,
                                        boolean isSingleCommentThreadMode,
@@ -171,7 +171,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mFragment = fragment;
         mExecutor = executor;
         mRetrofit = retrofit;
-        mOauthRetrofit = oauthRetrofit;
         mGlide = Glide.with(activity);
         mSecondaryTextColor = customThemeWrapper.getSecondaryTextColor();
         mCommentTextColor = customThemeWrapper.getCommentColor();

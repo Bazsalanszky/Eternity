@@ -327,11 +327,12 @@ public class ParseComment {
         boolean collapsed = false;
         boolean hasReply = countsObj.getInt("child_count") > 0;
         boolean saved = jsonObject.getBoolean("saved");
+        boolean deleted = commentObj.getBoolean("deleted");
         long edited = 0;
 
-        Comment comment = new Comment(id,postID, fullName, author, authorQualifiedName, linkAuthor, commentTimeMillis,
+        Comment comment = new Comment(id, postID, fullName, author, authorQualifiedName, linkAuthor, commentTimeMillis,
                 commentMarkdown, commentRawText, linkId, communityName, communityQualifiedName, parentId,
-                score, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, edited, path);
+                score, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, deleted, edited, path);
         int child_count = countsObj.getInt("child_count");
         comment.setChildCount(child_count);
         return comment;

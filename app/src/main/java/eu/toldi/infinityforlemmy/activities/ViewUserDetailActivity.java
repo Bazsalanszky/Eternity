@@ -1098,12 +1098,12 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         }
     }
 
-    public void deleteComment(String fullName) {
+    public void deleteComment(int commentId) {
         new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
                 .setTitle(R.string.delete_this_comment)
                 .setMessage(R.string.are_you_sure)
                 .setPositiveButton(R.string.delete, (dialogInterface, i)
-                        -> DeleteThing.delete(mOauthRetrofit, fullName, mAccessToken, new DeleteThing.DeleteThingListener() {
+                        -> DeleteThing.deleteComment(mRetrofit.getRetrofit(), commentId, mAccessToken, new DeleteThing.DeleteThingListener() {
                     @Override
                     public void deleteSuccess() {
                         Toast.makeText(ViewUserDetailActivity.this, R.string.delete_post_success, Toast.LENGTH_SHORT).show();

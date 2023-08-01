@@ -127,9 +127,9 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
                 deleteTextView.setOnClickListener(view -> {
                     dismiss();
                     if (activity instanceof ViewPostDetailActivity) {
-                        ((ViewPostDetailActivity) activity).deleteComment(comment.getFullName(), bundle.getInt(EXTRA_POSITION));
+                        ((ViewPostDetailActivity) activity).deleteComment(comment.getId(), bundle.getInt(EXTRA_POSITION));
                     } else if (activity instanceof ViewUserDetailActivity) {
-                        ((ViewUserDetailActivity) activity).deleteComment(comment.getFullName());
+                        ((ViewUserDetailActivity) activity).deleteComment(comment.getId());
                     }
                 });
             }

@@ -85,7 +85,7 @@ import eu.toldi.infinityforlemmy.activities.SubmitCrosspostActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.adapters.CommentsRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.adapters.PostDetailRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.asynctasks.LoadUserData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FlairBottomSheetFragment;
@@ -97,6 +97,7 @@ import eu.toldi.infinityforlemmy.comment.FetchRemovedCommentReveddit;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.CustomToroContainer;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
+import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.events.ChangeNSFWBlurEvent;
 import eu.toldi.infinityforlemmy.events.ChangeNetworkStatusEvent;
 import eu.toldi.infinityforlemmy.events.ChangeSpoilerBlurEvent;
@@ -154,9 +155,6 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @Inject
     @Named("reveddit")
     Retrofit revedditRetrofit;
-    @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
     @Inject
     @Named("gfycat")
     Retrofit mGfycatRetrofit;
@@ -578,7 +576,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
     private void bindView() {
         if (mAccessToken != null && mMessageFullname != null) {
-            ReadMessage.readMessage(mOauthRetrofit, mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
+            ReadMessage.readMessage(mRetrofit.getRetrofit(), mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
                 @Override
                 public void readSuccess() {
                     mMessageFullname = null;
@@ -601,13 +599,13 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             setupMenu();
 
             mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
-                    this, mExecutor, mCustomThemeWrapper, mRetrofit.getRetrofit(), mOauthRetrofit, mGfycatRetrofit,
+                    this, mExecutor, mCustomThemeWrapper, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mRedditDataRoomDatabase, mGlide,
                     mSeparatePostAndComments, mAccessToken, mAccountName, mPost, mLocale,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostDetailsSharedPreferences,
                     mExoCreator, post -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
-                    this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(), mOauthRetrofit,
+                    this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(),
                     mAccessToken, mAccountName, mPost, mLocale, mSingleCommentId,
                     isSingleCommentThreadMode, mSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
@@ -776,29 +774,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     }
 
     public void changeFlair(Flair flair) {
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.API_TYPE_KEY, APIUtils.API_TYPE_JSON);
-        params.put(APIUtils.FLAIR_TEMPLATE_ID_KEY, flair.getId());
-        params.put(APIUtils.LINK_KEY, mPost.getFullName());
-        params.put(APIUtils.TEXT_KEY, flair.getText());
 
-        mOauthRetrofit.create(RedditAPI.class).selectFlair(mPost.getSubredditNamePrefixed(),
-                APIUtils.getOAuthHeader(mAccessToken), params).enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                if (response.isSuccessful()) {
-                    refresh(true, false);
-                    showMessage(R.string.update_flair_success);
-                } else {
-                    showMessage(R.string.update_flair_failed);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                showMessage(R.string.update_flair_failed);
-            }
-        });
     }
 
     public void changeSortType(SortType sortType) {
@@ -952,7 +928,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 SavePost savePost = new SavePost();
                 if (mPost.isSaved()) {
                     item.setIcon(mUnsavedIcon);
-                    savePost.unsaveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
+                    savePost.unsaveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
@@ -976,7 +952,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                             });
                 } else {
                     item.setIcon(mSavedIcon);
-                    savePost.saveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
+                    savePost.saveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
@@ -1017,7 +993,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 if (mPost.isHidden()) {
                     Utils.setTitleWithCustomFontToMenuItem(activity.typeface, item, getString(R.string.action_hide_post));
 
-                    HidePost.unhidePost(mOauthRetrofit, mAccessToken, mPost.getFullName(), new HidePost.HidePostListener() {
+                    HidePost.unhidePost(mRetrofit.getRetrofit(), mAccessToken, mPost.getFullName(), new HidePost.HidePostListener() {
                         @Override
                         public void success() {
                             mPost.setHidden(false);
@@ -1037,7 +1013,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 } else {
                     Utils.setTitleWithCustomFontToMenuItem(activity.typeface, item, getString(R.string.action_unhide_post));
 
-                    HidePost.hidePost(mOauthRetrofit, mAccessToken, mPost.getFullName(), new HidePost.HidePostListener() {
+                    HidePost.hidePost(mRetrofit.getRetrofit(), mAccessToken, mPost.getFullName(), new HidePost.HidePostListener() {
                         @Override
                         public void success() {
                             mPost.setHidden(true);
@@ -1067,7 +1043,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     .setTitle(R.string.delete_this_post)
                     .setMessage(R.string.are_you_sure)
                     .setPositiveButton(R.string.delete, (dialogInterface, i)
-                            -> DeleteThing.delete(mOauthRetrofit, mPost.getFullName(), mAccessToken, new DeleteThing.DeleteThingListener() {
+                            -> DeleteThing.deletePost(mRetrofit.getRetrofit(), mPost.getId(), mAccessToken, new DeleteThing.DeleteThingListener() {
                         @Override
                         public void deleteSuccess() {
                             Toast.makeText(activity, R.string.delete_post_success, Toast.LENGTH_SHORT).show();
@@ -1262,7 +1238,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         mPost = post;
                         mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
                                 ViewPostDetailFragment.this, mExecutor, mCustomThemeWrapper,
-                                mRetrofit.getRetrofit(), mOauthRetrofit, mGfycatRetrofit, mRedgifsRetrofit,
+                                mRetrofit.getRetrofit(), mGfycatRetrofit, mRedgifsRetrofit,
                                 mStreamableApiProvider, mRedditDataRoomDatabase, mGlide, mSeparatePostAndComments,
                                 mAccessToken, mAccountName, mPost, mLocale, mSharedPreferences,
                                 mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences,
@@ -1275,7 +1251,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 pages_loaded++;
                                 mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                                         ViewPostDetailFragment.this, mCustomThemeWrapper, mExecutor,
-                                        mRetrofit.getRetrofit(), mOauthRetrofit, mAccessToken, mAccountName, mPost, mLocale,
+                                        mRetrofit.getRetrofit(), mAccessToken, mAccountName, mPost, mLocale,
                                         mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences,
                                         new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                                             @Override
@@ -1567,7 +1543,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         Map<String, String> params = new HashMap<>();
         params.put(APIUtils.ID_KEY, mPost.getFullName());
-        mOauthRetrofit.create(RedditAPI.class).markNSFW(APIUtils.getOAuthHeader(mAccessToken), params)
+        mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), mPost.getTitle(), mPost.getUrl(), mPost.getSelfText(), true, null, mAccessToken))
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1605,7 +1581,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         Map<String, String> params = new HashMap<>();
         params.put(APIUtils.ID_KEY, mPost.getFullName());
-        mOauthRetrofit.create(RedditAPI.class).unmarkNSFW(APIUtils.getOAuthHeader(mAccessToken), params)
+        mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), mPost.getTitle(), mPost.getUrl(), mPost.getSelfText(), false, null, mAccessToken))
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1636,88 +1612,12 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 });
     }
 
-    private void markSpoiler() {
-        if (mMenu != null) {
-            mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_unmark_spoiler);
-        }
-
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.ID_KEY, mPost.getFullName());
-        mOauthRetrofit.create(RedditAPI.class).markSpoiler(APIUtils.getOAuthHeader(mAccessToken), params)
-                .enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                        if (response.isSuccessful()) {
-                            if (mMenu != null) {
-                                mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_unmark_spoiler);
-                            }
-
-                            refresh(true, false);
-                            showMessage(R.string.mark_spoiler_success);
-                        } else {
-                            if (mMenu != null) {
-                                mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_mark_spoiler);
-                            }
-
-                            showMessage(R.string.mark_spoiler_failed);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                        if (mMenu != null) {
-                            mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_mark_spoiler);
-                        }
-
-                        showMessage(R.string.mark_spoiler_failed);
-                    }
-                });
-    }
-
-    private void unmarkSpoiler() {
-        if (mMenu != null) {
-            mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_mark_spoiler);
-        }
-
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.ID_KEY, mPost.getFullName());
-        mOauthRetrofit.create(RedditAPI.class).unmarkSpoiler(APIUtils.getOAuthHeader(mAccessToken), params)
-                .enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                        if (response.isSuccessful()) {
-                            if (mMenu != null) {
-                                mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_mark_spoiler);
-                            }
-
-                            refresh(true, false);
-                            showMessage(R.string.unmark_spoiler_success);
-                        } else {
-                            if (mMenu != null) {
-                                mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_unmark_spoiler);
-                            }
-
-                            showMessage(R.string.unmark_spoiler_failed);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                        if (mMenu != null) {
-                            mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment).setTitle(R.string.action_unmark_spoiler);
-                        }
-
-                        showMessage(R.string.unmark_spoiler_failed);
-                    }
-                });
-    }
-
-    public void deleteComment(String fullName, int position) {
+    public void deleteComment(int commentId, int position) {
         new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogTheme)
                 .setTitle(R.string.delete_this_comment)
                 .setMessage(R.string.are_you_sure)
                 .setPositiveButton(R.string.delete, (dialogInterface, i)
-                        -> DeleteThing.delete(mOauthRetrofit, fullName, mAccessToken, new DeleteThing.DeleteThingListener() {
+                        -> DeleteThing.deleteComment(mRetrofit.getRetrofit(), commentId, mAccessToken, new DeleteThing.DeleteThingListener() {
                     @Override
                     public void deleteSuccess() {
                         Toast.makeText(activity, R.string.delete_post_success, Toast.LENGTH_SHORT).show();
