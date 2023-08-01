@@ -691,10 +691,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 hideItem.setVisible(false);
             }
 
-            if (mPost.getAuthor().equals(mAccountName)) {
-                if (mPost.getPostType() == Post.TEXT_TYPE) {
-                    mMenu.findItem(R.id.action_edit_view_post_detail_fragment).setVisible(true);
-                }
+            if (mPost.getAuthorNamePrefixed().equals(mAccountQualifiedName)) {
+                mMenu.findItem(R.id.action_edit_view_post_detail_fragment).setVisible(true);
                 mMenu.findItem(R.id.action_delete_view_post_detail_fragment).setVisible(true);
 
                 MenuItem nsfwItem = mMenu.findItem(R.id.action_nsfw_view_post_detail_fragment);
@@ -1061,9 +1059,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             return true;
         } else if (itemId == R.id.action_edit_view_post_detail_fragment) {
             Intent editPostIntent = new Intent(activity, EditPostActivity.class);
-            editPostIntent.putExtra(EditPostActivity.EXTRA_FULLNAME, mPost.getFullName());
-            editPostIntent.putExtra(EditPostActivity.EXTRA_TITLE, mPost.getTitle());
-            editPostIntent.putExtra(EditPostActivity.EXTRA_CONTENT, mPost.getSelfText());
+            editPostIntent.putExtra(EditPostActivity.EXTRA_DATA, mPost);
             startActivityForResult(editPostIntent, EDIT_POST_REQUEST_CODE);
             return true;
         } else if (itemId == R.id.action_delete_view_post_detail_fragment) {

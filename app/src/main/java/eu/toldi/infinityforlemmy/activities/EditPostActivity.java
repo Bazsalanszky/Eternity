@@ -3,16 +3,20 @@ package eu.toldi.infinityforlemmy.activities;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,18 +26,22 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONException;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -47,14 +55,16 @@ import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
 import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.adapters.MarkdownBottomBarRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UploadedImagesBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
+import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import eu.toldi.infinityforlemmy.utils.UploadImageUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,15 +73,18 @@ import retrofit2.Retrofit;
 
 public class EditPostActivity extends BaseActivity implements UploadImageEnabledActivity {
 
-    public static final String EXTRA_TITLE = "ET";
-    public static final String EXTRA_CONTENT = "EC";
-    public static final String EXTRA_FULLNAME = "EF";
+    public static final String EXTRA_DATA = "ED";
 
+
+    private static final int UPLOAD_IMAGE_REQUEST_CODE = 1;
     private static final int PICK_IMAGE_REQUEST_CODE = 100;
     private static final int CAPTURE_IMAGE_REQUEST_CODE = 200;
     private static final int MARKDOWN_PREVIEW_REQUEST_CODE = 300;
 
     private static final String UPLOADED_IMAGES_STATE = "UIS";
+
+    private static final String picturePattern = "https:\\/\\/[^\\/]+\\/pictrs\\/image\\/([a-f\\d-]+\\.jpeg)";
+
 
     @BindView(R.id.coordinator_layout_edit_post_activity)
     CoordinatorLayout coordinatorLayout;
@@ -87,6 +100,15 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
     EditText contentEditText;
     @BindView(R.id.markdown_bottom_bar_recycler_view_edit_post_activity)
     RecyclerView markdownBottomBarRecyclerView;
+    @BindView(R.id.post_link_edit_text_post_edit_activity)
+    EditText linkEditText;
+
+    @BindView(R.id.upload_image_button_post_edit_activity)
+    MaterialButton uploadImageButton;
+
+    @BindView(R.id.image_view_post_edit_activity)
+    ImageView imageView;
+
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
@@ -103,12 +125,15 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
-    private String mFullName;
+    private Post mPost;
+
     private String mAccessToken;
-    private String mPostContent;
     private boolean isSubmitting = false;
     private Uri capturedImageUri;
     private ArrayList<UploadedImage> uploadedImages = new ArrayList<>();
+
+
+    private RequestManager mGlide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,11 +162,49 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mFullName = getIntent().getStringExtra(EXTRA_FULLNAME);
+        mPost = getIntent().getParcelableExtra(EXTRA_DATA);
+        if (mPost == null) {
+            finish();
+        }
+
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-        titleEditText.setText(getIntent().getStringExtra(EXTRA_TITLE));
-        mPostContent = getIntent().getStringExtra(EXTRA_CONTENT);
-        contentEditText.setText(mPostContent);
+        titleEditText.setText(mPost.getTitle());
+        contentEditText.setText(mPost.getSelfText());
+        linkEditText.setText(mPost.getUrl());
+
+        mGlide = Glide.with(this);
+
+        if (mPost.getUrl().matches(picturePattern)) {
+            loadImage();
+        }
+
+        linkEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().matches(picturePattern)) {
+                    loadImage();
+                } else {
+                    uploadImageButton.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        uploadImageButton.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, getString(R.string.select_from_gallery)), UPLOAD_IMAGE_REQUEST_CODE);
+        });
+
 
         if (savedInstanceState != null) {
             uploadedImages = savedInstanceState.getParcelableArrayList(UPLOADED_IMAGES_STATE);
@@ -192,13 +255,22 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
         titleEditText.setTextColor(mCustomThemeWrapper.getPostTitleColor());
         divider.setBackgroundColor(mCustomThemeWrapper.getPostTitleColor());
         contentEditText.setTextColor(mCustomThemeWrapper.getPostContentColor());
+        linkEditText.setTextColor(mCustomThemeWrapper.getPostContentColor());
 
+        uploadImageButton.setTextColor(mCustomThemeWrapper.getButtonTextColor());
+        uploadImageButton.setBackgroundColor(mCustomThemeWrapper.getColorPrimaryLightTheme());
         if (titleTypeface != null) {
             titleEditText.setTypeface(titleTypeface);
         }
         if (contentTypeface != null) {
             contentEditText.setTypeface(contentTypeface);
         }
+    }
+
+    private void loadImage() {
+        uploadImageButton.setVisibility(View.GONE);
+        imageView.setVisibility(View.VISIBLE);
+        mGlide.load(mPost.getUrl()).into(imageView);
     }
 
     @Override
@@ -236,21 +308,19 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
             isSubmitting = true;
 
             Snackbar.make(coordinatorLayout, R.string.posting, Snackbar.LENGTH_SHORT).show();
-
-            Map<String, String> params = new HashMap<>();
-            params.put(APIUtils.THING_ID_KEY, mFullName);
-            params.put(APIUtils.TEXT_KEY, contentEditText.getText().toString());
-
-            mRetrofit.getRetrofit().create(RedditAPI.class)
-                    .editPostOrComment(APIUtils.getOAuthHeader(mAccessToken), params)
+            mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), titleEditText.getText().toString(), linkEditText.getText().toString(), contentEditText.getText().toString(), mPost.isNSFW(), null, mAccessToken))
                     .enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                             isSubmitting = false;
-                            Toast.makeText(EditPostActivity.this, R.string.edit_success, Toast.LENGTH_SHORT).show();
-                            Intent returnIntent = new Intent();
-                            setResult(RESULT_OK, returnIntent);
-                            finish();
+                            if (response.isSuccessful()) {
+                                Toast.makeText(EditPostActivity.this, R.string.edit_success, Toast.LENGTH_SHORT).show();
+                                Intent returnIntent = new Intent();
+                                setResult(RESULT_OK, returnIntent);
+                                finish();
+                            } else {
+                                Snackbar.make(coordinatorLayout, R.string.post_failed, Snackbar.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -274,6 +344,39 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
                 }
                 Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, data.getData(), uploadedImages);
+            } else if (requestCode == UPLOAD_IMAGE_REQUEST_CODE) {
+                if (data == null) {
+                    Snackbar.make(coordinatorLayout, R.string.error_getting_image, Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(this, R.string.uploading_image, Toast.LENGTH_SHORT).show();
+                Handler handler = new Handler();
+                Uri imageUri = data.getData();
+                mExecutor.execute(() -> {
+                    try {
+                        Bitmap bitmap = Glide.with(this).asBitmap().load(imageUri).submit().get();
+                        String imageUrlOrError = UploadImageUtils.uploadImage(mRetrofit, mAccessToken, bitmap);
+                        handler.post(() -> {
+                            if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {
+                                String fileName = Utils.getFileName(this, imageUri);
+                                if (fileName == null) {
+                                    fileName = imageUrlOrError;
+                                }
+                                mPost.setUrl(imageUrlOrError);
+                                linkEditText.setText(imageUrlOrError);
+                                Snackbar.make(coordinatorLayout, R.string.upload_image_success, Snackbar.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(this, R.string.upload_image_failed, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                        handler.post(() -> Toast.makeText(this, R.string.get_image_bitmap_failed, Toast.LENGTH_LONG).show());
+                    } catch (XmlPullParserException | JSONException | IOException e) {
+                        e.printStackTrace();
+                        handler.post(() -> Toast.makeText(this, R.string.error_processing_image, Toast.LENGTH_LONG).show());
+                    }
+                });
             } else if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
                 Utils.uploadImageToReddit(this, mExecutor, mRetrofit,
                         mAccessToken, contentEditText, coordinatorLayout, capturedImageUri, uploadedImages);
@@ -281,6 +384,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
                 editPost();
             }
         }
+
     }
 
     @Override
@@ -304,7 +408,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
         if (isSubmitting) {
             promptAlertDialog(R.string.exit_when_submit, R.string.exit_when_edit_post_detail);
         } else {
-            if (contentEditText.getText().toString().equals(mPostContent)) {
+            if (contentEditText.getText().toString().equals(mPost.getSelfText())) {
                 finish();
             } else {
                 promptAlertDialog(R.string.discard, R.string.discard_detail);
