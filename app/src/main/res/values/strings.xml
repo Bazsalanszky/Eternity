@@ -1344,4 +1344,6 @@
     <string name="could_not_resolve_link">Could not resolve URL :(</string>
     <string name="mark_post_as_read_failed">Failed to mark post as read</string>
     <string name="upload_image">Upload an image</string>
+    <string name="mentions">Mentions</string>
+    <string name="replies">Replies</string>
 </resources>

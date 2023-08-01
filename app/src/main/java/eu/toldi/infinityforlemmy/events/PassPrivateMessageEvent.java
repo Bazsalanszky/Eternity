@@ -1,11 +1,11 @@
 package eu.toldi.infinityforlemmy.events;
 
-import eu.toldi.infinityforlemmy.message.Message;
+import eu.toldi.infinityforlemmy.message.CommentInteraction;
 
 public class PassPrivateMessageEvent {
-    public Message message;
+    public CommentInteraction message;
 
-    public PassPrivateMessageEvent(Message message) {
+    public PassPrivateMessageEvent(CommentInteraction message) {
         this.message = message;
     }
 }

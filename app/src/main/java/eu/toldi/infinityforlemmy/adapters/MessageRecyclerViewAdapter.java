@@ -17,12 +17,22 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.NetworkState;
+import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.activities.BaseActivity;
+import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
+import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
+import eu.toldi.infinityforlemmy.activities.ViewPrivateMessagesActivity;
+import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
+import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.markdown.RedditHeadingPlugin;
+import eu.toldi.infinityforlemmy.markdown.SpoilerAwareMovementMethod;
+import eu.toldi.infinityforlemmy.markdown.SpoilerParserPlugin;
+import eu.toldi.infinityforlemmy.markdown.SuperscriptPlugin;
+import eu.toldi.infinityforlemmy.message.CommentInteraction;
+import eu.toldi.infinityforlemmy.message.FetchMessage;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -33,36 +43,21 @@ import io.noties.markwon.inlineparser.HtmlInlineProcessor;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
 import io.noties.markwon.movement.MovementMethodPlugin;
-import eu.toldi.infinityforlemmy.NetworkState;
-import eu.toldi.infinityforlemmy.R;
-import eu.toldi.infinityforlemmy.activities.BaseActivity;
-import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
-import eu.toldi.infinityforlemmy.activities.ViewPrivateMessagesActivity;
-import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
-import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
-import eu.toldi.infinityforlemmy.events.ChangeInboxCountEvent;
-import eu.toldi.infinityforlemmy.markdown.RedditHeadingPlugin;
-import eu.toldi.infinityforlemmy.markdown.SpoilerAwareMovementMethod;
-import eu.toldi.infinityforlemmy.markdown.SpoilerParserPlugin;
-import eu.toldi.infinityforlemmy.markdown.SuperscriptPlugin;
-import eu.toldi.infinityforlemmy.message.FetchMessage;
-import eu.toldi.infinityforlemmy.message.Message;
-import eu.toldi.infinityforlemmy.message.ReadMessage;
 import retrofit2.Retrofit;
 
-public class MessageRecyclerViewAdapter extends PagedListAdapter<Message, RecyclerView.ViewHolder> {
+public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteraction, RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_DATA = 0;
     private static final int VIEW_TYPE_ERROR = 1;
     private static final int VIEW_TYPE_LOADING = 2;
-    private static final DiffUtil.ItemCallback<Message> DIFF_CALLBACK = new DiffUtil.ItemCallback<>() {
+    private static final DiffUtil.ItemCallback<CommentInteraction> DIFF_CALLBACK = new DiffUtil.ItemCallback<>() {
         @Override
-        public boolean areItemsTheSame(@NonNull Message message, @NonNull Message t1) {
-            return message.getId().equals(t1.getId());
+        public boolean areItemsTheSame(@NonNull CommentInteraction message, @NonNull CommentInteraction t1) {
+            return message.getComment().getId() == t1.getComment().getId();
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Message message, @NonNull Message t1) {
-            return message.getBody().equals(t1.getBody());
+        public boolean areContentsTheSame(@NonNull CommentInteraction message, @NonNull CommentInteraction t1) {
+            return message.getComment().getCommentMarkdown().equals(t1.getComment().getCommentMarkdown());
         }
     };
     private BaseActivity mActivity;
@@ -154,41 +149,35 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<Message, Recycl
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof DataViewHolder) {
-            Message message = getItem(holder.getBindingAdapterPosition());
+            CommentInteraction message = getItem(holder.getBindingAdapterPosition());
             if (message != null) {
-                ArrayList<Message> replies = message.getReplies();
-                Message displayedMessage;
-                if (replies != null && !replies.isEmpty() && replies.get(replies.size() - 1) != null) {
-                    displayedMessage = replies.get(replies.size() - 1);
-                } else {
-                    displayedMessage = message;
-                }
-                if (message.isNew()) {
+
+                if (message.isRead()) {
                     if (markAllMessagesAsRead) {
-                        message.setNew(false);
+                        message.markAsRead();
                     } else {
                         holder.itemView.setBackgroundColor(
                                 mUnreadMessageBackgroundColor);
                     }
                 }
 
-                if (message.wasComment()) {
-                    ((DataViewHolder) holder).titleTextView.setText(message.getTitle());
-                } else {
-                    ((DataViewHolder) holder).titleTextView.setVisibility(View.GONE);
-                }
 
-                ((DataViewHolder) holder).authorTextView.setText(displayedMessage.getAuthor());
-                String subject = displayedMessage.getSubject().substring(0, 1).toUpperCase() + displayedMessage.getSubject().substring(1);
+                ((DataViewHolder) holder).titleTextView.setVisibility(View.GONE);
+
+
+                ((DataViewHolder) holder).authorTextView.setText(message.getComment().getAuthorQualifiedName());
+                String subject = message.getComment().getCommunityQualifiedName();
                 ((DataViewHolder) holder).subjectTextView.setText(subject);
-                mMarkwon.setMarkdown(((DataViewHolder) holder).contentCustomMarkwonView, displayedMessage.getBody());
+                mMarkwon.setMarkdown(((DataViewHolder) holder).contentCustomMarkwonView, message.getComment().getCommentMarkdown());
 
                 holder.itemView.setOnClickListener(view -> {
                     if (mMessageType == FetchMessage.MESSAGE_TYPE_INBOX
-                            && message.getContext() != null && !message.getContext().equals("")) {
-                        Uri uri = Uri.parse(message.getContext());
-                        Intent intent = new Intent(mActivity, LinkResolverActivity.class);
-                        intent.setData(uri);
+                            && message.getComment() != null) {
+
+                        Intent intent = new Intent(mActivity, ViewPostDetailActivity.class);
+
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, message.getComment().getPostId());
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, message.getComment().getId());
                         mActivity.startActivity(intent);
                     } else if (mMessageType == FetchMessage.MESSAGE_TYPE_PRIVATE_MESSAGE) {
                         Intent intent = new Intent(mActivity, ViewPrivateMessagesActivity.class);
@@ -197,32 +186,32 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<Message, Recycl
                         mActivity.startActivity(intent);
                     }
 
-                    if (displayedMessage.isNew()) {
+                    if (message.isRead()) {
                         holder.itemView.setBackgroundColor(mMessageBackgroundColor);
-                        message.setNew(false);
 
-                        ReadMessage.readMessage(mOauthRetrofit, mAccessToken, message.getFullname(),
+
+                        /*ReadMessage.readMessage(mOauthRetrofit, mAccessToken, message.getId(),
                                 new ReadMessage.ReadMessageListener() {
                                     @Override
                                     public void readSuccess() {
+                                        message.markAsRead();
                                         EventBus.getDefault().post(new ChangeInboxCountEvent(-1));
                                     }
 
                                     @Override
                                     public void readFailed() {
-                                        message.setNew(true);
+                                        message.markAsUnRead();
                                         holder.itemView.setBackgroundColor(mUnreadMessageBackgroundColor);
                                     }
-                                });
+                                });*/
                     }
                 });
 
                 ((DataViewHolder) holder).authorTextView.setOnClickListener(view -> {
-                    if (message.isAuthorDeleted()) {
-                        return;
-                    }
+
                     Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
-                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, message.getAuthor());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, message.getComment().getAuthor());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, message.getComment().getCommunityQualifiedName());
                     mActivity.startActivity(intent);
                 });
             }
@@ -280,9 +269,9 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<Message, Recycl
         }
     }
 
-    public void updateMessageReply(Message newReply, int position) {
+    public void updateMessageReply(CommentInteraction newReply, int position) {
         if (position >= 0 && position < super.getItemCount()) {
-            Message message = getItem(position);
+            CommentInteraction message = getItem(position);
             if (message != null) {
                 notifyItemChanged(position);
             }

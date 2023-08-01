@@ -36,6 +36,15 @@ public interface LemmyAPI {
     @GET("api/v3/user")
     Call<String> userInfo(@Query("username") String username, @Query("auth") String access_token);
 
+    @GET("api/v3/user/mention")
+    Call<String> userMentions(@Query("sort") String sort, @Query("page") Integer page, @Query("limit") Integer limit, @Query("unread_only") boolean unread_only, @Query("auth") String access_token);
+
+    @GET("api/v3/user/replies")
+    Call<String> userReplies(@Query("sort") String sort, @Query("page") Integer page, @Query("limit") Integer limit, @Query("unread_only") boolean unread_only, @Query("auth") String access_token);
+
+    @GET("api/v3/private_message/list")
+    Call<String> privateMessageList(@Query("page") Integer page, @Query("limit") Integer limit, @Query("unread_only") boolean unread_only, @Query("auth") String access_token);
+
     @GET("api/v3/community")
     Call<String> communityInfo(@Query("name") String name, @Query("auth") String access_token);
 

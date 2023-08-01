@@ -35,15 +35,15 @@ import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.adapters.MessageRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.events.RepliedToPrivateMessageEvent;
+import eu.toldi.infinityforlemmy.message.CommentInteraction;
 import eu.toldi.infinityforlemmy.message.FetchMessage;
-import eu.toldi.infinityforlemmy.message.Message;
 import eu.toldi.infinityforlemmy.message.MessageViewModel;
-import retrofit2.Retrofit;
 
 public class InboxFragment extends Fragment implements FragmentCommunicator {
 
@@ -61,8 +61,8 @@ public class InboxFragment extends Fragment implements FragmentCommunicator {
     TextView mFetchMessageInfoTextView;
     MessageViewModel mMessageViewModel;
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+    @Named("no_oauth")
+    RetrofitHolder mRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -106,7 +106,7 @@ public class InboxFragment extends Fragment implements FragmentCommunicator {
         }
 
         mWhere = arguments.getString(EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_INBOX);
-        mAdapter = new MessageRecyclerViewAdapter(mActivity, mOauthRetrofit, mCustomThemeWrapper,
+        mAdapter = new MessageRecyclerViewAdapter(mActivity, mRetrofit.getRetrofit(), mCustomThemeWrapper,
                 mAccessToken, mWhere, () -> mMessageViewModel.retryLoadingMore());
         mLinearLayoutManager = new LinearLayoutManagerBugFixed(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -127,7 +127,7 @@ public class InboxFragment extends Fragment implements FragmentCommunicator {
             });
         }
 
-        MessageViewModel.Factory factory = new MessageViewModel.Factory(mOauthRetrofit,
+        MessageViewModel.Factory factory = new MessageViewModel.Factory(mRetrofit.getRetrofit(),
                 getResources().getConfiguration().locale, mAccessToken, mWhere);
         mMessageViewModel = new ViewModelProvider(this, factory).get(MessageViewModel.class);
         mMessageViewModel.getMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.submitList(messages));
@@ -216,11 +216,11 @@ public class InboxFragment extends Fragment implements FragmentCommunicator {
         mAdapter.setNetworkState(null);
     }
 
-    public Message getMessageByIndex(int index) {
+    public CommentInteraction getMessageByIndex(int index) {
         if (mMessageViewModel == null || index < 0) {
             return null;
         }
-        PagedList<Message> messages = mMessageViewModel.getMessages().getValue();
+        PagedList<CommentInteraction> messages = mMessageViewModel.getMessages().getValue();
         if (messages == null) {
             return null;
         }
@@ -245,8 +245,8 @@ public class InboxFragment extends Fragment implements FragmentCommunicator {
 
     @Subscribe
     public void onRepliedToPrivateMessageEvent(RepliedToPrivateMessageEvent repliedToPrivateMessageEvent) {
-        if (mAdapter != null && mWhere.equals(FetchMessage.WHERE_MESSAGES)) {
+       /* if (mAdapter != null && mWhere.equals(FetchMessage.WHERE_MESSAGES)) {
             mAdapter.updateMessageReply(repliedToPrivateMessageEvent.newReply, repliedToPrivateMessageEvent.messagePosition);
-        }
+        }*/
     }
 }

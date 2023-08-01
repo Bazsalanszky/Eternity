@@ -56,8 +56,8 @@ import eu.toldi.infinityforlemmy.events.PassPrivateMessageEvent;
 import eu.toldi.infinityforlemmy.events.PassPrivateMessageIndexEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.InboxFragment;
+import eu.toldi.infinityforlemmy.message.CommentInteraction;
 import eu.toldi.infinityforlemmy.message.FetchMessage;
-import eu.toldi.infinityforlemmy.message.Message;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
@@ -268,13 +268,16 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
             }
         });
         viewPager2.setAdapter(sectionsPagerAdapter);
-        viewPager2.setOffscreenPageLimit(2);
+        viewPager2.setOffscreenPageLimit(3);
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             switch (position) {
                 case 0:
-                    Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.notifications));
+                    Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.replies));
                     break;
                 case 1:
+                    Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.mentions));
+                    break;
+                case 2:
                     Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.messages));
                     break;
             }
@@ -438,7 +441,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
             }
         }
 
-        Message getPrivateMessage(int index) {
+        CommentInteraction getPrivateMessage(int index) {
             if (viewPager2 == null || fragmentManager == null) {
                 return null;
             }
@@ -452,26 +455,29 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            if (position == 0) {
-                InboxFragment fragment = new InboxFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(InboxFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_INBOX);
-                fragment.setArguments(bundle);
-                return fragment;
-            } else {
-                InboxFragment fragment = new InboxFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(InboxFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_MESSAGES);
-                fragment.setArguments(bundle);
-                return fragment;
+            InboxFragment fragment = new InboxFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(InboxFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+            switch (position) {
+                case 0:
+                    bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_REPLIES);
+                    break;
+                case 1:
+                    bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_MENTIONS);
+                    fragment.setArguments(bundle);
+                    break;
+                case 2:
+                    bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_MESSAGES);
+                    fragment.setArguments(bundle);
+                    break;
             }
+            fragment.setArguments(bundle);
+            return fragment;
         }
 
         @Override
         public int getItemCount() {
-            return 2;
+            return 3;
         }
     }
 }

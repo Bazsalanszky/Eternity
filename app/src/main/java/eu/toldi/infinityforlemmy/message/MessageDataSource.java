@@ -1,18 +1,18 @@
 package eu.toldi.infinityforlemmy.message;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import eu.toldi.infinityforlemmy.NetworkState;
 import retrofit2.Retrofit;
 
-class MessageDataSource extends PageKeyedDataSource<String, Message> {
-    private Retrofit oauthRetrofit;
+class MessageDataSource extends PageKeyedDataSource<Integer, CommentInteraction> {
+    private Retrofit retrofit;
     private Locale locale;
     private String accessToken;
     private String where;
@@ -22,18 +22,22 @@ class MessageDataSource extends PageKeyedDataSource<String, Message> {
     private MutableLiveData<NetworkState> initialLoadStateLiveData;
     private MutableLiveData<Boolean> hasPostLiveData;
 
-    private LoadParams<String> params;
-    private LoadCallback<String, Message> callback;
+    private LoadParams<Integer> params;
+    private LoadCallback<Integer, CommentInteraction> callback;
+
+    private int page = 0;
 
     MessageDataSource(Retrofit oauthRetrofit, Locale locale, String accessToken, String where) {
-        this.oauthRetrofit = oauthRetrofit;
+        this.retrofit = oauthRetrofit;
         this.locale = locale;
         this.accessToken = accessToken;
         this.where = where;
         if (where.equals(FetchMessage.WHERE_MESSAGES)) {
             messageType = FetchMessage.MESSAGE_TYPE_PRIVATE_MESSAGE;
+        } else if (where.equals(FetchMessage.WHERE_REPLIES)) {
+            messageType = FetchMessage.MESSAGE_TYPE_REPLIES;
         } else {
-            messageType = FetchMessage.MESSAGE_TYPE_INBOX;
+            messageType = FetchMessage.MESSAGE_TYPE_MENTIONS;
         }
         paginationNetworkStateLiveData = new MutableLiveData<>();
         initialLoadStateLiveData = new MutableLiveData<>();
@@ -57,63 +61,97 @@ class MessageDataSource extends PageKeyedDataSource<String, Message> {
     }
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<String> params, @NonNull LoadInitialCallback<String, Message> callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, CommentInteraction> callback) {
         initialLoadStateLiveData.postValue(NetworkState.LOADING);
-
-        FetchMessage.fetchInbox(oauthRetrofit, locale, accessToken, where, null, messageType,
-                new FetchMessage.FetchMessagesListener() {
-            @Override
-            public void fetchSuccess(ArrayList<Message> messages, @Nullable String after) {
-                if (messages.size() == 0) {
-                    hasPostLiveData.postValue(false);
-                } else {
+        if (messageType == FetchMessage.MESSAGE_TYPE_REPLIES) {
+            FetchCommentInteractions.fetchReplies(retrofit, 1, false, accessToken, new FetchCommentInteractions.FetchCommentInteractionsListener() {
+                @Override
+                public void fetchSuccess(List<CommentInteraction> commentInteractions) {
                     hasPostLiveData.postValue(true);
+                    if (commentInteractions.size() == 0) {
+                        callback.onResult(commentInteractions, null, null);
+                    } else {
+                        callback.onResult(commentInteractions, null, 2);
+                    }
+
+                    initialLoadStateLiveData.postValue(NetworkState.LOADED);
                 }
 
-                if (after == null || after.equals("") || after.equals("null")) {
-                    callback.onResult(messages, null, null);
-                } else {
-                    callback.onResult(messages, null, after);
+                @Override
+                public void fetchFailed() {
+                    initialLoadStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetch messages"));
                 }
-                initialLoadStateLiveData.postValue(NetworkState.LOADED);
-            }
+            });
+        } else if (messageType == FetchMessage.MESSAGE_TYPE_MENTIONS) {
+            FetchCommentInteractions.fetchMentions(retrofit, 1, false, accessToken, new FetchCommentInteractions.FetchCommentInteractionsListener() {
+                @Override
+                public void fetchSuccess(List<CommentInteraction> commentInteractions) {
+                    hasPostLiveData.postValue(true);
+                    if (commentInteractions.size() == 0) {
+                        callback.onResult(commentInteractions, null, null);
+                    } else {
+                        callback.onResult(commentInteractions, null, 2);
+                    }
 
-            @Override
-            public void fetchFailed() {
-                initialLoadStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetch messages"));
-            }
-        });
+                    initialLoadStateLiveData.postValue(NetworkState.LOADED);
+                }
+
+                @Override
+                public void fetchFailed() {
+                    initialLoadStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetch messages"));
+                }
+            });
+        }
     }
 
     @Override
-    public void loadBefore(@NonNull LoadParams<String> params, @NonNull LoadCallback<String, Message> callback) {
+    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, CommentInteraction> callback) {
 
     }
 
     @Override
-    public void loadAfter(@NonNull LoadParams<String> params, @NonNull LoadCallback<String, Message> callback) {
+    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, CommentInteraction> callback) {
         this.params = params;
         this.callback = callback;
 
         paginationNetworkStateLiveData.postValue(NetworkState.LOADING);
+        if (messageType == FetchMessage.MESSAGE_TYPE_REPLIES) {
+            FetchCommentInteractions.fetchReplies(retrofit, params.key, false, accessToken, new FetchCommentInteractions.FetchCommentInteractionsListener() {
+                @Override
+                public void fetchSuccess(List<CommentInteraction> commentInteractions) {
+                    hasPostLiveData.postValue(true);
+                    if (commentInteractions.size() == 0) {
+                        callback.onResult(new ArrayList<>(), null);
+                    } else {
+                        callback.onResult(commentInteractions, params.key + 1);
+                    }
 
-        FetchMessage.fetchInbox(oauthRetrofit, locale, accessToken, where, params.key, messageType,
-                new FetchMessage.FetchMessagesListener() {
-            @Override
-            public void fetchSuccess(ArrayList<Message> messages, @Nullable String after) {
-                if (after == null || after.equals("") || after.equals("null")) {
-                    callback.onResult(messages, null);
-                } else {
-                    callback.onResult(messages, after);
+                    paginationNetworkStateLiveData.postValue(NetworkState.LOADED);
                 }
 
-                paginationNetworkStateLiveData.postValue(NetworkState.LOADED);
-            }
+                @Override
+                public void fetchFailed() {
+                    paginationNetworkStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetch messages"));
+                }
+            });
+        } else if (messageType == FetchMessage.MESSAGE_TYPE_MENTIONS) {
+            FetchCommentInteractions.fetchMentions(retrofit, params.key, false, accessToken, new FetchCommentInteractions.FetchCommentInteractionsListener() {
+                @Override
+                public void fetchSuccess(List<CommentInteraction> commentInteractions) {
+                    hasPostLiveData.postValue(true);
+                    if (commentInteractions.size() == 0) {
+                        callback.onResult(new ArrayList<>(), null);
+                    } else {
+                        callback.onResult(commentInteractions, params.key + 1);
+                    }
+                    paginationNetworkStateLiveData.postValue(NetworkState.LOADED);
+                }
 
-            @Override
-            public void fetchFailed() {
-                paginationNetworkStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetching data"));
-            }
-        });
+                @Override
+                public void fetchFailed() {
+                    paginationNetworkStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetch messages"));
+                }
+            });
+        }
     }
 }

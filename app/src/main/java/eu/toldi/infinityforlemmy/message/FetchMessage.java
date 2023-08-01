@@ -15,6 +15,8 @@ import retrofit2.Retrofit;
 
 public class FetchMessage {
 
+    public static final String WHERE_REPLIES = "replies";
+    public static final String WHERE_MENTIONS = "mentions";
     public static final String WHERE_INBOX = "inbox";
     public static final String WHERE_UNREAD = "unread";
     public static final String WHERE_SENT = "sent";
@@ -24,6 +26,9 @@ public class FetchMessage {
     public static final int MESSAGE_TYPE_INBOX = 0;
     public static final int MESSAGE_TYPE_PRIVATE_MESSAGE = 1;
     public static final int MESSAGE_TYPE_NOTIFICATION = 2;
+    public static final int MESSAGE_TYPE_REPLIES = 3;
+    public static final int MESSAGE_TYPE_MENTIONS = 4;
+
 
     static void fetchInbox(Retrofit oauthRetrofit, Locale locale, String accessToken, String where,
                            String after, int messageType, FetchMessagesListener fetchMessagesListener) {

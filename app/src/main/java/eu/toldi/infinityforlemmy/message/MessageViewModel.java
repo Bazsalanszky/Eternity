@@ -19,7 +19,7 @@ public class MessageViewModel extends ViewModel {
     private LiveData<NetworkState> paginationNetworkState;
     private LiveData<NetworkState> initialLoadingState;
     private LiveData<Boolean> hasMessageLiveData;
-    private LiveData<PagedList<Message>> messages;
+    private LiveData<PagedList<CommentInteraction>> messages;
     private MutableLiveData<String> whereLiveData;
 
     public MessageViewModel(Retrofit retrofit, Locale locale, String accessToken, String where) {
@@ -47,7 +47,7 @@ public class MessageViewModel extends ViewModel {
         });
     }
 
-    public LiveData<PagedList<Message>> getMessages() {
+    public LiveData<PagedList<CommentInteraction>> getMessages() {
         return messages;
     }
 

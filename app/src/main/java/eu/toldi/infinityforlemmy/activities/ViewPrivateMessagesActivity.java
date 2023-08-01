@@ -332,7 +332,7 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
 
     @Subscribe
     public void onPassPrivateMessageEvent(PassPrivateMessageEvent passPrivateMessageEvent) {
-        privateMessage = passPrivateMessageEvent.message;
+       /* privateMessage = passPrivateMessageEvent.message;
         if (privateMessage != null) {
             if (privateMessage.getAuthor().equals(mAccountName)) {
                 if (privateMessage.getReplies() != null) {
@@ -351,7 +351,7 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
             }
 
             bindView();
-        }
+        }*/
     }
 
     public interface ProvideUserAvatarCallback {
