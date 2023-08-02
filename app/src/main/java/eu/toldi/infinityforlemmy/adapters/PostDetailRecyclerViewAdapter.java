@@ -42,7 +42,9 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.exoplayer2.Tracks;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.DefaultTimeBar;
@@ -634,8 +636,20 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailVideoAutoplayViewHolder) holder).previewImageView.setVisibility(View.VISIBLE);
                 Post.Preview preview = getSuitablePreview(mPost.getPreviews());
                 if (preview != null) {
-                    ((PostDetailVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewWidth() / preview.getPreviewHeight());
-                    mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostDetailVideoAutoplayViewHolder) holder).previewImageView);
+                    mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                            int width = resource.getIntrinsicWidth();
+                            int height = resource.getIntrinsicHeight();
+                            ((PostDetailVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) width / height);
+                            ((PostDetailVideoAutoplayViewHolder) holder).previewImageView.setImageDrawable(resource);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                        }
+                    });
                 } else {
                     ((PostDetailVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio(1);
                 }
@@ -843,9 +857,45 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     });
 
             if (blurImage) {
-                imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10))).into(((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView);
+                imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10))).into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        int width = resource.getIntrinsicWidth();
+                        int height = resource.getIntrinsicHeight();
+                        if (preview.getPreviewHeight() == 0 || preview.getPreviewWidth() == 0) {
+                            ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.setRatio((float) height / width);
+                            ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.getLayoutParams().height = height;
+                            preview.setPreviewHeight(height);
+                            preview.setPreviewWidth(width);
+                        }
+                        ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.setImageDrawable(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.setImageDrawable(null);
+                    }
+                });
             } else {
-                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView);
+                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        int width = resource.getIntrinsicWidth();
+                        int height = resource.getIntrinsicHeight();
+                        if (preview.getPreviewHeight() == 0 || preview.getPreviewWidth() == 0) {
+                            ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.setRatio((float) height / width);
+                            ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.getLayoutParams().height = height;
+                            preview.setPreviewHeight(height);
+                            preview.setPreviewWidth(width);
+                        }
+                        ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.setImageDrawable(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        ((PostDetailImageAndGifAutoplayViewHolder) holder).mImageView.setImageDrawable(null);
+                    }
+                });
             }
         } else if (holder instanceof PostDetailVideoAndGifPreviewHolder) {
             RequestBuilder<Drawable> imageRequestBuilder = mGlide.load(preview.getPreviewUrl())
@@ -871,9 +921,45 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
             if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()))) {
                 imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
-                        .into(((PostDetailVideoAndGifPreviewHolder) holder).mImageView);
+                        .into(new CustomTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                int width = resource.getIntrinsicWidth();
+                                int height = resource.getIntrinsicHeight();
+                                if (preview.getPreviewHeight() == 0 || preview.getPreviewWidth() == 0) {
+                                    ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.setRatio((float) height / width);
+                                    ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.getLayoutParams().height = height;
+                                    preview.setPreviewHeight(height);
+                                    preview.setPreviewWidth(width);
+                                }
+                                ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.setImageDrawable(resource);
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.setImageDrawable(null);
+                            }
+                        });
             } else {
-                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostDetailVideoAndGifPreviewHolder) holder).mImageView);
+                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        int width = resource.getIntrinsicWidth();
+                        int height = resource.getIntrinsicHeight();
+                        if (preview.getPreviewHeight() == 0 || preview.getPreviewWidth() == 0) {
+                            ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.setRatio((float) height / width);
+                            ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.getLayoutParams().height = height;
+                            preview.setPreviewHeight(height);
+                            preview.setPreviewWidth(width);
+                        }
+                        ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.setImageDrawable(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        ((PostDetailVideoAndGifPreviewHolder) holder).mImageView.setImageDrawable(null);
+                    }
+                });
             }
         } else if (holder instanceof PostDetailLinkViewHolder) {
             RequestBuilder<Drawable> imageRequestBuilder = mGlide.load(preview.getPreviewUrl())
@@ -899,9 +985,51 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
             if ((mPost.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()))) {
                 imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
-                        .into(((PostDetailLinkViewHolder) holder).mImageView);
+                        .into(new CustomTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                int width = resource.getIntrinsicWidth();
+                                int height = resource.getIntrinsicHeight();
+                                if (preview.getPreviewHeight() == 0 || preview.getPreviewWidth() == 0) {
+                                    ((PostDetailLinkViewHolder) holder).mImageView.setRatio((float) height / width);
+                                    ((PostDetailLinkViewHolder) holder).mImageView.getLayoutParams().height = height;
+                                    preview.setPreviewHeight(height);
+                                    preview.setPreviewWidth(width);
+                                } else {
+                                    ((PostDetailLinkViewHolder) holder).mImageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                    ((PostDetailLinkViewHolder) holder).mImageView.getLayoutParams().height = height;
+                                }
+                                ((PostDetailLinkViewHolder) holder).mImageView.setImageDrawable(resource);
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                                ((PostDetailLinkViewHolder) holder).mImageView.setImageDrawable(null);
+                            }
+                        });
             } else {
-                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostDetailLinkViewHolder) holder).mImageView);
+                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        int width = resource.getIntrinsicWidth();
+                        int height = resource.getIntrinsicHeight();
+                        ((PostDetailLinkViewHolder) holder).mImageView.setImageDrawable(resource);
+                        if (preview.getPreviewHeight() == 0 || preview.getPreviewWidth() == 0) {
+                            ((PostDetailLinkViewHolder) holder).mImageView.setRatio((float) height / width);
+                            ((PostDetailLinkViewHolder) holder).mImageView.getLayoutParams().height = height;
+                            preview.setPreviewHeight(height);
+                            preview.setPreviewWidth(width);
+                        } else {
+                            ((PostDetailLinkViewHolder) holder).mImageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                        }
+
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        ((PostDetailLinkViewHolder) holder).mImageView.setImageDrawable(null);
+                    }
+                });
             }
         }
     }

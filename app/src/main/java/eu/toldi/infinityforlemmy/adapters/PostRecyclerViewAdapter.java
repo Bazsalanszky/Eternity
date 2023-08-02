@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,10 +42,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.exoplayer2.Tracks;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.DefaultTimeBar;
@@ -439,7 +443,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 switch (post.getPostType()) {
                     case Post.VIDEO_TYPE:
                         if (mAutoplay) {
-                            if ((!mAutoplayNsfwVideos && post.isNSFW()) ) {
+                            if ((!mAutoplayNsfwVideos && post.isNSFW())) {
                                 return VIEW_TYPE_POST_CARD_2_WITH_PREVIEW_TYPE;
                             }
                             return VIEW_TYPE_POST_CARD_2_VIDEO_AUTOPLAY_TYPE;
@@ -524,7 +528,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                     ((PostBaseViewHolder) holder).titleTextView.setTextColor(mReadPostTitleColor);
                 }
-                String authorPrefixed =  post.getAuthorNamePrefixed();
+                String authorPrefixed = post.getAuthorNamePrefixed();
 
                 if (mHideSubredditAndUserPrefix) {
                     ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditName());
@@ -714,8 +718,28 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     ((PostVideoAutoplayViewHolder) holder).previewImageView.setVisibility(View.VISIBLE);
                     Post.Preview preview = getSuitablePreview(post.getPreviews());
                     if (!mFixedHeightPreviewInCard && preview != null) {
-                        ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewWidth() / preview.getPreviewHeight());
-                        mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostVideoAutoplayViewHolder) holder).previewImageView);
+                        mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                int width = resource.getIntrinsicWidth();
+                                int height = resource.getIntrinsicHeight();
+                                ((PostVideoAutoplayViewHolder) holder).previewImageView.setImageDrawable(resource);
+                                if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                    ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) height / width);
+                                    ((PostVideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
+                                    preview.setPreviewHeight(height);
+                                    preview.setPreviewWidth(width);
+                                } else {
+                                    ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                    ((PostVideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = preview.getPreviewHeight();
+                                }
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                            }
+                        });
                     } else {
                         ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio(1);
                     }
@@ -752,7 +776,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                         }
                                     }
                                 });
-                    } else if(post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
+                    } else if (post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
                         ((PostVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
                                 mStreamableApiProvider.get().getStreamableData(post.getStreamableShortCode());
                         FetchStreamableVideo.fetchStreamableVideoInRecyclerViewAdapter(mExecutor, new Handler(),
@@ -833,13 +857,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             if (preview != null) {
                                 ((PostWithPreviewTypeViewHolder) holder).imageView.setVisibility(View.VISIBLE);
                                 ((PostWithPreviewTypeViewHolder) holder).imageWrapperRelativeLayout.setVisibility(View.VISIBLE);
-                                if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                                if (mFixedHeightPreviewInCard) {
                                     int height = (int) (400 * mScale);
                                     ((PostWithPreviewTypeViewHolder) holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                     ((PostWithPreviewTypeViewHolder) holder).imageView.getLayoutParams().height = height;
-                                } else {
-                                    ((PostWithPreviewTypeViewHolder) holder).imageView
-                                            .setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                                 }
                                 ((PostWithPreviewTypeViewHolder) holder).imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                                     @Override
@@ -873,10 +894,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         ((PostBaseGalleryTypeViewHolder) holder).imageIndexTextView.setText(mActivity.getString(R.string.image_index_in_gallery, 1, post.getGallery().size()));
                         Post.Preview preview = getSuitablePreview(post.getPreviews());
                         if (preview != null) {
-                            if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                            if (mFixedHeightPreviewInCard) {
                                 ((PostBaseGalleryTypeViewHolder) holder).adapter.setRatio(-1);
-                            } else {
-                                ((PostBaseGalleryTypeViewHolder) holder).adapter.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                             }
                         } else {
                             ((PostBaseGalleryTypeViewHolder) holder).adapter.setRatio(-1);
@@ -886,7 +905,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 (post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit())));
                     }
                 } else if (holder instanceof PostTextTypeViewHolder) {
-                    if (!mHideTextPostContent  && post.getSelfTextPlainTrimmed() != null && !post.getSelfTextPlainTrimmed().equals("")) {
+                    if (!mHideTextPostContent && post.getSelfTextPlainTrimmed() != null && !post.getSelfTextPlainTrimmed().equals("")) {
                         ((PostTextTypeViewHolder) holder).contentTextView.setVisibility(View.VISIBLE);
                         if (post.isRead()) {
                             ((PostTextTypeViewHolder) holder).contentTextView.setTextColor(mReadPostContentColor);
@@ -897,8 +916,28 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     ((PostCard2VideoAutoplayViewHolder) holder).previewImageView.setVisibility(View.VISIBLE);
                     Post.Preview preview = getSuitablePreview(post.getPreviews());
                     if (!mFixedHeightPreviewInCard && preview != null) {
-                        ((PostCard2VideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewWidth() / preview.getPreviewHeight());
-                        mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostCard2VideoAutoplayViewHolder) holder).previewImageView);
+                        mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                int width = resource.getIntrinsicWidth();
+                                int height = resource.getIntrinsicHeight();
+                                ((PostVideoAutoplayViewHolder) holder).previewImageView.setImageDrawable(resource);
+                                if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                    ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) height / width);
+                                    ((PostVideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
+                                    preview.setPreviewHeight(height);
+                                    preview.setPreviewWidth(width);
+                                } else {
+                                    ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                    ((PostVideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
+                                }
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                            }
+                        });
                     } else {
                         ((PostCard2VideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio(1);
                     }
@@ -935,7 +974,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                         }
                                     }
                                 });
-                    } else if(post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
+                    } else if (post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
                         ((PostCard2VideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
                                 mStreamableApiProvider.get().getStreamableData(post.getStreamableShortCode());
                         FetchStreamableVideo.fetchStreamableVideoInRecyclerViewAdapter(mExecutor, new Handler(),
@@ -1023,13 +1062,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             ((PostCard2WithPreviewViewHolder) holder).preview = preview;
                             if (preview != null) {
                                 ((PostCard2WithPreviewViewHolder) holder).imageView.setVisibility(View.VISIBLE);
-                                if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                                if (mFixedHeightPreviewInCard) {
                                     int height = (int) (400 * mScale);
                                     ((PostCard2WithPreviewViewHolder) holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                     ((PostCard2WithPreviewViewHolder) holder).imageView.getLayoutParams().height = height;
-                                } else {
-                                    ((PostCard2WithPreviewViewHolder) holder).imageView
-                                            .setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                                 }
                                 ((PostCard2WithPreviewViewHolder) holder).imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                                     @Override
@@ -1078,7 +1114,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
                 final String subredditNamePrefixed = post.getSubredditNamePrefixed();
                 String subredditName = subredditNamePrefixed.substring(2);
-                String authorPrefixed =  post.getAuthorNamePrefixed();
+                String authorPrefixed = post.getAuthorNamePrefixed();
                 final String title = post.getTitle();
                 int voteType = post.getVoteType();
                 boolean nsfw = post.isNSFW();
@@ -1401,13 +1437,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 ((PostGalleryViewHolder) holder).imageView.setVisibility(View.VISIBLE);
                                 ((PostGalleryViewHolder) holder).progressBar.setVisibility(View.VISIBLE);
 
-                                if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                                if (mFixedHeightPreviewInCard) {
                                     int height = (int) (400 * mScale);
                                     ((PostGalleryViewHolder) holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                     ((PostGalleryViewHolder) holder).imageView.getLayoutParams().height = height;
-                                } else {
-                                    ((PostGalleryViewHolder) holder).imageView
-                                            .setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                                 }
                                 ((PostGalleryViewHolder) holder).imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                                     @Override
@@ -1423,7 +1456,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             break;
                         }
                         case Post.GIF_TYPE: {
-                            if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)) )) {
+                            if (post.getPostType() == Post.GIF_TYPE && ((post.isNSFW() && mNeedBlurNsfw && !(mDoNotBlurNsfwInNsfwSubreddits && mFragment != null && mFragment.getIsNsfwSubreddit()) && !(mAutoplay && mAutoplayNsfwVideos)))) {
                                 ((PostGalleryViewHolder) holder).noPreviewImageView.setVisibility(View.VISIBLE);
                                 ((PostGalleryViewHolder) holder).noPreviewImageView.setImageResource(R.drawable.ic_image_24dp);
                             } else {
@@ -1435,13 +1468,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     ((PostGalleryViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.VISIBLE);
                                     ((PostGalleryViewHolder) holder).videoOrGifIndicatorImageView.setImageDrawable(ContextCompat.getDrawable(mActivity, R.drawable.ic_play_circle_36dp));
 
-                                    if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                                    if (mFixedHeightPreviewInCard) {
                                         int height = (int) (400 * mScale);
                                         ((PostGalleryViewHolder) holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                         ((PostGalleryViewHolder) holder).imageView.getLayoutParams().height = height;
-                                    } else {
-                                        ((PostGalleryViewHolder) holder).imageView
-                                                .setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                                     }
                                     ((PostGalleryViewHolder) holder).imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                                         @Override
@@ -1466,13 +1496,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 ((PostGalleryViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.VISIBLE);
                                 ((PostGalleryViewHolder) holder).videoOrGifIndicatorImageView.setImageDrawable(ContextCompat.getDrawable(mActivity, R.drawable.ic_play_circle_36dp));
 
-                                if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                                if (mFixedHeightPreviewInCard) {
                                     int height = (int) (400 * mScale);
                                     ((PostGalleryViewHolder) holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                     ((PostGalleryViewHolder) holder).imageView.getLayoutParams().height = height;
-                                } else {
-                                    ((PostGalleryViewHolder) holder).imageView
-                                            .setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                                 }
                                 ((PostGalleryViewHolder) holder).imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                                     @Override
@@ -1496,13 +1523,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 ((PostGalleryViewHolder) holder).videoOrGifIndicatorImageView.setVisibility(View.VISIBLE);
                                 ((PostGalleryViewHolder) holder).videoOrGifIndicatorImageView.setImageDrawable(ContextCompat.getDrawable(mActivity, R.drawable.ic_link_post_type_indicator));
 
-                                if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                                if (mFixedHeightPreviewInCard) {
                                     int height = (int) (400 * mScale);
                                     ((PostGalleryViewHolder) holder).imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                     ((PostGalleryViewHolder) holder).imageView.getLayoutParams().height = height;
-                                } else {
-                                    ((PostGalleryViewHolder) holder).imageView
-                                            .setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                                 }
                                 ((PostGalleryViewHolder) holder).imageView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                                     @Override
@@ -1549,10 +1573,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     ((PostGalleryBaseGalleryTypeViewHolder) holder).frameLayout.setVisibility(View.VISIBLE);
                     ((PostGalleryBaseGalleryTypeViewHolder) holder).imageIndexTextView.setText(mActivity.getString(R.string.image_index_in_gallery, 1, post.getGallery().size()));
                     if (preview != null) {
-                        if (mFixedHeightPreviewInCard || (preview.getPreviewWidth() <= 0 || preview.getPreviewHeight() <= 0)) {
+                        if (mFixedHeightPreviewInCard) {
                             ((PostGalleryBaseGalleryTypeViewHolder) holder).adapter.setRatio(-1);
-                        } else {
-                            ((PostGalleryBaseGalleryTypeViewHolder) holder).adapter.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
                         }
                     } else {
                         ((PostGalleryBaseGalleryTypeViewHolder) holder).adapter.setRatio(-1);
@@ -1605,9 +1627,79 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 RequestBuilder<Drawable> imageRequestBuilder = mGlide.load(url).listener(((PostWithPreviewTypeViewHolder) holder).glideRequestListener);
                 if (blurImage) {
                     imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
-                            .into(((PostWithPreviewTypeViewHolder) holder).imageView);
+                            .into(new CustomTarget<Drawable>() {
+                                @Override
+                                public void onLoadStarted(@Nullable Drawable placeholder) {
+                                    mGlide.clear(((PostWithPreviewTypeViewHolder) holder).imageView);
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.setVisibility(View.GONE);
+                                    ((PostWithPreviewTypeViewHolder) holder).progressBar.setVisibility(View.VISIBLE);
+                                }
+
+                                @Override
+                                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.setImageDrawable(resource);
+                                    int width = resource.getIntrinsicWidth();
+                                    int height = resource.getIntrinsicHeight();
+                                    if (!mFixedHeightPreviewInCard) {
+                                        if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                            ((PostWithPreviewTypeViewHolder) holder).imageView.setRatio((float) height / width);
+                                            ((PostWithPreviewTypeViewHolder) holder).imageView.getLayoutParams().height = height;
+                                            ((PostWithPreviewTypeViewHolder) holder).imageWrapperRelativeLayout.getLayoutParams().height = height;
+                                            preview.setPreviewHeight(height);
+                                            preview.setPreviewWidth(width);
+                                        } else {
+                                            ((PostWithPreviewTypeViewHolder) holder).imageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                            ((PostWithPreviewTypeViewHolder) holder).imageView.getLayoutParams().height = preview.getPreviewHeight();
+                                            ((PostWithPreviewTypeViewHolder) holder).imageWrapperRelativeLayout.getLayoutParams().height = preview.getPreviewHeight();
+                                        }
+                                    } else {
+                                        ((PostWithPreviewTypeViewHolder) holder).imageView.setRatio(-1);
+                                        ((PostWithPreviewTypeViewHolder) holder).imageView.getLayoutParams().height = height;
+                                    }
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.setImageDrawable(null);
+                                }
+                            });
                 } else {
-                    imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostWithPreviewTypeViewHolder) holder).imageView);
+                    mGlide.load(post.getPreviews().get(0).getPreviewUrl()).diskCacheStrategy(DiskCacheStrategy.NONE).into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onLoadStarted(@Nullable Drawable placeholder) {
+                            ((PostWithPreviewTypeViewHolder) holder).imageView.setVisibility(View.GONE);
+                            ((PostWithPreviewTypeViewHolder) holder).progressBar.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                            int width = resource.getIntrinsicWidth();
+                            int height = resource.getIntrinsicHeight();
+                            ((PostWithPreviewTypeViewHolder) holder).imageView.setImageDrawable(resource);
+                            ((PostWithPreviewTypeViewHolder) holder).imageView.setAdjustViewBounds(true);
+
+                            ((PostWithPreviewTypeViewHolder) holder).imageView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                                @Override
+                                public boolean onPreDraw() {
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                                    // Calculate the aspect ratio and set the height
+                                    float aspectRatio = (float) height / width;
+                                    int imageViewWidth = ((PostWithPreviewTypeViewHolder) holder).imageView.getWidth();
+                                    int imageViewHeight = Math.round(imageViewWidth * aspectRatio);
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.getLayoutParams().height = ((PostWithPreviewTypeViewHolder) holder).imageView.getHeight();
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.requestLayout();
+                                    ((PostWithPreviewTypeViewHolder) holder).imageView.setVisibility(View.VISIBLE);
+                                    ((PostWithPreviewTypeViewHolder) holder).progressBar.setVisibility(View.GONE);
+                                    return true;
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                        }
+                    });
                 }
             }
         } else if (holder instanceof PostCompactBaseViewHolder) {
@@ -1645,9 +1737,53 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 if (blurImage) {
                     imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
-                            .into(((PostGalleryViewHolder) holder).imageView);
+                            .into(new CustomTarget<Drawable>() {
+                                @Override
+                                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                    int width = resource.getIntrinsicWidth();
+                                    int height = resource.getIntrinsicHeight();
+                                    ((PostGalleryViewHolder) holder).imageView.setImageDrawable(resource);
+                                    if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                        ((PostGalleryViewHolder) holder).imageView.setRatio((float) height / width);
+                                        ((PostGalleryViewHolder) holder).imageView.getLayoutParams().height = height;
+                                        preview.setPreviewHeight(height);
+                                        preview.setPreviewWidth(width);
+                                    } else {
+                                        ((PostGalleryViewHolder) holder).imageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                    }
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
+                                    ((PostGalleryViewHolder) holder).imageView.setImageDrawable(null);
+                                }
+                            });
                 } else {
-                    imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostGalleryViewHolder) holder).imageView);
+                    imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                            ((PostGalleryViewHolder) holder).imageView.setImageDrawable(resource);
+                            int width = resource.getIntrinsicWidth();
+                            int height = resource.getIntrinsicHeight();
+                            if (!mFixedHeightPreviewInCard) {
+                                if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                    ((PostGalleryViewHolder) holder).imageView.setRatio((float) height / width);
+                                    ((PostGalleryViewHolder) holder).imageView.getLayoutParams().height = height;
+                                    preview.setPreviewHeight(height);
+                                    preview.setPreviewWidth(width);
+                                } else {
+                                    ((PostGalleryViewHolder) holder).imageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                }
+                            } else {
+                                ((PostGalleryViewHolder) holder).imageView.setRatio(-1);
+                            }
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                            ((PostGalleryViewHolder) holder).imageView.setImageDrawable(null);
+                        }
+                    });
                 }
             }
         } else if (holder instanceof PostCard2WithPreviewViewHolder) {
@@ -1665,9 +1801,57 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 if (blurImage) {
                     imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
-                            .into(((PostCard2WithPreviewViewHolder) holder).imageView);
+                            .into(new CustomTarget<Drawable>() {
+                                @Override
+                                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                    ((PostCard2WithPreviewViewHolder) holder).imageView.setImageDrawable(resource);
+                                    int width = resource.getIntrinsicWidth();
+                                    int height = resource.getIntrinsicHeight();
+                                    if (!mFixedHeightPreviewInCard) {
+                                        if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                            ((PostCard2WithPreviewViewHolder) holder).imageView.setRatio((float) height / width);
+                                            ((PostCard2WithPreviewViewHolder) holder).imageView.getLayoutParams().height = height;
+                                            preview.setPreviewHeight(height);
+                                            preview.setPreviewWidth(width);
+                                        } else {
+                                            ((PostCard2WithPreviewViewHolder) holder).imageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                        }
+                                    } else {
+                                        ((PostCard2WithPreviewViewHolder) holder).imageView.setRatio(-1);
+                                    }
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
+                                    ((PostCard2WithPreviewViewHolder) holder).imageView.setImageDrawable(null);
+                                }
+                            });
                 } else {
-                    imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(((PostCard2WithPreviewViewHolder) holder).imageView);
+                    imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                            ((PostCard2WithPreviewViewHolder) holder).imageView.setImageDrawable(resource);
+                            int width = resource.getIntrinsicWidth();
+                            int height = resource.getIntrinsicHeight();
+                            if (!mFixedHeightPreviewInCard) {
+                                if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
+                                    ((PostCard2WithPreviewViewHolder) holder).imageView.setRatio((float) height / width);
+                                    ((PostCard2WithPreviewViewHolder) holder).imageView.getLayoutParams().height = height;
+                                    preview.setPreviewHeight(height);
+                                    preview.setPreviewWidth(width);
+                                } else {
+                                    ((PostCard2WithPreviewViewHolder) holder).imageView.setRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                }
+                            } else {
+                                ((PostCard2WithPreviewViewHolder) holder).imageView.setRatio(-1);
+                            }
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                            ((PostCard2WithPreviewViewHolder) holder).imageView.setImageDrawable(null);
+                        }
+                    });
                 }
             }
         }
@@ -3307,7 +3491,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             downY = e.getRawY();
                             break;
                         case MotionEvent.ACTION_MOVE:
-                            if(Math.abs(e.getRawX() - downX) > minTouchSlop || Math.abs(e.getRawY() - downY) > minTouchSlop) {
+                            if (Math.abs(e.getRawX() - downX) > minTouchSlop || Math.abs(e.getRawY() - downY) > minTouchSlop) {
                                 dragged = true;
                             }
                             break;
@@ -3510,21 +3694,21 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         }
 
         void setBaseView(AspectRatioGifImageView iconGifImageView,
-                                         TextView nameTextView, ImageView stickiedPostImageView,
-                                         TextView postTimeTextView, ConstraintLayout titleAndImageConstraintLayout,
-                                         TextView titleTextView, CustomTextView typeTextView,
-                                         ImageView archivedImageView, ImageView lockedImageView,
-                                         ImageView crosspostImageView, CustomTextView nsfwTextView,
-                                         CustomTextView spoilerTextView, CustomTextView flairTextView,
-                                         CustomTextView awardsTextView, TextView linkTextView,
-                                         RelativeLayout relativeLayout, ProgressBar progressBar,
-                                         ImageView imageView, ImageView playButtonImageView,
-                                         FrameLayout noPreviewLinkImageFrameLayout,
-                                         ImageView noPreviewLinkImageView, Barrier imageBarrier,
-                                         ConstraintLayout bottomConstraintLayout, ImageView upvoteButton,
-                                         TextView scoreTextView, ImageView downvoteButton,
-                                         TextView commentsCountTextView, ImageView saveButton,
-                                         ImageView shareButton, View divider) {
+                         TextView nameTextView, ImageView stickiedPostImageView,
+                         TextView postTimeTextView, ConstraintLayout titleAndImageConstraintLayout,
+                         TextView titleTextView, CustomTextView typeTextView,
+                         ImageView archivedImageView, ImageView lockedImageView,
+                         ImageView crosspostImageView, CustomTextView nsfwTextView,
+                         CustomTextView spoilerTextView, CustomTextView flairTextView,
+                         CustomTextView awardsTextView, TextView linkTextView,
+                         RelativeLayout relativeLayout, ProgressBar progressBar,
+                         ImageView imageView, ImageView playButtonImageView,
+                         FrameLayout noPreviewLinkImageFrameLayout,
+                         ImageView noPreviewLinkImageView, Barrier imageBarrier,
+                         ConstraintLayout bottomConstraintLayout, ImageView upvoteButton,
+                         TextView scoreTextView, ImageView downvoteButton,
+                         TextView commentsCountTextView, ImageView saveButton,
+                         ImageView shareButton, View divider) {
             this.iconGifImageView = iconGifImageView;
             this.nameTextView = nameTextView;
             this.stickiedPostImageView = stickiedPostImageView;
@@ -4419,7 +4603,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             downTime = System.currentTimeMillis();
                             break;
                         case MotionEvent.ACTION_MOVE:
-                            if(Math.abs(e.getRawX() - downX) > minTouchSlop || Math.abs(e.getRawY() - downY) > minTouchSlop) {
+                            if (Math.abs(e.getRawX() - downX) > minTouchSlop || Math.abs(e.getRawY() - downY) > minTouchSlop) {
                                 dragged = true;
                             }
                             if (!dragged) {

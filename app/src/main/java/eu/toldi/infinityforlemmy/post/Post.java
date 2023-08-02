@@ -1,5 +1,6 @@
 package eu.toldi.infinityforlemmy.post;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -624,6 +625,8 @@ public class Post implements Parcelable {
         private String previewCaption;
         private String previewCaptionUrl;
 
+        private Bitmap previewBitmap;
+
         public Preview(String previewUrl, int previewWidth, int previewHeight, String previewCaption, String previewCaptionUrl) {
             this.previewUrl = previewUrl;
             this.previewWidth = previewWidth;
@@ -638,6 +641,7 @@ public class Post implements Parcelable {
             previewHeight = in.readInt();
             previewCaption = in.readString();
             previewCaptionUrl = in.readString();
+            previewBitmap = in.readParcelable(Bitmap.class.getClassLoader());
         }
 
         public static final Creator<Preview> CREATOR = new Creator<Preview>() {
@@ -686,11 +690,21 @@ public class Post implements Parcelable {
             return previewCaptionUrl;
         }
 
-        public void setPreviewCaptionUrl(String previewCaptionUrl) { this.previewCaptionUrl = previewCaptionUrl; }
+        public void setPreviewCaptionUrl(String previewCaptionUrl) {
+            this.previewCaptionUrl = previewCaptionUrl;
+        }
 
         @Override
         public int describeContents() {
             return 0;
+        }
+
+        public Bitmap getPreviewBitmap() {
+            return previewBitmap;
+        }
+
+        public void setPreviewBitmap(Bitmap previewBitmap) {
+            this.previewBitmap = previewBitmap;
         }
 
         @Override
@@ -700,6 +714,7 @@ public class Post implements Parcelable {
             parcel.writeInt(previewHeight);
             parcel.writeString(previewCaption);
             parcel.writeString(previewCaptionUrl);
+            parcel.writeParcelable(previewBitmap, i);
         }
     }
 }

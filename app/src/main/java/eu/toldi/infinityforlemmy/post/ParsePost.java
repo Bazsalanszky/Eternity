@@ -5,7 +5,6 @@ import static java.lang.Integer.max;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -191,8 +190,8 @@ public class ParsePost {
         ArrayList <Post.Preview> previews = new ArrayList<>();
         if(!post.isNull("thumbnail_url")) {
             String thumbnail = post.getString("thumbnail_url");
-            int[] wh_array = getImageDimension(thumbnail);
-            previews.add(new Post.Preview(thumbnail, wh_array[0], wh_array[1], "", ""));
+            //int[] wh_array = getImageDimension(thumbnail);
+            previews.add(new Post.Preview(thumbnail, 0, 0, "", ""));
         }
 
 
@@ -684,8 +683,7 @@ public class ParsePost {
     }
 
     public static int[] getImageDimension(String imageUrl) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy); //Permit all for simplicity. You may want to revise this for your actual app.
+
 
         HttpURLConnection urlConnection = null;
         try {
