@@ -335,7 +335,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     protected void applyCustomTheme() {
         mCoordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(mAppBarLayout, mCollapsingToolbarLayout, mToolbar);
-        applyFABTheme(fab);
+        applyFABTheme(fab, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
         searchPanelMaterialCardView.setBackgroundTintList(ColorStateList.valueOf(mCustomThemeWrapper.getColorPrimary()));
         int searchPanelTextAndIconColor = mCustomThemeWrapper.getToolbarPrimaryTextAndIconColor();
         searchTextInputLayout.setBoxStrokeColor(searchPanelTextAndIconColor);

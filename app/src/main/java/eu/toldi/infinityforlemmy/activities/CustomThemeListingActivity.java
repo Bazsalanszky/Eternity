@@ -51,6 +51,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeViewModel;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.events.RecreateActivityEvent;
 import eu.toldi.infinityforlemmy.utils.CustomThemeSharedPreferencesUtils;
+import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 
 public class CustomThemeListingActivity extends BaseActivity implements
@@ -154,7 +155,7 @@ public class CustomThemeListingActivity extends BaseActivity implements
     @Override
     protected void applyCustomTheme() {
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar);
-        applyFABTheme(fab);
+        applyFABTheme(fab, sharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
     }
 
     @Override

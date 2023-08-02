@@ -33,6 +33,7 @@ import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.postfilter.DeletePostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterViewModel;
+import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class PostFilterPreferenceActivity extends BaseActivity {
 
@@ -205,7 +206,7 @@ public class PostFilterPreferenceActivity extends BaseActivity {
     @Override
     protected void applyCustomTheme() {
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar);
-        applyFABTheme(fab);
+        applyFABTheme(fab, sharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
         coordinatorLayout.setBackgroundColor(customThemeWrapper.getBackgroundColor());
     }
 

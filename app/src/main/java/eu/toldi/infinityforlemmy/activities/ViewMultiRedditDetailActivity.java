@@ -853,7 +853,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
         coordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar);
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
-        applyFABTheme(navigationWrapper.floatingActionButton);
+        applyFABTheme(navigationWrapper.floatingActionButton, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
     }
 
     @Override

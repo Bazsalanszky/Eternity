@@ -39,6 +39,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.shape.MaterialShapeDrawable;
+import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Field;
@@ -377,9 +380,18 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomFo
         button.setTextColor(customThemeWrapper.getFABIconColor());
     }
 
-    protected void applyFABTheme(FloatingActionButton fab) {
+    protected void applyFABTheme(FloatingActionButton fab, boolean isCircular) {
         fab.setBackgroundTintList(ColorStateList.valueOf(customThemeWrapper.getColorAccent()));
         fab.setImageTintList(ColorStateList.valueOf(customThemeWrapper.getFABIconColor()));
+        if (isCircular) {
+            ShapeAppearanceModel shapeAppearanceModel = ShapeAppearanceModel.builder()
+                    .setAllCorners(CornerFamily.ROUNDED, 100) // Adjust the radius value to control the roundness
+                    .build();
+
+            // Apply the circular shape to the FAB
+            MaterialShapeDrawable shapeDrawable = new MaterialShapeDrawable(shapeAppearanceModel);
+            fab.setShapeAppearanceModel(shapeAppearanceModel);
+        }
     }
 
     protected void fixViewPager2Sensitivity(ViewPager2 viewPager2) {

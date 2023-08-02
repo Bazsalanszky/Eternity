@@ -221,7 +221,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         coordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar);
         applyTabLayoutTheme(tabLayout);
-        applyFABTheme(fab);
+        applyFABTheme(fab, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
         searchEditText.setTextColor(mCustomThemeWrapper.getToolbarPrimaryTextAndIconColor());
         searchEditText.setHintTextColor(mCustomThemeWrapper.getToolbarSecondaryTextColor());
     }

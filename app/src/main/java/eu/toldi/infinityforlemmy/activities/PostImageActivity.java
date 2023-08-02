@@ -475,8 +475,9 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
         nsfwTextView.setTextColor(primaryTextColor);
         titleEditText.setTextColor(primaryTextColor);
         titleEditText.setHintTextColor(secondaryTextColor);
-        applyFABTheme(captureFab);
-        applyFABTheme(selectFromLibraryFab);
+        boolean circleFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false);
+        applyFABTheme(captureFab, circleFab);
+        applyFABTheme(selectFromLibraryFab, circleFab);
         selectAgainTextView.setTextColor(mCustomThemeWrapper.getColorAccent());
         if (typeface != null) {
             subredditNameTextView.setTypeface(typeface);

@@ -107,6 +107,7 @@ import eu.toldi.infinityforlemmy.events.ChangeLockBottomAppBarEvent;
 import eu.toldi.infinityforlemmy.events.ChangeNSFWEvent;
 import eu.toldi.infinityforlemmy.events.ChangeRequireAuthToAccountSectionEvent;
 import eu.toldi.infinityforlemmy.events.ChangeShowAvatarOnTheRightInTheNavigationDrawerEvent;
+import eu.toldi.infinityforlemmy.events.ChangeUseCircularFabEvent;
 import eu.toldi.infinityforlemmy.events.RecreateActivityEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.PostFragment;
@@ -233,6 +234,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     private String mMessageFullname;
     private String mNewAccountName;
     private boolean hideFab;
+
+    private boolean useCircularFab;
     private boolean showBottomAppBar;
     private int mBackButtonAction;
     private boolean mLockBottomAppBar;
@@ -259,6 +262,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         ButterKnife.bind(this);
 
         hideFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_FAB_IN_POST_FEED, false);
+        useCircularFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false);
         showBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.BOTTOM_APP_BAR_KEY, false);
 
         navigationWrapper = new NavigationWrapper(findViewById(R.id.bottom_app_bar_bottom_app_bar), findViewById(R.id.linear_layout_bottom_app_bar),
@@ -385,7 +389,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         navigationView.setBackgroundColor(backgroundColor);
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar);
         applyTabLayoutTheme(tabLayout);
-        applyFABTheme(navigationWrapper.floatingActionButton);
+        applyFABTheme(navigationWrapper.floatingActionButton, useCircularFab);
     }
 
     private void initializeNotificationAndBindView() {
@@ -1334,6 +1338,12 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     public void onChangeHideFabInPostFeed(ChangeHideFabInPostFeedEvent event) {
         hideFab = event.hideFabInPostFeed;
         navigationWrapper.floatingActionButton.setVisibility(hideFab ? View.GONE : View.VISIBLE);
+    }
+
+    @Subscribe
+    public void onChangeUseCircularFab(ChangeUseCircularFabEvent event) {
+        useCircularFab = event.isUseCircularFab();
+        applyFABTheme(navigationWrapper.floatingActionButton, useCircularFab);
     }
 
     @Override

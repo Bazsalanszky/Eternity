@@ -631,7 +631,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         karmaTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         cakedayTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
-        applyFABTheme(navigationWrapper.floatingActionButton);
+        applyFABTheme(navigationWrapper.floatingActionButton, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
         descriptionTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         subscribeUserChip.setTextColor(mCustomThemeWrapper.getChipTextColor());
         applyTabLayoutTheme(tabLayout);

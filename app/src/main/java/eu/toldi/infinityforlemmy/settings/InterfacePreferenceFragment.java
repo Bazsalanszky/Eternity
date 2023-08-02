@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.EventBus;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceFragmentCompat;
 import eu.toldi.infinityforlemmy.events.ChangeHideFabInPostFeedEvent;
+import eu.toldi.infinityforlemmy.events.ChangeUseCircularFabEvent;
 import eu.toldi.infinityforlemmy.events.ChangeVoteButtonsPositionEvent;
 import eu.toldi.infinityforlemmy.events.RecreateActivityEvent;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -23,6 +24,7 @@ public class InterfacePreferenceFragment extends CustomFontPreferenceFragmentCom
 
         Preference immersiveInterfaceEntryPreference = findPreference(SharedPreferencesUtils.IMMERSIVE_INTERFACE_ENTRY_KEY);
         SwitchPreference hideFabInPostFeedSwitchPreference = findPreference(SharedPreferencesUtils.HIDE_FAB_IN_POST_FEED);
+        SwitchPreference useCircularFAbSwitchPreference = findPreference(SharedPreferencesUtils.USE_CIRCULAR_FAB);
         SwitchPreference bottomAppBarSwitch = findPreference(SharedPreferencesUtils.BOTTOM_APP_BAR_KEY);
         SwitchPreference voteButtonsOnTheRightSwitch = findPreference(SharedPreferencesUtils.VOTE_BUTTONS_ON_THE_RIGHT_KEY);
 
@@ -33,6 +35,13 @@ public class InterfacePreferenceFragment extends CustomFontPreferenceFragmentCom
         if (hideFabInPostFeedSwitchPreference != null) {
             hideFabInPostFeedSwitchPreference.setOnPreferenceChangeListener((preference, newValue) -> {
                 EventBus.getDefault().post(new ChangeHideFabInPostFeedEvent((Boolean) newValue));
+                return true;
+            });
+        }
+
+        if (useCircularFAbSwitchPreference != null) {
+            useCircularFAbSwitchPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                EventBus.getDefault().post(new ChangeUseCircularFabEvent((Boolean) newValue));
                 return true;
             });
         }

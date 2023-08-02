@@ -39,6 +39,7 @@ import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterUsage;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterUsageViewModel;
 import eu.toldi.infinityforlemmy.postfilter.SavePostFilterUsage;
+import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 
 public class PostFilterUsageListingActivity extends BaseActivity {
@@ -206,7 +207,7 @@ public class PostFilterUsageListingActivity extends BaseActivity {
     @Override
     protected void applyCustomTheme() {
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, collapsingToolbarLayout, toolbar);
-        applyFABTheme(fab);
+        applyFABTheme(fab, sharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
         coordinatorLayout.setBackgroundColor(customThemeWrapper.getBackgroundColor());
     }
 }

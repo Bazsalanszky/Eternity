@@ -420,7 +420,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         descriptionTextView.setTextColor(primaryTextColor);
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
         applyTabLayoutTheme(tabLayout);
-        applyFABTheme(navigationWrapper.floatingActionButton);
+        applyFABTheme(navigationWrapper.floatingActionButton, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
         if (typeface != null) {
             subredditNameTextView.setTypeface(typeface);
             subscribeSubredditChip.setTypeface(typeface);

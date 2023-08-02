@@ -229,7 +229,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
         mCoordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(mAppBarLayout, mCollapsingToolbarLayout, mToolbar);
         applyTabLayoutTheme(tabLayout);
-        applyFABTheme(fab);
+        applyFABTheme(fab, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
     }
 
     private void getCurrentAccountAndFetchMessage(Bundle savedInstanceState) {

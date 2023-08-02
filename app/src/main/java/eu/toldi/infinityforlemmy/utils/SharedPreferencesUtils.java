@@ -46,6 +46,8 @@ public class SharedPreferencesUtils {
     public static final String REDDIT_USER_AGREEMENT_KEY = "reddit_user_agreement";
     public static final String HIDE_FAB_IN_POST_FEED = "hide_fab_in_post_feed";
 
+    public static final String USE_CIRCULAR_FAB = "use_circular_fab";
+
     public static final String SORT_TYPE_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.sort_type";
     public static final String SORT_TYPE_BEST_POST = "sort_type_best_post";
     public static final String SORT_TIME_BEST_POST = "sort_time_best_post";

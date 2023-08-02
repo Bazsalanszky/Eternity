@@ -1346,4 +1346,5 @@
     <string name="upload_image">Upload an image</string>
     <string name="mentions">Mentions</string>
     <string name="replies">Replies</string>
+    <string name="use_circular_fab">Use Circular FAB</string>
 </resources>
