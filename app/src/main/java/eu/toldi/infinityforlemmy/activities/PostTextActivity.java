@@ -673,8 +673,8 @@ public class PostTextActivity extends BaseActivity implements FlairBottomSheetFr
         int start = Math.max(contentEditText.getSelectionStart(), 0);
         int end = Math.max(contentEditText.getSelectionEnd(), 0);
         contentEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                "[" + uploadedImage.imageName + "](" + uploadedImage.imageUrl + ")",
-                0, "[]()".length() + uploadedImage.imageName.length() + uploadedImage.imageUrl.length());
+                "![" + uploadedImage.imageName + "](" + uploadedImage.imageUrl + ")",
+                0, "![]()".length() + uploadedImage.imageName.length() + uploadedImage.imageUrl.length());
     }
 
     @Override

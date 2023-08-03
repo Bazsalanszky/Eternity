@@ -214,6 +214,7 @@ public class ParsePost {
 
         String url = (!data.getJSONObject("post").isNull("url")) ? data.getJSONObject("post").getString("url") : "";
         String communityURL = (!data.getJSONObject("community").isNull("icon")) ? data.getJSONObject("community").getString("icon") : "";
+        String authorAvatar = (!data.getJSONObject("creator").isNull("avatar")) ? data.getJSONObject("creator").getString("avatar") : null;
 
         Uri uri = Uri.parse(url);
         String path = uri.getPath();
@@ -654,14 +655,14 @@ public class ParsePost {
             post.setVoteType(data.getInt("my_vote"));
             post.setScore(post.getScore() - 1);
         }
-
-
         if (!data.getJSONObject("post").isNull("body")) {
-            String body = MarkdownUtils.processImageCaptions(data.getJSONObject("post").getString("body"), "Image");
+            String body = data.getJSONObject("post").getString("body");
             post.setSelfText(body);
             post.setSelfTextPlain(body);
             post.setSelfTextPlainTrimmed(body.trim());
         }
+
+        post.setAuthorIconUrl(authorAvatar);
         post.setSubredditIconUrl(communityURL);
         return post;
     }

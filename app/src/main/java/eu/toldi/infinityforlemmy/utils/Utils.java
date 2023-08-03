@@ -382,8 +382,8 @@ public final class Utils {
                         int start = Math.max(editText.getSelectionStart(), 0);
                         int end = Math.max(editText.getSelectionEnd(), 0);
                         editText.getText().replace(Math.min(start, end), Math.max(start, end),
-                                "[" + fileName + "](" + imageUrlOrError + ")",
-                                0, "[]()".length() + fileName.length() + imageUrlOrError.length());
+                                "![" + fileName + "](" + imageUrlOrError + ")",
+                                0, "![]()".length() + fileName.length() + imageUrlOrError.length());
                         Snackbar.make(coordinatorLayout, R.string.upload_image_success, Snackbar.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(context, R.string.upload_image_failed, Toast.LENGTH_LONG).show();

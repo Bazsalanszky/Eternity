@@ -24,7 +24,6 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
-import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
@@ -310,7 +309,7 @@ public class ParseComment {
                 e.printStackTrace();
             }
         }
-        String content = MarkdownUtils.processImageCaptions(commentObj.getString("content"), "Image");
+        String content = commentObj.getString("content");
         String commentMarkdown = content;
         String commentRawText = content;
         String linkId = postObj.getString("id");
