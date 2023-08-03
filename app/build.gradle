@@ -8,8 +8,8 @@ android {
         applicationId "eu.toldi.infinityforlemmy"
         minSdk 21
         targetSdk 33
-        versionCode 126
-        versionName "0.0.6"
+        versionCode 128
+        versionName "0.0.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -169,6 +169,7 @@ dependencies {
     implementation "io.noties.markwon:recycler-table:$markwonVersion"
     implementation "io.noties.markwon:simple-ext:$markwonVersion"
     implementation "io.noties.markwon:inline-parser:$markwonVersion"
+    implementation "io.noties.markwon:image-glide:$markwonVersion"
     implementation 'com.atlassian.commonmark:commonmark-ext-gfm-tables:0.14.0'
     implementation 'me.saket:better-link-movement-method:2.2.0'
 

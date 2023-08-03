@@ -42,7 +42,7 @@ import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
 import io.noties.markwon.core.MarkwonTheme;
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
-import io.noties.markwon.inlineparser.BangInlineProcessor;
+import io.noties.markwon.image.glide.GlideImagesPlugin;
 import io.noties.markwon.inlineparser.HtmlInlineProcessor;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
@@ -105,7 +105,6 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
         mMarkwon = Markwon.builder(mActivity)
                 .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
                     plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
-                    plugin.excludeInlineProcessor(BangInlineProcessor.class);
                 }))
                 .usePlugin(new AbstractMarkwonPlugin() {
                     @Override
@@ -129,6 +128,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
                 .usePlugin(StrikethroughPlugin.create())
                 .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()))
                 .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
+                .usePlugin(GlideImagesPlugin.create(mActivity))
                 .build();
         mAccessToken = accessToken;
         if (where.equals(FetchMessage.WHERE_MESSAGES)) {
