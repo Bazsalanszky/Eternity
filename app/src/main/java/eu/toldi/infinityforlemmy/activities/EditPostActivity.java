@@ -174,7 +174,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
 
         mGlide = Glide.with(this);
 
-        if (mPost.getUrl().matches(picturePattern)) {
+        if (mPost.getUrl() != null && mPost.getUrl().matches(picturePattern)) {
             loadImage();
         }
 
