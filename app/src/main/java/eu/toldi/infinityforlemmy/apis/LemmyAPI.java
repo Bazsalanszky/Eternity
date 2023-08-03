@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
+import eu.toldi.infinityforlemmy.dto.AuthDTO;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.DeleteCommentDTO;
@@ -60,6 +61,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/comment/mark_as_read")
     Call<String> commentMarkAsRead(@Body ReadCommentDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/user/mark_all_as_read")
+    Call<String> userMarkAllAsRead(@Body AuthDTO params);
 
     @GET("api/v3/community")
     Call<String> communityInfo(@Query("name") String name, @Query("auth") String access_token);

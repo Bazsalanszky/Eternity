@@ -47,7 +47,6 @@ import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RecyclerViewContentScrollingInterface;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
@@ -58,12 +57,9 @@ import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.InboxFragment;
 import eu.toldi.infinityforlemmy.message.CommentInteraction;
 import eu.toldi.infinityforlemmy.message.FetchMessage;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.message.ReadMessage;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class InboxActivity extends BaseActivity implements ActivityToolbarInterface, RecyclerViewContentScrollingInterface {
 
@@ -305,31 +301,21 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
             return true;
         } else if (item.getItemId() == R.id.action_read_all_messages_inbox_activity) {
             if (mAccessToken != null) {
-                Toast.makeText(this, R.string.please_wait, Toast.LENGTH_SHORT).show();
-                mRetrofit.getRetrofit().create(RedditAPI.class).readAllMessages(APIUtils.getOAuthHeader(mAccessToken))
-                        .enqueue(new Callback<>() {
-                            @Override
-                            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                                if (response.isSuccessful()) {
-                                    Toast.makeText(InboxActivity.this, R.string.read_all_messages_success, Toast.LENGTH_SHORT).show();
-                                    if (sectionsPagerAdapter != null) {
-                                        sectionsPagerAdapter.readAllMessages();
-                                    }
-                                    EventBus.getDefault().post(new ChangeInboxCountEvent(0));
-                                } else {
-                                    if (response.code() == 429) {
-                                        Toast.makeText(InboxActivity.this, R.string.read_all_messages_time_limit, Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(InboxActivity.this, R.string.read_all_messages_failed, Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            }
+                ReadMessage.readAllMessages(mRetrofit.getRetrofit(), mAccessToken, new ReadMessage.ReadMessageListener() {
+                    @Override
+                    public void readSuccess() {
+                        Toast.makeText(InboxActivity.this, R.string.read_all_messages_success, Toast.LENGTH_SHORT).show();
+                        if (sectionsPagerAdapter != null) {
+                            sectionsPagerAdapter.readAllMessages();
+                        }
+                        EventBus.getDefault().post(new ChangeInboxCountEvent(0));
+                    }
 
-                            @Override
-                            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                                Toast.makeText(InboxActivity.this, R.string.read_all_messages_failed, Toast.LENGTH_LONG).show();
-                            }
-                        });
+                    @Override
+                    public void readFailed() {
+
+                    }
+                });
             }
         } else if (item.getItemId() == android.R.id.home) {
             finish();
