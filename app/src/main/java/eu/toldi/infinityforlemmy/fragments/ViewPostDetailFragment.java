@@ -213,7 +213,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @State
     boolean isFetchingComments = false;
     @State
-    String mMessageFullname;
+    int mMessageFullname;
     @State
     SortType.Type sortType;
     @State
@@ -553,7 +553,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             if (mSingleCommentId != 0) {
                 isSingleCommentThreadMode = true;
             }
-            mMessageFullname = getArguments().getString(EXTRA_MESSAGE_FULLNAME);
+            mMessageFullname = getArguments().getInt(EXTRA_MESSAGE_FULLNAME);
 
             if (!mRespectSubredditRecommendedSortType || isSingleCommentThreadMode) {
                 sortType = loadSortType();
@@ -575,11 +575,11 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     }
 
     private void bindView() {
-        if (mAccessToken != null && mMessageFullname != null) {
+        if (mAccessToken != null && mMessageFullname != 0) {
             ReadMessage.readMessage(mRetrofit.getRetrofit(), mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
                 @Override
                 public void readSuccess() {
-                    mMessageFullname = null;
+                    mMessageFullname = 0;
                 }
 
                 @Override

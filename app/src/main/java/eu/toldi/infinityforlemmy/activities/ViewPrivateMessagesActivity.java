@@ -229,13 +229,15 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
                         }
                         if (fullnames.length() > 0) {
                             fullnames.deleteCharAt(fullnames.length() - 1);
-                            ReadMessage.readMessage(mOauthRetrofit, mAccessToken, fullnames.toString(),
+                            ReadMessage.readMessage(mOauthRetrofit, mAccessToken, 0,
                                     new ReadMessage.ReadMessageListener() {
                                         @Override
-                                        public void readSuccess() {}
+                                        public void readSuccess() {
+                                        }
 
                                         @Override
-                                        public void readFailed() {}
+                                        public void readFailed() {
+                                        }
                                     });
                         }
                     }

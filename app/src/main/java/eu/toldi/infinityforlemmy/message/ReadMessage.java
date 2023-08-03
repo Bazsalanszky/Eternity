@@ -2,22 +2,17 @@ package eu.toldi.infinityforlemmy.message;
 
 import androidx.annotation.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.dto.ReadCommentDTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class ReadMessage {
-    public static void readMessage(Retrofit oauthRetrofit, String accessToken, String commaSeparatedFullnames,
+    public static void readMessage(Retrofit oauthRetrofit, String accessToken, int messageId,
                                    ReadMessageListener readMessageListener) {
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.ID_KEY, commaSeparatedFullnames);
-        oauthRetrofit.create(RedditAPI.class).readMessage(APIUtils.getOAuthHeader(accessToken), params)
+        oauthRetrofit.create(LemmyAPI.class).commentMarkAsRead(new ReadCommentDTO(messageId, true, accessToken))
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

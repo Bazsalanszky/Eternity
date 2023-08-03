@@ -13,6 +13,8 @@ import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
+import eu.toldi.infinityforlemmy.dto.ReadCommentDTO;
+import eu.toldi.infinityforlemmy.dto.ReadMessageDTO;
 import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
@@ -50,6 +52,14 @@ public interface LemmyAPI {
 
     @GET("api/v3/user/unread_count")
     Call<MessageCount> userUnreadCount(@NonNull @Query("auth") String access_token);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/user/mention/mark_as_read")
+    Call<String> userMentionMarkAsRead(@Body ReadMessageDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/comment/mark_as_read")
+    Call<String> commentMarkAsRead(@Body ReadCommentDTO params);
 
     @GET("api/v3/community")
     Call<String> communityInfo(@Query("name") String name, @Query("auth") String access_token);

@@ -17,6 +17,8 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.NetworkState;
@@ -27,12 +29,14 @@ import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPrivateMessagesActivity;
 import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.events.ChangeInboxCountEvent;
 import eu.toldi.infinityforlemmy.markdown.RedditHeadingPlugin;
 import eu.toldi.infinityforlemmy.markdown.SpoilerAwareMovementMethod;
 import eu.toldi.infinityforlemmy.markdown.SpoilerParserPlugin;
 import eu.toldi.infinityforlemmy.markdown.SuperscriptPlugin;
 import eu.toldi.infinityforlemmy.message.CommentInteraction;
 import eu.toldi.infinityforlemmy.message.FetchMessage;
+import eu.toldi.infinityforlemmy.message.ReadMessage;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -61,7 +65,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
         }
     };
     private BaseActivity mActivity;
-    private Retrofit mOauthRetrofit;
+    private Retrofit retrofit;
     private Markwon mMarkwon;
     private String mAccessToken;
     private int mMessageType;
@@ -83,7 +87,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
                                       RetryLoadingMoreCallback retryLoadingMoreCallback) {
         super(DIFF_CALLBACK);
         mActivity = activity;
-        mOauthRetrofit = oauthRetrofit;
+        retrofit = oauthRetrofit;
         mRetryLoadingMoreCallback = retryLoadingMoreCallback;
 
         mColorAccent = customThemeWrapper.getColorAccent();
@@ -190,7 +194,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
                         holder.itemView.setBackgroundColor(mMessageBackgroundColor);
 
 
-                        /*ReadMessage.readMessage(mOauthRetrofit, mAccessToken, message.getId(),
+                        ReadMessage.readMessage(retrofit, mAccessToken, message.getId(),
                                 new ReadMessage.ReadMessageListener() {
                                     @Override
                                     public void readSuccess() {
@@ -203,7 +207,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
                                         message.markAsUnRead();
                                         holder.itemView.setBackgroundColor(mUnreadMessageBackgroundColor);
                                     }
-                                });*/
+                                });
                     }
                 });
 

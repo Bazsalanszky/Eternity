@@ -233,7 +233,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private boolean hideFab;
     private boolean showBottomAppBar;
     private boolean lockBottomAppBar;
-    private String mMessageFullname;
+    private int mMessageId;
     private String mNewAccountName;
 
     private UserData mUserData;
@@ -282,11 +282,11 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
 
         if (savedInstanceState == null) {
-            mMessageFullname = getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME);
+            mMessageId = getIntent().getIntExtra(EXTRA_MESSAGE_FULLNAME, 0);
             mNewAccountName = getIntent().getStringExtra(EXTRA_NEW_ACCOUNT_NAME);
         } else {
             mFetchUserInfoSuccess = savedInstanceState.getBoolean(FETCH_USER_INFO_STATE);
-            mMessageFullname = savedInstanceState.getString(MESSAGE_FULLNAME_STATE);
+            mMessageId = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
         }
 
@@ -706,11 +706,11 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
         fixViewPager2Sensitivity(viewPager2);
 
-        if (mMessageFullname != null) {
-            ReadMessage.readMessage(mOauthRetrofit, mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
+        if (mMessageId != 0) {
+            ReadMessage.readMessage(mOauthRetrofit, mAccessToken, mMessageId, new ReadMessage.ReadMessageListener() {
                 @Override
                 public void readSuccess() {
-                    mMessageFullname = null;
+                    mMessageId = 0;
                 }
 
                 @Override
@@ -1268,7 +1268,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(FETCH_USER_INFO_STATE, mFetchUserInfoSuccess);
-        outState.putString(MESSAGE_FULLNAME_STATE, mMessageFullname);
+        outState.putInt(MESSAGE_FULLNAME_STATE, mMessageId);
         outState.putString(NEW_ACCOUNT_NAME_STATE, mNewAccountName);
     }
 

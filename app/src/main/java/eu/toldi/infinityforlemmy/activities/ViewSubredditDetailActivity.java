@@ -221,7 +221,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private boolean hideFab;
     private boolean showBottomAppBar;
     private boolean lockBottomAppBar;
-    private String mMessageFullname;
+    private int mMessageFullname;
     private String mNewAccountName;
     private RequestManager glide;
     private int expandedTabTextColor;
@@ -352,12 +352,12 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState == null) {
-            mMessageFullname = getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME);
+            mMessageFullname = getIntent().getIntExtra(EXTRA_MESSAGE_FULLNAME, 0);
             mNewAccountName = getIntent().getStringExtra(EXTRA_NEW_ACCOUNT_NAME);
         } else {
             mFetchSubredditInfoSuccess = savedInstanceState.getBoolean(FETCH_SUBREDDIT_INFO_STATE);
             mNCurrentOnlineSubscribers = savedInstanceState.getInt(CURRENT_ONLINE_SUBSCRIBERS_STATE);
-            mMessageFullname = savedInstanceState.getString(MESSAGE_FULLNAME_STATE);
+            mMessageFullname = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
 
             if (mFetchSubredditInfoSuccess) {
@@ -872,11 +872,11 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     }
 
     private void bindView() {
-        if (mMessageFullname != null) {
+        if (mMessageFullname != 0) {
             ReadMessage.readMessage(mRetrofit.getRetrofit(), mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
                 @Override
                 public void readSuccess() {
-                    mMessageFullname = null;
+                    mMessageFullname = 0;
                 }
 
                 @Override
@@ -1234,7 +1234,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         super.onSaveInstanceState(outState);
         outState.putBoolean(FETCH_SUBREDDIT_INFO_STATE, mFetchSubredditInfoSuccess);
         outState.putInt(CURRENT_ONLINE_SUBSCRIBERS_STATE, mNCurrentOnlineSubscribers);
-        outState.putString(MESSAGE_FULLNAME_STATE, mMessageFullname);
+        outState.putInt(MESSAGE_FULLNAME_STATE, mMessageFullname);
         outState.putString(NEW_ACCOUNT_NAME_STATE, mNewAccountName);
     }
 

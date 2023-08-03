@@ -231,7 +231,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     private boolean mFetchUserInfoSuccess = false;
     private boolean mFetchSubscriptionsSuccess = false;
     private boolean mDrawerOnAccountSwitch = false;
-    private String mMessageFullname;
+    private int mMessageFullname;
     private String mNewAccountName;
     private boolean hideFab;
 
@@ -348,11 +348,11 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             mFetchUserInfoSuccess = savedInstanceState.getBoolean(FETCH_USER_INFO_STATE);
             mFetchSubscriptionsSuccess = savedInstanceState.getBoolean(FETCH_SUBSCRIPTIONS_STATE);
             mDrawerOnAccountSwitch = savedInstanceState.getBoolean(DRAWER_ON_ACCOUNT_SWITCH_STATE);
-            mMessageFullname = savedInstanceState.getString(MESSAGE_FULLNAME_STATE);
+            mMessageFullname = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
             inboxCount = savedInstanceState.getInt(INBOX_COUNT_STATE);
         } else {
-            mMessageFullname = getIntent().getStringExtra(EXTRA_MESSSAGE_FULLNAME);
+            mMessageFullname = getIntent().getIntExtra(EXTRA_MESSSAGE_FULLNAME, 0);
             mNewAccountName = getIntent().getStringExtra(EXTRA_NEW_ACCOUNT_NAME);
         }
 
@@ -1029,11 +1029,11 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         loadUserData();
 
         if (mAccessToken != null) {
-            if (mMessageFullname != null) {
+            if (mMessageFullname != 0) {
                 ReadMessage.readMessage(mOauthRetrofit, mAccessToken, mMessageFullname, new ReadMessage.ReadMessageListener() {
                     @Override
                     public void readSuccess() {
-                        mMessageFullname = null;
+                        mMessageFullname = 0;
                     }
 
                     @Override
@@ -1190,7 +1190,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         outState.putBoolean(FETCH_USER_INFO_STATE, mFetchUserInfoSuccess);
         outState.putBoolean(FETCH_SUBSCRIPTIONS_STATE, mFetchSubscriptionsSuccess);
         outState.putBoolean(DRAWER_ON_ACCOUNT_SWITCH_STATE, mDrawerOnAccountSwitch);
-        outState.putString(MESSAGE_FULLNAME_STATE, mMessageFullname);
+        outState.putInt(MESSAGE_FULLNAME_STATE, mMessageFullname);
         outState.putString(NEW_ACCOUNT_NAME_STATE, mNewAccountName);
         outState.putInt(INBOX_COUNT_STATE, inboxCount);
     }
