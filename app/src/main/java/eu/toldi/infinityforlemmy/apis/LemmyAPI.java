@@ -1,5 +1,7 @@
 package eu.toldi.infinityforlemmy.apis;
 
+import androidx.annotation.NonNull;
+
 import com.google.common.util.concurrent.ListenableFuture;
 
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
@@ -15,6 +17,7 @@ import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
+import eu.toldi.infinityforlemmy.message.MessageCount;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -44,6 +47,9 @@ public interface LemmyAPI {
 
     @GET("api/v3/private_message/list")
     Call<String> privateMessageList(@Query("page") Integer page, @Query("limit") Integer limit, @Query("unread_only") boolean unread_only, @Query("auth") String access_token);
+
+    @GET("api/v3/user/unread_count")
+    Call<MessageCount> userUnreadCount(@NonNull @Query("auth") String access_token);
 
     @GET("api/v3/community")
     Call<String> communityInfo(@Query("name") String name, @Query("auth") String access_token);

@@ -1076,20 +1076,29 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
     private void loadUserData() {
         if (!mFetchUserInfoSuccess) {
-            FetchUserData.fetchUserData(mRedditDataRoomDatabase, mRetrofit.getRetrofit(), mAccessToken,
-                    mAccountName, new FetchUserData.FetchUserDataListener() {
+            FetchUserData.fetchUnreadCount(mRetrofit.getRetrofit(), mAccessToken, new FetchUserData.FetchUserUnreadCountListener() {
                 @Override
-                public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
+                public void onFetchUserUnreadCountSuccess(int inboxCount) {
                     MainActivity.this.inboxCount = inboxCount;
-                    mAccountName = userData.getName();
-                    mFetchUserInfoSuccess = true;
                     if (adapter != null) {
                         adapter.setInboxCount(inboxCount);
                     }
                 }
 
                 @Override
-                public void onFetchUserDataFailed() {
+                public void onFetchUserUnreadCountFailed() {
+                }
+            });
+            FetchUserData.fetchUserData(mRedditDataRoomDatabase, mRetrofit.getRetrofit(), mAccessToken,
+                    mAccountName, new FetchUserData.FetchUserDataListener() {
+                        @Override
+                        public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
+                            mAccountName = userData.getName();
+                            mFetchUserInfoSuccess = true;
+                        }
+
+                        @Override
+                        public void onFetchUserDataFailed() {
                     mFetchUserInfoSuccess = false;
                 }
             });

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.message.MessageCount;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -83,6 +84,33 @@ public class FetchUserData {
                 fetchUserListingDataListener.onFetchUserListingDataFailed();
             }
         });
+    }
+
+    public static void fetchUnreadCount(Retrofit retrofit, String accessToken, FetchUserUnreadCountListener fetchUserUnreadCountListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+
+        Call<MessageCount> userUnreadCount = api.userUnreadCount(accessToken);
+        userUnreadCount.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(@NonNull Call<MessageCount> call, @NonNull retrofit2.Response<MessageCount> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    fetchUserUnreadCountListener.onFetchUserUnreadCountSuccess(response.body().getSum());
+                } else {
+                    fetchUserUnreadCountListener.onFetchUserUnreadCountFailed();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<MessageCount> call, @NonNull Throwable t) {
+                fetchUserUnreadCountListener.onFetchUserUnreadCountFailed();
+            }
+        });
+    }
+
+    public interface FetchUserUnreadCountListener {
+        void onFetchUserUnreadCountSuccess(int unreadCount);
+
+        void onFetchUserUnreadCountFailed();
     }
 
     public interface FetchUserDataListener {
