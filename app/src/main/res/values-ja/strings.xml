@@ -432,8 +432,8 @@
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Redditアカウント"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_community_title">"Subreddit"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">Community</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"共有"</string>
     <string name="settings_share_summary">"このアプリが気に入ったようでしたら、ぜひ他の方々にもご紹介ください"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>

@@ -400,7 +400,7 @@
     <string name="settings_reddit_account_title">"Reddit račun"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
     <string name="settings_community_title">"Podreddit"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"Dijeljenje"</string>
     <string name="settings_share_summary">"Ako Vam se aplikacija sviđa, podijelite ju s drugima"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>

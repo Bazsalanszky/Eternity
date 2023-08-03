@@ -389,7 +389,7 @@
     <string name="settings_reddit_account_title">"Аккаунт Reddit"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
     <string name="settings_community_title">"Сабреддит"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"Поделиться"</string>
     <string name="settings_share_summary">"Поделитесь этим приложением с другими людьми, если оно вам нравится"</string>
     <string name="settings_version_title">"Infinity для Reddit"</string>

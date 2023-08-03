@@ -171,7 +171,7 @@ Toque para tentar novamente."</string>
     <string name="post_link_hint">"URL"</string>
     <string name="communities">"Comunidades"</string>
     <string name="users">"Utilizadores"</string>
-    <string name="multi_reddits">"MultiReddits"</string>
+    <string name="multi_reddits">MultiCommunity</string>
     <string name="bottom_sheet_post_text">"Texto"</string>
     <string name="bottom_sheet_post_link">"Ligação"</string>
     <string name="bottom_sheet_post_image">"Imagem"</string>
@@ -388,7 +388,7 @@ Toque para tentar novamente."</string>
     <string name="settings_reddit_account_title">"Conta do Reddit"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
     <string name="settings_community_title">"Comunidade"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"Partilhar"</string>
     <string name="settings_share_summary">"Se aprecia esta aplicação, partilhe-a com outros"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>

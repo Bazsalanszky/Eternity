@@ -16,13 +16,13 @@
     <string name="view_message_activity_label">Inbox</string>
     <string name="settings_activity_label">Settings</string>
     <string name="account_saved_thing_activity_label">Saved</string>
-    <string name="create_multi_reddit_activity_label">Create Multireddit</string>
+    <string name="create_multi_reddit_activity_label">Create Multicommunity</string>
     <string name="community_multiselection_activity_label">Select Communities</string>
     <string name="custom_theme_listing_activity_label">Custom Themes</string>
     <string name="customize_theme_activity_label">Customize Theme</string>
     <string name="customize_theme_activity_create_theme_label">Create Theme</string>
     <string name="theme_preview_activity_label">Theme Preview</string>
-    <string name="edit_multi_reddit_activity_label">Edit Multireddit</string>
+    <string name="edit_multi_reddit_activity_label">Edit Multicommunity</string>
     <string name="selected_subeddits_activity_label">Selected Communities</string>
     <string name="report_activity_label">Report</string>
     <string name="view_imgur_media_activity_image_label">Image %1$d/%2$d</string>
@@ -38,7 +38,7 @@
     <string name="filtered_posts_activity_subtitle">Filtered Posts</string>
     <string name="post_filter_preference_activity_label">Post Filter</string>
     <string name="search_users_result_activity_label">Users</string>
-    <string name="multireddit_selection_activity_label">Select a Multireddit</string>
+    <string name="multireddit_selection_activity_label">Select a Multicommunity</string>
     <string name="post_gallery_activity_label">Gallery Post</string>
     <string name="trending_activity_label">Trending</string>
     <string name="wiki_activity_label">Wiki</string>
@@ -70,8 +70,8 @@
     <string name="action_edit_flair">Edit Flair</string>
     <string name="action_change_post_layout">Change Post Layout</string>
     <string name="action_save">Save</string>
-    <string name="action_edit_multi_reddit">Edit MultiReddit</string>
-    <string name="action_delete_multi_reddit">Delete Multireddit</string>
+    <string name="action_edit_multi_reddit">Edit Multicommunity</string>
+    <string name="action_delete_multi_reddit">Delete Multicommunity</string>
     <string name="action_share">Share</string>
     <string name="action_preview">Preview</string>
     <string name="action_report">Report</string>
@@ -84,7 +84,7 @@
     <string name="action_give_award">Give Award</string>
     <string name="action_save_to_database">Save to Database</string>
     <string name="action_read_all_messages">Read All Messages</string>
-    <string name="action_add_to_multireddit">Add to Multireddit</string>
+    <string name="action_add_to_multireddit">Add to Multicommuity</string>
     <string name="action_share_link">Share Link</string>
     <string name="action_copy_link">Copy Link</string>
     <string name="action_open_external_browser">Open in browser</string>
@@ -114,7 +114,7 @@
     <string name="no_comments">No comments found</string>
     <string name="no_communities">No communities found</string>
     <string name="no_users">No users found</string>
-    <string name="no_multi_reddits">No Multireddits found</string>
+    <string name="no_multi_reddits">No Multicommunities found</string>
     <string name="no_storage_permission">No storage permission to save this file</string>
     <string name="anonymous_homepage_not_implemented">Anonymous homepage is not implemented yet</string>
 
@@ -135,7 +135,7 @@
 
     <string name="profile">Profile</string>
     <string name="subscriptions">Subscriptions</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">Multicommuity</string>
     <string name="history">History</string>
     <string name="inbox">Inbox</string>
     <string name="inbox_with_count">Inbox (%1$,d)</string>
@@ -153,7 +153,7 @@
     <string name="invalid_response">Invalid response from the server</string>
     <string name="invalid_username_or_password">Invalid username or password</string>
     <string name="cannot_fetch_sidebar">Cannot fetch sidebar</string>
-    <string name="cannot_fetch_multireddit">Cannot fetch multireddit info</string>
+    <string name="cannot_fetch_multireddit">Cannot fetch multicommunity info</string>
 
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
@@ -226,7 +226,7 @@
 
     <string name="communities">Communities</string>
     <string name="users">Users</string>
-    <string name="multi_reddits">MultiReddits</string>
+    <string name="multi_reddits">MultiCommunity</string>
     <string name="posts">Posts</string>
     <string name="comments">Comments</string>
     <string name="about">About</string>
@@ -511,14 +511,14 @@
     <string name="settings_tab_3_summary">Tab 3</string>
     <string name="settings_more_tabs_summary">More Tabs</string>
     <string name="settings_more_tabs_info_summary">Enabling the following options will cause an unintended behaviour:\nTabs may lose all the content after switching to others. This is the same as refreshing the page.</string>
-    <string name="settings_more_tabs_show_favorite_multireddits_title">Show Favorite Multireddits</string>
-    <string name="settings_more_tabs_show_multireddits_title">Show Multireddits</string>
+    <string name="settings_more_tabs_show_favorite_multireddits_title">Show Favorite Multicommunities</string>
+    <string name="settings_more_tabs_show_multireddits_title">Show Multicommunities</string>
     <string name="settings_more_tabs_show_favorite_subscribed_communities_title">Show Favorite Subscribed Communities</string>
     <string name="settings_more_tabs_show_subscribed_communities_title">Show Subscribed Communities</string>
     <string name="settings_tab_title">Title</string>
     <string name="settings_tab_post_type">Type</string>
     <string name="settings_tab_community_name">Community Name (Without @ instance tag)</string>
-    <string name="settings_tab_multi_reddit_name">MultiReddit Path (/user/yourusername/m/yourmultiredditname) (only lowercase characters)</string>
+    <string name="settings_tab_multi_reddit_name">Multicommunity Path (/user/yourusername/m/yourmulticommunityname) (only lowercase characters)</string>
     <string name="settings_tab_username">Username (Without u/ prefix)</string>
     <string name="no_developer_easter_egg">There\'s no developer options here</string>
     <string name="settings_download_location_title">Download Location</string>
@@ -548,7 +548,7 @@
     <string name="settings_bottom_app_bar_option_4">Option 4</string>
     <string name="settings_bottom_app_bar_fab">Floating Action Button</string>
     <string name="settings_data_saving_mode">Data Saving Mode</string>
-    <string name="settings_data_saving_mode_info_summary">In data saving mode:\nPreview images are in lower resolution.\nReddit videos are in lower resolution.\nVideo autoplay is disabled.</string>
+    <string name="settings_data_saving_mode_info_summary">In data saving mode: Preview images are in lower resolution. Lemmy videos are in lower resolution. Video autoplay is disabled.</string>
     <string name="settings_translation_title">Translation</string>
     <string name="settings_translation_summary">Translate this app on POEditor. Thanks to all contributors.</string>
     <string name="settings_credits_national_flags">National Flags</string>
@@ -594,7 +594,7 @@
     <string name="settings_swipe_between_posts_title">Swipe Between Posts</string>
     <string name="settings_navigation_drawer_title">Navigation Drawer</string>
     <string name="settings_collapse_account_section_title">Collapse Account Section</string>
-    <string name="settings_collapse_reddit_section_title">Collapse Reddit Section</string>
+    <string name="settings_collapse_reddit_section_title">Collapse Lemmy Section</string>
     <string name="settings_collapse_post_section_title">Collapse Post Section</string>
     <string name="settings_collapse_preferences_section_title">Collapse Preferences Section</string>
     <string name="settings_collapse_favorite_communities_section_title">Collapse Favorite Communities Section</string>
@@ -639,13 +639,13 @@
     <string name="settings_show_fewer_toolbar_options_threshold_title">Show Fewer Toolbar Options Starting From</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Level %1$d</string>
     <string name="settings_show_author_avatar_title">Show Author Avatar</string>
-    <string name="settings_reddit_user_agreement_title">Reddit User Agreement</string>
+    <string name="settings_reddit_user_agreement_title">Lemmy User Agreement</string>
     <string name="settings_always_show_child_comment_count_title">Always Show the Number of Child Comments</string>
     <string name="settings_hide_upvote_ratio_title">Hide Upvote Ratio</string>
     <string name="settings_miscellaneous_dangerous_group_title">Dangerous</string>
     <string name="settings_post_feed_max_resolution_warning_title">Increase the value to show previews in higher resolution, but the app may crash unexpectedly.</string>
     <string name="settings_post_feed_max_resolution_title">Post Feed Preview Max Resolution (Width * Height)</string>
-    <string name="settings_reddit_video_default_resolution">Reddit Video Default Resolution</string>
+    <string name="settings_reddit_video_default_resolution">Lemmy Video Default Resolution</string>
     <string name="settings_easier_to_watch_in_full_screen_title">Easier to Watch in Full Screen</string>
     <string name="settings_hide_fab_in_post_feed">Hide FAB in Post Feed</string>
     <string name="settings_comment_divider_type">Comment Divider Type</string>
@@ -700,8 +700,8 @@
     <string name="elapsed_time_a_year_ago">1 Year</string>
     <string name="elapsed_time_years_ago">%1$d Years</string>
 
-    <string name="error_getting_multi_reddit_data">Error getting multireddit data</string>
-    <string name="error_loading_multi_reddit_list">Cannot sync multireddits</string>
+    <string name="error_getting_multi_reddit_data">Error getting multicommunity data</string>
+    <string name="error_loading_multi_reddit_list">Cannot sync multicommunities</string>
     <string name="error_loading_subscriptions">Cannot sync subscriptions</string>
 
     <string name="share_this_app">Check out Infinity for Lemmy, an awesome Lemmy client!\nhttps://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy</string>
@@ -742,9 +742,9 @@
     <string name="private_multi_reddit">Private</string>
     <string name="select_communities_and_users">Select Communities and Users</string>
     <string name="no_multi_reddit_name">Where is the name?</string>
-    <string name="create_multi_reddit_failed">Cannot create this multireddit</string>
-    <string name="duplicate_multi_reddit">This multireddit already exists</string>
-    <string name="edit_multi_reddit_failed">Cannot edit this multireddit</string>
+    <string name="create_multi_reddit_failed">Cannot create this multicommunity</string>
+    <string name="duplicate_multi_reddit">This multicommunity already exists</string>
+    <string name="edit_multi_reddit_failed">Cannot edit this multicommunity</string>
     <string name="delete_multi_reddit_success">Deleted successfully</string>
     <string name="delete_multi_reddit_failed">Delete failed</string>
     <string name="delete_multi_reddit_dialog_message">Are you sure?</string>
@@ -981,7 +981,7 @@
     <string name="reset_all_settings_success">Reset all settings successfully</string>
 
     <string name="username_preview">\@bazsalanszky@lemmy.toldi.eu</string>
-    <string name="community_preview">r/Infinity_For_Reddit</string>
+    <string name="community_preview">!infinityforlemmy@lemdro.id</string>
     <string name="primary_text_preview">Primary Text</string>
     <string name="secondary_text_preview">Secondary Text</string>
     <string name="post_title_preview">This is a post</string>
@@ -992,10 +992,10 @@
     <string name="author_flair_preview">Author Flair</string>
     <string name="comment_content_preview">I got my girlfriend a “Get better soon” card.\nShe\'s not ill or anything, but she could definitely get better.</string>
 
-    <string name="copy_multi_reddit_path">Copy Multireddit\'s Path</string>
-    <string name="copy_multi_reddit_path_failed">Unable to copy multireddit\'s path</string>
-    <string name="edit_multi_reddit">Edit Multireddit</string>
-    <string name="delete_multi_reddit">Delete Multireddit</string>
+    <string name="copy_multi_reddit_path">Copy Multicommunity\'s Path</string>
+    <string name="copy_multi_reddit_path_failed">Unable to copy multicommunity\'s path</string>
+    <string name="edit_multi_reddit">Edit Multicommunity</string>
+    <string name="delete_multi_reddit">Delete Multicommunity</string>
 
     <string name="n_awards">%1$,d Awards</string>
     <string name="one_award">1 Award</string>
@@ -1140,19 +1140,19 @@
     <string name="post_filter_usage_community_all">Community</string>
     <string name="post_filter_usage_user">User: %1$s</string>
     <string name="post_filter_usage_user_all">User</string>
-    <string name="post_filter_usage_multireddit">MultiReddit: %1$s</string>
-    <string name="post_filter_usage_multireddit_all">MultiReddit</string>
+    <string name="post_filter_usage_multireddit">Multicommunity: %1$s</string>
+    <string name="post_filter_usage_multireddit_all">Multicommunity</string>
     <string name="post_filter_usage_search">Search</string>
     <string name="community">Community</string>
     <string name="user">User</string>
-    <string name="edit_post_filter_name_of_usage_info">Leave it blank to apply this post filter to all the communities / users / multireddits</string>
+    <string name="edit_post_filter_name_of_usage_info">Leave it blank to apply this post filter to all the communities / users / multicommunities</string>
 
     <string name="read_all_messages_time_limit">You are doing this too frequently. Try again later. This is Reddit API\'s rate limit.</string>
     <string name="read_all_messages_success">Read all messages successfully</string>
     <string name="read_all_messages_failed">Unable to read all messages</string>
 
-    <string name="add_community_or_user_to_multireddit_success">%1$s is added to multireddit %2$s</string>
-    <string name="add_community_or_user_to_multireddit_failed">Unable to add %1$s to multireddit %2$s</string>
+    <string name="add_community_or_user_to_multireddit_success">%1$s is added to multicommunity %2$s</string>
+    <string name="add_community_or_user_to_multireddit_failed">Unable to add %1$s to multicommunity %2$s</string>
 
     <string name="choose_a_user">Choose a user</string>
 
@@ -1162,7 +1162,7 @@
     <string name="vote">Vote</string>
 
     <string name="anonymous_front_page_no_subscriptions">Start by joining a community!</string>
-    <string name="anonymous_multireddit_no_community">This multireddit does not have a community!</string>
+    <string name="anonymous_multireddit_no_community">This multicommunity does not have a community!</string>
 
     <string name="backup_settings_success">Successfully exported settings to the destination directory. The password of the generated zip file is 123321. Please don\'t modify the zip file.</string>
     <string name="create_zip_in_destination_directory_failed">Could not create backup zip in the destination directory</string>

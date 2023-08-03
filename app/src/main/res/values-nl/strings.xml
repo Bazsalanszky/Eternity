@@ -166,9 +166,9 @@ Druk om opnieuw te proberen."</string>
     <string name="choose_a_communities">"Kies een subreddit"</string>
     <string name="rules">"Regels"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="communities">"Subreddits"</string>
+    <string name="communities">Communities</string>
     <string name="users">"Gebruikers"</string>
-    <string name="multi_reddits">"MultiReddits"</string>
+    <string name="multi_reddits">MultiCommunity</string>
     <string name="bottom_sheet_post_text">"Tekst"</string>
     <string name="bottom_sheet_post_link">"Link"</string>
     <string name="bottom_sheet_post_image">"Afbeelding"</string>
@@ -383,8 +383,8 @@ Druk om opnieuw te proberen."</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"Reddit-account"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_community_title">"Subreddit"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_title">Community</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"Delen"</string>
     <string name="settings_share_summary">"Deel deze app met anderen als je hem graag gebruikt"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>

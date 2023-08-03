@@ -395,7 +395,7 @@
     <string name="settings_community_title">"版块"</string>
 
     <!-- 这个应该不做翻译为好，它是指示infinity社区位置的。在关于界面 -->
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"分享"</string>
     <string name="settings_share_summary">"如果您喜欢此应用，可以分享给其他人"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>
