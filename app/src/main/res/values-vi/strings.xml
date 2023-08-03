@@ -390,7 +390,7 @@ Nhấn để thử lại."</string>
     <string name="settings_reddit_account_title">"Tài khoản Reddit"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
     <string name="settings_community_title">"Subreddit"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"Chia sẻ"</string>
     <string name="settings_share_summary">"Hãy chia sẻ ứng dụng này với người khác nếu bạn thích nó"</string>
     <string name="settings_version_title">"Infinity cho Reddit"</string>
