@@ -16,7 +16,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FetchCommentInteractions {
-    static void fetchReplies(Retrofit retrofit, Integer page, boolean unreadOnly, String auth, FetchCommentInteractionsListener fetchMessagesListener) {
+    public static void fetchReplies(Retrofit retrofit, Integer page, boolean unreadOnly, String auth, FetchCommentInteractionsListener fetchMessagesListener) {
         LemmyAPI api = retrofit.create(LemmyAPI.class);
 
         api.userReplies("New", page, 25, unreadOnly, auth).enqueue(
