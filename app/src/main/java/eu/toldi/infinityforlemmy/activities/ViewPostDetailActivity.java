@@ -95,6 +95,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     public static final String EXTRA_POST_ID = "EPI";
     public static final String EXTRA_POST_LIST_POSITION = "EPLP";
     public static final String EXTRA_SINGLE_COMMENT_ID = "ESCI";
+    public static final String EXTRA_SINGLE_COMMENT_PARENT_ID = "ESCPI";
     public static final String EXTRA_CONTEXT_NUMBER = "ECN";
     public static final String EXTRA_MESSAGE_FULLNAME = "ENI";
     public static final String EXTRA_NEW_ACCOUNT_NAME = "ENAN";
@@ -870,6 +871,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                     bundle.putParcelable(ViewPostDetailFragment.EXTRA_POST_DATA, post);
                     bundle.putInt(ViewPostDetailFragment.EXTRA_POST_LIST_POSITION, position);
                     bundle.putInt(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_ID, getIntent().getIntExtra(EXTRA_SINGLE_COMMENT_ID, 0));
+                    bundle.putInt(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_PARENT_ID, getIntent().getIntExtra(EXTRA_SINGLE_COMMENT_PARENT_ID, 0));
                     bundle.putString(ViewPostDetailFragment.EXTRA_CONTEXT_NUMBER, getIntent().getStringExtra(EXTRA_CONTEXT_NUMBER));
                     bundle.putString(ViewPostDetailFragment.EXTRA_MESSAGE_FULLNAME, getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME));
                 } else {
@@ -891,6 +893,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                     bundle.putInt(ViewPostDetailFragment.EXTRA_POST_LIST_POSITION, postListPosition);
                 }
                 bundle.putInt(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_ID, getIntent().getIntExtra(EXTRA_SINGLE_COMMENT_ID, 0));
+                bundle.putInt(ViewPostDetailFragment.EXTRA_SINGLE_COMMENT_PARENT_ID, getIntent().getIntExtra(EXTRA_SINGLE_COMMENT_PARENT_ID, 0));
                 bundle.putString(ViewPostDetailFragment.EXTRA_CONTEXT_NUMBER, getIntent().getStringExtra(EXTRA_CONTEXT_NUMBER));
                 bundle.putString(ViewPostDetailFragment.EXTRA_MESSAGE_FULLNAME, getIntent().getStringExtra(EXTRA_MESSAGE_FULLNAME));
             }

@@ -472,6 +472,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                     Intent intent = new Intent(mActivity, ViewPostDetailActivity.class);
                     intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
                     intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_PARENT_ID, comment.getParentId());
                     mActivity.startActivity(intent);
                 }
             });

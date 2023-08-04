@@ -129,6 +129,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     public static final String EXTRA_POST_DATA = "EPD";
     public static final String EXTRA_POST_ID = "EPI";
     public static final String EXTRA_SINGLE_COMMENT_ID = "ESCI";
+
+    public static final String EXTRA_SINGLE_COMMENT_PARENT_ID = "ESCPID";
     public static final String EXTRA_CONTEXT_NUMBER = "ECN";
     public static final String EXTRA_MESSAGE_FULLNAME = "EMF";
     public static final String EXTRA_POST_LIST_POSITION = "EPLP";
@@ -229,6 +231,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     private String mAccountQualifiedName;
     private int postListPosition = -1;
     private Integer mSingleCommentId;
+    private Integer mSingleCommentParentId;
     private String mContextNumber;
     private boolean showToast = false;
     private boolean mIsSmoothScrolling = false;
@@ -547,6 +550,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         };
 
         mSingleCommentId = getArguments().getInt(EXTRA_SINGLE_COMMENT_ID, 0);
+        mSingleCommentParentId = getArguments().getInt(EXTRA_SINGLE_COMMENT_PARENT_ID, 0);
         mContextNumber = getArguments().getString(EXTRA_CONTEXT_NUMBER, "8");
 
         if (savedInstanceState == null) {
@@ -606,8 +610,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     mExoCreator, post -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                     this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(),
-                    mAccessToken, mAccountName, mPost, mLocale, mSingleCommentId,
-                    isSingleCommentThreadMode, mSharedPreferences,
+                    mAccessToken, mAccountName, mPost, mLocale, mSingleCommentId
+                    , isSingleCommentThreadMode, mSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                         @Override
                         public void retryFetchingComments() {
@@ -626,7 +630,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         public SortType.Type getSortType() {
                             return sortType;
                         }
-                    });
+                    } );
             if (mCommentsRecyclerView != null) {
                 mRecyclerView.setAdapter(mPostAdapter);
                 mCommentsRecyclerView.setAdapter(mCommentsAdapter);
@@ -1245,7 +1249,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 mPostDetailsSharedPreferences, mExoCreator,
                                 post1 -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
                         mSwipeRefreshLayout.setRefreshing(false);
-                        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, post.getId(), mSingleCommentId == 0 ? null : mSingleCommentId, sortType, mExpandChildren, 1, new FetchComment.FetchCommentListener() {
+                        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, post.getId(), mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, 1, new FetchComment.FetchCommentListener() {
                             @Override
                             public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
                                 pages_loaded++;
@@ -1666,6 +1670,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     public void changeToNormalThreadMode() {
         isSingleCommentThreadMode = false;
         mSingleCommentId = null;
+        mSingleCommentParentId = null;
         mRespectSubredditRecommendedSortType = mSharedPreferences.getBoolean(SharedPreferencesUtils.RESPECT_SUBREDDIT_RECOMMENDED_COMMENT_SORT_TYPE, false);
         refresh(false, true);
     }

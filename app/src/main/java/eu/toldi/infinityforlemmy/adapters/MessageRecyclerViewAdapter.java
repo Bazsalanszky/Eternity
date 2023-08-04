@@ -182,6 +182,9 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
 
                         intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, message.getComment().getPostId());
                         intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, message.getComment().getId());
+                        if(message.getComment().getDepth() > 0) {
+                            intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_PARENT_ID, message.getComment().getParentId());
+                        }
                         mActivity.startActivity(intent);
                     } else if (mMessageType == FetchMessage.MESSAGE_TYPE_PRIVATE_MESSAGE) {
                         Intent intent = new Intent(mActivity, ViewPrivateMessagesActivity.class);
