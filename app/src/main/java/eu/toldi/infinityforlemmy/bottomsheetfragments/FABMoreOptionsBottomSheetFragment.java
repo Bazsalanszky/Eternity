@@ -24,7 +24,6 @@ public class FABMoreOptionsBottomSheetFragment extends LandscapeExpandedRoundedB
     public static final int FAB_OPTION_SEARCH = 4;
     public static final int FAB_OPTION_GO_TO_SUBREDDIT = 5;
     public static final int FAB_OPTION_GO_TO_USER = 6;
-    public static final int FAB_RANDOM = 7;
     public static final int FAB_HIDE_READ_POSTS = 8;
     public static final int FAB_FILTER_POSTS = 9;
     public static final int FAB_GO_TO_TOP = 10;
@@ -86,10 +85,6 @@ public class FABMoreOptionsBottomSheetFragment extends LandscapeExpandedRoundedB
             dismiss();
         });
 
-        binding.randomTextViewFabMoreOptionsBottomSheetFragment.setOnClickListener(view -> {
-            activity.fabOptionSelected(FAB_RANDOM);
-            dismiss();
-        });
 
         binding.filterPostsTextViewFabMoreOptionsBottomSheetFragment.setOnClickListener(view -> {
             activity.fabOptionSelected(FAB_FILTER_POSTS);
