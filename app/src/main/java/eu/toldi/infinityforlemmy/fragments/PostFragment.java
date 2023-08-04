@@ -460,9 +460,9 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             nameOfUsage = PostFilterUsage.NO_USAGE;
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_POST, SortType.Type.TOP_ALL.value);
-            String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SEARCH_POST, SortType.Time.ALL.name());
+            String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SEARCH_POST, sort.equalsIgnoreCase(SortType.Type.TOP.value) ? SortType.Time.ALL.name() : null);
             SortType.Type st = SortType.Type.fromValue(sort);
-            sortType = new SortType(st == null ? SortType.Type.TOP_ALL : st, SortType.Time.valueOf(sortTime));
+            sortType = new SortType(st == null ? SortType.Type.TOP_ALL : st,sortTime != null ? SortType.Time.valueOf(sortTime) : null);
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SEARCH_POST, defaultPostLayout);
 
             mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
@@ -1385,6 +1385,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                         mSortTypeSharedPreferences.edit().putString(SharedPreferencesUtils.SORT_TYPE_SEARCH_POST, sortType.getType().name()).apply();
                         if (sortType.getTime() != null) {
                             mSortTypeSharedPreferences.edit().putString(SharedPreferencesUtils.SORT_TIME_SEARCH_POST, sortType.getTime().name()).apply();
+                        }else {
+                            mSortTypeSharedPreferences.edit().remove(SharedPreferencesUtils.SORT_TIME_SEARCH_POST).apply();
                         }
                         break;
                     case PostPagingSource.TYPE_MULTI_REDDIT:

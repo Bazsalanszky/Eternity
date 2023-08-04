@@ -31,16 +31,12 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
 
     public static final String EXTRA_CURRENT_SORT_TYPE = "ECST";
 
-    @BindView(R.id.relevance_type_text_view_search_sort_type_bottom_sheet_fragment)
-    TextView relevanceTypeTextView;
-    @BindView(R.id.hot_type_text_view_search_sort_type_bottom_sheet_fragment)
-    TextView hotTypeTextView;
     @BindView(R.id.top_type_text_view_search_sort_type_bottom_sheet_fragment)
     TextView topTypeTextView;
     @BindView(R.id.new_type_text_view_search_sort_type_bottom_sheet_fragment)
     TextView newTypeTextView;
-    @BindView(R.id.comments_type_text_view_search_sort_type_bottom_sheet_fragment)
-    TextView commentsTypeTextView;
+    @BindView(R.id.old_type_text_view_search_sort_type_bottom_sheet_fragment)
+    TextView oldTypeTextView;
     private BaseActivity activity;
     public SearchPostSortTypeBottomSheetFragment() {
         // Required empty public constructor
@@ -61,14 +57,12 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
         ButterKnife.bind(this, rootView);
 
         String currentSortType = getArguments().getString(EXTRA_CURRENT_SORT_TYPE);
-        if (currentSortType.equals(SortType.Type.HOT.fullName)) {
-            hotTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(hotTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
-        } else if (currentSortType.equals(SortType.Type.TOP.fullName)) {
+        if (currentSortType.equals(SortType.Type.TOP.fullName)) {
             topTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(topTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.NEW.fullName)) {
             newTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(newTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.OLD.fullName)) {
-            commentsTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(commentsTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+            oldTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(oldTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
@@ -76,15 +70,6 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
             rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         }
 
-        /*relevanceTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.RELEVANCE.name());
-            dismiss();
-        });*/
-
-        hotTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.HOT.name());
-            dismiss();
-        });
 
         topTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.TOP.name());
@@ -92,12 +77,12 @@ public class SearchPostSortTypeBottomSheetFragment extends LandscapeExpandedRoun
         });
 
         newTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.NEW));
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.NEW,null));
             dismiss();
         });
 
-        commentsTypeTextView.setOnClickListener(view -> {
-            ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.MOST_COMMENTS.name());
+        oldTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.OLD,null));
             dismiss();
         });
 
