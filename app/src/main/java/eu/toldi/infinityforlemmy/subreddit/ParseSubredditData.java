@@ -8,7 +8,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 
@@ -47,7 +52,11 @@ public class ParseSubredditData {
         }
 
         boolean removed = community.getBoolean("removed");
-        String published = community.getString("published");
+        String published_raw = community.getString("published");
+        String published = formatISOTime(published_raw);
+        if(published == null){
+            published = published_raw;
+        }
         String updated = "";
         if (!community.isNull("updated")) {
             updated = community.getString("updated");
@@ -168,6 +177,27 @@ public class ParseSubredditData {
             } else {
                 parseSubredditListingDataListener.onParseSubredditListingDataFail();
             }
+        }
+    }
+
+    public static String formatISOTime(String isoTime) {
+        // Truncate the time to millisecond precision
+        String truncatedTime = isoTime.substring(0, 23);
+
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        try {
+            Date date = isoFormat.parse(truncatedTime);
+
+            // Set your desired output format here
+            SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss", Locale.US);
+            outputFormat.setTimeZone(TimeZone.getDefault()); // Set to device's default timezone
+
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
