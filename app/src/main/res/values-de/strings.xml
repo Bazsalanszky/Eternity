@@ -17,14 +17,14 @@
     <string name="view_message_activity_label">"Posteingang"</string>
     <string name="settings_activity_label">"Einstellungen"</string>
     <string name="account_saved_thing_activity_label">"Gespeichert"</string>
-    <string name="create_multi_reddit_activity_label">"Multireddit erstellen"</string>
-    <string name="community_multiselection_activity_label">"Multireddits auswählen"</string>
+    <string name="create_multi_reddit_activity_label">Multicommunity erstellen</string>
+    <string name="community_multiselection_activity_label">Multicommunity auswählen</string>
     <string name="custom_theme_listing_activity_label">"Benutzerdefinierte Themen"</string>
     <string name="customize_theme_activity_label">"Thema anpassen"</string>
     <string name="customize_theme_activity_create_theme_label">"Thema erstellen"</string>
     <string name="theme_preview_activity_label">"Thema-Vorschau"</string>
-    <string name="edit_multi_reddit_activity_label">"Multireddit bearbeiten"</string>
-    <string name="selected_subeddits_activity_label">"Ausgewählte Subreddits"</string>
+    <string name="edit_multi_reddit_activity_label">Multicommunity bearbeiten</string>
+    <string name="selected_subeddits_activity_label">Ausgewählte Communities</string>
     <string name="report_activity_label">"Melden"</string>
     <string name="view_imgur_media_activity_image_label">"Bild %1$d/%2$d"</string>
     <string name="view_imgur_media_activity_video_label">"Video %1$d/%2$d"</string>
@@ -55,8 +55,8 @@
     <string name="action_edit_flair">"Flair bearbeiten"</string>
     <string name="action_change_post_layout">"Beitragslayout ändern"</string>
     <string name="action_save">"Speichern"</string>
-    <string name="action_edit_multi_reddit">"Multireddit bearbeiten"</string>
-    <string name="action_delete_multi_reddit">"Multireddit löschen"</string>
+    <string name="action_edit_multi_reddit">Multicommunity bearbeiten</string>
+    <string name="action_delete_multi_reddit">Multicommunity löschen</string>
     <string name="action_share">"Teilen"</string>
     <string name="action_preview">"Vorschau"</string>
     <string name="action_report">"Melden"</string>
@@ -83,7 +83,7 @@ Tippen für Neuversuch."</string>
     <string name="no_comments">"Keine Kommentare gefunden"</string>
     <string name="no_communities">"Keine Subreddits gefunden"</string>
     <string name="no_users">"Keine Benutzer gefunden"</string>
-    <string name="no_multi_reddits">"Keine Multireddits gefunden"</string>
+    <string name="no_multi_reddits">Keine Multicommunities gefunden</string>
     <string name="no_storage_permission">"Keine Speicherberechtigung, um diese Datei zu speichern"</string>
     <string name="load_comments_failed">"Fehler beim Laden der Kommentare.
 Tippen für Neuversuch."</string>
@@ -104,7 +104,7 @@ Tippen für Neuversuch."</string>
     <string name="since">"Seit:"</string>
     <string name="profile">"Profil"</string>
     <string name="subscriptions">"Abonnements"</string>
-    <string name="multi_reddit">"Multireddit"</string>
+    <string name="multi_reddit">Multicommunity</string>
     <string name="inbox">"Posteingang"</string>
     <string name="upvoted">"Upgevotet"</string>
     <string name="downvoted">"Downgevotet"</string>
@@ -117,7 +117,7 @@ Tippen für Neuversuch."</string>
     <string name="cannot_fetch_community_info">"Kann Subredddit-Info nicht abrufen"</string>
     <string name="cannot_fetch_user_info">"Kann Benutzer-Info nicht abrufen"</string>
     <string name="cannot_fetch_sidebar">"Kann Seitenleiste nicht abrufen"</string>
-    <string name="cannot_fetch_multireddit">"Kann Multireddit-Info nicht abrufen"</string>
+    <string name="cannot_fetch_multireddit">Kann Multicommunity-Info nicht abrufen</string>
     <string name="subscribe">"Abonnieren"</string>
     <string name="unsubscribe">"Deabonnieren"</string>
     <string name="subscribed">"Abonniert"</string>
@@ -171,9 +171,9 @@ Tippen für Neuversuch."</string>
     <string name="choose_a_communities">"Wähle ein Subreddit"</string>
     <string name="rules">"Regeln"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="communities">"Subreddits"</string>
+    <string name="communities">Communities</string>
     <string name="users">"Benutzer"</string>
-    <string name="multi_reddits">"Multireddits"</string>
+    <string name="multi_reddits">MultiCommunity</string>
     <string name="bottom_sheet_post_text">"Text"</string>
     <string name="bottom_sheet_post_link">"Link"</string>
     <string name="bottom_sheet_post_image">"Bild"</string>
@@ -408,10 +408,10 @@ Tippen für Neuversuch."</string>
     <string name="settings_rate_summary">"Gib mir eine 5-Stern-Bewertung und mach mich richtig glücklich"</string>
     <string name="settings_email_title">"E-Mail"</string>
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
-    <string name="settings_reddit_account_title">"Reddit-Konto"</string>
-    <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_community_title">"Subreddit"</string>
-    <string name="settings_community_summary">"r/Infinity_For_Reddit"</string>
+    <string name="settings_reddit_account_title">Lemmy-Konto</string>
+    <string name="settings_reddit_account_summary">\@bazsalanszky@lemmy.toldi.eu</string>
+    <string name="settings_community_title">Community</string>
+    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">"Teilen"</string>
     <string name="settings_share_summary">"Teile diese App mit anderen Leuten, wenn sie dir gefällt"</string>
     <string name="settings_version_title">"Infinity For Reddit"</string>
@@ -434,10 +434,10 @@ Tippen für Neuversuch."</string>
     <string name="settings_tab_3_summary">"Reiter 3"</string>
     <string name="settings_tab_title">"Titel"</string>
     <string name="settings_tab_post_type">"Typ"</string>
-    <string name="settings_tab_community_name">"Subreddit-Name (ohne r/ Präfix)"</string>
+    <string name="settings_tab_community_name">Community-Name (ohne r/ Präfix)</string>
 
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">"Multireddit-Name (/user/DeinBenutzername/m/DeinMultiredditName)"</string>
+    <string name="settings_tab_multi_reddit_name">Multicommunity-Name (/user/DeinBenutzername/m/DeinMulticommunityName)</string>
     <string name="settings_tab_username">"Benutzername (ohne u/ Präfix)"</string>
     <string name="no_developer_easter_egg">"Es gibt hier keine Entwickleroptionen"</string>
     <string name="no_link_available">"Konnte den Link nicht abrufen"</string>
@@ -475,8 +475,8 @@ Tippen für Neuversuch."</string>
     <string name="elapsed_time_months_ago">"%1$d Monate"</string>
     <string name="elapsed_time_a_year_ago">"1 Jahr"</string>
     <string name="elapsed_time_years_ago">"%1$d Jahre"</string>
-    <string name="error_getting_multi_reddit_data">"Fehler beim Abrufen der Multireddit-Daten"</string>
-    <string name="error_loading_multi_reddit_list">"Kann Multireddits nicht synchronisieren"</string>
+    <string name="error_getting_multi_reddit_data">Fehler beim Abrufen der Multicommunity-Daten</string>
+    <string name="error_loading_multi_reddit_list">Kann Multicommunities nicht synchronisieren</string>
     <string name="error_loading_subscriptions">"Kann Abonnements nicht synchronisieren"</string>
     <string name="share_this_app">"Schau dir Infinity for Reddit an, ein super Reddit-Client!
 https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string>
@@ -506,9 +506,9 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="multi_reddit_description_hint">"Beschreibung"</string>
     <string name="private_multi_reddit">"Privat"</string>
     <string name="no_multi_reddit_name">"Wo ist der Name?"</string>
-    <string name="create_multi_reddit_failed">"Kann dieses Multireddit nicht erstellen"</string>
-    <string name="duplicate_multi_reddit">"Dieses Multireddit existiert bereits"</string>
-    <string name="edit_multi_reddit_failed">"Kann dieses Multireddit nicht bearbeiten"</string>
+    <string name="create_multi_reddit_failed">Kann dieses Multicommunity nicht erstellen</string>
+    <string name="duplicate_multi_reddit">Dieses Multicommunity existiert bereits</string>
+    <string name="edit_multi_reddit_failed">Kann diese Multicommunity nicht bearbeiten</string>
     <string name="delete_multi_reddit_success">"Löschen erfolgreich"</string>
     <string name="delete_multi_reddit_failed">"Löschen fehlgeschlagen"</string>
     <string name="delete_multi_reddit_dialog_message">"Bist du sicher?"</string>
@@ -745,7 +745,7 @@ Basiere auf Indigo-AMOLED-Thema"</string>
     <!-- Fuzzy -->
     <string name="reset_all_settings_success">"Alle Einstellungen erfolgreich gelöscht"</string>
     <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="community_preview">"r/Infinity_For_Reddit"</string>
+    <string name="community_preview">!infinityforlemmy@lemdro.id</string>
     <string name="primary_text_preview">"Primärer Text"</string>
     <string name="secondary_text_preview">"Sekundärer Text"</string>
     <string name="post_title_preview">"Dies ist ein Beitrag"</string>
@@ -756,8 +756,8 @@ Basiere auf Indigo-AMOLED-Thema"</string>
     <string name="author_flair_preview">"Autor-Flair"</string>
     <string name="comment_content_preview">"Ich habe für meine Freundin eine “Gute Besserung“-Karte besorgt.
 Sie ist nicht krank oder so, aber sie könnte sich definitiv bessern."</string>
-    <string name="edit_multi_reddit">"Multireddit bearbeiten"</string>
-    <string name="delete_multi_reddit">"Multireddit löschen"</string>
+    <string name="edit_multi_reddit">Multicommunity bearbeiten</string>
+    <string name="delete_multi_reddit">Multicommunity löschen</string>
     <string name="n_awards">"%1$d Auszeichnungen"</string>
     <string name="one_award">"1 Auszeichnung"</string>
     <string name="report">"Melden"</string>
@@ -822,7 +822,7 @@ Beispiel: DeinPasswort:123456"</string>
     <string name="settings_more_tabs_summary">"Mehr Reiter"</string>
     <string name="settings_more_tabs_info_summary">"Die folgenden Optionen zu aktivieren, kann zu ungewollten Verhalten führen:
 Reiter könnten den Inhalt verlieren, wenn zu anderen gewechselt wird. Selbes Verhalten wie beim Neuladen der Seite."</string>
-    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"Favoriten der abonnierten Subreddits anzeigen"</string>
+    <string name="settings_more_tabs_show_favorite_subscribed_communities_title">Favoriten der abonnierten Communities anzeigen</string>
     <string name="settings_more_tabs_show_subscribed_communities_title">"Abonnierte Subreddits anzeigen"</string>
     <string name="settings_download_location_title">"Downloadpfad"</string>
     <string name="settings_image_download_location_title">"Downloadpfad für Bilder"</string>
@@ -855,7 +855,7 @@ Reiter könnten den Inhalt verlieren, wenn zu anderen gewechselt wird. Selbes Ve
     <!-- Fuzzy -->
     <string name="settings_data_saving_mode_info_summary">"Im Datensparmodus:
 Vorschaubilder haben eine geringere Auflösung.
-Reddit-Videos haben eine geringere Auflösung.
+Lemmy-Videos haben eine geringere Auflösung.
 Automatisches Abspielen von Videos ist deaktiviert."</string>
     <string name="settings_translation_title">"Übersetzung"</string>
     <string name="settings_translation_summary">"Übersetze diese App auf POEditor. Danke an alle Beitragenden."</string>
@@ -933,10 +933,10 @@ Nachricht: %2$s"</string>
     <string name="filtered_posts_activity_subtitle">"Gefilterte Beiträge"</string>
     <string name="post_filter_preference_activity_label">"Beitragsfilter"</string>
     <string name="search_users_result_activity_label">"Benutzer"</string>
-    <string name="multireddit_selection_activity_label">"Wähle ein Multireddit"</string>
+    <string name="multireddit_selection_activity_label">Wähle eine Multicommunity</string>
     <string name="action_save_to_database">"In der Datenbank speichern"</string>
     <string name="action_read_all_messages">"Alle Nachrichten lesen"</string>
-    <string name="action_add_to_multireddit">"Zum Multireddit hinzufügen"</string>
+    <string name="action_add_to_multireddit">Zum Multicommunity hinzufügen</string>
     <string name="search_only_communities_hint">"Subreddits durchsuchen"</string>
     <string name="search_only_users_hint">"Benutzer durchsuchen"</string>
     <string name="post_type_gif">"GIF"</string>
@@ -995,19 +995,19 @@ Nachricht: %2$s"</string>
     <string name="post_filter_usage_user_all">"Benutzer"</string>
 
     <!-- This is inconsistant. Sometimes we call it Multireddit, other times MultiReddit. -->
-    <string name="post_filter_usage_multireddit">"Multireddit: %1$s"</string>
+    <string name="post_filter_usage_multireddit">Multicommunity: %1$s</string>
 
     <!-- This is inconsistant. Sometimes we call it Multireddit, other times MultiReddit. -->
-    <string name="post_filter_usage_multireddit_all">"Multireddit"</string>
+    <string name="post_filter_usage_multireddit_all">Multicommunity</string>
     <string name="post_filter_usage_search">"Suche"</string>
     <string name="community">"Subreddit"</string>
     <string name="user">"Benutzer"</string>
-    <string name="edit_post_filter_name_of_usage_info">"Leer lassen, um diesen Beitragsfilter auf alle Subreddits / Benutzer / Multireddits anzuwenden"</string>
+    <string name="edit_post_filter_name_of_usage_info">Leer lassen, um diesen Beitragsfilter auf alle Subreddits / Benutzer / Multicommunities anzuwenden</string>
     <string name="read_all_messages_time_limit">"Du machst das zu oft hintereinander. Versuche es später noch einmal. Dies ist eine Beschränkung der Reddit-API."</string>
     <string name="read_all_messages_success">"Alle Nachrichten erfolgreich als gelesen markiert"</string>
     <string name="read_all_messages_failed">"Kann nicht alle Nachrichten als gelesen markieren"</string>
-    <string name="add_community_or_user_to_multireddit_success">"%1$s wurde zu Multireddit %2$s hinzugefügt"</string>
-    <string name="add_community_or_user_to_multireddit_failed">"Konnte %1$s nicht zu Multireddit %2$s hinzufügen"</string>
+    <string name="add_community_or_user_to_multireddit_success">%1$s wurde zu Multicommunity %2$s hinzugefügt</string>
+    <string name="add_community_or_user_to_multireddit_failed">Konnte %1$s nicht zu Multicommunity %2$s hinzufügen</string>
     <string name="choose_a_user">"Wähle einen Benutzer"</string>
     <string name="settings_click_to_show_media_in_gallery_layout">"Antippen, um die Medien in der Galerie-Ansicht anzuzeigen"</string>
     <string name="settings_hide_post_type">"Beitragsart verstecken"</string>
@@ -1097,8 +1097,8 @@ Nachricht: %2$s"</string>
     <string name="settings_show_only_one_comment_level_indicator">"Nur einen Indikator für die Kommentarebene anzeigen"</string>
     <string name="save_comment">"Speichern"</string>
     <string name="unsave_comment">"Nicht mehr speichern"</string>
-    <string name="copy_multi_reddit_path">"Pfad des Multireddit kopieren"</string>
-    <string name="copy_multi_reddit_path_failed">"Pfad des Multireddit kann nicht kopiert werden"</string>
+    <string name="copy_multi_reddit_path">Pfad der Multicommunity kopieren</string>
+    <string name="copy_multi_reddit_path_failed">Pfad der Multicommunity kann nicht kopiert werden</string>
     <string name="crash_reports_deleted">"Absturzmeldungen werden gelöscht"</string>
     <string name="disable_nsfw_forever_message">"Wenn du diese Option aktivierst, wird NSFW dauerhaft deaktiviert, egal ob die NSFW-Option ein- oder ausgeschaltet ist. Diese Option ist irreversibel, wenn du NSFW wieder einschalten willst, müssen die Daten der App gelöscht werden.
 
@@ -1125,9 +1125,9 @@ Benenne diese Themen sonst neu."</string>
     <string name="settings_enable_material_you_summary">"Infinity Theme ihrem Hintergrund anpassen"</string>
     <string name="settings_apply_material_you_title">"Material You anwenden"</string>
     <string name="settings_apply_material_you_summary">"Sollte Infinity den Theme nicht gewechselt haben"</string>
-    <string name="settings_more_tabs_show_favorite_multireddits_title">"Multireddits Favoriten anzeigen"</string>
-    <string name="settings_more_tabs_show_multireddits_title">"Multireddits anzeigen"</string>
-    <string name="settings_collapse_reddit_section_title">"Sektion für Reddit zusammenklappen"</string>
+    <string name="settings_more_tabs_show_favorite_multireddits_title">Multicommunities Favoriten anzeigen</string>
+    <string name="settings_more_tabs_show_multireddits_title">Multicommunities anzeigen</string>
+    <string name="settings_collapse_reddit_section_title">Sektion für Lemmy zusammenklappen</string>
     <string name="settings_video_player_automatic_landscape_orientation">"Automatisch zum Querformat im Videospieler wechseln"</string>
     <string name="settings_remember_muting_option_in_post_feed">"Stummschalt-Option im Beitragsfeed merken"</string>
     <string name="link_post_layout_auto">"Automatisch"</string>
@@ -1190,7 +1190,7 @@ Antippen zum Wiederholen."</string>
     <string name="title_contains_strings_hint">"Titel: enthält Schlüsselwörter (key1,key2)"</string>
     <string name="title_contains_regex_hint">"Titel: enthält Regex"</string>
     <string name="contain_domains_hint">"Domains cont"</string>
-    <string name="anonymous_multireddit_no_community">"Dieses Multireddit hat kein Subreddit!"</string>
+    <string name="anonymous_multireddit_no_community">Dieses Multicommunity hat kein Subreddit!</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">"Fehler beim Abrufen von v.redd.it video: Kann Video URL nicht finden"</string>
     <string name="contain_domain">"Diese Domain containen"</string>
     <string name="lock_screen_text">"Ruhig Brauner!!!"</string>
@@ -1256,13 +1256,13 @@ Antippen zum Wiederholen."</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">"Weniger Werkzeugleistenoptionen anzeigen"</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">"Wert %1$d"</string>
     <string name="settings_show_author_avatar_title">"Autoravatar zeigen"</string>
-    <string name="settings_reddit_user_agreement_title">"Reddit Nutzungsbestimmungen "</string>
+    <string name="settings_reddit_user_agreement_title">"Lemmy Nutzungsbestimmungen "</string>
     <string name="settings_always_show_child_comment_count_title">"Immer die Anzahl von untergeordneten Kommentaren anzeigen"</string>
     <string name="settings_hide_upvote_ratio_title">"Upvoteverhaltnis verstecken"</string>
     <string name="settings_miscellaneous_dangerous_group_title">"Gefährlich"</string>
     <string name="settings_post_feed_max_resolution_warning_title">"Wert erhöhen um Vorschau in höherer Qualität zu zeigen, aber die App kann unerwartet abstürzen."</string>
     <string name="settings_post_feed_max_resolution_title">"Beitragsvorschau maximale Auflösung (Höhe * Breite)"</string>
-    <string name="settings_reddit_video_default_resolution">"Reddit Video Standardauflösung"</string>
+    <string name="settings_reddit_video_default_resolution">Lemmy Video Standardauflösung</string>
     <string name="select_a_ttf_font">"ttf Schriftart Datei auswählen"</string>
     <string name="unable_to_get_font_file">"Schriftart konnte nicht geladen werden"</string>
     <string name="unable_to_load_font">"Benutzerdefinierte Schriftart konnte nicht geladen werden"</string>
