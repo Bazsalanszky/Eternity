@@ -16,6 +16,7 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
 <div align="center">
 
 [![status-badge](https://ci.codeberg.org/api/badges/12474/status.svg)](https://ci.codeberg.org/12474)
+[![Liberapay patrons](https://img.shields.io/liberapay/patrons/bazsalanszky)](https://liberapay.com/Bazsalanszky)
 
 <a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues">Report a Bug</a>
 
@@ -41,11 +42,14 @@ Infinity for Lemmy is currently in the early stages of development. Expect many 
 - [x] Support for multiple account handling
 - [x] Functionality for post upvotes/downvotes
 - [x] Functionality to browse comments
-- [ ] Capability for creating a new post
+- [x] Capability for creating a new post
 - [x] Ability to create comments
+- [x] Edit/Delete posts and comments
+- [x] Basic inbox
 - [ ] Elimination of code/string references specific to Reddit
 - [ ] Incorporation of private messaging feature
-- [ ] Feature for saving posts
+- [x] Feature for saving posts/comments
+- [x] Resolving links
 - [ ] Account editing function
 - [ ] Multi community view?
 
