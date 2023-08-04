@@ -554,12 +554,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 creationTimeTextView.setText(subredditData.getCreatedUTC());
                 description = subredditData.getDescription();
 
-                if (hideSubredditDescription || description.equals("")) {
-                    descriptionTextView.setVisibility(View.GONE);
-                } else {
-                    descriptionTextView.setVisibility(View.VISIBLE);
-                    markwon.setMarkdown(descriptionTextView, description);
-                }
+
+                descriptionTextView.setVisibility(View.GONE);
+
 
                 if (subredditData.isNSFW()) {
                     if (nsfwWarningBuilder == null
