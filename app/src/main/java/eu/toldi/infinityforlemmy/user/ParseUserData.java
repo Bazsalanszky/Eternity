@@ -46,6 +46,7 @@ public class ParseUserData {
         int instance_id = personJson.getInt("instance_id");
 
         String cakeday = personJson.getString(JSONUtils.PUBLISHED);
+        cakeday = cakeday.substring(0, cakeday.indexOf("T"));
         boolean isBot = personJson.getBoolean("bot_account");
         boolean isBanned = personJson.getBoolean("banned");
         boolean isLocal = personJson.getBoolean("local");
