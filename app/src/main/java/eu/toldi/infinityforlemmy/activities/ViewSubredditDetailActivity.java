@@ -554,12 +554,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 creationTimeTextView.setText(subredditData.getCreatedUTC());
                 description = subredditData.getDescription();
 
-                if (hideSubredditDescription || description.equals("")) {
-                    descriptionTextView.setVisibility(View.GONE);
-                } else {
-                    descriptionTextView.setVisibility(View.VISIBLE);
-                    markwon.setMarkdown(descriptionTextView, description);
-                }
+
+                descriptionTextView.setVisibility(View.GONE);
+
 
                 if (subredditData.isNSFW()) {
                     if (nsfwWarningBuilder == null
@@ -1400,10 +1397,6 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
             case FABMoreOptionsBottomSheetFragment.FAB_OPTION_GO_TO_USER: {
                 goToUser();
-                break;
-            }
-            case FABMoreOptionsBottomSheetFragment.FAB_RANDOM: {
-                random();
                 break;
             }
             case FABMoreOptionsBottomSheetFragment.FAB_HIDE_READ_POSTS: {

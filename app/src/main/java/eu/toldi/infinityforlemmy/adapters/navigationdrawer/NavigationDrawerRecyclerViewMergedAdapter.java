@@ -17,8 +17,6 @@ import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 public class NavigationDrawerRecyclerViewMergedAdapter {
     private HeaderSectionRecyclerViewAdapter headerSectionRecyclerViewAdapter;
     private AccountSectionRecyclerViewAdapter accountSectionRecyclerViewAdapter;
-    private RedditSectionRecyclerViewAdapter redditSectionRecyclerViewAdapter;
-    private PostSectionRecyclerViewAdapter postSectionRecyclerViewAdapter;
     private PreferenceSectionRecyclerViewAdapter preferenceSectionRecyclerViewAdapter;
     private FavoriteSubscribedSubredditsSectionRecyclerViewAdapter favoriteSubscribedSubredditsSectionRecyclerViewAdapter;
     private SubscribedSubredditsRecyclerViewAdapter subscribedSubredditsRecyclerViewAdapter;
@@ -49,10 +47,6 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
                 });
         accountSectionRecyclerViewAdapter = new AccountSectionRecyclerViewAdapter(baseActivity, customThemeWrapper,
                 navigationDrawerSharedPreferences, accountName != null, itemClickListener);
-        redditSectionRecyclerViewAdapter = new RedditSectionRecyclerViewAdapter(baseActivity, customThemeWrapper,
-                navigationDrawerSharedPreferences, itemClickListener, accountName != null);
-        postSectionRecyclerViewAdapter = new PostSectionRecyclerViewAdapter(baseActivity, customThemeWrapper,
-                navigationDrawerSharedPreferences, accountName != null, itemClickListener);
         preferenceSectionRecyclerViewAdapter = new PreferenceSectionRecyclerViewAdapter(baseActivity, customThemeWrapper,
                 accountName, nsfwAndSpoilerSharedPreferences, navigationDrawerSharedPreferences, itemClickListener);
         favoriteSubscribedSubredditsSectionRecyclerViewAdapter = new FavoriteSubscribedSubredditsSectionRecyclerViewAdapter(
@@ -65,8 +59,6 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
         mainPageConcatAdapter = new ConcatAdapter(
                 headerSectionRecyclerViewAdapter,
                 accountSectionRecyclerViewAdapter,
-                redditSectionRecyclerViewAdapter,
-                postSectionRecyclerViewAdapter,
                 preferenceSectionRecyclerViewAdapter,
                 favoriteSubscribedSubredditsSectionRecyclerViewAdapter,
                 subscribedSubredditsRecyclerViewAdapter);
@@ -78,8 +70,6 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
 
     private void openAccountSection() {
         mainPageConcatAdapter.removeAdapter(accountSectionRecyclerViewAdapter);
-        mainPageConcatAdapter.removeAdapter(redditSectionRecyclerViewAdapter);
-        mainPageConcatAdapter.removeAdapter(postSectionRecyclerViewAdapter);
         mainPageConcatAdapter.removeAdapter(preferenceSectionRecyclerViewAdapter);
         mainPageConcatAdapter.removeAdapter(favoriteSubscribedSubredditsSectionRecyclerViewAdapter);
         mainPageConcatAdapter.removeAdapter(subscribedSubredditsRecyclerViewAdapter);
@@ -91,8 +81,6 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
         mainPageConcatAdapter.removeAdapter(accountManagementSectionRecyclerViewAdapter);
 
         mainPageConcatAdapter.addAdapter(accountSectionRecyclerViewAdapter);
-        mainPageConcatAdapter.addAdapter(redditSectionRecyclerViewAdapter);
-        mainPageConcatAdapter.addAdapter(postSectionRecyclerViewAdapter);
         mainPageConcatAdapter.addAdapter(preferenceSectionRecyclerViewAdapter);
         mainPageConcatAdapter.addAdapter(favoriteSubscribedSubredditsSectionRecyclerViewAdapter);
         mainPageConcatAdapter.addAdapter(subscribedSubredditsRecyclerViewAdapter);

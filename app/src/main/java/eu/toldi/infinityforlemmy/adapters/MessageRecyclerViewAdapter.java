@@ -215,7 +215,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
 
                     Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
                     intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, message.getComment().getAuthor());
-                    intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, message.getComment().getCommunityQualifiedName());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, message.getComment().getAuthorQualifiedName());
                     mActivity.startActivity(intent);
                 });
             }

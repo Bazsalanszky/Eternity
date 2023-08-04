@@ -233,7 +233,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         });
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(1);
         if (viewPager.getCurrentItem() != 2) {
             fab.hide();
         }
@@ -358,7 +358,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         }
 
         if (!(!forceLoad && mInsertMultiredditSuccess)) {
-            loadMultiReddits();
+            //loadMultiReddits();
         }
     }
 
@@ -412,7 +412,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                                     public void success() {
                                         Toast.makeText(SubscribedThingListingActivity.this,
                                                 R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show();
-                                        loadMultiReddits();
+                                        //loadMultiReddits();
                                     }
 
                                     @Override
@@ -439,7 +439,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
 
     @Subscribe
     public void onRefreshMultiRedditsEvent(RefreshMultiRedditsEvent event) {
-        loadMultiReddits();
+        //loadMultiReddits();
     }
 
     @Override
@@ -477,6 +477,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         @Override
         public Fragment getItem(int position) {
             switch (position) {
+                default:
                 case 0: {
                     SubscribedSubredditsListingFragment fragment = new SubscribedSubredditsListingFragment();
                     Bundle bundle = new Bundle();
@@ -487,28 +488,12 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                     fragment.setArguments(bundle);
                     return fragment;
                 }
-                case 1: {
-                    FollowedUsersListingFragment fragment = new FollowedUsersListingFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString(FollowedUsersListingFragment.EXTRA_ACCOUNT_NAME, mAccountName == null ? "-" : mAccountName);
-                    bundle.putString(FollowedUsersListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                    fragment.setArguments(bundle);
-                    return fragment;
-                }
-                default: {
-                    MultiRedditListingFragment fragment = new MultiRedditListingFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString(MultiRedditListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                    bundle.putString(MultiRedditListingFragment.EXTRA_ACCOUNT_NAME, mAccountName == null ? "-" : mAccountName);
-                    fragment.setArguments(bundle);
-                    return fragment;
-                }
             }
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 1;
         }
 
         @Override

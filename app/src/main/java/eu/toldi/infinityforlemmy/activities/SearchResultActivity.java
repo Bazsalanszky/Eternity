@@ -558,10 +558,6 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                 goToUser();
                 break;
             }
-            case FABMoreOptionsBottomSheetFragment.FAB_RANDOM: {
-                random();
-                break;
-            }
             case FABMoreOptionsBottomSheetFragment.FAB_HIDE_READ_POSTS: {
                 if (sectionsPagerAdapter != null) {
                     sectionsPagerAdapter.hideReadPosts();

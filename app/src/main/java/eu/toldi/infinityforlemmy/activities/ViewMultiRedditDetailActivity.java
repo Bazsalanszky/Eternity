@@ -946,10 +946,6 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
                 goToUser();
                 break;
             }
-            case FABMoreOptionsBottomSheetFragment.FAB_RANDOM: {
-                random();
-                break;
-            }
             case FABMoreOptionsBottomSheetFragment.FAB_HIDE_READ_POSTS: {
                 if (mFragment instanceof PostFragment) {
                     ((PostFragment) mFragment).hideReadPosts();

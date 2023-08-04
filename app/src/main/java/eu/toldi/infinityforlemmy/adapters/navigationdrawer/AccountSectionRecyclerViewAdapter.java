@@ -24,8 +24,8 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
 
     private static final int VIEW_TYPE_MENU_GROUP_TITLE = 1;
     private static final int VIEW_TYPE_MENU_ITEM = 2;
-    private static final int ACCOUNT_SECTION_ITEMS = 5;
-    private static final int ANONYMOUS_ACCOUNT_SECTION_ITEMS = 3;
+    private static final int ACCOUNT_SECTION_ITEMS = 4;
+    private static final int ANONYMOUS_ACCOUNT_SECTION_ITEMS = 2;
 
     private BaseActivity baseActivity;
     private int inboxCount;
@@ -101,10 +101,6 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
                         drawableId = R.drawable.ic_subscritptions_bottom_app_bar_24dp;
                         break;
                     case 3:
-                        stringId = R.string.multi_reddit;
-                        drawableId = R.drawable.ic_multi_reddit_24dp;
-                        break;
-                    case 4:
                         setOnClickListener = false;
                         if (inboxCount > 0) {
                             ((MenuItemViewHolder) holder).menuTextView.setText(baseActivity.getString(R.string.inbox_with_count, inboxCount));
@@ -118,23 +114,21 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
                         });
                         break;
                     default:
-                        stringId = R.string.history;
-                        drawableId = R.drawable.ic_history_24dp;
-
+                        stringId = R.string.account_saved_thing_activity_label;
+                        drawableId = R.drawable.ic_outline_bookmarks_24dp;
+                        break;
                 }
             } else {
                 switch (position) {
+
                     case 1:
                         stringId = R.string.subscriptions;
                         drawableId = R.drawable.ic_subscritptions_bottom_app_bar_24dp;
                         break;
-                    case 2:
-                        stringId = R.string.multi_reddit;
-                        drawableId = R.drawable.ic_multi_reddit_24dp;
-                        break;
                     default:
-                        stringId = R.string.history;
-                        drawableId = R.drawable.ic_history_24dp;
+                        stringId = R.string.anonymous_account_instance;
+                        drawableId = R.drawable.ic_account_circle_24dp;
+                        break;
                 }
             }
 

@@ -1400,10 +1400,6 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                 goToUser();
                 break;
             }
-            case FABMoreOptionsBottomSheetFragment.FAB_RANDOM: {
-                randomThing();
-                break;
-            }
             case FABMoreOptionsBottomSheetFragment.FAB_HIDE_READ_POSTS: {
                 if (sectionsPagerAdapter != null) {
                     sectionsPagerAdapter.hideReadPosts();
