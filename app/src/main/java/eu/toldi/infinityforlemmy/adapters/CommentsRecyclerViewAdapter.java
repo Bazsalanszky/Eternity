@@ -1924,6 +1924,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 if (mActivity != null && mActivity instanceof ViewPostDetailActivity) {
                     mIsSingleCommentThreadMode = false;
                     mSingleCommentId = null;
+                    loadedComments.clear();
                     notifyItemRemoved(0);
                     mFragment.changeToNormalThreadMode();
                 }
