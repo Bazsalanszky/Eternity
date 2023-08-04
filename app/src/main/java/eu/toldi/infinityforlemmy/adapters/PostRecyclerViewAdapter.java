@@ -1099,7 +1099,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     ((PostCompactBaseViewHolder) holder).titleTextView.setTextColor(mReadPostTitleColor);
                 }
                 final String subredditNamePrefixed = post.getSubredditNamePrefixed();
-                String subredditName = subredditNamePrefixed.substring(2);
+                String subredditName = subredditNamePrefixed;
                 String authorPrefixed = post.getAuthorNamePrefixed();
                 final String title = post.getTitle();
                 int voteType = post.getVoteType();
@@ -1181,7 +1181,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
                 } else {
                     if (post.getAuthorIconUrl() == null) {
-                        String authorName = post.isAuthorDeleted() ? post.getSubredditName() : post.getAuthor();
+                        String authorName =  post.getSubredditName();
                         mFragment.loadIcon(authorName, post.isAuthorDeleted(), (subredditOrUserName, iconUrl) -> {
                             if (mActivity != null && getItemCount() > 0 && authorName.equals(subredditOrUserName)) {
                                 if (iconUrl == null || iconUrl.equals("")) {
