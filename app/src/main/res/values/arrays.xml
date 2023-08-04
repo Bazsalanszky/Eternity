@@ -501,47 +501,57 @@
     <string-array name="settings_subreddit_default_sort_type">
         <item>Hot</item>
         <item>New</item>
-        <item>Rising</item>
+        <item>Active</item>
         <item>Top</item>
-        <item>Controversial</item>
+        <item>Most Comments</item>
+        <item>New Comments</item>
     </string-array>
 
     <string-array name="settings_subreddit_default_sort_type_values">
         <item>HOT</item>
         <item>NEW</item>
-        <item>RISING</item>
+        <item>ACTIVE</item>
         <item>TOP</item>
-        <item>CONTROVERSIAL</item>
+        <item>MOSTCOMMENTS</item>
+        <item>NEWCOMMENTS</item>
     </string-array>
 
     <string-array name="settings_user_default_sort_type">
         <item>New</item>
-        <item>Hot</item>
+        <item>Old</item>
         <item>Top</item>
-        <item>Controversial</item>
     </string-array>
 
     <string-array name="settings_user_default_sort_type_values">
         <item>NEW</item>
-        <item>HOT</item>
+        <item>OLD</item>
         <item>TOP</item>
-        <item>CONTROVERSIAL</item>
     </string-array>
 
     <string-array name="settings_default_sort_time">
         <item>Hour</item>
+        <item>6 Hours</item>
+        <item>12 Hours</item>
         <item>Day</item>
         <item>Week</item>
         <item>Month</item>
+        <item>3 Months</item>
+        <item>6 Months</item>
+        <item>9 Months</item>
         <item>Year</item>
         <item>All Time</item>
     </string-array>
 
     <string-array name="settings_default_sort_time_values">
         <item>HOUR</item>
+        <item>6HOURS</item>
+        <item>12HOURS</item>
         <item>DAY</item>
         <item>WEEK</item>
         <item>MONTH</item>
+        <item>3MONTHS</item>
+        <item>6MONTHS</item>
+        <item>9MONTHS</item>
         <item>YEAR</item>
         <item>ALL</item>
     </string-array>
