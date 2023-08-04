@@ -858,7 +858,7 @@ Mensagem: %2$s"</string>
     <string name="multireddit_selection_activity_label">"Escolher uma Multicomunidade"</string>
     <string name="action_save_to_database">"Guardar na Base de Dados"</string>
     <string name="action_read_all_messages">"Ler Todas as Mensagens"</string>
-    <string name="action_add_to_multicomunidade">"Adicionar à Multicomunidade"</string>
+    <string name="action_add_to_multireddit">"Adicionar à Multicomunidade"</string>
     <string name="search_only_communities_hint">"Pesquisar comunidades"</string>
     <string name="search_only_users_hint">"Pesquisar utilizadores"</string>
     <string name="post_type_gif">"Gif"</string>
