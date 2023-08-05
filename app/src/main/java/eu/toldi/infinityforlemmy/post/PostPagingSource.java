@@ -251,7 +251,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
     private ListenableFuture<LoadResult<Integer, Post>> loadSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> subredditPost;
 
-        subredditPost = api.getPosts(null,sortType.getType().value,loadParams.getKey(),25,null,subredditOrUserName,false,null);
+        subredditPost = api.getPosts(null,sortType.getType().value,loadParams.getKey(),25,null,subredditOrUserName,false,accessToken);
 
 
         ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(subredditPost, this::transformData, executor);
