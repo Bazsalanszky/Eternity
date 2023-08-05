@@ -211,10 +211,11 @@ public class ParsePost {
                                   String distinguished, String suggestedSort) throws JSONException {
         Post post;
 
-        boolean isVideo = false;
+
         String url = (!data.getJSONObject("post").isNull("url")) ? data.getJSONObject("post").getString("url") : "";
         Uri uri = Uri.parse(url);
         String path = uri.getPath();
+        boolean isVideo = path.endsWith(".mp4") || path.endsWith(".webm") || path.endsWith(".gifv");
 
         if (!data.getJSONObject("post").has("thumbnail_url") && previews.isEmpty()) {
             if (!data.getJSONObject("post").isNull("body") && url.equals("")) {
@@ -244,16 +245,13 @@ public class ParsePost {
                 } else {
                     if (isVideo) {
                         //No preview video post
-                        JSONObject redditVideoObject = data.getJSONObject(JSONUtils.MEDIA_KEY).getJSONObject(JSONUtils.REDDIT_VIDEO_KEY);
                         int postType = Post.VIDEO_TYPE;
-                        String videoUrl = Html.fromHtml(redditVideoObject.getString(JSONUtils.HLS_URL_KEY)).toString();
-                        String videoDownloadUrl = redditVideoObject.getString(JSONUtils.FALLBACK_URL_KEY);
 
                         post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, score, postType, voteType,
                                 nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
 
-                        post.setVideoUrl(videoUrl);
-                        post.setVideoDownloadUrl(videoDownloadUrl);
+                        post.setVideoUrl(url);
+                        post.setVideoDownloadUrl(url);
                     } else if (!url.equals("")) {
                         //No preview link post
                         int postType = Post.NO_PREVIEW_LINK_TYPE;
