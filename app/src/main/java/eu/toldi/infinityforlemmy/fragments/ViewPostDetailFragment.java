@@ -78,7 +78,6 @@ import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.EditPostActivity;
-import eu.toldi.infinityforlemmy.activities.GiveAwardActivity;
 import eu.toldi.infinityforlemmy.activities.PostFilterPreferenceActivity;
 import eu.toldi.infinityforlemmy.activities.ReportActivity;
 import eu.toldi.infinityforlemmy.activities.SubmitCrosspostActivity;
@@ -114,7 +113,6 @@ import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
-import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import eu.toldi.infinityforlemmy.videoautoplay.ExoCreator;
@@ -709,7 +707,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 MenuItem spoilerItem = mMenu.findItem(R.id.action_spoiler_view_post_detail_fragment);
                 spoilerItem.setVisible(true);
 
-                mMenu.findItem(R.id.action_edit_flair_view_post_detail_fragment).setVisible(true);
+                mMenu.findItem(R.id.action_block_user_view_post_detail_fragment).setVisible(false);
             }
 
             mMenu.findItem(R.id.action_view_crosspost_parent_view_post_detail_fragment).setVisible(mPost.getCrosspostParentId() != null);
@@ -1072,35 +1070,18 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             return true;
         } else if (itemId == R.id.action_spoiler_view_post_detail_fragment) {
             return true;
-        } else if (itemId == R.id.action_edit_flair_view_post_detail_fragment) {
-            FlairBottomSheetFragment flairBottomSheetFragment = new FlairBottomSheetFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString(FlairBottomSheetFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-            bundle.putString(FlairBottomSheetFragment.EXTRA_SUBREDDIT_NAME, mPost.getSubredditName());
-            bundle.putLong(FlairBottomSheetFragment.EXTRA_VIEW_POST_DETAIL_FRAGMENT_ID, viewPostDetailFragmentId);
-            flairBottomSheetFragment.setArguments(bundle);
-            flairBottomSheetFragment.show(activity.getSupportFragmentManager(), flairBottomSheetFragment.getTag());
+        } else if (itemId == R.id.action_block_user_view_post_detail_fragment) {
+            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
             return true;
-        } else if (itemId == R.id.action_give_award_view_post_detail_fragment) {
-            if (mAccessToken == null) {
-                Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-
-            Intent giveAwardIntent = new Intent(activity, GiveAwardActivity.class);
-            giveAwardIntent.putExtra(GiveAwardActivity.EXTRA_THING_FULLNAME, mPost.getFullName());
-            giveAwardIntent.putExtra(GiveAwardActivity.EXTRA_ITEM_POSITION, 0);
-            activity.startActivityForResult(giveAwardIntent, ViewPostDetailActivity.GIVE_AWARD_REQUEST_CODE);
+        } else if (itemId == R.id.action_block_community_view_post_detail_fragment) {
+            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
             return true;
         } else if (itemId == R.id.action_report_view_post_detail_fragment) {
             if (mAccessToken == null) {
                 Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
                 return true;
             }
-            Intent intent = new Intent(activity, ReportActivity.class);
-            intent.putExtra(ReportActivity.EXTRA_SUBREDDIT_NAME, mPost.getSubredditName());
-            intent.putExtra(ReportActivity.EXTRA_THING_FULLNAME, mPost.getFullName());
-            startActivity(intent);
+            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
             return true;
         } else if (itemId == R.id.action_see_removed_view_post_detail_fragment) {
             showRemovedPost();
@@ -1190,7 +1171,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         if (mCommentsRecyclerView != null) {
             LinearLayoutManager myLayoutManager = (LinearLayoutManager) mCommentsRecyclerView.getLayoutManager();
             scrollPosition = myLayoutManager != null ? myLayoutManager.findFirstVisibleItemPosition() : 0;
-            
+
         } else {
             LinearLayoutManager myLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
             scrollPosition = myLayoutManager != null ? myLayoutManager.findFirstVisibleItemPosition() : 0;
@@ -1369,7 +1350,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         }
 
 
-        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, mPost.getId(), commentId, sortType, mExpandChildren, pages_loaded + 1,
+        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, mPost.getId(), mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, pages_loaded + 1,
                 new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments,
@@ -1438,8 +1419,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     @Override
                     public void onFetchCommentFailed() {
                         isFetchingComments = false;
-
-                        mCommentsAdapter.initiallyLoadCommentsFailed();
+                        if(pages_loaded == 0)
+                            mCommentsAdapter.initiallyLoadCommentsFailed();
                         if (changeRefreshState) {
                             isRefreshing = false;
                         }
@@ -1459,7 +1440,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         isLoadingMoreChildren = true;
 
         FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken,
-                mPost.getId(), null, sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
+                mPost.getId(), mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
                         pages_loaded++;

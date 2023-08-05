@@ -1347,4 +1347,6 @@
     <string name="mentions">Mentions</string>
     <string name="replies">Replies</string>
     <string name="use_circular_fab">Use Circular FAB</string>
+    <string name="block_community">Block Community\n</string>
+    <string name="not_implemented">Feature not implemented yet :(</string>
 </resources>

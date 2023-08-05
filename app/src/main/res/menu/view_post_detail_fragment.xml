@@ -76,16 +76,16 @@
         android:visible="false" />
 
     <item
-        android:id="@+id/action_edit_flair_view_post_detail_fragment"
+        android:id="@+id/action_block_user_view_post_detail_fragment"
         android:orderInCategory="12"
-        android:title="@string/action_edit_flair"
+        android:title="@string/block_user"
         app:showAsAction="never"
-        android:visible="false" />
+        android:visible="true" />
 
     <item
-        android:id="@+id/action_give_award_view_post_detail_fragment"
+        android:id="@+id/action_block_community_view_post_detail_fragment"
         android:orderInCategory="13"
-        android:title="@string/action_give_award"
+        android:title="@string/block_community"
         app:showAsAction="never" />
 
     <item

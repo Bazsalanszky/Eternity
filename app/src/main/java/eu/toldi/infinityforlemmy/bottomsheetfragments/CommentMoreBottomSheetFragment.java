@@ -55,12 +55,8 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
     TextView shareTextView;
     @BindView(R.id.copy_text_view_comment_more_bottom_sheet_fragment)
     TextView copyTextView;
-    @BindView(R.id.give_award_text_view_comment_more_bottom_sheet_fragment)
-    TextView giveAwardTextView;
     @BindView(R.id.report_view_comment_more_bottom_sheet_fragment)
     TextView reportTextView;
-    @BindView(R.id.see_removed_view_comment_more_bottom_sheet_fragment)
-    TextView seeRemovedTextView;
     private BaseActivity activity;
 
     public CommentMoreBottomSheetFragment() {
@@ -93,18 +89,6 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
         boolean showReplyAndSaveOption = bundle.getBoolean(EXTRA_SHOW_REPLY_AND_SAVE_OPTION, false);
 
         if (accessToken != null && !accessToken.equals("")) {
-            giveAwardTextView.setVisibility(View.VISIBLE);
-            giveAwardTextView.setOnClickListener(view -> {
-                Intent intent = new Intent(activity, GiveAwardActivity.class);
-                intent.putExtra(GiveAwardActivity.EXTRA_THING_FULLNAME, comment.getFullName());
-                intent.putExtra(GiveAwardActivity.EXTRA_ITEM_POSITION, bundle.getInt(EXTRA_POSITION));
-                if (activity instanceof ViewPostDetailActivity) {
-                    activity.startActivityForResult(intent, ViewPostDetailActivity.GIVE_AWARD_REQUEST_CODE);
-                } else if (activity instanceof ViewUserDetailActivity) {
-                    activity.startActivityForResult(intent, ViewUserDetailActivity.GIVE_AWARD_REQUEST_CODE);
-                }
-                dismiss();
-            });
 
             if (editAndDeleteAvailable) {
                 editTextView.setVisibility(View.VISIBLE);
@@ -193,27 +177,14 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
         });
 
         reportTextView.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, ReportActivity.class);
+            /*Intent intent = new Intent(activity, ReportActivity.class);
             intent.putExtra(ReportActivity.EXTRA_SUBREDDIT_NAME, comment.getCommunityName());
             intent.putExtra(ReportActivity.EXTRA_THING_FULLNAME, comment.getFullName());
-            activity.startActivity(intent);
-
+            activity.startActivity(intent);*/
+            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
             dismiss();
         });
 
-        if ("[deleted]".equals(comment.getAuthor()) ||
-                "[deleted]".equals(comment.getCommentRawText()) ||
-                "[removed]".equals(comment.getCommentRawText())
-        ) {
-            seeRemovedTextView.setVisibility(View.VISIBLE);
-
-            seeRemovedTextView.setOnClickListener(view -> {
-                dismiss();
-                if (activity instanceof ViewPostDetailActivity) {
-                    ((ViewPostDetailActivity) activity).showRemovedComment(comment, bundle.getInt(EXTRA_POSITION));
-                }
-            });
-        }
 
         if (activity.typeface != null) {
             Utils.setFontToAllTextViews(rootView, activity.typeface);
