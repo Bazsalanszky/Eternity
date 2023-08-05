@@ -1219,6 +1219,10 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             this.mSaveButton = mSaveButton;
             this.mShareButton = mShareButton;
 
+            if(!mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE,true)){
+                mDownvoteButton.setVisibility(View.GONE);
+            }
+
             mIconGifImageView.setOnClickListener(view -> mSubredditTextView.performClick());
 
             mSubredditTextView.setOnClickListener(view -> {

@@ -2370,6 +2370,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             this.shareButton = shareButton;
 
             scoreTextView.setOnClickListener(null);
+            if(!mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE,true)){
+                downvoteButton.setVisibility(View.GONE);
+            }
 
             if (mVoteButtonsOnTheRight) {
                 ConstraintSet constraintSet = new ConstraintSet();
@@ -3726,6 +3729,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             this.divider = divider;
 
             scoreTextView.setOnClickListener(null);
+
+            if(!mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE,true)){
+                downvoteButton.setVisibility(View.GONE);
+            }
 
             if (mVoteButtonsOnTheRight) {
                 ConstraintSet constraintSet = new ConstraintSet();

@@ -11,11 +11,11 @@ public class ParseAndInsertNewAccount {
 
     public static void parseAndInsertNewAccount(Executor executor, Handler handler, String username,
                                                 String display_name,String accessToken, String profileImageUrl,
-                                                String bannerImageUrl, String code,String instance, AccountDao accountDao,
+                                                String bannerImageUrl, String code,String instance,boolean can_downvote, AccountDao accountDao,
                                                 ParseAndInsertAccountListener parseAndInsertAccountListener) {
         executor.execute(() -> {
             Account account = new Account(username,display_name, accessToken, code, profileImageUrl,
-                    bannerImageUrl, true,instance);
+                    bannerImageUrl, true,instance,true);
             accountDao.markAllAccountsNonCurrent();
             accountDao.insert(account);
 

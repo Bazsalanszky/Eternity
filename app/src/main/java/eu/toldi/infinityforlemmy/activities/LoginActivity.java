@@ -43,6 +43,8 @@ import eu.toldi.infinityforlemmy.asynctasks.ParseAndInsertNewAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
+import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
+import eu.toldi.infinityforlemmy.site.SiteInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -176,17 +178,35 @@ public class LoginActivity extends BaseActivity {
                                     accessToken, new FetchMyInfo.FetchMyInfoListener() {
                                         @Override
                                         public void onFetchMyInfoSuccess(String name, String display_name, String profileImageUrl, String bannerImageUrl) {
+                                            FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), accessToken, new FetchSiteInfo.FetchSiteInfoListener() {
+                                                @Override
+                                                public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+                                                    boolean canDownvote = siteInfo.isEnable_downvotes();
+                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance,canDownvote, mRedditDataRoomDatabase.accountDao(),
+                                                            () -> {
+                                                                Intent resultIntent = new Intent();
+                                                                setResult(Activity.RESULT_OK, resultIntent);
+                                                                finish();
+                                                            });
+                                                    mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, canDownvote).apply();
+                                                }
+
+                                                @Override
+                                                public void onFetchSiteInfoFailed() {
+                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance,true, mRedditDataRoomDatabase.accountDao(),
+                                                            () -> {
+                                                                Intent resultIntent = new Intent();
+                                                                setResult(Activity.RESULT_OK, resultIntent);
+                                                                finish();
+                                                            });
+                                                    mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true).apply();
+                                                }
+                                            });
                                             mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_NAME, display_name)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, name)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,instance)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, profileImageUrl).apply();
-                                            ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance, mRedditDataRoomDatabase.accountDao(),
-                                                    () -> {
-                                                        Intent resultIntent = new Intent();
-                                                        setResult(Activity.RESULT_OK, resultIntent);
-                                                        finish();
-                                                    });
                                         }
 
                                         @Override

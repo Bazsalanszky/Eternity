@@ -32,6 +32,9 @@ public class Account implements Parcelable {
     @ColumnInfo(name = "instance_url")
     private String instance_url;
 
+    @ColumnInfo(name = "can_downvote")
+    private boolean canDownvote = true;
+
     @Ignore
     protected Account(Parcel in) {
         accountName = in.readString();
@@ -42,6 +45,7 @@ public class Account implements Parcelable {
         code = in.readString();
         isCurrentUser = in.readByte() != 0;
         instance_url = in.readString();
+        canDownvote = in.readByte() != 0;
     }
 
     public static final Creator<Account> CREATOR = new Creator<Account>() {
@@ -58,11 +62,11 @@ public class Account implements Parcelable {
 
     @Ignore
     public static Account getAnonymousAccount() {
-        return new Account("-",null, null, null, null, null, false,null);
+        return new Account("-",null, null, null, null, null, false,null,true);
     }
 
     public Account(@NonNull String accountName, String display_name, String accessToken, String code,
-                   String profileImageUrl, String bannerImageUrl, boolean isCurrentUser,String instance_url) {
+                   String profileImageUrl, String bannerImageUrl, boolean isCurrentUser,String instance_url, boolean canDownvote) {
         this.accountName = accountName;
         this.display_name = display_name;
         this.accessToken = accessToken;
@@ -71,6 +75,7 @@ public class Account implements Parcelable {
         this.bannerImageUrl = bannerImageUrl;
         this.isCurrentUser = isCurrentUser;
         this.instance_url = instance_url;
+        this.canDownvote = canDownvote;
     }
 
     @NonNull
@@ -116,6 +121,10 @@ public class Account implements Parcelable {
         return instance_url;
     }
 
+    public boolean canDownvote() {
+        return canDownvote;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(accountName);
@@ -126,5 +135,6 @@ public class Account implements Parcelable {
         dest.writeString(code);
         dest.writeByte((byte) (isCurrentUser ? 1 : 0));
         dest.writeString(instance_url);
+        dest.writeByte((byte) (canDownvote ? 1 : 0));
     }
 }

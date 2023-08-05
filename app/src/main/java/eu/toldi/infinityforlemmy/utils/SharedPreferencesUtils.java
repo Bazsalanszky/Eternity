@@ -400,4 +400,5 @@ public class SharedPreferencesUtils {
     public static final String OPEN_LINK_IN_APP_LEGACY = "open_link_in_app";
     public static final String ACCOUNT_INSTANCE = "account_instance";
     public static final String ACCOUNT_QUALIFIED_NAME = "account_qualified_name";
+    public static final String CAN_DOWNVOTE = "can_downvote";
 }

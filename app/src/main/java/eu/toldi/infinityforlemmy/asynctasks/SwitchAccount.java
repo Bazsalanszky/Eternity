@@ -8,6 +8,8 @@ import java.util.concurrent.Executor;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.Account;
+import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
+import eu.toldi.infinityforlemmy.site.SiteInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class SwitchAccount {
@@ -26,6 +28,18 @@ public class SwitchAccount {
                     .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,account.getInstance_url())
                     .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, account.getProfileImageUrl()).apply();
             retrofitHolder.setBaseURL(account.getInstance_url());
+            FetchSiteInfo.fetchSiteInfo(retrofitHolder.getRetrofit(), account.getAccessToken(), new FetchSiteInfo.FetchSiteInfoListener() {
+                @Override
+                public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+                    boolean canDownvote = siteInfo.isEnable_downvotes();
+                    currentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, canDownvote).apply();
+                }
+
+                @Override
+                public void onFetchSiteInfoFailed() {
+                    currentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true).apply();
+                }
+            });
             handler.post(() -> switchAccountListener.switched(account));
         });
 

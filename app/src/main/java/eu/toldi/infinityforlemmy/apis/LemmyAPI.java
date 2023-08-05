@@ -221,4 +221,9 @@ public interface LemmyAPI {
             @Query("id") int commentId,
             @Query("auth") String auth
     );
+
+    @GET("api/v3/site")
+    Call<String> getSiteInfo(
+            @Query("auth") String auth
+    );
 }
