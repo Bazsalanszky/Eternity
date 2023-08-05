@@ -1548,7 +1548,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     SaveComment saveComment = new SaveComment();
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        saveComment.unsaveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        saveComment.unsaveThing(mRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
