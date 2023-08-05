@@ -1757,7 +1757,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
                         });
             } else {
-                LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, LemmyUtils.qualifiedUserName2ActorId(subredditOrUserName),
+                LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditOrUserName,
                         mRetrofit.getRetrofit(), iconImageUrl -> {
                             subredditOrUserIcons.put(subredditOrUserName, iconImageUrl);
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
