@@ -182,13 +182,13 @@ public class ParseSubredditData {
 
     public static String formatISOTime(String isoTime) {
         // Truncate the time to millisecond precision
-        String truncatedTime = isoTime.substring(0, 23);
+        //String truncatedTime = isoTime.substring(0, 23);
 
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.US);
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         try {
-            Date date = isoFormat.parse(truncatedTime);
+            Date date = isoFormat.parse(isoTime);
 
             // Set your desired output format here
             SimpleDateFormat outputFormat = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss", Locale.US);

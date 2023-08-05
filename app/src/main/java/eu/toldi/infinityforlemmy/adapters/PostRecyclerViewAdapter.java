@@ -542,7 +542,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 if (mDisplaySubredditName) {
                     if (authorPrefixed.equals(post.getSubredditNamePrefixed())) {
                         if (post.getAuthorIconUrl() == null) {
-                            mFragment.loadIcon(post.getAuthor(), false, (subredditOrUserName, iconUrl) -> {
+                            mFragment.loadIcon(post.getAuthorNamePrefixed(), false, (subredditOrUserName, iconUrl) -> {
                                 if (mActivity != null && getItemCount() > 0 && post.getAuthor().equals(subredditOrUserName)) {
                                     if (iconUrl == null || iconUrl.equals("")) {
                                         mGlide.load(R.drawable.subreddit_default_icon)
@@ -608,7 +608,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 } else {
                     if (post.getAuthorIconUrl() == null) {
                         String authorName = post.isAuthorDeleted() ? post.getSubredditName() : post.getAuthor();
-                        mFragment.loadIcon(authorName, post.isAuthorDeleted(), (subredditOrUserName, iconUrl) -> {
+                        mFragment.loadIcon(post.getSubredditNamePrefixed(), post.isAuthorDeleted(), (subredditOrUserName, iconUrl) -> {
                             if (mActivity != null && getItemCount() > 0) {
                                 if (iconUrl == null || iconUrl.equals("") && authorName.equals(subredditOrUserName)) {
                                     mGlide.load(R.drawable.subreddit_default_icon)
@@ -1109,8 +1109,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 if (mDisplaySubredditName) {
                     if (authorPrefixed.equals(subredditNamePrefixed)) {
                         if (post.getAuthorIconUrl() == null) {
-                            mFragment.loadIcon(post.getAuthor(), false, (subredditOrUserName, iconUrl) -> {
-                                if (mActivity != null && getItemCount() > 0 && post.getAuthor().equals(subredditOrUserName)) {
+                            mFragment.loadIcon(post.getAuthorNamePrefixed(), false, (subredditOrUserName, iconUrl) -> {
+                                if (mActivity != null && getItemCount() > 0 && post.getAuthorNamePrefixed().equals(subredditOrUserName)) {
                                     if (iconUrl == null || iconUrl.equals("")) {
                                         mGlide.load(R.drawable.subreddit_default_icon)
                                                 .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0)))
@@ -1181,8 +1181,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
                 } else {
                     if (post.getAuthorIconUrl() == null) {
-                        String authorName =  post.getSubredditName();
-                        mFragment.loadIcon(authorName, post.isAuthorDeleted(), (subredditOrUserName, iconUrl) -> {
+                        String authorName =  post.getAuthorNamePrefixed();
+                        mFragment.loadIcon(post.getAuthorNamePrefixed(), false, (subredditOrUserName, iconUrl) -> {
                             if (mActivity != null && getItemCount() > 0 && authorName.equals(subredditOrUserName)) {
                                 if (iconUrl == null || iconUrl.equals("")) {
                                     mGlide.load(R.drawable.subreddit_default_icon)
