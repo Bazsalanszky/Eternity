@@ -9,6 +9,7 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditDao;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import retrofit2.Retrofit;
 
 public class LoadSubredditIcon {
@@ -18,9 +19,9 @@ public class LoadSubredditIcon {
                                          LoadSubredditIconAsyncTaskListener loadSubredditIconAsyncTaskListener) {
         executor.execute(() -> {
             SubredditDao subredditDao = redditDataRoomDatabase.subredditDao();
-            SubredditData subredditData = subredditDao.getSubredditData(subredditName);
+            SubredditData subredditData = subredditDao.getSubredditDataByActorId(LemmyUtils.qualifiedCommunityName2ActorId(subredditName));
             if (subredditData != null) {
-                String iconImageUrl = subredditDao.getSubredditData(subredditName).getIconUrl();
+                String iconImageUrl = subredditDao.getSubredditDataByActorId(LemmyUtils.qualifiedCommunityName2ActorId(subredditName)).getIconUrl();
                 handler.post(() -> loadSubredditIconAsyncTaskListener.loadIconSuccess(iconImageUrl));
             } else {
                 handler.post(() -> FetchSubredditData.fetchSubredditData(retrofit, subredditName, accessToken, new FetchSubredditData.FetchSubredditDataListener() {

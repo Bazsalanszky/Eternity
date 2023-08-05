@@ -8,6 +8,7 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.user.FetchUserData;
 import eu.toldi.infinityforlemmy.user.UserDao;
 import eu.toldi.infinityforlemmy.user.UserData;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import retrofit2.Retrofit;
 
 public class LoadUserData {
@@ -16,8 +17,9 @@ public class LoadUserData {
                                     Retrofit retrofit, LoadUserDataAsyncTaskListener loadUserDataAsyncTaskListener) {
         executor.execute(() -> {
             UserDao userDao = redditDataRoomDatabase.userDao();
-            if (userDao.getUserData(userName) != null) {
-                String iconImageUrl = userDao.getUserData(userName).getIconUrl();
+            UserData userData= userDao.getUserDataByActorId(LemmyUtils.qualifiedUserName2ActorId(userName));
+            if (userData != null) {
+                String iconImageUrl = userData.getIconUrl();
                 handler.post(() -> loadUserDataAsyncTaskListener.loadUserDataSuccess(iconImageUrl));
             } else {
                 handler.post(() -> FetchUserData.fetchUserData(retrofit, userName, new FetchUserData.FetchUserDataListener() {

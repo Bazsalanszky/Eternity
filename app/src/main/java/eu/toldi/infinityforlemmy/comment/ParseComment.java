@@ -285,6 +285,12 @@ public class ParseComment {
         String author = creatorObj.getString("name");
         String authorQualifiedName = LemmyUtils.actorID2FullName(creatorObj.getString("actor_id"));
         String linkAuthor = creatorObj.getString("actor_id");
+
+
+        String authorAvatar = null;
+        if(creatorObj.has("avatar")){
+            authorAvatar = creatorObj.getString("avatar");
+        }
         long commentTimeMillis = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             commentTimeMillis = ZonedDateTime.parse(commentObj.getString("published"),
@@ -335,6 +341,7 @@ public class ParseComment {
                 score, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, deleted, edited, path);
         int child_count = countsObj.getInt("child_count");
         comment.setChildCount(child_count);
+        comment.setAuthorIconUrl(authorAvatar);
         return comment;
     }
 

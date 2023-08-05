@@ -392,12 +392,12 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                 if (comment.getAuthorIconUrl() == null) {
                     mFragment.loadIcon(comment.getAuthorQualifiedName(), (authorName, iconUrl) -> {
-                        if (authorName.equals(comment.getAuthor())) {
+                        if (authorName.equals(comment.getAuthorQualifiedName())) {
                             comment.setAuthorIconUrl(iconUrl);
                         }
 
                         Comment currentComment = getCurrentComment(holder);
-                        if (currentComment != null && authorName.equals(currentComment.getAuthor())) {
+                        if (currentComment != null && authorName.equals(currentComment.getAuthorQualifiedName())) {
                             mGlide.load(iconUrl)
                                     .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0)))
                                     .error(mGlide.load(R.drawable.subreddit_default_icon)
@@ -537,12 +537,12 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                 if (comment.getAuthorIconUrl() == null) {
                     mFragment.loadIcon(comment.getAuthorQualifiedName(), (authorName, iconUrl) -> {
-                        if (authorName.equals(comment.getAuthor())) {
+                        if (authorName.equals(comment.getAuthorQualifiedName())) {
                             comment.setAuthorIconUrl(iconUrl);
                         }
 
                         Comment currentComment = getCurrentComment(holder);
-                        if (currentComment != null && authorName.equals(currentComment.getAuthor())) {
+                        if (currentComment != null && authorName.equals(currentComment.getAuthorQualifiedName())) {
                             mGlide.load(iconUrl)
                                     .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0)))
                                     .error(mGlide.load(R.drawable.subreddit_default_icon)

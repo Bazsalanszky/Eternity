@@ -114,6 +114,7 @@ import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import eu.toldi.infinityforlemmy.videoautoplay.ExoCreator;

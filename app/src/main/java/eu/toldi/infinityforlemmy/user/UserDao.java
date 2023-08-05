@@ -25,4 +25,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM users WHERE name = :userName COLLATE NOCASE LIMIT 1")
     UserData getUserData(String userName);
+
+    @Query("SELECT * FROM users WHERE actor_id = :actorId COLLATE NOCASE LIMIT 1")
+    UserData getUserDataByActorId(String actorId);
 }

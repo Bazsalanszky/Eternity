@@ -137,6 +137,7 @@ import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.post.PostViewModel;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterUsage;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import eu.toldi.infinityforlemmy.videoautoplay.ExoCreator;
@@ -1756,7 +1757,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);
                         });
             } else {
-                LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditOrUserName,
+                LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, LemmyUtils.qualifiedUserName2ActorId(subredditOrUserName),
                         mRetrofit.getRetrofit(), iconImageUrl -> {
                             subredditOrUserIcons.put(subredditOrUserName, iconImageUrl);
                             loadIconListener.loadIconSuccess(subredditOrUserName, iconImageUrl);

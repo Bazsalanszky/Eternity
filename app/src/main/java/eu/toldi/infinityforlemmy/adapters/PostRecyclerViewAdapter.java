@@ -574,7 +574,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     } else {
                         if (post.getSubredditIconUrl() == null) {
-                            mFragment.loadIcon(post.getSubredditName(), true, (subredditOrUserName, iconUrl) -> {
+                            mFragment.loadIcon(post.getSubredditNamePrefixed(), true, (subredditOrUserName, iconUrl) -> {
                                 if (mActivity != null && getItemCount() > 0 && post.getSubredditName().equals(subredditOrUserName)) {
                                     if (iconUrl == null || iconUrl.equals("")) {
                                         mGlide.load(R.drawable.subreddit_default_icon)
@@ -1141,7 +1141,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     } else {
                         if (post.getSubredditIconUrl() == null) {
-                            mFragment.loadIcon(subredditName, true, (subredditOrUserName, iconUrl) -> {
+                            mFragment.loadIcon(subredditNamePrefixed, true, (subredditOrUserName, iconUrl) -> {
                                 if (mActivity != null && getItemCount() > 0 && subredditName.equals(subredditOrUserName)) {
                                     if (iconUrl == null || iconUrl.equals("")) {
                                         mGlide.load(R.drawable.subreddit_default_icon)

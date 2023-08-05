@@ -213,6 +213,8 @@ public class ParsePost {
 
 
         String url = (!data.getJSONObject("post").isNull("url")) ? data.getJSONObject("post").getString("url") : "";
+        String communityURL = (!data.getJSONObject("community").isNull("icon")) ? data.getJSONObject("community").getString("icon") : "";
+
         Uri uri = Uri.parse(url);
         String path = uri.getPath();
         boolean isVideo = path.endsWith(".mp4") || path.endsWith(".webm") || path.endsWith(".gifv");
@@ -660,6 +662,7 @@ public class ParsePost {
             post.setSelfTextPlain(body);
             post.setSelfTextPlainTrimmed(body.trim());
         }
+        post.setSubredditIconUrl(communityURL);
         return post;
     }
 

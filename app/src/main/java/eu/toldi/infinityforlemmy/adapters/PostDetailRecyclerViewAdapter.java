@@ -98,6 +98,7 @@ import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import eu.toldi.infinityforlemmy.videoautoplay.CacheManager;
@@ -475,8 +476,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ((PostDetailBaseViewHolder) holder).mTitleTextView.setText(mPost.getTitle());
             if (mPost.getSubredditNamePrefixed().startsWith("u/")) {
                 if (mPost.getAuthorIconUrl() == null) {
-                    String authorName = mPost.isAuthorDeleted() ? mPost.getSubredditNamePrefixed().substring(2) : mPost.getAuthor();
-                    LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, authorName, mOauthRetrofit, iconImageUrl -> {
+                    LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, LemmyUtils.qualifiedUserName2ActorId(mPost.getAuthorNamePrefixed()), mOauthRetrofit, iconImageUrl -> {
                         if (mActivity != null && getItemCount() > 0) {
                             if (iconImageUrl == null || iconImageUrl.equals("")) {
                                 mGlide.load(R.drawable.subreddit_default_icon)
