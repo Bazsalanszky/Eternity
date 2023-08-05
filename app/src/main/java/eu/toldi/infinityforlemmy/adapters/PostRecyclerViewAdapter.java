@@ -913,15 +913,15 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                                 int width = resource.getIntrinsicWidth();
                                 int height = resource.getIntrinsicHeight();
-                                ((PostVideoAutoplayViewHolder) holder).previewImageView.setImageDrawable(resource);
+                                ((PostCard2VideoAutoplayViewHolder) holder).previewImageView.setImageDrawable(resource);
                                 if (preview.getPreviewHeight() <= 0 || preview.getPreviewWidth() <= 0) {
-                                    ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) height / width);
-                                    ((PostVideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
+                                    ((PostCard2VideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) height / width);
+                                    ((PostCard2VideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
                                     preview.setPreviewHeight(height);
                                     preview.setPreviewWidth(width);
                                 } else {
-                                    ((PostVideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
-                                    ((PostVideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
+                                    ((PostCard2VideoAutoplayViewHolder) holder).aspectRatioFrameLayout.setAspectRatio((float) preview.getPreviewHeight() / preview.getPreviewWidth());
+                                    ((PostCard2VideoAutoplayViewHolder) holder).previewImageView.getLayoutParams().height = height;
                                 }
                             }
 
