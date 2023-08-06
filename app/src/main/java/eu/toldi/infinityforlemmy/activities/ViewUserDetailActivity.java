@@ -141,6 +141,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private static final String FETCH_USER_INFO_STATE = "FSIS";
     private static final String MESSAGE_FULLNAME_STATE = "MFS";
     private static final String NEW_ACCOUNT_NAME_STATE = "NANS";
+    private static final String NEW_ACCOUNT_QUALIFIED_NAME_STATE = "NAQNS";
 
     @BindView(R.id.coordinator_layout_view_user_detail_activity)
     CoordinatorLayout coordinatorLayout;
@@ -236,6 +237,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private int mMessageId;
     private String mNewAccountName;
 
+
     private UserData mUserData;
 
     //private MaterialAlertDialogBuilder nsfwWarningBuilder;
@@ -288,6 +290,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             mFetchUserInfoSuccess = savedInstanceState.getBoolean(FETCH_USER_INFO_STATE);
             mMessageId = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
+            qualifiedName = savedInstanceState.getString(NEW_ACCOUNT_QUALIFIED_NAME_STATE);
         }
 
         checkNewAccountAndInitializeViewPager();
@@ -1271,6 +1274,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         outState.putBoolean(FETCH_USER_INFO_STATE, mFetchUserInfoSuccess);
         outState.putInt(MESSAGE_FULLNAME_STATE, mMessageId);
         outState.putString(NEW_ACCOUNT_NAME_STATE, mNewAccountName);
+        outState.getString(NEW_ACCOUNT_QUALIFIED_NAME_STATE, mAccountQualifiedName);
     }
 
     @Override
