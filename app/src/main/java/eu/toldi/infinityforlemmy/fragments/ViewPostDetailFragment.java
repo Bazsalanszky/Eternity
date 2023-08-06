@@ -1440,7 +1440,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         isLoadingMoreChildren = true;
 
         FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken,
-                mPost.getId(), mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
+                mPost.getId(), mSingleCommentId == null ? null : mSingleCommentParentId == null || mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
                         pages_loaded++;
