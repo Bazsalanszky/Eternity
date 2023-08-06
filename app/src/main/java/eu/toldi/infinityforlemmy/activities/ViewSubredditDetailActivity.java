@@ -1286,27 +1286,27 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 break;
             case PostTypeBottomSheetFragment.TYPE_LINK:
                 intent = new Intent(this, PostLinkActivity.class);
-                intent.putExtra(PostLinkActivity.EXTRA_SUBREDDIT_NAME, communityName);
+                intent.putExtra(PostLinkActivity.EXTRA_SUBREDDIT_NAME, qualifiedName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_IMAGE:
                 intent = new Intent(this, PostImageActivity.class);
-                intent.putExtra(PostImageActivity.EXTRA_SUBREDDIT_NAME, communityName);
+                intent.putExtra(PostImageActivity.EXTRA_SUBREDDIT_NAME, qualifiedName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_VIDEO:
                 intent = new Intent(this, PostVideoActivity.class);
-                intent.putExtra(PostVideoActivity.EXTRA_SUBREDDIT_NAME, communityName);
+                intent.putExtra(PostVideoActivity.EXTRA_SUBREDDIT_NAME, qualifiedName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_GALLERY:
                 intent = new Intent(this, PostGalleryActivity.class);
-                intent.putExtra(PostGalleryActivity.EXTRA_SUBREDDIT_NAME, communityName);
+                intent.putExtra(PostGalleryActivity.EXTRA_SUBREDDIT_NAME, qualifiedName);
                 startActivity(intent);
                 break;
             case PostTypeBottomSheetFragment.TYPE_POLL:
                 intent = new Intent(this, PostPollActivity.class);
-                intent.putExtra(PostPollActivity.EXTRA_SUBREDDIT_NAME, communityName);
+                intent.putExtra(PostPollActivity.EXTRA_SUBREDDIT_NAME, qualifiedName);
                 startActivity(intent);
         }
     }

@@ -488,7 +488,7 @@ public class PostLinkActivity extends BaseActivity implements FlairBottomSheetFr
     }
 
     private void loadSubredditIcon() {
-        LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditName,
+        LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, communityData.getQualified_name(),
                 mAccessToken, mOauthRetrofit, mRetrofit.getRetrofit(), iconImageUrl -> {
                     iconUrl = iconImageUrl;
                     displaySubredditIcon();
