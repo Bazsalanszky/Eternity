@@ -481,7 +481,6 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                 Intent intent = new Intent(this, ViewUserDetailActivity.class);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountQualifiedName);
-                intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountName);
                 startActivity(intent);
                 break;
             }

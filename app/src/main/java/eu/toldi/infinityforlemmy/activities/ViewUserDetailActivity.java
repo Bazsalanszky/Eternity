@@ -929,6 +929,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             case SharedPreferencesUtils.OTHER_ACTIVITIES_BOTTOM_APP_BAR_OPTION_PROFILE: {
                 Intent intent = new Intent(this, ViewUserDetailActivity.class);
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
+                intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY,mAccountQualifiedName);
                 startActivity(intent);
                 break;
             }
