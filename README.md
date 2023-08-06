@@ -54,6 +54,8 @@ Infinity for Lemmy is currently in the early stages of development. Expect many 
 - [ ] Multi community view?
 
 
+
+
 ## Contributing
 
 First off, thanks for taking the time to contribute! Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -69,9 +71,18 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-Here are other ways you can help:
+### Translation
 
-- [Report Bugs](https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues)
+You can alos help Infinity for Lemmy by translating it to your native langugage! Translations are done via [Weblate](https://hosted.weblate.org/projects/lemminfinity/codeberg/)!
+
+
+[![Translation](https://hosted.weblate.org/widgets/lemminfinity/-/codeberg/multi-auto.svg)](https://hosted.weblate.org/engage/lemminfinity/)
+
+
+### Reporting bugs
+
+You can also contribute by [reporting bugs](https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues)
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
