@@ -40,6 +40,7 @@ import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditViewModel;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonConfiguration;
@@ -97,7 +98,7 @@ public class SidebarFragment extends Fragment {
         mAccessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         subredditName = getArguments().getString(EXTRA_SUBREDDIT_NAME);
         communityQualifiedName = getArguments().getString(EXTRA_COMMUNITY_QUALIFIED_NAME);
-        if (subredditName == null) {
+        if (communityQualifiedName == null) {
             Toast.makeText(activity, R.string.error_getting_community_name, Toast.LENGTH_SHORT).show();
             return rootView;
         }
@@ -166,7 +167,7 @@ public class SidebarFragment extends Fragment {
         });
 
         mSubredditViewModel = new ViewModelProvider(activity,
-                new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, communityQualifiedName))
+                new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, LemmyUtils.qualifiedCommunityName2ActorId(communityQualifiedName)))
                 .get(SubredditViewModel.class);
         mSubredditViewModel.getSubredditLiveData().observe(getViewLifecycleOwner(), subredditData -> {
             if (subredditData != null) {

@@ -1352,4 +1352,6 @@
     <string name="instance_cannot_be_empty">The instance field cannot be left empty.</string>
     <string name="username_cannot_be_empty">The username field cannot be left empty.</string>
     <string name="password_cannot_be_empty">The password field cannot be left empty.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

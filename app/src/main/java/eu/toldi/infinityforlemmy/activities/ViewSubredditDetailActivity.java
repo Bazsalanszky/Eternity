@@ -690,9 +690,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     qualifiedName = LemmyUtils.actorID2FullName(communityData.getActorId());
                     if (communityName == null) {
                         communityName = communityData.getTitle();
-
-                        setupVisibleElements();
                     }
+                    setupVisibleElements();
                     communityId = communityData.getId();
                     setupSubscribeChip();
 

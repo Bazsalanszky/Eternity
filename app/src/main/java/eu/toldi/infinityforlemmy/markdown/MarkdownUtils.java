@@ -52,6 +52,7 @@ public class MarkdownUtils {
                 .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
                 .usePlugin(TableEntryPlugin.create(context))
                 .usePlugin(ClickableGlideImagesPlugin.create(context))
+                .usePlugin(new MarkwonLemmyLinkPlugin())
                 .build();
     }
 
@@ -71,6 +72,7 @@ public class MarkdownUtils {
                 .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
                 .usePlugin(TableEntryPlugin.create(context))
                 .usePlugin(GlideImagesPlugin.create(context))
+                .usePlugin(new MarkwonLemmyLinkPlugin())
                 .build();
     }
 
