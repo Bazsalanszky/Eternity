@@ -27,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -146,11 +148,12 @@ public class LoginActivity extends BaseActivity {
             progressBar.setVisibility(ProgressBar.VISIBLE);
             String username = username_input.getText().toString().trim();
             String instance = correctURL(instance_input.getText().toString().trim());
-            if (!Patterns.WEB_URL.matcher(instance).matches()) {
-                instance_input.setError("Invalid instance URL");
+            try {
+                URL urlObj = new URL(instance);
+                instance = urlObj.getProtocol() + "://" + urlObj.getHost() + "/";
+            } catch (MalformedURLException e) {
+                instance_input.setError("Invalid URL");
                 Toast.makeText(LoginActivity.this, "Invalid instance URL", Toast.LENGTH_SHORT).show();
-                loginButton.setEnabled(true);
-                progressBar.setVisibility(ProgressBar.GONE);
                 return;
             }
             Log.i("LoginActivity", "Instance: " + instance);
@@ -158,6 +161,7 @@ public class LoginActivity extends BaseActivity {
             mRetrofit.setBaseURL(instance);
             LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
             Call<String> accessTokenCall = api.userLogin(accountLoginDTO);
+            String finalInstance = instance;
             accessTokenCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -185,7 +189,7 @@ public class LoginActivity extends BaseActivity {
                                                 @Override
                                                 public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
                                                     boolean canDownvote = siteInfo.isEnable_downvotes();
-                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance,canDownvote, mRedditDataRoomDatabase.accountDao(),
+                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode, finalInstance,canDownvote, mRedditDataRoomDatabase.accountDao(),
                                                             () -> {
                                                                 Intent resultIntent = new Intent();
                                                                 setResult(Activity.RESULT_OK, resultIntent);
@@ -196,7 +200,7 @@ public class LoginActivity extends BaseActivity {
 
                                                 @Override
                                                 public void onFetchSiteInfoFailed() {
-                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode,instance,true, mRedditDataRoomDatabase.accountDao(),
+                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode, finalInstance,true, mRedditDataRoomDatabase.accountDao(),
                                                             () -> {
                                                                 Intent resultIntent = new Intent();
                                                                 setResult(Activity.RESULT_OK, resultIntent);
@@ -208,7 +212,7 @@ public class LoginActivity extends BaseActivity {
                                             mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_NAME, display_name)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, name)
-                                                    .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,instance)
+                                                    .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,finalInstance)
                                                     .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, profileImageUrl).apply();
                                         }
 
