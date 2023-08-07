@@ -1081,4 +1081,18 @@
     <string name="app_lock_timeout_6_hours">6 horas</string>
     <string name="app_lock_timeout_12_hours">12 horas</string>
     <string name="app_lock_timeout_24_hours">24 horas</string>
+    <string name="settings_backup_settings_summary">A palavra-chave do ficheiro de backup é \"123321\".</string>
+    <string name="settings_open_navigation_drawer">Abrir Gaveta de Navegação</string>
+    <string name="settings_nsfw_download_location_title">Localização para Transferências de 18+</string>
+    <string name="invalid_username_or_password">Nome de utilizador ou palavra-chave inválidos</string>
+    <string name="edit_profile_activity_label">Editar perfil</string>
+    <string name="history_activity_label">História</string>
+    <string name="action_block_user">Bloquear o utilizador</string>
+    <string name="action_playback_speed">Velocidade de reprodução</string>
+    <string name="anonymous_homepage_not_implemented">Página inicial anónima ainda não está implementada</string>
+    <string name="action_open_external_browser">Abrir no navegador</string>
+    <string name="invalid_response">Resposta inválida do servidor</string>
+    <string name="action_contact_mods">Contactar Moderadores</string>
+    <string name="settings_number_of_columns_in_post_feed_unfolded_portrait_title">Retrato (Desdobrado)</string>
+    <string name="action_more_options">Mais opções</string>
 </resources>
