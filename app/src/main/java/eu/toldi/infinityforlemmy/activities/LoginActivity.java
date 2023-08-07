@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.InflateException;
@@ -139,6 +140,8 @@ public class LoginActivity extends BaseActivity {
 
         loginButton.setOnClickListener(view -> {
             Log.i("LoginActivity", "Login button clicked");
+            if(!checkFields())
+                return;
             loginButton.setEnabled(false);
             progressBar.setVisibility(ProgressBar.VISIBLE);
             String username = username_input.getText().toString().trim();
@@ -259,6 +262,26 @@ public class LoginActivity extends BaseActivity {
             });
         });
 
+    }
+
+    private boolean checkFields() {
+        boolean result = true;
+        Editable username = username_input.getText();
+        Editable password = password_input.getText();
+        Editable instance = instance_input.getText();
+        if(instance == null || instance.toString().isEmpty()) {
+            instance_input.setError(getString(R.string.instance_cannot_be_empty));
+            result = false;
+        }
+        if(username == null || username.toString().isEmpty()) {
+            username_input.setError(getString(R.string.username_cannot_be_empty));
+            result = false;
+        }
+        if(password == null || password.toString().isEmpty()) {
+            password_input.setError(getString(R.string.password_cannot_be_empty));
+            result = false;
+        }
+        return result;
     }
     private static String correctURL(String url) {
         if (url == null || url.isEmpty()) {
