@@ -1349,4 +1349,7 @@
     <string name="use_circular_fab">Use Circular FAB</string>
     <string name="block_community">Block Community\n</string>
     <string name="not_implemented">Feature not implemented yet :(</string>
+    <string name="instance_cannot_be_empty">The instance field cannot be left empty.</string>
+    <string name="username_cannot_be_empty">The username field cannot be left empty.</string>
+    <string name="password_cannot_be_empty">The password field cannot be left empty.</string>
 </resources>

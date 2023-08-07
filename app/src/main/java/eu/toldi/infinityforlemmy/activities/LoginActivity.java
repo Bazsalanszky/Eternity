@@ -139,6 +139,8 @@ public class LoginActivity extends BaseActivity {
 
         loginButton.setOnClickListener(view -> {
             Log.i("LoginActivity", "Login button clicked");
+            if(!checkFields())
+                return;
             loginButton.setEnabled(false);
             progressBar.setVisibility(ProgressBar.VISIBLE);
             String username = username_input.getText().toString().trim();
@@ -259,6 +261,26 @@ public class LoginActivity extends BaseActivity {
             });
         });
 
+    }
+
+    private boolean checkFields() {
+        boolean result = true;
+        String username = username_input.getText().toString();
+        String password = password_input.getText().toString();
+        String instance = instance_input.getText().toString();
+        if(instance == null || instance.isEmpty()) {
+            instance_input.setError(getString(R.string.instance_cannot_be_empty));
+            result = false;
+        }
+        if(username == null || username.isEmpty()) {
+            username_input.setError(getString(R.string.username_cannot_be_empty));
+            result = false;
+        }
+        if(password == null || password.isEmpty()) {
+            password_input.setError(getString(R.string.password_cannot_be_empty));
+            result = false;
+        }
+        return result;
     }
     private static String correctURL(String url) {
         if (url == null || url.isEmpty()) {
