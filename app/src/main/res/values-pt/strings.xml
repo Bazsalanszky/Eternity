@@ -1095,4 +1095,7 @@
     <string name="action_contact_mods">Contactar Moderadores</string>
     <string name="settings_number_of_columns_in_post_feed_unfolded_portrait_title">Retrato (Desdobrado)</string>
     <string name="action_more_options">Mais opções</string>
+    <string name="settings_number_of_columns_in_post_feed_unfolded_landscape_title">Paisagem (Desdobrado)</string>
+    <string name="settings_save_nsfw_media_in_different_folder_title">Gravar Média 18+ numa Localização Diferente</string>
+    <string name="settings_loop_video_title">Repetir Vídeo</string>
 </resources>
