@@ -145,7 +145,6 @@
     <string name="send_message_success">"Üzenet elküldve"</string>
     <string name="send_message_failed">"Nem sikerült elküldeni az üzenetet"</string>
     <string name="select_a_community">"Kérlek előbb válassz egy közösséget"</string>
-
     <!-- Fuzzy -->
     <string name="title_required">"A posztnak szüksége van egy jó címre"</string>
     <string name="link_required">"Hé! Hol a link?"</string>
@@ -224,10 +223,8 @@
     <string name="search">"Keresés"</string>
     <string name="posting_video">"Videó posztolása"</string>
     <string name="posting_image">"Kép posztolása"</string>
-
     <!-- Fuzzy -->
     <string name="please_wait">"Kérlek várj."</string>
-
     <!-- Fuzzy -->
     <string name="add_account">"Fiók hozzáadása"</string>
     <string name="anonymous_account">"Anoním"</string>
@@ -301,7 +298,6 @@
     <string name="settings_immersive_interface_title">"Immerzív felület"</string>
     <string name="settings_immersive_interface_summary">"Nem alkalmazható minden oldalon"</string>
     <string name="settings_immersive_interface_ignore_nav_bar_title">"Navigációs sáv ignorálása immerzív felületen"</string>
-
     <!-- Fuzzy -->
     <string name="settings_immersive_interface_ignore_nav_bar_summary">"Alsó navigációs sáv extra \"párnázásának\" meggátlása"</string>
     <string name="settings_customize_tabs_in_main_page_title">"Fülek testreszabása a főoldalon"</string>
@@ -312,7 +308,6 @@
     <string name="settings_volume_keys_navigate_posts_title">"Hangerőgombok használata posztok navigálására"</string>
     <string name="settings_mute_video_title">"Videók némítása"</string>
     <string name="settings_mute_nsfw_video_title">"NSFW videók némítása"</string>
-
     <!-- Fuzzy -->
     <string name="settings_automatically_try_redgifs_title">"Próbálja autómatikusan elérni a Redgifeket, ha a videók Gfycat-en el vannak távolítva."</string>
     <string name="settings_video_player_ignore_nav_bar_title">"Navigációs sáv ignorálása videó lejátszóban"</string>
@@ -329,13 +324,10 @@
     <string name="settings_time_format_title">"Idő formátum"</string>
     <string name="settings_category_post_title">"Poszt"</string>
     <string name="settings_default_post_layout">"Alapértelmezett poszt elrendezés"</string>
-
     <!-- Fuzzy -->
     <string name="settings_show_divider_in_compact_layout">"Elválasztó megjelenítése kompakt elrendezésben"</string>
-
     <!-- Fuzzy -->
     <string name="settings_show_thumbnail_on_the_left_in_compact_layout">"Indexkép megjelenítése a baloldalon kompakt előnézetben"</string>
-
     <!-- Fuzzy -->
     <string name="settings_swap_tap_and_long_title">"Swap koppintás hosszan nyomás a kommentekben"</string>
     <string name="settings_swipe_to_go_back_title">"Csúsztass jobbra, hogy visszalépj"</string>
@@ -409,7 +401,6 @@
     <string name="settings_tab_title">"Cím"</string>
     <string name="settings_tab_post_type">"Típus"</string>
     <string name="settings_tab_community_name">"Közösség név ( '@pélány' nélkül)"</string>
-
     <!-- what does /m/ refer to here? -->
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">"Multireddit név (/felhasználó/felhasználóneved/m/temultiredditneved)"</string>
@@ -617,7 +608,6 @@ https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy"</string
     <string name="theme_item_submitter_color">"Beküldő"</string>
     <string name="theme_item_submitter_color_detail">"Beállítva: Beküldő flairre a kommentekben"</string>
     <string name="theme_item_moderator_color">"Moderátor"</string>
-
     <!-- Instead of "Moderator in comments" imo it should be "Moderator flair in comments". -->
     <string name="theme_item_moderator_color_detail">"Beállítva: Moderátor flairre a kommentekben"</string>
     <string name="theme_item_single_comment_thread_background_color">"Egyedülálló komment thread háttérszín"</string>
@@ -697,8 +687,8 @@ Az alap az indigó amoled téma"</string>
     <string name="delete_all_themes_success">"Összes téma törlése sikeres"</string>
     <string name="delete_all_front_page_scrolled_positions_success">"A Kezdőlap összes görgetési pozíciójának törlése sikeres"</string>
     <string name="reset_all_settings_success">"Összes beállítás visszaállítása sikeres"</string>
-    <string name="username_preview">"u/Hostilenemy"</string>
-    <string name="community_preview">"r/Infinity_For_Reddit"</string>
+    <string name="username_preview">\@bazsalanszky@lemmy.toldi.eu</string>
+    <string name="community_preview">!infinityforlemmy@lemdro.id</string>
     <string name="primary_text_preview">"Elsődleges szöveg"</string>
     <string name="secondary_text_preview">"Másodlagos szöveg"</string>
     <string name="post_title_preview">"Ez egy poszt"</string>
@@ -781,16 +771,13 @@ Az alap az indigó amoled téma"</string>
     <string name="settings_swipe_action_threshold">"Küszöb"</string>
     <string name="settings_pull_to_refresh_title">"Húzd a frissítéshez"</string>
     <string name="settings_security_title">"Biztonság"</string>
-
     <!-- Fuzzy -->
     <string name="settings_long_press_to_hide_toolbar_in_compact_layout_title">"Nyomd hosszan, hogy elrejtsd az eszköztárat kompakt elrendezésben"</string>
-
     <!-- Fuzzy -->
     <string name="settings_post_compact_layout_toolbar_hidden_by_default_title">"Az eszköztár alapértelmezve rejtett kompakt elrendezésben"</string>
     <string name="settings_customize_bottom_app_bar_title">"Alsó navigációs sáv testreszabása"</string>
     <string name="settings_main_activity_bottom_app_bar_group_summary">"Főoldal"</string>
     <string name="settings_other_activities_bottom_app_bar_group_summary">"Más oldalak"</string>
-
     <!-- Fuzzy -->
     <string name="settings_bottom_app_bar_option_count">"Opció szám"</string>
     <string name="settings_bottom_app_bar_option_1">"1. opció"</string>
@@ -925,7 +912,6 @@ Videó autómatikus lejátszása le van tiltva."</string>
     <string name="post_filter_requires_a_name">"Mi a neve ennek a poszt szűrőnek?"</string>
     <string name="duplicate_post_filter_dialog_title">"'%1$s' már létezik"</string>
     <string name="duplicate_post_filter_dialog_message">"Írja fölül?"</string>
-
     <!-- Fuzzy -->
     <string name="apply_post_filter_to">"Alkalmazd"</string>
     <string name="post_filter_usage_home">"Home"</string>
