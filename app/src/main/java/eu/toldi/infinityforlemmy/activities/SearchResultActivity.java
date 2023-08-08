@@ -784,7 +784,8 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                     bundle.putString(SubredditListingFragment.EXTRA_QUERY, mQuery);
                     bundle.putBoolean(SubredditListingFragment.EXTRA_IS_GETTING_SUBREDDIT_INFO, false);
                     bundle.putString(SubredditListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                    bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
+                    bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                    bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_QUALIFIED_NAME, mAccountQualifiedName);
                     mFragment.setArguments(bundle);
                     return mFragment;
                 }

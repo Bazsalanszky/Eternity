@@ -119,7 +119,8 @@ public class SearchSubredditsResultActivity extends BaseActivity implements Acti
             bundle.putString(SubredditListingFragment.EXTRA_QUERY, query);
             bundle.putBoolean(SubredditListingFragment.EXTRA_IS_GETTING_SUBREDDIT_INFO, true);
             bundle.putString(SubredditListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-            bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
+            bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+            bundle.putString(SubredditListingFragment.EXTRA_ACCOUNT_QUALIFIED_NAME, mAccountQualifiedName);
             bundle.putBoolean(SubredditListingFragment.EXTRA_IS_MULTI_SELECTION, getIntent().getBooleanExtra(EXTRA_IS_MULTI_SELECTION, false));
             mFragment.setArguments(bundle);
         } else {
