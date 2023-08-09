@@ -1108,4 +1108,10 @@
     <string name="no_activity_found_for_external_browser">Não existe nenhuma aplicação que possa tratar a ação de abrir numa aplicação externa</string>
     <string name="settings_loop_video_summary">Reinicie a aplicação para aplicar esta definição para reproduzir vídeos automaticamente</string>
     <string name="settings_separate_post_and_comments_in_landscape_mode_title">Separar publicação e comentários no modo paisagem</string>
+    <string name="two_options_required">Uma boa pesquisa precisa de duas ou mais opções!</string>
+    <string name="bottom_sheet_post_poll">Votação</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Ocultar Karma da conta</string>
+    <string name="settings_credits_lock_screen_animation_title">Animação do ecrã de bloqueio</string>
+    <string name="settings_app_lock_title">Bloqueio da Aplicação</string>
+    <string name="settings_link_handler_value_custom_tab">Separador personalizado</string>
 </resources>
