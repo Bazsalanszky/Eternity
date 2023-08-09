@@ -61,6 +61,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
     public static final String EXTRA_IS_GETTING_SUBREDDIT_INFO = "EIGSI";
     public static final String EXTRA_ACCESS_TOKEN = "EAT";
     public static final String EXTRA_ACCOUNT_NAME = "EAN";
+    public static final String EXTRA_ACCOUNT_QUALIFIED_NAME = "EAQN";
     public static final String EXTRA_IS_MULTI_SELECTION = "EIMS";
 
     @BindView(R.id.coordinator_layout_subreddit_listing_fragment)
@@ -135,13 +136,14 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         boolean isGettingSubredditInfo = getArguments().getBoolean(EXTRA_IS_GETTING_SUBREDDIT_INFO);
         String accessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         String accountName = getArguments().getString(EXTRA_ACCOUNT_NAME);
+        String accountQualifiedName = getArguments().getString(EXTRA_ACCOUNT_QUALIFIED_NAME);
 
         String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SEARCH_SUBREDDIT, SortType.Type.TOP_ALL.value);
         sortType = new SortType(SortType.Type.fromValue(sort));
         boolean nsfw = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.NSFW_BASE, false);
 
         mAdapter = new SubredditListingRecyclerViewAdapter(mActivity, mExecutor, mRetrofit.getRetrofit(), mRetrofit.getRetrofit(),
-                mCustomThemeWrapper, accessToken, accountName,
+                mCustomThemeWrapper, accessToken, accountQualifiedName,
                 mRedditDataRoomDatabase, getArguments().getBoolean(EXTRA_IS_MULTI_SELECTION, false),
                 new SubredditListingRecyclerViewAdapter.Callback() {
                     @Override
