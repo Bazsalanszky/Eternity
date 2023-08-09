@@ -329,6 +329,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/downvote_text_view_item_post_compact"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="?attr/font_family"
+            android:gravity="center"
+            android:textSize="?attr/font_12"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/minus_button_item_post_compact"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
             android:id="@+id/comments_count_item_post_compact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -343,7 +357,7 @@
             android:textSize="?attr/font_12"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/minus_button_item_post_compact"
+            app:layout_constraintStart_toEndOf="@id/downvote_text_view_item_post_compact"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView

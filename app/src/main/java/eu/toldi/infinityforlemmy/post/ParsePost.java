@@ -178,6 +178,8 @@ public class ParsePost {
         String title = post.getString("name");
         String permalink = post.getString("ap_id");
         int score = counts.getInt("score");
+        int upvotes = counts.getInt("upvotes");
+        int downvotes = counts.getInt("downvotes");
         int voteType = 0;
         int nComments = counts.getInt("comments");
         int upvoteRatio = 100 * counts.getInt("upvotes") / max(counts.getInt("upvotes") + counts.getInt("downvotes"), 1);
@@ -197,7 +199,7 @@ public class ParsePost {
 
         return parseData(data, permalink, id, fullName, subredditName, subredditNamePrefixed,
                     author,authorFull, postTimeMillis, title, previews,
-                    score, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                    downvotes,upvotes, voteType, nComments, upvoteRatio, nsfw, locked, saved,
                     distinguished, suggestedSort);
 
     }
@@ -205,7 +207,7 @@ public class ParsePost {
     private static Post parseData(JSONObject data, String permalink, int id, String fullName,
                                   String subredditName, String subredditNamePrefixed, String author, String authorFull,
                                   long postTimeMillis, String title, ArrayList<Post.Preview> previews,
-                                  int score, int voteType, int nComments, int upvoteRatio,
+                                  int downvotes,int upvotes, int voteType, int nComments, int upvoteRatio,
                                   boolean nsfw, boolean locked,
                                   boolean saved,
                                   String distinguished, String suggestedSort) throws JSONException {
@@ -225,7 +227,7 @@ public class ParsePost {
                 //Text post
                 int postType = Post.TEXT_TYPE;
                 post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                        postTimeMillis, title, permalink, score,
+                        postTimeMillis, title, permalink, downvotes, upvotes,
                         postType, voteType, nComments, upvoteRatio, nsfw,
                         locked, saved, distinguished, suggestedSort);
                 String body = data.getJSONObject("post").getString("body");
@@ -238,7 +240,7 @@ public class ParsePost {
                     int postType = Post.IMAGE_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio,  nsfw, locked, saved, distinguished, suggestedSort);
 
                     if (previews.isEmpty()) {
@@ -250,7 +252,7 @@ public class ParsePost {
                         //No preview video post
                         int postType = Post.VIDEO_TYPE;
 
-                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, score, postType, voteType,
+                        post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, downvotes,upvotes, postType, voteType,
                                 nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
 
                         post.setVideoUrl(url);
@@ -259,7 +261,7 @@ public class ParsePost {
                         //No preview link post
                         int postType = Post.NO_PREVIEW_LINK_TYPE;
                         post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                                postTimeMillis, title, url, permalink, score,
+                                postTimeMillis, title, url, permalink, downvotes, upvotes,
                                 postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
                         if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
                             post.setSelfText("");
@@ -293,7 +295,7 @@ public class ParsePost {
                     } else {
                         int postType = Post.TEXT_TYPE;
                         post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                                postTimeMillis, title, permalink, score,
+                                postTimeMillis, title, permalink, downvotes, upvotes,
                                 postType, voteType, nComments, upvoteRatio, nsfw,
                                 locked, saved, distinguished, suggestedSort);
                         String body = "";
@@ -331,7 +333,7 @@ public class ParsePost {
                 String videoUrl = Html.fromHtml(redditVideoObject.getString(JSONUtils.HLS_URL_KEY)).toString();
                 String videoDownloadUrl = redditVideoObject.getString(JSONUtils.FALLBACK_URL_KEY);
 
-                post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, score, postType, voteType,
+                post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull, postTimeMillis, title, permalink, downvotes, upvotes, postType, voteType,
                         nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
 
                 post.setPreviews(previews);
@@ -343,7 +345,7 @@ public class ParsePost {
                     int postType = Post.IMAGE_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,
-                            authorFull, postTimeMillis, title, url, permalink, score,
+                            authorFull, postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
                             distinguished, suggestedSort);
 
@@ -355,7 +357,7 @@ public class ParsePost {
                     //Gif post
                     int postType = Post.GIF_TYPE;
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio,
                             nsfw, locked, saved,
                             distinguished, suggestedSort);
@@ -371,7 +373,7 @@ public class ParsePost {
                     }
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio,
                             nsfw, locked, saved,
                             distinguished, suggestedSort);
@@ -384,7 +386,7 @@ public class ParsePost {
                     int postType = Post.VIDEO_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
                             distinguished, suggestedSort);
                     post.setPreviews(previews);
@@ -395,7 +397,7 @@ public class ParsePost {
                     int postType = Post.LINK_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author, authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
                             distinguished, suggestedSort);
                     if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
@@ -436,7 +438,7 @@ public class ParsePost {
                     int postType = Post.IMAGE_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
 
                     if (previews.isEmpty()) {
@@ -448,7 +450,7 @@ public class ParsePost {
                     int postType = Post.VIDEO_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
                     post.setPreviews(previews);
                     post.setVideoUrl(url);
@@ -458,7 +460,7 @@ public class ParsePost {
                     int postType = Post.NO_PREVIEW_LINK_TYPE;
 
                     post = new Post(id, fullName, subredditName, subredditNamePrefixed, author,authorFull,
-                            postTimeMillis, title, url, permalink, score,
+                            postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio, nsfw,  locked, saved, distinguished, suggestedSort);
                     //Need attention
                     if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
@@ -653,7 +655,10 @@ public class ParsePost {
         }
         if (!data.isNull("my_vote")) {
             post.setVoteType(data.getInt("my_vote"));
-            post.setScore(post.getScore() - 1);
+            if(post.getVoteType() == 1)
+                post.setUpvotes(post.getUpvotes() - 1);
+            else
+                post.setDownvotes(post.getDownvotes() - 1);
         }
         if (!data.getJSONObject("post").isNull("body")) {
             String body = data.getJSONObject("post").getString("body");

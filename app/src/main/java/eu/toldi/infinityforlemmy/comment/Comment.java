@@ -41,7 +41,8 @@ public class Comment implements Parcelable {
 
     private String communityQualifiedName;
     private Integer parentId;
-    private int score;
+    private int downvotes;
+    private int upvotes;
     private int voteType;
     private boolean isSubmitter;
     private String distinguished;
@@ -67,7 +68,7 @@ public class Comment implements Parcelable {
 
     public Comment(int id, int postId, String fullName, String author, String authorQualifiedName, String linkAuthor,
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
-                   String linkId, String communityName, String communityQualifiedName, Integer parentId, int score,
+                   String linkId, String communityName, String communityQualifiedName, Integer parentId, int downvotes,int upvotes,
                    int voteType, boolean isSubmitter, String distinguished, String permalink,
                    int depth, boolean collapsed, boolean hasReply, boolean saved, boolean deleted, long edited, String[] path) {
         this.id = id;
@@ -83,7 +84,8 @@ public class Comment implements Parcelable {
         this.communityName = communityName;
         this.communityQualifiedName = communityQualifiedName;
         this.parentId = parentId;
-        this.score = score;
+        this.downvotes = downvotes;
+        this.upvotes = upvotes;
         this.voteType = voteType;
         this.isSubmitter = isSubmitter;
         this.distinguished = distinguished;
@@ -132,7 +134,8 @@ public class Comment implements Parcelable {
         communityName = in.readString();
         communityQualifiedName = in.readString();
         parentId = in.readInt();
-        score = in.readInt();
+        downvotes = in.readInt();
+        upvotes = in.readInt();
         voteType = in.readInt();
         isSubmitter = in.readByte() != 0;
         distinguished = in.readString();
@@ -228,11 +231,7 @@ public class Comment implements Parcelable {
     }
 
     public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+        return upvotes-downvotes;
     }
 
     public boolean isSubmitter() {
@@ -432,7 +431,8 @@ public class Comment implements Parcelable {
         parcel.writeString(communityName);
         parcel.writeString(communityQualifiedName);
         parcel.writeInt(parentId == null ? 0 : parentId);
-        parcel.writeInt(score);
+        parcel.writeInt(downvotes);
+        parcel.writeInt(upvotes);
         parcel.writeInt(voteType);
         parcel.writeByte((byte) (isSubmitter ? 1 : 0));
         parcel.writeString(distinguished);

@@ -48,6 +48,12 @@ public class SharedPreferencesUtils {
 
     public static final String USE_CIRCULAR_FAB = "use_circular_fab";
 
+    public static final String POST_SEPARATE_UP_AND_DOWN_VOTES = "post_separate_down_and_up_votes";
+
+    public static final String POST_DETAIL_SEPARATE_UP_AND_DOWN_VOTES = "post_detail_separate_down_and_up_votes";
+
+    public static final String COMMENT_SEPARATE_UP_AND_DOWN_VOTES = "comment_separate_down_and_up_votes";
+
     public static final String SORT_TYPE_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.sort_type";
     public static final String SORT_TYPE_BEST_POST = "sort_type_best_post";
     public static final String SORT_TIME_BEST_POST = "sort_time_best_post";

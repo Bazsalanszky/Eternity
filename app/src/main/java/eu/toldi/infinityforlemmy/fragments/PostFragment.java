@@ -1781,7 +1781,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             if (post != null && post.getFullName().equals(event.post.getFullName())) {
                 post.setTitle(event.post.getTitle());
                 post.setVoteType(event.post.getVoteType());
-                post.setScore(event.post.getScore());
+                post.setDownvotes(event.post.getDownvotes());
+                post.setUpvotes(event.post.getUpvotes());
                 post.setNComments(event.post.getNComments());
                 post.setNSFW(event.post.isNSFW());
                 post.setHidden(event.post.isHidden());

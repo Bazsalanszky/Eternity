@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -226,6 +227,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean mHideTheNumberOfAwards;
     private boolean mHideSubredditAndUserPrefix;
     private boolean mHideTheNumberOfVotes;
+
+    private boolean mSeparateUpandDownVotes;
     private boolean mHideTheNumberOfComments;
     private boolean mLegacyAutoplayVideoControllerUI;
     private boolean mFixedHeightPreviewInCard;
@@ -308,6 +311,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mHideTheNumberOfAwards = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
             mHideSubredditAndUserPrefix = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
             mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
+            mSeparateUpandDownVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_SEPARATE_UP_AND_DOWN_VOTES, true);
             mHideTheNumberOfComments = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_COMMENTS, false);
             mLegacyAutoplayVideoControllerUI = sharedPreferences.getBoolean(SharedPreferencesUtils.LEGACY_AUTOPLAY_VIDEO_CONTROLLER_UI, false);
             mFixedHeightPreviewInCard = sharedPreferences.getBoolean(SharedPreferencesUtils.FIXED_HEIGHT_PREVIEW_IN_CARD, false);
@@ -649,7 +653,22 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 ((PostBaseViewHolder) holder).titleTextView.setText(post.getTitle());
                 if (!mHideTheNumberOfVotes) {
-                    ((PostBaseViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                    if( mSeparateUpandDownVotes ) {
+                        ((PostBaseViewHolder) holder).downvoteTextView.setVisibility(View.VISIBLE);
+                        int downVotes = (post.getVoteType() == -1) ? post.getDownvotes()+1 : post.getDownvotes();
+                        int upVotes = (post.getVoteType() == 1) ? post.getUpvotes()+1 : post.getUpvotes();
+                        ((PostBaseViewHolder) holder).downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,downVotes));
+                        ((PostBaseViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upVotes));
+                        ((PostBaseViewHolder) holder).downvoteTextView.setGravity(Gravity.START);
+                        ((PostBaseViewHolder) holder).scoreTextView.setGravity(Gravity.START);
+                        ((PostBaseViewHolder) holder).scoreTextView.getLayoutParams().width = (int) (32  * mActivity.getResources().getDisplayMetrics().density);
+
+                        ((PostBaseViewHolder) holder).scoreTextView.setPadding(0, 0, 6, 0);
+                        ((PostBaseViewHolder) holder).downvoteButton.setPadding(24, 0, 12, 0);
+                        ((PostBaseViewHolder) holder).upvoteButton.setPadding(24, 0, 12, 0);
+                    } else {
+                        ((PostBaseViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                    }
                 } else {
                     ((PostBaseViewHolder) holder).scoreTextView.setText(mActivity.getString(R.string.vote));
                 }
@@ -671,8 +690,14 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     case -1:
                         //Downvoted
                         ((PostBaseViewHolder) holder).downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                        ((PostBaseViewHolder) holder).scoreTextView.setTextColor(mDownvotedColor);
+                        if(mSeparateUpandDownVotes){
+                            ((PostBaseViewHolder) holder).downvoteTextView.setTextColor(mDownvotedColor);
+                        } else {
+                            ((PostBaseViewHolder) holder).scoreTextView.setTextColor(mDownvotedColor);
+                        }
                         break;
+                    case 0:
+                        ((PostBaseViewHolder) holder).downvoteTextView.setTextColor(mPostIconAndInfoColor);
                 }
 
                 if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isStickied()) {
@@ -1248,7 +1273,24 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                 ((PostCompactBaseViewHolder) holder).titleTextView.setText(title);
                 if (!mHideTheNumberOfVotes) {
-                    ((PostCompactBaseViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                    if(mSeparateUpandDownVotes){
+                        int upvotes = (post.getVoteType() == 1) ?  post.getUpvotes()+1  : post.getUpvotes();
+                        int downvotes = (post.getVoteType() == -1) ?  post.getDownvotes()+1  : post.getDownvotes();
+                        ((PostCompactBaseViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                        ((PostCompactBaseViewHolder) holder).downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+
+                        ((PostCompactBaseViewHolder) holder).downvoteTextView.setVisibility(View.VISIBLE);
+
+                        ((PostCompactBaseViewHolder) holder).downvoteTextView.setGravity(Gravity.START);
+                        ((PostCompactBaseViewHolder) holder).scoreTextView.setGravity(Gravity.START);
+                        ((PostCompactBaseViewHolder) holder).scoreTextView.getLayoutParams().width = (int) (32  * mActivity.getResources().getDisplayMetrics().density);
+
+                        ((PostCompactBaseViewHolder) holder).scoreTextView.setPadding(0, 0, 6, 0);
+                        ((PostCompactBaseViewHolder) holder).downvoteButton.setPadding(24, 0, 12, 0);
+                        ((PostCompactBaseViewHolder) holder).upvoteButton.setPadding(24, 0, 12, 0);
+                    } else {
+                        ((PostCompactBaseViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                    }
                 } else {
                     ((PostCompactBaseViewHolder) holder).scoreTextView.setText(mActivity.getString(R.string.vote));
                 }
@@ -1270,7 +1312,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     case -1:
                         //Downvoted
                         ((PostCompactBaseViewHolder) holder).downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                        ((PostCompactBaseViewHolder) holder).scoreTextView.setTextColor(mDownvotedColor);
+                        if(mSeparateUpandDownVotes){
+                            ((PostCompactBaseViewHolder) holder).downvoteTextView.setTextColor(mDownvotedColor);
+                        } else {
+                            ((PostCompactBaseViewHolder) holder).scoreTextView.setTextColor(mDownvotedColor);
+                        }
                         break;
                 }
 
@@ -2312,6 +2358,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ConstraintLayout bottomConstraintLayout;
         ImageView upvoteButton;
         TextView scoreTextView;
+
+        TextView downvoteTextView;
         ImageView downvoteButton;
         TextView commentsCountTextView;
         ImageView saveButton;
@@ -2343,6 +2391,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ConstraintLayout bottomConstraintLayout,
                          ImageView upvoteButton,
                          TextView scoreTextView,
+                         TextView downvoteTextView,
                          ImageView downvoteButton,
                          TextView commentsCountTextView,
                          ImageView saveButton,
@@ -2364,6 +2413,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             this.bottomConstraintLayout = bottomConstraintLayout;
             this.upvoteButton = upvoteButton;
             this.scoreTextView = scoreTextView;
+            this.downvoteTextView = downvoteTextView;
             this.downvoteButton = downvoteButton;
             this.commentsCountTextView = commentsCountTextView;
             this.saveButton = saveButton;
@@ -2689,17 +2739,31 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton
                                 .setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                        scoreTextView.setTextColor(mDownvotedColor);
+                        if(mSeparateUpandDownVotes) {
+                            scoreTextView.setTextColor(mPostIconAndInfoColor);
+                            downvoteTextView.setTextColor(mDownvotedColor);
+                        }else {
+                            scoreTextView.setTextColor(mDownvotedColor);
+                        }
                     } else {
                         //Downvoted before
                         post.setVoteType(0);
                         newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mPostIconAndInfoColor);
+                        downvoteTextView.setTextColor(mPostIconAndInfoColor);
                     }
 
                     if (!mHideTheNumberOfVotes) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                        if(mSeparateUpandDownVotes){
+                            if(post.getVoteType() == -1)
+                                downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getDownvotes() + 1 ));
+                            else if (post.getVoteType() == 1){
+                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getUpvotes() + 1));
+                            }
+                        }else {
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                        }
                     }
 
                     VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
@@ -2710,12 +2774,17 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 post.setVoteType(-1);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                                    scoreTextView.setTextColor(mDownvotedColor);
+                                    if(mSeparateUpandDownVotes){
+                                        downvoteTextView.setTextColor(mDownvotedColor);
+                                    }else {
+                                        scoreTextView.setTextColor(mDownvotedColor);
+                                    }
                                 }
                             } else {
                                 post.setVoteType(0);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
+                                    downvoteTextView.setTextColor(mPostIconAndInfoColor);
                                     scoreTextView.setTextColor(mPostIconAndInfoColor);
                                 }
                             }
@@ -2723,7 +2792,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             if (currentPosition == position) {
                                 upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                                 if (!mHideTheNumberOfVotes) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                                    if(mSeparateUpandDownVotes){
+                                        int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() + 1 : post.getDownvotes();
+                                        downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                                    }
                                 }
                             }
 
@@ -2855,6 +2929,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ConstraintLayout bottomConstraintLayout,
                          ImageView upvoteButton,
                          TextView scoreTextView,
+                         TextView downvoteTextView,
                          ImageView downvoteButton,
                          TextView commentsCountTextView,
                          ImageView saveButton,
@@ -2864,7 +2939,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(iconGifImageView, subredditTextView, userTextView, stickiedPostImageView, postTimeTextView,
                     titleTextView, typeTextView, archivedImageView, lockedImageView, crosspostImageView,
                     nsfwTextView, spoilerTextView, flairTextView, awardsTextView, bottomConstraintLayout,
-                    upvoteButton, scoreTextView, downvoteButton, commentsCountTextView, saveButton, shareButton);
+                    upvoteButton, scoreTextView, downvoteTextView,downvoteButton, commentsCountTextView, saveButton, shareButton);
         }
 
         void markPostRead(Post post, boolean changePostItemColor) {
@@ -2942,6 +3017,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_video_type_autoplay)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_video_type_autoplay)
+        TextView downvoteTextView;
         @BindView(R.id.minus_button_item_post_video_type_autoplay)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_video_type_autoplay)
@@ -2981,6 +3059,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,
@@ -3257,6 +3336,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_with_preview)
         TextView scoreTextView;
+        @BindView(R.id.downvote_text_view_item_post_with_preview)
+        TextView downvoteTextView;
+
         @BindView(R.id.minus_button_item_post_with_preview)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_with_preview)
@@ -3288,6 +3370,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,
@@ -3376,6 +3459,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                       ConstraintLayout bottomConstraintLayout,
                                       ImageView upvoteButton,
                                       TextView scoreTextView,
+                                      TextView downvoteTextView,
                                       ImageView downvoteButton,
                                       TextView commentsCountTextView,
                                       ImageView saveButton,
@@ -3400,6 +3484,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,
@@ -3554,6 +3639,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.bottomConstraintLayoutItemPostGalleryType,
                     binding.upvoteButtonItemPostGalleryType,
                     binding.scoreTextViewItemPostGalleryType,
+                    binding.downvoteTextViewItemPostGalleryType,
                     binding.downvoteButtonItemPostGalleryType,
                     binding.commentsCountTextViewItemPostGalleryType,
                     binding.saveButtonItemPostGalleryType,
@@ -3599,6 +3685,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_text_type)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_text_type)
+        TextView downvoteTextView;
+
         @BindView(R.id.minus_button_item_post_text_type)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_text_type)
@@ -3629,6 +3719,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,
@@ -3667,6 +3758,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ConstraintLayout bottomConstraintLayout;
         ImageView upvoteButton;
         TextView scoreTextView;
+        TextView downvoteTextView;
         ImageView downvoteButton;
         TextView commentsCountTextView;
         ImageView saveButton;
@@ -3694,7 +3786,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          FrameLayout noPreviewLinkImageFrameLayout,
                          ImageView noPreviewLinkImageView, Barrier imageBarrier,
                          ConstraintLayout bottomConstraintLayout, ImageView upvoteButton,
-                         TextView scoreTextView, ImageView downvoteButton,
+                         TextView scoreTextView, TextView downvoteTextView, ImageView downvoteButton,
                          TextView commentsCountTextView, ImageView saveButton,
                          ImageView shareButton, View divider) {
             this.iconGifImageView = iconGifImageView;
@@ -3722,6 +3814,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             this.bottomConstraintLayout = bottomConstraintLayout;
             this.upvoteButton = upvoteButton;
             this.scoreTextView = scoreTextView;
+            this.downvoteTextView = downvoteTextView;
             this.downvoteButton = downvoteButton;
             this.commentsCountTextView = commentsCountTextView;
             this.saveButton = saveButton;
@@ -4052,17 +4145,27 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton
                                 .setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                        scoreTextView.setTextColor(mDownvotedColor);
+                        if(mSeparateUpandDownVotes){
+                            downvoteTextView.setTextColor(mDownvotedColor);
+                        }else {
+                            scoreTextView.setTextColor(mDownvotedColor);
+                        }
                     } else {
                         //Downvoted before
                         post.setVoteType(0);
                         newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mPostIconAndInfoColor);
+                        downvoteTextView.setTextColor(mPostIconAndInfoColor);
                     }
 
                     if (!mHideTheNumberOfVotes) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                        if(mSeparateUpandDownVotes) {
+                            int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() +1 : post.getDownvotes();
+                            downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                        } else {
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                        }
                     }
 
                     VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
@@ -4073,7 +4176,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 post.setVoteType(-1);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                                    scoreTextView.setTextColor(mDownvotedColor);
+                                    if(mSeparateUpandDownVotes) {
+                                        downvoteTextView.setTextColor(mDownvotedColor);
+                                    } else {
+                                        scoreTextView.setTextColor(mDownvotedColor);
+                                    }
                                 }
 
                             } else {
@@ -4081,13 +4188,19 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                                     scoreTextView.setTextColor(mPostIconAndInfoColor);
+                                    downvoteTextView.setTextColor(mPostIconAndInfoColor);
                                 }
                             }
 
                             if (currentPosition == position) {
                                 upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                                 if (!mHideTheNumberOfVotes) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                                    if(mSeparateUpandDownVotes) {
+                                        int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() +1 : post.getDownvotes();
+                                        downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                                    }
                                 }
                             }
 
@@ -4283,6 +4396,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_compact)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_compact)
+        TextView downvoteTextView;
         @BindView(R.id.minus_button_item_post_compact)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_compact)
@@ -4303,7 +4419,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     lockedImageView, crosspostImageView, nsfwTextView, spoilerTextView,
                     flairTextView, awardsTextView, linkTextView, relativeLayout, progressBar, imageView,
                     playButtonImageView, noPreviewLinkImageFrameLayout, noPreviewLinkImageView,
-                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView, downvoteButton,
+                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView, downvoteTextView,downvoteButton,
                     commentsCountTextView, saveButton, shareButton, divider);
         }
     }
@@ -4359,6 +4475,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_compact_right_thumbnail)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_compact_right_thumbnail)
+        TextView downvoteTextView;
         @BindView(R.id.minus_button_item_post_compact_right_thumbnail)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_compact_right_thumbnail)
@@ -4379,7 +4498,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     lockedImageView, crosspostImageView, nsfwTextView, spoilerTextView,
                     flairTextView, awardsTextView, linkTextView, relativeLayout, progressBar, imageView,
                     playButtonImageView, noPreviewLinkImageFrameLayout, noPreviewLinkImageView,
-                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView, downvoteButton,
+                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView,downvoteTextView, downvoteButton,
                     commentsCountTextView, saveButton, shareButton, divider);
         }
     }
@@ -4747,6 +4866,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_card_2_video_autoplay)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_card_2_video_autoplay)
+        TextView downvoteTextView;
+
         @BindView(R.id.minus_button_item_post_card_2_video_autoplay)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_card_2_video_autoplay)
@@ -4788,6 +4911,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,
@@ -5062,6 +5186,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_card_2_with_preview)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_card_2_with_preview)
+        TextView downvoteTextView;
         @BindView(R.id.minus_button_item_post_card_2_with_preview)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_card_2_with_preview)
@@ -5095,6 +5222,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,
@@ -5179,6 +5307,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.bottomConstraintLayoutItemPostCard2GalleryType,
                     binding.upvoteButtonItemPostCard2GalleryType,
                     binding.scoreTextViewItemPostCard2GalleryType,
+                    binding.downvoteTextViewItemPostCard2GalleryType,
                     binding.downvoteButtonItemPostCard2GalleryType,
                     binding.commentsCountTextViewItemPostCard2GalleryType,
                     binding.saveButtonItemPostCard2GalleryType,
@@ -5226,6 +5355,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_card_2_text)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_card_2_text)
+        TextView downvoteTextView;
         @BindView(R.id.minus_button_item_post_card_2_text)
         ImageView downvoteButton;
         @BindView(R.id.comments_count_item_post_card_2_text)
@@ -5258,6 +5390,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     bottomConstraintLayout,
                     upvoteButton,
                     scoreTextView,
+                    downvoteTextView,
                     downvoteButton,
                     commentsCountTextView,
                     saveButton,

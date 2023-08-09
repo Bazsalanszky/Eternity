@@ -39,6 +39,11 @@
         app:title="@string/settings_hide_the_number_of_votes" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
+        app:defaultValue="true"
+        app:key="post_separate_down_and_up_votes"
+        app:title="@string/separate_down_and_up_votes" />
+
+    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
         app:key="hide_the_number_of_comments"
         app:title="@string/settings_hide_the_number_of_comments" />

@@ -56,6 +56,11 @@
         app:key="hide_the_number_of_votes_in_comments"
         app:title="@string/settings_hide_the_number_of_votes" />
 
+    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
+        app:defaultValue="true"
+        app:key="comment_separate_down_and_up_votes"
+        app:title="@string/separate_down_and_up_votes" />
+
     <eu.toldi.infinityforlemmy.customviews.CustomFontSeekBarPreference
         app:defaultValue="5"
         android:max="10"

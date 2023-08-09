@@ -56,7 +56,10 @@ public class Post implements Parcelable {
     private boolean loadGfyOrStreamableVideoSuccess;
     private String permalink;
     private long postTimeMillis;
-    private int score;
+
+    private int downvotes;
+
+    private int upvotes;
     private int postType;
     private int voteType;
     private int nComments;
@@ -77,7 +80,7 @@ public class Post implements Parcelable {
 
     public Post(int id, String fullName, String subredditName, String subredditNamePrefixed,
                 String author,String authorNamePrefixed, long postTimeMillis,
-                String title, String permalink, int score, int postType, int voteType, int nComments,
+                String title, String permalink, int downvotes,int upvotes, int postType, int voteType, int nComments,
                 int upvoteRatio,
                 boolean nsfw, boolean locked, boolean saved,
                 String distinguished, String suggestedSort) {
@@ -90,7 +93,8 @@ public class Post implements Parcelable {
         this.postTimeMillis = postTimeMillis;
         this.title = title;
         this.permalink = permalink;
-        this.score = score;
+        this.upvotes = upvotes;
+        this.downvotes = downvotes;
         this.postType = postType;
         this.voteType = voteType;
         this.nComments = nComments;
@@ -109,7 +113,7 @@ public class Post implements Parcelable {
 
     public Post(int id, String fullName, String subredditName, String subredditNamePrefixed,
                 String author, String authorNamePrefixed, long postTimeMillis, String title,
-                String url, String permalink, int score, int postType, int voteType, int nComments,
+                String url, String permalink, int downvotes,int upvotes, int postType, int voteType, int nComments,
                 int upvoteRatio,
                 boolean nsfw,  boolean locked, boolean saved, String distinguished, String suggestedSort) {
         this.id = id;
@@ -122,7 +126,8 @@ public class Post implements Parcelable {
         this.title = title;
         this.url = url;
         this.permalink = permalink;
-        this.score = score;
+        this.downvotes = downvotes;
+        this.upvotes = upvotes;
         this.postType = postType;
         this.voteType = voteType;
         this.nComments = nComments;
@@ -164,7 +169,8 @@ public class Post implements Parcelable {
         isStreamable = in.readByte() != 0;
         loadGfyOrStreamableVideoSuccess = in.readByte() != 0;
         permalink = in.readString();
-        score = in.readInt();
+        downvotes = in.readInt();
+        upvotes = in.readInt();
         postType = in.readInt();
         voteType = in.readInt();
         nComments = in.readInt();
@@ -269,6 +275,22 @@ public class Post implements Parcelable {
         this.selfTextPlainTrimmed = selfTextPlainTrimmed;
     }
 
+    public int getDownvotes() {
+        return downvotes;
+    }
+
+    public void setDownvotes(int downvotes) {
+        this.downvotes = downvotes;
+    }
+
+    public int getUpvotes() {
+        return upvotes;
+    }
+
+    public void setUpvotes(int upvotes) {
+        this.upvotes = upvotes;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -366,11 +388,7 @@ public class Post implements Parcelable {
     }
 
     public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+        return upvotes- downvotes;
     }
 
     public int getPostType() {
@@ -508,7 +526,8 @@ public class Post implements Parcelable {
         parcel.writeByte((byte) (isStreamable ? 1 : 0));
         parcel.writeByte((byte) (loadGfyOrStreamableVideoSuccess ? 1 : 0));
         parcel.writeString(permalink);
-        parcel.writeInt(score);
+        parcel.writeInt(downvotes);
+        parcel.writeInt(upvotes);
         parcel.writeInt(postType);
         parcel.writeInt(voteType);
         parcel.writeInt(nComments);
