@@ -105,7 +105,7 @@ public class CrashReportsFragment extends Fragment {
         } catch (UnsupportedEncodingException e) {
             return false;
         }
-        Uri githubIssueUri = Uri.parse(String.format("https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues/new?template=.gitea%2fissue_template%2fbug_report.md", model, appVersion, androidVersion, logs));
+        Uri githubIssueUri = Uri.parse(String.format("https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues/new?template=.gitea/issue_template/bug_report.md&body=%s", logs));
         intent.setData(githubIssueUri);
         startActivity(intent);
         return true;
