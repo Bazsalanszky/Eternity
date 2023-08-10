@@ -975,4 +975,5 @@
     <string name="label_reddit">Lemmy</string>
     <string name="about">Az appról</string>
     <string name="settings_open_navigation_drawer">Navigációs fiók megnyitása</string>
+    <string name="post_gallery_activity_label">Galéria Poszt</string>
 </resources>
