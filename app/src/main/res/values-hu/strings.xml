@@ -985,4 +985,5 @@
     <string name="post_poll_activity_label">Szavazás Post</string>
     <string name="history_activity_label">Előzmények</string>
     <string name="action_create_github_issue">Codeberg hibajegy létrehozása</string>
+    <string name="action_go_to_wiki">Menj Wiki-re</string>
 </resources>
