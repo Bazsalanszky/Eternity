@@ -66,9 +66,9 @@ Don't forget to give the project a star! Thanks again!
 
 ### Translation
 
-You can alos help Infinity for Lemmy by translating it to your native langugage! Translations are done via [Weblate](https://hosted.weblate.org/projects/lemminfinity/codeberg/)!
+You can alos help Infinity for Lemmy by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/infinity-for-lemmy/app/)!
 
-[![Translation](https://hosted.weblate.org/widgets/lemminfinity/-/codeberg/multi-auto.svg)](https://hosted.weblate.org/engage/lemminfinity/)
+[![Translation](https://translate.codeberg.org/widgets/infinity-for-lemmy/-/app/multi-auto.svg)](https://translate.codeberg.org/engage/infinity-for-lemmy/)
 
 ### Reporting bugs
 
