@@ -6,7 +6,10 @@ import android.text.SpannableStringBuilder
 import android.text.style.URLSpan
 import android.text.util.Linkify
 import eu.toldi.infinityforlemmy.utils.LemmyUtils
-import io.noties.markwon.*
+import io.noties.markwon.AbstractMarkwonPlugin
+import io.noties.markwon.MarkwonPlugin
+import io.noties.markwon.MarkwonVisitor
+import io.noties.markwon.SpannableBuilder
 import io.noties.markwon.core.CorePlugin
 import io.noties.markwon.core.CoreProps
 import org.commonmark.node.Link
@@ -36,13 +39,13 @@ class MarkwonLemmyLinkPlugin : AbstractMarkwonPlugin() {
          * Pattern to match lemmy's unique community pattern, e.g. !commmunity[@instance]
          */
         val lemmyCommunityPattern: Pattern =
-                Pattern.compile("(?<!\\S)!($communityPatternFragment)(?:@($instancePatternFragment))?\\b")
+            Pattern.compile("(?<!\\S)!($communityPatternFragment)(?:@($instancePatternFragment))\\b")
 
         /**
          * Pattern to match lemmy's unique user pattern, e.g. @user[@instance]
          */
         val lemmyUserPattern: Pattern =
-                Pattern.compile("(?<!\\S)@($userPatternFragment)(?:@($instancePatternFragment))?\\b")
+            Pattern.compile("(?<!\\S)@($userPatternFragment)(?:@($instancePatternFragment))\\b")
 
     }
     override fun configure(registry: MarkwonPlugin.Registry) {
