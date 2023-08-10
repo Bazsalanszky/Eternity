@@ -451,6 +451,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     if(mSeperateUpandDownvote){
                         int upvotes = (comment.getVoteType() == 1) ? comment.getUpvotes()+1 : comment.getUpvotes();
                         int downvotes = (comment.getVoteType() == -1) ? comment.getDownvotes()+1 : comment.getDownvotes();
+                        ((CommentViewHolder) holder).downvoteTextView.setVisibility(View.VISIBLE);
                         ((CommentViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
                         ((CommentViewHolder) holder).downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
                         ((CommentViewHolder) holder).scoreTextView.setGravity(Gravity.START);
