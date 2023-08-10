@@ -33,7 +33,6 @@ import java.util.concurrent.Executor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
@@ -219,6 +218,9 @@ public class ParsePost {
         String authorAvatar = (!data.getJSONObject("creator").isNull("avatar")) ? data.getJSONObject("creator").getString("avatar") : null;
 
         Uri uri = Uri.parse(url);
+        if (uri.getAuthority() == null) {
+            Log.e("ParsePost", "parseData:" + uri.toString());
+        }
         String path = uri.getPath();
         boolean isVideo = path.endsWith(".mp4") || path.endsWith(".webm") || path.endsWith(".gifv");
 
@@ -364,7 +366,7 @@ public class ParsePost {
 
                     post.setPreviews(previews);
                     post.setVideoUrl(url);
-                } else if (uri.getAuthority().contains("imgur.com") && (path.endsWith(".gifv") || path.endsWith(".mp4"))) {
+                } else if (uri.getAuthority() != null && uri.getAuthority().contains("imgur.com") && (path.endsWith(".gifv") || path.endsWith(".mp4"))) {
                     // Imgur gifv/mp4
                     int postType = Post.VIDEO_TYPE;
 

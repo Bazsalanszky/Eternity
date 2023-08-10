@@ -43,7 +43,7 @@ public class SortType {
         TOP_TWELVE_HOURS("TopTwelveHour", "Top"),
         TOP_DAY("TopDay", "Top"),
         TOP_WEEK("TopWeek", "Top"),
-        TOP_MONTH("month", "Top"),
+        TOP_MONTH("TopMonth", "Top"),
         TOP_THREE_MONTHS("TopThreeMonths", "Top"),
         TOP_SIX_MONTHS("TopSixMonths", "Top"),
         TOP_NINE_MONTHS("TopNineMonths", "Top"),
