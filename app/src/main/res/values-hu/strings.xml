@@ -986,4 +986,13 @@
     <string name="history_activity_label">Előzmények</string>
     <string name="action_create_github_issue">Codeberg hibajegy létrehozása</string>
     <string name="action_go_to_wiki">Menj Wiki-re</string>
+    <string name="action_share_post_link">Poszt link megosztása</string>
+    <string name="action_playback_speed">Lejátszási sebesség</string>
+    <string name="action_more_options">További műveletek</string>
+    <string name="anonymous_homepage_not_implemented">Az Anonymous főoldal még nincs implementálva</string>
+    <string name="history">Előzmények</string>
+    <string name="inbox_with_count">Bejövő üzenetek (%1$,d)</string>
+    <string name="trending">Felkapott</string>
+    <string name="invalid_response">Érvénytelen válasz a kiszolgálótól</string>
+    <string name="invalid_username_or_password">Helytelen felhasználónév vagy jelszó</string>
 </resources>
