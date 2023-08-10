@@ -186,7 +186,7 @@ public class ParsePost {
         boolean nsfw = post.getBoolean("nsfw");
         boolean locked = post.getBoolean("locked");
         boolean saved = data.getBoolean("saved");
-        String distinguished = "";
+        String distinguished = (creator.getBoolean("admin") ? "admin" : "");
         String suggestedSort = "";
         ArrayList <Post.Preview> previews = new ArrayList<>();
         if(!post.isNull("thumbnail_url")) {
@@ -659,7 +659,7 @@ public class ParsePost {
             post.setVoteType(data.getInt("my_vote"));
             if(post.getVoteType() == 1)
                 post.setUpvotes(post.getUpvotes() - 1);
-            else if(post.getVoteType() == -1)
+            else if (post.getVoteType() == -1)
                 post.setDownvotes(post.getDownvotes() - 1);
         }
         if (!data.getJSONObject("post").isNull("body")) {
@@ -668,7 +668,13 @@ public class ParsePost {
             post.setSelfTextPlain(body);
             post.setSelfTextPlainTrimmed(body.trim());
         }
+        if (data.getJSONObject("post").getBoolean("featured_community")) {
+            post.setFeaturedInCommunity(true);
+        }
 
+        if (data.getJSONObject("post").getBoolean("featured_local")) {
+            post.setFeaturedOnInstance(true);
+        }
         post.setAuthorIconUrl(authorAvatar);
         post.setSubredditIconUrl(communityURL);
         return post;

@@ -541,7 +541,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
 
                 ((PostBaseViewHolder) holder).userTextView.setTextColor(
-                        post.isModerator() ? mModeratorColor : mUsernameColor);
+                        post.isModerator() || post.isAdmin() ? mModeratorColor : mUsernameColor);
 
                 if (mDisplaySubredditName) {
                     if (authorPrefixed.equals(post.getSubredditNamePrefixed())) {
@@ -700,9 +700,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         ((PostBaseViewHolder) holder).downvoteTextView.setTextColor(mPostIconAndInfoColor);
                 }
 
-                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isStickied()) {
+                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isFeaturedInCommunity() || post.isFeaturedOnInstance()) {
                     ((PostBaseViewHolder) holder).stickiedPostImageView.setVisibility(View.VISIBLE);
                     mGlide.load(R.drawable.ic_thumbtack_24dp).into(((PostBaseViewHolder) holder).stickiedPostImageView);
+                    if (post.isFeaturedOnInstance()) {
+                        ((PostBaseViewHolder) holder).stickiedPostImageView.setColorFilter(mModeratorColor, android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
                 }
 
                 if (post.isArchived()) {
@@ -1239,7 +1242,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
 
                     ((PostCompactBaseViewHolder) holder).nameTextView.setTextColor(
-                            post.isModerator() ? mModeratorColor : mUsernameColor);
+                            post.isModerator() || post.isAdmin() ? mModeratorColor : mUsernameColor);
 
                     if (mHideSubredditAndUserPrefix) {
                         ((PostCompactBaseViewHolder) holder).nameTextView.setText(post.getAuthor());
@@ -1333,7 +1336,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
                 }
 
-                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isStickied()) {
+                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isFeaturedInCommunity()) {
                     ((PostCompactBaseViewHolder) holder).stickiedPostImageView.setVisibility(View.VISIBLE);
                     mGlide.load(R.drawable.ic_thumbtack_24dp).into(((PostCompactBaseViewHolder) holder).stickiedPostImageView);
                 }

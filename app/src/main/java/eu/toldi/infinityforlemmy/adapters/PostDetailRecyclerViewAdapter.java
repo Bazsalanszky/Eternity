@@ -99,7 +99,6 @@ import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
-import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import eu.toldi.infinityforlemmy.videoautoplay.CacheManager;
@@ -586,7 +585,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthor());
             }
 
-            if (mPost.isModerator()) {
+            if (mPost.isModerator() || mPost.isAdmin()) {
                 ((PostDetailBaseViewHolder) holder).mUserTextView.setTextColor(mModeratorColor);
                 Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
                 ((PostDetailBaseViewHolder) holder).mUserTextView.setCompoundDrawablesWithIntrinsicBounds(

@@ -66,7 +66,9 @@ public class Post implements Parcelable {
     private int upvoteRatio;
     private boolean hidden;
     private boolean nsfw;
-    private boolean stickied;
+    private boolean featuredInCommunity;
+
+    private boolean featuredOnInstance;
     private boolean archived;
     private boolean locked;
     private boolean saved;
@@ -101,7 +103,6 @@ public class Post implements Parcelable {
         this.upvoteRatio = upvoteRatio;
         this.hidden = hidden;
         this.nsfw = nsfw;
-        this.stickied = stickied;
         this.archived = archived;
         this.locked = locked;
         this.saved = saved;
@@ -134,7 +135,6 @@ public class Post implements Parcelable {
         this.upvoteRatio = upvoteRatio;
         this.hidden = hidden;
         this.nsfw = nsfw;
-        this.stickied = stickied;
         this.archived = archived;
         this.locked = locked;
         this.saved = saved;
@@ -177,7 +177,7 @@ public class Post implements Parcelable {
         upvoteRatio = in.readInt();
         hidden = in.readByte() != 0;
         nsfw = in.readByte() != 0;
-        stickied = in.readByte() != 0;
+        featuredInCommunity = in.readByte() != 0;
         archived = in.readByte() != 0;
         locked = in.readByte() != 0;
         saved = in.readByte() != 0;
@@ -444,8 +444,20 @@ public class Post implements Parcelable {
         return 0;
     }
 
-    public boolean isStickied() {
-        return stickied;
+    public boolean isFeaturedInCommunity() {
+        return featuredInCommunity;
+    }
+
+    public void setFeaturedInCommunity(boolean featuredInCommunity) {
+        this.featuredInCommunity = featuredInCommunity;
+    }
+
+    public boolean isFeaturedOnInstance() {
+        return featuredOnInstance;
+    }
+
+    public void setFeaturedOnInstance(boolean featuredOnInstance) {
+        this.featuredOnInstance = featuredOnInstance;
     }
 
     public boolean isArchived() {
@@ -534,7 +546,7 @@ public class Post implements Parcelable {
         parcel.writeInt(upvoteRatio);
         parcel.writeByte((byte) (hidden ? 1 : 0));
         parcel.writeByte((byte) (nsfw ? 1 : 0));
-        parcel.writeByte((byte) (stickied ? 1 : 0));
+        parcel.writeByte((byte) (featuredInCommunity ? 1 : 0));
         parcel.writeByte((byte) (archived ? 1 : 0));
         parcel.writeByte((byte) (locked ? 1 : 0));
         parcel.writeByte((byte) (saved ? 1 : 0));

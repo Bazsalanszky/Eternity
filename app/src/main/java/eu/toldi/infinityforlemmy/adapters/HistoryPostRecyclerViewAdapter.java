@@ -641,9 +641,12 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                         break;
                 }
 
-                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isStickied()) {
+                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isFeaturedInCommunity() || post.isFeaturedOnInstance()) {
                     ((PostBaseViewHolder) holder).stickiedPostImageView.setVisibility(View.VISIBLE);
                     mGlide.load(R.drawable.ic_thumbtack_24dp).into(((PostBaseViewHolder) holder).stickiedPostImageView);
+                    if (post.isFeaturedOnInstance()) {
+                        ((PostBaseViewHolder) holder).stickiedPostImageView.setColorFilter(mModeratorColor, android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
                 }
 
                 if (post.isArchived()) {
@@ -1210,7 +1213,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                     }
                 }
 
-                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isStickied()) {
+                if (mPostType == PostPagingSource.TYPE_SUBREDDIT && !mDisplaySubredditName && post.isFeaturedInCommunity()) {
                     ((PostCompactBaseViewHolder) holder).stickiedPostImageView.setVisibility(View.VISIBLE);
                     mGlide.load(R.drawable.ic_thumbtack_24dp).into(((PostCompactBaseViewHolder) holder).stickiedPostImageView);
                 }
