@@ -981,4 +981,8 @@
     <string name="wiki_activity_label">Wiki</string>
     <string name="edit_profile_activity_label">Profil szerkesztése</string>
     <string name="action_open_external_browser">Megnyitás böngészőben</string>
+    <string name="action_delete_logs">Logok törlése</string>
+    <string name="post_poll_activity_label">Szavazás Post</string>
+    <string name="history_activity_label">Előzmények</string>
+    <string name="action_create_github_issue">Codeberg hibajegy létrehozása</string>
 </resources>
