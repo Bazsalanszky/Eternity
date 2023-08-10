@@ -1569,7 +1569,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 SavePost savePost = new SavePost();
                 if (mPost.isSaved()) {
                     mSaveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                    savePost.unsaveThing(mOauthRetrofit, mAccessToken, mPost.getId(),
+                    savePost.unsaveThing(mRetrofit, mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
