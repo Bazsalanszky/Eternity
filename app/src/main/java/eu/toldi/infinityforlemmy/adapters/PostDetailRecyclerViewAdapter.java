@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Spanned;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -172,6 +173,8 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private boolean mHideTheNumberOfAwards;
     private boolean mHideSubredditAndUserPrefix;
     private boolean mHideTheNumberOfVotes;
+
+    private boolean mSeperateUpvoteAndDownvote;
     private boolean mHideTheNumberOfComments;
     private boolean mSeparatePostAndComments;
     private boolean mLegacyAutoplayVideoControllerUI;
@@ -342,6 +345,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mHideTheNumberOfAwards = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
         mHideSubredditAndUserPrefix = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
         mHideTheNumberOfVotes = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
+        mSeperateUpvoteAndDownvote = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_SEPARATE_UP_AND_DOWN_VOTES, true);
         mHideTheNumberOfComments = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_COMMENTS, false);
 
         mPostDetailRecyclerViewAdapterCallback = postDetailRecyclerViewAdapterCallback;
@@ -544,16 +548,23 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     //Upvote
                     ((PostDetailBaseViewHolder) holder).mUpvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                     ((PostDetailBaseViewHolder) holder).mScoreTextView.setTextColor(mUpvotedColor);
+                    ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setTextColor(mPostIconAndInfoColor);
                     break;
                 case -1:
                     //Downvote
                     ((PostDetailBaseViewHolder) holder).mDownvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                    ((PostDetailBaseViewHolder) holder).mScoreTextView.setTextColor(mDownvotedColor);
+                    if(mSeperateUpvoteAndDownvote){
+                        ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setTextColor(mDownvotedColor);
+                    } else {
+                        ((PostDetailBaseViewHolder) holder).mScoreTextView.setTextColor(mDownvotedColor);
+                    }
                     break;
+                default:
                 case 0:
                     ((PostDetailBaseViewHolder) holder).mUpvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                     ((PostDetailBaseViewHolder) holder).mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                     ((PostDetailBaseViewHolder) holder).mScoreTextView.setTextColor(mPostIconAndInfoColor);
+                    ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setTextColor(mPostIconAndInfoColor);
             }
 
             if (mPost.isArchived()) {
@@ -611,7 +622,24 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             }
 
             if (!mHideTheNumberOfVotes) {
-                ((PostDetailBaseViewHolder) holder).mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, mPost.getScore() + mPost.getVoteType()));
+                if(mSeperateUpvoteAndDownvote){
+                    int upvotes = (mPost.getVoteType() == 1) ?  mPost.getUpvotes()+1  : mPost.getUpvotes();
+                    int downvotes = (mPost.getVoteType() == -1) ?  mPost.getDownvotes() +1  : Math.max(mPost.getDownvotes(),0);
+                    ((PostDetailBaseViewHolder) holder).mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                    ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+
+                    ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setVisibility(View.VISIBLE);
+
+                    ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setGravity(Gravity.START);
+                    ((PostDetailBaseViewHolder) holder).mScoreTextView.setGravity(Gravity.START);
+                    ((PostDetailBaseViewHolder) holder).mScoreTextView.getLayoutParams().width = (int) (32  * mActivity.getResources().getDisplayMetrics().density);
+
+                    ((PostDetailBaseViewHolder) holder).mScoreTextView.setPadding(0, 0, 6, 0);
+                    ((PostDetailBaseViewHolder) holder).mDownvoteTextView.setPadding(0, 0, 12, 0);
+                    ((PostDetailBaseViewHolder) holder).mUpvoteButton.setPadding(24, 0, 12, 0);
+                } else {
+                    ((PostDetailBaseViewHolder) holder).mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, mPost.getScore() + mPost.getVoteType()));
+                }
             } else {
                 ((PostDetailBaseViewHolder) holder).mScoreTextView.setText(mActivity.getString(R.string.vote));
             }
@@ -1163,6 +1191,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ConstraintLayout mBottomConstraintLayout;
         ImageView mUpvoteButton;
         TextView mScoreTextView;
+        TextView mDownvoteTextView;
         ImageView mDownvoteButton;
         TextView commentsCountTextView;
         ImageView mSaveButton;
@@ -1191,6 +1220,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                          ConstraintLayout mBottomConstraintLayout,
                          ImageView mUpvoteButton,
                          TextView mScoreTextView,
+                         TextView mDownvoteTextView,
                          ImageView mDownvoteButton,
                          TextView commentsCountTextView,
                          ImageView mSaveButton,
@@ -1214,6 +1244,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             this.mBottomConstraintLayout = mBottomConstraintLayout;
             this.mUpvoteButton = mUpvoteButton;
             this.mScoreTextView = mScoreTextView;
+            this.mDownvoteTextView = mDownvoteTextView;
             this.mDownvoteButton = mDownvoteButton;
             this.commentsCountTextView = commentsCountTextView;
             this.mSaveButton = mSaveButton;
@@ -1306,6 +1337,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 int newVoteType;
 
                 mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
+                mDownvoteTextView.setTextColor(mPostIconAndInfoColor);
 
                 if (previousVoteType != 1) {
                     //Not upvoted before
@@ -1322,8 +1354,15 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 }
 
                 if (!mHideTheNumberOfVotes) {
-                    mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                            mPost.getScore() + mPost.getVoteType()));
+                    if(mSeperateUpvoteAndDownvote){
+                        int upvotes = (mPost.getVoteType() == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                        int downvotes = (mPost.getVoteType() == -1) ? mPost.getDownvotes() + 1 :  Math.max(mPost.getDownvotes(),0);;
+                        mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                        mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                    } else {
+                        mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                mPost.getScore() + mPost.getVoteType()));
+                    }
                 }
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
@@ -1343,8 +1382,15 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                         mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         if (!mHideTheNumberOfVotes) {
-                            mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                    mPost.getScore() + mPost.getVoteType()));
+                            if(mSeperateUpvoteAndDownvote){
+                                int upvotes = (mPost.getVoteType() == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                                int downvotes = (mPost.getVoteType() == -1) ? mPost.getDownvotes() + 1 :  Math.max(mPost.getDownvotes(),0);;
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                            } else {
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                        mPost.getScore() + mPost.getVoteType()));
+                            }
                         }
 
                         mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
@@ -1355,8 +1401,15 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                         mPost.setVoteType(previousVoteType);
                         if (!mHideTheNumberOfVotes) {
-                            mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                    mPost.getScore() + previousVoteType));
+                            if(mSeperateUpvoteAndDownvote){
+                                int upvotes = (previousVoteType == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                                int downvotes = (previousVoteType == -1) ? mPost.getDownvotes() - 1 :  Math.max(mPost.getDownvotes(),0);;
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                            } else {
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                        mPost.getScore() + previousVoteType));
+                            }
                         }
                         mUpvoteButton.setColorFilter(previousUpvoteButtonColorFilter);
                         mDownvoteButton.setColorFilter(previousDownvoteButtonColorFilter);
@@ -1386,24 +1439,36 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 int newVoteType;
 
                 mUpvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
-
+                mScoreTextView.setTextColor(mPostIconAndInfoColor);
                 if (previousVoteType != -1) {
                     //Not upvoted before
                     mPost.setVoteType(-1);
                     newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                     mDownvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                    mScoreTextView.setTextColor(mDownvotedColor);
+                    if(mSeperateUpvoteAndDownvote){
+                        mDownvoteTextView.setTextColor(mDownvotedColor);
+                    } else {
+                        mScoreTextView.setTextColor(mDownvotedColor);
+                    }
                 } else {
                     //Upvoted before
                     mPost.setVoteType(0);
                     newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                     mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                     mScoreTextView.setTextColor(mPostIconAndInfoColor);
+                    mDownvoteTextView.setTextColor(mPostIconAndInfoColor);
                 }
 
                 if (!mHideTheNumberOfVotes) {
-                    mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                            mPost.getScore() + mPost.getVoteType()));
+                    if(mSeperateUpvoteAndDownvote){
+                        int upvotes = (mPost.getVoteType() == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                        int downvotes = (mPost.getVoteType() == -1) ? mPost.getDownvotes() + 1 : Math.max(mPost.getDownvotes(),0);;
+                        mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                        mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                    } else {
+                        mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                mPost.getScore() + mPost.getVoteType()));
+                    }
                 }
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
@@ -1414,17 +1479,29 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                             mPost.setVoteType(-1);
                             mDownvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                            mScoreTextView.setTextColor(mDownvotedColor);
+                            if(mSeperateUpvoteAndDownvote) {
+                                mDownvoteTextView.setTextColor(mDownvotedColor);
+                            } else {
+                                mScoreTextView.setTextColor(mDownvotedColor);
+                            }
                         } else {
                             mPost.setVoteType(0);
                             mDownvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                             mScoreTextView.setTextColor(mPostIconAndInfoColor);
+                            mDownvoteTextView.setTextColor(mPostIconAndInfoColor);
                         }
 
                         mUpvoteButton.setColorFilter(mPostIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         if (!mHideTheNumberOfVotes) {
-                            mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                    mPost.getScore() + mPost.getVoteType()));
+                            if(mSeperateUpvoteAndDownvote){
+                                int upvotes = (mPost.getVoteType() == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                                int downvotes = (mPost.getVoteType() == -1) ? mPost.getDownvotes() + 1 :  Math.max(mPost.getDownvotes(),0);;
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                            } else {
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                        mPost.getScore() + mPost.getVoteType()));
+                            }
                         }
 
                         mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
@@ -1435,8 +1512,15 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                         mPost.setVoteType(previousVoteType);
                         if (!mHideTheNumberOfVotes) {
-                            mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                    mPost.getScore() + previousVoteType));
+                            if(mSeperateUpvoteAndDownvote) {
+                                int upvotes = (previousVoteType == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                                int downvotes = (previousVoteType == -1) ? mPost.getDownvotes() + 1 :  Math.max(mPost.getDownvotes(),0);
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                            } else {
+                                mScoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                        mPost.getScore() + previousVoteType));
+                            }
                         }
                         mUpvoteButton.setColorFilter(previousUpvoteButtonColorFilter);
                         mDownvoteButton.setColorFilter(previousDownvoteButtonColorFilter);
@@ -1683,6 +1767,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_video_autoplay)
         TextView mScoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_detail_video_autoplay)
+        TextView mDownvoteTextView;
         @BindView(R.id.minus_button_item_post_detail_video_autoplay)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_video_autoplay)
@@ -1721,6 +1808,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,
@@ -1982,6 +2070,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_video_and_gif_preview)
         TextView mScoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_detail_video_and_gif_preview)
+        TextView mDownvoteTextView;
         @BindView(R.id.minus_button_item_post_detail_video_and_gif_preview)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_video_and_gif_preview)
@@ -2013,6 +2104,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,
@@ -2111,6 +2203,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_image_and_gif_autoplay)
         TextView mScoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_detail_image_and_gif_autoplay)
+        TextView mDownvoteTextView;
         @BindView(R.id.minus_button_item_post_detail_image_and_gif_autoplay)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_image_and_gif_autoplay)
@@ -2142,6 +2237,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,
@@ -2226,6 +2322,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_link)
         TextView mScoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_detail_link)
+        TextView mDownvoteTextView;
         @BindView(R.id.minus_button_item_post_detail_link)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_link)
@@ -2257,6 +2356,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,
@@ -2322,6 +2422,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_no_preview_link)
         TextView mScoreTextView;
+        @BindView(R.id.downvote_text_view_item_post_detail_no_preview_link)
+        TextView mDownvoteTextView;
+
         @BindView(R.id.minus_button_item_post_detail_no_preview_link)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_no_preview_link)
@@ -2353,6 +2456,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,
@@ -2467,6 +2571,8 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_gallery)
         TextView mScoreTextView;
+        @BindView(R.id.downvote_text_view_item_post_detail_gallery)
+        TextView mDownvoteTextView;
         @BindView(R.id.minus_button_item_post_detail_gallery)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_gallery)
@@ -2499,6 +2605,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,
@@ -2654,6 +2761,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         ImageView mUpvoteButton;
         @BindView(R.id.score_text_view_item_post_detail_text)
         TextView mScoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_detail_text)
+        TextView mDownvoteTextView;
         @BindView(R.id.minus_button_item_post_detail_text)
         ImageView mDownvoteButton;
         @BindView(R.id.comments_count_item_post_detail_text)
@@ -2685,6 +2795,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     mBottomConstraintLayout,
                     mUpvoteButton,
                     mScoreTextView,
+                    mDownvoteTextView,
                     mDownvoteButton,
                     commentsCountTextView,
                     mSaveButton,

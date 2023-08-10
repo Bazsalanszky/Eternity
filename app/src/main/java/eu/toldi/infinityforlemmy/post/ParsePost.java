@@ -657,7 +657,7 @@ public class ParsePost {
             post.setVoteType(data.getInt("my_vote"));
             if(post.getVoteType() == 1)
                 post.setUpvotes(post.getUpvotes() - 1);
-            else
+            else if(post.getVoteType() == -1)
                 post.setDownvotes(post.getDownvotes() - 1);
         }
         if (!data.getJSONObject("post").isNull("body")) {
