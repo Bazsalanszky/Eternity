@@ -2636,6 +2636,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     int newVoteType;
 
                     downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
+                    downvoteTextView.setTextColor(mPostIconAndInfoColor);
 
                     if (previousVoteType != 1) {
                         //Not upvoted before
@@ -2653,7 +2654,14 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
 
                     if (!mHideTheNumberOfVotes) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                        if(mSeparateUpandDownVotes){
+                            int upvotes = (post.getVoteType() == 1) ? post.getUpvotes() + 1 : post.getUpvotes();
+                            int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() + 1 : post.getDownvotes();
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                            downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                        } else {
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                        }
                     }
 
                     VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
@@ -2677,7 +2685,14 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             if (currentPosition == position) {
                                 downvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                                 if (!mHideTheNumberOfVotes) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                                    if (mSeparateUpandDownVotes) {
+                                        int upvotes = (post.getVoteType() == 1) ? post.getUpvotes() + 1 : post.getUpvotes();
+                                        int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() + 1 : post.getDownvotes();
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                        downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
+                                    }
                                 }
                             }
 
@@ -2756,11 +2771,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                     if (!mHideTheNumberOfVotes) {
                         if(mSeparateUpandDownVotes){
-                            if(post.getVoteType() == -1)
-                                downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getDownvotes() + 1 ));
-                            else if (post.getVoteType() == 1){
-                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getUpvotes() + 1));
-                            }
+                            int upvotes = (post.getVoteType() == 1) ? post.getUpvotes() + 1 : post.getUpvotes();
+                            int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() + 1 : post.getDownvotes();
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                            downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
                         }else {
                             scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                         }
@@ -2793,7 +2807,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 upvoteButton.setColorFilter(mPostIconAndInfoColor, android.graphics.PorterDuff.Mode.SRC_IN);
                                 if (!mHideTheNumberOfVotes) {
                                     if(mSeparateUpandDownVotes){
+                                        int upvotes = (post.getVoteType() == 1) ? post.getUpvotes() + 1 : post.getUpvotes();
                                         int downvotes = (post.getVoteType() == -1) ? post.getDownvotes() + 1 : post.getDownvotes();
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
                                         downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
                                     } else {
                                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
