@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Spanned;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +125,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private boolean mShowAuthorAvatar;
     private boolean mAlwaysShowChildCommentCount;
     private boolean mHideTheNumberOfVotes;
+    private boolean mSeperateUpandDownvote;
     private int mDepthThreshold;
     private CommentRecyclerViewAdapterCallback mCommentRecyclerViewAdapterCallback;
     private boolean isInitiallyLoading;
@@ -237,6 +239,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mShowAuthorAvatar = sharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AUTHOR_AVATAR, false);
         mAlwaysShowChildCommentCount = sharedPreferences.getBoolean(SharedPreferencesUtils.ALWAYS_SHOW_CHILD_COMMENT_COUNT, false);
         mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES_IN_COMMENTS, false);
+        mSeperateUpandDownvote = sharedPreferences.getBoolean(SharedPreferencesUtils.COMMENT_SEPARATE_UP_AND_DOWN_VOTES, true);
         mDepthThreshold = sharedPreferences.getInt(SharedPreferencesUtils.SHOW_FEWER_TOOLBAR_OPTIONS_THRESHOLD, 5);
 
         mCommentRecyclerViewAdapterCallback = commentRecyclerViewAdapterCallback;
@@ -445,7 +448,20 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                             Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                     comment.getScore() + comment.getVoteType()));
 
-                    ((CommentViewHolder) holder).scoreTextView.setText(commentText);
+                    if(mSeperateUpandDownvote){
+                        int upvotes = (comment.getVoteType() == 1) ? comment.getUpvotes()+1 : comment.getUpvotes();
+                        int downvotes = (comment.getVoteType() == -1) ? comment.getDownvotes()+1 : comment.getDownvotes();
+                        ((CommentViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                        ((CommentViewHolder) holder).downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                        ((CommentViewHolder) holder).scoreTextView.setGravity(Gravity.START);
+                        ((CommentViewHolder) holder).scoreTextView.getLayoutParams().width = (int) (32  * mActivity.getResources().getDisplayMetrics().density);
+
+                        ((CommentViewHolder) holder).scoreTextView.setPadding(0, 0, 6, 0);
+                        ((CommentViewHolder) holder).downvoteButton.setPadding(24, 0, 12, 0);
+                        ((CommentViewHolder) holder).upvoteButton.setPadding(24, 0, 12, 0);
+                    } else {
+                        ((CommentViewHolder) holder).scoreTextView.setText(commentText);
+                    }
                     ((CommentViewHolder) holder).topScoreTextView.setText(topScoreText);
                 } else {
                     ((CommentViewHolder) holder).scoreTextView.setText(mActivity.getString(R.string.vote));
@@ -485,13 +501,21 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                 .setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                         ((CommentViewHolder) holder).scoreTextView.setTextColor(mUpvotedColor);
                         ((CommentViewHolder) holder).topScoreTextView.setTextColor(mUpvotedColor);
+                        ((CommentViewHolder) holder).downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                         break;
                     case Comment.VOTE_TYPE_DOWNVOTE:
                         ((CommentViewHolder) holder).downvoteButton
                                 .setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                        ((CommentViewHolder) holder).scoreTextView.setTextColor(mDownvotedColor);
+                        if(mSeperateUpandDownvote) {
+                            ((CommentViewHolder) holder).downvoteTextView.setTextColor(mDownvotedColor);
+                            ((CommentViewHolder) holder).scoreTextView.setTextColor(mCommentIconAndInfoColor);
+                        } else {
+                            ((CommentViewHolder) holder).scoreTextView.setTextColor(mDownvotedColor);
+                        }
                         ((CommentViewHolder) holder).topScoreTextView.setTextColor(mDownvotedColor);
                         break;
+                    default:
+                        ((CommentViewHolder) holder).downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                 }
 
                 if (mPost.isArchived()) {
@@ -1190,6 +1214,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         ImageView upvoteButton;
         @BindView(R.id.score_text_view_item_post_comment)
         TextView scoreTextView;
+
+        @BindView(R.id.downvote_text_view_item_post_comment)
+        TextView downvoteTextView;
         @BindView(R.id.down_vote_button_item_post_comment)
         ImageView downvoteButton;
         @BindView(R.id.placeholder_item_post_comment)
@@ -1267,6 +1294,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 editedTextView.setTypeface(mActivity.typeface);
                 awardsTextView.setTypeface(mActivity.typeface);
                 scoreTextView.setTypeface(mActivity.typeface);
+                downvoteTextView.setTypeface(mActivity.typeface);
                 expandButton.setTypeface(mActivity.typeface);
             }
 
@@ -1298,11 +1326,13 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             commentTimeTextView.setTextColor(mSecondaryTextColor);
             authorFlairTextView.setTextColor(mAuthorFlairTextColor);
             topScoreTextView.setTextColor(mSecondaryTextColor);
+            downvoteTextView.setTextColor(mSecondaryTextColor);
             editedTextView.setTextColor(mSecondaryTextColor);
             awardsTextView.setTextColor(mSecondaryTextColor);
             commentDivider.setBackgroundColor(mDividerColor);
             upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
             scoreTextView.setTextColor(mCommentIconAndInfoColor);
+            downvoteTextView.setTextColor(mCommentIconAndInfoColor);
             downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
             moreButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
             expandButton.setTextColor(mCommentIconAndInfoColor);
@@ -1409,12 +1439,22 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
+                        downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                         topScoreTextView.setTextColor(mSecondaryTextColor);
                     }
 
                     if (!mHideTheNumberOfVotes) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                comment.getScore() + comment.getVoteType()));
+                        if(mSeperateUpandDownvote){
+                            int upvoteCount = (comment.getVoteType() == 1) ? comment.getUpvotes() + 1 : comment.getUpvotes();
+                            int downvoteCount = (comment.getVoteType() == -1) ? comment.getDownvotes() + 1 : comment.getDownvotes();
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                    upvoteCount));
+                            downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                    downvoteCount));
+                        }else {
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                    comment.getScore() + comment.getVoteType()));
+                        }
                         topScoreTextView.setText(mActivity.getString(R.string.top_score,
                                 Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                         comment.getScore() + comment.getVoteType())));
@@ -1430,6 +1470,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                     upvoteButton.setColorFilter(mUpvotedColor, PorterDuff.Mode.SRC_IN);
                                     scoreTextView.setTextColor(mUpvotedColor);
                                     topScoreTextView.setTextColor(mUpvotedColor);
+                                    downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                                 }
                             } else {
                                 comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
@@ -1437,14 +1478,24 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                     upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                                     scoreTextView.setTextColor(mCommentIconAndInfoColor);
                                     topScoreTextView.setTextColor(mSecondaryTextColor);
+                                    downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                                 }
                             }
 
                             if (currentPosition == position) {
                                 downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                                 if (!mHideTheNumberOfVotes) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                            comment.getScore() + comment.getVoteType()));
+                                    if(mSeperateUpandDownvote){
+                                        int upvoteCount = (comment.getVoteType() == 1) ? comment.getUpvotes() + 1 : comment.getUpvotes();
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                upvoteCount));
+                                        int downvoteCount = (comment.getVoteType() == -1) ? comment.getDownvotes() + 1 : comment.getDownvotes();
+                                        downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                downvoteCount));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                comment.getScore() + comment.getVoteType()));
+                                    }
                                     topScoreTextView.setText(mActivity.getString(R.string.top_score,
                                             Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                                     comment.getScore() + comment.getVoteType())));
@@ -1482,20 +1533,34 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
                         newVoteType = Integer.parseInt(APIUtils.DIR_DOWNVOTE);
                         downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                        scoreTextView.setTextColor(mDownvotedColor);
+                        if(mSeperateUpandDownvote){
+                            downvoteTextView.setTextColor(mDownvotedColor);
+                            scoreTextView.setTextColor(mCommentIconAndInfoColor);
+                        }else {
+                            scoreTextView.setTextColor(mDownvotedColor);
+                        }
                         topScoreTextView.setTextColor(mDownvotedColor);
                     } else {
                         //Downvoted before
                         comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
                         newVoteType = Integer.parseInt(APIUtils.DIR_UNVOTE);
                         downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
+                        downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                         scoreTextView.setTextColor(mCommentIconAndInfoColor);
                         topScoreTextView.setTextColor(mSecondaryTextColor);
                     }
 
                     if (!mHideTheNumberOfVotes) {
-                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                comment.getScore() + comment.getVoteType()));
+                        if(mSeperateUpandDownvote){
+                         int downvotes = (comment.getVoteType() == -1) ? comment.getDownvotes() +1 : comment.getDownvotes();
+                         int upvotes = (comment.getVoteType() == 1) ? comment.getUpvotes() +1 : comment.getUpvotes();
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                    upvotes));
+                         downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                        } else {
+                            scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                    comment.getScore() + comment.getVoteType()));
+                        }
                         topScoreTextView.setText(mActivity.getString(R.string.top_score,
                                 Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                         comment.getScore() + comment.getVoteType())));
@@ -1510,7 +1575,11 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                 comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                                    scoreTextView.setTextColor(mDownvotedColor);
+                                    if(mSeperateUpandDownvote){
+                                        downvoteTextView.setTextColor(mDownvotedColor);
+                                    }else {
+                                        scoreTextView.setTextColor(mDownvotedColor);
+                                    }
                                     topScoreTextView.setTextColor(mDownvotedColor);
                                 }
                             } else {
@@ -1518,6 +1587,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                                     scoreTextView.setTextColor(mCommentIconAndInfoColor);
+                                    downvoteTextView.setTextColor(mCommentIconAndInfoColor);
                                     topScoreTextView.setTextColor(mSecondaryTextColor);
                                 }
                             }
@@ -1525,8 +1595,17 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                             if (currentPosition == position) {
                                 upvoteButton.setColorFilter(mCommentIconAndInfoColor, PorterDuff.Mode.SRC_IN);
                                 if (!mHideTheNumberOfVotes) {
-                                    scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                            comment.getScore() + comment.getVoteType()));
+                                    if(mSeperateUpandDownvote){
+                                        int downvotes = (comment.getVoteType() == -1) ? comment.getDownvotes() +1 : comment.getDownvotes();
+                                        int upvotes = (comment.getVoteType() == 1) ? comment.getUpvotes() +1 : comment.getUpvotes();
+                                        downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                upvotes));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                comment.getScore() + comment.getVoteType()));
+                                    }
+
                                     topScoreTextView.setText(mActivity.getString(R.string.top_score,
                                             Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                                     comment.getScore() + comment.getVoteType())));

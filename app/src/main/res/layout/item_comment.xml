@@ -197,6 +197,18 @@
                 app:layout_constraintStart_toEndOf="@+id/score_text_view_item_post_comment"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/downvote_text_view_item_post_comment"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="?attr/font_family"
+                android:gravity="start"
+                android:textSize="?attr/font_12"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/down_vote_button_item_post_comment"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <View
                 android:id="@+id/placeholder_item_post_comment"
                 android:layout_width="0dp"
