@@ -21,6 +21,7 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
     private FavoriteSubscribedSubredditsSectionRecyclerViewAdapter favoriteSubscribedSubredditsSectionRecyclerViewAdapter;
     private SubscribedSubredditsRecyclerViewAdapter subscribedSubredditsRecyclerViewAdapter;
     private AccountManagementSectionRecyclerViewAdapter accountManagementSectionRecyclerViewAdapter;
+    private LemmySectionRecyclerViewAdapter lemmySectionRecyclerViewAdapter;
     private ConcatAdapter mainPageConcatAdapter;
 
     public NavigationDrawerRecyclerViewMergedAdapter(BaseActivity baseActivity, SharedPreferences sharedPreferences,
@@ -55,10 +56,13 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
                 customThemeWrapper, navigationDrawerSharedPreferences, itemClickListener);
         accountManagementSectionRecyclerViewAdapter = new AccountManagementSectionRecyclerViewAdapter(baseActivity,
                 customThemeWrapper, glide, accountName != null, itemClickListener);
+        lemmySectionRecyclerViewAdapter = new LemmySectionRecyclerViewAdapter(baseActivity, customThemeWrapper,
+                navigationDrawerSharedPreferences, itemClickListener, accountName != null);
 
         mainPageConcatAdapter = new ConcatAdapter(
                 headerSectionRecyclerViewAdapter,
                 accountSectionRecyclerViewAdapter,
+                lemmySectionRecyclerViewAdapter,
                 preferenceSectionRecyclerViewAdapter,
                 favoriteSubscribedSubredditsSectionRecyclerViewAdapter,
                 subscribedSubredditsRecyclerViewAdapter);
@@ -70,6 +74,7 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
 
     private void openAccountSection() {
         mainPageConcatAdapter.removeAdapter(accountSectionRecyclerViewAdapter);
+        mainPageConcatAdapter.removeAdapter(lemmySectionRecyclerViewAdapter);
         mainPageConcatAdapter.removeAdapter(preferenceSectionRecyclerViewAdapter);
         mainPageConcatAdapter.removeAdapter(favoriteSubscribedSubredditsSectionRecyclerViewAdapter);
         mainPageConcatAdapter.removeAdapter(subscribedSubredditsRecyclerViewAdapter);
@@ -81,6 +86,7 @@ public class NavigationDrawerRecyclerViewMergedAdapter {
         mainPageConcatAdapter.removeAdapter(accountManagementSectionRecyclerViewAdapter);
 
         mainPageConcatAdapter.addAdapter(accountSectionRecyclerViewAdapter);
+        mainPageConcatAdapter.addAdapter(lemmySectionRecyclerViewAdapter);
         mainPageConcatAdapter.addAdapter(preferenceSectionRecyclerViewAdapter);
         mainPageConcatAdapter.addAdapter(favoriteSubscribedSubredditsSectionRecyclerViewAdapter);
         mainPageConcatAdapter.addAdapter(subscribedSubredditsRecyclerViewAdapter);

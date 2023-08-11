@@ -882,6 +882,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                                     });
                         } else if (stringId == R.string.anonymous_account_instance) {
                             changeAnonymousAccountInstance();
+                        } else if (stringId == R.string.blocks) {
+                            intent = new Intent(MainActivity.this, BlockedThingListingActivity.class);
                         }
                         if (intent != null) {
                             startActivity(intent);

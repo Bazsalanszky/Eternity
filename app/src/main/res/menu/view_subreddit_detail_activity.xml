@@ -30,9 +30,15 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_select_user_flair_view_subreddit_detail_activity"
+        android:id="@+id/block_community_view_subreddit_detail_activity"
         android:orderInCategory="5"
-        android:title="@string/action_select_user_flair"
+        android:title="@string/block_community"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/unblock_community_view_subreddit_detail_activity"
+        android:orderInCategory="5"
+        android:title="@string/unblock_community"
         app:showAsAction="never" />
 
 

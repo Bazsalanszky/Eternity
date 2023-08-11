@@ -27,7 +27,7 @@ public class ParseSubredditData {
     }
 
     @Nullable
-    private static SubredditData parseSubredditData(JSONObject subredditDataJsonObject, boolean nsfw) throws JSONException {
+    public static SubredditData parseSubredditData(JSONObject subredditDataJsonObject, boolean nsfw) throws JSONException {
         JSONObject community = subredditDataJsonObject.getJSONObject("community");
         boolean isNSFW = community.getBoolean("nsfw");
         if (!nsfw && isNSFW) {
@@ -69,9 +69,10 @@ public class ParseSubredditData {
         boolean hidden = community.getBoolean("hidden");
         boolean postingRestrictedToMods = community.getBoolean("posting_restricted_to_mods");
         int instanceId = community.getInt("instance_id");
-        int subscribers = subredditDataJsonObject.getJSONObject("counts").getInt("subscribers");
+        int subscribers = (subredditDataJsonObject.has("counts")) ? subredditDataJsonObject.getJSONObject("counts").getInt("subscribers") : 0;
+        boolean blocked = (subredditDataJsonObject.has("blocked")) ? subredditDataJsonObject.getBoolean("blocked") : true;
 
-        return new SubredditData(id,name,title,description,removed,published,updated,deleted,isNSFW,actorId,local,iconUrl,bannerImageUrl,hidden,postingRestrictedToMods,instanceId,subscribers);
+        return new SubredditData(id, name, title, description, removed, published, updated, deleted, isNSFW, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, blocked);
     }
 
     interface ParseSubredditDataListener {

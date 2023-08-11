@@ -8,6 +8,7 @@ import dagger.BindsInstance;
 import dagger.Component;
 import eu.toldi.infinityforlemmy.activities.AccountPostsActivity;
 import eu.toldi.infinityforlemmy.activities.AccountSavedThingActivity;
+import eu.toldi.infinityforlemmy.activities.BlockedThingListingActivity;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.CreateMultiRedditActivity;
 import eu.toldi.infinityforlemmy.activities.CustomThemeListingActivity;
@@ -66,6 +67,8 @@ import eu.toldi.infinityforlemmy.activities.WebViewActivity;
 import eu.toldi.infinityforlemmy.activities.WikiActivity;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.AccountChooserBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FlairBottomSheetFragment;
+import eu.toldi.infinityforlemmy.fragments.BlockedCommunitiesListingFragment;
+import eu.toldi.infinityforlemmy.fragments.BlockedUsersListingFragment;
 import eu.toldi.infinityforlemmy.fragments.CommentsListingFragment;
 import eu.toldi.infinityforlemmy.fragments.FollowedUsersListingFragment;
 import eu.toldi.infinityforlemmy.fragments.HistoryPostFragment;
@@ -306,6 +309,12 @@ public interface AppComponent {
     void inject(HistoryActivity historyActivity);
 
     void inject(MorePostsInfoFragment morePostsInfoFragment);
+
+    void inject(BlockedThingListingActivity blockedThingListingActivity);
+
+    void inject(BlockedCommunitiesListingFragment blockedCommunitiesListingFragment);
+
+    void inject(BlockedUsersListingFragment blockedUsersListingFragment);
 
 
     @Component.Factory

@@ -16,7 +16,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -29,14 +28,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -45,36 +43,28 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
-import eu.toldi.infinityforlemmy.FetchSubscribedThing;
 import eu.toldi.infinityforlemmy.FragmentCommunicator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.asynctasks.DeleteMultiredditInDatabase;
-import eu.toldi.infinityforlemmy.asynctasks.InsertMultireddit;
-import eu.toldi.infinityforlemmy.asynctasks.InsertSubscribedThings;
+import eu.toldi.infinityforlemmy.account.FetchBlockedThings;
+import eu.toldi.infinityforlemmy.asynctasks.InsertBlockedThings;
+import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.ViewPagerBugFixed;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.GoBackToMainPageEvent;
-import eu.toldi.infinityforlemmy.events.RefreshMultiRedditsEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
-import eu.toldi.infinityforlemmy.fragments.FollowedUsersListingFragment;
-import eu.toldi.infinityforlemmy.fragments.MultiRedditListingFragment;
-import eu.toldi.infinityforlemmy.fragments.SubscribedSubredditsListingFragment;
-import eu.toldi.infinityforlemmy.multireddit.DeleteMultiReddit;
-import eu.toldi.infinityforlemmy.multireddit.FetchMyMultiReddits;
-import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
-import eu.toldi.infinityforlemmy.subreddit.SubredditData;
-import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
-import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserData;
+import eu.toldi.infinityforlemmy.fragments.BlockedCommunitiesListingFragment;
+import eu.toldi.infinityforlemmy.fragments.BlockedUsersListingFragment;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Retrofit;
 
 
-public class SubscribedThingListingActivity extends BaseActivity implements ActivityToolbarInterface {
+public class BlockedThingListingActivity extends BaseActivity implements ActivityToolbarInterface {
 
     public static final String EXTRA_SHOW_MULTIREDDITS = "ESM";
     private static final String INSERT_SUBSCRIBED_SUBREDDIT_STATE = "ISSS";
@@ -232,7 +222,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         });
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(2);
         if (viewPager.getCurrentItem() != 2) {
             fab.hide();
         }
@@ -258,7 +248,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
             viewPager.setCurrentItem(2, false);
         }
 
-        loadSubscriptions(false);
+        loadBlocks(false);
     }
 
     @Override
@@ -322,109 +312,26 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         EventBus.getDefault().unregister(this);
     }
 
-    public void loadSubscriptions(boolean forceLoad) {
+    public void loadBlocks(boolean forceLoad) {
         if (mAccessToken != null && !(!forceLoad && mInsertSuccess)) {
-            FetchSubscribedThing.fetchSubscribedThing(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, null,
-                    new ArrayList<>(), new ArrayList<>(),
-                    new ArrayList<>(),
-                    new FetchSubscribedThing.FetchSubscribedThingListener() {
-                        @Override
-                        public void onFetchSubscribedThingSuccess(ArrayList<SubscribedSubredditData> subscribedSubredditData,
-                                                                  ArrayList<SubscribedUserData> subscribedUserData,
-                                                                  ArrayList<SubredditData> subredditData) {
-                            InsertSubscribedThings.insertSubscribedThings(
-                                    mExecutor,
-                                    new Handler(),
-                                    mRedditDataRoomDatabase,
-                                    mAccountQualifiedName,
-                                    subscribedSubredditData,
-                                    subscribedUserData,
-                                    subredditData,
-                                    () -> {
-                                        mInsertSuccess = true;
-                                        sectionsPagerAdapter.stopRefreshProgressbar();
-                                    });
-                        }
-
-                        @Override
-                        public void onFetchSubscribedThingFail() {
-                            mInsertSuccess = false;
-                            sectionsPagerAdapter.stopRefreshProgressbar();
-                            Toast.makeText(SubscribedThingListingActivity.this,
-                                    R.string.error_loading_subscriptions, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-
-        if (!(!forceLoad && mInsertMultiredditSuccess)) {
-            //loadMultiReddits();
-        }
-    }
-
-    public void showFabInMultiredditTab() {
-        if (viewPager.getCurrentItem() == 2) {
-            fab.show();
-        }
-    }
-
-    public void hideFabInMultiredditTab() {
-        if (viewPager.getCurrentItem() == 2) {
-            fab.hide();
-        }
-    }
-
-    private void loadMultiReddits() {
-        if (mAccessToken != null) {
-            FetchMyMultiReddits.fetchMyMultiReddits(mOauthRetrofit, mAccessToken, new FetchMyMultiReddits.FetchMyMultiRedditsListener() {
+            FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
                 @Override
-                public void success(ArrayList<MultiReddit> multiReddits) {
-                    InsertMultireddit.insertMultireddits(mExecutor, new Handler(), mRedditDataRoomDatabase, multiReddits, mAccountName, () -> {
-                        mInsertMultiredditSuccess = true;
-                        sectionsPagerAdapter.stopMultiRedditRefreshProgressbar();
-                    });
+                public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities) {
+                    InsertBlockedThings.insertBlockedThings(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountQualifiedName,
+                            blockedCommunities, blockedUsers, () -> {
+                                mInsertSuccess = true;
+                                sectionsPagerAdapter.stopRefreshProgressbar();
+                            });
                 }
 
                 @Override
-                public void failed() {
-                    mInsertMultiredditSuccess = false;
-                    sectionsPagerAdapter.stopMultiRedditRefreshProgressbar();
-                    Toast.makeText(SubscribedThingListingActivity.this, R.string.error_loading_multi_reddit_list, Toast.LENGTH_SHORT).show();
+                public void onFetchBlockedThingsFailure() {
+
                 }
             });
         }
     }
 
-    public void deleteMultiReddit(MultiReddit multiReddit) {
-        new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                .setTitle(R.string.delete)
-                .setMessage(R.string.delete_multi_reddit_dialog_message)
-                .setPositiveButton(R.string.delete, (dialogInterface, i)
-                        -> {
-                    if (mAccessToken == null) {
-                        DeleteMultiredditInDatabase.deleteMultiredditInDatabase(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountName, multiReddit.getPath(),
-                                () -> Toast.makeText(SubscribedThingListingActivity.this,
-                                        R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show());
-                    } else {
-                        DeleteMultiReddit.deleteMultiReddit(mExecutor, new Handler(), mOauthRetrofit, mRedditDataRoomDatabase,
-                                mAccessToken, mAccountName, multiReddit.getPath(), new DeleteMultiReddit.DeleteMultiRedditListener() {
-                                    @Override
-                                    public void success() {
-                                        Toast.makeText(SubscribedThingListingActivity.this,
-                                                R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show();
-                                        //loadMultiReddits();
-                                    }
-
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(SubscribedThingListingActivity.this,
-                                                R.string.delete_multi_reddit_failed, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
-                })
-                .setNegativeButton(R.string.cancel, null)
-                .show();
-    }
 
     @Subscribe
     public void onAccountSwitchEvent(SwitchAccountEvent event) {
@@ -434,11 +341,6 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
     @Subscribe
     public void goBackToMainPageEvent(GoBackToMainPageEvent event) {
         finish();
-    }
-
-    @Subscribe
-    public void onRefreshMultiRedditsEvent(RefreshMultiRedditsEvent event) {
-        //loadMultiReddits();
     }
 
     @Override
@@ -464,9 +366,8 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private SubscribedSubredditsListingFragment subscribedSubredditsListingFragment;
-        private FollowedUsersListingFragment followedUsersListingFragment;
-        private MultiRedditListingFragment multiRedditListingFragment;
+        private BlockedCommunitiesListingFragment blockedCommunitiesListingFragment;
+        private BlockedUsersListingFragment followedUsersListingFragment;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -478,12 +379,20 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
             switch (position) {
                 default:
                 case 0: {
-                    SubscribedSubredditsListingFragment fragment = new SubscribedSubredditsListingFragment();
+                    BlockedCommunitiesListingFragment fragment = new BlockedCommunitiesListingFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putBoolean(SubscribedSubredditsListingFragment.EXTRA_IS_SUBREDDIT_SELECTION, false);
-                    bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
-                    bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCOUNT_QUALIFIED_NAME, mAccountQualifiedName);
-                    bundle.putString(SubscribedSubredditsListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+                    bundle.putBoolean(BlockedCommunitiesListingFragment.EXTRA_IS_SUBREDDIT_SELECTION, false);
+                    bundle.putString(BlockedCommunitiesListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                    bundle.putString(BlockedCommunitiesListingFragment.EXTRA_ACCOUNT_QUALIFIED_NAME, mAccountQualifiedName);
+                    bundle.putString(BlockedCommunitiesListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+                    fragment.setArguments(bundle);
+                    return fragment;
+                }
+                case 1: {
+                    BlockedUsersListingFragment fragment = new BlockedUsersListingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(BlockedUsersListingFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
+                    bundle.putString(BlockedUsersListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                     fragment.setArguments(bundle);
                     return fragment;
                 }
@@ -492,7 +401,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
 
         @Override
@@ -514,51 +423,40 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             Fragment fragment = (Fragment) super.instantiateItem(container, position);
             if (position == 0) {
-                subscribedSubredditsListingFragment = (SubscribedSubredditsListingFragment) fragment;
+                blockedCommunitiesListingFragment = (BlockedCommunitiesListingFragment) fragment;
             } else if (position == 1) {
-                followedUsersListingFragment = (FollowedUsersListingFragment) fragment;
-            } else {
-                multiRedditListingFragment = (MultiRedditListingFragment) fragment;
+                followedUsersListingFragment = (BlockedUsersListingFragment) fragment;
             }
 
             return fragment;
         }
 
         void stopRefreshProgressbar() {
-            if (subscribedSubredditsListingFragment != null) {
-                ((FragmentCommunicator) subscribedSubredditsListingFragment).stopRefreshProgressbar();
+            if (blockedCommunitiesListingFragment != null) {
+                ((FragmentCommunicator) blockedCommunitiesListingFragment).stopRefreshProgressbar();
             }
             if (followedUsersListingFragment != null) {
                 ((FragmentCommunicator) followedUsersListingFragment).stopRefreshProgressbar();
             }
         }
 
-        void stopMultiRedditRefreshProgressbar() {
-            if (multiRedditListingFragment != null) {
-                ((FragmentCommunicator) multiRedditListingFragment).stopRefreshProgressbar();
-            }
-        }
 
         void goBackToTop() {
             if (viewPager.getCurrentItem() == 0) {
-                subscribedSubredditsListingFragment.goBackToTop();
+                blockedCommunitiesListingFragment.goBackToTop();
             } else if (viewPager.getCurrentItem() == 1) {
                 followedUsersListingFragment.goBackToTop();
-            } else {
-                multiRedditListingFragment.goBackToTop();
             }
         }
 
         void changeSearchQuery(String searchQuery) {
-            if (subscribedSubredditsListingFragment != null) {
-                subscribedSubredditsListingFragment.changeSearchQuery(searchQuery);
+            if (blockedCommunitiesListingFragment != null) {
+                blockedCommunitiesListingFragment.changeSearchQuery(searchQuery);
             }
             if (followedUsersListingFragment != null) {
                 followedUsersListingFragment.changeSearchQuery(searchQuery);
             }
-            if (multiRedditListingFragment != null) {
-                multiRedditListingFragment.changeSearchQuery(searchQuery);
-            }
         }
     }
 }
+

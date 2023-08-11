@@ -25,7 +25,7 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
     private static final int VIEW_TYPE_MENU_GROUP_TITLE = 1;
     private static final int VIEW_TYPE_MENU_ITEM = 2;
     private static final int ACCOUNT_SECTION_ITEMS = 4;
-    private static final int ANONYMOUS_ACCOUNT_SECTION_ITEMS = 2;
+    private static final int ANONYMOUS_ACCOUNT_SECTION_ITEMS = 1;
 
     private BaseActivity baseActivity;
     private int inboxCount;

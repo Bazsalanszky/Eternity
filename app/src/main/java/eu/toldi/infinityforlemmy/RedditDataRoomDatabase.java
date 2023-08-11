@@ -13,6 +13,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.account.AccountDao;
+import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityDao;
+import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockeduser.BlockedUserDao;
+import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.customtheme.CustomTheme;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeDao;
 import eu.toldi.infinityforlemmy.multireddit.AnonymousMultiredditSubreddit;
@@ -38,7 +42,7 @@ import eu.toldi.infinityforlemmy.user.UserData;
 
 @Database(entities = {Account.class, SubredditData.class, SubscribedSubredditData.class, UserData.class,
         SubscribedUserData.class, MultiReddit.class, CustomTheme.class, RecentSearchQuery.class,
-        ReadPost.class, PostFilter.class, PostFilterUsage.class, AnonymousMultiredditSubreddit.class}, version = 24)
+        ReadPost.class, PostFilter.class, PostFilterUsage.class, AnonymousMultiredditSubreddit.class, BlockedUserData.class, BlockedCommunityData.class}, version = 26)
 public abstract class RedditDataRoomDatabase extends RoomDatabase {
 
     public static RedditDataRoomDatabase create(final Context context) {
@@ -49,7 +53,7 @@ public abstract class RedditDataRoomDatabase extends RoomDatabase {
                         MIGRATION_9_10, MIGRATION_10_11, MIGRATION_11_12, MIGRATION_12_13,
                         MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17,
                         MIGRATION_17_18, MIGRATION_18_19, MIGRATION_19_20, MIGRATION_20_21,
-                        MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24)
+                        MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24, MIGRATION_24_25, MIGRATION_25_26)
                 .build();
     }
 
@@ -58,6 +62,10 @@ public abstract class RedditDataRoomDatabase extends RoomDatabase {
     public abstract SubredditDao subredditDao();
 
     public abstract SubscribedSubredditDao subscribedSubredditDao();
+
+    public abstract BlockedUserDao blockedUserDao();
+
+    public abstract BlockedCommunityDao blockedCommunityDao();
 
     public abstract UserDao userDao();
 
@@ -388,6 +396,24 @@ public abstract class RedditDataRoomDatabase extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE accounts ADD COLUMN can_downvote INTEGER DEFAULT 1 NOT NULL");
+        }
+    };
+
+    private static final Migration MIGRATION_24_25 = new Migration(24, 25) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE subreddits ADD COLUMN blocked INTEGER DEFAULT 1 NOT NULL");
+        }
+    };
+
+    private static final Migration MIGRATION_25_26 = new Migration(25, 26) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE blocked_users" +
+                    "(name TEXT, id INTEGER NOT NULL, avatar TEXT, qualified_name TEXT, account_name TEXT NOT NULL, PRIMARY KEY( id, account_name))");
+            database.execSQL("CREATE TABLE blocked_communities" +
+                    "(name TEXT, icon TEXT, id INTEGER NOT NULL, qualified_name TEXT, account_name TEXT NOT NULL, PRIMARY KEY( id, account_name))");
+
         }
     };
 }

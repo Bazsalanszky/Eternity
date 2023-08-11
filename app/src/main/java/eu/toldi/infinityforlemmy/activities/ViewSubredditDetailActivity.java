@@ -82,6 +82,7 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.RandomBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTimeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
+import eu.toldi.infinityforlemmy.community.BlockCommunity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.NavigationWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
@@ -210,6 +211,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private String communityName;
 
     private int communityId;
+
+    private SubredditData communityData;
     private String description;
 
     private String qualifiedName;
@@ -693,6 +696,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     }
                     setupVisibleElements();
                     communityId = communityData.getId();
+                    ViewSubredditDetailActivity.this.communityData = communityData;
                     setupSubscribeChip();
 
                     mNCurrentOnlineSubscribers = nCurrentOnlineSubscribers;
@@ -1123,6 +1127,11 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.view_subreddit_detail_activity, menu);
+        if (communityData != null && communityData.isBlocked()) {
+            menu.findItem(R.id.block_community_view_subreddit_detail_activity).setVisible(false);
+        } else {
+            menu.findItem(R.id.unblock_community_view_subreddit_detail_activity).setVisible(false);
+        }
         applyMenuItemTheme(menu);
         return true;
     }
@@ -1151,15 +1160,6 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             PostLayoutBottomSheetFragment postLayoutBottomSheetFragment = new PostLayoutBottomSheetFragment();
             postLayoutBottomSheetFragment.show(getSupportFragmentManager(), postLayoutBottomSheetFragment.getTag());
             return true;
-        } else if (itemId == R.id.action_select_user_flair_view_subreddit_detail_activity) {
-            if (mAccessToken == null) {
-                Toast.makeText(this, R.string.login_first, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            Intent selectUserFlairIntent = new Intent(this, SelectUserFlairActivity.class);
-            selectUserFlairIntent.putExtra(SelectUserFlairActivity.EXTRA_SUBREDDIT_NAME, communityName);
-            startActivity(selectUserFlairIntent);
-            return true;
         } else if (itemId == R.id.action_add_to_post_filter_view_subreddit_detail_activity) {
             Intent intent = new Intent(this, PostFilterPreferenceActivity.class);
             intent.putExtra(PostFilterPreferenceActivity.EXTRA_SUBREDDIT_NAME, communityName);
@@ -1179,7 +1179,39 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         } else if (itemId == R.id.action_contact_mods_view_subreddit_detail_activity) {
             Intent intent = new Intent(this, SendPrivateMessageActivity.class);
             intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + communityName);
-            startActivity(intent);
+            //startActivity(intent);
+            return true;
+        } else if (itemId == R.id.block_community_view_subreddit_detail_activity) {
+            BlockCommunity.INSTANCE.blockCommunity(mRetrofit.getRetrofit(), communityId, mAccessToken, new BlockCommunity.BlockCommunityListener() {
+                @Override
+                public void onBlockCommunitySuccess() {
+                    communityData.setBlocked(true);
+                    Toast.makeText(ViewSubredditDetailActivity.this, R.string.block_community_success, Toast.LENGTH_SHORT).show();
+                    ViewSubredditDetailActivity.this.invalidateOptionsMenu();
+                    sectionsPagerAdapter.refresh(false);
+                }
+
+                @Override
+                public void onBlockCommunityError() {
+                    Toast.makeText(ViewSubredditDetailActivity.this, R.string.block_community_failed, Toast.LENGTH_SHORT).show();
+                }
+            });
+            return true;
+        } else if (itemId == R.id.unblock_community_view_subreddit_detail_activity) {
+            BlockCommunity.INSTANCE.unBlockCommunity(mRetrofit.getRetrofit(), communityId, mAccessToken, new BlockCommunity.BlockCommunityListener() {
+                @Override
+                public void onBlockCommunitySuccess() {
+                    communityData.setBlocked(false);
+                    Toast.makeText(ViewSubredditDetailActivity.this, R.string.unblock_community_success, Toast.LENGTH_SHORT).show();
+                    ViewSubredditDetailActivity.this.invalidateOptionsMenu();
+                    sectionsPagerAdapter.refresh(false);
+                }
+
+                @Override
+                public void onBlockCommunityError() {
+                    Toast.makeText(ViewSubredditDetailActivity.this, R.string.unblock_community_failed, Toast.LENGTH_SHORT).show();
+                }
+            });
             return true;
         }
         return false;

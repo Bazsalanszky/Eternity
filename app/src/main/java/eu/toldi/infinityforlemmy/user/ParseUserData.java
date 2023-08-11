@@ -21,7 +21,7 @@ public class ParseUserData {
         new ParseUserListingDataAsyncTask(response, parseUserListingDataListener).execute();
     }
 
-    private static UserData parseUserDataBase(JSONObject userDataJson, boolean parseFullKarma) throws JSONException {
+    public static UserData parseUserDataBase(JSONObject userDataJson, boolean parseFullKarma) throws JSONException {
         if (userDataJson == null) {
             return null;
         }
@@ -38,10 +38,7 @@ public class ParseUserData {
         if (!personJson.isNull("banner")) {
             bannerImageUrl = personJson.getString("banner");
         }
-        JSONObject countsJson = (userDataJson.has("person_view")) ? userDataJson.getJSONObject("person_view").getJSONObject("counts") : userDataJson.getJSONObject("counts");
 
-        int linkKarma = countsJson.getInt(JSONUtils.POST_SCORE_KEY);
-        int commentKarma = countsJson.getInt(JSONUtils.COMMENT_SCORE_KEY);
         int account_id = personJson.getInt("id");
         int instance_id = personJson.getInt("instance_id");
 

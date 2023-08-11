@@ -1353,4 +1353,13 @@
     <string name="username_cannot_be_empty">The username field cannot be left empty.</string>
     <string name="password_cannot_be_empty">The password field cannot be left empty.</string>
     <string name="separate_down_and_up_votes">Separate Up and Down votes</string>
+    <string name="block_community_success">Community blocked!</string>
+    <string name="block_community_failed">Failed to block community</string>
+    <string name="unblock_community">Unblock Community</string>
+    <string name="unblock_community_success">Community unblocked!</string>
+    <string name="unblock_community_failed">Failed to unblock community</string>
+    <string name="instance_info">Instance Info</string>
+    <string name="blocked_communities">Blocked Communities</string>
+    <string name="blocked_users">Blocked users</string>
+    <string name="blocks">Blocks</string>
 </resources>

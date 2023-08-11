@@ -110,9 +110,9 @@ class ParseSubscribedThing {
                     boolean postingRestrictedToMods = community.getBoolean("posting_restricted_to_mods");
                     int instanceId = community.getInt("instance_id");
                     int subscribers = data.getJSONObject("counts").getInt("subscribers");
-
+                    boolean isBlocked = data.getBoolean("blocked");
                     newSubscribedSubredditData.add(new SubscribedSubredditData(id, title, LemmyUtils.actorID2FullName(actorId), iconUrl, accountName));
-                    newSubredditData.add(new SubredditData(id,name,title,description,removed,published,updated,deleted,nsfw,actorId,local,iconUrl,bannerImageUrl,hidden,postingRestrictedToMods,instanceId,subscribers));
+                    newSubredditData.add(new SubredditData(id, name, title, description, removed, published, updated, deleted, nsfw, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, isBlocked));
 
                 }
             } catch (JSONException e) {

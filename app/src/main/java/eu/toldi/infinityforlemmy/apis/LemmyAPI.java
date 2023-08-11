@@ -6,6 +6,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
 import eu.toldi.infinityforlemmy.dto.AuthDTO;
+import eu.toldi.infinityforlemmy.dto.BlockCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.DeleteCommentDTO;
@@ -135,6 +136,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/community/follow")
     Call<String> communityFollow(@Body FollowCommunityDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/community/block")
+    Call<String> communityBlock(@Body BlockCommunityDTO params);
 
     @Headers("Content-Type: application/json")
     @PUT("api/v3/post/save")

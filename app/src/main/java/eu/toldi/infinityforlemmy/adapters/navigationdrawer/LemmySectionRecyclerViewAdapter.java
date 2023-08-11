@@ -18,13 +18,13 @@ import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
-public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class LemmySectionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_MENU_GROUP_TITLE = 1;
     private static final int VIEW_TYPE_MENU_ITEM = 2;
-    private static final int REDDIT_SECTION_ITEMS = 1;
+    private static final int LEMMY_SECTION_ITEMS = 2;
 
-    private static final int REDDIT_SECTION_ANONYMOUS_ITEMS = 2;
+    private static final int LEMMY_SECTION_ANONYMOUS_ITEMS = 1;
     private final boolean isLoggedIn;
 
     private BaseActivity baseActivity;
@@ -34,9 +34,9 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     private boolean collapseRedditSection;
     private NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener itemClickListener;
 
-    public RedditSectionRecyclerViewAdapter(BaseActivity baseActivity, CustomThemeWrapper customThemeWrapper,
-                                            SharedPreferences navigationDrawerSharedPreferences,
-                                            NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener itemClickListener, boolean isLoggedIn) {
+    public LemmySectionRecyclerViewAdapter(BaseActivity baseActivity, CustomThemeWrapper customThemeWrapper,
+                                           SharedPreferences navigationDrawerSharedPreferences,
+                                           NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener itemClickListener, boolean isLoggedIn) {
         this.baseActivity = baseActivity;
         primaryTextColor = customThemeWrapper.getPrimaryTextColor();
         secondaryTextColor = customThemeWrapper.getSecondaryTextColor();
@@ -76,10 +76,10 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             holder.itemView.setOnClickListener(view -> {
                 if (collapseRedditSection) {
                     collapseRedditSection = !collapseRedditSection;
-                    notifyItemRangeInserted(holder.getBindingAdapterPosition() + 1, REDDIT_SECTION_ITEMS);
+                    notifyItemRangeInserted(holder.getBindingAdapterPosition() + 1, isLoggedIn ? LEMMY_SECTION_ITEMS : LEMMY_SECTION_ANONYMOUS_ITEMS);
                 } else {
                     collapseRedditSection = !collapseRedditSection;
-                    notifyItemRangeRemoved(holder.getBindingAdapterPosition() + 1, REDDIT_SECTION_ITEMS);
+                    notifyItemRangeRemoved(holder.getBindingAdapterPosition() + 1, isLoggedIn ? LEMMY_SECTION_ITEMS : LEMMY_SECTION_ANONYMOUS_ITEMS);
                 }
                 notifyItemChanged(holder.getBindingAdapterPosition());
             });
@@ -89,12 +89,13 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
             switch (position) {
                 case 1:
-                    stringId = R.string.trending;
-                    drawableId = R.drawable.ic_trending_24dp;
+                    stringId = R.string.instance_info;
+                    drawableId = R.drawable.ic_baseline_info_24;
                     break;
                 case 2:
-                    stringId = R.string.anonymous_account_instance;
-                    drawableId = R.drawable.ic_account_circle_24dp;
+                    stringId = R.string.blocks;
+                    drawableId = R.drawable.ic_outline_lock_24dp;
+                    break;
             }
 
             ((MenuItemViewHolder) holder).menuTextView.setText(stringId);
@@ -106,7 +107,7 @@ public class RedditSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemCount() {
-        return !collapseRedditSection ? (isLoggedIn ? REDDIT_SECTION_ITEMS + 1 : REDDIT_SECTION_ANONYMOUS_ITEMS + 1) : 1;
+        return !collapseRedditSection ? (isLoggedIn ? LEMMY_SECTION_ITEMS + 1 : LEMMY_SECTION_ANONYMOUS_ITEMS + 1) : 1;
     }
 
     class MenuGroupTitleViewHolder extends RecyclerView.ViewHolder {

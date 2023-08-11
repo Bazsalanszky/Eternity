@@ -61,6 +61,9 @@ public class SubredditData {
     @ColumnInfo(name = "subscribers")
     private int subscribers;
 
+    @ColumnInfo(name = "blocked")
+    private boolean blocked;
+
 
     @Ignore
     private boolean isSelected;
@@ -201,7 +204,7 @@ public class SubredditData {
         this.subscribers = subscribers;
     }
 
-    public SubredditData(int id, String name, String title, String description, boolean removed, String published, String updated, boolean deleted, boolean nsfw, String actorId, boolean local, String icon, String banner, boolean hidden, boolean postingRestrictedToMods, int instanceId, int subscribers) {
+    public SubredditData(int id, String name, String title, String description, boolean removed, String published, String updated, boolean deleted, boolean nsfw, String actorId, boolean local, String icon, String banner, boolean hidden, boolean postingRestrictedToMods, int instanceId, int subscribers, boolean blocked) {
         this.id = id;
         this.name = name;
         this.title = title;
@@ -219,6 +222,7 @@ public class SubredditData {
         this.postingRestrictedToMods = postingRestrictedToMods;
         this.instanceId = instanceId;
         this.subscribers = subscribers;
+        this.blocked = blocked;
     }
 
     public boolean isNSFW() {
@@ -250,6 +254,14 @@ public class SubredditData {
     }
 
     public void setSelected(boolean b) {
-        isSelected =b;
+        isSelected = b;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }
