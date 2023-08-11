@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="login_activity_label">লগ ইন করুন</string>
+    <string name="comment_activity_label">মন্তব্য পাঠান</string>
+    <string name="comment_activity_label_is_replying">প্রত্যুত্তর দিন</string>
+    <string name="community_selection_activity_label">কম্যুনিটি বেছে নিন</string>
+    <string name="post_link_activity_label">লিঙ্ক পোস্ট</string>
+    <string name="post_image_activity_label">ছবি পোস্ট</string>
+    <string name="post_video_activity_label">ভিডিও পোস্ট</string>
+    <string name="rules_activity_label">নিয়মাবলি</string>
+    <string name="edit_post_activity_label">পোস্ট সম্পাদনা করুন</string>
+    <string name="edit_comment_activity_label">মন্তব্য সম্পাদনা করুন</string>
+    <string name="view_message_activity_label">ইনবক্স</string>
+    <string name="account_saved_thing_activity_label">সংরক্ষণ</string>
+    <string name="post_text_activity_label">লিখিত পোস্ট</string>
+    <string name="search_community_activity_label">কম্যুনিটি সমূহ</string>
+    <string name="settings_activity_label">পছন্দসমূহ</string>
+    <string name="create_multi_reddit_activity_label">কম্যুনিটিগুচ্ছ বানান</string>
+    <string name="community_multiselection_activity_label">কম্যুনিটিসমূহ বেছে নিন</string>
+</resources>
