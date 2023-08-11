@@ -137,7 +137,6 @@ import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.post.PostViewModel;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterUsage;
-import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import eu.toldi.infinityforlemmy.videoautoplay.ExoCreator;
@@ -530,7 +529,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SUBREDDIT_POST_BASE + subredditName,
                     mSharedPreferences.getString(SharedPreferencesUtils.SUBREDDIT_DEFAULT_SORT_TYPE, SortType.Type.HOT.name()));
-            if (sort.equals(sort.equals(SortType.Type.TOP.name()))) {
+            if (sort.equalsIgnoreCase(SortType.Type.TOP.value)) {
                 sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SUBREDDIT_POST_BASE + subredditName,
                         mSharedPreferences.getString(SharedPreferencesUtils.SUBREDDIT_DEFAULT_SORT_TIME, SortType.Time.ALL.name()));
             }
@@ -538,7 +537,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SUBREDDIT_POST_BASE + subredditName, defaultPostLayout);
 
             if (sortTime != null) {
-                sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
+                sortType = new SortType(SortType.Type.fromValue(sortTime));
             } else {
                 sortType = new SortType(SortType.Type.valueOf(sort));
             }
@@ -670,10 +669,10 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_USER_POST_BASE + username,
                     mSharedPreferences.getString(SharedPreferencesUtils.USER_DEFAULT_SORT_TYPE, SortType.Type.NEW.name()));
-            if (sort.equals(SortType.Type.TOP.name())) {
+            if (sort.equalsIgnoreCase(SortType.Type.TOP.value)) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_USER_POST_BASE + username,
                         mSharedPreferences.getString(SharedPreferencesUtils.USER_DEFAULT_SORT_TIME, SortType.Time.ALL.name()));
-                sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
+                sortType = new SortType(SortType.Type.fromValue(sortTime));
             } else {
                 sortType = new SortType(SortType.Type.valueOf(sort));
             }
