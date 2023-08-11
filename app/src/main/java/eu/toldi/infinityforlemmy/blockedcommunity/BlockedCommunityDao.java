@@ -25,6 +25,6 @@ public interface BlockedCommunityDao {
     @Query("SELECT * FROM blocked_communities WHERE name = :name COLLATE NOCASE AND account_name = :accountName COLLATE NOCASE LIMIT 1")
     BlockedCommunityData getBlockedCommunity(String name, String accountName);
 
-    @Query("DELETE FROM blocked_communities WHERE name = :name COLLATE NOCASE AND account_name = :accountName COLLATE NOCASE")
+    @Query("DELETE FROM blocked_communities WHERE qualified_name = :name COLLATE NOCASE AND account_name = :accountName COLLATE NOCASE")
     void deleteBlockedCommunity(String name, String accountName);
 }

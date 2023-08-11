@@ -79,19 +79,19 @@ public class InsertBlockedThings {
         for (int oldIndex = 0; oldIndex < oldSubscribedSubreddits.size(); oldIndex++) {
             if (newIndex >= newSubscribedSubreddits.size()) {
                 for (; oldIndex < oldSubscribedSubreddits.size(); oldIndex++) {
-                    unsubscribedSubredditNames.add(oldSubscribedSubreddits.get(oldIndex).getName());
+                    unsubscribedSubredditNames.add(oldSubscribedSubreddits.get(oldIndex).getQualified_name());
                 }
                 return;
             }
 
             BlockedCommunityData old = oldSubscribedSubreddits.get(oldIndex);
             for (; newIndex < newSubscribedSubreddits.size(); newIndex++) {
-                if (newSubscribedSubreddits.get(newIndex).getName().compareToIgnoreCase(old.getName()) == 0) {
+                if (newSubscribedSubreddits.get(newIndex).getQualified_name().compareToIgnoreCase(old.getQualified_name()) == 0) {
                     newIndex++;
                     break;
                 }
-                if (newSubscribedSubreddits.get(newIndex).getName().compareToIgnoreCase(old.getName()) > 0) {
-                    unsubscribedSubredditNames.add(old.getName());
+                if (newSubscribedSubreddits.get(newIndex).getQualified_name().compareToIgnoreCase(old.getQualified_name()) > 0) {
+                    unsubscribedSubredditNames.add(old.getQualified_name());
                     break;
                 }
             }

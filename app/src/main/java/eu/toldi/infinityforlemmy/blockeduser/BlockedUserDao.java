@@ -26,6 +26,6 @@ public interface BlockedUserDao {
     @Query("SELECT * FROM blocked_users WHERE name = :name COLLATE NOCASE AND account_name = :accountName COLLATE NOCASE LIMIT 1")
     BlockedUserData getBlockedUser(String name, String accountName);
 
-    @Query("DELETE FROM blocked_users WHERE name = :name COLLATE NOCASE AND account_name = :accountName COLLATE NOCASE")
+    @Query("DELETE FROM blocked_users WHERE qualified_name = :name COLLATE NOCASE AND account_name = :accountName COLLATE NOCASE")
     void deleteBlockedUser(String name, String accountName);
 }
