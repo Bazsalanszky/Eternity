@@ -52,6 +52,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
@@ -71,11 +72,14 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
+import eu.toldi.infinityforlemmy.account.FetchBlockedThings;
 import eu.toldi.infinityforlemmy.adapters.SubredditAutocompleteRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.asynctasks.AddSubredditOrUserToMultiReddit;
 import eu.toldi.infinityforlemmy.asynctasks.CheckIsFollowingUser;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
+import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CopyTextBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FABMoreOptionsBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostLayoutBottomSheetFragment;
@@ -237,8 +241,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private int mMessageId;
     private String mNewAccountName;
 
-
     private UserData mUserData;
+
+    private boolean isBlocked;
 
     //private MaterialAlertDialogBuilder nsfwWarningBuilder;
 
@@ -1091,6 +1096,25 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     setupVisibleElements();
                     new ViewUserDetailActivity.InsertUserDataAsyncTask(mRedditDataRoomDatabase.userDao(), userData,
                             () -> mFetchUserInfoSuccess = true).execute();
+                    FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
+
+                        @Override
+                        public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities) {
+                            for (BlockedUserData blockedUserData : blockedUsers) {
+                                if (blockedUserData.getQualifiedName().equals(qualifiedName)) {
+                                    isBlocked = true;
+                                    invalidateOptionsMenu();
+                                    return;
+                                }
+                            }
+                            isBlocked = false;
+                        }
+
+                        @Override
+                        public void onFetchBlockedThingsFailure() {
+
+                        }
+                    });
                 }
 
                 @Override
@@ -1131,6 +1155,12 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             menu.findItem(R.id.action_block_user_view_user_detail_activity).setVisible(false);
         } else {
             menu.findItem(R.id.action_edit_profile_view_user_detail_activity).setVisible(false);
+            if (isBlocked) {
+                menu.findItem(R.id.action_block_user_view_user_detail_activity).setVisible(false);
+                menu.findItem(R.id.action_unblock_user_view_user_detail_activity).setVisible(true);
+            } else {
+                menu.findItem(R.id.action_unblock_user_view_user_detail_activity).setVisible(false);
+            }
         }
         applyMenuItemTheme(menu);
         return true;
@@ -1202,10 +1232,13 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     .setTitle(R.string.block_user)
                     .setMessage(R.string.are_you_sure)
                     .setPositiveButton(R.string.yes, (dialogInterface, i)
-                            -> BlockUser.blockUser(mOauthRetrofit, mAccessToken, username, new BlockUser.BlockUserListener() {
+                            -> BlockUser.blockUser(mRetrofit.getRetrofit(), mAccessToken, mUserData.getId(), true, new BlockUser.BlockUserListener() {
                         @Override
                         public void success() {
                             Toast.makeText(ViewUserDetailActivity.this, R.string.block_user_success, Toast.LENGTH_SHORT).show();
+                            isBlocked = true;
+                            sectionsPagerAdapter.refresh();
+                            invalidateOptionsMenu();
                         }
 
                         @Override
@@ -1219,6 +1252,25 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         } else if (itemId == R.id.action_edit_profile_view_user_detail_activity) {
             startActivity(new Intent(this, EditProfileActivity.class));
             return true;
+        } else if (itemId == R.id.action_unblock_user_view_user_detail_activity) {
+            if (mAccessToken == null) {
+                Toast.makeText(this, R.string.login_first, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            BlockUser.blockUser(mRetrofit.getRetrofit(), mAccessToken, mUserData.getId(), false, new BlockUser.BlockUserListener() {
+                @Override
+                public void success() {
+                    isBlocked = false;
+                    Toast.makeText(ViewUserDetailActivity.this, R.string.unblock_user_success, Toast.LENGTH_SHORT).show();
+                    sectionsPagerAdapter.refresh();
+                    invalidateOptionsMenu();
+                }
+
+                @Override
+                public void failed() {
+                    Toast.makeText(ViewUserDetailActivity.this, R.string.unblock_user_failed, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         return false;
     }

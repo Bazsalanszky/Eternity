@@ -1362,4 +1362,7 @@
     <string name="blocked_communities">Blocked Communities</string>
     <string name="blocked_users">Blocked users</string>
     <string name="blocks">Blocks</string>
+    <string name="action_unblock_user">Unblock User</string>
+    <string name="unblock_user_success">Unblocked</string>
+    <string name="unblock_user_failed">Failed to unblock user</string>
 </resources>

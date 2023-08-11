@@ -21,6 +21,7 @@ import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
+import eu.toldi.infinityforlemmy.dto.UserBlockDTO;
 import eu.toldi.infinityforlemmy.message.MessageCount;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -42,6 +43,10 @@ public interface LemmyAPI {
 
     @GET("api/v3/user")
     Call<String> userInfo(@Query("username") String username, @Query("auth") String access_token);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/user/block")
+    Call<String> userBlock(@Body UserBlockDTO params);
 
     @GET("api/v3/user/mention")
     Call<String> userMentions(@Query("sort") String sort, @Query("page") Integer page, @Query("limit") Integer limit, @Query("unread_only") boolean unread_only, @Query("auth") String access_token);

@@ -79,9 +79,9 @@ public class LinkResolverActivity extends AppCompatActivity {
 
     private Uri getRedditUriByPath(String path) {
         if (path.charAt(0) != '/') {
-            return Uri.parse("https://www.reddit.com/" + path);
+            return Uri.parse(mRetrofit.getBaseURL() + path);
         } else {
-            return Uri.parse("https://www.reddit.com" + path);
+            return Uri.parse(mRetrofit.getBaseURL() + path);
         }
     }
 

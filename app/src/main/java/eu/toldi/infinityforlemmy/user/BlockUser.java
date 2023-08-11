@@ -2,11 +2,8 @@ package eu.toldi.infinityforlemmy.user;
 
 import androidx.annotation.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.dto.UserBlockDTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,13 +12,13 @@ import retrofit2.Retrofit;
 public class BlockUser {
     public interface BlockUserListener {
         void success();
+
         void failed();
     }
 
-    public static void blockUser(Retrofit oauthRetrofit, String accessToken, String username, BlockUserListener blockUserListener) {
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.NAME_KEY, username);
-        oauthRetrofit.create(RedditAPI.class).blockUser(APIUtils.getOAuthHeader(accessToken), params).enqueue(new Callback<String>() {
+    public static void blockUser(Retrofit retrofit, String accessToken, int userID, boolean block, BlockUserListener blockUserListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        api.userBlock(new UserBlockDTO(userID, block, accessToken)).enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
