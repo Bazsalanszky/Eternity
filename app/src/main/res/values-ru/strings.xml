@@ -716,7 +716,7 @@
     <string name="report_reason_general_copyright_issue">Содержит нарушение авторских прав</string>
     <string name="report_reason_general_child_pornography">Содержит детскую порнографию</string>
     <string name="report_reason_general_abusive_content">Содержит оскорбительный контент</string>
-    <string name="home">Главная</string>
+    <string name="subscribed_feed">Главная</string>
     <string name="local">Популярное</string>
     <string name="notifications">Уведомления</string>
     <string name="messages">Сообщения</string>

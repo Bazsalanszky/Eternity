@@ -707,7 +707,7 @@
     <string name="report_reason_general_copyright_issue">Zawiera kwestię dotyczącą praw autorskich</string>
     <string name="report_reason_general_child_pornography">Zawiera pornografię dziecięcą</string>
     <string name="report_reason_general_abusive_content">Zawiera obraźliwe treści</string>
-    <string name="home">Strona główna</string>
+    <string name="subscribed_feed">Strona główna</string>
     <string name="local">Popularne</string>
     <string name="notifications">Powiadomienia</string>
     <string name="messages">Wiadomości</string>

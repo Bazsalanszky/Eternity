@@ -717,7 +717,7 @@ not: "5 uren" -->
     <string name="report_reason_general_copyright_issue">Het bevat een auteursrechtkwestie</string>
     <string name="report_reason_general_child_pornography">Het bevat kinderpornografie</string>
     <string name="report_reason_general_abusive_content">Het bevat beledigende inhoud</string>
-    <string name="home">Thuis</string>
+    <string name="subscribed_feed">Thuis</string>
     <string name="local">Populair</string>
     <string name="notifications">Notificaties</string>
     <string name="messages">Berichten</string>

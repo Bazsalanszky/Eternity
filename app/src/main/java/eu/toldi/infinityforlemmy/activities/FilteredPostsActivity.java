@@ -272,7 +272,7 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
         switch (postType) {
             case PostPagingSource.TYPE_FRONT_PAGE:
             case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
-                getSupportActionBar().setTitle(R.string.home);
+                getSupportActionBar().setTitle(R.string.subscribed_feed);
                 break;
             case PostPagingSource.TYPE_SEARCH:
                 getSupportActionBar().setTitle(R.string.search);

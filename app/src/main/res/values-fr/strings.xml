@@ -754,7 +754,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="report_reason_general_copyright_issue">Ça contient des problèmes de droits d\'auteur</string>
     <string name="report_reason_general_child_pornography">Ça contient de la pédopornographie</string>
     <string name="report_reason_general_abusive_content">Ça contient du contenu abusif</string>
-    <string name="home">Suivi</string>
+    <string name="subscribed_feed">Suivi</string>
     <string name="local">Local</string>
     <string name="notifications">Notifications</string>
     <string name="messages">Messages</string>

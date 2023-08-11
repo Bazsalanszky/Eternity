@@ -730,7 +730,7 @@
     <string name="report_reason_general_copyright_issue">Conține Probleme Legate cu Drepturile de Autor</string>
     <string name="report_reason_general_child_pornography">Conține Pornografie Infantilă</string>
     <string name="report_reason_general_abusive_content">Conține Conținut Abuziv</string>
-    <string name="home">Acasă</string>
+    <string name="subscribed_feed">Acasă</string>
     <string name="local">Popular</string>
     <string name="notifications">Notificări</string>
     <string name="messages">Mesaje</string>

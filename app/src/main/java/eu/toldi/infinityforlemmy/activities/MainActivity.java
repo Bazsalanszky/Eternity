@@ -930,7 +930,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
                 switch (position) {
                     case 0:
-                        Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_TITLE, getString(R.string.home)));
+                        Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_TITLE, getString(R.string.subscribed_feed)));
                         break;
                     case 1:
                         Utils.setTitleWithCustomFontToTab(typeface, tab, mMainActivityTabsSharedPreferences.getString((mAccountName == null ? "" : mAccountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_2_TITLE, getString(R.string.local)));

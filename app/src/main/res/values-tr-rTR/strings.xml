@@ -722,7 +722,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="report_reason_general_copyright_issue">Telif Hakkı Meselesi İçeriyor</string>
     <string name="report_reason_general_child_pornography">Çocuk Pornografisi İçeriyor</string>
     <string name="report_reason_general_abusive_content">Kötüye Kullanım Amaçlı İçerik İçeriyor</string>
-    <string name="home">Ana Sayfa</string>
+    <string name="subscribed_feed">Ana Sayfa</string>
     <string name="local">Popüler</string>
     <string name="notifications">Bildirimler</string>
     <string name="messages">Mesajlar</string>

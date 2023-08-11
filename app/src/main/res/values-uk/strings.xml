@@ -709,7 +709,7 @@
     <string name="report_reason_general_copyright_issue">Містить проблему авторських прав</string>
     <string name="report_reason_general_child_pornography">Містить дитячу порнографію</string>
     <string name="report_reason_general_abusive_content">Містить образливий вміст</string>
-    <string name="home">Домівка</string>
+    <string name="subscribed_feed">Домівка</string>
     <string name="local">Популярне</string>
     <string name="notifications">Сповіщення</string>
     <string name="messages">Повідомлення</string>

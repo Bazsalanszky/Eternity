@@ -712,7 +712,7 @@
     <string name="report_reason_general_copyright_issue">Contém problemas com direitos autorais</string>
     <string name="report_reason_general_child_pornography">Contém pornografia infantil</string>
     <string name="report_reason_general_abusive_content">Contém conteúdo abusivo</string>
-    <string name="home">Tela inicial</string>
+    <string name="subscribed_feed">Tela inicial</string>
     <string name="local">Popular</string>
     <string name="notifications">Notificações</string>
     <string name="messages">Mensagens</string>

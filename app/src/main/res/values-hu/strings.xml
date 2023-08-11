@@ -712,7 +712,7 @@
     <string name="report_reason_general_copyright_issue">Ez szerzői jogi problémát tartalmaz</string>
     <string name="report_reason_general_child_pornography">Ez gyermek gyermek pornográfiát tartalmaz</string>
     <string name="report_reason_general_abusive_content">Ez bántalmazó tartalmat tartalmaz</string>
-    <string name="home">Home</string>
+    <string name="subscribed_feed">Home</string>
     <string name="local">Helyi</string>
     <string name="notifications">Értesítések</string>
     <string name="messages">Üzenetek</string>

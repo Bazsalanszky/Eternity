@@ -713,7 +713,7 @@
     <string name="report_reason_general_copyright_issue">Nó chứa vấn đề bản quyền</string>
     <string name="report_reason_general_child_pornography">Nó chứa porn trẻ em</string>
     <string name="report_reason_general_abusive_content">Nó chứa nội dung lạm dụng</string>
-    <string name="home">Trang chủ</string>
+    <string name="subscribed_feed">Trang chủ</string>
     <string name="local">Phổ biến</string>
     <string name="notifications">Thông báo</string>
     <string name="messages">Tin nhắn</string>

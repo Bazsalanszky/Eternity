@@ -712,7 +712,7 @@
     <string name="report_reason_general_copyright_issue">Obsahuje problém s autorskými právy</string>
     <string name="report_reason_general_child_pornography">Obsahuje dětskou pornografii</string>
     <string name="report_reason_general_abusive_content">Obsahuje zneužívající obsah</string>
-    <string name="home">Domů</string>
+    <string name="subscribed_feed">Domů</string>
     <string name="local">Populární</string>
     <string name="notifications">Oznámení</string>
     <string name="messages">Zprávy</string>

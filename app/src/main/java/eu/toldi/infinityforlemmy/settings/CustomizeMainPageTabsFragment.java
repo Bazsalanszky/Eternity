@@ -224,7 +224,7 @@ public class CustomizeMainPageTabsFragment extends Fragment {
         showTabNamesSwitch.setOnCheckedChangeListener((compoundButton, b) -> mainActivityTabsSharedPreferences.edit().putBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_SHOW_TAB_NAMES, b).apply());
         showTabNamesLinearLayout.setOnClickListener(view -> showTabNamesSwitch.performClick());
 
-        tab1CurrentTitle = mainActivityTabsSharedPreferences.getString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_TITLE, getString(R.string.home));
+        tab1CurrentTitle = mainActivityTabsSharedPreferences.getString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_TITLE, getString(R.string.subscribed_feed));
         tab1CurrentPostType = mainActivityTabsSharedPreferences.getInt((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_POST_TYPE, SharedPreferencesUtils.MAIN_PAGE_TAB_POST_TYPE_HOME);
         tab1CurrentName = mainActivityTabsSharedPreferences.getString((accountName == null ? "" : accountName) + SharedPreferencesUtils.MAIN_PAGE_TAB_1_NAME, "");
         tab1TypeSummaryTextView.setText(typeValues[tab1CurrentPostType]);

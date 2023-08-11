@@ -702,7 +702,7 @@
     <string name="report_reason_general_copyright_issue">Contiene problemi di Copyright</string>
     <string name="report_reason_general_child_pornography">Contiene pedopornografia</string>
     <string name="report_reason_general_abusive_content">Contiene contenuto offensivo</string>
-    <string name="home">Home</string>
+    <string name="subscribed_feed">Home</string>
     <string name="local">Popolari</string>
     <string name="notifications">Notifiche</string>
     <string name="messages">Messaggi</string>

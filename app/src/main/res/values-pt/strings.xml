@@ -704,7 +704,7 @@
     <string name="report_reason_general_copyright_issue">Contém Problemas de Direitos de Autor</string>
     <string name="report_reason_general_child_pornography">Contém Pornografia Infantil</string>
     <string name="report_reason_general_abusive_content">Contém Conteúdo Abusivo</string>
-    <string name="home">Início</string>
+    <string name="subscribed_feed">Início</string>
     <string name="local">Local</string>
     <string name="notifications">Notificações</string>
     <string name="messages">Mensagens</string>

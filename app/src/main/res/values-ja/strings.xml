@@ -752,7 +752,7 @@
     <string name="report_reason_general_copyright_issue">著作権侵害が含まれている</string>
     <string name="report_reason_general_child_pornography">児童ポルノが含まれている</string>
     <string name="report_reason_general_abusive_content">虐待的内容が含まれている</string>
-    <string name="home">ホーム</string>
+    <string name="subscribed_feed">ホーム</string>
     <string name="local">人気</string>
     <string name="notifications">通知</string>
     <string name="messages">メッセージ</string>

@@ -1011,7 +1011,7 @@
     <string name="report_reason_general_child_pornography">It Contains Child Pornography</string>
     <string name="report_reason_general_abusive_content">It Contains Abusive Content</string>
 
-    <string name="home">Home</string>
+    <string name="subscribed_feed">Subscribed</string>
     <string name="local">Local</string>
     <string name="notifications">Notifications</string>
     <string name="messages">Messages</string>

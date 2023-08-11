@@ -734,7 +734,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="report_reason_general_copyright_issue">Contiene Copyright</string>
     <string name="report_reason_general_child_pornography">Contiene pornografía infantil</string>
     <string name="report_reason_general_abusive_content">Contiene contenido abusivo</string>
-    <string name="home">Inicio</string>
+    <string name="subscribed_feed">Inicio</string>
     <string name="local">Popular</string>
     <string name="notifications">Notificaciones</string>
     <string name="messages">Mensajes</string>

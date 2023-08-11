@@ -724,7 +724,7 @@
     <string name="report_reason_general_copyright_issue">Sadrži povredu autorskih prava</string>
     <string name="report_reason_general_child_pornography">Sadrži dječju pornografiju</string>
     <string name="report_reason_general_abusive_content">Sadrži uvredljiv sadržaj</string>
-    <string name="home">Naslovnica</string>
+    <string name="subscribed_feed">Naslovnica</string>
     <string name="local">Popularno</string>
     <string name="notifications">Obavijesti</string>
     <string name="messages">Poruke</string>

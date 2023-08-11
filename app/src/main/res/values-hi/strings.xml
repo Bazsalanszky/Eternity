@@ -750,7 +750,7 @@ Behavior -->
     <string name="report_reason_general_copyright_issue">"इसमें कापीराइट के मुद्दे हैं "</string>
     <string name="report_reason_general_child_pornography">"इसमें चाइल्ड पाॅर्नोग्राफी है "</string>
     <string name="report_reason_general_abusive_content">"इसकी अंतःवस्तु अनुचित है "</string>
-    <string name="home">"होम "</string>
+    <string name="subscribed_feed">"होम "</string>
     <string name="local">"लोकप्रिय "</string>
     <string name="notifications">"अधिसूचनाएं "</string>
     <string name="messages">"संदेश "</string>
