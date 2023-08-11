@@ -148,7 +148,7 @@ public class UserListingRecyclerViewAdapter extends PagedListAdapter<UserData, R
 
                                 @Override
                                 public void isNotSubscribed() {
-                                    ((DataViewHolder) holder).subscribeButton.setVisibility(View.VISIBLE);
+
                                     ((DataViewHolder) holder).subscribeButton.setOnClickListener(view -> {
                                         UserFollowing.followUser(oauthRetrofit, retrofit,
                                                 accessToken, userData.getName(), accountName, redditDataRoomDatabase,
