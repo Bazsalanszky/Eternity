@@ -1182,13 +1182,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, username);
             startActivity(pmIntent);
             return true;
-        } else if (itemId == R.id.action_add_to_multireddit_view_user_detail_activity) {
-            if (mAccessToken == null) {
-                Toast.makeText(this, R.string.login_first, Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            Intent intent = new Intent(this, MultiredditSelectionActivity.class);
-            startActivityForResult(intent, ADD_TO_MULTIREDDIT_REQUEST_CODE);
         } else if (itemId == R.id.action_add_to_post_filter_view_user_detail_activity) {
             Intent intent = new Intent(this, PostFilterPreferenceActivity.class);
             intent.putExtra(PostFilterPreferenceActivity.EXTRA_USER_NAME, username);
