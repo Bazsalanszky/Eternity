@@ -1016,4 +1016,40 @@
 \n\"Material You Amoled\".
 \nEllenkező esetben nevezze át őket, mielőtt engedélyezné az Material You témát.</string>
     <string name="settings_more_tabs_show_multireddits_title">Multiközösségek mutatása</string>
+    <string name="blocked_communities">Toltott közösségek</string>
+    <string name="instance_info">Példány információ</string>
+    <string name="unblock_community_success">Közösségi tiltása feloldva!</string>
+    <string name="unblock_community">Közösségi tiltásának feloldása</string>
+    <string name="block_community_success">Közösség tiltva!</string>
+    <string name="blocks">Tiltások</string>
+    <string name="instance_cannot_be_empty">A példány mező nem hagyható üresen.</string>
+    <string name="username_cannot_be_empty">A felhasználónév mező nem hagyható üresen.</string>
+    <string name="block_community">Közösség tilása
+\n</string>
+    <string name="use_circular_fab">Kör alakú FAB használata</string>
+    <string name="replies">Válaszok</string>
+    <string name="mentions">Megemlítések</string>
+    <string name="upload_image">Kép feltöltése</string>
+    <string name="could_not_resolve_link">URL feloldása sikertelen :(</string>
+    <string name="url_cannot_be_null_or_empty">Az URL nem lehet null vagy üres</string>
+    <string name="anonymous_account_instance">Anonymous Fiók példánya</string>
+    <string name="sort_time_9months">9 hónap</string>
+    <string name="sort_time_6months">6 hónap</string>
+    <string name="sort_time_3months">3 hónal</string>
+    <string name="sort_time_12hours">12 óra</string>
+    <string name="sort_time_6hours">6 óra</string>
+    <string name="user_login">Bejelentkezés</string>
+    <string name="user_password">Jelszó</string>
+    <string name="user_username">Felhasználónév</string>
+    <string name="instance_url">Példány címe</string>
+    <string name="i_understand">Megértettem</string>
+    <string name="go_to_settings">Beállítások</string>
+    <string name="denied_notification_permission">Az értesítési engedélyt nem lett megadva</string>
+    <string name="blocked_users">Tiltott felhasználók</string>
+    <string name="block_community_failed">Közösség tilása sikertelen</string>
+    <string name="password_cannot_be_empty">A jelszó mező nem hagyható üresen.</string>
+    <string name="not_implemented">Még nem implementált funkció :(</string>
+    <string name="mark_post_as_read_failed">Nem sikerült a posztot olvasottként megjelölni</string>
+    <string name="user_2fa_token">2FA token (ha szükséges)</string>
+    <string name="instance_url_hint">Az Ön által preferált Lemmy példány URL címe a https:// előtaggal vagy anélkül.</string>
 </resources>
