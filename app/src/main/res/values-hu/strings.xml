@@ -995,4 +995,25 @@
     <string name="trending">Felkapott</string>
     <string name="invalid_response">Érvénytelen válasz a kiszolgálótól</string>
     <string name="invalid_username_or_password">Helytelen felhasználónév vagy jelszó</string>
+    <string name="bottom_sheet_post_poll">Szavazás</string>
+    <string name="settings_link_handler_title">Link Kezelő</string>
+    <string name="settings_default_link_post_layout">Alapértelmezett poszt elrendezés</string>
+    <string name="settings_category_material_you_title">Material You</string>
+    <string name="settings_enable_material_you_title">Material You engedélyezése</string>
+    <string name="settings_enable_material_you_summary">Személyre szabhatja az Infinity-t a háttérképe alapján</string>
+    <string name="settings_apply_material_you_title">Alkalmazza a Material You témát</string>
+    <string name="settings_apply_material_you_summary">Abban az esetben, ha az Infinity nem változtatta meg a témát</string>
+    <string name="settings_more_tabs_show_favorite_multireddits_title">Kedvenc MultiKözösségek mutatása</string>
+    <string name="settings_save_nsfw_media_in_different_folder_title">NSFW média mentése más helyre</string>
+    <string name="settings_nsfw_download_location_title">NSFW Letültési hely</string>
+    <string name="comment_continue_thread">Száll folytatása</string>
+    <string name="receive_post_reply_notifications">Válaszértesítések fogadása a posztokra</string>
+    <string name="no_activity_found_for_external_browser">Nincs olyan alkalmazás, amely képes kezelni a külső alkalmazásban történő megnyitás műveletét</string>
+    <string name="settings_main_page_back_button_action">Főoldali vissza gomb művelet</string>
+    <string name="settings_enable_material_you_warning_summary">Győződjön meg róla, hogy nincs olyan témája, amelynek neve
+\n\"Material You\",
+\n\"Material You Dark\" vagy
+\n\"Material You Amoled\".
+\nEllenkező esetben nevezze át őket, mielőtt engedélyezné az Material You témát.</string>
+    <string name="settings_more_tabs_show_multireddits_title">Multiközösségek mutatása</string>
 </resources>
