@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Entrar</string>
     <string name="comment_activity_label">Enviar Comentário</string>
     <string name="comment_activity_label_is_replying">Responder</string>
@@ -15,13 +15,13 @@
     <string name="view_message_activity_label">Caixa de Entrada</string>
     <string name="settings_activity_label">Definições</string>
     <string name="account_saved_thing_activity_label">Guardado</string>
-    <string name="create_multi_reddit_activity_label">Criar Multicomunidade</string>
+    <string name="create_multi_reddit_activity_label">Criar Multi-comunidade</string>
     <string name="community_multiselection_activity_label">Selecionar Comunidades</string>
     <string name="custom_theme_listing_activity_label">Temas Personalizados</string>
     <string name="customize_theme_activity_label">Personalizar Tema</string>
     <string name="customize_theme_activity_create_theme_label">Criar Tema</string>
     <string name="theme_preview_activity_label">Pré-visualizar Tema</string>
-    <string name="edit_multi_reddit_activity_label">Editar Multicomunidade</string>
+    <string name="edit_multi_reddit_activity_label">Editar Multi-comunidade</string>
     <string name="selected_subeddits_activity_label">Comunidades selecionadas</string>
     <string name="report_activity_label">Denunciar</string>
     <string name="view_imgur_media_activity_image_label">Imagem %1$d/%2$d</string>
@@ -53,8 +53,8 @@
     <string name="action_edit_flair">Editar Flair</string>
     <string name="action_change_post_layout">Alterar Visualização de Publicações</string>
     <string name="action_save">Guardar</string>
-    <string name="action_edit_multi_reddit">Editar MultiComunidade</string>
-    <string name="action_delete_multi_reddit">Eliminar MultiComunidade</string>
+    <string name="action_edit_multi_reddit">Editar Multi-comunidade</string>
+    <string name="action_delete_multi_reddit">Eliminar Multi-comunidade</string>
     <string name="action_share">Partilhar</string>
     <string name="action_preview">Pré-visualizar</string>
     <string name="action_report">Denunciar</string>
@@ -81,7 +81,7 @@
     <string name="no_comments">Sem comentários encontrados</string>
     <string name="no_communities">Nenhuma comunidade encontrada</string>
     <string name="no_users">Nenhum utilizador encontrado</string>
-    <string name="no_multi_reddits">Nenhuma Multicomunidade encontrada</string>
+    <string name="no_multi_reddits">Nenhuma Multi-comunidade encontrada</string>
     <string name="no_storage_permission">Sem permissão de armazenamento para guardar este ficheiro</string>
     <string name="load_comments_failed">Erro ao carregar comentários.
 \nToque para tentar novamente.</string>
@@ -94,9 +94,9 @@
 \nToque para tentar novamente.</string>
     <string name="no_messages">Vazio</string>
     <string name="nsfw">18+</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Dia de bolo:
 \n%1$s</string>
     <string name="since">Desde:</string>
@@ -110,12 +110,12 @@
     <string name="saved">Guardado</string>
     <string name="gilded">Dourado</string>
     <string name="settings">Definições</string>
-    <string name="subscribers_number_detail">Membros: %1$d</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="subscribers_number_detail">Membros: %1$,d</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Não é possível obter informações da comunidade</string>
     <string name="cannot_fetch_user_info">Não é possível obter informações do utilizador</string>
     <string name="cannot_fetch_sidebar">Não é possível obter informações da barra lateral</string>
-    <string name="cannot_fetch_multireddit">Não é possível obter informações da multicomunidade</string>
+    <string name="cannot_fetch_multireddit">Não é possível obter informações da multi-comunidade</string>
     <string name="subscribe">Subscrever</string>
     <string name="unsubscribe">Cancelar subscrição</string>
     <string name="subscribed">Subscrito</string>
@@ -161,7 +161,7 @@
     <string name="error_processing_video">Erro ao processar vídeo</string>
     <string name="download_started">Transferência Iniciada. Consultar a notificação para ver o progresso.</string>
     <string name="comment_load_more_comments">Carregar mais comentários</string>
-    <string name="comment_load_more_comments_failed">Erro ao carregar. Toque para tentar novamente</string>
+    <string name="comment_load_more_comments_failed">Erro ao carregar. Toque para tentar novamente.</string>
     <string name="loading">A carregar</string>
     <string name="post_title_hint">Título</string>
     <string name="post_text_content_hint">Conteúdo</string>
@@ -170,7 +170,7 @@
     <string name="post_link_hint">URL</string>
     <string name="communities">Comunidades</string>
     <string name="users">Utilizadores</string>
-    <string name="multi_reddits">MultiCommunity</string>
+    <string name="multi_reddits">Multi-Comunidade</string>
     <string name="bottom_sheet_post_text">Texto</string>
     <string name="bottom_sheet_post_link">Ligação</string>
     <string name="bottom_sheet_post_image">Imagem</string>
@@ -233,7 +233,7 @@
     <string name="posting_video">A Publicar Vídeo</string>
     <string name="posting_image">A Publicar Imagem</string>
     <!-- Fuzzy -->
-    <string name="please_wait">Por favor aguarde.</string>
+    <string name="please_wait">Por favor aguarde</string>
     <!-- Fuzzy -->
     <string name="add_account">Adicionar conta</string>
     <string name="anonymous_account">Anónimo</string>
@@ -349,7 +349,7 @@
     <string name="settings_font_family_title">Família Tipográfica</string>
     <string name="settings_title_font_family_title">Família Tipográfica do Título</string>
     <string name="settings_content_font_family_title">Família Tipográfica do Conteúdo</string>
-    <string name="settings_font_size_title">Tamanho do Tipo de Letra</string>
+    <string name="settings_font_size_title">Tamanho de Letra</string>
     <string name="settings_title_font_size_title">Tamanho de Letra do Título</string>
     <string name="settings_content_font_size_title">Tamanho de Letra do Conteúdo</string>
     <string name="settings_enable_nsfw_title">Ativar 18+</string>
@@ -407,7 +407,7 @@
     <string name="settings_tab_post_type">Tipo</string>
     <string name="settings_tab_community_name">Nome da Comunidade (sem prefixo r/)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Nome MultiComunidade (/utilizador/oseunomedeutilizador/m/oseunomemulticomunidade)</string>
+    <string name="settings_tab_multi_reddit_name">Nome Multi-comunidade (/utilizador/oseunomedeutilizador/m/oseunomemulticomunidade) (apenas letra minúscula)</string>
     <string name="settings_tab_username">Nome de Utilizador (sem prefixo u/)</string>
     <string name="no_developer_easter_egg">Aqui não existem opções de programador</string>
     <string name="no_link_available">Não foi possível obter a ligação</string>
@@ -445,10 +445,10 @@
     <string name="elapsed_time_months_ago">%1$d Meses</string>
     <string name="elapsed_time_a_year_ago">1 Ano</string>
     <string name="elapsed_time_years_ago">%1$d Anos</string>
-    <string name="error_getting_multi_reddit_data">Erro ao obter dados da multicomunidade</string>
-    <string name="error_loading_multi_reddit_list">Não foi possível sincronizar multicomunidades</string>
+    <string name="error_getting_multi_reddit_data">Erro ao obter dados da multi-comunidade</string>
+    <string name="error_loading_multi_reddit_list">Não foi possível sincronizar multi-comunidades</string>
     <string name="error_loading_subscriptions">Não foi possível sincronizar as subscrições</string>
-    <string name="share_this_app">Check out Infinity for Lemmy, an awesome Lemmy client!
+    <string name="share_this_app">Veja o Infinity for Lemmy, um cliente fantástico do Lemmy!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Erro ao obter o nome da comunidade</string>
     <string name="share_post_link">Partilhar Endereço da Publicação</string>
@@ -476,9 +476,9 @@
     <string name="multi_reddit_description_hint">Descrição</string>
     <string name="private_multi_reddit">Privado</string>
     <string name="no_multi_reddit_name">Onde está o nome\?</string>
-    <string name="create_multi_reddit_failed">Não é possível criar esta multicomunidade</string>
-    <string name="duplicate_multi_reddit">Esta multicomunidade já existe</string>
-    <string name="edit_multi_reddit_failed">Não é possível editar esta multicomunidade</string>
+    <string name="create_multi_reddit_failed">Não é possível criar esta multi-comunidade</string>
+    <string name="duplicate_multi_reddit">Esta multi-comunidade já existe</string>
+    <string name="edit_multi_reddit_failed">Não é possível editar esta multi-comunidade</string>
     <string name="delete_multi_reddit_success">Eliminado com sucesso</string>
     <string name="delete_multi_reddit_failed">Falha ao eliminar</string>
     <string name="delete_multi_reddit_dialog_message">Tem a certeza\?</string>
@@ -691,9 +691,9 @@
     <string name="author_flair_preview">Flair do Autor</string>
     <string name="comment_content_preview">Arranjei um cartão a desejar as \"Melhoras\" à minha namorada.
 \nEla não está doente nem nada, mas certamente poderá melhorar.</string>
-    <string name="edit_multi_reddit">Editar Multicomunidade</string>
-    <string name="delete_multi_reddit">Eliminar Multicomunidade</string>
-    <string name="n_awards">%1$d Prémios</string>
+    <string name="edit_multi_reddit">Editar Multi-comunidade</string>
+    <string name="delete_multi_reddit">Eliminar Multi-comunidade</string>
+    <string name="n_awards">%1$,d Prémios</string>
     <string name="one_award">1 Prémio</string>
     <string name="report">Denunciar</string>
     <string name="reporting">A denunciar</string>
@@ -732,8 +732,7 @@
     <string name="default_font_font_preview">Padrão</string>
     <string name="load_video_in_redgifs">Tente carregar o vídeo no Redgifs</string>
     <string name="top_score">%1$s pontos</string>
-    <string name="login_activity_2fa_prompt">Caso tenha autenticação de 2 fatores ativada, por favor introduza a palavra-passe da seguinte forma: &lt;palavra-passe&gt;:&lt;código 2FA&gt;.
-\nExemplo: asuapasse:123456</string>
+    <string name="login_activity_2fa_prompt">Caso tenha autenticação de dois fatores (2FA) ativada, tem de preencher o campo do token 2FA. Caso contrário, deixe-o vazio</string>
     <string name="submit_crosspost_activity_label">Republicar</string>
     <string name="give_award_activity_label">Premiar</string>
     <string name="action_crosspost">Republicar</string>
@@ -777,10 +776,7 @@
     <string name="settings_bottom_app_bar_option_4">Opção 4</string>
     <string name="settings_bottom_app_bar_fab">Botão de Ação Flutuante</string>
     <string name="settings_data_saving_mode">Modo de Poupança de Dados</string>
-    <string name="settings_data_saving_mode_info_summary">No modo de poupança de dados:
-\nPré-visualização de imagens em baixa resolução.
-\nVídeos do Lemmy em baixa resolução.
-\nReprodução automática de vídeos desativada.</string>
+    <string name="settings_data_saving_mode_info_summary">No modo de poupança de dados: Pré-visualização de imagens em baixa resolução. Vídeos do Lemmy em baixa resolução. Reprodução automática de vídeos desativada.</string>
     <string name="settings_translation_title">Tradução</string>
     <string name="settings_translation_summary">Traduzir esta aplicação no POEditor. Obrigado a todos os colaboradores.</string>
     <string name="settings_credits_national_flags">Bandeiras Nacionais</string>
@@ -847,10 +843,10 @@
     <string name="filtered_posts_activity_subtitle">Publicações Filtradas</string>
     <string name="post_filter_preference_activity_label">Filtro de Publicações</string>
     <string name="search_users_result_activity_label">Utilizadores</string>
-    <string name="multireddit_selection_activity_label">Escolher uma Multicomunidade</string>
+    <string name="multireddit_selection_activity_label">Escolher uma Multi-comunidade</string>
     <string name="action_save_to_database">Guardar na Base de Dados</string>
     <string name="action_read_all_messages">Ler Todas as Mensagens</string>
-    <string name="action_add_to_multireddit">Adicionar à Multicomunidade</string>
+    <string name="action_add_to_multireddit">Adicionar à Multi-comunidade</string>
     <string name="search_only_communities_hint">Pesquisar comunidades</string>
     <string name="search_only_users_hint">Pesquisar utilizadores</string>
     <string name="post_type_gif">Gif</string>
@@ -907,8 +903,8 @@
     <string name="post_filter_usage_community_all">Comunidade</string>
     <string name="post_filter_usage_user">Utilizador: %1$s</string>
     <string name="post_filter_usage_user_all">Utilizador</string>
-    <string name="post_filter_usage_multireddit">MultiComunidade: %1$s</string>
-    <string name="post_filter_usage_multireddit_all">MultiComunidade</string>
+    <string name="post_filter_usage_multireddit">Multi-comunidade: %1$s</string>
+    <string name="post_filter_usage_multireddit_all">Multi-comunidade</string>
     <string name="post_filter_usage_search">Pesquisar</string>
     <string name="community">Comunidade</string>
     <string name="user">Utilizador</string>
@@ -916,10 +912,10 @@
     <string name="read_all_messages_time_limit">Está a repetir esta ação com demasiada frequência. Tente novamente mais tarde. Este é o valor limite da API do Lemmy.</string>
     <string name="read_all_messages_success">Todas as mensagens lidas com sucesso</string>
     <string name="read_all_messages_failed">Não é possível ler todas as mensagens</string>
-    <string name="add_community_or_user_to_multireddit_success">%1$s foi adicionado à multicomunidade %2$s</string>
-    <string name="add_community_or_user_to_multireddit_failed">Não é possível adicionar %1$s à multicomunidade %2$s</string>
+    <string name="add_community_or_user_to_multireddit_success">%1$s foi adicionado à multi-comunidade %2$s</string>
+    <string name="add_community_or_user_to_multireddit_failed">Não é possível adicionar %1$s à multi-comunidade %2$s</string>
     <string name="choose_a_user">Escolher um utilizador</string>
-    <string name="settings_click_to_show_media_in_gallery_layout">Clicar para Mostrar Média na Visualização Galeria</string>
+    <string name="settings_click_to_show_media_in_gallery_layout">Clicar para Mostrar Media na Visualização Galeria</string>
     <string name="settings_hide_post_type">Esconder Tipo de Publicação</string>
     <string name="settings_hide_the_number_of_awards">Esconder Número de Prémios</string>
     <string name="settings_hide_community_and_user_prefix">Esconder Prefixos de Comunidades e Utilizador</string>
@@ -957,12 +953,12 @@
     <string name="theme_item_current_user_color_detail">Aplicado a: Utilizador atual nos comentários</string>
     <string name="exclude_domains_hint">Excluir Domínios</string>
     <string name="anonymous_front_page_no_subscriptions">Comece por se juntar a uma comunidade!</string>
-    <string name="backup_settings_success">As definições foram exportadas para o diretório de destino com sucesso. A palavra-chave do ficheiro zip gerado é 123321. Por favor não modifique o ficheiro zip.</string>
+    <string name="backup_settings_success">As definições foram exportadas para o diretório de destino com sucesso. A palavra-passe do ficheiro zip gerado é 123321. Por favor não modifique o ficheiro zip.</string>
     <string name="create_zip_in_destination_directory_failed">Não foi possível criar a cópia de segurança zip no diretório de destino</string>
     <string name="backup_some_settings_failed">Não foi possível copiar algumas definições mas outras foram exportadas com sucesso para o diretório de destino</string>
     <string name="restore_settings_success">Definições restauradas com sucesso. Reinicie a aplicação para ver as alterações.</string>
     <string name="restore_settings_partially_failed">Algumas definições poderão não ter sido restauradas com sucesso. Reinicie a aplicação para ver as alterações.</string>
-    <string name="restore_settings_failed_file_corrupted">"Não é possível restaurar as definições. O ficheiro poderá estar corrompido. "</string>
+    <string name="restore_settings_failed_file_corrupted">Não é possível restaurar as definições. O ficheiro poderá estar corrompido.</string>
     <string name="restore_settings_failed_cannot_get_file">Não é possível aceder ao ficheiro</string>
     <string name="suicide_prevention_quote">Se está a procura de um sinal para não se suicidar, isto é o sinal.❤</string>
     <string name="do_not_show_this_again">Não mostrar novamente</string>
@@ -974,7 +970,7 @@
     <string name="only_on_wifi">Apenas em WiFi</string>
     <string name="never">Nunca</string>
     <string name="normal">Normal</string>
-    <string name="extra_large">Grande</string>
+    <string name="extra_large">Extra Grande</string>
     <string name="enormously_large">Enorme</string>
     <string name="default_in_array">Padrão</string>
     <string name="off">Desligado</string>
@@ -991,10 +987,10 @@
     <string name="suggest_title">Sugerir Título</string>
     <string name="suggest_title_failed">Falha ao sugerir título</string>
     <string name="action_delete_logs">Eliminar Logs</string>
-    <string name="inbox_with_count">Caixa de Entrada (%1$d)</string>
+    <string name="inbox_with_count">Caixa de Entrada (%1$,d)</string>
     <string name="comment_continue_thread">Continuar</string>
     <!-- Fuzzy -->
-    <string name="settings_swipe_vertically_to_go_back_from_media_title">Deslize Verticalmente para Sair dos Média</string>
+    <string name="settings_swipe_vertically_to_go_back_from_media_title">Deslizar Verticalmente para sair de Imagens e Gifs</string>
     <string name="settings_hide_post_flair">Esconder Flair da Publicação</string>
     <string name="settings_crash_reports_title">Relatório de Falhas</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Perigoso</string>
@@ -1002,8 +998,8 @@
     <string name="settings_show_only_one_comment_level_indicator">Mostrar Apenas Um Indicador do Nível de Comentário</string>
     <string name="save_comment">Guardar</string>
     <string name="unsave_comment">Esquecer</string>
-    <string name="copy_multi_reddit_path">Copiar Caminho da Multicomunidade</string>
-    <string name="copy_multi_reddit_path_failed">Não é possível copiar o caminho da multicomunidade</string>
+    <string name="copy_multi_reddit_path">Copiar Caminho da Multi-comunidade</string>
+    <string name="copy_multi_reddit_path_failed">Não é possível copiar o caminho da multi-comunidade</string>
     <string name="crash_reports_deleted">Os relatórios de erros eliminados</string>
     <string name="disable_nsfw_forever_message">Uma vez ativo, todo o conteúdo impróprio será desativado permanentemente, quer a definição de conteúdo 18+ esteja ativa ou não. Esta configuração é irreversível e a única maneira de reativar conteúdo 18+ é limpando os dados da aplicação.
 \n
@@ -1022,14 +1018,14 @@
     <string name="settings_enable_material_you_warning_summary">Assegure-se de que não tem temas com nome
 \n\"Material You\",
 \n\"Material You Dark\" ou
-\n\"Material You Amoled\"
-\nCaso contrário, altere o nome antes de ativar Material You</string>
+\n\"Material You Amoled\".
+\nCaso contrário, altere o nome antes de ativar Material You.</string>
     <string name="settings_enable_material_you_title">Ativar Material You</string>
     <string name="settings_enable_material_you_summary">Personalizar Infinity baseado na imagem de fundo</string>
     <string name="settings_apply_material_you_title">Aplicar Material You</string>
     <string name="settings_apply_material_you_summary">Em caso do Infinity não alterar o tema</string>
-    <string name="settings_more_tabs_show_favorite_multireddits_title">Mostrar MultiComunidade Favorita</string>
-    <string name="settings_more_tabs_show_multireddits_title">Mostrar MultiComunidade</string>
+    <string name="settings_more_tabs_show_favorite_multireddits_title">Mostrar Multi-comunidade Favorita</string>
+    <string name="settings_more_tabs_show_multireddits_title">Mostrar Multi-comunidade</string>
     <string name="settings_collapse_reddit_section_title">Recolher Secção do Lemmy</string>
     <string name="settings_video_player_automatic_landscape_orientation">Alterar para Orientação Paisagem automaticamente no Reprodutor de Vídeo</string>
     <string name="settings_remember_muting_option_in_post_feed">Lembrar opção sem som no Feed de Publicações</string>
@@ -1063,7 +1059,7 @@
     <string name="go_to_top">Ir para Cima</string>
     <string name="title_contains_regex_hint">Título: contém regex</string>
     <string name="contain_domains_hint">Contém domínios</string>
-    <string name="anonymous_multireddit_no_community">Esta multicomunidade não tem nenhuma comunidade!</string>
+    <string name="anonymous_multireddit_no_community">Esta multi-comunidade não tem nenhuma comunidade!</string>
     <string name="contain_domain">Contém este domínio</string>
     <string name="app_lock_timeout_immediately">Imediatamente</string>
     <string name="app_lock_timeout_1_min">1 minuto</string>
@@ -1081,10 +1077,10 @@
     <string name="app_lock_timeout_6_hours">6 horas</string>
     <string name="app_lock_timeout_12_hours">12 horas</string>
     <string name="app_lock_timeout_24_hours">24 horas</string>
-    <string name="settings_backup_settings_summary">A palavra-chave do ficheiro de backup é \"123321\".</string>
+    <string name="settings_backup_settings_summary">A palavra-passe do ficheiro de backup é \"123321\".</string>
     <string name="settings_open_navigation_drawer">Abrir Gaveta de Navegação</string>
     <string name="settings_nsfw_download_location_title">Localização para Transferências de 18+</string>
-    <string name="invalid_username_or_password">Nome de utilizador ou palavra-chave inválidos</string>
+    <string name="invalid_username_or_password">Nome de utilizador ou palavra-passe inválidos</string>
     <string name="edit_profile_activity_label">Editar perfil</string>
     <string name="history_activity_label">História</string>
     <string name="action_block_user">Bloquear o utilizador</string>
@@ -1096,7 +1092,7 @@
     <string name="settings_number_of_columns_in_post_feed_unfolded_portrait_title">Retrato (Desdobrado)</string>
     <string name="action_more_options">Mais opções</string>
     <string name="settings_number_of_columns_in_post_feed_unfolded_landscape_title">Paisagem (Desdobrado)</string>
-    <string name="settings_save_nsfw_media_in_different_folder_title">Gravar Média 18+ numa Localização Diferente</string>
+    <string name="settings_save_nsfw_media_in_different_folder_title">Guardar Media 18+ Numa Localização Diferente</string>
     <string name="settings_loop_video_title">Repetir Vídeo</string>
     <string name="settings_main_page_back_button_action">Ação do botão Voltar da página principal</string>
     <string name="settings_require_authentication_to_show_accounts">Exigir autenticação para mostrar contas</string>
@@ -1150,4 +1146,122 @@
     <string name="reddit_gallery_item_url_hint">Url</string>
     <string name="option_3_hint">Opção 3</string>
     <string name="go_to_settings">Definições</string>
+    <string name="block_community_success">Comunidade Bloqueada!</string>
+    <string name="block_community_failed">Falha ao bloquear comunidade</string>
+    <string name="unblock_community">Desbloquear Comunidade</string>
+    <string name="unblock_community_success">Comunidade Desbloqueada!</string>
+    <string name="unblock_community_failed">Falha ao desbloquear comunidade</string>
+    <string name="instance_info">Informação da Instância</string>
+    <string name="blocked_communities">Comunidades Bloqueadas</string>
+    <string name="blocked_users">Utilizadores Bloqueados</string>
+    <string name="blocks">Bloqueios</string>
+    <string name="unblock_user_success">Desbloqueado</string>
+    <string name="unblock_user_failed">Falha ao desbloquear utilizador</string>
+    <string name="settings_custom_font_family_title">Família Tipográfica Personalizada</string>
+    <string name="settings_custom_title_font_family_title">Família Tipográfica do Título Personalizada</string>
+    <string name="settings_custom_content_font_family_title">Família Tipográfica do Conteúdo Personalizada</string>
+    <string name="settings_hide_comment_awards_title">Ocultar Prémios de Comentários</string>
+    <string name="settings_reddit_user_agreement_title">Acordo de Utilizador Lemmy</string>
+    <string name="settings_post_feed_max_resolution_warning_title">Aumente o valor para mostrar pré-visualizações com uma resolução mais elevada, mas a aplicação pode falhar inesperadamente.</string>
+    <string name="settings_post_feed_max_resolution_title">Pré-visualização do Feed de Publicações Resolução Máxima (Largura * Altura)</string>
+    <string name="settings_reddit_video_default_resolution">Resolução Predefinida do Vídeo Lemmy</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">Mais Fácil de Ver em Ecrã Inteiro</string>
+    <string name="settings_hide_fab_in_post_feed">Ocultar FAB no Feed de Publicações</string>
+    <string name="settings_comment_divider_type">Tipo de Divisor de Comentários</string>
+    <string name="settings_use_bottom_toolbar_in_media_viewer_title">Utilizar a barra de ferramentas inferior no Visualizador de Media</string>
+    <string name="settings_always_show_child_comment_count_title">Mostrar Sempre o Número de Comentários de Descendentes</string>
+    <string name="discard_dialog_button">Descartar</string>
+    <string name="theme_item_media_indicator_background_color_detail">Aplicado a: Fundo do vídeo ou ícone da Galeria na pré-visualização da publicação</string>
+    <string name="theme_item_media_indicator_background_color">Cor de Fundo do Indicador de Media</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background_detail">Aplicado a: Fundo de separadores (barra de ferramentas expandida)</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color">Cor do texto do Separador na Barra de Ferramentas Expandida</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color_detail">Aplicado a: Cor do texto do separador (barra de ferramentas expandida)</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_indicator">Cor do Indicador de Separador do Separador na Barra de Ferramentas Expandida</string>
+    <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_tab_background">Cor de Fundo do Separador na Barra de Ferramentas Recolhida</string>
+    <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_tab_background_detail">Aplicado a: Fundo de Separadores (barra de ferramentas recolhida)</string>
+    <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_text_color">Cor do Texto do Separador na Barra de Ferramentas Recolhida</string>
+    <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_text_color_detail">Aplicado a: Cor do texto do separador (barra de ferramentas recolhida)</string>
+    <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_tab_indicator_detail">Aplicado a: Cor do Indicador de Separador do Separador (barra de ferramentas recolhida)</string>
+    <string name="fetch_streamable_video_failed">Falha na obtenção de vídeo Streamable</string>
+    <string name="block_user_failed">Falha ao bloquear o utilizador</string>
+    <string name="clear_user_flair">Remover Flair</string>
+    <string name="clear_user_flair_success">Flair de Utilizador Removido</string>
+    <string name="title_contains_strings_hint">Título: contém palavras-chave (key1,key2)</string>
+    <string name="extra_small">Extra Pequeno</string>
+    <string name="select_a_ttf_font">Selecionar ficheiro ttf</string>
+    <string name="unable_to_get_font_file">Não é possível obter o seu tipo de letra</string>
+    <string name="unable_to_load_font">Não é possível carregar o tipo de letra personalizado</string>
+    <string name="unable_to_copy_font_file">Não é possível copiar o seu tipo de letra</string>
+    <string name="lock_screen_text">Calma ai!!!</string>
+    <string name="submit_change_banner">Submeter Alteração da Faixa</string>
+    <string name="submit_save_profile">Submeter Guardar Perfil</string>
+    <string name="remove_banner">Remover Faixa</string>
+    <string name="display_name_text">Mostrar Nome</string>
+    <string name="display_name_hint">Mostrar na página do perfil</string>
+    <string name="about_you_hint">Uma breve descrição de si próprio</string>
+    <string name="message_remove_avatar_success">Removido o avatar com sucesso</string>
+    <string name="message_remove_avatar_failed">Falha na remoção do avatar %s</string>
+    <string name="message_remove_banner_success">Removido a faixa com sucesso</string>
+    <string name="message_change_avatar_success">Alteração do avatar com sucesso</string>
+    <string name="message_change_banner_success">Alteração da faixa com sucesso</string>
+    <string name="message_remove_banner_failed">Falha na remoção da faixa %s</string>
+    <string name="message_change_avatar_failed">Falha na remoção do avatar %s</string>
+    <string name="message_change_banner_failed">Falha na remoção da faixa %s</string>
+    <string name="message_save_profile_success">Guardado o perfil com sucesso</string>
+    <string name="message_save_profile_failed">Falha ao gravar o perfil %s</string>
+    <string name="user_agreement_dialog_title">Acordo de utilizador</string>
+    <string name="agree">Concordo</string>
+    <string name="do_not_agree">Não Concordo</string>
+    <string name="option_1_hint">Opção 1 (Obrigatório)</string>
+    <string name="option_2_hint">Opção 2 (Obrigatório)</string>
+    <string name="image_index_in_gallery">%1$d/%2$d</string>
+    <string name="not_a_valid_number">Não é um número válido</string>
+    <string name="post_karma">Karma da Publicação:</string>
+    <string name="comment_karma">Karma do Comentário:</string>
+    <string name="awarder_karma">Karma do Premiador:</string>
+    <string name="awardee_karma">Karma do Premiado:</string>
+    <string name="invalid_link">Link invalido</string>
+    <string name="unexpected_intent_action">Ação de intenção inesperada: <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="enable_random_adaptation">Ativar adaptação aleatória</string>
+    <string name="storage_permission_denied">A permissão de acesso ao armazenamento foi negada</string>
+    <string name="sample_list_load_error">Não foi possível carregar uma ou mais listas de amostras</string>
+    <string name="exo_controls_volume_up_description">Aumentar volume</string>
+    <string name="exo_controls_volume_off_description">Baixar Volume</string>
+    <string name="invalid_regex">Padrão de regex inválido</string>
+    <string name="load_more_posts_failed">Falha ao carregar mais publicações.
+\nToque para tentar novamente.</string>
+    <string name="no_more_posts">Sem mais publicações</string>
+    <string name="denied_notification_permission">A autorização de notificação não foi concedida</string>
+    <string name="instance_url_hint">O URL da sua instância Lemmy preferida, com ou sem o prefixo https://</string>
+    <string name="user_username">Nome de utilizador</string>
+    <string name="user_password">Palavra-passe</string>
+    <string name="user_2fa_token">Token 2FA (se necessário)</string>
+    <string name="user_login">Iniciar sessão</string>
+    <string name="anonymous_account_instance">Instância de Conta Anónima</string>
+    <string name="url_cannot_be_null_or_empty">URL não pode ser nulo ou vazio</string>
+    <string name="could_not_resolve_link">Não foi possível resolver o URL :(</string>
+    <string name="mark_post_as_read_failed">Falha ao marcar a publicação como lida</string>
+    <string name="upload_image">Enviar uma imagem</string>
+    <string name="mentions">Menções</string>
+    <string name="replies">Respostas</string>
+    <string name="use_circular_fab">Utilizar FAB circular</string>
+    <string name="block_community">Bloquear Comunidade
+\n</string>
+    <string name="not_implemented">Funcionalidade ainda não implementada :(</string>
+    <string name="instance_cannot_be_empty">O campo de instância não pode ficar vazio.</string>
+    <string name="username_cannot_be_empty">O campo de utilizador não pode ficar vazio.</string>
+    <string name="password_cannot_be_empty">O campo de palavra-passe não pode ficar vazio.</string>
+    <string name="voting_length">Duração da votação: %1$d dias</string>
+    <string name="theme_item_media_indicator_icon_color_detail">Aplicado a: Ícone de vídeo ou galeria na pré-visualização da publicação</string>
+    <string name="theme_item_media_indicator_icon_color">Cor do Ícone Indicador de Media</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background">Cor de Fundo do Separador na Barra de Ferramentas Expandida</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_indicator_detail">Aplicado a: Cor do Indicador de Separador no Esquema de Separadores (barra de ferramentas expandida)</string>
+    <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_tab_indicator">Cor do Indicador de Separador do Esquema do Separador na Barra de Ferramentas Recolhida</string>
+    <string name="theme_item_no_preview_post_type_icon_tint_detail">Aplicado a: Ícone que indica o tipo de publicação quando não há pré-visualização disponível</string>
+    <string name="theme_item_no_preview_post_type_background_color_detail">Aplicado a: Marcador de posição que indica o tipo de publicação quando não há pré-visualização disponível</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_video_url">Erro ao obter o vídeo v.redd.it: Não é possível obter o URL do vídeo</string>
+    <string name="submit_change_avatar">Submeter Alteração Avatar</string>
+    <string name="display_name_description">Isto será apresentado aos visualizadores da sua página de perfil e não altera o seu nome de utilizador.</string>
+    <string name="reddit_gallery_item_caption_hint">Legenda (máx. 180 caracteres)</string>
+    <string name="action_unblock_user">Desbloquear Utilizador</string>
 </resources>
