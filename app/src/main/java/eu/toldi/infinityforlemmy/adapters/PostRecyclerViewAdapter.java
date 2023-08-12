@@ -229,6 +229,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean mHideTheNumberOfVotes;
 
     private boolean mSeparateUpandDownVotes;
+
+    private boolean mHideDownvotes;
     private boolean mHideTheNumberOfComments;
     private boolean mLegacyAutoplayVideoControllerUI;
     private boolean mFixedHeightPreviewInCard;
@@ -311,7 +313,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mHideTheNumberOfAwards = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
             mHideSubredditAndUserPrefix = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
             mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
-            mSeparateUpandDownVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_SEPARATE_UP_AND_DOWN_VOTES, true);
+            mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
+            mSeparateUpandDownVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
             mHideTheNumberOfComments = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_COMMENTS, false);
             mLegacyAutoplayVideoControllerUI = sharedPreferences.getBoolean(SharedPreferencesUtils.LEGACY_AUTOPLAY_VIDEO_CONTROLLER_UI, false);
             mFixedHeightPreviewInCard = sharedPreferences.getBoolean(SharedPreferencesUtils.FIXED_HEIGHT_PREVIEW_IN_CARD, false);
@@ -2423,7 +2426,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             this.shareButton = shareButton;
 
             scoreTextView.setOnClickListener(null);
-            if(!mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE,true)){
+            if (mHideDownvotes) {
                 downvoteButton.setVisibility(View.GONE);
             }
 

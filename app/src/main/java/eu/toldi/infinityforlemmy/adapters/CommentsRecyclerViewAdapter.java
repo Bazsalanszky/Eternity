@@ -126,6 +126,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private boolean mAlwaysShowChildCommentCount;
     private boolean mHideTheNumberOfVotes;
     private boolean mSeperateUpandDownvote;
+    private boolean mHideDownvotes;
     private int mDepthThreshold;
     private CommentRecyclerViewAdapterCallback mCommentRecyclerViewAdapterCallback;
     private boolean isInitiallyLoading;
@@ -168,6 +169,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                        Post post, Locale locale, Integer singleCommentId,
                                        boolean isSingleCommentThreadMode,
                                        SharedPreferences sharedPreferences,
+                                       SharedPreferences currentAccountSharedPreferences,
                                        CommentRecyclerViewAdapterCallback commentRecyclerViewAdapterCallback) {
         mActivity = activity;
         mFragment = fragment;
@@ -239,7 +241,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mShowAuthorAvatar = sharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AUTHOR_AVATAR, false);
         mAlwaysShowChildCommentCount = sharedPreferences.getBoolean(SharedPreferencesUtils.ALWAYS_SHOW_CHILD_COMMENT_COUNT, false);
         mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES_IN_COMMENTS, false);
-        mSeperateUpandDownvote = sharedPreferences.getBoolean(SharedPreferencesUtils.COMMENT_SEPARATE_UP_AND_DOWN_VOTES, true);
+        mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
+        mSeperateUpandDownvote = sharedPreferences.getBoolean(SharedPreferencesUtils.COMMENT_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
         mDepthThreshold = sharedPreferences.getInt(SharedPreferencesUtils.SHOW_FEWER_TOOLBAR_OPTIONS_THRESHOLD, 5);
 
         mCommentRecyclerViewAdapterCallback = commentRecyclerViewAdapterCallback;
@@ -437,6 +440,10 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 ((CommentViewHolder) holder).mMarkwonAdapter.setMarkdown(mCommentMarkwon, comment.getCommentMarkdown());
                 // noinspection NotifyDataSetChanged
                 ((CommentViewHolder) holder).mMarkwonAdapter.notifyDataSetChanged();
+                if (mHideDownvotes) {
+                    ((CommentViewHolder) holder).downvoteButton.setVisibility(View.GONE);
+                    ((CommentViewHolder) holder).downvoteTextView.setVisibility(View.GONE);
+                }
 
                 if (!mHideTheNumberOfVotes) {
                     String commentText = "";
@@ -448,14 +455,14 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                             Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                     comment.getScore() + comment.getVoteType()));
 
-                    if(mSeperateUpandDownvote){
-                        int upvotes = (comment.getVoteType() == 1) ? comment.getUpvotes()+1 : comment.getUpvotes();
-                        int downvotes = (comment.getVoteType() == -1) ? comment.getDownvotes()+1 : comment.getDownvotes();
+                    if (mSeperateUpandDownvote) {
+                        int upvotes = (comment.getVoteType() == 1) ? comment.getUpvotes() + 1 : comment.getUpvotes();
+                        int downvotes = (comment.getVoteType() == -1) ? comment.getDownvotes() + 1 : comment.getDownvotes();
                         ((CommentViewHolder) holder).downvoteTextView.setVisibility(View.VISIBLE);
                         ((CommentViewHolder) holder).scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
                         ((CommentViewHolder) holder).downvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
                         ((CommentViewHolder) holder).scoreTextView.setGravity(Gravity.START);
-                        ((CommentViewHolder) holder).scoreTextView.getLayoutParams().width = (int) (32  * mActivity.getResources().getDisplayMetrics().density);
+                        ((CommentViewHolder) holder).scoreTextView.getLayoutParams().width = (int) (32 * mActivity.getResources().getDisplayMetrics().density);
 
                         ((CommentViewHolder) holder).scoreTextView.setPadding(0, 0, 6, 0);
                         ((CommentViewHolder) holder).downvoteButton.setPadding(24, 0, 12, 0);

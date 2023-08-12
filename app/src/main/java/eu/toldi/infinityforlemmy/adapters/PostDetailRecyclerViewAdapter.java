@@ -176,6 +176,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private boolean mSeperateUpvoteAndDownvote;
     private boolean mHideTheNumberOfComments;
     private boolean mSeparatePostAndComments;
+    private boolean mHideDownvotes;
     private boolean mLegacyAutoplayVideoControllerUI;
     private boolean mEasierToWatchInFullScreen;
     private PostDetailRecyclerViewAdapterCallback mPostDetailRecyclerViewAdapterCallback;
@@ -344,7 +345,8 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mHideTheNumberOfAwards = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
         mHideSubredditAndUserPrefix = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
         mHideTheNumberOfVotes = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
-        mSeperateUpvoteAndDownvote = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_SEPARATE_UP_AND_DOWN_VOTES, true);
+        mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
+        mSeperateUpvoteAndDownvote = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
         mHideTheNumberOfComments = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_COMMENTS, false);
 
         mPostDetailRecyclerViewAdapterCallback = postDetailRecyclerViewAdapterCallback;

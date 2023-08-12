@@ -616,7 +616,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                     this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(),
                     mAccessToken, mAccountName, mPost, mLocale, mSingleCommentId
-                    , isSingleCommentThreadMode, mSharedPreferences,
+                    , isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                         @Override
                         public void retryFetchingComments() {
@@ -1308,7 +1308,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                                         ViewPostDetailFragment.this, mCustomThemeWrapper, mExecutor,
                                         mRetrofit.getRetrofit(), mAccessToken, mAccountName, mPost, mLocale,
-                                        mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences,
+                                        mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                                         new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                                             @Override
                                             public void retryFetchingComments() {
