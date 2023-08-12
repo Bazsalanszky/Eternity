@@ -40,7 +40,10 @@ public class FetchBlockedThings {
                                     JSONObject blockedUserJson = blockedUsersJson.getJSONObject(i).getJSONObject("target");
                                     int id = blockedUserJson.getInt("id");
                                     String name = blockedUserJson.getString("name");
-                                    String avatar = blockedUserJson.getString("avatar");
+                                    String avatar = "";
+                                    if (blockedUserJson.has("avatar"))
+                                        avatar = blockedUserJson.getString("avatar");
+
                                     String qualifiedName = LemmyUtils.actorID2FullName(blockedUserJson.getString("actor_id"));
                                     BlockedUserData blockedUserData = new BlockedUserData(id, name, avatar, qualifiedName, accountName);
 

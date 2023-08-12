@@ -1094,8 +1094,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     mUserData = userData;
                     username = userData.getName();
                     setupVisibleElements();
-                    new ViewUserDetailActivity.InsertUserDataAsyncTask(mRedditDataRoomDatabase.userDao(), userData,
-                            () -> mFetchUserInfoSuccess = true).execute();
                     FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
 
                         @Override
@@ -1108,13 +1106,15 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                                 }
                             }
                             isBlocked = false;
+                            invalidateOptionsMenu();
                         }
 
                         @Override
                         public void onFetchBlockedThingsFailure() {
-
                         }
                     });
+                    new ViewUserDetailActivity.InsertUserDataAsyncTask(mRedditDataRoomDatabase.userDao(), userData,
+                            () -> mFetchUserInfoSuccess = true).execute();
                 }
 
                 @Override
