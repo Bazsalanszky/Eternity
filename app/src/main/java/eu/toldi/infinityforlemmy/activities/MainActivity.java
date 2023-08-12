@@ -807,17 +807,17 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
         adapter = new NavigationDrawerRecyclerViewMergedAdapter(this, mSharedPreferences,
                 mNsfwAndSpoilerSharedPreferences, mNavigationDrawerSharedPreferences, mSecuritySharedPreferences,
-                mCustomThemeWrapper, mAccountName, new NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener() {
-                    @Override
-                    public void onMenuClick(int stringId) {
-                        Intent intent = null;
-                        if (stringId == R.string.profile) {
-                            intent = new Intent(MainActivity.this, ViewUserDetailActivity.class);
-                            intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
-                            intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountQualifiedName);
-                        } else if (stringId == R.string.subscriptions) {
-                            intent = new Intent(MainActivity.this, SubscribedThingListingActivity.class);
-                        } else if (stringId == R.string.multi_reddit) {
+                mCustomThemeWrapper, mAccountName, mAccountQualifiedName, new NavigationDrawerRecyclerViewMergedAdapter.ItemClickListener() {
+            @Override
+            public void onMenuClick(int stringId) {
+                Intent intent = null;
+                if (stringId == R.string.profile) {
+                    intent = new Intent(MainActivity.this, ViewUserDetailActivity.class);
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mAccountName);
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mAccountQualifiedName);
+                } else if (stringId == R.string.subscriptions) {
+                    intent = new Intent(MainActivity.this, SubscribedThingListingActivity.class);
+                } else if (stringId == R.string.multi_reddit) {
                             intent = new Intent(MainActivity.this, SubscribedThingListingActivity.class);
                             intent.putExtra(SubscribedThingListingActivity.EXTRA_SHOW_MULTIREDDITS, true);
                         } else if (stringId == R.string.history) {

@@ -39,6 +39,7 @@ public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     private Resources resources;
     private RequestManager glide;
     private String accountName;
+    private String accountQualifiedName;
     private String profileImageUrl;
     private String bannerImageUrl;
     private int karma;
@@ -50,7 +51,7 @@ public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     private boolean hideKarma;
 
     public HeaderSectionRecyclerViewAdapter(BaseActivity baseActivity, CustomThemeWrapper customThemeWrapper,
-                                            RequestManager glide, String accountName,
+                                            RequestManager glide, String accountName, String accountQualifiedName,
                                             SharedPreferences sharedPreferences,
                                             SharedPreferences navigationDrawerSharedPreferences,
                                             SharedPreferences securitySharedPreferences,
@@ -62,6 +63,7 @@ public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         this.accountName = accountName;
         isLoggedIn = accountName != null;
         this.pageToggle = pageToggle;
+        this.accountQualifiedName = accountQualifiedName;
         requireAuthToAccountSection = securitySharedPreferences.getBoolean(SharedPreferencesUtils.REQUIRE_AUTHENTICATION_TO_GO_TO_ACCOUNT_SECTION_IN_NAVIGATION_DRAWER, false);
         showAvatarOnTheRightInTheNavigationDrawer = sharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AVATAR_ON_THE_RIGHT, false);
         showAvatarOnTheRightInTheNavigationDrawer = navigationDrawerSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AVATAR_ON_THE_RIGHT, false);
@@ -86,15 +88,11 @@ public class HeaderSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
             }
             ((NavHeaderViewHolder) holder).profileImageView.setLayoutParams(params);
             if (isLoggedIn) {
-                if (hideKarma) {
-                    int karmaTextHeight = ((NavHeaderViewHolder) holder).karmaTextView.getHeight();
-                    ((NavHeaderViewHolder) holder).karmaTextView.setVisibility(View.GONE);
-                    ((NavHeaderViewHolder) holder).accountNameTextView.setTranslationY(karmaTextHeight / 2);
-                } else {
-                    ((NavHeaderViewHolder) holder).karmaTextView.setVisibility(View.VISIBLE);
-                    ((NavHeaderViewHolder) holder).karmaTextView.setText(baseActivity.getString(R.string.karma_info, karma));
-                    ((NavHeaderViewHolder) holder).accountNameTextView.setTranslationY(0);
-                }
+
+                ((NavHeaderViewHolder) holder).karmaTextView.setVisibility(View.VISIBLE);
+                ((NavHeaderViewHolder) holder).karmaTextView.setText(accountQualifiedName);
+                ((NavHeaderViewHolder) holder).accountNameTextView.setTranslationY(0);
+
                 ((NavHeaderViewHolder) holder).accountNameTextView.setText(accountName);
                 if (profileImageUrl != null && !profileImageUrl.equals("")) {
                     glide.load(profileImageUrl)
