@@ -791,6 +791,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         mGlide.clear(mFetchPostInfoImageView);
         if (children != null) {
             children.clear();
+            pages_loaded = 0;
+            mCommentsAdapter.clearLoadedComments();
         }
         this.sortType = sortType.getType();
         if (mSharedPreferences.getBoolean(SharedPreferencesUtils.SAVE_SORT_TYPE, true)) {
