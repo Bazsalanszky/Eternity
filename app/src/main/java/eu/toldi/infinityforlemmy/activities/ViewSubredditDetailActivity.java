@@ -1187,7 +1187,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 return true;
             }
             new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                    .setTitle(R.string.block_user)
+                    .setTitle(R.string.block_community)
                     .setMessage(R.string.are_you_sure)
                     .setPositiveButton(R.string.yes, (dialogInterface, i)
                             -> BlockCommunity.INSTANCE.blockCommunity(mRetrofit.getRetrofit(), communityId, mAccessToken, new BlockCommunity.BlockCommunityListener() {
