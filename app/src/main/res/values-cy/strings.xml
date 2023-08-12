@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="comment_activity_label_is_replying">Ateb</string>
+    <string name="post_text_activity_label">Testun Post</string>
+    <string name="community_selection_activity_label">Dethol Cymuned</string>
+</resources>
