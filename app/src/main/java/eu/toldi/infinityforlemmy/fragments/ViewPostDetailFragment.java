@@ -79,7 +79,6 @@ import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.EditPostActivity;
 import eu.toldi.infinityforlemmy.activities.PostFilterPreferenceActivity;
-import eu.toldi.infinityforlemmy.activities.ReportActivity;
 import eu.toldi.infinityforlemmy.activities.SubmitCrosspostActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.adapters.CommentsRecyclerViewAdapter;
@@ -87,12 +86,12 @@ import eu.toldi.infinityforlemmy.adapters.PostDetailRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.asynctasks.LoadUserData;
-import eu.toldi.infinityforlemmy.bottomsheetfragments.FlairBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostCommentSortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.FetchComment;
 import eu.toldi.infinityforlemmy.comment.FetchRemovedComment;
 import eu.toldi.infinityforlemmy.comment.FetchRemovedCommentReveddit;
+import eu.toldi.infinityforlemmy.community.BlockCommunity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.CustomToroContainer;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
@@ -112,6 +111,9 @@ import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.user.BlockUser;
+import eu.toldi.infinityforlemmy.user.FetchUserData;
+import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
@@ -221,6 +223,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     boolean mRespectSubredditRecommendedSortType;
     @State
     long viewPostDetailFragmentId;
+
+    @State
+    boolean isCommunityBlocked;
+
     private ViewPostDetailActivity activity;
     private RequestManager mGlide;
     private Locale mLocale;
@@ -1071,10 +1077,74 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         } else if (itemId == R.id.action_spoiler_view_post_detail_fragment) {
             return true;
         } else if (itemId == R.id.action_block_user_view_post_detail_fragment) {
-            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
+            if (mAccessToken == null) {
+                Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogTheme)
+                    .setTitle(R.string.block_user)
+                    .setMessage(R.string.are_you_sure)
+                    .setPositiveButton(R.string.yes, (dialogInterface, i)
+                            -> FetchUserData.fetchUserData(mRetrofit.getRetrofit(), mPost.getAuthorNamePrefixed(), new FetchUserData.FetchUserDataListener() {
+
+                        @Override
+                        public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
+                            BlockUser.blockUser(mRetrofit.getRetrofit(), mAccessToken, userData.getId(), true, new BlockUser.BlockUserListener() {
+
+                                @Override
+                                public void success() {
+                                    Toast.makeText(activity, R.string.block_user_success, Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                }
+
+                                @Override
+                                public void failed() {
+                                    Toast.makeText(activity, R.string.block_user_failed, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFetchUserDataFailed() {
+                            Toast.makeText(activity, R.string.block_user_failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }))
+                    .setNegativeButton(R.string.no, null)
+                    .show();
             return true;
         } else if (itemId == R.id.action_block_community_view_post_detail_fragment) {
-            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
+            if (mAccessToken == null) {
+                Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogTheme)
+                    .setTitle(R.string.block_community)
+                    .setMessage(R.string.are_you_sure)
+                    .setPositiveButton(R.string.yes, (dialogInterface, i)
+                            -> FetchSubredditData.fetchSubredditData(mRetrofit.getRetrofit(), mPost.getSubredditNamePrefixed(), mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
+                        @Override
+                        public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
+                            BlockCommunity.INSTANCE.blockCommunity(mRetrofit.getRetrofit(), subredditData.getId(), mAccessToken, new BlockCommunity.BlockCommunityListener() {
+                                @Override
+                                public void onBlockCommunitySuccess() {
+                                    Toast.makeText(activity, R.string.block_community_success, Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                }
+
+                                @Override
+                                public void onBlockCommunityError() {
+                                    Toast.makeText(activity, R.string.block_community_failed, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFetchSubredditDataFail(boolean isQuarantined) {
+                            Toast.makeText(activity, R.string.block_community_failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }))
+                    .setNegativeButton(R.string.no, null)
+                    .show();
             return true;
         } else if (itemId == R.id.action_report_view_post_detail_fragment) {
             if (mAccessToken == null) {

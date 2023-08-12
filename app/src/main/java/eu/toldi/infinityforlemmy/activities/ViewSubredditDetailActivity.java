@@ -1182,20 +1182,30 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             //startActivity(intent);
             return true;
         } else if (itemId == R.id.block_community_view_subreddit_detail_activity) {
-            BlockCommunity.INSTANCE.blockCommunity(mRetrofit.getRetrofit(), communityId, mAccessToken, new BlockCommunity.BlockCommunityListener() {
-                @Override
-                public void onBlockCommunitySuccess() {
-                    communityData.setBlocked(true);
-                    Toast.makeText(ViewSubredditDetailActivity.this, R.string.block_community_success, Toast.LENGTH_SHORT).show();
-                    ViewSubredditDetailActivity.this.invalidateOptionsMenu();
-                    sectionsPagerAdapter.refresh(false);
-                }
+            if (mAccessToken == null) {
+                Toast.makeText(this, R.string.login_first, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
+                    .setTitle(R.string.block_user)
+                    .setMessage(R.string.are_you_sure)
+                    .setPositiveButton(R.string.yes, (dialogInterface, i)
+                            -> BlockCommunity.INSTANCE.blockCommunity(mRetrofit.getRetrofit(), communityId, mAccessToken, new BlockCommunity.BlockCommunityListener() {
+                        @Override
+                        public void onBlockCommunitySuccess() {
+                            communityData.setBlocked(true);
+                            Toast.makeText(ViewSubredditDetailActivity.this, R.string.block_community_success, Toast.LENGTH_SHORT).show();
+                            ViewSubredditDetailActivity.this.invalidateOptionsMenu();
+                            sectionsPagerAdapter.refresh(false);
+                        }
 
-                @Override
-                public void onBlockCommunityError() {
-                    Toast.makeText(ViewSubredditDetailActivity.this, R.string.block_community_failed, Toast.LENGTH_SHORT).show();
-                }
-            });
+                        @Override
+                        public void onBlockCommunityError() {
+                            Toast.makeText(ViewSubredditDetailActivity.this, R.string.block_community_failed, Toast.LENGTH_SHORT).show();
+                        }
+                    }))
+                    .setNegativeButton(R.string.no, null)
+                    .show();
             return true;
         } else if (itemId == R.id.unblock_community_view_subreddit_detail_activity) {
             BlockCommunity.INSTANCE.unBlockCommunity(mRetrofit.getRetrofit(), communityId, mAccessToken, new BlockCommunity.BlockCommunityListener() {
