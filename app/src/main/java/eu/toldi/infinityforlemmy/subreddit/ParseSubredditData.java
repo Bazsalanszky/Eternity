@@ -34,7 +34,7 @@ public class ParseSubredditData {
             return null;
         }
 
-        String title = community.getString(JSONUtils.TITLE_KEY);
+        String title = community.getString(JSONUtils.TITLE_KEY).replace("&amp;", "&");
         String bannerImageUrl = "";
         if (!community.isNull("banner")) {
             bannerImageUrl = community.getString("banner");

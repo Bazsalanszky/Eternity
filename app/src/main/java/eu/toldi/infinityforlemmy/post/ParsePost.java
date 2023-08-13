@@ -174,7 +174,7 @@ public class ParsePost {
             }
         }
 
-        String title = post.getString("name");
+        String title = post.getString("name").replace("&amp;", "&");
         String permalink = post.getString("ap_id");
         int score = counts.getInt("score");
         int upvotes = counts.getInt("upvotes");
