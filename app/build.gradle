@@ -59,12 +59,12 @@ android {
             variant.resValue "string", "applicationId", variant.applicationId
 
 
-            if (variant.buildType.name == 'nightly' || variant.buildType.name == 'nopebble') {
+            if (variant.buildType.name == 'nightly') {
                 variant.outputs.all {
                     setVersionCodeOverride(getCommitVersionCode())
 
                     setVersionNameOverride(variant.versionName)
-                    outputFileName = "${applicationId}_${variant.versionName}.apk"
+                    outputFileName = "${applicationId}.apk"
                 }
             }
         }

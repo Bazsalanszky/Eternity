@@ -1,0 +1,69 @@
+steps:
+  build:
+    image: alvrme/alpine-android:android-33-jdk11
+    commands:
+      - ./gradlew :app:assembleNightly
+    sign:
+      image: alvrme/alpine-android:android-33-jdk11
+      commands:
+        - ./scripts/apk-sign.sh eu.toldi.infinityforlemmy.nightly.apk app/build/outputs/apk/nightly/eu.toldi.infinityforlemmy.nightly.apk.apk
+      secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
+    pull-repo-config:
+      image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+      commands:
+        - cd ..
+        - pwd
+        - mkdir repoconfig
+        - cd repoconfig
+        - pwd
+        - git clone --depth 1 https://codeberg.org/Bazsalanszky/fdroid-repo-config
+        - cp "${CI_WORKSPACE%%${CI_REPO_NAME}}"/eu.toldi.infinityforlemmy.nightly.apk fdroid-repo-config/repo/
+
+    pull-pages:
+      image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+      commands:
+        - cd ..
+        - pwd
+        - mkdir pages
+        - cd pages
+        - pwd
+        - git clone --depth 2 https://codeberg.org/Bazsalanszky/pages
+        - cd pages
+        - git config user.name "CODEBERG CI"
+        - git config user.email "noreply@nodomain.nodomain"
+        # reset and remove, later force push, to keep repo size small
+        - git reset --soft HEAD~1
+        - git status
+
+      update-fdroid-data:
+        image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+        commands:
+          - pwd
+          - cd ../repoconfig/fdroid-repo-config/
+          # get secrets from storage
+          - cp
+          - fdroid update
+          - fdroid deploy
+          - ls -laR repo
+        secrets: [ signing_key, keystorepass, keypass ]
+
+      push-pages-update-repo:
+        image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+        commands:
+          - if [ -f .do_not_build ]; then return 0; fi
+          - cd ../pages/pages/
+          - git add -A
+          - git status
+          - git diff
+          - ls -lsR fdroid/repo
+          - git commit -m "autodeploy"
+          - git remote remove origin
+          - git remote add origin https://"$${GITEA_ACCESS_TOKEN}"@codeberg.org/Freeyourgadget/pages.git
+          # force push as we removed all data
+          - git push -f origin master
+          - cd ../../
+          - pwd
+          - ls -la
+        secrets: [ GITEA_ACCESS_TOKEN ]
+when:
+  event: cron
