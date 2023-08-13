@@ -308,7 +308,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
             isSubmitting = true;
 
             Snackbar.make(coordinatorLayout, R.string.posting, Snackbar.LENGTH_SHORT).show();
-            mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), titleEditText.getText().toString(), linkEditText.getText().toString(), contentEditText.getText().toString(), mPost.isNSFW(), null, mAccessToken))
+            mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), titleEditText.getText().toString(), (linkEditText.getText().toString().isEmpty()) ? null : linkEditText.getText().toString(), contentEditText.getText().toString(), mPost.isNSFW(), null, mAccessToken))
                     .enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
