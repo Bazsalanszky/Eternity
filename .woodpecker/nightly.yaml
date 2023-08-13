@@ -6,7 +6,7 @@ steps:
   sign:
     image: alvrme/alpine-android:android-33-jdk11
     commands:
-      - ./scripts/apk-sign.sh eu.toldi.infinityforlemmy.nightly.apk app/build/outputs/apk/nightly/eu.toldi.infinityforlemmy.nightly.apk.apk
+      - ./scripts/apk-sign.sh eu.toldi.infinityforlemmy.nightly.apk app/build/outputs/apk/nightly/eu.toldi.infinityforlemmy.nightly.apk
     secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
   pull-repo-config:
     image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
