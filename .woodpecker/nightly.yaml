@@ -35,35 +35,34 @@ steps:
       - git reset --soft HEAD~1
       - git status
 
-    update-fdroid-data:
-      image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
-      commands:
-        - pwd
-        - cd ../repoconfig/fdroid-repo-config/
-        # get secrets from storage
-        - cp
-        - fdroid update
-        - fdroid deploy
-        - ls -laR repo
-      secrets: [ signing_key, keystorepass, keypass ]
+  update-fdroid-data:
+    image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+    commands:
+      - pwd
+      - cd ../repoconfig/fdroid-repo-config/
+      # get secrets from storage
+      - cp
+      - fdroid update
+      - fdroid deploy
+      - ls -laR repo
 
-    push-pages-update-repo:
-      image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
-      commands:
-        - if [ -f .do_not_build ]; then return 0; fi
-        - cd ../pages/pages/
-        - git add -A
-        - git status
-        - git diff
-        - ls -lsR fdroid/repo
-        - git commit -m "autodeploy"
-        - git remote remove origin
-        - git remote add origin https://"$${GITEA_ACCESS_TOKEN}"@codeberg.org/Freeyourgadget/pages.git
-        # force push as we removed all data
-        - git push -f origin master
-        - cd ../../
-        - pwd
-        - ls -la
-      secrets: [ GITEA_ACCESS_TOKEN ]
+  push-pages-update-repo:
+    image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+    commands:
+      - if [ -f .do_not_build ]; then return 0; fi
+      - cd ../pages/pages/
+      - git add -A
+      - git status
+      - git diff
+      - ls -lsR fdroid/repo
+      - git commit -m "autodeploy"
+      - git remote remove origin
+      - git remote add origin https://"$${GITEA_ACCESS_TOKEN}"@codeberg.org/Freeyourgadget/pages.git
+      # force push as we removed all data
+      - git push -f origin master
+      - cd ../../
+      - pwd
+      - ls -la
+    secrets: [ GITEA_ACCESS_TOKEN ]
 when:
   event: cron
