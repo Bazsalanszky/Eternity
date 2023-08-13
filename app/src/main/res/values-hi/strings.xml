@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="login_activity_label">लाॅग इन करें</string>
-    <string name="comment_activity_label">"टिप्पणी करें "</string>
+    <string name="comment_activity_label">टिप्पणी करें</string>
     <string name="comment_activity_label_is_replying">उत्तर दें</string>
     <string name="post_text_activity_label">लेख पोस्ट</string>
     <string name="community_selection_activity_label">एक सबरैडिट चुनें</string>
@@ -25,7 +25,7 @@
     <string name="selected_subeddits_activity_label">चुनी हुई सबरैडिट्स</string>
     <string name="report_activity_label">शिकायत करें</string>
     <string name="view_imgur_media_activity_image_label">चित्र %1$d/%2$d</string>
-    <string name="view_imgur_media_activity_video_label">वीडियो %1$/%2$d</string>
+    <string name="view_imgur_media_activity_video_label">वीडियो %1$d/%2$d</string>
     <!-- Or one can use as is form in Devnagari script ' पी एम भेजें' -->
     <string name="send_private_message_activity_label">व्यक्तिगत संदेश भेजें</string>
     <string name="view_reddit_gallery_activity_image_label">चित्र %1$d/%2$d</string>
@@ -38,13 +38,13 @@
     <string name="action_add_comment">टिप्पणी जोडें</string>
     <string name="action_save_post">पोस्ट जमा करे</string>
     <!-- Fuzzy -->
-    <string name="action_view_crosspost_parent">"क्रॉसपोस्ट पैरेंट देखें "</string>
+    <string name="action_view_crosspost_parent">क्रॉसपोस्ट पैरेंट देखें</string>
     <string name="action_search">खोजें</string>
     <string name="action_start_lazy_mode">औटो मोड शुरू करे</string>
-    <string name="action_stop_lazy_mode">"औटो मोड बन्द करें "</string>
+    <string name="action_stop_lazy_mode">औटो मोड बन्द करें</string>
     <string name="action_send">भेजें</string>
     <!-- क्रमबन्धन? -->
-    <string name="action_sort">"क्रमबन्धन "</string>
+    <string name="action_sort">इस क्रम से लगाएं</string>
     <string name="action_hide_post">पोस्ट छुपाएं</string>
     <string name="action_unhide_post">पोस्ट दिखाएं</string>
     <string name="action_edit_post">पोस्ट संपादित करें</string>
@@ -62,51 +62,46 @@
     <string name="action_preview">पूर्वदर्शन</string>
     <string name="action_report">शिकायत करें</string>
     <string name="action_see_removed">हटाए हुए पोस्ट देखें</string>
-    <string name="action_set_wallpaper">"वालपेपर लगाएं "</string>
+    <string name="action_set_wallpaper">वालपेपर लगाएं</string>
     <string name="action_send_private_message">व्यक्तिगत संदेश भेजें</string>
-    <string name="parse_json_response_error">JSON प्रतिक्रिया को समझने में त्रुटि</string>
-    <string name="retrieve_token_error">टोकन प्राप्ति में त्रुटि</string>
+    <string name="parse_json_response_error">JSON प्रतिक्रिया को समझने में दिक्कत</string>
+    <string name="retrieve_token_error">टोकन प्राप्ति में दिक्कत</string>
     <string name="something_went_wrong">कुछ गलत हो गया है। बाद में पुनः प्रयास करें।</string>
-    <string name="access_denied">"प्रवेश अस्वीकृत "</string>
-    <string name="parse_user_info_error">यूजर की जानकारी प्राप्ति में त्रुटि</string>
-    <string name="no_system_webview_error">सिस्टम वेब-व्यू खोलने में त्रुटि
-\n</string>
-    <string name="error_loading_image_tap_to_retry">चित्र खुलने में त्रुटि। पुनः प्रयास के लिए यहां दबाएं।</string>
-    <string name="load_posts_error">पोस्ट खुलने में त्रुटि।
-\nपुनः प्रयास के लिए यहां दबाएं।
-\n</string>
-    <string name="load_more_posts_error">पोस्ट खुलने में त्रुटि</string>
-    <string name="load_post_error">इस पोस्ट के खुलने में त्रुटि।
-\nपुनः प्रयास के लिए यहां दबाएं।
-\n</string>
-    <string name="search_communities_error">सबरैडिट खोजने में त्रुटि।
-\nपुनः प्रयास के लिए यहां दबाएं।
-\n</string>
-    <string name="search_users_error">यूजर को खोजने में त्रुटि।
-\nपुनः प्रयास के लिए यहां दबाएं।
-\n</string>
+    <string name="access_denied">प्रवेश अस्वीकृत</string>
+    <string name="parse_user_info_error">यूजर की जानकारी प्राप्ति में दिक्कत</string>
+    <string name="no_system_webview_error">सिस्टम वेब-व्यू खोलने में गलती</string>
+    <string name="error_loading_image_tap_to_retry">चित्र खुलने में दिक्कत। पुनः प्रयास के लिए यहां दबाएं।</string>
+    <string name="load_posts_error">पोस्ट खुलने में दिक्कत।
+\nपुनः प्रयास के लिए यहां दबाएं।</string>
+    <string name="load_more_posts_error">पोस्ट खुलने में दिक्कत।</string>
+    <string name="load_post_error">इस पोस्ट के खुलने में दिक्कत।
+\nपुनः प्रयास के लिए यहां दबाएं।</string>
+    <string name="search_communities_error">समुदायों खोजने में दिक्कत।
+\nपुनः प्रयास के लिए यहां दबाएं।</string>
+    <string name="search_users_error">उपयोगकर्ताओं को खोजने में दिक्कत।
+\nपुनः प्रयास के लिए यहां दबाएं।</string>
     <string name="no_posts">कोई पोस्ट नहीं मिली</string>
     <string name="no_comments">कोई टिप्पणी नहीं मिली</string>
     <string name="no_communities">कोई सबरैडिट नहीं मिली</string>
     <string name="no_users">कोई यूजर नहीं मिला</string>
     <string name="no_multi_reddits">कोई मल्टीरैडिट नहीं मिली</string>
     <string name="no_storage_permission">"फाइल सहेजने के लिए स्टोरेज की अनुमति नहीं मिली "</string>
-    <string name="load_comments_failed">टिप्पणी खुलने में त्रुटि।
-\nयहा दबाएं</string>
+    <string name="load_comments_failed">टिप्पणी खुलने में दिक्कत।
+\nयहा दबाएं।</string>
     <string name="retry">पुनः प्रयास</string>
     <string name="comments">"टिप्पणियां "</string>
     <string name="no_comments_yet">अभी तक कोई टिप्पणी नहीं। आप एक टिप्पणी लिखें\?</string>
     <string name="vote_failed">मत असफल रहा</string>
-    <string name="refresh_post_failed">पोस्ट को ताजा करने में त्रुटि</string>
-    <string name="load_messages_failed">संदेश दिखाने में त्रुटि।
+    <string name="refresh_post_failed">पोस्ट को ताजा करने में दिक्कत</string>
+    <string name="load_messages_failed">संदेश दिखाने में दिक्कत।
 \nपुनः प्रयास के लिए यहां दबाएं।</string>
     <string name="no_messages">"रिक्त "</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">कर्म: %1$d</string>
-    <string name="karma_info_user_detail">कर्म: %1$d(%2$d + %3$d)</string>
+    <string name="karma_info">कर्म: %1$,d</string>
+    <string name="karma_info_user_detail">कर्म:
+\n%1$,d(%2$d + %3$d)</string>
     <string name="cakeday_info">केक दिवस: %1$s</string>
-    <string name="since">से (समय):
-\n</string>
+    <string name="since">से (समय):</string>
     <string name="profile">प्रोफाइल</string>
     <string name="subscriptions">सब्सक्रिप्शन्स</string>
     <string name="multi_reddit">मल्टीरैडिट</string>
@@ -118,8 +113,8 @@
 \n</string>
     <string name="gilded">पदक प्राप्त</string>
     <string name="settings">सैटिंग्स</string>
-    <string name="subscribers_number_detail">सब्सक्राइबर्स: %1$d</string>
-    <string name="online_subscribers_number_detail">ऑनलाइन: %1$d</string>
+    <string name="subscribers_number_detail">सब्सक्राइबर्स: %1$,d</string>
+    <string name="online_subscribers_number_detail">ऑनलाइन: %1$,d</string>
     <string name="cannot_fetch_community_info">सबरैडिट की जानकारी प्राप्त नहीं हो सकी</string>
     <string name="cannot_fetch_user_info">यूजर की जानकारी प्राप्त नहीं हो सकी</string>
     <string name="cannot_fetch_sidebar">"साइड बार प्राप्त नहीं हो सका "</string>
@@ -148,11 +143,11 @@
     <string name="send_comment_success">टिप्पणी भेज दी गई</string>
     <string name="send_comment_failed">टिप्पणी भेजी नहीं जा सकी
 \n</string>
-    <string name="send_message_username_hint">"उपयोगकर्ता "</string>
+    <string name="send_message_username_hint">उपयोगकर्ता</string>
     <string name="send_message_subject_hint">बिषय (अधिकतम १०० अक्षर)</string>
     <string name="send_message_content_hint">संदेश</string>
     <string name="reply_message_failed">"इस संदेश का उत्तर नहीं दिया जा सका "</string>
-    <string name="error_getting_message">संदेश प्राप्ति में त्रुटि</string>
+    <string name="error_getting_message">संदेश प्राप्ति में दिक्कत</string>
     <string name="message_username_required">नमस्ते, आप यह संदेश किसे भेजना चाहते हैं\?</string>
     <string name="message_subject_required">आपके संदेश का एक बिषय होना चाहिए</string>
     <string name="message_content_required">आपको प्राप्तकर्ता को कुछ तो बताना चाहिए</string>
@@ -166,8 +161,8 @@
     <string name="select_an_image">कृपया पहले एक चित्र चुनिए</string>
     <string name="posting">"पोस्ट किया जा रहा है "</string>
     <string name="post_failed">पोस्ट नहीं कर सका</string>
-    <string name="error_processing_image">"प्रसंस्करण में त्रुटि "</string>
-    <string name="error_processing_video">प्रसंस्करण में त्रुटि</string>
+    <string name="error_processing_image">चित्र प्रसंस्करण में दिक्कत</string>
+    <string name="error_processing_video">प्रसंस्करण में दिक्कत</string>
     <string name="download_started">डाउनलोड शुरू हो गया है। प्रगति देखने के लिए नोटिफिकेशन देखें।
 \n</string>
     <string name="comment_load_more_comments">और टिप्पणियां देखें</string>
@@ -179,7 +174,7 @@
     <string name="rules">नियम</string>
     <string name="post_link_hint">URL</string>
     <string name="communities">सबरैडिट्स</string>
-    <string name="users">"उपयोगकर्ता "</string>
+    <string name="users">उपयोगकर्ताओं</string>
     <string name="multi_reddits">मल्टीरैडिट्स</string>
     <string name="bottom_sheet_post_text">"लेख "</string>
     <string name="bottom_sheet_post_link">लिंक</string>
@@ -187,10 +182,10 @@
     <string name="bottom_sheet_post_video">वीडियो</string>
     <string name="select_from_gallery">एक तस्वीर चुनें</string>
     <string name="select_again">पुनः चुनें</string>
-    <string name="error_getting_image">चित्र प्राप्ति में त्रुटि</string>
-    <string name="error_getting_video">वीडियो प्राप्ति में त्रुटि</string>
+    <string name="error_getting_image">चित्र प्राप्ति में दिक्कत</string>
+    <string name="error_getting_video">वीडियो प्राप्ति में दिक्कत</string>
     <string name="no_camera_available">कोई भी कैमरा एप्प उपलब्ध नहीं</string>
-    <string name="error_creating_temp_file">अस्थाई फाइल बनाने में त्रुटि</string>
+    <string name="error_creating_temp_file">अस्थाई फाइल बनाने में दिक्कत</string>
     <string name="video_is_processing">वीडियो प्रसंस्कृत हो रही है। कृपया प्रतीक्षा करें।</string>
     <string name="image_is_processing">चित्र प्रसंस्कृत हो रहा है। कृपया प्रतीक्षा करें।</string>
     <string name="gif_is_processing">"जिफ प्रसंस्कृत हो रही है। कृपया प्रतीक्षा करें। "</string>
@@ -200,12 +195,12 @@ Behavior -->
     <string name="flair">फ्लेयर</string>
     <string name="spoiler">स्पॉइलर</string>
     <string name="no_flair">कोई फ्लेयर नहीं</string>
-    <string name="error_loading_flairs">"फ्लेयर लोड होने में  त्रुटि।
-\nयहां दबाएं"</string>
+    <string name="error_loading_flairs">फ्लेयर लोड होने में दिक्कत।
+\nयहां दबाएं।</string>
     <string name="no_rule">कोई नियम उप्लब्ध नहीं</string>
-    <string name="error_loading_rules">नियम लोड होने में त्रुटि।
-\nयहां दबाएं</string>
-    <string name="error_loading_rules_without_retry">नियम लोड होने में त्रुटि</string>
+    <string name="error_loading_rules">नियम लोड होने में दिक्कत।
+\nयहां दबाएं।</string>
+    <string name="error_loading_rules_without_retry">नियम लोड होने में दिक्कत</string>
     <string name="search_in">खोजें</string>
     <string name="all_communities">सभी सबरैडिट्स</string>
     <string name="sort_best">श्रेष्ठ</string>
@@ -266,7 +261,7 @@ Behavior -->
     <string name="post_unhide_failed">पोस्ट दिखाने मे असफल</string>
     <string name="delete_this_post">यह पोस्ट मिटाएं</string>
     <string name="delete_this_comment">यह टिप्पणी मिटाएं</string>
-    <string name="are_you_sure">"क्या आप सुनिश्चित हैं\? "</string>
+    <string name="are_you_sure">क्या आपको यकीन है\?</string>
     <string name="edit">"संपादन करें "</string>
     <string name="delete">"हटाएं "</string>
     <string name="see_removed_comment">"हटाई हुई टिप्पणी देखें "</string>
@@ -302,7 +297,7 @@ Behavior -->
     <string name="notification_summary_account">"खाता "</string>
     <string name="notification_summary_message">"नया संदेश "</string>
     <string name="notification_summary_community">"सबरैडिट "</string>
-    <string name="notification_summary_award">"पुरस्कार "</string>
+    <string name="notification_summary_award">पुरस्कार</string>
     <string name="notification_new_messages">%1$d नया संदेश</string>
     <string name="label_account">"खाता "</string>
     <string name="label_post">"पोस्ट "</string>
@@ -388,7 +383,7 @@ Behavior -->
     <string name="settings_credits_icon_foreground_summary">प्रौद्योगिकी आईकोनस के निर्माता है फ्रीपिक - www.freepik.com</string>
     <string name="settings_credits_icon_background_title">"पृष्टभूमि आइकॉन "</string>
     <string name="settings_credits_icon_background_summary">ब्याकग्राउंड डिज़ाइन बनाया हे फ्रीपिक - www.freepik.com</string>
-    <string name="settings_credits_error_image_title">"त्रुटि चित्र "</string>
+    <string name="settings_credits_error_image_title">चित्र में दिक्कत</string>
     <string name="settings_credits_error_image_summary">प्रौद्योगिकी डिज़ाइन बनाया हे फ्रीपिक - www.freepik.com</string>
     <string name="settings_credits_gilded_icon_title">"पदक आइकॉन "</string>
     <string name="settings_credits_gilded_icon_summary">"फ्रीपिक द्वारा आइकॉन डिजाइन  www.flaticon.com"</string>
@@ -431,17 +426,17 @@ Behavior -->
     <string name="settings_tab_3_summary">टैब 3</string>
     <string name="settings_tab_title">"शीर्षक "</string>
     <string name="settings_tab_post_type">"प्रकार "</string>
-    <string name="settings_tab_community_name">" सबरैडिट का नाम (r/ उपसर्ग के बिना )"</string>
+    <string name="settings_tab_community_name">समुदाय का नाम (बिना @इंस्टेंस टैग के)</string>
     <!-- Fuzzy -->
     <string name="settings_tab_multi_reddit_name">मल्टीरैडिट का नाम (/यूजर/आपकायूजरनाम/m/आपकेमल्टीरैडिटकानाम)</string>
     <string name="settings_tab_username">यूजर का नाम (u/ उपसर्ग के बिना)</string>
     <string name="no_developer_easter_egg">"यहां डिवेलपर के लिए कोई विकल्प नहीं है "</string>
     <string name="no_link_available">"लिंक प्रात नहीं किया जा सका "</string>
-    <string name="exit_when_submit">"निकासी\? "</string>
+    <string name="exit_when_submit">छोड़े\?</string>
     <string name="exit_when_submit_post_detail">यदि आप अभी छोड़ के चले जाते हैं तो भी पोस्ट जमा हो जाएगी।</string>
     <string name="exit_when_edit_post_detail">"यदि आप अभी छोड़ के चले जाते हैं तो भी पोस्ट जमा की जा सकती है। "</string>
     <string name="exit_when_edit_comment_detail">"यदि आप अभी छोड़ के चले जाते हैं तो भी टिप्पणी जमा की जा सकती है। "</string>
-    <string name="discard">"त्याग करें\? "</string>
+    <string name="discard">खारिज करे\?</string>
     <string name="discard_detail">"पूरी ड्राफ्ट नहीं सहेजी जाएगी। "</string>
     <string name="yes">"हाँ "</string>
     <string name="no">"नहीं "</string>
@@ -460,10 +455,10 @@ Behavior -->
     <string name="all">"सभी "</string>
     <string name="post_layout_card">"कार्ड विन्यास "</string>
     <string name="post_layout_compact">"संक्षिप्त विन्यास "</string>
-    <string name="elapsed_time_just_now">"अभी अभी "</string>
+    <string name="elapsed_time_just_now">बस अभी</string>
     <string name="elapsed_time_a_minute_ago">"1 मिनट "</string>
     <string name="elapsed_time_minutes_ago">"%1$d मिनट "</string>
-    <string name="elapsed_time_an_hour_ago">"1 घंटा "</string>
+    <string name="elapsed_time_an_hour_ago">1 घंटा</string>
     <string name="elapsed_time_hours_ago">"%1$d घंटे "</string>
     <string name="elapsed_time_yesterday">"कल "</string>
     <string name="elapsed_time_days_ago">"%1$d दिन "</string>
@@ -471,12 +466,12 @@ Behavior -->
     <string name="elapsed_time_months_ago">"%1$d महीने "</string>
     <string name="elapsed_time_a_year_ago">"1 वर्ष "</string>
     <string name="elapsed_time_years_ago">"%1$d वर्ष "</string>
-    <string name="error_getting_multi_reddit_data">"मल्टीरैडिट डेटा प्राप्ति में त्रुटि "</string>
-    <string name="error_loading_multi_reddit_list">"मल्टीरैडिट्स सिंक नहीं कर सकता "</string>
-    <string name="error_loading_subscriptions">"सब्सक्रिप्शन सिंक नहीं कर सकता "</string>
+    <string name="error_getting_multi_reddit_data">मल्टीसमुदायों डेटा प्राप्ति में दिक्कत</string>
+    <string name="error_loading_multi_reddit_list">मल्टीसमुदायों को सिंक नहीं किया जा सकता</string>
+    <string name="error_loading_subscriptions">सब्सक्रिप्शन को सिंक नहीं किया जा सकता</string>
     <string name="share_this_app">इनफिनिटी फॉर रैडिट का प्रयोग करके देखिए, एक लाजवाब रैडिट एप्लीकेशन!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
-    <string name="error_getting_community_name">"सबरैडिट का नाम प्राप्त करने  में त्रुटि "</string>
+    <string name="error_getting_community_name">समुदायों का नाम प्राप्त करने में दिक्कत</string>
     <string name="share_post_link">"पोस्ट का लिंक साझा करें "</string>
     <string name="share_image_link">"चित्र का लिंक साझा करें "</string>
     <string name="share_gif_link">"जिफ का लिंक साझा करें "</string>
@@ -496,19 +491,19 @@ Behavior -->
     <string name="copy_raw_text">"कच्चे लेख को कॉपी करें "</string>
     <string name="copy_all_markdown">"सभी चिन्हित किए को कॉपी करें "</string>
     <string name="copy_all_raw_text">"पूरे कच्चे लेख को भी copy करें "</string>
-    <string name="exit_app">"निकासी\? "</string>
+    <string name="exit_app">बाहर निकलें\?</string>
     <string name="light_theme">"हल्की थीम "</string>
     <string name="dark_theme">"गहरी थीम "</string>
     <string name="multi_reddit_name_hint">नाम (अधिकतम 50 वर्ण)</string>
     <string name="multi_reddit_description_hint">"विवरण "</string>
     <string name="private_multi_reddit">"गुप्त "</string>
-    <string name="no_multi_reddit_name">"नाम कहाँ है\? "</string>
+    <string name="no_multi_reddit_name">नाम कहाँ है\?</string>
     <string name="create_multi_reddit_failed">"इस मल्टीरैडिट का  निर्माण असफल "</string>
     <string name="duplicate_multi_reddit">"यह मल्टीरैडिट पहले से उपलब्ध है "</string>
     <string name="edit_multi_reddit_failed">"इस मल्टीरैडिट का संपादन असफल "</string>
     <string name="delete_multi_reddit_success">"सफलतापूर्वक मिटाई गई "</string>
     <string name="delete_multi_reddit_failed">"मिटाना असफल "</string>
-    <string name="delete_multi_reddit_dialog_message">"क्या आप निश्चित हैं\? "</string>
+    <string name="delete_multi_reddit_dialog_message">क्या आप निश्चित हैं\?</string>
     <string name="enable_nsfw">"NSFW शुरू करें "</string>
     <string name="disable_nsfw">"NSFW बंद करें "</string>
     <string name="cannot_save_image">"चित्र सुरक्षित करने में असफल "</string>
@@ -556,8 +551,8 @@ Behavior -->
     <string name="theme_item_comment_background_color_detail">"पर लागू होगा: टिप्पणी पृष्टभूमि "</string>
     <string name="theme_item_fully_collapsed_comment_background_color">"पूर्णतः संक्षिप्त टिप्पणियों की पृष्ठभूमि का रंग "</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">पर लागू होगा: पूर्णतः संक्षिप्त टिप्पणियों की पृष्ठभूमि</string>
-    <string name="theme_item_awarded_comment_background_color">"पदक प्राप्त टिप्पणियों की पृष्टभूमि का रंग "</string>
-    <string name="theme_item_awarded_comment_background_color_detail">पर लागू होगा: पदक प्राप्त टिप्पणियों की पृष्टभूमि</string>
+    <string name="theme_item_awarded_comment_background_color">पुरस्कृत टिप्पणी के पीछे की भूमि का रंग</string>
+    <string name="theme_item_awarded_comment_background_color_detail">पर लागू होगा: पुरस्कृत टिप्पणियों के पीछे की भूमि पर</string>
     <string name="theme_item_received_message_background_color">"प्राप्त संदेश की पृष्ठभूमि का रंग "</string>
     <string name="theme_item_received_message_background_color_detail">"पर लागू होगा: प्राप्त व्यक्तिगत संदेश की पृष्ठभूमि "</string>
     <string name="theme_item_sent_message_background_color">"भेजे गए संदेश की पृष्टभूमि का रंग "</string>
@@ -614,20 +609,20 @@ Behavior -->
     <string name="theme_item_flair_background_color_detail">पर लागू होगा: फ्लेयर टैग की पृष्ठभूमि</string>
     <string name="theme_item_flair_text_color">"फ्लेयर टेक्स्ट रंग "</string>
     <string name="theme_item_flair_text_color_detail">"पर लागू होगा: फ्लेयर टैग के टेक्स्ट का रंग "</string>
-    <string name="theme_item_awards_background_color">"पदक पृष्ठभूमि रंग "</string>
-    <string name="theme_item_awards_background_color_detail">"पर लागू होगा: पदक टैग की पृष्ठभूमि "</string>
-    <string name="theme_item_awards_text_color">"पदक टेक्स्ट रंग "</string>
-    <string name="theme_item_awards_text_color_detail">"पर लागू होगा: पदक टैग के टेक्स्ट का रंग "</string>
+    <string name="theme_item_awards_background_color">पुरस्कृत टिप्पणियों के पीछे की भूमि का रंग</string>
+    <string name="theme_item_awards_background_color_detail">पर लागू होगा: पुरस्कार टैग की पीछे की भूमि</string>
+    <string name="theme_item_awards_text_color">पुरस्कार पाठ का रंग</string>
+    <string name="theme_item_awards_text_color_detail">पर लागू होगा: पुरस्कार टैग का टेक्स्ट रंग</string>
     <string name="theme_item_archived_tint">"संग्रहित आइकन का रंग "</string>
     <string name="theme_item_archived_tint_detail">"पर लागू होगा: संग्रहित आइकन "</string>
     <string name="theme_item_locked_icon_tint">"बंद आइकन का रंग "</string>
     <string name="theme_item_locked_icon_tint_detail">पर लागू होगा: बंद आइकन</string>
-    <string name="theme_item_crosspost_icon_tint">"  क्रॉसपोस्ट आइकन का रंग"</string>
+    <string name="theme_item_crosspost_icon_tint">क्रॉसपोस्ट आइकन का रंग</string>
     <string name="theme_item_crosspost_icon_tint_detail">पर लागू होगा: क्रॉसपोस्ट आइकन</string>
     <string name="theme_item_stickied_post_icon_tint">"स्टिकी पोस्ट आइकन का रंग "</string>
     <string name="theme_item_stickied_post_icon_tint_detail">पर लागू होगा: स्टिकी पोस्ट आइकन</string>
     <string name="theme_item_subscribed_color">सब्सक्राइब्ड</string>
-    <string name="theme_item_subscribed_color_detail">" पर लागू होगा: अनसब्सक्राइब बटन "</string>
+    <string name="theme_item_subscribed_color_detail">पर लागू होगा: अनसब्सक्राइब बटन</string>
     <string name="theme_item_unsubscribed_color">अनसब्सक्राइब्ड</string>
     <string name="theme_item_unsubscribed_color_detail">"पर लागू होगा: सब्सक्राइब बटन "</string>
     <string name="theme_item_username_color">"यूजर के नाम का रंग "</string>
@@ -671,7 +666,7 @@ Behavior -->
     <string name="theme_item_available_on_android_6">"केवल एंड्रॉयड 6.0 या बाद के लिए उपलब्ध "</string>
     <string name="predefined_themes">पूर्वपरिभाषित थीम्स</string>
     <string name="user_themes">आपकी थीम्स</string>
-    <string name="no_theme_name">"इस थीम का नाम क्या है\? "</string>
+    <string name="no_theme_name">इस थीम का नाम क्या है\?</string>
     <string name="theme_name_hint">"थीम का नाम "</string>
     <string name="theme_name_indigo">"नीला "</string>
     <string name="theme_name_indigo_dark">"गहरा नीला "</string>
@@ -694,7 +689,7 @@ Behavior -->
     <string name="edit_theme_name">"थीम का नाम संपादित करें "</string>
     <string name="edit_theme">"थीम संपादित करें "</string>
     <string name="delete_theme">थीम मिटाएं</string>
-    <string name="delete_theme_dialog_message">"%1$s को मिटाने के लिए सुनिश्चित हैं\? "</string>
+    <string name="delete_theme_dialog_message">%1$s को मिटाने के लिए सुनिश्चित हैं\?</string>
     <string name="share_theme">"थीम साझा करें "</string>
     <string name="change_theme_name">"नाम बदलें "</string>
     <string name="theme_copied">"कॉपी कर लिया। पेस्ट एवं अन्य लोगों के साथ साझा करें। "</string>
@@ -706,7 +701,7 @@ Behavior -->
     <string name="import_theme_success">"थीम आयात सफल "</string>
     <string name="parse_theme_failed">"थीम को समझने में असफल "</string>
     <string name="duplicate_theme_name_dialog_title">"दोहरी थीम मिली "</string>
-    <string name="duplicate_theme_name_dialog_message">"डेटाबेस में भी एक थीम %1$s है। क्या आप आयातित थीम का नाम परिवर्तित करना चाहते हैं\? "</string>
+    <string name="duplicate_theme_name_dialog_message">डेटाबेस में भी एक थीम %1$s है। क्या आप आयातित थीम का नाम परिवर्तित करना चाहते हैं\?</string>
     <string name="rename">"नया नाम दें "</string>
     <string name="override">"ओवरराइड "</string>
     <string name="color_picker">रंग पिकर</string>
@@ -733,14 +728,14 @@ Behavior -->
     <string name="post_content_preview">"गुरुत्वाकर्षण वाला चुटकुला थोड़ा पुराना हो रहा है पर मैं हमेशा इसके जाल में गिर जाता हूँ "</string>
     <string name="post_type_preview">"पोस्ट "</string>
     <string name="flair_preview">"फ्लेयर "</string>
-    <string name="awards_preview">"4 पदक "</string>
+    <string name="awards_preview">4 पुरस्कार</string>
     <string name="author_flair_preview">"रचयिता फ्लेयर "</string>
     <string name="comment_content_preview">मैंने अपनी प्रेमिका को एक \'जल्दी से अच्छी हो जाओ\' कार्ड दिया।
 \nवह बीमार नहीं है, लेकिन वह निश्चित रूप से अच्छी हो जाएगी।</string>
     <string name="edit_multi_reddit">"मल्टीरैडिट्स संपादित करें "</string>
     <string name="delete_multi_reddit">"मल्टीरैडिट्स मिटा दें "</string>
-    <string name="n_awards">"%1$d पदक "</string>
-    <string name="one_award">"1 पदक "</string>
+    <string name="n_awards">%1$,d पुरस्कार</string>
+    <string name="one_award">1 पुरस्कार</string>
     <string name="report">"रिपोर्ट "</string>
     <string name="reporting">"रिपोर्ट हो रही है "</string>
     <string name="report_successful">"रिपोर्ट कर दी गई "</string>
@@ -758,7 +753,7 @@ Behavior -->
     <string name="fetch_gfycat_video_failed">"Gfycat वीडियो प्राप्ति सफल "</string>
     <string name="fetch_redgifs_video_failed">"Redgifs वीडियो प्राप्ति असफल "</string>
     <string name="fetching_video_info_please_wait">"वीडियो इनफो प्राप्त हो रहा है। कृपया प्रतीक्षा करें। "</string>
-    <string name="error_fetching_imgur_media">"चित्र लोड नहीं हो सका "</string>
+    <string name="error_fetching_imgur_media">चित्र लोड नहीं हो सका</string>
     <string name="downloading_reddit_video">"वीडियो ट्रैक डाउनलोड हो रहा है "</string>
     <string name="downloading_reddit_video_audio_track">"ऑडियो ट्रैक डाउनलोड हो रहा है "</string>
     <string name="downloading_reddit_video_muxing">"वीडियो एवं ऑडियो का एकीकरण किया जा रहा है "</string>
@@ -772,7 +767,7 @@ Behavior -->
     <string name="downloading_reddit_video_failed_cannot_mux">सेव करना असफल: वीडियो और आडियो मिक्स नहि होगा</string>
     <string name="downloading_reddit_video_failed_cannot_save_mux_video">सेव करना असफल: गैलरी सेव नहि कर सकते</string>
     <string name="wallpaper_set">अलपेपर सेट</string>
-    <string name="error_set_wallpaper">अलपेपर नहि लगा सकते</string>
+    <string name="error_set_wallpaper">वॉलपेपर नहि लगा सकते</string>
     <string name="set_to_home_screen">होम स्क्रीन पे सेट करे</string>
     <string name="set_to_lock_screen">लक स्क्रीन पे सेट करे</string>
     <string name="set_to_both">दोनो पे ही सेट करे</string>
@@ -781,16 +776,16 @@ Behavior -->
     <string name="top_score">%1$s अंक</string>
     <string name="login_activity_2fa_prompt">अगार आपका 2-कदाम प्रमाणीकरण चालू है, तो कृपिया आपना पासबर्ड(चाबी) निम्ना लिखित तरीके से दिजीये: &lt;पासबर्ड&gt;:&lt;2FA code&gt;
 \nउदाहरण: पासबर्ड:123456</string>
-    <string name="submit_crosspost_activity_label">"क्रॉसपोस्ट "</string>
-    <string name="give_award_activity_label">"पुरस्कार दें "</string>
+    <string name="submit_crosspost_activity_label">क्रॉसपोस्ट</string>
+    <string name="give_award_activity_label">पुरस्कार दें</string>
     <string name="action_crosspost">क्रॉसपोस्ट</string>
-    <string name="action_select_user_flair">"उपयोगकर्ता का फ्लेयर चुनें "</string>
-    <string name="action_give_award">पुरस्कार दें␣</string>
+    <string name="action_select_user_flair">उपयोगकर्ता का फ्लेयर चुनें</string>
+    <string name="action_give_award">पुरस्कार दें</string>
     <string name="posts">पोस्ट्स</string>
     <string name="only_for_logged_in_user">"केवल लाॅग्ड-इन उपयोगकर्ता के लिए "</string>
     <string name="settings_number_of_columns_in_post_feed_title">"पोस्ट फीड में स्तम्भों की संख्या "</string>
     <string name="settings_number_of_columns_in_post_feed_portrait_title">ऊर्ध्वाधर</string>
-    <string name="settings_number_of_columns_in_post_feed_landscape_title">" क्षैतिज "</string>
+    <string name="settings_number_of_columns_in_post_feed_landscape_title">लैंडस्केप</string>
     <string name="settings_nsfw_and_spoiler_title">समाचारपत्र एवं स्प्वाॅइलर</string>
     <string name="settings_delete_all_legacy_settings_title">सभी पुरानी सैटिंग्स को मिटाएं</string>
     <string name="restart_app_see_changes">"परिवर्तन देखने के लिए एप्प को पुनः शुरू करें "</string>
@@ -844,7 +839,7 @@ Behavior -->
     <string name="downloading_media_failed_cannot_download_media">डाउनलोड असफल</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">डाउनलोड असफल: गंतव्य डायरेक्टरी में फाइल का संरक्षण असफल</string>
     <string name="select_user_flair_success">"यूजर फ्लेयर चुन लिया गया "</string>
-    <string name="select_this_user_flair">"इस यूजर फ्लेयर का चुनाव करना है\? "</string>
+    <string name="select_this_user_flair">इस यूजर फ्लेयर का चुनाव करना है\?</string>
     <string name="select_header_size">"हेडर माप चुनें "</string>
     <string name="large">"बड़ा "</string>
     <string name="small">"छोटा "</string>
@@ -857,13 +852,13 @@ Behavior -->
     <string name="refresh">"ताजा करें "</string>
     <string name="change_sort_type">क्रम प्रकार बदलें</string>
     <string name="change_post_layout">"पोस्ट विन्यास बदलें "</string>
-    <string name="give_award_dialog_title">"पुरस्कार दें\? "</string>
+    <string name="give_award_dialog_title">पुरस्कार दें\?</string>
     <string name="anonymous">अज्ञात</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">कूट: %1$d
-\nसंदेश: %2$s</string>
-    <string name="give_award_success">"पुरस्कार दे दिया गया "</string>
-    <string name="give_award_failed">"असफल "</string>
+    <string name="give_award_error_message">कोड: %1$d/
+\n संदेश: %2$s</string>
+    <string name="give_award_success">पुरस्कार दे दिया गया</string>
+    <string name="give_award_failed">असफल</string>
     <string name="warning">"चेतावनी "</string>
     <string name="this_is_a_nsfw_community">"यह एक NSFW सबरैडिट है "</string>
     <string name="this_user_has_nsfw_content">"इस यूजर के पास NSFW सामग्री है। "</string>
@@ -929,7 +924,7 @@ Behavior -->
     <string name="app_lock_timeout_15_mins">"15 मिनट "</string>
     <string name="app_lock_timeout_20_mins">"30 मिनट "</string>
     <string name="app_lock_timeout_30_mins">"30 मिनट "</string>
-    <string name="app_lock_timeout_1_hour">"1 घंटा "</string>
+    <string name="app_lock_timeout_1_hour">1 घंटा</string>
     <string name="app_lock_timeout_2_hours">"2 घंटे "</string>
     <string name="app_lock_timeout_3_hours">"3 घंटे "</string>
     <string name="app_lock_timeout_4_hours">"4 घंटे "</string>
@@ -937,4 +932,25 @@ Behavior -->
     <string name="app_lock_timeout_6_hours">"6 घंटे "</string>
     <string name="app_lock_timeout_12_hours">"12 घंटे "</string>
     <string name="app_lock_timeout_24_hours">"24 घंटे "</string>
+    <string name="trending_activity_label">ट्रेंडिंग</string>
+    <string name="history_activity_label">इतिहास</string>
+    <string name="edit_profile_activity_label">प्रोफ़ाइल संपादित करें</string>
+    <string name="post_poll_activity_label">मतदान पोस्ट</string>
+    <string name="settings_hide_comment_awards_title">टिप्पणी पुरस्कार छिपाएँ</string>
+    <string name="min_awards_hint">न्यूनतम पुरस्कार (-1: कोई प्रतिबंध नहीं)</string>
+    <string name="max_awards_hint">अधिकतम पुरस्कार (-1: कोई प्रतिबंध नहीं)</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_post">v.redd.it वीडियो लाने में दिक्कत: पोस्ट नहीं मिल सका</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_post_id">v.redd.it वीडियो लाने में दिक्कत: पोस्ट आईडी नहीं मिल सकी</string>
+    <string name="error_parse_trending_search">रुझान वाली खोजों को पार्स करना विफल रहा।
+\nपुन: प्रयास करने के लिए दबाए।</string>
+    <string name="sample_list_load_error">एक या अधिक नमूना सूचियाँ लोड होने में विफल रहीं</string>
+    <string name="post_gallery_activity_label">गैलरी पोस्ट</string>
+    <string name="settings_hide_the_number_of_awards">पुरस्कारों की संख्या छिपाएँ</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">v.redd.it वीडियो लाने में दिक्कत: रीडायरेक्ट यूआरएल नहीं मिल सका</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_video_url">v.redd.it वीडियो लाने में दिक्कत: वीडियो यूआरएल नहीं मिल सका</string>
+    <string name="error_fetch_trending_search">रुझान वाली खोजें प्राप्त करना विफल रहा।
+\nपुन: प्रयास करने के लिए दबाए।</string>
+    <string name="error_loading_wiki">विकी लोड करने में दिक्कत</string>
+    <string name="error_unsupported_video">मीडिया में वीडियो ट्रैक शामिल हैं, लेकिन कोई भी इस डिवाइस द्वारा चलाने योग्य नहीं है</string>
+    <string name="error_unsupported_audio">मीडिया में ऑडियो ट्रैक शामिल हैं, लेकिन कोई भी इस डिवाइस द्वारा चलाने योग्य नहीं है</string>
 </resources>
