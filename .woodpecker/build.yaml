@@ -25,3 +25,5 @@ steps:
       note: "This is an alpha release. Expect many bugs and unfinished features!"
     when:
       event: [ tag ]
+when:
+  event: [ push, tag, pull_request ]
