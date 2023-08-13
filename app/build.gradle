@@ -2,6 +2,18 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+def getCommitVersionCode = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', 'HEAD', '--count'
+            standardOutput = stdout
+        }
+        return Integer.valueOf(stdout.toString().trim())
+    } catch (ignored) {
+        return null
+    }
+}
 
 android {
     compileSdk 33
@@ -19,10 +31,12 @@ android {
         }
     }
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
         minifiedRelease {
             initWith buildTypes.release
             zipAlignEnabled true
@@ -34,6 +48,27 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix ' (DEBUG)'
         }
+
+        nightly {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix '.nightly'
+            versionNameSuffix ' (NIGHTLY)'
+        }
+        applicationVariants.all { variant ->
+            variant.resValue "string", "applicationId", variant.applicationId
+
+
+            if (variant.buildType.name == 'nightly' || variant.buildType.name == 'nopebble') {
+                variant.outputs.all {
+                    setVersionCodeOverride(getCommitVersionCode())
+
+                    setVersionNameOverride(variant.versionName)
+                    outputFileName = "${applicationId}_${variant.versionName}.apk"
+                }
+            }
+        }
+
     }
 
     sourceSets {
@@ -207,3 +242,4 @@ dependencies {
     // debugImplementation because LeakCanary should only run in debug builds.
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:x.y'
 }
+
