@@ -40,8 +40,6 @@ steps:
     commands:
       - pwd
       - cd ../repoconfig/fdroid-repo-config/
-      # get secrets from storage
-      - cp
       - fdroid update
       - fdroid deploy
       - ls -laR repo
