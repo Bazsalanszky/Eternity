@@ -54,22 +54,22 @@ public class CustomThemeWrapper {
 
     public int getColorPrimary() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COLOR_PRIMARY,
-                getDefaultColor("#0336FF", "#242424", "#000000"));
+                getDefaultColor("#0336FF", "#393A59", "#000000"));
     }
 
     public int getColorPrimaryDark() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COLOR_PRIMARY_DARK,
-                getDefaultColor("#002BF0", "#121212", "#000000"));
+                getDefaultColor("#002BF0", "#393A59", "#000000"));
     }
 
     public int getColorAccent() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COLOR_ACCENT,
-                getDefaultColor("#FF1868", "#FF1868", "#FF1868"));
+                getDefaultColor("#FF1868", "#F8F8F2", "#FF1868"));
     }
 
     public int getColorPrimaryLightTheme() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COLOR_PRIMARY_LIGHT_THEME,
-                getDefaultColor("#0336FF", "#0336FF", "#0336FF"));
+                getDefaultColor("#0336FF", "#393A59", "#0336FF"));
     }
 
     public int getPrimaryTextColor() {
@@ -79,7 +79,7 @@ public class CustomThemeWrapper {
 
     public int getSecondaryTextColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.SECONDARY_TEXT_COLOR,
-                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
+                getDefaultColor("#8A0000", "#B3FFFF", "#B3FFFF"));
     }
 
     public int getPostTitleColor() {
@@ -89,17 +89,17 @@ public class CustomThemeWrapper {
 
     public int getPostContentColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.POST_CONTENT_COLOR,
-                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
+                getDefaultColor("#8A0000", "#B3FFFF", "#B3FFFF"));
     }
 
     public int getReadPostTitleColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.READ_POST_TITLE_COLOR,
-                getDefaultColor("#9D9D9D", "#979797", "#979797"));
+                getDefaultColor("#9D9D9D", "#9D9D9D", "#979797"));
     }
 
     public int getReadPostContentColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.READ_POST_CONTENT_COLOR,
-                getDefaultColor("#9D9D9D", "#979797", "#979797"));
+                getDefaultColor("#9D9D9D", "#9D9D9D", "#979797"));
     }
 
     public int getCommentColor() {
@@ -114,27 +114,27 @@ public class CustomThemeWrapper {
 
     public int getBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.BACKGROUND_COLOR,
-                getDefaultColor("#FFFFFF", "#121212", "#000000"));
+                getDefaultColor("#FFFFFF", "#282A36", "#000000"));
     }
 
     public int getCardViewBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.CARD_VIEW_BACKGROUND_COLOR,
-                getDefaultColor("#FFFFFF", "#242424", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public int getReadPostCardViewBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.READ_POST_CARD_VIEW_BACKGROUND_COLOR,
-                getDefaultColor("#F5F5F5", "#101010", "#000000"));
+                getDefaultColor("#F5F5F5", "#1C1F3D", "#000000"));
     }
 
     public int getCommentBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_BACKGROUND_COLOR,
-                getDefaultColor("#FFFFFF", "#242424", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public int getBottomAppBarBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.BOTTOM_APP_BAR_BACKGROUND_COLOR,
-                getDefaultColor("#FFFFFF", "#121212", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public int getPrimaryIconColor() {
@@ -149,12 +149,12 @@ public class CustomThemeWrapper {
 
     public int getPostIconAndInfoColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.POST_ICON_AND_INFO_COLOR,
-                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
+                getDefaultColor("#8A0000", "#FFFFFF", "#B3FFFF"));
     }
 
     public int getCommentIconAndInfoColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_ICON_AND_INFO_COLOR,
-                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
+                getDefaultColor("#8A0000", "#FFFFFF", "#B3FFFF"));
     }
 
     public int getToolbarPrimaryTextAndIconColor() {
@@ -169,22 +169,22 @@ public class CustomThemeWrapper {
 
     public int getCircularProgressBarBackground() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.CIRCULAR_PROGRESS_BAR_BACKGROUND,
-                getDefaultColor("#FFFFFF", "#242424", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public int getMediaIndicatorIconColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.MEDIA_INDICATOR_ICON_COLOR,
-                getDefaultColor("#FFFFFF", "#000000", "#000000"));
+                getDefaultColor("#FFFFFF", "#FFFFFF", "#000000"));
     }
 
     public int getMediaIndicatorBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.MEDIA_INDICATOR_BACKGROUND_COLOR,
-                getDefaultColor("#000000", "#FFFFFF", "#FFFFFF"));
+                getDefaultColor("#000000", "#000000", "#FFFFFF"));
     }
 
     public int getTabLayoutWithExpandedCollapsingToolbarTabBackground() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.TAB_LAYOUT_WITH_EXPANDED_COLLAPSING_TOOLBAR_TAB_BACKGROUND,
-                getDefaultColor("#FFFFFF", "#242424", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public int getTabLayoutWithExpandedCollapsingToolbarTextColor() {
@@ -199,7 +199,7 @@ public class CustomThemeWrapper {
 
     public int getTabLayoutWithCollapsedCollapsingToolbarTabBackground() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.TAB_LAYOUT_WITH_COLLAPSED_COLLAPSING_TOOLBAR_TAB_BACKGROUND,
-                getDefaultColor("#0336FF", "#242424", "#000000"));
+                getDefaultColor("#0336FF", "#393A59", "#000000"));
     }
 
     public int getTabLayoutWithCollapsedCollapsingToolbarTextColor() {
@@ -214,7 +214,7 @@ public class CustomThemeWrapper {
 
     public int getUpvoted() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.UPVOTED,
-                getDefaultColor("#FF1868", "#FF1868", "#FF1868"));
+                getDefaultColor("#FF1868", "#FF008C", "#FF1868"));
     }
 
     public int getDownvoted() {
@@ -294,12 +294,12 @@ public class CustomThemeWrapper {
 
     public int getStickiedPostIconTint() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.STICKIED_POST_ICON_TINT,
-                getDefaultColor("#002BF0", "#0336FF", "#0336FF"));
+                getDefaultColor("#002BF0", "#02ABEE", "#0336FF"));
     }
 
     public int getNoPreviewPostTypeIconTint() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.NO_PREVIEW_POST_TYPE_ICON_TINT,
-                getDefaultColor("#808080", "#808080", "#808080"));
+                getDefaultColor("#808080", "#FFFFFF", "#808080"));
     }
 
     public int getSubscribed() {
@@ -309,7 +309,7 @@ public class CustomThemeWrapper {
 
     public int getUnsubscribed() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.UNSUBSCRIBED,
-                getDefaultColor("#002BF0", "#0336FF", "#0336FF"));
+                getDefaultColor("#002BF0", "#002BF0", "#0336FF"));
     }
 
     public int getUsername() {
@@ -319,7 +319,7 @@ public class CustomThemeWrapper {
 
     public int getSubreddit() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.SUBREDDIT,
-                getDefaultColor("#FF1868", "#FF1868", "#FF1868"));
+                getDefaultColor("#FF1868", "#FF4B9C", "#FF1868"));
     }
 
     public int getAuthorFlairTextColor() {
@@ -334,7 +334,7 @@ public class CustomThemeWrapper {
 
     public int getModerator() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.MODERATOR,
-                getDefaultColor("#00BA81", "#00BA81", "#00BA81"));
+                getDefaultColor("#00BA81", "#00BA81"", "#00BA81"));
     }
 
     public int getCurrentUser() {
@@ -344,12 +344,12 @@ public class CustomThemeWrapper {
 
     public int getSingleCommentThreadBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.SINGLE_COMMENT_THREAD_BACKGROUND_COLOR,
-                getDefaultColor("#B3E5F9", "#123E77", "#123E77"));
+                getDefaultColor("#B3E5F9", "#5F5B85", "#123E77"));
     }
 
     public int getUnreadMessageBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.UNREAD_MESSAGE_BACKGROUND_COLOR,
-                getDefaultColor("#B3E5F9", "#123E77", "#123E77"));
+                getDefaultColor("#B3E5F9", "#5F5B85", "#123E77"));
     }
 
     public int getDividerColor() {
@@ -359,52 +359,52 @@ public class CustomThemeWrapper {
 
     public int getNoPreviewPostTypeBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.NO_PREVIEW_POST_TYPE_BACKGROUND_COLOR,
-                getDefaultColor("#E0E0E0", "#424242", "#424242"));
+                getDefaultColor("#E0E0E0", "#6272A4", "#424242"));
     }
 
     public int getVoteAndReplyUnavailableButtonColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.VOTE_AND_REPLY_UNAVAILABLE_BUTTON_COLOR,
-                getDefaultColor("#F0F0F0", "#3C3C3C", "#3C3C3C"));
+                getDefaultColor("#F0F0F0", "#777C82", "#3C3C3C"));
     }
 
     public int getCommentVerticalBarColor1() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_1,
-                getDefaultColor("#0336FF", "#0336FF", "#0336FF"));
+                getDefaultColor("#0336FF", "#8BE9FD", "#0336FF"));
     }
 
     public int getCommentVerticalBarColor2() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_2,
-                getDefaultColor("#EE02BE", "#C300B3", "#C300B3"));
+                getDefaultColor("#EE02BE", "#50FA7B", "#C300B3"));
     }
 
     public int getCommentVerticalBarColor3() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_3,
-                getDefaultColor("#02DFEE", "#00B8DA", "#00B8DA"));
+                getDefaultColor("#02DFEE", "#FFB86C", "#00B8DA"));
     }
 
     public int getCommentVerticalBarColor4() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_4,
-                getDefaultColor("#EED502", "#EDCA00", "#EDCA00"));
+                getDefaultColor("#EED502", "#FF79C6", "#EDCA00"));
     }
 
     public int getCommentVerticalBarColor5() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_5,
-                getDefaultColor("#EE0220", "#EE0219", "#EE0219"));
+                getDefaultColor("#EE0220", "#BD93F9", "#EE0219"));
     }
 
     public int getCommentVerticalBarColor6() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_6,
-                getDefaultColor("#02EE6E", "#00B925", "#00B925"));
+                getDefaultColor("#02EE6E", "#FF5555", "#00B925"));
     }
 
     public int getCommentVerticalBarColor7() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_VERTICAL_BAR_COLOR_7,
-                getDefaultColor("#EE4602", "#EE4602", "#EE4602"));
+                getDefaultColor("#EE4602", "#F1FA8C", "#EE4602"));
     }
 
     public int getFABIconColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.FAB_ICON_COLOR,
-                getDefaultColor("#FFFFFF", "#FFFFFF", "#FFFFFF"));
+                getDefaultColor("#FFFFFF", "#000000", "#FFFFFF"));
     }
 
     public int getChipTextColor() {
@@ -449,12 +449,12 @@ public class CustomThemeWrapper {
 
     public int getAwardedCommentBackgroundColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.AWARDED_COMMENT_BACKGROUND_COLOR,
-                getDefaultColor("#FFFFFF", "#242424", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public int getNavBarColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.NAV_BAR_COLOR,
-                getDefaultColor("#FFFFFF", "#121212", "#000000"));
+                getDefaultColor("#FFFFFF", "#393A59", "#000000"));
     }
 
     public boolean isLightStatusBar() {
