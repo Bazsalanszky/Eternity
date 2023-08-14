@@ -334,7 +334,7 @@ public class CustomThemeWrapper {
 
     public int getModerator() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.MODERATOR,
-                getDefaultColor("#00BA81", "#00BA81"", "#00BA81"));
+                getDefaultColor("#00BA81", "#00BA81", "#00BA81"));
     }
 
     public int getCurrentUser() {
