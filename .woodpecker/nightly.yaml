@@ -36,7 +36,7 @@ steps:
       - git status
 
   update-fdroid-data:
-    image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
+    image: cs8898/android-fdroid-sdk:33.0.0
     commands:
       - pwd
       - cd ../repoconfig/fdroid-repo-config/
