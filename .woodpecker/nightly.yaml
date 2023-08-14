@@ -59,9 +59,9 @@ steps:
       - ls -lsR fdroid/repo
       - git commit -m "autodeploy"
       - git remote remove origin
-      - git remote add origin https://Bazsalanszky:"$${GITEA_ACCESS_TOKEN}"@codeberg.org/Freeyourgadget/pages.git
+      - git remote add origin https://Bazsalanszky:"$${GITEA_ACCESS_TOKEN}"@codeberg.org/Bazsalanszky/pages.git
       # force push as we removed all data
-      - git push -f origin master
+      - git push -f origin main
       - cd ../../
       - pwd
       - ls -la
