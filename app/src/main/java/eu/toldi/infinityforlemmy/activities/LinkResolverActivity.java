@@ -91,6 +91,8 @@ public class LinkResolverActivity extends AppCompatActivity {
 
         ((Infinity) getApplication()).getAppComponent().inject(this);
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
+        String instance = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
+        mRetrofit.setBaseURL(instance);
 
         Uri uri = getIntent().getData();
         if (uri == null) {
