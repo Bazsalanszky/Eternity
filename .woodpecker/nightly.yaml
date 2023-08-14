@@ -41,6 +41,7 @@ steps:
       - pwd
       - cd ../repoconfig/fdroid-repo-config/
       - echo -n "$${fdroid_ks}" | base64 -d > keystore.p12
+      - cat keystore.p12 | sha256sum
       - sed -i "s|KS_PASS|$${fdroid_ks_pass}|g" config.yml
       - sed -i "s|KEY_PASS|$${fdroid_key_pass}|g" config.yml
       - fdroid update
