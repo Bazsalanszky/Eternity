@@ -40,14 +40,14 @@ steps:
     commands:
       - pwd
       - cd ../repoconfig/fdroid-repo-config/
-      - echo -n "$${fdroid_ks}" | base64 -d > keystore.p12
+      - echo -n "$${FDROID_KS}" | base64 -d > keystore.p12
       - cat keystore.p12 | sha256sum
       - sed -i "s|KS_PASS|$${fdroid_ks_pass}|g" config.yml
       - sed -i "s|KEY_PASS|$${fdroid_key_pass}|g" config.yml
       - fdroid update
       - fdroid deploy
       - ls -laR repo
-    secrets: [ fdroid_ks_pass, fdroid_key_pass, fdroid_ks ]
+    secrets: [ FDROID_KS_PASS, FDROID_KEY_PASS, FDROID_KS ]
   push-pages-update-repo:
     image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
     commands:
