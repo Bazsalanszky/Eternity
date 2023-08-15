@@ -1,7 +1,6 @@
 package eu.toldi.infinityforlemmy;
 
 import android.os.AsyncTask;
-import android.text.Html;
 
 import androidx.annotation.NonNull;
 
@@ -9,9 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
-import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,7 +79,7 @@ public class FetchMyInfo {
                 if (!person.isNull("banner")) {
                     bannerImageUrl = person.getString("banner");
                 }
-                display_name = person.getString("name");
+                display_name = (person.has("display_name")) ? person.getString("display_name") : person.getString("name");
                 redditDataRoomDatabase.accountDao().updateAccountInfo(name, profileImageUrl, bannerImageUrl);
             } catch (JSONException e) {
                 parseFailed = true;
