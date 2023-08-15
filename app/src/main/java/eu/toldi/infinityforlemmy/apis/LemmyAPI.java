@@ -15,6 +15,10 @@ import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageReadDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageReportDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageUpdateDTO;
 import eu.toldi.infinityforlemmy.dto.ReadCommentDTO;
 import eu.toldi.infinityforlemmy.dto.ReadMessageDTO;
 import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
@@ -245,5 +249,38 @@ public interface LemmyAPI {
     @GET("api/v3/site")
     Call<String> getSiteInfo(
             @Query("auth") String auth
+    );
+
+    @GET("api/v3/private_message/list")
+    Call<String> privateMessagesList(
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("unread_only") Boolean unread_only,
+            @NonNull @Query("auth") String auth
+    );
+
+    @POST("api/v3/private_message")
+    Call<String> privateMessageSend(
+            @Body PrivateMessageDTO params
+    );
+
+    @PUT("api/v3/private_message")
+    Call<String> privateMessageEdit(
+            @Body PrivateMessageUpdateDTO params
+    );
+
+    @POST("api/v3/private_message/delete")
+    Call<String> privateMessageDelete(
+            @Body PrivateMessageUpdateDTO params
+    );
+
+    @POST("api/v3/private_message/mark_as_read")
+    Call<String> privateMessageMarkAsRead(
+            @Body PrivateMessageReadDTO params
+    );
+
+    @POST("api/v3/private_message/report")
+    Call<String> privateMessageReport(
+            @Body PrivateMessageReportDTO params
     );
 }

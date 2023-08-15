@@ -55,6 +55,7 @@ import eu.toldi.infinityforlemmy.events.PassPrivateMessageEvent;
 import eu.toldi.infinityforlemmy.events.PassPrivateMessageIndexEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.InboxFragment;
+import eu.toldi.infinityforlemmy.fragments.PrivateMessageFragment;
 import eu.toldi.infinityforlemmy.message.CommentInteraction;
 import eu.toldi.infinityforlemmy.message.FetchMessage;
 import eu.toldi.infinityforlemmy.message.ReadMessage;
@@ -441,7 +442,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            InboxFragment fragment = new InboxFragment();
+            Fragment fragment = new InboxFragment();
             Bundle bundle = new Bundle();
             bundle.putString(InboxFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             switch (position) {
@@ -450,11 +451,9 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
                     break;
                 case 1:
                     bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_MENTIONS);
-                    fragment.setArguments(bundle);
                     break;
                 case 2:
-                    bundle.putString(InboxFragment.EXTRA_MESSAGE_WHERE, FetchMessage.WHERE_MESSAGES);
-                    fragment.setArguments(bundle);
+                    fragment = new PrivateMessageFragment();
                     break;
             }
             fragment.setArguments(bundle);
