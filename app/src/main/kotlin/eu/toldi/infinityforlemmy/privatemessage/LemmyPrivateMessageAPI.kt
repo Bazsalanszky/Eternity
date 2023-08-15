@@ -3,6 +3,7 @@ package eu.toldi.infinityforlemmy.privatemessage
 import eu.toldi.infinityforlemmy.RetrofitHolder
 import eu.toldi.infinityforlemmy.apis.LemmyAPI
 import eu.toldi.infinityforlemmy.dto.PrivateMessageReadDTO
+import eu.toldi.infinityforlemmy.utils.LemmyUtils
 import org.json.JSONObject
 
 class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
@@ -98,10 +99,10 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
             updated = privateMessage.optString("updated", ""),
             creatorName = creator.getString("name"),
             creatorAvatar = creator.optString("avatar", ""),
-            creatorQualifiedName = creator.getString("actor_id"),
+            creatorQualifiedName = LemmyUtils.actorID2FullName(creator.getString("actor_id")),
             recipientName = recipient.getString("name"),
             recipientAvatar = recipient.optString("avatar", ""),
-            recipientQualifiedName = recipient.getString("actor_id")
+            recipientQualifiedName = LemmyUtils.actorID2FullName(recipient.getString("actor_id"))
         )
     }
 }
