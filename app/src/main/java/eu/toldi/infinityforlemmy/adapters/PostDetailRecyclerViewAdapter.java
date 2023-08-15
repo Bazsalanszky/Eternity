@@ -1644,11 +1644,18 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 constraintSet.clear(mUpvoteButton.getId(), ConstraintSet.START);
                 constraintSet.clear(mScoreTextView.getId(), ConstraintSet.START);
                 constraintSet.clear(mDownvoteButton.getId(), ConstraintSet.START);
+                constraintSet.clear(mDownvoteTextView.getId(), ConstraintSet.START);
                 constraintSet.clear(mSaveButton.getId(), ConstraintSet.END);
                 constraintSet.clear(mShareButton.getId(), ConstraintSet.END);
                 constraintSet.connect(mUpvoteButton.getId(), ConstraintSet.END, mScoreTextView.getId(), ConstraintSet.START);
                 constraintSet.connect(mScoreTextView.getId(), ConstraintSet.END, mDownvoteButton.getId(), ConstraintSet.START);
-                constraintSet.connect(mDownvoteButton.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
+                if (!mSeperateUpvoteAndDownvote) {
+                    constraintSet.connect(mDownvoteButton.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
+                } else {
+                    constraintSet.connect(mDownvoteButton.getId(), ConstraintSet.END, mDownvoteTextView.getId(), ConstraintSet.START);
+                    constraintSet.connect(mDownvoteTextView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
+                }
+
                 constraintSet.connect(commentsCountTextView.getId(), ConstraintSet.START, mSaveButton.getId(), ConstraintSet.END);
                 constraintSet.connect(commentsCountTextView.getId(), ConstraintSet.END, mUpvoteButton.getId(), ConstraintSet.START);
                 constraintSet.connect(mSaveButton.getId(), ConstraintSet.START, mShareButton.getId(), ConstraintSet.END);
