@@ -79,7 +79,7 @@ public class CustomThemeWrapper {
 
     public int getSecondaryTextColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.SECONDARY_TEXT_COLOR,
-                getDefaultColor("#8A0000", "#B3FFFF", "#B3FFFF"));
+                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
     }
 
     public int getPostTitleColor() {
@@ -89,7 +89,7 @@ public class CustomThemeWrapper {
 
     public int getPostContentColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.POST_CONTENT_COLOR,
-                getDefaultColor("#8A0000", "#B3FFFF", "#B3FFFF"));
+                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
     }
 
     public int getReadPostTitleColor() {
@@ -149,12 +149,12 @@ public class CustomThemeWrapper {
 
     public int getPostIconAndInfoColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.POST_ICON_AND_INFO_COLOR,
-                getDefaultColor("#8A0000", "#FFFFFF", "#B3FFFF"));
+                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
     }
 
     public int getCommentIconAndInfoColor() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.COMMENT_ICON_AND_INFO_COLOR,
-                getDefaultColor("#8A0000", "#FFFFFF", "#B3FFFF"));
+                getDefaultColor("#8A000000", "#B3FFFFFF", "#B3FFFFFF"));
     }
 
     public int getToolbarPrimaryTextAndIconColor() {
