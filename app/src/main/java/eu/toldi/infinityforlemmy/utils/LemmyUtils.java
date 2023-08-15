@@ -5,7 +5,7 @@ public class LemmyUtils {
         String[] splitURL = url.split("/");
         String userName = splitURL[splitURL.length - 1];
         String domain = splitURL[2];
-        return userName + "@" + domain;
+        return (userName.contains("@")) ? userName : userName + "@" + domain;
     }
 
     public static String qualifiedCommunityName2ActorId(String qualifiedName) {
