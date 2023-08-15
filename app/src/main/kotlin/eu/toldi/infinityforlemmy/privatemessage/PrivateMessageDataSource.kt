@@ -16,7 +16,7 @@ class PrivateMessageDataSource(
     PageKeyedDataSource<Int, PrivateMessage>() {
 
 
-    val paginationNetworkStateLiveData: MutableLiveData<NetworkState>
+    val paginationNetworkStateLiveData: MutableLiveData<NetworkState> = MutableLiveData()
     val initialLoadStateLiveData: MutableLiveData<NetworkState>
     private val hasPostLiveData: MutableLiveData<Boolean>
     private var params: LoadParams<Int>? = null
@@ -24,7 +24,6 @@ class PrivateMessageDataSource(
     private val page = 1
 
     init {
-        paginationNetworkStateLiveData = MutableLiveData()
         initialLoadStateLiveData = MutableLiveData()
         hasPostLiveData = MutableLiveData()
     }
@@ -49,7 +48,7 @@ class PrivateMessageDataSource(
                 if (privateMessages.isEmpty()) {
                     callback.onResult(ArrayList(), null, null)
                 } else {
-                    callback.onResult(privateMessages, null, page + 1)
+                    callback.onResult(privateMessages, null, 2)
                 }
                 initialLoadStateLiveData.postValue(NetworkState.LOADED)
             }

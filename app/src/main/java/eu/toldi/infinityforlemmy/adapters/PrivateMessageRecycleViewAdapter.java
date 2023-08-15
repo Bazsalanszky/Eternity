@@ -150,7 +150,7 @@ public class PrivateMessageRecycleViewAdapter extends PagedListAdapter<PrivateMe
             PrivateMessage message = getItem(holder.getBindingAdapterPosition());
             if (message != null) {
 
-                if (message.getRead()) {
+                if (!message.getRead()) {
                     if (markAllMessagesAsRead) {
                         message.setRead(true);
                     } else {
@@ -171,8 +171,7 @@ public class PrivateMessageRecycleViewAdapter extends PagedListAdapter<PrivateMe
                 holder.itemView.setOnClickListener(view -> {
 
                     Intent intent = new Intent(mActivity, ViewPrivateMessagesActivity.class);
-                    intent.putExtra(ViewPrivateMessagesActivity.EXTRA_PRIVATE_MESSAGE_INDEX, holder.getBindingAdapterPosition());
-                    intent.putExtra(ViewPrivateMessagesActivity.EXTRA_MESSAGE_POSITION, holder.getBindingAdapterPosition());
+                    intent.putExtra(ViewPrivateMessagesActivity.EXTRA_PRIVATE_MESSAGE, message);
                     mActivity.startActivity(intent);
 
 

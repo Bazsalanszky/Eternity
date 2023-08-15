@@ -1,12 +1,12 @@
 package eu.toldi.infinityforlemmy.events;
 
-import eu.toldi.infinityforlemmy.message.Message;
+import eu.toldi.infinityforlemmy.privatemessage.PrivateMessage;
 
 public class RepliedToPrivateMessageEvent {
-    public Message newReply;
+    public PrivateMessage newReply;
     public int messagePosition;
 
-    public RepliedToPrivateMessageEvent(Message newReply, int messagePosition) {
+    public RepliedToPrivateMessageEvent(PrivateMessage newReply, int messagePosition) {
         this.newReply = newReply;
         this.messagePosition = messagePosition;
     }

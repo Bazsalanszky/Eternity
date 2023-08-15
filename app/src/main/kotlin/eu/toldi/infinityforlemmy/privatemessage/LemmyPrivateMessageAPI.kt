@@ -2,6 +2,7 @@ package eu.toldi.infinityforlemmy.privatemessage
 
 import eu.toldi.infinityforlemmy.RetrofitHolder
 import eu.toldi.infinityforlemmy.apis.LemmyAPI
+import eu.toldi.infinityforlemmy.dto.PrivateMessageDTO
 import eu.toldi.infinityforlemmy.dto.PrivateMessageReadDTO
 import eu.toldi.infinityforlemmy.utils.LemmyUtils
 import org.json.JSONObject
@@ -71,6 +72,45 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
         )
     }
 
+    fun sendPrivateMessage(
+        auth: String,
+        recipientId: Int,
+        content: String,
+        listener: PrivateMessageSentListener
+    ) {
+        val api = retrofitHolder.retrofit.create(LemmyAPI::class.java)
+
+        api.privateMessageSend(PrivateMessageDTO(recipientId, content, auth)).enqueue(
+            object : retrofit2.Callback<String> {
+                override fun onResponse(
+                    call: retrofit2.Call<String>,
+                    response: retrofit2.Response<String>
+                ) {
+                    if (response.isSuccessful) {
+                        listener.onPrivateMessageSentSuccess(
+                            parsePrivateMessage(
+                                JSONObject(response.body()!!).getJSONObject(
+                                    "private_message_view"
+                                )
+                            )
+                        )
+                    } else {
+                        listener.onPrivateMessageSentError()
+                    }
+                }
+
+                override fun onFailure(call: retrofit2.Call<String>, t: Throwable) {
+                    listener.onPrivateMessageSentError()
+                }
+            }
+        )
+    }
+
+    interface PrivateMessageSentListener {
+        fun onPrivateMessageSentSuccess(privateMessage: PrivateMessage)
+        fun onPrivateMessageSentError()
+    }
+
     interface PrivateMessageMarkedAsReadListener {
         fun onPrivateMessageMarkedAsReadSuccess()
         fun onPrivateMessageMarkedAsReadError()
@@ -87,6 +127,7 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
         val privateMessage = jsonObject.getJSONObject("private_message")
         val creator = jsonObject.getJSONObject("creator")
         val recipient = jsonObject.getJSONObject("recipient")
+        val updated = privateMessage.optString("updated", "")
 
         return PrivateMessage(
             id = privateMessage.getInt("id"),
@@ -95,8 +136,12 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
             content = privateMessage.getString("content"),
             deleted = privateMessage.getBoolean("deleted"),
             read = privateMessage.getBoolean("read"),
-            published = privateMessage.getString("published"),
-            updated = privateMessage.optString("updated", ""),
+            published = LemmyUtils.dateStringToMills(privateMessage.getString("published")),
+            updated = if (updated == "") {
+                null
+            } else {
+                LemmyUtils.dateStringToMills(updated)
+            },
             creatorName = creator.getString("name"),
             creatorAvatar = creator.optString("avatar", ""),
             creatorQualifiedName = LemmyUtils.actorID2FullName(creator.getString("actor_id")),

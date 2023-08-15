@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -46,14 +48,15 @@ import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.events.PassPrivateMessageEvent;
 import eu.toldi.infinityforlemmy.events.PassPrivateMessageIndexEvent;
 import eu.toldi.infinityforlemmy.events.RepliedToPrivateMessageEvent;
-import eu.toldi.infinityforlemmy.message.Message;
 import eu.toldi.infinityforlemmy.message.ReadMessage;
-import eu.toldi.infinityforlemmy.message.ReplyMessage;
+import eu.toldi.infinityforlemmy.privatemessage.LemmyPrivateMessageAPI;
+import eu.toldi.infinityforlemmy.privatemessage.PrivateMessage;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import retrofit2.Retrofit;
 
 public class ViewPrivateMessagesActivity extends BaseActivity implements ActivityToolbarInterface {
 
+    public static final String EXTRA_PRIVATE_MESSAGE = "EPM";
     public static final String EXTRA_PRIVATE_MESSAGE_INDEX = "EPM";
     public static final String EXTRA_MESSAGE_POSITION = "EMP";
     private static final String USER_AVATAR_STATE = "UAS";
@@ -91,14 +94,19 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+
+    @Inject
+    LemmyPrivateMessageAPI mLemmyPrivateMessageAPI;
     private LinearLayoutManagerBugFixed mLinearLayoutManager;
     private PrivateMessagesDetailRecyclerViewAdapter mAdapter;
     @State
-    Message privateMessage;
+    PrivateMessage privateMessage;
     @State
-    Message replyTo;
+    PrivateMessage replyTo;
     private String mAccessToken;
     private String mAccountName;
+
+    private String mAccountQualifiedName;
     private String mUserAvatar;
     private ArrayList<ProvideUserAvatarCallback> mProvideUserAvatarCallbacks;
     private boolean isLoadingUserAvatar = false;
@@ -128,6 +136,11 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
             addOnOffsetChangedListener(mAppBarLayout);
         }
 
+        Intent intent = getIntent();
+        privateMessage = intent.getParcelableExtra(EXTRA_PRIVATE_MESSAGE);
+
+        Log.i("ViewPrivate", "privateMessage: " + privateMessage);
+
         setSupportActionBar(mToolbar);
         setToolbarGoToTop(mToolbar);
 
@@ -135,6 +148,7 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState != null) {
             mUserAvatar = savedInstanceState.getString(USER_AVATAR_STATE);
@@ -144,36 +158,37 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
                 bindView();
             }
         } else {
+            if (privateMessage != null) {
+                bindView();
+            }
             EventBus.getDefault().post(new PassPrivateMessageIndexEvent(getIntent().getIntExtra(EXTRA_PRIVATE_MESSAGE_INDEX, -1)));
         }
     }
 
     private void bindView() {
         if (privateMessage != null) {
-            if (privateMessage.getAuthor().equals(mAccountName)) {
-                setTitle(privateMessage.getDestination());
+            if (privateMessage.getCreatorQualifiedName().equals(mAccountQualifiedName)) {
+                setTitle(privateMessage.getRecipientName());
                 mToolbar.setOnClickListener(view -> {
-                    if (privateMessage.isDestinationDeleted()) {
-                        return;
-                    }
+
                     Intent intent = new Intent(this, ViewUserDetailActivity.class);
-                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, privateMessage.getDestination());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, privateMessage.getRecipientName());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, privateMessage.getRecipientQualifiedName());
                     startActivity(intent);
                 });
             } else {
-                setTitle(privateMessage.getAuthor());
+                setTitle(privateMessage.getCreatorName());
                 mToolbar.setOnClickListener(view -> {
-                    if (privateMessage.isAuthorDeleted()) {
-                        return;
-                    }
+
                     Intent intent = new Intent(this, ViewUserDetailActivity.class);
-                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, privateMessage.getAuthor());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, privateMessage.getCreatorName());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, privateMessage.getCreatorQualifiedName());
                     startActivity(intent);
                 });
             }
         }
         mAdapter = new PrivateMessagesDetailRecyclerViewAdapter(this, mSharedPreferences,
-                getResources().getConfiguration().locale, privateMessage, mAccountName, mCustomThemeWrapper);
+                getResources().getConfiguration().locale, privateMessage, mAccountQualifiedName, mCustomThemeWrapper);
         mLinearLayoutManager = new LinearLayoutManagerBugFixed(this);
         mLinearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -184,45 +199,40 @@ public class ViewPrivateMessagesActivity extends BaseActivity implements Activit
                 if (!mEditText.getText().toString().equals("")) {
                     //Send Message
                     if (privateMessage != null) {
-                        ArrayList<Message> replies = privateMessage.getReplies();
+                        List<PrivateMessage> replies = privateMessage.getReplies();
                         if (replyTo == null) {
                             replyTo = privateMessage;
                         }
                         isSendingMessage = true;
                         mSendImageView.setColorFilter(mSecondaryTextColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                        ReplyMessage.replyMessage(mEditText.getText().toString(), replyTo.getFullname(),
-                                getResources().getConfiguration().locale, mOauthRetrofit, mAccessToken,
-                                new ReplyMessage.ReplyMessageListener() {
-                                    @Override
-                                    public void replyMessageSuccess(Message message) {
-                                        if (mAdapter != null) {
-                                            mAdapter.addReply(message);
-                                        }
-                                        goToBottom();
-                                        mEditText.setText("");
-                                        mSendImageView.setColorFilter(mSendMessageIconColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        isSendingMessage = false;
-                                        EventBus.getDefault().post(new RepliedToPrivateMessageEvent(message, getIntent().getIntExtra(EXTRA_MESSAGE_POSITION, -1)));
-                                    }
 
-                                    @Override
-                                    public void replyMessageFailed(String errorMessage) {
-                                        if (errorMessage != null && !errorMessage.equals("")) {
-                                            Snackbar.make(mCoordinatorLayout, errorMessage, Snackbar.LENGTH_LONG).show();
-                                        } else {
-                                            Snackbar.make(mCoordinatorLayout, R.string.reply_message_failed, Snackbar.LENGTH_LONG).show();
-                                        }
-                                        mSendImageView.setColorFilter(mSendMessageIconColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                                        isSendingMessage = false;
-                                    }
-                                });
+                        mLemmyPrivateMessageAPI.sendPrivateMessage(mAccessToken, replyTo.getCreatorId(), mEditText.getText().toString(), new LemmyPrivateMessageAPI.PrivateMessageSentListener() {
+
+                            @Override
+                            public void onPrivateMessageSentSuccess(@NonNull PrivateMessage privateMessage) {
+                                if (mAdapter != null) {
+                                    mAdapter.addReply(privateMessage);
+                                }
+                                goToBottom();
+                                mEditText.setText("");
+                                isSendingMessage = false;
+                                EventBus.getDefault().post(new RepliedToPrivateMessageEvent(privateMessage, getIntent().getIntExtra(EXTRA_MESSAGE_POSITION, -1)));
+                            }
+
+                            @Override
+                            public void onPrivateMessageSentError() {
+                                Snackbar.make(mCoordinatorLayout, R.string.reply_message_failed, Snackbar.LENGTH_LONG).show();
+                                mSendImageView.setColorFilter(mSendMessageIconColor, android.graphics.PorterDuff.Mode.SRC_IN);
+                                isSendingMessage = false;
+                            }
+                        });
+
+
                         StringBuilder fullnames = new StringBuilder();
-                        if (privateMessage.isNew()) {
-                            fullnames.append(privateMessage.getFullname()).append(",");
-                        }
+
                         if (replies != null && !replies.isEmpty()) {
-                            for (Message m : replies) {
-                                if (m.isNew()) {
+                            for (PrivateMessage m : replies) {
+                                if (!m.getRead()) {
                                     fullnames.append(m).append(",");
                                 }
                             }
