@@ -2547,7 +2547,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 return false;
             });
 
-            userTextView.setOnClickListener(view -> {
+            View.OnClickListener onClickListener = view -> {
                 if (!canStartActivity) {
                     return;
                 }
@@ -2564,49 +2564,35 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, post.getAuthor());
                 intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, post.getAuthorNamePrefixed());
                 mActivity.startActivity(intent);
-            });
+            };
+            userTextView.setOnClickListener(onClickListener);
+            userInstanceTextView.setOnClickListener(onClickListener);
 
+
+            View.OnClickListener onClickListener1 = view -> {
+                int position = getBindingAdapterPosition();
+                if (position < 0) {
+                    return;
+                }
+                Post post = getItem(position);
+                if (post != null) {
+                    if (canStartActivity) {
+                        canStartActivity = false;
+                        Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
+                        intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
+                                post.getSubredditName());
+                        intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
+                                post.getSubredditNamePrefixed());
+                        mActivity.startActivity(intent);
+                    }
+                }
+            };
+            communityInstanceTextView.setOnClickListener(onClickListener1);
             if (mDisplaySubredditName) {
-                subredditTextView.setOnClickListener(view -> {
-                    int position = getBindingAdapterPosition();
-                    if (position < 0) {
-                        return;
-                    }
-                    Post post = getItem(position);
-                    if (post != null) {
-                        if (canStartActivity) {
-                            canStartActivity = false;
-                            Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
-                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
-                                    post.getSubredditName());
-                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
-                                    post.getSubredditNamePrefixed());
-                            mActivity.startActivity(intent);
-                        }
-                    }
-                });
-
+                subredditTextView.setOnClickListener(onClickListener1);
                 iconGifImageView.setOnClickListener(view -> subredditTextView.performClick());
             } else {
-                subredditTextView.setOnClickListener(view -> {
-                    int position = getBindingAdapterPosition();
-                    if (position < 0) {
-                        return;
-                    }
-                    Post post = getItem(position);
-                    if (post != null) {
-                        if (canStartActivity) {
-                            canStartActivity = false;
-                            Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
-                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
-                                    post.getSubredditName());
-                            intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
-                                    post.getSubredditNamePrefixed());
-                            mActivity.startActivity(intent);
-                        }
-                    }
-                });
-
+                subredditTextView.setOnClickListener(onClickListener1);
                 iconGifImageView.setOnClickListener(view -> userTextView.performClick());
             }
 
@@ -4025,7 +4011,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 return false;
             });
 
-            nameTextView.setOnClickListener(view -> {
+            View.OnClickListener onClickListener = view -> {
                 int position = getBindingAdapterPosition();
                 if (position < 0) {
                     return;
@@ -4047,7 +4033,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         mActivity.startActivity(intent);
                     }
                 }
-            });
+            };
+            nameTextView.setOnClickListener(onClickListener);
+            instanceTextView.setOnClickListener(onClickListener);
+
 
             iconGifImageView.setOnClickListener(view -> nameTextView.performClick());
 

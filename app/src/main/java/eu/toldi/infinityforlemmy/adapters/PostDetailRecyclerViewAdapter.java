@@ -1268,16 +1268,18 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
             mIconGifImageView.setOnClickListener(view -> mSubredditTextView.performClick());
 
-            mSubredditTextView.setOnClickListener(view -> {
+            View.OnClickListener communityClickListener = view -> {
                 Intent intent;
                 intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
                         mPost.getSubredditName());
                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, mPost.getSubredditNamePrefixed());
                 mActivity.startActivity(intent);
-            });
+            };
+            mSubredditTextView.setOnClickListener(communityClickListener);
+            mCommunityInstanceTextView.setOnClickListener(communityClickListener);
 
-            mUserTextView.setOnClickListener(view -> {
+            View.OnClickListener onUserClick = view -> {
                 if (mPost.isAuthorDeleted()) {
                     return;
                 }
@@ -1285,7 +1287,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mPost.getAuthor());
                 intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mPost.getAuthorNamePrefixed());
                 mActivity.startActivity(intent);
-            });
+            };
+            mUserTextView.setOnClickListener(onUserClick);
+            mUserInstanceTextView.setOnClickListener(onUserClick);
 
             mAuthorFlairTextView.setOnClickListener(view -> mUserTextView.performClick());
 
