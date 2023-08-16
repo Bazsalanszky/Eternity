@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -170,6 +171,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
     @BindView(R.id.user_qualified_name_text_view_view_user_detail_activity)
     TextView qualifiedNameTextView;
+
+    @BindView(R.id.loading_user_progress_indicator_view_user_detail_activity)
+    ProgressBar progressBar;
     @BindView(R.id.subscribe_user_chip_view_user_detail_activity)
     Chip subscribeUserChip;
     @BindView(R.id.karma_text_view_view_user_detail_activity)
@@ -310,6 +314,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private void setupVisibleElements() {
         Resources resources = getResources();
         String title = username;
+        progressBar.setVisibility(View.GONE);
         userNameTextView.setText(title);
         qualifiedNameTextView.setText(qualifiedName);
         toolbar.setTitle(title);
