@@ -1176,4 +1176,24 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="message_change_banner_failed">Error al cambiar banner %s</string>
     <string name="message_save_profile_success">Perfil guardado correctamente</string>
     <string name="message_save_profile_failed">Error al guardar perfil %s</string>
+    <string name="action_block_user">Bloquear Usuario</string>
+    <string name="bottom_sheet_post_poll">Encuesta</string>
+    <string name="history_activity_label">Historia</string>
+    <string name="action_open_external_browser">Abrir en el navegador</string>
+    <string name="action_more_options">Mas Opciones</string>
+    <string name="history">Historia</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Ocultar Karma de la Cuenta</string>
+    <string name="settings_custom_title_font_family_title">Fuente Personalizada para el Titulo</string>
+    <string name="settings_custom_content_font_family_title">Fuente Personalizada para el Contenido</string>
+    <string name="post_poll_activity_label">Publicar Encuesta</string>
+    <string name="action_create_github_issue">Abrir conflicto en Codeberg</string>
+    <string name="anonymous_homepage_not_implemented">Pantalla de Inicio Anónima aún no ha sido implementada</string>
+    <string name="invalid_response">Respuesta invalida del servidor</string>
+    <string name="invalid_username_or_password">Usuario o Contraseña invalido</string>
+    <string name="voting_length">Tiempo de votación: %1$d dias</string>
+    <string name="two_options_required">¡Una buena encuesta necesita dos o mas opciones!</string>
+    <string name="no_activity_found_for_external_browser">No hay aplicación que pueda ejecutar la acción \"abrir en aplicación externa\"</string>
+    <string name="settings_require_authentication_to_show_accounts">Requiere Autenticación para Mostrar Cuentas</string>
+    <string name="settings_backup_settings_summary">El archivo de respaldo de la contraseña es \"123321\".</string>
+    <string name="settings_custom_font_family_title">Fuentes Personalizadas</string>
 </resources>
