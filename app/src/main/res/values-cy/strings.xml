@@ -3,4 +3,7 @@
     <string name="comment_activity_label_is_replying">Ateb</string>
     <string name="post_text_activity_label">Testun Post</string>
     <string name="community_selection_activity_label">Dethol Cymuned</string>
+    <string name="login_activity_label">Mewngofnodi</string>
+    <string name="send_message_username_hint">Defnyddiwr</string>
+    <string name="link_required">Hei! Ble mae\'r linc\?</string>
 </resources>
