@@ -57,6 +57,7 @@ import com.libRG.CustomTextView;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import javax.inject.Provider;
 
@@ -579,12 +580,16 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailBaseViewHolder) holder).mCrosspostImageView.setVisibility(View.VISIBLE);
             }
 
-            if (!mHideSubredditAndUserPrefix) {
-                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditNamePrefixed());
-                ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthorNamePrefixed());
-            } else {
+            if (mHideSubredditAndUserPrefix) {
                 ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditName());
                 ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthor());
+            } else {
+                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditName());
+                ((PostDetailBaseViewHolder) holder).mCommunityInstanceTextView.setText('@' + mPost.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
+                ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthor());
+                ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setText('@' + mPost.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
+                ((PostDetailBaseViewHolder) holder).mCommunityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
+                ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mPost.isModerator() || mPost.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
             }
 
             if (mPost.isModerator() || mPost.isAdmin()) {
@@ -1175,7 +1180,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     public class PostDetailBaseViewHolder extends RecyclerView.ViewHolder {
         AspectRatioGifImageView mIconGifImageView;
         TextView mSubredditTextView;
+        TextView mCommunityInstanceTextView;
         TextView mUserTextView;
+        TextView mUserInstanceTextView;
         TextView mAuthorFlairTextView;
         TextView mPostTimeTextView;
         TextView mTitleTextView;
@@ -1204,7 +1211,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
         void setBaseView(AspectRatioGifImageView mIconGifImageView,
                          TextView mSubredditTextView,
+                         TextView mCommunityInstanceTextView,
                          TextView mUserTextView,
+                         TextView mUserInstanceTextView,
                          TextView mAuthorFlairTextView,
                          TextView mPostTimeTextView,
                          TextView mTitleTextView,
@@ -1228,7 +1237,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                          ImageView mShareButton) {
             this.mIconGifImageView = mIconGifImageView;
             this.mSubredditTextView = mSubredditTextView;
+            this.mCommunityInstanceTextView = mCommunityInstanceTextView;
             this.mUserTextView = mUserTextView;
+            this.mUserInstanceTextView = mUserInstanceTextView;
             this.mAuthorFlairTextView = mAuthorFlairTextView;
             this.mPostTimeTextView = mPostTimeTextView;
             this.mTitleTextView = mTitleTextView;
@@ -1723,8 +1734,14 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_video_autoplay)
         TextView mSubredditTextView;
+
+        @BindView(R.id.community_instance_text_view_item_post_detail_video_autoplay)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_video_autoplay)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_video_autoplay)
+        TextView mUserInstanceTextView;
+
         @BindView(R.id.author_flair_text_view_item_post_detail_video_autoplay)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_video_autoplay)
@@ -1799,7 +1816,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
@@ -2034,8 +2053,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_video_and_gif_preview)
         TextView mSubredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_detail_video_and_gif_preview)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_video_and_gif_preview)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_video_and_gif_preview)
+        TextView mUserInstanceTextView;
         @BindView(R.id.author_flair_text_view_item_post_detail_video_and_gif_preview)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_video_and_gif_preview)
@@ -2095,7 +2118,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
@@ -2167,8 +2192,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_image_and_gif_autoplay)
         TextView mSubredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_detail_image_and_gif_autoplay)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_image_and_gif_autoplay)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_image_and_gif_autoplay)
+        TextView mUserInstanceTextView;
         @BindView(R.id.author_flair_text_view_item_post_detail_image_and_gif_autoplay)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_image_and_gif_autoplay)
@@ -2228,7 +2257,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
@@ -2284,8 +2315,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_link)
         TextView mSubredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_detail_link)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_link)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_link)
+        TextView mUserInstanceTextView;
         @BindView(R.id.author_flair_text_view_item_post_detail_link)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_link)
@@ -2347,7 +2382,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
@@ -2392,8 +2429,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_no_preview_link)
         TextView mSubredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_detail_no_preview_link)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_no_preview_link)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_no_preview_link)
+        TextView mUserInstanceTextView;
         @BindView(R.id.author_flair_text_view_item_post_detail_no_preview_link)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_no_preview_link)
@@ -2447,7 +2488,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
@@ -2537,8 +2580,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_gallery)
         TextView mSubredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_detail_gallery)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_gallery)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_gallery)
+        TextView mUserInstanceTextView;
         @BindView(R.id.author_flair_text_view_item_post_detail_gallery)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_gallery)
@@ -2596,7 +2643,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
@@ -2735,8 +2784,12 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         AspectRatioGifImageView mIconGifImageView;
         @BindView(R.id.subreddit_text_view_item_post_detail_text)
         TextView mSubredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_detail_text)
+        TextView mCommunityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_detail_text)
         TextView mUserTextView;
+        @BindView(R.id.user_instance_text_view_item_post_detail_text)
+        TextView mUserInstanceTextView;
         @BindView(R.id.author_flair_text_view_item_post_detail_text)
         TextView mAuthorFlairTextView;
         @BindView(R.id.post_time_text_view_item_post_detail_text)
@@ -2786,7 +2839,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ButterKnife.bind(this, itemView);
             setBaseView(mIconGifImageView,
                     mSubredditTextView,
+                    mCommunityInstanceTextView,
                     mUserTextView,
+                    mUserInstanceTextView,
                     mAuthorFlairTextView,
                     mPostTimeTextView,
                     mTitleTextView,
