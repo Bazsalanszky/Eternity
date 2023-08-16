@@ -182,36 +182,63 @@
 
     </com.nex3z.flowlayout.FlowLayout>
 
-    <com.nex3z.flowlayout.FlowLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:flRowVerticalGravity="center"
-        app:flChildSpacing="16dp"
-        app:flChildSpacingForLastRow="align"
-        app:flRowSpacing="8dp">
+        android:layout_height="match_parent">
 
         <eu.toldi.infinityforlemmy.customviews.AspectRatioGifImageView
             android:id="@+id/icon_gif_image_view_item_post_card_2_gallery_type"
             android:layout_width="24dp"
-            android:layout_height="24dp" />
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/subreddit_name_text_view_item_post_card_2_gallery_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="?attr/font_family"
             android:textSize="?attr/font_default"
-            android:fontFamily="?attr/font_family" />
+            app:layout_constraintStart_toEndOf="@+id/icon_gif_image_view_item_post_card_2_gallery_type"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/community_instance_text_view_item_post_card_2_gallery_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="?attr/font_family"
+            android:textSize="?attr/font_default"
+            app:layout_constraintStart_toEndOf="@+id/subreddit_name_text_view_item_post_card_2_gallery_type"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/user_text_view_item_post_card_2_gallery_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="?attr/font_family"
             android:textSize="?attr/font_default"
-            android:fontFamily="?attr/font_family" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/subreddit_name_text_view_item_post_card_2_gallery_type"
+            app:layout_constraintTop_toBottomOf="@+id/subreddit_name_text_view_item_post_card_2_gallery_type" />
 
-    </com.nex3z.flowlayout.FlowLayout>
+        <TextView
+            android:id="@+id/user_instance_text_view_item_post_card_2_gallery_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="?attr/font_family"
+            android:textSize="?attr/font_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/user_text_view_item_post_card_2_gallery_type" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_constraint_layout_item_post_card_2_gallery_type"

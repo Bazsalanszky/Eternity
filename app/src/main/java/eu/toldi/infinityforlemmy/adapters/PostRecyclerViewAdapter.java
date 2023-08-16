@@ -61,6 +61,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import javax.inject.Provider;
 
@@ -539,8 +540,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditName());
                     ((PostBaseViewHolder) holder).userTextView.setText(post.getAuthor());
                 } else {
-                    ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditNamePrefixed());
-                    ((PostBaseViewHolder) holder).userTextView.setText(authorPrefixed);
+                    ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditName());
+                    ((PostBaseViewHolder) holder).communityInstanceTextView.setText('@' + post.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
+                    ((PostBaseViewHolder) holder).userTextView.setText(post.getAuthor());
+                    ((PostBaseViewHolder) holder).userInstanceTextView.setText('@' + post.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
+                    ((PostBaseViewHolder) holder).communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
+                    ((PostBaseViewHolder) holder).userInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(post.isModerator() || post.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
                 }
 
                 ((PostBaseViewHolder) holder).userTextView.setTextColor(
@@ -1208,8 +1213,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     if (mHideSubredditAndUserPrefix) {
                         ((PostCompactBaseViewHolder) holder).nameTextView.setText(post.getSubredditName());
                     } else {
-                        ((PostCompactBaseViewHolder) holder).nameTextView.setText(post.getSubredditNamePrefixed());
+                        ((PostCompactBaseViewHolder) holder).nameTextView.setText(post.getSubredditName());
+                        ((PostCompactBaseViewHolder) holder).instanceTextView.setText('@' + post.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
+                        ((PostCompactBaseViewHolder) holder).instanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
                     }
+                    d
                 } else {
                     if (post.getAuthorIconUrl() == null) {
                         String authorName =  post.getAuthorNamePrefixed();
@@ -2349,7 +2357,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     public class PostBaseViewHolder extends RecyclerView.ViewHolder {
         AspectRatioGifImageView iconGifImageView;
         TextView subredditTextView;
+
+        TextView communityInstanceTextView;
         TextView userTextView;
+        TextView userInstanceTextView;
         ImageView stickiedPostImageView;
         TextView postTimeTextView;
         TextView titleTextView;
@@ -2382,7 +2393,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
         void setBaseView(AspectRatioGifImageView iconGifImageView,
                          TextView subredditTextView,
+                         TextView communityInstanceTextView,
                          TextView userTextView,
+                         TextView userInstanceTextView,
                          ImageView stickiedPostImageView,
                          TextView postTimeTextView,
                          TextView titleTextView,
@@ -2404,7 +2417,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ImageView shareButton) {
             this.iconGifImageView = iconGifImageView;
             this.subredditTextView = subredditTextView;
+            this.communityInstanceTextView = communityInstanceTextView;
             this.userTextView = userTextView;
+            this.userInstanceTextView = userInstanceTextView;
             this.stickiedPostImageView = stickiedPostImageView;
             this.postTimeTextView = postTimeTextView;
             this.titleTextView = titleTextView;
@@ -2942,7 +2957,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
         void setBaseView(AspectRatioGifImageView iconGifImageView,
                          TextView subredditTextView,
+                         TextView communityInstanceTextView,
                          TextView userTextView,
+                         TextView userInstanceTextView,
                          ImageView stickiedPostImageView,
                          TextView postTimeTextView,
                          TextView titleTextView,
@@ -2964,10 +2981,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ImageView shareButton, boolean itemViewIsNotCardView) {
             this.itemViewIsNotCardView = itemViewIsNotCardView;
 
-            setBaseView(iconGifImageView, subredditTextView, userTextView, stickiedPostImageView, postTimeTextView,
+            setBaseView(iconGifImageView, subredditTextView, communityInstanceTextView, userTextView, userInstanceTextView, stickiedPostImageView, postTimeTextView,
                     titleTextView, typeTextView, archivedImageView, lockedImageView, crosspostImageView,
                     nsfwTextView, spoilerTextView, flairTextView, awardsTextView, bottomConstraintLayout,
-                    upvoteButton, scoreTextView, downvoteTextView,downvoteButton, commentsCountTextView, saveButton, shareButton);
+                    upvoteButton, scoreTextView, downvoteTextView, downvoteButton, commentsCountTextView, saveButton, shareButton);
         }
 
         void markPostRead(Post post, boolean changePostItemColor) {
@@ -2997,8 +3014,13 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_post_video_type_autoplay)
         TextView subredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_video_type_autoplay)
+        TextView communityInstanceTextView;
+
         @BindView(R.id.user_text_view_item_post_video_type_autoplay)
         TextView userTextView;
+        @BindView(R.id.user_instance_text_view_item_post_video_type_autoplay)
+        TextView userInstanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_video_type_autoplay)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_video_type_autoplay)
@@ -3072,7 +3094,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
@@ -3320,8 +3344,14 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_post_with_preview)
         TextView subredditTextView;
+
+        @BindView(R.id.community_instance_text_view_item_post_with_preview)
+        TextView communityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_with_preview)
         TextView userTextView;
+
+        @BindView(R.id.user_instance_text_view_item_post_with_preview)
+        TextView userInstanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_with_preview)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_with_preview)
@@ -3383,7 +3413,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
@@ -3468,7 +3500,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         PostBaseGalleryTypeViewHolder(View rootView,
                                       AspectRatioGifImageView iconGifImageView,
                                       TextView subredditTextView,
+                                      TextView communityInstanceTextView,
                                       TextView userTextView,
+                                      TextView userInstanceTextView,
                                       ImageView stickiedPostImageView,
                                       TextView postTimeTextView,
                                       TextView titleTextView,
@@ -3497,7 +3531,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
@@ -3648,7 +3684,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             super(binding.getRoot(),
                     binding.iconGifImageViewItemPostGalleryType,
                     binding.subredditNameTextViewItemPostGalleryType,
+                    binding.communityInstanceTextViewItemPostGalleryType,
                     binding.userTextViewItemPostGalleryType,
+                    binding.userInstanceTextViewItemPostGalleryType,
                     binding.stickiedPostImageViewItemPostGalleryType,
                     binding.postTimeTextViewItemPostGalleryType,
                     binding.titleTextViewItemPostGalleryType,
@@ -3681,8 +3719,15 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_post_text_type)
         TextView subredditTextView;
+
+        @BindView(R.id.community_instance_text_view_item_post_text_type)
+        TextView communityInstanceTextView;
+
         @BindView(R.id.user_text_view_item_post_text_type)
         TextView userTextView;
+
+        @BindView(R.id.user_instance_text_view_item_post_text_type)
+        TextView userInstanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_text_type)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_text_type)
@@ -3732,7 +3777,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
@@ -3763,6 +3810,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     public class PostCompactBaseViewHolder extends RecyclerView.ViewHolder {
         AspectRatioGifImageView iconGifImageView;
         TextView nameTextView;
+
+        TextView instanceTextView;
         ImageView stickiedPostImageView;
         TextView postTimeTextView;
         ConstraintLayout titleAndImageConstraintLayout;
@@ -3802,7 +3851,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         }
 
         void setBaseView(AspectRatioGifImageView iconGifImageView,
-                         TextView nameTextView, ImageView stickiedPostImageView,
+                         TextView nameTextView, TextView instanceTextView, ImageView stickiedPostImageView,
                          TextView postTimeTextView, ConstraintLayout titleAndImageConstraintLayout,
                          TextView titleTextView, CustomTextView typeTextView,
                          ImageView archivedImageView, ImageView lockedImageView,
@@ -3819,6 +3868,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ImageView shareButton, View divider) {
             this.iconGifImageView = iconGifImageView;
             this.nameTextView = nameTextView;
+            this.instanceTextView = instanceTextView;
             this.stickiedPostImageView = stickiedPostImageView;
             this.postTimeTextView = postTimeTextView;
             this.titleAndImageConstraintLayout = titleAndImageConstraintLayout;
@@ -3861,17 +3911,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 constraintSet.clear(upvoteButton.getId(), ConstraintSet.START);
                 constraintSet.clear(scoreTextView.getId(), ConstraintSet.START);
                 constraintSet.clear(downvoteButton.getId(), ConstraintSet.START);
-                constraintSet.clear(downvoteTextView.getId(), ConstraintSet.START);
                 constraintSet.clear(saveButton.getId(), ConstraintSet.END);
                 constraintSet.clear(shareButton.getId(), ConstraintSet.END);
                 constraintSet.connect(upvoteButton.getId(), ConstraintSet.END, scoreTextView.getId(), ConstraintSet.START);
                 constraintSet.connect(scoreTextView.getId(), ConstraintSet.END, downvoteButton.getId(), ConstraintSet.START);
-                if (!mSeparateUpandDownVotes) {
-                    constraintSet.connect(downvoteButton.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
-                } else {
-                    constraintSet.connect(downvoteButton.getId(), ConstraintSet.END, downvoteTextView.getId(), ConstraintSet.START);
-                    constraintSet.connect(downvoteTextView.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
-                }
+                constraintSet.connect(downvoteButton.getId(), ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END);
                 constraintSet.connect(commentsCountTextView.getId(), ConstraintSet.START, saveButton.getId(), ConstraintSet.END);
                 constraintSet.connect(commentsCountTextView.getId(), ConstraintSet.END, upvoteButton.getId(), ConstraintSet.START);
                 constraintSet.connect(saveButton.getId(), ConstraintSet.START, shareButton.getId(), ConstraintSet.END);
@@ -4384,6 +4428,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.name_text_view_item_post_compact)
         TextView nameTextView;
+
+        @BindView(R.id.instance_name_text_view_item_post_compact)
+        TextView instanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_compact)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_compact)
@@ -4448,12 +4495,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            setBaseView(iconGifImageView, nameTextView, stickiedPostImageView, postTimeTextView,
+            setBaseView(iconGifImageView, nameTextView, instanceTextView, stickiedPostImageView, postTimeTextView,
                     titleAndImageConstraintLayout, titleTextView, typeTextView, archivedImageView,
                     lockedImageView, crosspostImageView, nsfwTextView, spoilerTextView,
                     flairTextView, awardsTextView, linkTextView, relativeLayout, progressBar, imageView,
                     playButtonImageView, noPreviewLinkImageFrameLayout, noPreviewLinkImageView,
-                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView, downvoteTextView,downvoteButton,
+                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView, downvoteTextView, downvoteButton,
                     commentsCountTextView, saveButton, shareButton, divider);
         }
     }
@@ -4463,6 +4510,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.name_text_view_item_post_compact_right_thumbnail)
         TextView nameTextView;
+        @BindView(R.id.instance_name_text_view_item_post_compact_right_thumbnail)
+        TextView instanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_compact_right_thumbnail)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_compact_right_thumbnail)
@@ -4527,12 +4576,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            setBaseView(iconGifImageView, nameTextView, stickiedPostImageView, postTimeTextView,
+            setBaseView(iconGifImageView, nameTextView, instanceTextView, stickiedPostImageView, postTimeTextView,
                     titleAndImageConstraintLayout, titleTextView, typeTextView, archivedImageView,
                     lockedImageView, crosspostImageView, nsfwTextView, spoilerTextView,
                     flairTextView, awardsTextView, linkTextView, relativeLayout, progressBar, imageView,
                     playButtonImageView, noPreviewLinkImageFrameLayout, noPreviewLinkImageView,
-                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView,downvoteTextView, downvoteButton,
+                    imageBarrier, bottomConstraintLayout, upvoteButton, scoreTextView, downvoteTextView, downvoteButton,
                     commentsCountTextView, saveButton, shareButton, divider);
         }
     }
@@ -4852,8 +4901,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_post_card_2_video_autoplay)
         TextView subredditTextView;
+        @BindView(R.id.community_instance_text_view_item_post_card_2_video_autoplay)
+        TextView communityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_card_2_video_autoplay)
         TextView userTextView;
+        @BindView(R.id.user_instance_text_view_item_post_card_2_video_autoplay)
+        TextView userInstanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_card_2_video_autoplay)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_card_2_video_autoplay)
@@ -4930,7 +4983,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
@@ -5178,8 +5233,13 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_post_card_2_with_preview)
         TextView subredditTextView;
+
+        @BindView(R.id.community_instance_text_view_item_post_card_2_with_preview)
+        TextView communityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_card_2_with_preview)
         TextView userTextView;
+        @BindView(R.id.user_instance_text_view_item_post_card_2_with_preview)
+        TextView userInstanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_card_2_with_preview)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_card_2_with_preview)
@@ -5241,7 +5301,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
@@ -5322,7 +5384,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             super(binding.getRoot(),
                     binding.iconGifImageViewItemPostCard2GalleryType,
                     binding.subredditNameTextViewItemPostCard2GalleryType,
+                    binding.communityInstanceTextViewItemPostCard2GalleryType,
                     binding.userTextViewItemPostCard2GalleryType,
+                    binding.userInstanceTextViewItemPostCard2GalleryType,
                     binding.stickiedPostImageViewItemPostCard2GalleryType,
                     binding.postTimeTextViewItemPostCard2GalleryType,
                     binding.titleTextViewItemPostCard2GalleryType,
@@ -5357,8 +5421,13 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         AspectRatioGifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_post_card_2_text)
         TextView subredditTextView;
+
+        @BindView(R.id.community_instance_text_view_item_post_card_2_text)
+        TextView communityInstanceTextView;
         @BindView(R.id.user_text_view_item_post_card_2_text)
         TextView userTextView;
+        @BindView(R.id.user_instance_text_view_item_post_card_2_text)
+        TextView userInstanceTextView;
         @BindView(R.id.stickied_post_image_view_item_post_card_2_text)
         ImageView stickiedPostImageView;
         @BindView(R.id.post_time_text_view_item_post_card_2_text)
@@ -5409,7 +5478,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             setBaseView(
                     iconGifImageView,
                     subredditTextView,
+                    communityInstanceTextView,
                     userTextView,
+                    userInstanceTextView,
                     stickiedPostImageView,
                     postTimeTextView,
                     titleTextView,
