@@ -54,6 +54,10 @@ public class SharedPreferencesUtils {
 
     public static final String COMMENT_SEPARATE_UP_AND_DOWN_VOTES = "comment_separate_down_and_up_votes";
 
+    public static final String POST_DISPLAY_NAME_INSTEAD_OF_USERNAME = "post_display_name_instead_of_user_name";
+
+    public static final String POST_DETAIL_DISPLAY_NAME_INSTEAD_OF_USERNAME = "post_detail_display_name_instead_of_user_name";
+
     public static final String SORT_TYPE_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.sort_type";
     public static final String SORT_TYPE_BEST_POST = "sort_type_best_post";
     public static final String SORT_TIME_BEST_POST = "sort_time_best_post";

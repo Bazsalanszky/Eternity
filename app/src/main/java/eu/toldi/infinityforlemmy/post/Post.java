@@ -8,6 +8,9 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import eu.toldi.infinityforlemmy.community.BasicCommunityInfo;
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
+
 /**
  * Created by alex on 3/1/18.
  */
@@ -33,13 +36,8 @@ public class Post implements Parcelable {
         }
     };
     private int id;
-    private String fullName;
-    private String subredditName;
-    private String subredditNamePrefixed;
-    private String subredditIconUrl;
-    private String author;
-    private String authorNamePrefixed;
-    private String authorIconUrl;
+    private BasicCommunityInfo communityInfo;
+    private BasicUserInfo author;
     private String title;
     private String selfText;
     private String selfTextPlain;
@@ -80,18 +78,15 @@ public class Post implements Parcelable {
     private ArrayList<Preview> previews = new ArrayList<>();
     private ArrayList<Gallery> gallery = new ArrayList<>();
 
-    public Post(int id, String fullName, String subredditName, String subredditNamePrefixed,
-                String author,String authorNamePrefixed, long postTimeMillis,
-                String title, String permalink, int downvotes,int upvotes, int postType, int voteType, int nComments,
+    public Post(int id, BasicCommunityInfo communityInfo,
+                BasicUserInfo userInfo, long postTimeMillis,
+                String title, String permalink, int downvotes, int upvotes, int postType, int voteType, int nComments,
                 int upvoteRatio,
                 boolean nsfw, boolean locked, boolean saved,
                 String distinguished, String suggestedSort) {
         this.id = id;
-        this.fullName = fullName;
-        this.subredditName = subredditName;
-        this.subredditNamePrefixed = subredditNamePrefixed;
-        this.author = author;
-        this.authorNamePrefixed = authorNamePrefixed;
+        this.communityInfo = communityInfo;
+        this.author = userInfo;
         this.postTimeMillis = postTimeMillis;
         this.title = title;
         this.permalink = permalink;
@@ -112,17 +107,14 @@ public class Post implements Parcelable {
         isRead = false;
     }
 
-    public Post(int id, String fullName, String subredditName, String subredditNamePrefixed,
-                String author, String authorNamePrefixed, long postTimeMillis, String title,
-                String url, String permalink, int downvotes,int upvotes, int postType, int voteType, int nComments,
+    public Post(int id, BasicCommunityInfo communityInfo,
+                BasicUserInfo author, long postTimeMillis, String title,
+                String url, String permalink, int downvotes, int upvotes, int postType, int voteType, int nComments,
                 int upvoteRatio,
-                boolean nsfw,  boolean locked, boolean saved, String distinguished, String suggestedSort) {
+                boolean nsfw, boolean locked, boolean saved, String distinguished, String suggestedSort) {
         this.id = id;
-        this.fullName = fullName;
-        this.subredditName = subredditName;
-        this.subredditNamePrefixed = subredditNamePrefixed;
+        this.communityInfo = communityInfo;
         this.author = author;
-        this.authorNamePrefixed = authorNamePrefixed;
         this.postTimeMillis = postTimeMillis;
         this.title = title;
         this.url = url;
@@ -146,13 +138,8 @@ public class Post implements Parcelable {
 
     protected Post(Parcel in) {
         id = in.readInt();
-        fullName = in.readString();
-        subredditName = in.readString();
-        subredditNamePrefixed = in.readString();
-        subredditIconUrl = in.readString();
-        author = in.readString();
-        authorNamePrefixed = in.readString();
-        authorIconUrl = in.readString();
+        communityInfo = in.readParcelable(BasicCommunityInfo.class.getClassLoader());
+        author = in.readParcelable(BasicUserInfo.class.getClassLoader());
         postTimeMillis = in.readLong();
         title = in.readString();
         selfText = in.readString();
@@ -195,27 +182,24 @@ public class Post implements Parcelable {
     }
 
     public String getFullName() {
-        return fullName;
+        return communityInfo.getQualifiedName();
     }
 
     public String getSubredditName() {
-        return subredditName;
+        return communityInfo.getDisplayName();
     }
 
     public String getSubredditNamePrefixed() {
-        return subredditNamePrefixed;
+        return communityInfo.getQualifiedName();
     }
 
     public String getSubredditIconUrl() {
-        return subredditIconUrl;
+        return communityInfo.getIcon();
     }
 
-    public void setSubredditIconUrl(String subredditIconUrl) {
-        this.subredditIconUrl = subredditIconUrl;
-    }
 
     public String getAuthor() {
-        return author;
+        return author.getDisplayName();
     }
 
     public boolean isAuthorDeleted() {
@@ -223,20 +207,19 @@ public class Post implements Parcelable {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
-        this.authorNamePrefixed = "u/" + author;
+
     }
 
     public String getAuthorNamePrefixed() {
-        return authorNamePrefixed;
+        return author.getQualifiedName();
     }
 
     public String getAuthorIconUrl() {
-        return authorIconUrl;
+        return (author.getAvatar() == null) ? "" : author.getAvatar();
     }
 
     public void setAuthorIconUrl(String authorIconUrl) {
-        this.authorIconUrl = authorIconUrl;
+
     }
 
     public long getPostTimeMillis() {
@@ -512,16 +495,19 @@ public class Post implements Parcelable {
         this.gallery = gallery;
     }
 
+    public BasicCommunityInfo getCommunityInfo() {
+        return communityInfo;
+    }
+
+    public BasicUserInfo getAuthorInfo() {
+        return author;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
-        parcel.writeString(fullName);
-        parcel.writeString(subredditName);
-        parcel.writeString(subredditNamePrefixed);
-        parcel.writeString(subredditIconUrl);
-        parcel.writeString(author);
-        parcel.writeString(authorNamePrefixed);
-        parcel.writeString(authorIconUrl);
+        parcel.writeParcelable(communityInfo, i);
+        parcel.writeParcelable(author, i);
         parcel.writeLong(postTimeMillis);
         parcel.writeString(title);
         parcel.writeString(selfText);

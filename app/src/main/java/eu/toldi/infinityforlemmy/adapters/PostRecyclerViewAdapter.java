@@ -227,6 +227,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean mHidePostFlair;
     private boolean mHideTheNumberOfAwards;
     private boolean mHideSubredditAndUserPrefix;
+    private boolean mShowDisplayNames;
     private boolean mHideTheNumberOfVotes;
 
     private boolean mSeparateUpandDownVotes;
@@ -313,6 +314,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mHidePostFlair = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_POST_FLAIR, false);
             mHideTheNumberOfAwards = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
             mHideSubredditAndUserPrefix = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
+            mShowDisplayNames = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_DISPLAY_NAME_INSTEAD_OF_USERNAME, true);
             mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
             mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
             mSeparateUpandDownVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
@@ -536,13 +538,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
                 String authorPrefixed = post.getAuthorNamePrefixed();
 
-                if (mHideSubredditAndUserPrefix) {
-                    ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditName());
-                    ((PostBaseViewHolder) holder).userTextView.setText(post.getAuthor());
-                } else {
-                    ((PostBaseViewHolder) holder).subredditTextView.setText(post.getSubredditName());
+                ((PostBaseViewHolder) holder).userTextView.setText((mShowDisplayNames) ? post.getAuthor() : post.getAuthorInfo().getUsername());
+                ((PostBaseViewHolder) holder).subredditTextView.setText((mShowDisplayNames) ? post.getSubredditName() : post.getCommunityInfo().getName());
+                if (!mHideSubredditAndUserPrefix) {
                     ((PostBaseViewHolder) holder).communityInstanceTextView.setText('@' + post.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
-                    ((PostBaseViewHolder) holder).userTextView.setText(post.getAuthor());
                     ((PostBaseViewHolder) holder).userInstanceTextView.setText('@' + post.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
                     ((PostBaseViewHolder) holder).communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
                     ((PostBaseViewHolder) holder).userInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(post.isModerator() || post.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
@@ -598,10 +597,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                                 .error(mGlide.load(R.drawable.subreddit_default_icon)
                                                         .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0))))
                                                 .into(((PostBaseViewHolder) holder).iconGifImageView);
-                                    }
-
-                                    if (holder.getBindingAdapterPosition() >= 0) {
-                                        post.setSubredditIconUrl(iconUrl);
                                     }
                                 }
                             });
@@ -1191,9 +1186,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                                 .into(((PostCompactBaseViewHolder) holder).iconGifImageView);
                                     }
 
-                                    if (holder.getBindingAdapterPosition() >= 0) {
-                                        post.setSubredditIconUrl(iconUrl);
-                                    }
                                 }
                             });
                         } else if (!post.getSubredditIconUrl().equals("")) {
@@ -1210,10 +1202,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
 
                     ((PostCompactBaseViewHolder) holder).nameTextView.setTextColor(mSubredditColor);
-                    if (mHideSubredditAndUserPrefix) {
-                        ((PostCompactBaseViewHolder) holder).nameTextView.setText(post.getSubredditName());
-                    } else {
-                        ((PostCompactBaseViewHolder) holder).nameTextView.setText(post.getSubredditName());
+                    ((PostCompactBaseViewHolder) holder).nameTextView.setText((mShowDisplayNames) ? post.getAuthor() : post.getAuthorInfo().getUsername());
+                    if (!mHideSubredditAndUserPrefix) {
                         ((PostCompactBaseViewHolder) holder).instanceTextView.setText('@' + post.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
                         ((PostCompactBaseViewHolder) holder).instanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
                     }

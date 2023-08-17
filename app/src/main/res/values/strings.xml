@@ -1365,4 +1365,6 @@
     <string name="action_unblock_user">Unblock User</string>
     <string name="unblock_user_success">Unblocked</string>
     <string name="unblock_user_failed">Failed to unblock user</string>
+    <string name="settings_hide_community_and_user_instance">Hide community and user instance</string>
+    <string name="settings_show_display_name_instead_of_user_name">Show community and user display names</string>
 </resources>
