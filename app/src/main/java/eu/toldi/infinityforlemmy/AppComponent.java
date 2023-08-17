@@ -66,6 +66,7 @@ import eu.toldi.infinityforlemmy.activities.ViewVideoActivity;
 import eu.toldi.infinityforlemmy.activities.WebViewActivity;
 import eu.toldi.infinityforlemmy.activities.WikiActivity;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.AccountChooserBottomSheetFragment;
+import eu.toldi.infinityforlemmy.bottomsheetfragments.CommentMoreBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FlairBottomSheetFragment;
 import eu.toldi.infinityforlemmy.fragments.BlockedCommunitiesListingFragment;
 import eu.toldi.infinityforlemmy.fragments.BlockedUsersListingFragment;
@@ -315,6 +316,8 @@ public interface AppComponent {
     void inject(BlockedCommunitiesListingFragment blockedCommunitiesListingFragment);
 
     void inject(BlockedUsersListingFragment blockedUsersListingFragment);
+
+    void inject(CommentMoreBottomSheetFragment commentMoreBottomSheetFragment);
 
 
     @Component.Factory

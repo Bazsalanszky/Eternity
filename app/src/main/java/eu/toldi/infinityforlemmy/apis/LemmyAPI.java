@@ -18,6 +18,8 @@ import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
 import eu.toldi.infinityforlemmy.dto.ReadCommentDTO;
 import eu.toldi.infinityforlemmy.dto.ReadMessageDTO;
 import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
+import eu.toldi.infinityforlemmy.dto.ReportCommentDTO;
+import eu.toldi.infinityforlemmy.dto.ReportPostDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
@@ -83,6 +85,10 @@ public interface LemmyAPI {
     Call<String> postCreate(@Body SubmitPostDTO params);
 
     @Headers("Content-Type: application/json")
+    @POST("api/v3/post/report")
+    Call<String> postReport(@Body ReportPostDTO params);
+
+    @Headers("Content-Type: application/json")
     @PUT("api/v3/post")
     Call<String> postUpdate(@Body EditPostDTO params);
 
@@ -137,6 +143,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/comment/like")
     Call<String> commentLike(@Body CommentVoteDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/comment/report")
+    Call<String> commentReport(@Body ReportCommentDTO params);
 
     @Headers("Content-Type: application/json")
     @POST("api/v3/community/follow")
