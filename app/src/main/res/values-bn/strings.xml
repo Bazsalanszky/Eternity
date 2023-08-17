@@ -13,8 +13,21 @@
     <string name="view_message_activity_label">ইনবক্স</string>
     <string name="account_saved_thing_activity_label">সংরক্ষণ</string>
     <string name="post_text_activity_label">লিখিত পোস্ট</string>
-    <string name="search_community_activity_label">কম্যুনিটি সমূহ</string>
+    <string name="search_community_activity_label">কম্যুনিটিসমূহ</string>
     <string name="settings_activity_label">পছন্দসমূহ</string>
     <string name="create_multi_reddit_activity_label">কম্যুনিটিগুচ্ছ বানান</string>
     <string name="community_multiselection_activity_label">কম্যুনিটিসমূহ বেছে নিন</string>
+    <string name="custom_theme_listing_activity_label">নিজস্ব সজ্জা</string>
+    <string name="customize_theme_activity_label">সজ্জার নিজস্বীকরন</string>
+    <string name="theme_preview_activity_label">সজ্জার প্রাকদর্শন</string>
+    <string name="edit_multi_reddit_activity_label">কম্যুনিটিগুচ্ছ সম্পাদনা করুন</string>
+    <string name="report_activity_label">অভিযোগ করুন</string>
+    <string name="view_imgur_media_activity_video_label">ভিডিও %1$d/%2$d</string>
+    <string name="view_imgur_media_activity_image_label">ছবি %1$d/%2$d</string>
+    <string name="send_private_message_activity_label">ব্যক্তিগত মেসেজ পাঠান</string>
+    <string name="view_reddit_gallery_activity_image_label">ছবি %1$d/%2$d</string>
+    <string name="view_reddit_gallery_activity_gif_label">গিফ %1$d/%2$d</string>
+    <string name="customize_theme_activity_create_theme_label">সজ্জা তৈরী করুন</string>
+    <string name="selected_subeddits_activity_label">বেছে নেওয়া কম্যুনিটিসমূহ</string>
+    <string name="view_reddit_gallery_activity_video_label">ভিডিও %1$d/%2$d</string>
 </resources>

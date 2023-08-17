@@ -1240,4 +1240,8 @@
     <string name="action_more_options">Erweiterte Optionen</string>
     <string name="invalid_response">Ungültige antwort vom Server erhalten</string>
     <string name="settings_hide_fab_in_post_feed">FAB im Post Feed verstecken</string>
+    <string name="history_activity_label">Verlauf</string>
+    <string name="history">Verlauf</string>
+    <string name="invalid_username_or_password">Falscher Nutzername/Passwort</string>
+    <string name="action_block_user">Nutzer blockieren</string>
 </resources>
