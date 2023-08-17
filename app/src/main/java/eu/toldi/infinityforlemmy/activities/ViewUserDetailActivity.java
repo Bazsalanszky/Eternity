@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -111,6 +113,7 @@ import eu.toldi.infinityforlemmy.user.FetchUserData;
 import eu.toldi.infinityforlemmy.user.UserDao;
 import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.user.UserFollowing;
+import eu.toldi.infinityforlemmy.user.UserStats;
 import eu.toldi.infinityforlemmy.user.UserViewModel;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
@@ -176,9 +179,27 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     ProgressBar progressBar;
     @BindView(R.id.subscribe_user_chip_view_user_detail_activity)
     Chip subscribeUserChip;
-    @BindView(R.id.karma_text_view_view_user_detail_activity)
-    TextView karmaTextView;
-    @BindView(R.id.cakeday_text_view_view_user_detail_activity)
+
+    @BindView(R.id.post_count_text_view_view_user_detail_activity)
+    TextView postCountTextView;
+
+    @BindView(R.id.comment_count_text_view_view_user_detail_activity)
+    TextView commentCountTextView;
+
+    @BindView(R.id.upvote_count_post_text_view_view_user_detail_activity)
+    TextView upvoteCountPostTextView;
+
+    @BindView(R.id.upvote_count_comment_text_view_view_user_detail_activity)
+    TextView upvoteCountCommentTextView;
+
+    @BindView(R.id.posts_count_icon_image_view_view_user_detail_activity)
+    ImageView postsCountIconImageView;
+    @BindView(R.id.comments_count_icon_image_view_view_user_detail_activity)
+    ImageView commentsCountIconImageView;
+    @BindView(R.id.account_created_cake_icon_image_view_view_user_detail_activity)
+    ImageView accountCreatedCakeIconImageView;
+
+    @BindView(R.id.cake_day_text_view_view_user_detail_activity)
     TextView cakedayTextView;
     @BindView(R.id.description_text_view_view_user_detail_activity)
     TextView descriptionTextView;
@@ -572,8 +593,15 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     getSupportActionBar().setTitle(userFullName);
                 }
                 String karma = "";//getString(R.string.karma_info_user_detail, userData.getTotalKarma(), userData.getLinkKarma(), userData.getCommentKarma());
-                karmaTextView.setText(karma);
-                cakedayTextView.setText(getString(R.string.cakeday_info, userData.getCakeday()));
+
+                cakedayTextView.setText((String) userData.getCakeday());
+                UserStats userStats = mUserData.getStats();
+                if (userStats != null) {
+                    postCountTextView.setText(String.valueOf(userStats.getPostCount()));
+                    commentCountTextView.setText(String.valueOf(userStats.getCommentCount()));
+                    upvoteCountPostTextView.setText(String.valueOf(userStats.getPostScore()));
+                    upvoteCountCommentTextView.setText(String.valueOf(userStats.getCommentScore()));
+                }
 
                 if (userData.getDescription() == null || userData.getDescription().equals("")) {
                     descriptionTextView.setVisibility(View.GONE);
@@ -641,7 +669,13 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         unsubscribedColor = mCustomThemeWrapper.getUnsubscribed();
         subscribedColor = mCustomThemeWrapper.getSubscribed();
         userNameTextView.setTextColor(mCustomThemeWrapper.getUsername());
-        karmaTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        postCountTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        upvoteCountPostTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        commentCountTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        upvoteCountCommentTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        postsCountIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        commentsCountIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        accountCreatedCakeIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         cakedayTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
         applyFABTheme(navigationWrapper.floatingActionButton, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
@@ -650,7 +684,10 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         applyTabLayoutTheme(tabLayout);
         if (typeface != null) {
             userNameTextView.setTypeface(typeface);
-            karmaTextView.setTypeface(typeface);
+            postCountTextView.setTypeface(typeface);
+            upvoteCountPostTextView.setTypeface(typeface);
+            commentCountTextView.setTypeface(typeface);
+            upvoteCountCommentTextView.setTypeface(typeface);
             cakedayTextView.setTypeface(typeface);
             subscribeUserChip.setTypeface(typeface);
             descriptionTextView.setTypeface(typeface);

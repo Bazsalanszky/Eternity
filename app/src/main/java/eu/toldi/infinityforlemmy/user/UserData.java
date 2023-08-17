@@ -49,6 +49,9 @@ public class UserData {
     @Ignore
     private boolean isSelected;
 
+    @Ignore
+    private UserStats stats;
+
     public boolean isSelected() {
         return isSelected;
     }
@@ -157,6 +160,10 @@ public class UserData {
         this.instanceId = instanceId;
     }
 
+    public UserStats getStats() {
+        return stats;
+    }
+
     public UserData(int id, String name, String displayName, String avatar, boolean banned, String published, String actorId, boolean local, boolean deleted, boolean admin, boolean botAccount, int instanceId) {
         this.id = id;
         this.name = name;
@@ -171,6 +178,23 @@ public class UserData {
         this.botAccount = botAccount;
         this.instanceId = instanceId;
     }
+
+    public UserData(int id, String name, String displayName, String avatar, boolean banned, String published, String actorId, boolean local, boolean deleted, boolean admin, boolean botAccount, int instanceId, UserStats stats) {
+        this.id = id;
+        this.name = name;
+        this.displayName = displayName;
+        this.avatar = avatar;
+        this.banned = banned;
+        this.published = published;
+        this.actorId = actorId;
+        this.local = local;
+        this.deleted = deleted;
+        this.admin = admin;
+        this.botAccount = botAccount;
+        this.instanceId = instanceId;
+        this.stats = stats;
+    }
+
 
     public boolean isCanBeFollowed() {
         return false;

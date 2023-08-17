@@ -28,6 +28,7 @@ public class ParseUserData {
 
 
         JSONObject personJson = (userDataJson.has("person_view")) ? userDataJson.getJSONObject("person_view").getJSONObject("person") : userDataJson.getJSONObject("person");
+        JSONObject countsJson = (userDataJson.has("person_view")) ? userDataJson.getJSONObject("person_view").getJSONObject("counts") : userDataJson.getJSONObject("counts");
         String userName = personJson.getString(JSONUtils.NAME_KEY);
         String actor_id = personJson.getString("actor_id");
         String iconImageUrl = "";
@@ -59,9 +60,13 @@ public class ParseUserData {
         if (!personJson.isNull("display_name")) {
             title = personJson.getString("display_name");
         }
+        int postCount = countsJson.optInt("post_count", 0);
+        int commentCount = countsJson.optInt("comment_count", 0);
+        int postScore = countsJson.optInt("post_score", 0);
+        int commentScore = countsJson.optInt("comment_score", 0);
+        UserStats userStats = new UserStats(postCount, postScore, commentCount, commentScore);
 
-
-        return new UserData(account_id,userName,title, iconImageUrl,isBanned,cakeday,actor_id,isLocal,isDeleted,isAdmin,isBot,instance_id);
+        return new UserData(account_id, userName, title, iconImageUrl, isBanned, cakeday, actor_id, isLocal, isDeleted, isAdmin, isBot, instance_id, userStats);
     }
 
     interface ParseUserDataListener {
