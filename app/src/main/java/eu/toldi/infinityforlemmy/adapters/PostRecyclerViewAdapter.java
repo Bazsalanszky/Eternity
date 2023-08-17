@@ -1202,7 +1202,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     }
 
                     ((PostCompactBaseViewHolder) holder).nameTextView.setTextColor(mSubredditColor);
-                    ((PostCompactBaseViewHolder) holder).nameTextView.setText((mShowDisplayNames) ? post.getAuthor() : post.getAuthorInfo().getUsername());
+                    ((PostCompactBaseViewHolder) holder).nameTextView.setText((mShowDisplayNames) ? post.getSubredditName() : post.getCommunityInfo().getName());
                     if (!mHideSubredditAndUserPrefix) {
                         ((PostCompactBaseViewHolder) holder).instanceTextView.setText('@' + post.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
                         ((PostCompactBaseViewHolder) holder).instanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
