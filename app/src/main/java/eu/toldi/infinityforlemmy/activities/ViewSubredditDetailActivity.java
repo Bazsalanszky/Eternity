@@ -3,6 +3,7 @@ package eu.toldi.infinityforlemmy.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
+import com.evernote.android.state.State;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -83,6 +86,7 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTimeBottomSheetFragmen
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
 import eu.toldi.infinityforlemmy.community.BlockCommunity;
+import eu.toldi.infinityforlemmy.community.CommunityStats;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.NavigationWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
@@ -163,12 +167,23 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     TextView communityFullNameTextView;
     @BindView(R.id.subscriber_count_text_view_view_subreddit_detail_activity)
     TextView nSubscribersTextView;
-    @BindView(R.id.online_subscriber_count_text_view_view_subreddit_detail_activity)
-    TextView nOnlineSubscribersTextView;
-    @BindView(R.id.since_text_view_view_subreddit_detail_activity)
-    TextView sinceTextView;
-    @BindView(R.id.creation_time_text_view_view_subreddit_detail_activity)
-    TextView creationTimeTextView;
+    @BindView(R.id.active_user_count_text_view_view_subreddit_detail_activity)
+    TextView nActiveUsersTextView;
+    @BindView(R.id.post_count_text_view_view_subreddit_detail_activity)
+    TextView nPostsTextView;
+    @BindView(R.id.comment_count_text_view_view_subreddit_detail_activity)
+    TextView nCommentsTextView;
+
+    @BindView(R.id.subscriber_count_image_view_view_subreddit_detail_activity)
+    ImageView nSubscribersImageView;
+    @BindView(R.id.active_user_count_image_view_view_subreddit_detail_activity)
+    ImageView nActiveUsersImageView;
+    @BindView(R.id.post_count_image_view_view_subreddit_detail_activity)
+    ImageView nPostsImageView;
+    @BindView(R.id.comment_count_image_view_view_subreddit_detail_activity)
+    ImageView nCommentsImageView;
+
+
     @BindView(R.id.description_text_view_view_subreddit_detail_activity)
     TextView descriptionTextView;
     @Inject
@@ -212,7 +227,10 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
     private int communityId;
 
-    private SubredditData communityData;
+    @State
+    SubredditData communityData;
+    @State
+    CommunityStats mCommunityStats;
     private String description;
 
     private String qualifiedName;
@@ -363,15 +381,12 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             mMessageFullname = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
 
-            if (mFetchSubredditInfoSuccess) {
-                nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, mNCurrentOnlineSubscribers));
-            }
         }
 
         checkNewAccountAndBindView();
 
         fetchSubredditData();
-        if (communityName != null) {
+        if (communityData != null) {
             setupVisibleElements();
         }
     }
@@ -417,9 +432,13 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         subscribeSubredditChip.setTextColor(mCustomThemeWrapper.getChipTextColor());
         int primaryTextColor = mCustomThemeWrapper.getPrimaryTextColor();
         nSubscribersTextView.setTextColor(primaryTextColor);
-        nOnlineSubscribersTextView.setTextColor(primaryTextColor);
-        sinceTextView.setTextColor(primaryTextColor);
-        creationTimeTextView.setTextColor(primaryTextColor);
+        nActiveUsersTextView.setTextColor(primaryTextColor);
+        nPostsTextView.setTextColor(primaryTextColor);
+        nCommentsTextView.setTextColor(primaryTextColor);
+        nSubscribersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nActiveUsersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nPostsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nCommentsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         descriptionTextView.setTextColor(primaryTextColor);
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
         applyTabLayoutTheme(tabLayout);
@@ -428,9 +447,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             subredditNameTextView.setTypeface(typeface);
             subscribeSubredditChip.setTypeface(typeface);
             nSubscribersTextView.setTypeface(typeface);
-            nOnlineSubscribersTextView.setTypeface(typeface);
-            sinceTextView.setTypeface(typeface);
-            creationTimeTextView.setTypeface(typeface);
+            nActiveUsersTextView.setTypeface(typeface);
+            nPostsTextView.setTypeface(typeface);
+            nCommentsTextView.setTypeface(typeface);
             descriptionTextView.setTypeface(typeface);
         }
         unsubscribedColor = mCustomThemeWrapper.getUnsubscribed();
@@ -554,7 +573,19 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 communityFullNameTextView.setText(qualifiedName);
                 String nSubscribers = getString(R.string.subscribers_number_detail, subredditData.getNSubscribers());
                 nSubscribersTextView.setText(nSubscribers);
-                creationTimeTextView.setText(subredditData.getCreatedUTC());
+
+                if (mCommunityStats != null) {
+                    nActiveUsersTextView.setText(getString(R.string.active_users_number_detail, mCommunityStats.getActiveUsers()));
+                    nPostsTextView.setText(getString(R.string.post_count_detail, mCommunityStats.getPosts()));
+                    nCommentsTextView.setText(getString(R.string.comment_count_detail, mCommunityStats.getComments()));
+                } else {
+                    nActiveUsersTextView.setVisibility(View.GONE);
+                    nPostsTextView.setVisibility(View.GONE);
+                    nCommentsTextView.setVisibility(View.GONE);
+                    nActiveUsersImageView.setVisibility(View.GONE);
+                    nPostsImageView.setVisibility(View.GONE);
+                    nCommentsImageView.setVisibility(View.GONE);
+                }
                 description = subredditData.getDescription();
 
 
@@ -694,13 +725,14 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     if (communityName == null) {
                         communityName = communityData.getTitle();
                     }
+                    mCommunityStats = communityData.getCommunityStats();
                     setupVisibleElements();
                     communityId = communityData.getId();
                     ViewSubredditDetailActivity.this.communityData = communityData;
                     setupSubscribeChip();
 
                     mNCurrentOnlineSubscribers = nCurrentOnlineSubscribers;
-                    nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, nCurrentOnlineSubscribers));
+
                     InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
                             communityData, () -> mFetchSubredditInfoSuccess = true);
                 }

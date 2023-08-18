@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import eu.toldi.infinityforlemmy.community.CommunityStats;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 
 public class ParseSubredditData {
@@ -71,8 +72,16 @@ public class ParseSubredditData {
         int instanceId = community.getInt("instance_id");
         int subscribers = (subredditDataJsonObject.has("counts")) ? subredditDataJsonObject.getJSONObject("counts").getInt("subscribers") : 0;
         boolean blocked = (subredditDataJsonObject.has("blocked")) ? subredditDataJsonObject.getBoolean("blocked") : true;
+        CommunityStats stats = null;
+        if (subredditDataJsonObject.has("counts")) {
+            JSONObject counts = subredditDataJsonObject.getJSONObject("counts");
+            int activeUserCount = counts.getInt("users_active_month");
+            int postCount = counts.getInt("posts");
+            int commentCount = counts.getInt("comments");
+            stats = new CommunityStats(subscribers, activeUserCount, postCount, commentCount);
+        }
 
-        return new SubredditData(id, name, title, description, removed, published, updated, deleted, isNSFW, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, blocked);
+        return new SubredditData(id, name, title, description, removed, published, updated, deleted, isNSFW, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, blocked, stats);
     }
 
     interface ParseSubredditDataListener {
