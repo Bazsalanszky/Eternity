@@ -1219,7 +1219,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             String baseURL = mRetrofit.getBaseURL().endsWith("/") ? mRetrofit.getBaseURL() : mRetrofit.getBaseURL() + "/";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + "/" + qualifiedName);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + "c/" + qualifiedName);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             } else {

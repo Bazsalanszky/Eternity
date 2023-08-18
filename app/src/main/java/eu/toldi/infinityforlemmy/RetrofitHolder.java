@@ -24,7 +24,11 @@ public class RetrofitHolder {
     }
 
     public String getBaseURL() {
-        return baseURL;
+        String result = baseURL;
+        if (baseURL.endsWith("/")) {
+            result = baseURL.substring(0, baseURL.length() - 1);
+        }
+        return result;
     }
 
     public RetrofitHolder(OkHttpClient okHttpClient) {

@@ -1255,7 +1255,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             String baseURL = mRetrofit.getBaseURL().endsWith("/") ? mRetrofit.getBaseURL() : mRetrofit.getBaseURL() + "/";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + qualifiedName);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + "u/" + qualifiedName);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             } else {
