@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -389,6 +390,23 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         if (communityData != null) {
             setupVisibleElements();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("ViewSubredditDetail", "onStart");
+        if (communityData != null) {
+            setupVisibleElements();
+        } else {
+            fetchSubredditData();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFetchSubredditInfoSuccess = false;
     }
 
     @Override

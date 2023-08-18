@@ -246,6 +246,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private String mAccountName;
     private String mAccountQualifiedName;
     private String username;
+
     private String qualifiedName;
     private String description;
     private boolean subscriptionReady = false;
@@ -320,7 +321,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             mFetchUserInfoSuccess = savedInstanceState.getBoolean(FETCH_USER_INFO_STATE);
             mMessageId = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
-            qualifiedName = savedInstanceState.getString(NEW_ACCOUNT_QUALIFIED_NAME_STATE);
+            qualifiedName = savedInstanceState.getString("qualified_name");
         }
 
         checkNewAccountAndInitializeViewPager();
@@ -330,6 +331,22 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         if (mUserData != null) {
             setupVisibleElements();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mUserData != null) {
+            setupVisibleElements();
+        } else {
+            fetchUserInfo();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFetchUserInfoSuccess = false;
     }
 
     private void setupVisibleElements() {
@@ -1134,7 +1151,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                 @Override
                 public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
                     mUserData = userData;
-                    username = userData.getName();
+                    username = userData.getDisplayName();
                     setupVisibleElements();
                     FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
 
@@ -1361,7 +1378,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         outState.putBoolean(FETCH_USER_INFO_STATE, mFetchUserInfoSuccess);
         outState.putInt(MESSAGE_FULLNAME_STATE, mMessageId);
         outState.putString(NEW_ACCOUNT_NAME_STATE, mNewAccountName);
-        outState.getString(NEW_ACCOUNT_QUALIFIED_NAME_STATE, mAccountQualifiedName);
+        outState.putString(NEW_ACCOUNT_QUALIFIED_NAME_STATE, mAccountQualifiedName);
+        outState.putString("qualified_name", qualifiedName);
     }
 
     @Override
