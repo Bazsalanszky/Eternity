@@ -49,7 +49,11 @@ public class UploadImageUtils {
         if (uploadMediaResponse.isSuccessful()) {
             JSONObject responseObject = new JSONObject(uploadMediaResponse.body());
             String fileName = responseObject.getJSONArray("files").getJSONObject(0).getString("file");
-            return mRetrofit.getBaseURL() + "/pictrs/image/" + fileName;
+            String baseURL = mRetrofit.getBaseURL();
+            if (baseURL.endsWith("/")) {
+                baseURL = baseURL.substring(0, baseURL.length() - 1);
+            }
+            return baseURL + "/pictrs/image/" + fileName;
         } else {
             return "Error: " + uploadMediaResponse.code();
         }
