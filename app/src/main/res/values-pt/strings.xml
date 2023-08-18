@@ -514,7 +514,7 @@
     <string name="theme_item_button_text_color">Cor Texto do Botão</string>
     <string name="theme_item_button_text_color_detail">Aplicado a: Texto do Botão</string>
     <string name="theme_item_chip_text_color">Cor do Texto Chip</string>
-    <string name="theme_item_chip_text_color_detail">Aplicado a: Botão Aderir</string>
+    <string name="theme_item_chip_text_color_detail">Aplicado a: Botão Subscrever</string>
     <string name="theme_item_link_color">Cor da Ligação</string>
     <string name="theme_item_link_color_detail">Aplicado ao: URL</string>
     <string name="theme_item_received_message_text_color">Cor do Texto de Mensagem Recebida</string>
@@ -588,9 +588,9 @@
     <string name="theme_item_stickied_post_icon_tint">Cor do Ícone de Publicação Afixada</string>
     <string name="theme_item_stickied_post_icon_tint_detail">Aplicado a: Ícone de Publicação Afixada</string>
     <string name="theme_item_subscribed_color">Membro</string>
-    <string name="theme_item_subscribed_color_detail">Aplicado a: Botão cancelar adesão</string>
-    <string name="theme_item_unsubscribed_color">Cancelar Adesão</string>
-    <string name="theme_item_unsubscribed_color_detail">Aplicado a: Botão aderir</string>
+    <string name="theme_item_subscribed_color_detail">Aplicado a: Botão cancelar subscrição</string>
+    <string name="theme_item_unsubscribed_color">Cancelar Subscrição</string>
+    <string name="theme_item_unsubscribed_color_detail">Aplicado a: Botão Subscrever</string>
     <string name="theme_item_username_color">Cor do Nome de Utilizador</string>
     <string name="theme_item_username_color_detail">Aplicado a: Nome de Utilizador</string>
     <string name="theme_item_community_color">Cor das Comunidades</string>
@@ -704,7 +704,7 @@
     <string name="report_reason_general_copyright_issue">Contém Problemas de Direitos de Autor</string>
     <string name="report_reason_general_child_pornography">Contém Pornografia Infantil</string>
     <string name="report_reason_general_abusive_content">Contém Conteúdo Abusivo</string>
-    <string name="subscribed_feed">Início</string>
+    <string name="subscribed_feed">Subscrito</string>
     <string name="local">Local</string>
     <string name="notifications">Notificações</string>
     <string name="messages">Mensagens</string>
