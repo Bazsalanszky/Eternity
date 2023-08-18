@@ -77,6 +77,7 @@ import eu.toldi.infinityforlemmy.fragments.InboxFragment;
 import eu.toldi.infinityforlemmy.fragments.MorePostsInfoFragment;
 import eu.toldi.infinityforlemmy.fragments.MultiRedditListingFragment;
 import eu.toldi.infinityforlemmy.fragments.PostFragment;
+import eu.toldi.infinityforlemmy.fragments.PrivateMessageFragment;
 import eu.toldi.infinityforlemmy.fragments.SidebarFragment;
 import eu.toldi.infinityforlemmy.fragments.SubredditListingFragment;
 import eu.toldi.infinityforlemmy.fragments.SubscribedSubredditsListingFragment;
@@ -319,6 +320,7 @@ public interface AppComponent {
 
     void inject(CommentMoreBottomSheetFragment commentMoreBottomSheetFragment);
 
+    void inject(PrivateMessageFragment privateMessageFragment);
 
     @Component.Factory
     interface Factory {

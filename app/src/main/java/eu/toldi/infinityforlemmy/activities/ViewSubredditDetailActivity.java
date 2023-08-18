@@ -1227,8 +1227,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
             return true;
         } else if (itemId == R.id.action_contact_mods_view_subreddit_detail_activity) {
-            Intent intent = new Intent(this, SendPrivateMessageActivity.class);
-            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + communityName);
+           /* Intent intent = new Intent(this, SendPrivateMessageActivity.class);
+            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + communityName);*/
             //startActivity(intent);
             return true;
         } else if (itemId == R.id.block_community_view_subreddit_detail_activity) {
