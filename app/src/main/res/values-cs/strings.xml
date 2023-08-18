@@ -7,7 +7,7 @@
     <string name="community_selection_activity_label">Vybrat subreddit</string>
     <string name="post_link_activity_label">Odkaz</string>
     <string name="post_image_activity_label">Obrázek</string>
-    <string name="post_video_activity_label">Video</string>
+    <string name="post_video_activity_label">Příspěvek s videem</string>
     <string name="rules_activity_label">Pravidla</string>
     <string name="search_community_activity_label">Subreddity</string>
     <string name="edit_post_activity_label">Upravit příspěvek</string>
@@ -94,15 +94,15 @@
 \nŤukněte pro opakování.</string>
     <string name="no_messages">Prázdné</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Dortový den:
 \n%1$s</string>
     <string name="since">Od:</string>
     <string name="profile">Profil</string>
     <string name="subscriptions">Odběry</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">Multikomunita</string>
     <string name="inbox">Pošta</string>
     <string name="upvoted">Hlasováno pro</string>
     <string name="downvoted">Hlasováno proti</string>
@@ -110,8 +110,8 @@
     <string name="saved">Uložené</string>
     <string name="gilded">Pozlacené</string>
     <string name="settings">Nastavení</string>
-    <string name="subscribers_number_detail">Odběratelů: %1$d</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d odběratelů</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Nepodařilo se získat informace o subredditu</string>
     <string name="cannot_fetch_user_info">Nepodařilo se získat informace o uživateli</string>
     <string name="cannot_fetch_sidebar">Nepodařilo se získat postranní menu</string>
@@ -195,14 +195,14 @@
     <string name="error_loading_rules_without_retry">Chyba při načítání pravidel</string>
     <string name="search_in">Hledat v</string>
     <string name="all_communities">Všechny subreddity</string>
-    <string name="sort_best">Nejlepší</string>
+    <string name="sort_best">Aktivní</string>
     <string name="sort_hot">Žhavé</string>
     <string name="sort_new">Nové</string>
     <string name="sort_random">Náhodné</string>
     <string name="sort_rising">Na vzestupu</string>
     <string name="sort_top">Nejčtenější</string>
     <string name="sort_controversial">Sporné</string>
-    <string name="sort_relevance">Relevance</string>
+    <string name="sort_relevance">Relevantnost</string>
     <string name="sort_comments">Komentáře</string>
     <string name="sort_activity">Aktivita</string>
     <string name="sort_confidence">Přesvědčení</string>
@@ -217,7 +217,7 @@
     <string name="sort_time_all_time">Za celou dobu</string>
     <string name="no_activity_found_for_share">Nemáte žádnou aplikaci, která by zvládla akci sdílení</string>
     <string name="archived_post_vote_unavailable">Archivovaný příspěvek. Hlasování nedostupné.</string>
-    <string name="archived_post_comment_unavailable">Archivovaný příspěvek. Komentování nedostupné</string>
+    <string name="archived_post_comment_unavailable">Archivovaný příspěvek. Komentování nedostupné.</string>
     <string name="archived_post_reply_unavailable">Archivovaný příspěvek. Odpovídání nedostupné.</string>
     <string name="locked_post_comment_unavailable">Uzamčený příspěvek. Komentování nedostupné.</string>
     <string name="locked_post_reply_unavailable">Uzamčený příspěvek. Odpovídání nedostupné.</string>
@@ -378,7 +378,7 @@
     <string name="settings_email_summary">docilealligator.app@gmail.com</string>
     <string name="settings_reddit_account_title">Reddit účet</string>
     <string name="settings_reddit_account_summary">u/Hostilenemy</string>
-    <string name="settings_community_title">Community</string>
+    <string name="settings_community_title">Komunita</string>
     <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
     <string name="settings_share_title">Sdílet</string>
     <string name="settings_share_summary">Pokud máte rádi tuto aplikaci, sdílejte ji s ostatními lidmi</string>
@@ -701,7 +701,7 @@
 \nChodí popředu.</string>
     <string name="edit_multi_reddit">Upravit multireddit</string>
     <string name="delete_multi_reddit">Odstranit multireddit</string>
-    <string name="n_awards">%1$d ocenění</string>
+    <string name="n_awards">%1$,d ocenění</string>
     <string name="one_award">1 ocenění</string>
     <string name="report">Nahlásit</string>
     <string name="reporting">Nahlašování</string>
@@ -712,7 +712,7 @@
     <string name="report_reason_general_copyright_issue">Obsahuje problém s autorskými právy</string>
     <string name="report_reason_general_child_pornography">Obsahuje dětskou pornografii</string>
     <string name="report_reason_general_abusive_content">Obsahuje zneužívající obsah</string>
-    <string name="subscribed_feed">Domů</string>
+    <string name="subscribed_feed">Odebíráno</string>
     <string name="local">Populární</string>
     <string name="notifications">Oznámení</string>
     <string name="messages">Zprávy</string>
@@ -740,8 +740,7 @@
     <string name="default_font_font_preview">Výchozí</string>
     <string name="load_video_in_redgifs">Zkusit načíst video na Redgifs</string>
     <string name="top_score">%1$s bodů</string>
-    <string name="login_activity_2fa_prompt">Pokud máte zapnuté dvoufázové ověření, zadejte prosím heslo v následujícím formátu: &lt;heslo&gt;:&lt;2FA kód&gt;.
-\nPříklad: mojeheslo:123456</string>
+    <string name="login_activity_2fa_prompt">Pokud máte zapnuté dvoufaktorové ověřování, vyplňte pole tokenu 2FA. V opačném případě jej ponechte prázdné</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
     <string name="give_award_activity_label">Dát ocenění</string>
     <string name="action_crosspost">Crosspost</string>
@@ -785,10 +784,7 @@
     <string name="settings_bottom_app_bar_option_4">Možnost 4</string>
     <string name="settings_bottom_app_bar_fab">Létající akční tlačítko</string>
     <string name="settings_data_saving_mode">Režim úspory dat</string>
-    <string name="settings_data_saving_mode_info_summary">V režimu úspory dat:
-\nNáhledové obrázky mají nižší rozlišení.
-\nReddit videa mají nižší rozlišení.
-\nAutomatické přehrávání videí je zakázáno.</string>
+    <string name="settings_data_saving_mode_info_summary">V režimu úspory dat: Náhledové obrázky mají nižší rozlišení. Videa Lemmy mají nižší rozlišení. Automatické přehrávání videí je zakázáno.</string>
     <string name="settings_translation_title">Překlad</string>
     <string name="settings_translation_summary">Přeložit tuto aplikaci na POEditoru. Děkujeme všem přispěvatelům.</string>
     <string name="settings_credits_national_flags">Národní vlajky</string>
@@ -918,7 +914,7 @@
     <string name="post_filter_usage_user">Uživatel: %1$s</string>
     <string name="post_filter_usage_user_all">Uživatel</string>
     <string name="post_filter_usage_multireddit">Multireddit: %1$s</string>
-    <string name="post_filter_usage_multireddit_all">Multireddit</string>
+    <string name="post_filter_usage_multireddit_all">Multikomunita</string>
     <string name="post_filter_usage_search">Hledat</string>
     <string name="community">Subreddit</string>
     <string name="user">Uživatel</string>
@@ -1000,7 +996,7 @@
     <string name="suggest_title">Navrhnout název</string>
     <string name="suggest_title_failed">Nepodařilo se navrhnout název</string>
     <string name="action_delete_logs">Smazat protokol</string>
-    <string name="inbox_with_count">Pošta (%1$d)</string>
+    <string name="inbox_with_count">Pošta (%1$,d)</string>
     <string name="comment_continue_thread">Pokračovat ve vlákně</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Posunout vertikálně pro návrat zpět z obrázku a GIFu</string>
     <string name="settings_hide_post_flair">Skrýt štítek příspěvku</string>
@@ -1147,4 +1143,138 @@
     <string name="message_change_banner_failed">Nepodařilo se změnit banner %s</string>
     <string name="message_save_profile_success">Profil úspěšně uložen</string>
     <string name="message_save_profile_failed">Nepodařilo se uložit profil %s</string>
+    <string name="action_block_user">Zablokovat uživatele</string>
+    <string name="action_create_github_issue">Vytvořit problém na Codebergu</string>
+    <string name="settings_backup_settings_summary">Heslo k souboru se zálohami je „123321“.</string>
+    <string name="comment_count_detail">%1$,d komentářů</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Skrýt karmu účtu</string>
+    <string name="voting_length">Délka hlasování: %1$d dní</string>
+    <string name="settings_custom_content_font_family_title">Vlastní rodina písem obsahu</string>
+    <string name="two_options_required">Správná anketa potřebuje alespoň dvě možnosti!</string>
+    <string name="no_activity_found_for_external_browser">Nenašli jsme aplikaci, která by dokázala otevřít daný odkaz</string>
+    <string name="settings_reddit_user_agreement_title">Smlouva s uživatelem Lemmy</string>
+    <string name="settings_require_authentication_to_show_accounts">Vyžadovat ověření pro zobrazení účtů</string>
+    <string name="settings_post_feed_max_resolution_warning_title">Pro zobrazení náhledů ve vyšším rozlišení zvyšte hodnotu. Aplikace se ale může neočekávaně ukončit.</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">Jednodušší ke sledování na celé obrazovce</string>
+    <string name="settings_hide_fab_in_post_feed">Skrýt akční tlačítko v kanálu příspěvků</string>
+    <string name="block_user_success">Zablokován</string>
+    <string name="block_user_failed">Nepodařilo se zablokovat uživatele</string>
+    <string name="clear_user_flair">Odstranit štítek</string>
+    <string name="clear_user_flair_success">Uživatelský štítek odstraněn</string>
+    <string name="extra_small">Extra malé</string>
+    <string name="select_a_ttf_font">Vyberte soubor s písmem ttf</string>
+    <string name="unable_to_load_font">Nepodařilo se načíst vlastní písmo</string>
+    <string name="user_agreement_message">Před přihlášením musíte souhlasit s uživatelskou smlouvou Lemmy (%1$s) a zásadami ochrany osobních údajů Infinity pro Lemmy (%2$s).</string>
+    <string name="unexpected_intent_action">Neočekávaná akce intentu: <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="storage_permission_denied">Oprávnění přístupu k úložišti bylo zamítnuto</string>
+    <string name="load_more_posts_failed">Nepodařilo se načíst další příspěvky.
+\nKlepnutím to zkusíte znovu.</string>
+    <string name="denied_notification_permission">Oprávnění k oznámením nebylo uděleno</string>
+    <string name="reddit_api_info">Od 1. července 2023 bude rozhraní Reddit API pro klienty třetích stran, mezi něž patří i Infinity for Reddit, placené. Oznámení společnosti Reddit naleznete zde: %1$s
+\n
+\nAbychom přežili tuto změnu, stane se aplikace Infinity po 1. červenci aplikací pouze s předplatným. Více informací o změnách najdete v tomto příspěvku: %2$s
+\n
+\nJe nutné, abyste po 1. červenci aktualizovali aplikaci Infinity, abyste získali novou verzi s možností předplatného. Žádná z předchozích verzí (včetně této) nebude po 1. červenci fungovat. Ale vzhledem k napjatému časovému plánu, který Reddit poskytl, nemusí být aktualizace k dispozici hned 1. července, protože vyžaduje řádné testování. Děkujeme za pochopení!</string>
+    <string name="block_community_success">Komunita zablokována!</string>
+    <string name="block_community_failed">Nepodařilo se zablokovat komunitu</string>
+    <string name="unblock_community">Odblokovat komunitu</string>
+    <string name="unblock_community_success">Komunita odblokována!</string>
+    <string name="unblock_community_failed">Nepodařilo se odblokovat komunitu</string>
+    <string name="instance_info">Informace o instanci</string>
+    <string name="action_unblock_user">Odblokovat uživatele</string>
+    <string name="unblock_user_success">Odblokován</string>
+    <string name="unblock_user_failed">Nepodařilo se odblokovat uživatele</string>
+    <string name="report_post">Nahlásit příspěvek</string>
+    <string name="bottom_sheet_post_poll">Anketa</string>
+    <string name="post_poll_activity_label">Příspěvek s anketou</string>
+    <string name="history_activity_label">Historie</string>
+    <string name="action_open_external_browser">Otevřít v prohlížeči</string>
+    <string name="action_more_options">Další možnosti</string>
+    <string name="anonymous_homepage_not_implemented">Anonymní domovská stránka zatím není implementována</string>
+    <string name="history">Historie</string>
+    <string name="block_user">Zablokovat uživatele</string>
+    <string name="settings_show_display_name_instead_of_user_name">Skrýt zobrazovaná jména komunity a uživatelů</string>
+    <string name="settings_hide_community_and_user_instance">Skrýt instanci komunity a uživatelů</string>
+    <string name="active_users_number_detail">%1$,d aktivních uživatelů</string>
+    <string name="post_count_detail">%1$,d příspěvků</string>
+    <string name="invalid_response">Neplatná odpověď ze serveru</string>
+    <string name="invalid_username_or_password">Neplatné uživatelské jméno nebo heslo</string>
+    <string name="settings_custom_font_family_title">Vlastní rodina písem</string>
+    <string name="settings_custom_title_font_family_title">Vlastní rodina písem nadpisů</string>
+    <string name="settings_fixed_height_preview_in_card_title">Pevná výška v kartě</string>
+    <string name="settings_hide_text_post_content">Skrýt obsah textových příspěvků</string>
+    <string name="settings_hide_comment_awards_title">Skrýt ocenění komentářů</string>
+    <string name="settings_show_fewer_toolbar_options_threshold_title">Zobrazit méně možností nástrojové lišty počínaje</string>
+    <string name="settings_show_fewer_toolbar_options_threshold_summary">Úroveň %1$d</string>
+    <string name="settings_show_author_avatar_title">Zobrazit avatar autora</string>
+    <string name="settings_always_show_child_comment_count_title">Vždy zobrazit počet podřazených komentářů</string>
+    <string name="settings_hide_upvote_ratio_title">Skrýt poměr hlasů</string>
+    <string name="settings_miscellaneous_dangerous_group_title">Nebezpečné</string>
+    <string name="settings_post_feed_max_resolution_title">Maximální rozlišení náhledu příspěvků v kanálu (šířka * výška)</string>
+    <string name="settings_reddit_video_default_resolution">Výchozí rozlišení videí Lemmy</string>
+    <string name="settings_comment_divider_type">Typ oddělovače komentářů</string>
+    <string name="edited">Upraveno</string>
+    <string name="edited_time">Upraveno %s</string>
+    <string name="unable_to_get_font_file">Nepodařilo se načíst vaše písmo</string>
+    <string name="unable_to_copy_font_file">Nepodařilo se zkopírovat vaše písmo</string>
+    <string name="reddit_gallery_item_caption_hint">Popisek (max. 180 znaků)</string>
+    <string name="reddit_gallery_item_url_hint">URL</string>
+    <string name="user_agreement_dialog_title">Uživatelská smlouva</string>
+    <string name="agree">Souhlasím</string>
+    <string name="do_not_agree">Nesouhlasím</string>
+    <string name="option_1_hint">Možnost 1 (vyžadována)</string>
+    <string name="option_2_hint">Možnost 2 (vyžadována)</string>
+    <string name="option_3_hint">Možnost 3</string>
+    <string name="option_4_hint">Možnost 4</string>
+    <string name="option_5_hint">Možnost 5</string>
+    <string name="option_6_hint">Možnost 6</string>
+    <string name="not_a_valid_number">Není platné číslo</string>
+    <string name="post_karma">Karma příspěvků:</string>
+    <string name="comment_karma">Karma komentářů:</string>
+    <string name="awarder_karma">Karma oceňovatele:</string>
+    <string name="awardee_karma">Karma z ocenění:</string>
+    <string name="handle_link">Zpracovat odkaz</string>
+    <string name="invalid_link">Neplatný odkaz</string>
+    <string name="enable_random_adaptation">Povolit náhodnou adaptaci</string>
+    <string name="error_unsupported_video">Médium zahrnuje stopy videa, žádné ale nelze na tomto zařízení přehrát</string>
+    <string name="error_unsupported_audio">Médium zahrnuje stopy zvuku, žádné ale nelze na tomto zařízení přehrát</string>
+    <string name="sample_list_load_error">Nepodařilo se načíst jeden nebo více vzorových seznamů</string>
+    <string name="exo_controls_volume_up_description">Zvýšení hlasitosti</string>
+    <string name="exo_controls_volume_off_description">Vypnutí hlasitosti</string>
+    <string name="invalid_regex">Neplatný vzor regex</string>
+    <string name="no_more_posts">Žádné další příspěvky</string>
+    <string name="image_index_in_gallery">%1$d/%2$d</string>
+    <string name="go_to_settings">Nastavení</string>
+    <string name="reddit_api_info_title">Důležité upozornění ohledně změn v API Redditu</string>
+    <string name="i_understand">Chápu</string>
+    <string name="instance_url">URL instance</string>
+    <string name="instance_url_hint">Adresa URL vaší preferované instance Lemmy s nebo bez předpony https://</string>
+    <string name="user_username">Uživatelské jméno</string>
+    <string name="user_password">Heslo</string>
+    <string name="user_2fa_token">Token 2FA (pokud je potřeba)</string>
+    <string name="user_login">Přihlásit se</string>
+    <string name="sort_time_6hours">6 hodin</string>
+    <string name="sort_time_12hours">12 hodin</string>
+    <string name="sort_time_3months">3 měsíce</string>
+    <string name="sort_time_6months">6 měsíců</string>
+    <string name="sort_time_9months">9 měsíců</string>
+    <string name="anonymous_account_instance">Instance s anonymním účtem</string>
+    <string name="url_cannot_be_null_or_empty">Adresa URL nesmí být nulová nebo prázdná</string>
+    <string name="could_not_resolve_link">Nepodařilo se rozpoznat URL :(</string>
+    <string name="mark_post_as_read_failed">Nepodařilo se označit příspěvky jako přečtené</string>
+    <string name="upload_image">Nahrát obrázek</string>
+    <string name="mentions">Zmínky</string>
+    <string name="replies">Odpovědi</string>
+    <string name="use_circular_fab">Použít kulaté akční tlačítko</string>
+    <string name="block_community">Zablokovat komunitu
+\n</string>
+    <string name="not_implemented">Funkce zatím nebyla implementována :(</string>
+    <string name="instance_cannot_be_empty">Pole instance nesmí být prázdné.</string>
+    <string name="username_cannot_be_empty">Pole uživatelského jména nesmí být prázdné.</string>
+    <string name="password_cannot_be_empty">Pole hesla nesmí být prázdné.</string>
+    <string name="separate_down_and_up_votes">Oddělit hlasy pro a proti</string>
+    <string name="blocked_communities">Zablokované komunity</string>
+    <string name="blocked_users">Zablokovaní uživatelé</string>
+    <string name="blocks">Blokování</string>
+    <string name="send_report">Odeslat hlášení</string>
 </resources>
