@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
+import eu.toldi.infinityforlemmy.privatemessage.LemmyPrivateMessageAPI;
 import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
 import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -225,5 +226,11 @@ abstract class NetworkModule {
     @Singleton
     static LemmyCommentAPI provideCommentAPI(@Named("no_oauth") RetrofitHolder retrofitHolder) {
         return new LemmyCommentAPI(retrofitHolder);
+    }
+
+    @Provides
+    @Singleton
+    static LemmyPrivateMessageAPI provideLemmyPrivateMessageAPI(@Named("base") RetrofitHolder retrofit) {
+        return new LemmyPrivateMessageAPI(retrofit);
     }
 }

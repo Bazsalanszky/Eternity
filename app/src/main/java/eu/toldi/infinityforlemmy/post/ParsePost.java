@@ -220,9 +220,6 @@ public class ParsePost {
         String authorAvatar = (!data.getJSONObject("creator").isNull("avatar")) ? data.getJSONObject("creator").getString("avatar") : null;
 
         Uri uri = Uri.parse(url);
-        if (uri.getAuthority() == null) {
-            Log.e("ParsePost", "parseData:" + uri.toString());
-        }
         String path = uri.getPath();
         boolean isVideo = path.endsWith(".mp4") || path.endsWith(".webm") || path.endsWith(".gifv");
 
