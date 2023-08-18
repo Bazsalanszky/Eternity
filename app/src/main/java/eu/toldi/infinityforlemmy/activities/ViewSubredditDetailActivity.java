@@ -506,7 +506,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         setSupportActionBar(toolbar);
         setToolbarGoToTop(toolbar);
 
-        glide = Glide.with(this);
+        glide = Glide.with(getApplication());
         Locale locale = getResources().getConfiguration().locale;
 
         MarkwonPlugin miscPlugin = new AbstractMarkwonPlugin() {

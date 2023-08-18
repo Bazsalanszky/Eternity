@@ -161,7 +161,7 @@ public class ViewImageOrGifActivity extends AppCompatActivity implements SetAsWa
             Slidr.attach(this, new SlidrConfig.Builder().position(SlidrPosition.VERTICAL).distanceThreshold(0.125f).build());
         }
 
-        glide = Glide.with(this);
+        glide = Glide.with(getApplication());
 
         handler = new Handler();
 

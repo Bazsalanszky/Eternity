@@ -152,7 +152,7 @@ public class TrendingActivity extends BaseActivity {
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -201,7 +201,7 @@ public class TrendingActivity extends BaseActivity {
         isRefreshing = true;
 
         errorLinearLayout.setVisibility(View.GONE);
-        Glide.with(this).clear(errorImageView);
+        Glide.with(getApplication()).clear(errorImageView);
         swipeRefreshLayout.setRefreshing(true);
         trendingSearches = null;
         adapter.setTrendingSearches(null);

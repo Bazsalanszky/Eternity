@@ -204,7 +204,7 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         mPostingSnackbar = Snackbar.make(coordinatorLayout, R.string.posting, Snackbar.LENGTH_INDEFINITE);
 

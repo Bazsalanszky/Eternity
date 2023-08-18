@@ -216,7 +216,7 @@ public class PostVideoActivity extends BaseActivity implements FlairBottomSheetF
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         player = new ExoPlayer.Builder(this).build();
         videoPlayerView.setPlayer(player);

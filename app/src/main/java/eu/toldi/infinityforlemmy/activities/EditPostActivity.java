@@ -172,7 +172,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
         contentEditText.setText(mPost.getSelfText());
         linkEditText.setText(mPost.getUrl());
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         if (mPost.getUrl() != null && mPost.getUrl().matches(picturePattern)) {
             loadImage();
@@ -354,7 +354,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
                 Uri imageUri = data.getData();
                 mExecutor.execute(() -> {
                     try {
-                        Bitmap bitmap = Glide.with(this).asBitmap().load(imageUri).submit().get();
+                        Bitmap bitmap = Glide.with(getApplication()).asBitmap().load(imageUri).submit().get();
                         String imageUrlOrError = UploadImageUtils.uploadImage(mRetrofit, mAccessToken, bitmap);
                         handler.post(() -> {
                             if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {

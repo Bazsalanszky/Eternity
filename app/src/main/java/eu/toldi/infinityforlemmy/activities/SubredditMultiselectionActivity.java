@@ -127,7 +127,7 @@ public class SubredditMultiselectionActivity extends BaseActivity implements Act
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         mSwipeRefreshLayout.setEnabled(false);
 

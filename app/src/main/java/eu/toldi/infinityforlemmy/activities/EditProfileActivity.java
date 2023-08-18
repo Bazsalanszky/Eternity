@@ -38,7 +38,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
@@ -52,6 +51,7 @@ import eu.toldi.infinityforlemmy.user.UserViewModel;
 import eu.toldi.infinityforlemmy.utils.EditProfileUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
@@ -135,7 +135,7 @@ public class EditProfileActivity extends BaseActivity {
             startPickImage(PICK_IMAGE_AVATAR_REQUEST_CODE);
         });
 
-        final RequestManager glide = Glide.with(this);
+        final RequestManager glide = Glide.with(getApplication());
         final UserViewModel.Factory userViewModelFactory =
                 new UserViewModel.Factory(getApplication(), mRedditDataRoomDatabase, mAccountName);
         final UserViewModel userViewModel =

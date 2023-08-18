@@ -204,7 +204,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
                     builder.linkColor(linkColor);
                 }
             };
-            Markwon postBodyMarkwon = MarkdownUtils.createFullRedditMarkwon(this,
+            Markwon postBodyMarkwon = MarkdownUtils.createFullRedditMarkwon(getApplication(),
                     miscPlugin, parentTextColor, parentSpoilerBackgroundColor, null);
             MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();
             binding.commentContentMarkdownView.setLayoutManager(new LinearLayoutManagerBugFixed(this));
@@ -226,7 +226,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
 
         setSupportActionBar(binding.commentToolbar);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         if (savedInstanceState != null) {
             selectedAccount = savedInstanceState.getParcelable(SELECTED_ACCOUNT_STATE);

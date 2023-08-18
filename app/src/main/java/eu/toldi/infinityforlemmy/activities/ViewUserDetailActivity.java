@@ -434,7 +434,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             });
         }
 
-        glide = Glide.with(this);
+        glide = Glide.with(getApplication());
         Locale locale = getResources().getConfiguration().locale;
 
         MarkwonPlugin miscPlugin = new AbstractMarkwonPlugin() {
