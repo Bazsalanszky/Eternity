@@ -175,7 +175,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mFragment = fragment;
         mExecutor = executor;
         mRetrofit = retrofit;
-        mGlide = Glide.with(activity);
+        mGlide = Glide.with(activity.getApplicationContext());
         mSecondaryTextColor = customThemeWrapper.getSecondaryTextColor();
         mCommentTextColor = customThemeWrapper.getCommentColor();
         int commentSpoilerBackgroundColor = mCommentTextColor | 0xFF000000;
