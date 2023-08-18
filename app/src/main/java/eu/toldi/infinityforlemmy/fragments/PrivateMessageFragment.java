@@ -110,7 +110,7 @@ public class PrivateMessageFragment extends Fragment implements FragmentCommunic
         }
 
 
-        mAdapter = new PrivateMessageRecycleViewAdapter(mActivity, mRetrofit.getRetrofit(), mCustomThemeWrapper, mAccessToken, mLemmyPrivateMessageAPI, () -> mMessageViewModel.retryLoadingMore());
+        mAdapter = new PrivateMessageRecycleViewAdapter(mActivity, mRetrofit.getRetrofit(), mCustomThemeWrapper, mAccessToken, mLemmyPrivateMessageAPI, () -> mMessageViewModel.refresh());
         mLinearLayoutManager = new LinearLayoutManagerBugFixed(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -133,19 +133,10 @@ public class PrivateMessageFragment extends Fragment implements FragmentCommunic
         PrivateMessageViewModel.Factory factory = new PrivateMessageViewModel.Factory(mRetrofit.getRetrofit(),
                 getResources().getConfiguration().locale, mAccessToken, mLemmyPrivateMessageAPI);
         mMessageViewModel = new ViewModelProvider(this, factory).get(PrivateMessageViewModel.class);
-        mMessageViewModel.getMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.submitList(messages));
+        mMessageViewModel.getPrivateMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.submitList(messages));
 
-        mMessageViewModel.hasMessage().observe(getViewLifecycleOwner(), hasMessage -> {
-            mSwipeRefreshLayout.setRefreshing(false);
-            if (hasMessage) {
-                mFetchMessageInfoLinearLayout.setVisibility(View.GONE);
-            } else {
-                mFetchMessageInfoLinearLayout.setOnClickListener(null);
-                showErrorView(R.string.no_messages);
-            }
-        });
 
-        mMessageViewModel.getInitialLoadingState().observe(getViewLifecycleOwner(), networkState -> {
+        mMessageViewModel.getInitialLoadState().observe(getViewLifecycleOwner(), networkState -> {
             if (networkState.getStatus().equals(NetworkState.Status.SUCCESS)) {
                 mSwipeRefreshLayout.setRefreshing(false);
             } else if (networkState.getStatus().equals(NetworkState.Status.FAILED)) {
@@ -161,9 +152,6 @@ public class PrivateMessageFragment extends Fragment implements FragmentCommunic
             }
         });
 
-        mMessageViewModel.getPaginationNetworkState().observe(getViewLifecycleOwner(), networkState -> {
-            mAdapter.setNetworkState(networkState);
-        });
 
         mSwipeRefreshLayout.setOnRefreshListener(this::onRefresh);
 
@@ -216,14 +204,14 @@ public class PrivateMessageFragment extends Fragment implements FragmentCommunic
 
     private void onRefresh() {
         mMessageViewModel.refresh();
-        mAdapter.setNetworkState(null);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     public PrivateMessage getMessageByIndex(int index) {
         if (mMessageViewModel == null || index < 0) {
             return null;
         }
-        PagedList<PrivateMessage> messages = mMessageViewModel.getMessages().getValue();
+        PagedList<PrivateMessage> messages = mMessageViewModel.getPrivateMessages().getValue();
         if (messages == null) {
             return null;
         }
