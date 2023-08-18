@@ -214,7 +214,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             }
             return true;
         };
-        mCommentMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
+        mCommentMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity.getApplication(),
                 miscPlugin, mCommentTextColor, commentSpoilerBackgroundColor, onLinkLongClickListener);
         recycledViewPool = new RecyclerView.RecycledViewPool();
         mAccessToken = accessToken;

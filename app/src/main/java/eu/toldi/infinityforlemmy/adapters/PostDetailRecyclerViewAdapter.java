@@ -294,7 +294,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             }
             return true;
         };
-        mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
+        mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity.getApplication(),
                 miscPlugin, markdownColor, postSpoilerBackgroundColor, onLinkLongClickListener);
         mMarkwonAdapter = MarkdownUtils.createTablesAdapter();
 

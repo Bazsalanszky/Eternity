@@ -147,7 +147,7 @@ public class SidebarFragment extends Fragment {
             urlMenuBottomSheetFragment.show(getChildFragmentManager(), null);
             return true;
         };
-        Markwon markwon = MarkdownUtils.createFullRedditMarkwon(activity,
+        Markwon markwon = MarkdownUtils.createFullRedditMarkwon(activity.getApplication(),
                 miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener);
         MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();
 

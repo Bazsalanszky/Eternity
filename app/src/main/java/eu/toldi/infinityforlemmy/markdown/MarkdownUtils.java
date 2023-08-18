@@ -1,5 +1,6 @@
 package eu.toldi.infinityforlemmy.markdown;
 
+import android.app.Application;
 import android.content.Context;
 import android.text.util.Linkify;
 
@@ -29,10 +30,11 @@ import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 public class MarkdownUtils {
     /**
      * Creates a Markwon instance with all the plugins required for processing Reddit's markdown.
+     *
      * @return configured Markwon instance
      */
     @NonNull
-    public static Markwon createFullRedditMarkwon(@NonNull Context context,
+    public static Markwon createFullRedditMarkwon(@NonNull Application context,
                                                   @NonNull MarkwonPlugin miscPlugin,
                                                   int markdownColor,
                                                   int spoilerBackgroundColor,

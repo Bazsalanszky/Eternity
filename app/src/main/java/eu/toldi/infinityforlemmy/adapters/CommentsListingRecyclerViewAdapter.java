@@ -168,7 +168,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
             }
             return true;
         };
-        mMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
+        mMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity.getApplication(),
                 miscPlugin, mCommentColor, commentSpoilerBackgroundColor, onLinkLongClickListener);
         recycledViewPool = new RecyclerView.RecycledViewPool();
     }
