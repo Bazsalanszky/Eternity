@@ -108,6 +108,7 @@ import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.user.BlockUser;
 import eu.toldi.infinityforlemmy.user.FetchUserData;
 import eu.toldi.infinityforlemmy.user.UserDao;
@@ -1268,7 +1269,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             }
 
             Intent pmIntent = new Intent(this, SendPrivateMessageActivity.class);
-            pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, username);
+            pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USER_INFO, new BasicUserInfo(mUserData.getId(), username, qualifiedName, mUserData.getAvatar(), mUserData.getDisplayName()));
             startActivity(pmIntent);
             return true;
         } else if (itemId == R.id.action_add_to_post_filter_view_user_detail_activity) {

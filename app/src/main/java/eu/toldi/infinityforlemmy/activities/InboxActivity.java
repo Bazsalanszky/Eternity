@@ -181,7 +181,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
                 if (i == EditorInfo.IME_ACTION_DONE) {
                     Utils.hideKeyboard(this);
                     Intent pmIntent = new Intent(this, SendPrivateMessageActivity.class);
-                    pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, thingEditText.getText().toString());
+                    //pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, thingEditText.getText().toString());
                     startActivity(pmIntent);
                     return true;
                 }
@@ -194,7 +194,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
                             -> {
                         Utils.hideKeyboard(this);
                         Intent pmIntent = new Intent(this, SendPrivateMessageActivity.class);
-                        pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, thingEditText.getText().toString());
+                        //pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, thingEditText.getText().toString());
                         startActivity(pmIntent);
                     })
                     .setNegativeButton(R.string.cancel, null)
@@ -331,7 +331,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
         if (resultCode == RESULT_OK && requestCode == SEARCH_USER_REQUEST_CODE && data != null) {
             String username = data.getStringExtra(SearchActivity.EXTRA_RETURN_USER_NAME);
             Intent intent = new Intent(this, SendPrivateMessageActivity.class);
-            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, username);
+            //intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, username);
             startActivity(intent);
         }
     }
