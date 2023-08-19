@@ -24,7 +24,7 @@ public class LemmySectionRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
     private static final int VIEW_TYPE_MENU_ITEM = 2;
     private static final int LEMMY_SECTION_ITEMS = 2;
 
-    private static final int LEMMY_SECTION_ANONYMOUS_ITEMS = 1;
+    private static final int LEMMY_SECTION_ANONYMOUS_ITEMS = 2;
     private final boolean isLoggedIn;
 
     private BaseActivity baseActivity;
@@ -93,9 +93,15 @@ public class LemmySectionRecyclerViewAdapter extends RecyclerView.Adapter<Recycl
                     drawableId = R.drawable.ic_baseline_info_24;
                     break;
                 case 2:
-                    stringId = R.string.blocks;
-                    drawableId = R.drawable.ic_outline_lock_24dp;
-                    break;
+                    if (isLoggedIn) {
+                        stringId = R.string.blocks;
+                        drawableId = R.drawable.ic_outline_lock_24dp;
+                        break;
+                    } else {
+                        stringId = R.string.anonymous_account_instance;
+                        drawableId = R.drawable.ic_account_circle_24dp;
+                        break;
+                    }
             }
 
             ((MenuItemViewHolder) holder).menuTextView.setText(stringId);
