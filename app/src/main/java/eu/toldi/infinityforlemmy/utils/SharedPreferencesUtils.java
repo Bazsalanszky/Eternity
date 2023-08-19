@@ -411,4 +411,6 @@ public class SharedPreferencesUtils {
     public static final String ACCOUNT_INSTANCE = "account_instance";
     public static final String ACCOUNT_QUALIFIED_NAME = "account_qualified_name";
     public static final String CAN_DOWNVOTE = "can_downvote";
+    public static final String SHOW_STATISTICS = "show_statistics";
+    public static final String SHOW_POST_AND_COMMENT_SCORE = "show_score";
 }

@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -197,8 +198,16 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     ImageView postsCountIconImageView;
     @BindView(R.id.comments_count_icon_image_view_view_user_detail_activity)
     ImageView commentsCountIconImageView;
+
+    @BindView(R.id.upvote_count_posts_icon_image_view_view_user_detail_activity)
+    ImageView postUpvoteCountIconImageView;
+    @BindView(R.id.upvote_count_comments_icon_image_view_view_user_detail_activity)
+    ImageView commentUpvoteCountIconImageView;
     @BindView(R.id.account_created_cake_icon_image_view_view_user_detail_activity)
     ImageView accountCreatedCakeIconImageView;
+
+    @BindView(R.id.user_statistics_block_view_user_detail_activity)
+    ConstraintLayout userStatisticsBlock;
 
     @BindView(R.id.cake_day_text_view_view_user_detail_activity)
     TextView cakedayTextView;
@@ -250,6 +259,9 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
     private String qualifiedName;
     private String description;
+
+    private boolean showStatistics;
+    private boolean showScore;
     private boolean subscriptionReady = false;
     private boolean mFetchUserInfoSuccess = false;
     private int expandedTabTextColor;
@@ -314,6 +326,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
 
+        showStatistics = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_STATISTICS, true);
+        showScore = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_POST_AND_COMMENT_SCORE, true);
 
         if (savedInstanceState == null) {
             mMessageId = getIntent().getIntExtra(EXTRA_MESSAGE_FULLNAME, 0);
@@ -614,11 +628,20 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
                 cakedayTextView.setText((String) userData.getCakeday());
                 UserStats userStats = mUserData.getStats();
-                if (userStats != null) {
+                if (userStats != null && showStatistics) {
                     postCountTextView.setText(String.valueOf(userStats.getPostCount()));
                     commentCountTextView.setText(String.valueOf(userStats.getCommentCount()));
-                    upvoteCountPostTextView.setText(String.valueOf(userStats.getPostScore()));
-                    upvoteCountCommentTextView.setText(String.valueOf(userStats.getCommentScore()));
+                    if (showScore) {
+                        upvoteCountPostTextView.setText(String.valueOf(userStats.getPostScore()));
+                        upvoteCountCommentTextView.setText(String.valueOf(userStats.getCommentScore()));
+                    } else {
+                        upvoteCountPostTextView.setVisibility(View.GONE);
+                        upvoteCountCommentTextView.setVisibility(View.GONE);
+                        postUpvoteCountIconImageView.setVisibility(View.GONE);
+                        commentUpvoteCountIconImageView.setVisibility(View.GONE);
+                    }
+                } else {
+                    userStatisticsBlock.setVisibility(View.GONE);
                 }
 
                 if (userData.getDescription() == null || userData.getDescription().equals("")) {

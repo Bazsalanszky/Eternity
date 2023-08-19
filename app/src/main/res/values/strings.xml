@@ -1372,4 +1372,7 @@
     <string name="settings_show_display_name_instead_of_user_name">Show community and user display names</string>
     <string name="report_post">Report Post</string>
     <string name="send_report">Send Report</string>
+    <string name="settings_category_community_and_user_pages_title">Community and User pages</string>
+    <string name="settings_show_statistics">Show Statistics</string>
+    <string name="settings_show_post_and_comment_score">Show post and comment scores</string>
 </resources>

@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -184,6 +185,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     @BindView(R.id.comment_count_image_view_view_subreddit_detail_activity)
     ImageView nCommentsImageView;
 
+    @BindView(R.id.community_statistics_block_view_subreddit_detail_activity)
+    ConstraintLayout communityStatisticsBlock;
+
 
     @BindView(R.id.description_text_view_view_subreddit_detail_activity)
     TextView descriptionTextView;
@@ -257,6 +261,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private int fabOption;
     private MaterialAlertDialogBuilder nsfwWarningBuilder;
 
+    private boolean showStatistics;
+
     private boolean hideSubredditDescription;
 
     @Override
@@ -270,6 +276,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         ButterKnife.bind(this);
 
         hideFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_FAB_IN_POST_FEED, false);
+        showStatistics = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_STATISTICS, true);
         showBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.BOTTOM_APP_BAR_KEY, false);
         navigationWrapper = new NavigationWrapper(findViewById(R.id.bottom_app_bar_bottom_app_bar), findViewById(R.id.linear_layout_bottom_app_bar),
                 findViewById(R.id.option_1_bottom_app_bar), findViewById(R.id.option_2_bottom_app_bar),
@@ -592,17 +599,12 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 String nSubscribers = getString(R.string.subscribers_number_detail, subredditData.getNSubscribers());
                 nSubscribersTextView.setText(nSubscribers);
 
-                if (mCommunityStats != null) {
+                if (mCommunityStats != null && showStatistics) {
                     nActiveUsersTextView.setText(getString(R.string.active_users_number_detail, mCommunityStats.getActiveUsers()));
                     nPostsTextView.setText(getString(R.string.post_count_detail, mCommunityStats.getPosts()));
                     nCommentsTextView.setText(getString(R.string.comment_count_detail, mCommunityStats.getComments()));
                 } else {
-                    nActiveUsersTextView.setVisibility(View.GONE);
-                    nPostsTextView.setVisibility(View.GONE);
-                    nCommentsTextView.setVisibility(View.GONE);
-                    nActiveUsersImageView.setVisibility(View.GONE);
-                    nPostsImageView.setVisibility(View.GONE);
-                    nCommentsImageView.setVisibility(View.GONE);
+                    communityStatisticsBlock.setVisibility(View.GONE);
                 }
                 description = subredditData.getDescription();
 

@@ -85,7 +85,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/user_statistics_block_view_user_detail_activity">
 
                         <TextView
                             android:id="@+id/post_stats_text_view_view_user_detail_activity"
