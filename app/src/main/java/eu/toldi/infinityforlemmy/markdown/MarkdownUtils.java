@@ -59,7 +59,7 @@ public class MarkdownUtils {
     }
 
     @NonNull
-    public static Markwon createDescriptionMarkwon(Context context, MarkwonPlugin miscPlugin,
+    public static Markwon createDescriptionMarkwon(Application context, MarkwonPlugin miscPlugin,
                                                    BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener) {
         return Markwon.builder(context)
                 .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {

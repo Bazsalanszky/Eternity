@@ -531,7 +531,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             return true;
         };
 
-        Markwon markwon = MarkdownUtils.createDescriptionMarkwon(this, miscPlugin, onLinkLongClickListener);
+        Markwon markwon = MarkdownUtils.createDescriptionMarkwon(getApplication(), miscPlugin, onLinkLongClickListener);
 
         descriptionTextView.setOnLongClickListener(view -> {
             if (description != null && !description.equals("") && descriptionTextView.getSelectionStart() == -1 && descriptionTextView.getSelectionEnd() == -1) {
