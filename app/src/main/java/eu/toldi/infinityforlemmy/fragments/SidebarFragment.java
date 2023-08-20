@@ -2,6 +2,7 @@ package eu.toldi.infinityforlemmy.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,14 +10,18 @@ import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.evernote.android.state.State;
 
 import java.util.concurrent.Executor;
 
@@ -34,6 +39,7 @@ import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
 import eu.toldi.infinityforlemmy.asynctasks.InsertSubredditData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CopyTextBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
+import eu.toldi.infinityforlemmy.community.CommunityStats;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
@@ -60,6 +66,27 @@ public class SidebarFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.markdown_recycler_view_sidebar_fragment)
     RecyclerView recyclerView;
+
+    @BindView(R.id.subscriber_count_text_view_sidebar_fragment)
+    TextView nSubscribersTextView;
+    @BindView(R.id.active_user_count_text_view_sidebar_fragment)
+    TextView nActiveUsersTextView;
+    @BindView(R.id.post_count_text_view_sidebar_fragment)
+    TextView nPostsTextView;
+    @BindView(R.id.comment_count_text_view_sidebar_fragment)
+    TextView nCommentsTextView;
+
+    @BindView(R.id.subscriber_count_image_view_sidebar_fragment)
+    ImageView nSubscribersImageView;
+    @BindView(R.id.active_user_count_image_view_sidebar_fragment)
+    ImageView nActiveUsersImageView;
+    @BindView(R.id.post_count_image_view_sidebar_fragment)
+    ImageView nPostsImageView;
+    @BindView(R.id.comment_count_image_view_sidebar_fragment)
+    ImageView nCommentsImageView;
+
+    @BindView(R.id.community_statistics_block_sidebar_fragment)
+    ConstraintLayout communityStatisticsBlock;
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
@@ -80,6 +107,9 @@ public class SidebarFragment extends Fragment {
     private LinearLayoutManagerBugFixed linearLayoutManager;
     private int markdownColor;
     private String sidebarDescription;
+
+    @State
+    CommunityStats mCommunityStats;
 
     public SidebarFragment() {
         // Required empty public constructor
@@ -105,6 +135,16 @@ public class SidebarFragment extends Fragment {
 
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(mCustomThemeWrapper.getCircularProgressBarBackground());
         swipeRefreshLayout.setColorSchemeColors(mCustomThemeWrapper.getColorAccent());
+        int primaryTextColor = mCustomThemeWrapper.getPrimaryTextColor();
+        nSubscribersTextView.setTextColor(primaryTextColor);
+        nActiveUsersTextView.setTextColor(primaryTextColor);
+        nPostsTextView.setTextColor(primaryTextColor);
+        nCommentsTextView.setTextColor(primaryTextColor);
+        nSubscribersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nActiveUsersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nPostsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nCommentsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+
         markdownColor = mCustomThemeWrapper.getPrimaryTextColor();
         int spoilerBackgroundColor = markdownColor | 0xFF000000;
 
@@ -180,6 +220,16 @@ public class SidebarFragment extends Fragment {
             } else {
                 fetchSubredditData();
             }
+
+            if (mCommunityStats != null) {
+                communityStatisticsBlock.setVisibility(View.VISIBLE);
+                nSubscribersTextView.setText(getString(R.string.subscribers_number_detail, mCommunityStats.getSubscribers()));
+                nActiveUsersTextView.setText(getString(R.string.active_users_number_detail, mCommunityStats.getActiveUsers()));
+                nPostsTextView.setText(getString(R.string.post_count_detail, mCommunityStats.getPosts()));
+                nCommentsTextView.setText(getString(R.string.comment_count_detail, mCommunityStats.getComments()));
+            } else {
+                fetchSubredditData();
+            }
         });
 
         swipeRefreshLayout.setOnRefreshListener(this::fetchSubredditData);
@@ -199,6 +249,7 @@ public class SidebarFragment extends Fragment {
             @Override
             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 swipeRefreshLayout.setRefreshing(false);
+                mCommunityStats = subredditData.getCommunityStats();
                 InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
                         subredditData, () -> swipeRefreshLayout.setRefreshing(false));
             }
