@@ -76,11 +76,12 @@
                         app:chipStrokeColor="#00000000"  />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/community_statistics_block_view_subreddit_detail_activity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
-                        android:id="@+id/community_statistics_block_view_subreddit_detail_activity">
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/subscriber_count_image_view_view_subreddit_detail_activity"

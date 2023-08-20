@@ -86,6 +86,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:id="@+id/user_statistics_block_view_user_detail_activity">
 
                         <TextView

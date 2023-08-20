@@ -600,11 +600,10 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 nSubscribersTextView.setText(nSubscribers);
 
                 if (mCommunityStats != null && showStatistics) {
+                    communityStatisticsBlock.setVisibility(View.VISIBLE);
                     nActiveUsersTextView.setText(getString(R.string.active_users_number_detail, mCommunityStats.getActiveUsers()));
                     nPostsTextView.setText(getString(R.string.post_count_detail, mCommunityStats.getPosts()));
                     nCommentsTextView.setText(getString(R.string.comment_count_detail, mCommunityStats.getComments()));
-                } else {
-                    communityStatisticsBlock.setVisibility(View.GONE);
                 }
                 description = subredditData.getDescription();
 

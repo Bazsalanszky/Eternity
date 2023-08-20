@@ -629,6 +629,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                 cakedayTextView.setText((String) userData.getCakeday());
                 UserStats userStats = mUserData.getStats();
                 if (userStats != null && showStatistics) {
+                    userStatisticsBlock.setVisibility(View.VISIBLE);
                     postCountTextView.setText(String.valueOf(userStats.getPostCount()));
                     commentCountTextView.setText(String.valueOf(userStats.getCommentCount()));
                     if (showScore) {
@@ -640,8 +641,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                         postUpvoteCountIconImageView.setVisibility(View.GONE);
                         commentUpvoteCountIconImageView.setVisibility(View.GONE);
                     }
-                } else {
-                    userStatisticsBlock.setVisibility(View.GONE);
                 }
 
                 if (userData.getDescription() == null || userData.getDescription().equals("")) {
