@@ -400,7 +400,7 @@
     <string name="settings_tab_3_summary">Вкладка 3</string>
     <string name="settings_tab_title">Назва</string>
     <string name="settings_tab_post_type">Тип</string>
-    <string name="settings_tab_community_name">Назва спільноти (без префікса @)</string>
+    <string name="settings_tab_community_name">Назва спільноти (без частини «@сервер»)</string>
     <string name="settings_tab_multi_reddit_name">Шлях мультиспільноти (/user/yourusername/m/yourmulticommunityname) (лише маленькі літери)</string>
     <string name="settings_tab_username">Ім\'я користувача (без префікса u/)</string>
     <string name="no_developer_easter_egg">Тут нема опцій розробника</string>
@@ -1112,7 +1112,7 @@
     <string name="app_lock_timeout_12_hours">12 годин</string>
     <string name="app_lock_timeout_24_hours">24 години</string>
     <string name="edit_profile_activity_label">Змінити профіль</string>
-    <string name="action_contact_mods">Моди контактів</string>
+    <string name="action_contact_mods">Написати модераторам</string>
     <string name="settings_save_nsfw_media_in_different_folder_title">Зберігати НБДР-медіа в інше місце</string>
     <string name="settings_nsfw_download_location_title">Місце завантаження НБДР</string>
     <string name="fetch_streamable_video_failed">Не вдалося отримати потоковий відеозапис</string>
@@ -1212,7 +1212,7 @@
     <string name="anonymous_homepage_not_implemented">Анонімну домашню сторінку ще не реалізовано</string>
     <string name="user_username">Ім\'я користувача</string>
     <string name="upload_image">Завантажити зображення</string>
-    <string name="settings_hide_community_and_user_instance">Ховати спільноту й instance користувача</string>
+    <string name="settings_hide_community_and_user_instance">Ховати спільноту і сервер користувача</string>
     <string name="settings_show_display_name_instead_of_user_name">Показувати спільноту і відображувані імена користувачів</string>
     <string name="active_users_number_detail">%1$,d активних користувачів</string>
     <string name="post_count_detail">%1$,d дописів</string>
@@ -1249,7 +1249,7 @@
     <string name="blocks">Заблоковане</string>
     <string name="blocked_communities">Заблоковані спільноти</string>
     <string name="username_cannot_be_empty">Ім\'я користувача не може бути порожнім.</string>
-    <string name="instance_cannot_be_empty">Instance не може бути порожнім.</string>
+    <string name="instance_cannot_be_empty">Сервер не може бути порожнім.</string>
     <string name="block_community">Заблокувати спільноту
 \n</string>
     <string name="mentions">Згадки</string>
@@ -1260,4 +1260,11 @@
     <string name="could_not_resolve_link">Не вдалося визначити URL :(</string>
     <string name="reddit_api_info_title">Важливе повідомлення щодо змін у Reddit API</string>
     <string name="separate_down_and_up_votes">Розділяти голоси вгору і вниз</string>
+    <string name="settings_show_statistics">Показувати статистику</string>
+    <string name="settings_category_community_and_user_pages_title">Сторінки спільнот і користувачів</string>
+    <string name="settings_show_post_and_comment_score">Показувати оцінки дописів і коментарів</string>
+    <string name="instance_info">Про сервер</string>
+    <string name="instance_url">URL сервера</string>
+    <string name="anonymous_account_instance">Сервер анонімної обліківки</string>
+    <string name="instance_url_hint">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
 </resources>
