@@ -81,7 +81,7 @@ public class RulesRecyclerViewAdapter extends RecyclerView.Adapter<RulesRecycler
             }
             return true;
         };
-        markwon = MarkdownUtils.createFullRedditMarkwon(activity.getApplication(),
+        markwon = MarkdownUtils.createFullRedditMarkwon(activity,
                 miscPlugin, mPrimaryTextColor, spoilerBackgroundColor, onLinkLongClickListener);
     }
 

@@ -138,7 +138,7 @@ public class FullMarkdownActivity extends BaseActivity {
                 builder.linkColor(linkColor);
             }
         };
-        Markwon markwon = MarkdownUtils.createFullRedditMarkwon(getApplication(),
+        Markwon markwon = MarkdownUtils.createFullRedditMarkwon(this,
                 miscPlugin, markdownColor, spoilerBackgroundColor, null);
 
         MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();

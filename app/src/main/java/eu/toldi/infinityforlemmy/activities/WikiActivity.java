@@ -175,7 +175,7 @@ public class WikiActivity extends BaseActivity {
             urlMenuBottomSheetFragment.show(getSupportFragmentManager(), null);
             return true;
         };
-        markwon = MarkdownUtils.createFullRedditMarkwon(getApplication(),
+        markwon = MarkdownUtils.createFullRedditMarkwon(this,
                 miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener);
 
         markwonAdapter = MarkdownUtils.createTablesAdapter();

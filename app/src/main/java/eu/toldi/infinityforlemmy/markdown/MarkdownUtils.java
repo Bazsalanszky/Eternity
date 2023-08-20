@@ -1,6 +1,6 @@
 package eu.toldi.infinityforlemmy.markdown;
 
-import android.app.Application;
+import android.app.Activity;
 import android.content.Context;
 import android.text.util.Linkify;
 
@@ -34,13 +34,13 @@ public class MarkdownUtils {
      * @return configured Markwon instance
      */
     @NonNull
-    public static Markwon createFullRedditMarkwon(@NonNull Application context,
+    public static Markwon createFullRedditMarkwon(@NonNull Activity context,
                                                   @NonNull MarkwonPlugin miscPlugin,
                                                   int markdownColor,
                                                   int spoilerBackgroundColor,
                                                   @Nullable BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener) {
         return Markwon.builder(context)
-                .usePlugin(GlideImagesPlugin.create(context))
+                .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
                 .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
                     plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
                 }))
@@ -59,7 +59,7 @@ public class MarkdownUtils {
     }
 
     @NonNull
-    public static Markwon createDescriptionMarkwon(Application context, MarkwonPlugin miscPlugin,
+    public static Markwon createDescriptionMarkwon(Activity context, MarkwonPlugin miscPlugin,
                                                    BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener) {
         return Markwon.builder(context)
                 .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
@@ -73,7 +73,7 @@ public class MarkdownUtils {
                         .setOnLinkLongClickListener(onLinkLongClickListener)))
                 .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
                 .usePlugin(TableEntryPlugin.create(context))
-                .usePlugin(GlideImagesPlugin.create(context))
+                .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
                 .usePlugin(new MarkwonLemmyLinkPlugin())
                 .build();
     }
