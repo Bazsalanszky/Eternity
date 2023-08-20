@@ -1691,6 +1691,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             bundle.putString(SidebarFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             bundle.putString(SidebarFragment.EXTRA_SUBREDDIT_NAME, communityName);
             bundle.putString(SidebarFragment.EXTRA_COMMUNITY_QUALIFIED_NAME, qualifiedName);
+            bundle.putBoolean(SidebarFragment.EXTRA_SHOW_STATISTICS, !showStatistics);
             fragment.setArguments(bundle);
             return fragment;
         }

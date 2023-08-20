@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.evernote.android.state.State;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.concurrent.Executor;
 
@@ -36,6 +37,7 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
+import eu.toldi.infinityforlemmy.adapters.ModeratorRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.asynctasks.InsertSubredditData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CopyTextBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
@@ -46,6 +48,7 @@ import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditViewModel;
+import eu.toldi.infinityforlemmy.user.BasicUserRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
@@ -61,11 +64,16 @@ public class SidebarFragment extends Fragment {
     public static final String EXTRA_SUBREDDIT_NAME = "ESN";
     public static final String EXTRA_ACCESS_TOKEN = "EAT";
     public static final String EXTRA_COMMUNITY_QUALIFIED_NAME = "ECQN";
+
+    public static final String EXTRA_SHOW_STATISTICS = "ESS";
     public SubredditViewModel mSubredditViewModel;
     @BindView(R.id.swipe_refresh_layout_sidebar_fragment)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.markdown_recycler_view_sidebar_fragment)
     RecyclerView recyclerView;
+
+    @BindView(R.id.recycler_view_moderators_side_fragment)
+    RecyclerView moderatorsRecyclerView;
 
     @BindView(R.id.subscriber_count_text_view_sidebar_fragment)
     TextView nSubscribersTextView;
@@ -87,6 +95,19 @@ public class SidebarFragment extends Fragment {
 
     @BindView(R.id.community_statistics_block_sidebar_fragment)
     ConstraintLayout communityStatisticsBlock;
+
+    @BindView(R.id.moderators_text_view_sidebar_fragment)
+    TextView moderatorsTextView;
+
+    @BindView(R.id.moderators_card_sidebar_fragment)
+    MaterialCardView moderatorsCard;
+
+    @BindView(R.id.description_card_sidebar_fragment)
+    MaterialCardView descriptionCard;
+
+    @BindView(R.id.statistics_card_sidebar_fragment)
+    MaterialCardView statisticsCard;
+
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
@@ -103,6 +124,8 @@ public class SidebarFragment extends Fragment {
     private String mAccessToken;
     private String subredditName;
 
+    private boolean mShowStatistics;
+
     private String communityQualifiedName;
     private LinearLayoutManagerBugFixed linearLayoutManager;
     private int markdownColor;
@@ -110,6 +133,7 @@ public class SidebarFragment extends Fragment {
 
     @State
     CommunityStats mCommunityStats;
+    private BasicUserRecyclerViewAdapter moderatorAdapter;
 
     public SidebarFragment() {
         // Required empty public constructor
@@ -128,6 +152,7 @@ public class SidebarFragment extends Fragment {
         mAccessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         subredditName = getArguments().getString(EXTRA_SUBREDDIT_NAME);
         communityQualifiedName = getArguments().getString(EXTRA_COMMUNITY_QUALIFIED_NAME);
+        mShowStatistics = getArguments().getBoolean(EXTRA_SHOW_STATISTICS, true);
         if (communityQualifiedName == null) {
             Toast.makeText(activity, R.string.error_getting_community_name, Toast.LENGTH_SHORT).show();
             return rootView;
@@ -135,15 +160,26 @@ public class SidebarFragment extends Fragment {
 
         swipeRefreshLayout.setProgressBackgroundColorSchemeColor(mCustomThemeWrapper.getCircularProgressBarBackground());
         swipeRefreshLayout.setColorSchemeColors(mCustomThemeWrapper.getColorAccent());
+        int mCardViewBackgroundColor = mCustomThemeWrapper.getCardViewBackgroundColor();
         int primaryTextColor = mCustomThemeWrapper.getPrimaryTextColor();
         nSubscribersTextView.setTextColor(primaryTextColor);
         nActiveUsersTextView.setTextColor(primaryTextColor);
         nPostsTextView.setTextColor(primaryTextColor);
         nCommentsTextView.setTextColor(primaryTextColor);
+        moderatorsTextView.setTextColor(primaryTextColor);
+        moderatorsTextView.setTypeface(activity.contentTypeface);
         nSubscribersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         nActiveUsersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         nPostsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         nCommentsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        moderatorsCard.setCardBackgroundColor(mCardViewBackgroundColor);
+        descriptionCard.setCardBackgroundColor(mCardViewBackgroundColor);
+        if (mShowStatistics) {
+            statisticsCard.setCardBackgroundColor(mCardViewBackgroundColor);
+        } else {
+            statisticsCard.setVisibility(View.GONE);
+        }
+
 
         markdownColor = mCustomThemeWrapper.getPrimaryTextColor();
         int spoilerBackgroundColor = markdownColor | 0xFF000000;
@@ -206,6 +242,11 @@ public class SidebarFragment extends Fragment {
             }
         });
 
+        moderatorsRecyclerView.setLayoutManager(new LinearLayoutManagerBugFixed(activity));
+        moderatorAdapter = new ModeratorRecyclerViewAdapter(activity,
+                mCustomThemeWrapper);
+        moderatorsRecyclerView.setAdapter(moderatorAdapter);
+
         mSubredditViewModel = new ViewModelProvider(activity,
                 new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, LemmyUtils.qualifiedCommunityName2ActorId(communityQualifiedName)))
                 .get(SubredditViewModel.class);
@@ -250,6 +291,7 @@ public class SidebarFragment extends Fragment {
             public void onFetchSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers) {
                 swipeRefreshLayout.setRefreshing(false);
                 mCommunityStats = subredditData.getCommunityStats();
+                moderatorAdapter.setUsers(subredditData.getModerators());
                 InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
                         subredditData, () -> swipeRefreshLayout.setRefreshing(false));
             }

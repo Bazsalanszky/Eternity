@@ -16,7 +16,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import eu.toldi.infinityforlemmy.community.CommunityStats;
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
 public class ParseSubredditData {
     public static void parseSubredditData(String response, ParseSubredditDataListener parseSubredditDataListener) {
@@ -80,7 +82,6 @@ public class ParseSubredditData {
             int commentCount = counts.getInt("comments");
             stats = new CommunityStats(subscribers, activeUserCount, postCount, commentCount);
         }
-
         return new SubredditData(id, name, title, description, removed, published, updated, deleted, isNSFW, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, blocked, stats);
     }
 
@@ -120,6 +121,16 @@ public class ParseSubredditData {
                 JSONObject data = jsonResponse.getJSONObject("community_view");
                 mNCurrentOnlineSubscribers = 0;// data.getInt(JSONUtils.ACTIVE_USER_COUNT_KEY);
                 subredditData = parseSubredditData(data, true);
+                JSONArray moderators = jsonResponse.getJSONArray("moderators");
+                for (int i = 0; i < moderators.length(); i++) {
+                    JSONObject moderator = moderators.getJSONObject(i).getJSONObject("moderator");
+                    int mod_id = moderator.getInt("id");
+                    String mod_name = moderator.getString("name");
+                    String mod_displayName = moderator.optString("display_name", mod_name);
+                    String mod_qualified_name = LemmyUtils.actorID2FullName(moderator.getString("actor_id"));
+                    String avatarUrl = moderator.optString("avatar", "");
+                    subredditData.addModerator(new BasicUserInfo(mod_id, mod_name, mod_qualified_name, avatarUrl, mod_displayName));
+                }
             } catch (JSONException e) {
                 parseFailed = true;
                 e.printStackTrace();

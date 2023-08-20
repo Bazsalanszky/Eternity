@@ -9,7 +9,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import eu.toldi.infinityforlemmy.community.CommunityStats;
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 
 @Entity(tableName = "subreddits")
 public class SubredditData implements Parcelable {
@@ -75,6 +79,9 @@ public class SubredditData implements Parcelable {
 
     @Ignore
     private CommunityStats communityStats;
+
+    @Ignore
+    private List<BasicUserInfo> moderators = new ArrayList<>();
 
     protected SubredditData(Parcel in) {
         id = in.readInt();
@@ -365,5 +372,13 @@ public class SubredditData implements Parcelable {
 
     public void setCommunityStats(CommunityStats communityStats) {
         this.communityStats = communityStats;
+    }
+
+    public List<BasicUserInfo> getModerators() {
+        return moderators;
+    }
+
+    public void addModerator(BasicUserInfo moderator) {
+        moderators.add(moderator);
     }
 }
