@@ -905,7 +905,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             loadedComments.add(comments.get(i).getId());
         }
         if (mIsSingleCommentThreadMode) {
-            notifyItemRangeInserted(sizeBefore, comments.size() + 1);
+            int offset = (comments.size() > 0) ? 1 : 0;
+            notifyItemRangeInserted(sizeBefore, comments.size() + offset);
         } else {
             notifyItemRangeInserted(sizeBefore, comments.size());
         }
