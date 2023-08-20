@@ -1057,14 +1057,14 @@
     <string name="settings_use_bottom_toolbar_in_media_viewer_title">Викор. нижню панель засобів під час перегляду медіа</string>
     <string name="settings_secure_mode_title">Безпечний режим</string>
     <string name="settings_secure_mode_summary">Заборонено зімки екрана і запис відео. Нема передперегляду при перемиканні застосунків.</string>
-    <string name="discard_dialog_button">Відхилити</string>
+    <string name="discard_dialog_button">Скасувати зміни</string>
     <string name="error_loading_wiki">Помилка завантаження вікі</string>
     <string name="no_wiki">Ця спільнота не має вікі-сторінки</string>
     <string name="material_you_notification_title">Застосування Material You</string>
     <string name="action_go_to_wiki">Перейти до Вікі</string>
     <string name="action_playback_speed">Швидкість відтворення</string>
     <string name="about">Про</string>
-    <string name="settings_link_handler_title">Обробка посилань</string>
+    <string name="settings_link_handler_title">Обробник посилань</string>
     <string name="settings_main_page_back_button_action">Дія кнопки «Назад» на основній сторінці</string>
     <string name="settings_open_navigation_drawer">Відкрити шторку переходів</string>
     <string name="settings_number_of_columns_in_post_feed_unfolded_portrait_title">Портрет (Не згорнуто)</string>
@@ -1267,4 +1267,8 @@
     <string name="instance_url">URL сервера</string>
     <string name="anonymous_account_instance">Сервер анонімної обліківки</string>
     <string name="instance_url_hint">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
+    <string name="moderators">Модератори</string>
+    <string name="enable_random_adaptation">Увімкнути випадкову адаптацію</string>
+    <string name="handle_link">Обробка посилань</string>
+    <string name="sample_list_load_error">Не вдалося завантажити один або кілька списків зразків</string>
 </resources>
