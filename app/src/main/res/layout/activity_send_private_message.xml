@@ -23,77 +23,75 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <EditText
-                android:id="@+id/username_edit_text_send_private_message_activity"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#00000000"
-                android:gravity="top"
-                android:hint="@string/send_message_username_hint"
-                android:inputType="textCapSentences|textMultiLine"
-                android:paddingTop="16dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp"
-                android:textColor="?attr/primaryTextColor"
-                android:textSize="?attr/content_font_18"
-                android:fontFamily="?attr/content_font_family" />
+                android:orientation="vertical">
 
-            <View
-                android:id="@+id/divider_1_send_private_message_activity"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="16dp" />
+                <EditText
+                    android:id="@+id/username_edit_text_send_private_message_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:fontFamily="?attr/content_font_family"
+                    android:gravity="top"
+                    android:hint="@string/send_message_username_hint"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="?attr/content_font_18" />
 
-            <EditText
-                android:id="@+id/subjet_edit_text_send_private_message_activity"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#00000000"
-                android:gravity="top"
-                android:hint="@string/send_message_subject_hint"
-                android:inputType="textCapSentences|textMultiLine"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp"
-                android:textColor="?attr/primaryTextColor"
-                android:textSize="?attr/content_font_18"
-                android:maxLength="100"
-                android:fontFamily="?attr/content_font_family" />
+                <View
+                    android:id="@+id/divider_1_send_private_message_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="16dp" />
 
-            <View
-                android:id="@+id/divider_2_send_private_message_activity"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="16dp" />
+                <View
+                    android:id="@+id/divider_2_send_private_message_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="16dp" />
 
-            <EditText
-                android:id="@+id/content_edit_text_send_private_message_activity"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#00000000"
-                android:gravity="top"
-                android:hint="@string/send_message_content_hint"
-                android:inputType="textCapSentences|textMultiLine"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="16dp"
-                android:textColor="?attr/primaryTextColor"
-                android:textSize="?attr/content_font_18"
-                android:fontFamily="?attr/content_font_family" />
+                <EditText
+                    android:id="@+id/content_edit_text_send_private_message_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00000000"
+                    android:fontFamily="?attr/content_font_family"
+                    android:gravity="top"
+                    android:hint="@string/send_message_content_hint"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="?attr/content_font_18" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/markdown_bottom_bar_recycler_view_send_private_message_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

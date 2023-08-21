@@ -1,9 +1,11 @@
 package eu.toldi.infinityforlemmy.adapters;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
+import eu.toldi.infinityforlemmy.asynctasks.InsertSubscribedThings;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -158,10 +161,30 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 fullname = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name();
                 iconUrl = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
 
+                if (mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
+                    ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
+                } else {
+                    ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
+                }
+
+                ((SubredditViewHolder) viewHolder).favoriteImageView.setOnClickListener(view -> {
+                    if (mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
+                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
+                        mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(false);
+                    } else {
+                        ((SubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
+                        mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(true);
+                    }
+                    InsertSubscribedThings.insertSubscribedThings(mExecutor, new Handler(), mRedditDataRoomDatabase, mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset),
+                            () -> {
+                            });
+                });
+
                 if (itemClickListener != null) {
                     viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(communityData));
                 }
             }
+
 
             if (itemClickListener == null) {
                 String finalFullname = fullname;
@@ -201,12 +224,33 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             String name = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
             String iconUrl = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
 
+            if (mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
+                ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
+            } else {
+                ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
+            }
+
+            ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setOnClickListener(view -> {
+                if (mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
+                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_border_24dp);
+                    mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(false);
+                } else {
+                    ((FavoriteSubredditViewHolder) viewHolder).favoriteImageView.setImageResource(R.drawable.ic_favorite_24dp);
+                    mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).setFavorite(true);
+                }
+                InsertSubscribedThings.insertSubscribedThings(mExecutor, new Handler(), mRedditDataRoomDatabase, mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset),
+                        () -> {
+                        });
+            });
+
             if (itemClickListener != null) {
                 viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(communityData));
             } else {
                 viewHolder.itemView.setOnClickListener(view -> {
                     Intent intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                     intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, name);
+                    intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY,
+                            mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name());
                     mActivity.startActivity(intent);
                 });
             }
@@ -243,6 +287,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         if(holder instanceof SubredditViewHolder) {
             glide.clear(((SubredditViewHolder) holder).iconGifImageView);
+            ((SubredditViewHolder) holder).favoriteImageView.setVisibility(View.VISIBLE);
         } else if (holder instanceof FavoriteSubredditViewHolder) {
             glide.clear(((FavoriteSubredditViewHolder) holder).iconGifImageView);
         }
@@ -317,6 +362,8 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
+        @BindView(R.id.favorite_image_view_item_subscribed_thing)
+        ImageView favoriteImageView;
 
         SubredditViewHolder(View itemView) {
             super(itemView);
@@ -333,6 +380,9 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
+        @BindView(R.id.favorite_image_view_item_subscribed_thing)
+        ImageView favoriteImageView;
+
 
         FavoriteSubredditViewHolder(View itemView) {
             super(itemView);

@@ -146,7 +146,10 @@
     <string name="saved">Saved</string>
     <string name="gilded">Gilded</string>
     <string name="settings">Settings</string>
-    <string name="subscribers_number_detail">Subscribers: %1$,d</string>
+    <string name="subscribers_number_detail">%1$,d Subscribers</string>
+    <string name="active_users_number_detail">%1$,d Active Users</string>
+    <string name="post_count_detail">%1$,d Posts</string>
+    <string name="comment_count_detail">%1$,d Comments</string>
     <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Cannot fetch community info</string>
     <string name="cannot_fetch_user_info">Cannot fetch user info</string>
@@ -1365,4 +1368,12 @@
     <string name="action_unblock_user">Unblock User</string>
     <string name="unblock_user_success">Unblocked</string>
     <string name="unblock_user_failed">Failed to unblock user</string>
+    <string name="settings_hide_community_and_user_instance">Hide community and user instance</string>
+    <string name="settings_show_display_name_instead_of_user_name">Show community and user display names</string>
+    <string name="report_post">Report Post</string>
+    <string name="send_report">Send Report</string>
+    <string name="settings_category_community_and_user_pages_title">Community and User pages</string>
+    <string name="settings_show_statistics">Show Statistics</string>
+    <string name="settings_show_post_and_comment_score">Show post and comment scores</string>
+    <string name="moderators">Moderators</string>
 </resources>

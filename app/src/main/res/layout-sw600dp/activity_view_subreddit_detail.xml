@@ -76,62 +76,99 @@
                         app:chipStrokeColor="#00000000"  />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/community_statistics_block_view_subreddit_detail_activity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/subscriber_count_image_view_view_subreddit_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_person_24" />
 
                         <TextView
                             android:id="@+id/subscriber_count_text_view_view_subreddit_detail_activity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="?attr/font_default"
-                            android:fontFamily="?attr/font_family"
-                            app:layout_constraintBottom_toTopOf="@id/online_subscriber_count_text_view_view_subreddit_detail_activity"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/barrier"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintHorizontal_bias="0" />
-
-                        <TextView
-                            android:id="@+id/online_subscriber_count_text_view_view_subreddit_detail_activity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="?attr/font_default"
-                            android:fontFamily="?attr/font_family"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/barrier"
-                            app:layout_constraintTop_toBottomOf="@id/subscriber_count_text_view_view_subreddit_detail_activity"
-                            app:layout_constraintHorizontal_bias="0" />
-
-                        <TextView
-                            android:id="@+id/since_text_view_view_subreddit_detail_activity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/since"
-                            android:fontFamily="?attr/font_family"
-                            app:layout_constraintBottom_toTopOf="@id/creation_time_text_view_view_subreddit_detail_activity"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/subscribers_number_detail"
+                            app:layout_constraintStart_toEndOf="@+id/subscriber_count_image_view_view_subreddit_detail_activity"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/creation_time_text_view_view_subreddit_detail_activity"
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:textSize="?attr/font_default"
-                            android:fontFamily="?attr/font_family"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/since_text_view_view_subreddit_detail_activity" />
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
 
-                        <androidx.constraintlayout.widget.Barrier
-                            android:id="@+id/barrier"
+                        <ImageView
+                            android:id="@+id/active_user_count_image_view_view_subreddit_detail_activity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:barrierDirection="start"
-                            app:constraint_referenced_ids="creation_time_text_view_view_subreddit_detail_activity, since_text_view_view_subreddit_detail_activity" />
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="@+id/guideline7"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_bolt_24" />
+
+                        <TextView
+                            android:id="@+id/active_user_count_text_view_view_subreddit_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@string/active_users_number_detail"
+                            app:layout_constraintStart_toEndOf="@+id/active_user_count_image_view_view_subreddit_detail_activity"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/post_count_image_view_view_subreddit_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/subscriber_count_image_view_view_subreddit_detail_activity"
+                            app:srcCompat="@drawable/ic_post_add_24" />
+
+                        <TextView
+                            android:id="@+id/post_count_text_view_view_subreddit_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="18dp"
+                            android:text="@string/post_count_detail"
+                            app:layout_constraintStart_toEndOf="@+id/post_count_image_view_view_subreddit_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/subscriber_count_image_view_view_subreddit_detail_activity" />
+
+                        <ImageView
+                            android:id="@+id/comment_count_image_view_view_subreddit_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintStart_toStartOf="@+id/guideline7"
+                            app:layout_constraintTop_toBottomOf="@+id/active_user_count_image_view_view_subreddit_detail_activity"
+                            app:srcCompat="@drawable/ic_comment_black_24" />
+
+                        <TextView
+                            android:id="@+id/comment_count_text_view_view_subreddit_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="18dp"
+                            android:text="@string/comment_count_detail"
+                            app:layout_constraintStart_toEndOf="@+id/comment_count_image_view_view_subreddit_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/active_user_count_image_view_view_subreddit_detail_activity" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

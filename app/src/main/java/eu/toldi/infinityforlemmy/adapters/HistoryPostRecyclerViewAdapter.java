@@ -554,9 +554,6 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                                 .into(((PostBaseViewHolder) holder).iconGifImageView);
                                     }
 
-                                    if (holder.getBindingAdapterPosition() >= 0) {
-                                        post.setSubredditIconUrl(iconUrl);
-                                    }
                                 }
                             });
                         } else if (!post.getSubredditIconUrl().equals("")) {
@@ -1082,9 +1079,6 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                                 .into(((PostCompactBaseViewHolder) holder).iconGifImageView);
                                     }
 
-                                    if (holder.getBindingAdapterPosition() >= 0) {
-                                        post.setSubredditIconUrl(iconUrl);
-                                    }
                                 }
                             });
                         } else if (!post.getSubredditIconUrl().equals("")) {

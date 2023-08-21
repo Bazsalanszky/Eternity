@@ -10,24 +10,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.EditCommentActivity;
-import eu.toldi.infinityforlemmy.activities.GiveAwardActivity;
-import eu.toldi.infinityforlemmy.activities.ReportActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
 import eu.toldi.infinityforlemmy.comment.Comment;
+import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
+import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LandscapeExpandedRoundedBottomSheetDialogFragment;
 import eu.toldi.infinityforlemmy.utils.Utils;
 
@@ -57,6 +65,13 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
     TextView copyTextView;
     @BindView(R.id.report_view_comment_more_bottom_sheet_fragment)
     TextView reportTextView;
+
+    @Inject
+    LemmyCommentAPI lemmyCommentAPI;
+
+    @Inject
+    CustomThemeWrapper mCustomThemeWrapper;
+
     private BaseActivity activity;
 
     public CommentMoreBottomSheetFragment() {
@@ -66,6 +81,7 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((Infinity) activity.getApplication()).getAppComponent().inject(this);
         View rootView = inflater.inflate(R.layout.fragment_comment_more_bottom_sheet, container, false);
         ButterKnife.bind(this, rootView);
 
@@ -177,11 +193,44 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
         });
 
         reportTextView.setOnClickListener(view -> {
-            /*Intent intent = new Intent(activity, ReportActivity.class);
-            intent.putExtra(ReportActivity.EXTRA_SUBREDDIT_NAME, comment.getCommunityName());
-            intent.putExtra(ReportActivity.EXTRA_THING_FULLNAME, comment.getFullName());
-            activity.startActivity(intent);*/
-            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
+            if (accessToken == null) {
+                Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
+                dismiss();
+                return;
+            }
+            LayoutInflater dialog_inflater = LayoutInflater.from(activity);
+            View dialog_view = dialog_inflater.inflate(R.layout.dialog_report, null);
+            EditText reasonEditText = dialog_view.findViewById(R.id.reasonEditText);
+
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity)
+                    .setTitle(R.string.report_post)
+                    .setView(dialog_view)
+                    .setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                    .setPositiveButton(R.string.send_report, (dialogInterface, i) -> {
+                        String reason = reasonEditText.getText().toString();
+                        if (reason.isEmpty()) {
+                            Toast.makeText(activity, "A report reason must be provided", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        lemmyCommentAPI.reportComment(comment.getId(), reason, accessToken, new LemmyCommentAPI.ReportCommentCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(activity, R.string.report_successful, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                Toast.makeText(activity, R.string.report_failed, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            positiveButton.setTextColor(mCustomThemeWrapper.getSecondaryTextColor());
+            negativeButton.setTextColor(mCustomThemeWrapper.getSecondaryTextColor());
             dismiss();
         });
 

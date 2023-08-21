@@ -99,7 +99,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private Retrofit mOauthRetrofit;
     private Markwon mCommentMarkwon;
     private String mAccessToken;
-    private String mAccountName;
+    private String mAccountQualifiedName;
+
     private Post mPost;
     private ArrayList<Comment> mVisibleComments;
 
@@ -175,7 +176,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mFragment = fragment;
         mExecutor = executor;
         mRetrofit = retrofit;
-        mGlide = Glide.with(activity);
+        mGlide = Glide.with(activity.getApplicationContext());
         mSecondaryTextColor = customThemeWrapper.getSecondaryTextColor();
         mCommentTextColor = customThemeWrapper.getCommentColor();
         int commentSpoilerBackgroundColor = mCommentTextColor | 0xFF000000;
@@ -217,7 +218,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 miscPlugin, mCommentTextColor, commentSpoilerBackgroundColor, onLinkLongClickListener);
         recycledViewPool = new RecyclerView.RecycledViewPool();
         mAccessToken = accessToken;
-        mAccountName = accountName;
+        mAccountQualifiedName = accountName;
         mPost = post;
         mVisibleComments = new ArrayList<>();
         loadedComments = new HashSet<>();
@@ -389,7 +390,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
                     ((CommentViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(
                             moderatorDrawable, null, null, null);
-                } else if (comment.getAuthor().equals(mAccountName)) {
+                } else if (comment.getAuthorQualifiedName().equals(mAccountQualifiedName)) {
                     ((CommentViewHolder) holder).authorTextView.setTextColor(mCurrentUserColor);
                     Drawable currentUserDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_current_user_14dp, mCurrentUserColor);
                     ((CommentViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(
@@ -904,7 +905,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             loadedComments.add(comments.get(i).getId());
         }
         if (mIsSingleCommentThreadMode) {
-            notifyItemRangeInserted(sizeBefore, comments.size() + 1);
+            int offset = (comments.size() > 0) ? 1 : 0;
+            notifyItemRangeInserted(sizeBefore, comments.size() + offset);
         } else {
             notifyItemRangeInserted(sizeBefore, comments.size());
         }
@@ -1373,7 +1375,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 Comment comment = getCurrentComment(this);
                 if (comment != null) {
                     Bundle bundle = new Bundle();
-                    if (!mPost.isArchived() && !mPost.isLocked() && comment.getAuthor().equals(mAccountName)) {
+                    if (!mPost.isArchived() && !mPost.isLocked() && comment.getAuthorQualifiedName().equals(mAccountQualifiedName)) {
                         bundle.putBoolean(CommentMoreBottomSheetFragment.EXTRA_EDIT_AND_DELETE_AVAILABLE, true);
                     }
                     bundle.putString(CommentMoreBottomSheetFragment.EXTRA_ACCESS_TOKEN, mAccessToken);

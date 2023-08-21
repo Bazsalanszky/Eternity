@@ -51,6 +51,12 @@
                     android:paddingEnd="16dp"
                     android:layout_below="@id/banner_image_view_view_user_detail_activity">
 
+                    <ProgressBar
+                        android:id="@+id/loading_user_progress_indicator_view_user_detail_activity"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
                     <TextView
                         android:id="@+id/user_name_text_view_view_user_detail_activity"
                         android:layout_width="wrap_content"
@@ -59,14 +65,14 @@
                         android:layout_marginBottom="4dp"
                         android:textSize="?attr/font_18"
                         android:fontFamily="?attr/font_family"
-                        android:layout_gravity="center_horizontal"/>
+                        android:layout_gravity="center_horizontal" />
+
                     <TextView
                         android:id="@+id/user_qualified_name_text_view_view_user_detail_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp"
-                        android:text="TextView" />
+                        android:layout_marginBottom="16dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/subscribe_user_chip_view_user_detail_activity"
@@ -77,30 +83,146 @@
                         android:visibility="gone"
                         app:chipStrokeColor="#00000000" />
 
-                    <RelativeLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp">
+                        android:visibility="gone"
+                        android:id="@+id/user_statistics_block_view_user_detail_activity">
 
                         <TextView
-                            android:id="@+id/karma_text_view_view_user_detail_activity"
+                            android:id="@+id/post_stats_text_view_view_user_detail_activity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@id/cakeday_text_view_view_user_detail_activity"
-                            android:textSize="?attr/font_default"
-                            android:fontFamily="?attr/font_family" />
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/posts"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/posts_count_icon_image_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/post_stats_text_view_view_user_detail_activity"
+                            app:srcCompat="@drawable/ic_post_add_24" />
 
                         <TextView
-                            android:id="@+id/cakeday_text_view_view_user_detail_activity"
+                            android:id="@+id/post_count_text_view_view_user_detail_activity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="end"
-                            android:layout_alignParentEnd="true"
-                            android:textSize="?attr/font_default"
-                            android:fontFamily="?attr/font_family" />
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="9dp"
+                            android:text="0"
+                            app:layout_constraintStart_toEndOf="@+id/posts_count_icon_image_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/post_stats_text_view_view_user_detail_activity" />
 
-                    </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/upvote_count_posts_icon_image_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toEndOf="@+id/post_count_text_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/post_stats_text_view_view_user_detail_activity"
+                            app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/upvote_count_post_text_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="9dp"
+                            android:text="0"
+                            app:layout_constraintStart_toEndOf="@+id/upvote_count_posts_icon_image_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/post_stats_text_view_view_user_detail_activity" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                        <TextView
+                            android:id="@+id/comment_stats_text_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/comments"
+                            app:layout_constraintStart_toStartOf="@+id/guideline3"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/comments_count_icon_image_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="@+id/guideline3"
+                            app:layout_constraintTop_toBottomOf="@+id/comment_stats_text_view_view_user_detail_activity"
+                            app:srcCompat="@drawable/ic_comment_black_24" />
+
+                        <TextView
+                            android:id="@+id/comment_count_text_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="9dp"
+                            android:text="0"
+                            app:layout_constraintStart_toEndOf="@+id/comments_count_icon_image_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/comment_stats_text_view_view_user_detail_activity" />
+
+                        <ImageView
+                            android:id="@+id/upvote_count_comments_icon_image_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toEndOf="@+id/comment_count_text_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/comment_stats_text_view_view_user_detail_activity"
+                            app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/upvote_count_comment_text_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="9dp"
+                            android:text="0"
+                            app:layout_constraintStart_toEndOf="@+id/upvote_count_comments_icon_image_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/comment_stats_text_view_view_user_detail_activity" />
+
+                        <TextView
+                            android:id="@+id/account_created_text_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Account Created"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/posts_count_icon_image_view_view_user_detail_activity" />
+
+                        <ImageView
+                            android:id="@+id/account_created_cake_icon_image_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/account_created_text_view_view_user_detail_activity"
+                            app:srcCompat="@drawable/ic_cake_24" />
+
+                        <TextView
+                            android:id="@+id/cake_day_text_view_view_user_detail_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="11dp"
+                            app:layout_constraintStart_toEndOf="@+id/account_created_cake_icon_image_view_view_user_detail_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/account_created_text_view_view_user_detail_activity" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/description_text_view_view_user_detail_activity"

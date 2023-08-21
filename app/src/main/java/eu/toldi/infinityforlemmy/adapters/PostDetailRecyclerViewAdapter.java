@@ -172,6 +172,8 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private boolean mHideUpvoteRatio;
     private boolean mHideTheNumberOfAwards;
     private boolean mHideSubredditAndUserPrefix;
+
+    private boolean mShowDisplayNames;
     private boolean mHideTheNumberOfVotes;
 
     private boolean mSeperateUpvoteAndDownvote;
@@ -345,6 +347,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mHideUpvoteRatio = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_UPVOTE_RATIO, false);
         mHideTheNumberOfAwards = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
         mHideSubredditAndUserPrefix = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
+        mShowDisplayNames = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_DISPLAY_NAME_INSTEAD_OF_USERNAME, true);
         mHideTheNumberOfVotes = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
         mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
         mSeperateUpvoteAndDownvote = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
@@ -528,8 +531,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                                                     .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0))))
                                             .into(((PostDetailBaseViewHolder) holder).mIconGifImageView);
                                 }
-
-                                mPost.setSubredditIconUrl(iconImageUrl);
                             });
                 } else if (!mPost.getSubredditIconUrl().equals("")) {
                     mGlide.load(mPost.getSubredditIconUrl())
@@ -580,13 +581,14 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailBaseViewHolder) holder).mCrosspostImageView.setVisibility(View.VISIBLE);
             }
 
+            ((PostDetailBaseViewHolder) holder).mUserTextView.setText((mShowDisplayNames) ? mPost.getAuthor() : mPost.getAuthorInfo().getUsername());
+            ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText((mShowDisplayNames) ? mPost.getSubredditName() : mPost.getCommunityInfo().getName());
             if (mHideSubredditAndUserPrefix) {
-                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditName());
-                ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthor());
+                ((PostDetailBaseViewHolder) holder).mUserTextView.setText((mShowDisplayNames) ? mPost.getAuthor() : mPost.getAuthorInfo().getUsername());
             } else {
-                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText(mPost.getSubredditName());
+                ((PostDetailBaseViewHolder) holder).mSubredditTextView.setText((mShowDisplayNames) ? mPost.getSubredditName() : mPost.getCommunityInfo().getName());
                 ((PostDetailBaseViewHolder) holder).mCommunityInstanceTextView.setText('@' + mPost.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
-                ((PostDetailBaseViewHolder) holder).mUserTextView.setText(mPost.getAuthor());
+
                 ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setText('@' + mPost.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
                 ((PostDetailBaseViewHolder) holder).mCommunityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
                 ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mPost.isModerator() || mPost.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
@@ -1268,16 +1270,18 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
             mIconGifImageView.setOnClickListener(view -> mSubredditTextView.performClick());
 
-            mSubredditTextView.setOnClickListener(view -> {
+            View.OnClickListener communityClickListener = view -> {
                 Intent intent;
                 intent = new Intent(mActivity, ViewSubredditDetailActivity.class);
                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY,
                         mPost.getSubredditName());
                 intent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, mPost.getSubredditNamePrefixed());
                 mActivity.startActivity(intent);
-            });
+            };
+            mSubredditTextView.setOnClickListener(communityClickListener);
+            mCommunityInstanceTextView.setOnClickListener(communityClickListener);
 
-            mUserTextView.setOnClickListener(view -> {
+            View.OnClickListener onUserClick = view -> {
                 if (mPost.isAuthorDeleted()) {
                     return;
                 }
@@ -1285,7 +1289,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, mPost.getAuthor());
                 intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, mPost.getAuthorNamePrefixed());
                 mActivity.startActivity(intent);
-            });
+            };
+            mUserTextView.setOnClickListener(onUserClick);
+            mUserInstanceTextView.setOnClickListener(onUserClick);
 
             mAuthorFlairTextView.setOnClickListener(view -> mUserTextView.performClick());
 

@@ -24,6 +24,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.menu.MenuItemImpl;
 import androidx.core.content.res.ResourcesCompat;
@@ -106,6 +109,7 @@ import eu.toldi.infinityforlemmy.message.ReadMessage;
 import eu.toldi.infinityforlemmy.post.FetchPost;
 import eu.toldi.infinityforlemmy.post.FetchRemovedPost;
 import eu.toldi.infinityforlemmy.post.HidePost;
+import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
 import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
@@ -194,6 +198,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     Executor mExecutor;
     @Inject
     MarkPostAsRead markPostAsRead;
+    @Inject
+    LemmyPostAPI mLemmyPostAPI;
     @State
     Post mPost;
     @State
@@ -615,7 +621,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     mExoCreator, post -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                     this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(),
-                    mAccessToken, mAccountName, mPost, mLocale, mSingleCommentId
+                    mAccessToken, mAccountQualifiedName, mPost, mLocale, mSingleCommentId
                     , isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                         @Override
@@ -1153,7 +1159,43 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
                 return true;
             }
-            Toast.makeText(activity, R.string.not_implemented, Toast.LENGTH_SHORT).show();
+            if (mAccessToken == null) {
+                Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            LayoutInflater inflater = LayoutInflater.from(activity);
+            View view = inflater.inflate(R.layout.dialog_report, null);
+            EditText reasonEditText = view.findViewById(R.id.reasonEditText);
+
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity)
+                    .setTitle(R.string.report_post)
+                    .setView(view)
+                    .setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                    .setPositiveButton(R.string.send_report, (dialogInterface, i) -> {
+                        String reason = reasonEditText.getText().toString();
+                        if (reason.isEmpty()) {
+                            Toast.makeText(activity, "A report reason must be provided", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        mLemmyPostAPI.reportPost(mPost.getId(), reason, mAccessToken, new LemmyPostAPI.ReportPostCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(activity, R.string.report_successful, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                Toast.makeText(activity, R.string.report_failed, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            positiveButton.setTextColor(mCustomThemeWrapper.getSecondaryTextColor());
+            negativeButton.setTextColor(mCustomThemeWrapper.getSecondaryTextColor());
             return true;
         } else if (itemId == R.id.action_see_removed_view_post_detail_fragment) {
             showRemovedPost();
@@ -1309,7 +1351,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 pages_loaded++;
                                 mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                                         ViewPostDetailFragment.this, mCustomThemeWrapper, mExecutor,
-                                        mRetrofit.getRetrofit(), mAccessToken, mAccountName, mPost, mLocale,
+                                        mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, mPost, mLocale,
                                         mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                                         new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                                             @Override

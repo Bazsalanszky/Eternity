@@ -3,12 +3,14 @@ package eu.toldi.infinityforlemmy.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,12 +20,14 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -36,6 +40,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
+import com.evernote.android.state.State;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -83,6 +88,7 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTimeBottomSheetFragmen
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
 import eu.toldi.infinityforlemmy.community.BlockCommunity;
+import eu.toldi.infinityforlemmy.community.CommunityStats;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.NavigationWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
@@ -163,12 +169,26 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     TextView communityFullNameTextView;
     @BindView(R.id.subscriber_count_text_view_view_subreddit_detail_activity)
     TextView nSubscribersTextView;
-    @BindView(R.id.online_subscriber_count_text_view_view_subreddit_detail_activity)
-    TextView nOnlineSubscribersTextView;
-    @BindView(R.id.since_text_view_view_subreddit_detail_activity)
-    TextView sinceTextView;
-    @BindView(R.id.creation_time_text_view_view_subreddit_detail_activity)
-    TextView creationTimeTextView;
+    @BindView(R.id.active_user_count_text_view_view_subreddit_detail_activity)
+    TextView nActiveUsersTextView;
+    @BindView(R.id.post_count_text_view_view_subreddit_detail_activity)
+    TextView nPostsTextView;
+    @BindView(R.id.comment_count_text_view_view_subreddit_detail_activity)
+    TextView nCommentsTextView;
+
+    @BindView(R.id.subscriber_count_image_view_view_subreddit_detail_activity)
+    ImageView nSubscribersImageView;
+    @BindView(R.id.active_user_count_image_view_view_subreddit_detail_activity)
+    ImageView nActiveUsersImageView;
+    @BindView(R.id.post_count_image_view_view_subreddit_detail_activity)
+    ImageView nPostsImageView;
+    @BindView(R.id.comment_count_image_view_view_subreddit_detail_activity)
+    ImageView nCommentsImageView;
+
+    @BindView(R.id.community_statistics_block_view_subreddit_detail_activity)
+    ConstraintLayout communityStatisticsBlock;
+
+
     @BindView(R.id.description_text_view_view_subreddit_detail_activity)
     TextView descriptionTextView;
     @Inject
@@ -212,7 +232,10 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
     private int communityId;
 
-    private SubredditData communityData;
+    @State
+    SubredditData communityData;
+    @State
+    CommunityStats mCommunityStats;
     private String description;
 
     private String qualifiedName;
@@ -238,6 +261,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private int fabOption;
     private MaterialAlertDialogBuilder nsfwWarningBuilder;
 
+    private boolean showStatistics;
+
     private boolean hideSubredditDescription;
 
     @Override
@@ -251,6 +276,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         ButterKnife.bind(this);
 
         hideFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_FAB_IN_POST_FEED, false);
+        showStatistics = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_STATISTICS, true);
         showBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.BOTTOM_APP_BAR_KEY, false);
         navigationWrapper = new NavigationWrapper(findViewById(R.id.bottom_app_bar_bottom_app_bar), findViewById(R.id.linear_layout_bottom_app_bar),
                 findViewById(R.id.option_1_bottom_app_bar), findViewById(R.id.option_2_bottom_app_bar),
@@ -363,17 +389,31 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             mMessageFullname = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
 
-            if (mFetchSubredditInfoSuccess) {
-                nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, mNCurrentOnlineSubscribers));
-            }
         }
 
         checkNewAccountAndBindView();
 
         fetchSubredditData();
-        if (communityName != null) {
+        if (communityData != null) {
             setupVisibleElements();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("ViewSubredditDetail", "onStart");
+        if (communityData != null) {
+            setupVisibleElements();
+        } else {
+            fetchSubredditData();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFetchSubredditInfoSuccess = false;
     }
 
     @Override
@@ -417,9 +457,13 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         subscribeSubredditChip.setTextColor(mCustomThemeWrapper.getChipTextColor());
         int primaryTextColor = mCustomThemeWrapper.getPrimaryTextColor();
         nSubscribersTextView.setTextColor(primaryTextColor);
-        nOnlineSubscribersTextView.setTextColor(primaryTextColor);
-        sinceTextView.setTextColor(primaryTextColor);
-        creationTimeTextView.setTextColor(primaryTextColor);
+        nActiveUsersTextView.setTextColor(primaryTextColor);
+        nPostsTextView.setTextColor(primaryTextColor);
+        nCommentsTextView.setTextColor(primaryTextColor);
+        nSubscribersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nActiveUsersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nPostsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        nCommentsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         descriptionTextView.setTextColor(primaryTextColor);
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
         applyTabLayoutTheme(tabLayout);
@@ -428,9 +472,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             subredditNameTextView.setTypeface(typeface);
             subscribeSubredditChip.setTypeface(typeface);
             nSubscribersTextView.setTypeface(typeface);
-            nOnlineSubscribersTextView.setTypeface(typeface);
-            sinceTextView.setTypeface(typeface);
-            creationTimeTextView.setTypeface(typeface);
+            nActiveUsersTextView.setTypeface(typeface);
+            nPostsTextView.setTypeface(typeface);
+            nCommentsTextView.setTypeface(typeface);
             descriptionTextView.setTypeface(typeface);
         }
         unsubscribedColor = mCustomThemeWrapper.getUnsubscribed();
@@ -469,7 +513,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         setSupportActionBar(toolbar);
         setToolbarGoToTop(toolbar);
 
-        glide = Glide.with(this);
+        glide = Glide.with(getApplication());
         Locale locale = getResources().getConfiguration().locale;
 
         MarkwonPlugin miscPlugin = new AbstractMarkwonPlugin() {
@@ -554,7 +598,13 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 communityFullNameTextView.setText(qualifiedName);
                 String nSubscribers = getString(R.string.subscribers_number_detail, subredditData.getNSubscribers());
                 nSubscribersTextView.setText(nSubscribers);
-                creationTimeTextView.setText(subredditData.getCreatedUTC());
+
+                if (mCommunityStats != null && showStatistics) {
+                    communityStatisticsBlock.setVisibility(View.VISIBLE);
+                    nActiveUsersTextView.setText(getString(R.string.active_users_number_detail, mCommunityStats.getActiveUsers()));
+                    nPostsTextView.setText(getString(R.string.post_count_detail, mCommunityStats.getPosts()));
+                    nCommentsTextView.setText(getString(R.string.comment_count_detail, mCommunityStats.getComments()));
+                }
                 description = subredditData.getDescription();
 
 
@@ -694,13 +744,14 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                     if (communityName == null) {
                         communityName = communityData.getTitle();
                     }
+                    mCommunityStats = communityData.getCommunityStats();
                     setupVisibleElements();
                     communityId = communityData.getId();
                     ViewSubredditDetailActivity.this.communityData = communityData;
                     setupSubscribeChip();
 
                     mNCurrentOnlineSubscribers = nCurrentOnlineSubscribers;
-                    nOnlineSubscribersTextView.setText(getString(R.string.online_subscribers_number_detail, nCurrentOnlineSubscribers));
+
                     InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
                             communityData, () -> mFetchSubredditInfoSuccess = true);
                 }
@@ -1169,7 +1220,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             String baseURL = mRetrofit.getBaseURL().endsWith("/") ? mRetrofit.getBaseURL() : mRetrofit.getBaseURL() + "/";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + "/" + qualifiedName);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + "c/" + qualifiedName);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             } else {
@@ -1177,8 +1228,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
             return true;
         } else if (itemId == R.id.action_contact_mods_view_subreddit_detail_activity) {
-            Intent intent = new Intent(this, SendPrivateMessageActivity.class);
-            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + communityName);
+           /* Intent intent = new Intent(this, SendPrivateMessageActivity.class);
+            intent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, "r/" + communityName);*/
             //startActivity(intent);
             return true;
         } else if (itemId == R.id.block_community_view_subreddit_detail_activity) {
@@ -1640,6 +1691,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             bundle.putString(SidebarFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             bundle.putString(SidebarFragment.EXTRA_SUBREDDIT_NAME, communityName);
             bundle.putString(SidebarFragment.EXTRA_COMMUNITY_QUALIFIED_NAME, qualifiedName);
+            bundle.putBoolean(SidebarFragment.EXTRA_SHOW_STATISTICS, !showStatistics);
             fragment.setArguments(bundle);
             return fragment;
         }

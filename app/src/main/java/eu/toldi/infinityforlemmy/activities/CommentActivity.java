@@ -226,7 +226,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
 
         setSupportActionBar(binding.commentToolbar);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         if (savedInstanceState != null) {
             selectedAccount = savedInstanceState.getParcelable(SELECTED_ACCOUNT_STATE);

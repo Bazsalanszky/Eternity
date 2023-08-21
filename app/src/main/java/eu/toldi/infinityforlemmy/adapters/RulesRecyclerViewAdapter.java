@@ -16,13 +16,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.Markwon;
-import io.noties.markwon.MarkwonConfiguration;
-import io.noties.markwon.MarkwonPlugin;
-import io.noties.markwon.core.MarkwonTheme;
-import io.noties.markwon.recycler.MarkwonAdapter;
-import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.Rule;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
@@ -33,6 +26,13 @@ import eu.toldi.infinityforlemmy.customviews.SwipeLockInterface;
 import eu.toldi.infinityforlemmy.customviews.SwipeLockLinearLayoutManager;
 import eu.toldi.infinityforlemmy.customviews.slidr.widget.SliderPanel;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
+import io.noties.markwon.recycler.MarkwonAdapter;
+import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 
 public class RulesRecyclerViewAdapter extends RecyclerView.Adapter<RulesRecyclerViewAdapter.RuleViewHolder> {
     private BaseActivity activity;

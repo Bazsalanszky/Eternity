@@ -15,9 +15,15 @@ import eu.toldi.infinityforlemmy.dto.EditCommentDTO;
 import eu.toldi.infinityforlemmy.dto.EditPostDTO;
 import eu.toldi.infinityforlemmy.dto.FollowCommunityDTO;
 import eu.toldi.infinityforlemmy.dto.PostVoteDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageReadDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageReportDTO;
+import eu.toldi.infinityforlemmy.dto.PrivateMessageUpdateDTO;
 import eu.toldi.infinityforlemmy.dto.ReadCommentDTO;
 import eu.toldi.infinityforlemmy.dto.ReadMessageDTO;
 import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
+import eu.toldi.infinityforlemmy.dto.ReportCommentDTO;
+import eu.toldi.infinityforlemmy.dto.ReportPostDTO;
 import eu.toldi.infinityforlemmy.dto.SaveCommentDTO;
 import eu.toldi.infinityforlemmy.dto.SavePostDTO;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
@@ -83,6 +89,10 @@ public interface LemmyAPI {
     Call<String> postCreate(@Body SubmitPostDTO params);
 
     @Headers("Content-Type: application/json")
+    @POST("api/v3/post/report")
+    Call<String> postReport(@Body ReportPostDTO params);
+
+    @Headers("Content-Type: application/json")
     @PUT("api/v3/post")
     Call<String> postUpdate(@Body EditPostDTO params);
 
@@ -137,6 +147,10 @@ public interface LemmyAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/comment/like")
     Call<String> commentLike(@Body CommentVoteDTO params);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v3/comment/report")
+    Call<String> commentReport(@Body ReportCommentDTO params);
 
     @Headers("Content-Type: application/json")
     @POST("api/v3/community/follow")
@@ -235,5 +249,38 @@ public interface LemmyAPI {
     @GET("api/v3/site")
     Call<String> getSiteInfo(
             @Query("auth") String auth
+    );
+
+    @GET("api/v3/private_message/list")
+    Call<String> privateMessagesList(
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("unread_only") Boolean unread_only,
+            @NonNull @Query("auth") String auth
+    );
+
+    @POST("api/v3/private_message")
+    Call<String> privateMessageSend(
+            @Body PrivateMessageDTO params
+    );
+
+    @PUT("api/v3/private_message")
+    Call<String> privateMessageEdit(
+            @Body PrivateMessageUpdateDTO params
+    );
+
+    @POST("api/v3/private_message/delete")
+    Call<String> privateMessageDelete(
+            @Body PrivateMessageUpdateDTO params
+    );
+
+    @POST("api/v3/private_message/mark_as_read")
+    Call<String> privateMessageMarkAsRead(
+            @Body PrivateMessageReadDTO params
+    );
+
+    @POST("api/v3/private_message/report")
+    Call<String> privateMessageReport(
+            @Body PrivateMessageReportDTO params
     );
 }

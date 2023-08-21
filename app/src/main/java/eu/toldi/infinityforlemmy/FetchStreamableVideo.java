@@ -20,6 +20,7 @@ import retrofit2.Response;
 public class FetchStreamableVideo {
     public interface FetchStreamableVideoListener {
         void success(StreamableVideo streamableVideo);
+
         void failed();
     }
 
@@ -33,7 +34,12 @@ public class FetchStreamableVideo {
                     String title = jsonObject.getString(JSONUtils.TITLE_KEY);
                     JSONObject filesObject = jsonObject.getJSONObject(JSONUtils.FILES_KEY);
                     StreamableVideo.Media mp4 = parseMedia(filesObject.getJSONObject(JSONUtils.MP4_KEY));
-                    StreamableVideo.Media mp4Mobile = parseMedia(filesObject.getJSONObject(JSONUtils.MP4_MOBILE_KEY));
+                    StreamableVideo.Media mp4MobileTemp = null;
+                    try {
+                        mp4MobileTemp = parseMedia(filesObject.getJSONObject(JSONUtils.MP4_MOBILE_KEY));
+                    } catch (JSONException e) {
+                    }
+                    StreamableVideo.Media mp4Mobile = mp4MobileTemp;
                     handler.post(() -> fetchStreamableVideoListener.success(new StreamableVideo(title, mp4, mp4Mobile)));
                 } else {
                     handler.post(fetchStreamableVideoListener::failed);
@@ -55,7 +61,12 @@ public class FetchStreamableVideo {
                     String title = jsonObject.getString(JSONUtils.TITLE_KEY);
                     JSONObject filesObject = jsonObject.getJSONObject(JSONUtils.FILES_KEY);
                     StreamableVideo.Media mp4 = parseMedia(filesObject.getJSONObject(JSONUtils.MP4_KEY));
-                    StreamableVideo.Media mp4Mobile = parseMedia(filesObject.getJSONObject(JSONUtils.MP4_MOBILE_KEY));
+                    StreamableVideo.Media mp4MobileTemp = null;
+                    try {
+                        mp4MobileTemp = parseMedia(filesObject.getJSONObject(JSONUtils.MP4_MOBILE_KEY));
+                    } catch (JSONException e) {
+                    }
+                    StreamableVideo.Media mp4Mobile = mp4MobileTemp;
                     if (mp4 == null && mp4Mobile == null) {
                         handler.post(fetchStreamableVideoListener::failed);
                         return;

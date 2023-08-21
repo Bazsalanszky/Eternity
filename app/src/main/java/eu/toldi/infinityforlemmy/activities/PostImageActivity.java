@@ -228,7 +228,7 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mGlide = Glide.with(this);
+        mGlide = Glide.with(getApplication());
 
         mPostingSnackbar = Snackbar.make(coordinatorLayout, R.string.posting, Snackbar.LENGTH_INDEFINITE);
 

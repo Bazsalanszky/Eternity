@@ -10,15 +10,14 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
-import eu.toldi.infinityforlemmy.network.SortTypeConverterFactory;
+import eu.toldi.infinityforlemmy.privatemessage.LemmyPrivateMessageAPI;
+import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
+import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.guava.GuavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 @Module(includes = AppModule.class)
 abstract class NetworkModule {
@@ -215,5 +214,23 @@ abstract class NetworkModule {
     @Singleton
     static StreamableAPI provideStreamableApi(@Named("streamable") Retrofit streamableRetrofit) {
         return streamableRetrofit.create(StreamableAPI.class);
+    }
+
+    @Provides
+    @Singleton
+    static LemmyPostAPI providePostAPI(@Named("no_oauth") RetrofitHolder retrofitHolder) {
+        return new LemmyPostAPI(retrofitHolder);
+    }
+
+    @Provides
+    @Singleton
+    static LemmyCommentAPI provideCommentAPI(@Named("no_oauth") RetrofitHolder retrofitHolder) {
+        return new LemmyCommentAPI(retrofitHolder);
+    }
+
+    @Provides
+    @Singleton
+    static LemmyPrivateMessageAPI provideLemmyPrivateMessageAPI(@Named("base") RetrofitHolder retrofit) {
+        return new LemmyPrivateMessageAPI(retrofit);
     }
 }

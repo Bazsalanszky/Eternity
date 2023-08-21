@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,12 +21,15 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -105,11 +109,13 @@ import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.user.BlockUser;
 import eu.toldi.infinityforlemmy.user.FetchUserData;
 import eu.toldi.infinityforlemmy.user.UserDao;
 import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.user.UserFollowing;
+import eu.toldi.infinityforlemmy.user.UserStats;
 import eu.toldi.infinityforlemmy.user.UserViewModel;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
@@ -170,11 +176,40 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
 
     @BindView(R.id.user_qualified_name_text_view_view_user_detail_activity)
     TextView qualifiedNameTextView;
+
+    @BindView(R.id.loading_user_progress_indicator_view_user_detail_activity)
+    ProgressBar progressBar;
     @BindView(R.id.subscribe_user_chip_view_user_detail_activity)
     Chip subscribeUserChip;
-    @BindView(R.id.karma_text_view_view_user_detail_activity)
-    TextView karmaTextView;
-    @BindView(R.id.cakeday_text_view_view_user_detail_activity)
+
+    @BindView(R.id.post_count_text_view_view_user_detail_activity)
+    TextView postCountTextView;
+
+    @BindView(R.id.comment_count_text_view_view_user_detail_activity)
+    TextView commentCountTextView;
+
+    @BindView(R.id.upvote_count_post_text_view_view_user_detail_activity)
+    TextView upvoteCountPostTextView;
+
+    @BindView(R.id.upvote_count_comment_text_view_view_user_detail_activity)
+    TextView upvoteCountCommentTextView;
+
+    @BindView(R.id.posts_count_icon_image_view_view_user_detail_activity)
+    ImageView postsCountIconImageView;
+    @BindView(R.id.comments_count_icon_image_view_view_user_detail_activity)
+    ImageView commentsCountIconImageView;
+
+    @BindView(R.id.upvote_count_posts_icon_image_view_view_user_detail_activity)
+    ImageView postUpvoteCountIconImageView;
+    @BindView(R.id.upvote_count_comments_icon_image_view_view_user_detail_activity)
+    ImageView commentUpvoteCountIconImageView;
+    @BindView(R.id.account_created_cake_icon_image_view_view_user_detail_activity)
+    ImageView accountCreatedCakeIconImageView;
+
+    @BindView(R.id.user_statistics_block_view_user_detail_activity)
+    ConstraintLayout userStatisticsBlock;
+
+    @BindView(R.id.cake_day_text_view_view_user_detail_activity)
     TextView cakedayTextView;
     @BindView(R.id.description_text_view_view_user_detail_activity)
     TextView descriptionTextView;
@@ -221,8 +256,12 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private String mAccountName;
     private String mAccountQualifiedName;
     private String username;
+
     private String qualifiedName;
     private String description;
+
+    private boolean showStatistics;
+    private boolean showScore;
     private boolean subscriptionReady = false;
     private boolean mFetchUserInfoSuccess = false;
     private int expandedTabTextColor;
@@ -287,6 +326,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
 
+        showStatistics = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_STATISTICS, true);
+        showScore = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_POST_AND_COMMENT_SCORE, true);
 
         if (savedInstanceState == null) {
             mMessageId = getIntent().getIntExtra(EXTRA_MESSAGE_FULLNAME, 0);
@@ -295,7 +336,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             mFetchUserInfoSuccess = savedInstanceState.getBoolean(FETCH_USER_INFO_STATE);
             mMessageId = savedInstanceState.getInt(MESSAGE_FULLNAME_STATE);
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
-            qualifiedName = savedInstanceState.getString(NEW_ACCOUNT_QUALIFIED_NAME_STATE);
+            qualifiedName = savedInstanceState.getString("qualified_name");
         }
 
         checkNewAccountAndInitializeViewPager();
@@ -307,9 +348,26 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mUserData != null) {
+            setupVisibleElements();
+        } else {
+            fetchUserInfo();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFetchUserInfoSuccess = false;
+    }
+
     private void setupVisibleElements() {
         Resources resources = getResources();
         String title = username;
+        progressBar.setVisibility(View.GONE);
         userNameTextView.setText(title);
         qualifiedNameTextView.setText(qualifiedName);
         toolbar.setTitle(title);
@@ -390,7 +448,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             });
         }
 
-        glide = Glide.with(this);
+        glide = Glide.with(getApplication());
         Locale locale = getResources().getConfiguration().locale;
 
         MarkwonPlugin miscPlugin = new AbstractMarkwonPlugin() {
@@ -567,8 +625,23 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     getSupportActionBar().setTitle(userFullName);
                 }
                 String karma = "";//getString(R.string.karma_info_user_detail, userData.getTotalKarma(), userData.getLinkKarma(), userData.getCommentKarma());
-                karmaTextView.setText(karma);
-                cakedayTextView.setText(getString(R.string.cakeday_info, userData.getCakeday()));
+
+                cakedayTextView.setText((String) userData.getCakeday());
+                UserStats userStats = mUserData.getStats();
+                if (userStats != null && showStatistics) {
+                    userStatisticsBlock.setVisibility(View.VISIBLE);
+                    postCountTextView.setText(String.valueOf(userStats.getPostCount()));
+                    commentCountTextView.setText(String.valueOf(userStats.getCommentCount()));
+                    if (showScore) {
+                        upvoteCountPostTextView.setText(String.valueOf(userStats.getPostScore()));
+                        upvoteCountCommentTextView.setText(String.valueOf(userStats.getCommentScore()));
+                    } else {
+                        upvoteCountPostTextView.setVisibility(View.GONE);
+                        upvoteCountCommentTextView.setVisibility(View.GONE);
+                        postUpvoteCountIconImageView.setVisibility(View.GONE);
+                        commentUpvoteCountIconImageView.setVisibility(View.GONE);
+                    }
+                }
 
                 if (userData.getDescription() == null || userData.getDescription().equals("")) {
                     descriptionTextView.setVisibility(View.GONE);
@@ -636,7 +709,13 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         unsubscribedColor = mCustomThemeWrapper.getUnsubscribed();
         subscribedColor = mCustomThemeWrapper.getSubscribed();
         userNameTextView.setTextColor(mCustomThemeWrapper.getUsername());
-        karmaTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        postCountTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        upvoteCountPostTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        commentCountTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        upvoteCountCommentTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+        postsCountIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        commentsCountIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
+        accountCreatedCakeIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         cakedayTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         navigationWrapper.applyCustomTheme(mCustomThemeWrapper.getBottomAppBarIconColor(), mCustomThemeWrapper.getBottomAppBarBackgroundColor());
         applyFABTheme(navigationWrapper.floatingActionButton, mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false));
@@ -645,7 +724,10 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         applyTabLayoutTheme(tabLayout);
         if (typeface != null) {
             userNameTextView.setTypeface(typeface);
-            karmaTextView.setTypeface(typeface);
+            postCountTextView.setTypeface(typeface);
+            upvoteCountPostTextView.setTypeface(typeface);
+            commentCountTextView.setTypeface(typeface);
+            upvoteCountCommentTextView.setTypeface(typeface);
             cakedayTextView.setTypeface(typeface);
             subscribeUserChip.setTypeface(typeface);
             descriptionTextView.setTypeface(typeface);
@@ -1092,7 +1174,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                 @Override
                 public void onFetchUserDataSuccess(UserData userData, int inboxCount) {
                     mUserData = userData;
-                    username = userData.getName();
+                    username = userData.getDisplayName();
                     setupVisibleElements();
                     FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
 
@@ -1195,7 +1277,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             String baseURL = mRetrofit.getBaseURL().endsWith("/") ? mRetrofit.getBaseURL() : mRetrofit.getBaseURL() + "/";
-            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + qualifiedName);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, baseURL + "u/" + qualifiedName);
             if (shareIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             } else {
@@ -1209,7 +1291,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             }
 
             Intent pmIntent = new Intent(this, SendPrivateMessageActivity.class);
-            pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USERNAME, username);
+            pmIntent.putExtra(SendPrivateMessageActivity.EXTRA_RECIPIENT_USER_INFO, new BasicUserInfo(mUserData.getId(), username, qualifiedName, mUserData.getAvatar(), mUserData.getDisplayName()));
             startActivity(pmIntent);
             return true;
         } else if (itemId == R.id.action_add_to_post_filter_view_user_detail_activity) {
@@ -1319,7 +1401,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         outState.putBoolean(FETCH_USER_INFO_STATE, mFetchUserInfoSuccess);
         outState.putInt(MESSAGE_FULLNAME_STATE, mMessageId);
         outState.putString(NEW_ACCOUNT_NAME_STATE, mNewAccountName);
-        outState.getString(NEW_ACCOUNT_QUALIFIED_NAME_STATE, mAccountQualifiedName);
+        outState.putString(NEW_ACCOUNT_QUALIFIED_NAME_STATE, mAccountQualifiedName);
+        outState.putString("qualified_name", qualifiedName);
     }
 
     @Override

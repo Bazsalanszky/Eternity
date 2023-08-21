@@ -111,7 +111,7 @@ class ParseSubscribedThing {
                     int instanceId = community.getInt("instance_id");
                     int subscribers = data.getJSONObject("counts").getInt("subscribers");
                     boolean isBlocked = data.getBoolean("blocked");
-                    newSubscribedSubredditData.add(new SubscribedSubredditData(id, title, LemmyUtils.actorID2FullName(actorId), iconUrl, accountName));
+                    newSubscribedSubredditData.add(new SubscribedSubredditData(id, title, LemmyUtils.actorID2FullName(actorId), iconUrl, accountName, false));
                     newSubredditData.add(new SubredditData(id, name, title, description, removed, published, updated, deleted, nsfw, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, isBlocked));
 
                 }
