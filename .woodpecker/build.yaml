@@ -1,6 +1,6 @@
 steps:
   build:
-    image: alvrme/alpine-android:android-33-jdk11
+    image: alvrme/alpine-android:android-34-jdk11
     commands:
       - ./gradlew :app:assembleRelease
     when:
