@@ -397,7 +397,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Teilen</string>
     <string name="settings_share_summary">Teile diese App mit anderen Leuten, wenn sie dir gefällt</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Version %s</string>
     <string name="settings_category_customization_title">Anpassung</string>
     <string name="settings_customize_light_theme_title">Helles Thema</string>
@@ -1203,11 +1203,11 @@
     <string name="settings_custom_content_font_family_title">Benutzerdefinierte Inhaltschriftart-familie</string>
     <string name="settings_fixed_height_preview_in_card_title">Festgestellte Höhe in Kartenansicht</string>
     <string name="settings_hide_text_post_content">Text-Post Inhalt verstecken</string>
-    <string name="settings_hide_comment_awards_title">"Kommentarauszeichnungen verstecken "</string>
+    <string name="settings_hide_comment_awards_title">Kommentarauszeichnungen verstecken</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Weniger Werkzeugleistenoptionen anzeigen</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Wert %1$d</string>
     <string name="settings_show_author_avatar_title">Autoravatar zeigen</string>
-    <string name="settings_reddit_user_agreement_title">"Lemmy Nutzungsbestimmungen "</string>
+    <string name="settings_reddit_user_agreement_title">Lemmy Nutzungsbestimmungen</string>
     <string name="settings_always_show_child_comment_count_title">Immer die Anzahl von untergeordneten Kommentaren anzeigen</string>
     <string name="settings_hide_upvote_ratio_title">Upvoteverhaltnis verstecken</string>
     <string name="settings_miscellaneous_dangerous_group_title">Gefährlich</string>
@@ -1223,7 +1223,7 @@
     <string name="user_agreement_dialog_title">Nutzungsbedingungen</string>
     <string name="user_agreement_message">Du musst Reddit Nutzungsbedingungen (%1$s) und Infinity for reddit\'s Datenschutz-Bestimmungen (%2$s) zustimmen bevor du dich anmelden kannst.</string>
     <string name="agree">Zustimmen</string>
-    <string name="do_not_agree">"Nicht zustimmen "</string>
+    <string name="do_not_agree">Nicht zustimmen</string>
     <string name="option_1_hint">Option 1 (notwendig)</string>
     <string name="option_2_hint">Option 2 (notwendig)</string>
     <string name="option_3_hint">Option 3</string>
