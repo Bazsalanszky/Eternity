@@ -110,7 +110,7 @@
     <string name="saved">Guardado</string>
     <string name="gilded">Dourado</string>
     <string name="settings">Definições</string>
-    <string name="subscribers_number_detail">Membros: %1$,d</string>
+    <string name="subscribers_number_detail">%1$,d Membros</string>
     <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Não é possível obter informações da comunidade</string>
     <string name="cannot_fetch_user_info">Não é possível obter informações do utilizador</string>
@@ -680,7 +680,7 @@
     <string name="delete_all_front_page_scrolled_positions_success">Eliminação das posições de deslizamento com sucesso</string>
     <string name="reset_all_settings_success">Todas as definições repostas com sucesso</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">c/infinityforlemmy</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Texto Principal</string>
     <string name="secondary_text_preview">Texto Secundário</string>
     <string name="post_title_preview">Isto é uma publicação</string>
@@ -1264,4 +1264,16 @@
     <string name="display_name_description">Isto será apresentado aos visualizadores da sua página de perfil e não altera o seu nome de utilizador.</string>
     <string name="reddit_gallery_item_caption_hint">Legenda (máx. 180 caracteres)</string>
     <string name="action_unblock_user">Desbloquear Utilizador</string>
+    <string name="settings_show_statistics">Mostrar Estatísticas</string>
+    <string name="active_users_number_detail">%1$,d Utilizadores Ativos</string>
+    <string name="comment_count_detail">%1$,d Comentários</string>
+    <string name="settings_category_community_and_user_pages_title">Paginas da comunidade e do utilizador</string>
+    <string name="settings_show_post_and_comment_score">Mostrar pontuações de publicações e comentários</string>
+    <string name="moderators">Moderadores</string>
+    <string name="report_post">Denunciar publicação</string>
+    <string name="separate_down_and_up_votes">Votos Positivos e Negativos separados</string>
+    <string name="settings_show_display_name_instead_of_user_name">Mostrar nomes de exibição da comunidade e do utilizador</string>
+    <string name="settings_hide_community_and_user_instance">Ocultar instância da comunidade e do utilizador</string>
+    <string name="post_count_detail">%1$,d Publicações</string>
+    <string name="send_report">Enviar Denuncia</string>
 </resources>
