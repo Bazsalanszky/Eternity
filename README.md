@@ -1,5 +1,5 @@
 <h1 align="center">
-  Infinity for Lemmy
+  Eternity (formerly Infinity for Lemmy)
 </h1>
 
 <div align="center">
@@ -30,9 +30,9 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
 
 ---
 
-## Action Items for Infinity for Lemmy
+## Action Items for Eternity
 
-Infinity for Lemmy is currently in the early stages of development. Expect many unfinished features and bugs!
+Eternity is currently in the early stages of development. Expect many unfinished features and bugs!
 
 - [x] Implementation of basic post browsing feature
 - [x] Support for multiple account handling
@@ -43,7 +43,7 @@ Infinity for Lemmy is currently in the early stages of development. Expect many 
 - [x] Edit/Delete posts and comments
 - [x] Basic inbox
 - [ ] Elimination of code/string references specific to Reddit
-- [ ] Incorporation of private messaging feature
+- [x] Incorporation of private messaging feature
 - [x] Feature for saving posts/comments
 - [x] Resolving links
 - [ ] Account editing function
@@ -66,7 +66,7 @@ Don't forget to give the project a star! Thanks again!
 
 ### Translation
 
-You can alos help Infinity for Lemmy by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/infinity-for-lemmy/app/)!
+You can alos help Eternity by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/infinity-for-lemmy/app/)!
 
 [![Translation](https://translate.codeberg.org/widgets/infinity-for-lemmy/-/app/multi-auto.svg)](https://translate.codeberg.org/engage/infinity-for-lemmy/)
 

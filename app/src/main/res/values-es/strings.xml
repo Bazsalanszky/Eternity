@@ -390,7 +390,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="settings_reddit_account_title">Cuenta de Reddit</string>
     <string name="settings_reddit_account_summary">u/Hostilenemy</string>
     <string name="settings_community_title">Subreddit</string>
-    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
+    <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Compartir</string>
     <string name="settings_share_summary">Si te gusta esta aplicación ¡Compártela!</string>
     <string name="settings_version_title">Infinity for Reddit</string>

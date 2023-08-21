@@ -405,7 +405,7 @@
     <string name="settings_reddit_account_title">Compte Reddit</string>
     <string name="settings_reddit_account_summary">u/Hostilenemy</string>
     <string name="settings_community_title">Communauté</string>
-    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
+    <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Partager</string>
     <string name="settings_share_summary">Partagez cette application avec d\'autres si vous l\'appréciez</string>
     <string name="settings_version_title">Infinity pour Reddit</string>
@@ -832,7 +832,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <!-- Fuzzy -->
     <string name="settings_data_saving_mode_info_summary">Dans le mode économie de données, les aperçus d\'image et les vidéos sont en plus petite résolution.</string>
     <string name="settings_translation_title">Traduction</string>
-    <string name="settings_translation_summary">Application Infinity for Reddit traduite dans POEditor ; application Infinity for Lemmy traduite sur Weblate. Merci à tou·tes les contributeur·ices.</string>
+    <string name="settings_translation_summary">Application Infinity for Reddit traduite dans POEditor ; application Eternity traduite sur Weblate. Merci à tou·tes les contributeur·ices.</string>
     <string name="settings_credits_national_flags">Drapeaux nationaux</string>
     <string name="settings_credits_national_flags_summary">Icône réalisée par Freepik de www.flaticon.com</string>
     <string name="copy_failed">Échec de la copie</string>

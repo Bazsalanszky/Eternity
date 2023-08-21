@@ -68,7 +68,7 @@ public class AboutPreferenceFragment extends CustomFontPreferenceFragmentCompat 
         if (subredditPreference != null) {
             subredditPreference.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(activity, LinkResolverActivity.class);
-                intent.setData(Uri.parse("https://lemdro.id/c/infinityforlemmy"));
+                intent.setData(Uri.parse("https://lemdro.id/c/eternityapp"));
                 activity.startActivity(intent);
                 return true;
             });

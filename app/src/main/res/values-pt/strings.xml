@@ -382,10 +382,10 @@
     <string name="settings_reddit_account_title">Conta do Lemmy</string>
     <string name="settings_reddit_account_summary">u/Hostilenemy</string>
     <string name="settings_community_title">Comunidade</string>
-    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
+    <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Partilhar</string>
     <string name="settings_share_summary">Se aprecia esta aplicação, partilhe-a com outros</string>
-    <string name="settings_version_title">Infinity For Lemmy</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Versão %s</string>
     <string name="settings_category_customization_title">Personalização</string>
     <string name="settings_customize_light_theme_title">Tema Claro</string>
@@ -448,7 +448,7 @@
     <string name="error_getting_multi_reddit_data">Erro ao obter dados da multi-comunidade</string>
     <string name="error_loading_multi_reddit_list">Não foi possível sincronizar multi-comunidades</string>
     <string name="error_loading_subscriptions">Não foi possível sincronizar as subscrições</string>
-    <string name="share_this_app">Veja o Infinity for Lemmy, um cliente fantástico do Lemmy!
+    <string name="share_this_app">Veja o Eternity, um cliente fantástico do Lemmy!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Erro ao obter o nome da comunidade</string>
     <string name="share_post_link">Partilhar Endereço da Publicação</string>

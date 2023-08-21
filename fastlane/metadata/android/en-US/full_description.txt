@@ -1,4 +1,4 @@
- <h1>Infinity for Lemmy</h1>
+ <h1>Eternity</h1>
 <p>A client for Lemmy, specifically designed for Android and written in Java. This project is a fork of the Infinity for Reddit project, and it is currently in the early stages of development. As such, expect many unfinished features and potential bugs!</p>
 
 <h2>Development Progress</h2>

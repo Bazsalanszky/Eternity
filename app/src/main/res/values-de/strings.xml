@@ -394,7 +394,7 @@
     <string name="settings_reddit_account_title">Lemmy-Konto</string>
     <string name="settings_reddit_account_summary">\@bazsalanszky@lemmy.toldi.eu</string>
     <string name="settings_community_title">Community</string>
-    <string name="settings_community_summary">!infinityforlemmy@lemdro.id</string>
+    <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Teilen</string>
     <string name="settings_share_summary">Teile diese App mit anderen Leuten, wenn sie dir gefällt</string>
     <string name="settings_version_title">Infinity For Reddit</string>
@@ -715,7 +715,7 @@
     <!-- Fuzzy -->
     <string name="reset_all_settings_success">Alle Einstellungen erfolgreich gelöscht</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">!infinityforlemmy@lemdro.id</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Primärer Text</string>
     <string name="secondary_text_preview">Sekundärer Text</string>
     <string name="post_title_preview">Dies ist ein Beitrag</string>
