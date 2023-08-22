@@ -2,6 +2,8 @@ package eu.toldi.infinityforlemmy;
 
 import android.app.Application;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
@@ -25,6 +27,7 @@ import eu.toldi.infinityforlemmy.activities.FullMarkdownActivity;
 import eu.toldi.infinityforlemmy.activities.GiveAwardActivity;
 import eu.toldi.infinityforlemmy.activities.HistoryActivity;
 import eu.toldi.infinityforlemmy.activities.InboxActivity;
+import eu.toldi.infinityforlemmy.activities.InstanceInfoActivity;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
 import eu.toldi.infinityforlemmy.activities.LockScreenActivity;
 import eu.toldi.infinityforlemmy.activities.LoginActivity;
@@ -321,6 +324,8 @@ public interface AppComponent {
     void inject(CommentMoreBottomSheetFragment commentMoreBottomSheetFragment);
 
     void inject(PrivateMessageFragment privateMessageFragment);
+
+    void inject(@NotNull InstanceInfoActivity instanceInfoActivity);
 
     @Component.Factory
     interface Factory {

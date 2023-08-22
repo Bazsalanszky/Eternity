@@ -337,6 +337,11 @@ public class CustomThemeWrapper {
                 getDefaultColor("#577F63", "#D67AD2", "#25BE6A"));
     }
 
+    public int getAdmin() {
+        return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.MODERATOR,
+                getDefaultColor("#a5222f", "#c94f6d", "#EE5396"));
+    }
+
     public int getCurrentUser() {
         return getThemeSharedPreferences().getInt(CustomThemeSharedPreferencesUtils.CURRENT_USER,
                 getDefaultColor("#488D93", "#7AD5D6", "#2DC7C4"));

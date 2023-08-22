@@ -150,6 +150,8 @@
     <string name="active_users_number_detail">%1$,d Active Users</string>
     <string name="post_count_detail">%1$,d Posts</string>
     <string name="comment_count_detail">%1$,d Comments</string>
+    <string name="user_number_detail">%1$,d Users</string>
+    <string name="community_number_detail">%1$,d Communities</string>
     <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Cannot fetch community info</string>
     <string name="cannot_fetch_user_info">Cannot fetch user info</string>
@@ -1379,4 +1381,5 @@
     <string name="settings_show_statistics">Show Statistics</string>
     <string name="settings_show_post_and_comment_score">Show post and comment scores</string>
     <string name="moderators">Moderators</string>
+    <string name="admins">Admins</string>
 </resources>
