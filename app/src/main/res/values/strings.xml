@@ -1382,4 +1382,5 @@
     <string name="settings_show_post_and_comment_score">Show post and comment scores</string>
     <string name="moderators">Moderators</string>
     <string name="admins">Admins</string>
+    <string name="settings_hide_user_instance">Hide user instance</string>
 </resources>

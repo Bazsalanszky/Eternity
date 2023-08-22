@@ -620,7 +620,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostDetailsSharedPreferences,
                     mExoCreator, post -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
-                    this, mCustomThemeWrapper, mExecutor, mRetrofit.getRetrofit(),
+                    this, mCustomThemeWrapper, mExecutor, mRetrofit,
                     mAccessToken, mAccountQualifiedName, mPost, mLocale, mSingleCommentId
                     , isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
@@ -1351,7 +1351,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 pages_loaded++;
                                 mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                                         ViewPostDetailFragment.this, mCustomThemeWrapper, mExecutor,
-                                        mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, mPost, mLocale,
+                                        mRetrofit, mAccessToken, mAccountQualifiedName, mPost, mLocale,
                                         mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                                         new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                                             @Override

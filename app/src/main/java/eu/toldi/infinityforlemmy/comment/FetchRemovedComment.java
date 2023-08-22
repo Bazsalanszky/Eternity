@@ -110,7 +110,7 @@ public class FetchRemovedComment {
         boolean isSubmitter = result.getBoolean(JSONUtils.IS_SUBMITTER_KEY);
 
         if (id.equals(comment.getId()) &&
-                (!author.equals(comment.getAuthor()) ||
+                (!author.equals(comment.getAuthorName()) ||
                         !body.equals(comment.getCommentRawText()))
         ) {
             comment.setAuthor(author);

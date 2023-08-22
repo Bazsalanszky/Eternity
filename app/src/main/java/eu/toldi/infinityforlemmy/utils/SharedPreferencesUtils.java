@@ -56,6 +56,9 @@ public class SharedPreferencesUtils {
 
     public static final String POST_DISPLAY_NAME_INSTEAD_OF_USERNAME = "post_display_name_instead_of_user_name";
 
+    public static final String COMMENT_DISPLAY_NAME_INSTEAD_OF_USERNAME = "comment_display_name_instead_of_user_name";
+    public static final String COMMENT_HIDE_USER_INSTANCE = "comment_hide_user_instance";
+
     public static final String POST_DETAIL_DISPLAY_NAME_INSTEAD_OF_USERNAME = "post_detail_display_name_instead_of_user_name";
 
     public static final String SORT_TYPE_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.sort_type";

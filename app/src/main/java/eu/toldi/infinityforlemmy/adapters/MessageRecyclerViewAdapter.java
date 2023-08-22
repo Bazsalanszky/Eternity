@@ -217,7 +217,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
                 ((DataViewHolder) holder).authorTextView.setOnClickListener(view -> {
 
                     Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
-                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, message.getComment().getAuthor());
+                    intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, message.getComment().getAuthorName());
                     intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, message.getComment().getAuthorQualifiedName());
                     mActivity.startActivity(intent);
                 });

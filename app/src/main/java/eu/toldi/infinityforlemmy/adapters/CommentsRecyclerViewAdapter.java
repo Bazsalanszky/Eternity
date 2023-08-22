@@ -39,10 +39,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveComment;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
@@ -95,7 +97,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private BaseActivity mActivity;
     private ViewPostDetailFragment mFragment;
     private Executor mExecutor;
-    private Retrofit mRetrofit;
+    private RetrofitHolder mRetrofit;
     private Retrofit mOauthRetrofit;
     private Markwon mCommentMarkwon;
     private String mAccessToken;
@@ -134,6 +136,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private boolean isInitiallyLoadingFailed;
     private boolean mHasMoreComments;
     private boolean loadMoreCommentsFailed;
+
+    private boolean mHideUserInstance;
+    private boolean mShowUserDisplayName;
     private Drawable expandDrawable;
     private Drawable collapseDrawable;
 
@@ -165,7 +170,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public CommentsRecyclerViewAdapter(BaseActivity activity, ViewPostDetailFragment fragment,
                                        CustomThemeWrapper customThemeWrapper,
-                                       Executor executor, Retrofit retrofit,
+                                       Executor executor, RetrofitHolder retrofit,
                                        String accessToken, String accountName,
                                        Post post, Locale locale, Integer singleCommentId,
                                        boolean isSingleCommentThreadMode,
@@ -242,6 +247,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mShowAuthorAvatar = sharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_AUTHOR_AVATAR, false);
         mAlwaysShowChildCommentCount = sharedPreferences.getBoolean(SharedPreferencesUtils.ALWAYS_SHOW_CHILD_COMMENT_COUNT, false);
         mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES_IN_COMMENTS, false);
+        mHideUserInstance = sharedPreferences.getBoolean(SharedPreferencesUtils.COMMENT_HIDE_USER_INSTANCE, false);
+        mShowUserDisplayName = sharedPreferences.getBoolean(SharedPreferencesUtils.COMMENT_DISPLAY_NAME_INSTEAD_OF_USERNAME, true);
         mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
         mSeperateUpandDownvote = sharedPreferences.getBoolean(SharedPreferencesUtils.COMMENT_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
         mDepthThreshold = sharedPreferences.getInt(SharedPreferencesUtils.SHOW_FEWER_TOOLBAR_OPTIONS_THRESHOLD, 5);
@@ -375,9 +382,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 if (mIsSingleCommentThreadMode && comment.getId() == mSingleCommentId) {
                     holder.itemView.setBackgroundColor(mSingleCommentThreadBackgroundColor);
                 }
-
-                String authorPrefixed = comment.getAuthorQualifiedName();
-                ((CommentViewHolder) holder).authorTextView.setText(authorPrefixed);
+                String authorDisplayName = (mShowUserDisplayName) ? comment.getAuthorName() : comment.getAuthor().getUsername();
+                String authorInstance = (mHideUserInstance) ? "" : "@" + comment.getAuthor().getQualifiedName().split(Pattern.quote("@"))[1];
+                ((CommentViewHolder) holder).authorTextView.setText(authorDisplayName + authorInstance);
 
 
                 if (comment.isSubmitter()) {
@@ -565,7 +572,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         } else if (holder instanceof CommentFullyCollapsedViewHolder) {
             Comment comment = getCurrentComment(position);
             if (comment != null) {
-                String authorWithPrefix = "u/" + comment.getAuthor();
+                String authorWithPrefix = "u/" + comment.getAuthorName();
                 ((CommentFullyCollapsedViewHolder) holder).usernameTextView.setText(authorWithPrefix);
 
                 if (comment.getAuthorIconUrl() == null) {
@@ -648,7 +655,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         mVisibleComments.get(commentPosition).setLoadMoreChildrenFailed(false);
                         ((LoadMoreChildCommentsViewHolder) holder).placeholderTextView.setText(R.string.loading);
 
-                        Retrofit retrofit = mRetrofit;
+                        Retrofit retrofit = mRetrofit.getRetrofit();
                         SortType.Type sortType = mCommentRecyclerViewAdapterCallback.getSortType();
                         FetchComment.fetchComments(mExecutor, new Handler(), retrofit, mAccessToken,
                                 mPost.getId(), parentComment.getId(), sortType,
@@ -1479,7 +1486,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                         comment.getScore() + comment.getVoteType())));
                     }
 
-                    VoteThing.voteComment(mActivity, mRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.voteComment(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position) {
                             int currentPosition = getBindingAdapterPosition();
@@ -1586,7 +1593,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
 
                     int position = getBindingAdapterPosition();
-                    VoteThing.voteComment(mActivity, mRetrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.voteComment(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -1594,9 +1601,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                 comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                                    if(mSeperateUpandDownvote){
+                                    if (mSeperateUpandDownvote) {
                                         downvoteTextView.setTextColor(mDownvotedColor);
-                                    }else {
+                                    } else {
                                         scoreTextView.setTextColor(mDownvotedColor);
                                     }
                                     topScoreTextView.setTextColor(mDownvotedColor);
@@ -1646,7 +1653,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     SaveComment saveComment = new SaveComment();
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        saveComment.unsaveThing(mRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        saveComment.unsaveThing(mRetrofit.getRetrofit(), mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
@@ -1667,7 +1674,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         });
                     } else {
                         comment.setSaved(true);
-                        saveComment.saveThing(mRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        saveComment.saveThing(mRetrofit.getRetrofit(), mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(true);
@@ -1696,7 +1703,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     return;
                 }
                 Intent intent = new Intent(mActivity, ViewUserDetailActivity.class);
-                intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, comment.getAuthor());
+                intent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, comment.getAuthorName());
                 intent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, comment.getAuthorQualifiedName());
                 mActivity.startActivity(intent);
             });

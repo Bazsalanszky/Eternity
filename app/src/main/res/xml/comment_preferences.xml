@@ -61,6 +61,16 @@
         app:key="comment_separate_down_and_up_votes"
         app:title="@string/separate_down_and_up_votes" />
 
+    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
+        app:defaultValue="false"
+        app:key="comment_hide_user_instance"
+        app:title="@string/settings_hide_user_instance" />
+
+    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
+        app:defaultValue="true"
+        app:key="comment_display_name_instead_of_user_name"
+        app:title="@string/settings_show_display_name_instead_of_user_name" />
+
     <eu.toldi.infinityforlemmy.customviews.CustomFontSeekBarPreference
         app:defaultValue="5"
         android:max="10"

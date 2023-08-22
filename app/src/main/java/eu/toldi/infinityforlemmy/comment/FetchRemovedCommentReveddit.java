@@ -56,7 +56,7 @@ public class FetchRemovedCommentReveddit {
         String author = result.getString(JSONUtils.AUTHOR_KEY);
         String body = Utils.modifyMarkdown(Utils.trimTrailingWhitespace(result.optString(JSONUtils.BODY_KEY)));
 
-        if (id.equals(comment.getId()) && (!author.equals(comment.getAuthor()) || !body.equals(comment.getCommentRawText()))) {
+        if (id.equals(comment.getId()) && (!author.equals(comment.getAuthorName()) || !body.equals(comment.getCommentRawText()))) {
             comment.setAuthor(author);
             comment.setCommentMarkdown(body);
             comment.setCommentRawText(body);

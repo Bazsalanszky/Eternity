@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import eu.toldi.infinityforlemmy.BuildConfig;
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 
 public class Comment implements Parcelable {
     public static final int VOTE_TYPE_NO_VOTE = 0;
@@ -29,9 +30,7 @@ public class Comment implements Parcelable {
     };
     private int id;
     private String fullName;
-    private String author;
-    private String authorQualifiedName;
-    private String authorIconUrl;
+    private BasicUserInfo author;
     private String linkAuthor;
     private long commentTimeMillis;
     private String commentMarkdown;
@@ -66,16 +65,14 @@ public class Comment implements Parcelable {
     private List<String> path;
     private int postId;
 
-    public Comment(int id, int postId, String fullName, String author, String authorQualifiedName, String linkAuthor,
+    public Comment(int id, int postId, BasicUserInfo author, String linkAuthor,
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
-                   String linkId, String communityName, String communityQualifiedName, Integer parentId, int downvotes,int upvotes,
+                   String linkId, String communityName, String communityQualifiedName, Integer parentId, int downvotes, int upvotes,
                    int voteType, boolean isSubmitter, String distinguished, String permalink,
                    int depth, boolean collapsed, boolean hasReply, boolean saved, boolean deleted, long edited, String[] path) {
         this.id = id;
         this.postId = postId;
-        this.fullName = fullName;
         this.author = author;
-        this.authorQualifiedName = authorQualifiedName;
         this.linkAuthor = linkAuthor;
         this.commentTimeMillis = commentTimeMillis;
         this.commentMarkdown = commentMarkdown;
@@ -122,10 +119,7 @@ public class Comment implements Parcelable {
     protected Comment(Parcel in) {
         id = in.readInt();
         postId = in.readInt();
-        fullName = in.readString();
-        author = in.readString();
-        authorQualifiedName = in.readString();
-        authorIconUrl = in.readString();
+        author = in.readParcelable(BasicUserInfo.class.getClassLoader());
         linkAuthor = in.readString();
         commentTimeMillis = in.readLong();
         commentMarkdown = in.readString();
@@ -169,8 +163,8 @@ public class Comment implements Parcelable {
         return fullName;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorName() {
+        return author.getDisplayName();
     }
 
     public boolean isAuthorDeleted() {
@@ -178,16 +172,17 @@ public class Comment implements Parcelable {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        //this.author = author;
     }
 
 
     public String getAuthorIconUrl() {
-        return authorIconUrl;
+        return author.getAvatar();
     }
 
     public void setAuthorIconUrl(String authorIconUrl) {
-        this.authorIconUrl = authorIconUrl;
+
+        //this.authorIconUrl = authorIconUrl;
     }
 
     public String getLinkAuthor() {
@@ -435,10 +430,7 @@ public class Comment implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeInt(postId);
-        parcel.writeString(fullName);
-        parcel.writeString(author);
-        parcel.writeString(authorQualifiedName);
-        parcel.writeString(authorIconUrl);
+        parcel.writeParcelable(author, i);
         parcel.writeString(linkAuthor);
         parcel.writeLong(commentTimeMillis);
         parcel.writeString(commentMarkdown);
@@ -486,7 +478,7 @@ public class Comment implements Parcelable {
     }
 
     public String getAuthorQualifiedName() {
-        return authorQualifiedName;
+        return author.getQualifiedName();
     }
 
     public String getCommunityQualifiedName() {
@@ -495,5 +487,9 @@ public class Comment implements Parcelable {
 
     public int getPostId() {
         return postId;
+    }
+
+    public BasicUserInfo getAuthor() {
+        return author;
     }
 }

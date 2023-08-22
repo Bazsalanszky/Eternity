@@ -24,6 +24,7 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
+import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
@@ -340,10 +341,10 @@ public class ParseComment {
         boolean saved = jsonObject.getBoolean("saved");
         boolean deleted = commentObj.getBoolean("deleted");
         long edited = 0;
-
-        Comment comment = new Comment(id, postID, fullName, author, authorQualifiedName, linkAuthor, commentTimeMillis,
+        BasicUserInfo authorInfo = new BasicUserInfo(creatorObj.getInt("id"), author, authorQualifiedName, creatorObj.optString("avatar", ""), creatorObj.optString("display_name", author));
+        Comment comment = new Comment(id, postID, authorInfo, linkAuthor, commentTimeMillis,
                 commentMarkdown, commentRawText, linkId, communityName, communityQualifiedName, parentId,
-                downvotes,upvotes, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, deleted, edited, path);
+                downvotes, upvotes, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, deleted, edited, path);
         int child_count = countsObj.getInt("child_count");
         comment.setChildCount(child_count);
         comment.setAuthorIconUrl(authorAvatar);
