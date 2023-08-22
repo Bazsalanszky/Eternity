@@ -105,6 +105,9 @@ public class InstanceInfoActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        // Remove transparency from navigation bar
+        getWindow().setNavigationBarColor(mCustomThemeWrapper.getBackgroundColor());
 
         int markdownColor = customThemeWrapper.getPostContentColor();
         int postSpoilerBackgroundColor = markdownColor | 0xFF000000;
