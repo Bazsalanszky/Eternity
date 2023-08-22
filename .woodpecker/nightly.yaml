@@ -23,7 +23,7 @@ steps:
       - cd repoconfig
       - pwd
       - git clone --depth 1 https://codeberg.org/Bazsalanszky/fdroid-repo-config
-      - cp /woodpecker/src/codeberg.org/Bazsalanszky/Infinity-For-Lemmy/eu.toldi.infinityforlemmy.nightly.apk fdroid-repo-config/repo/
+      - cp /woodpecker/src/codeberg.org/Bazsalanszky/Eternity/eu.toldi.infinityforlemmy.nightly.apk fdroid-repo-config/repo/
 
   pull-pages:
     image: codeberg.org/freeyourgadget/android-fdroid-tools:latest
