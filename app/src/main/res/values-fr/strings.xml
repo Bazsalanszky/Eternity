@@ -408,7 +408,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Partager</string>
     <string name="settings_share_summary">Partagez cette application avec d\'autres si vous l\'appréciez</string>
-    <string name="settings_version_title">Infinity pour Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Version %s</string>
     <string name="settings_category_customization_title">Personnalisations</string>
     <string name="settings_customize_light_theme_title">Thème clair</string>
@@ -473,7 +473,7 @@
     <string name="error_getting_multi_reddit_data">Erreur de récupération des données de la multi-communauté</string>
     <string name="error_loading_multi_reddit_list">Impossible de synchroniser les multi-communautés</string>
     <string name="error_loading_subscriptions">Impossible de synchroniser les abonnements</string>
-    <string name="share_this_app">Essaie Infinity pour Lemmy, un super client Lemmy !
+    <string name="share_this_app">Essaie Eternity, un super client Lemmy !
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Impossible de récupérer le nom de la communauté</string>
     <string name="share_post_link">Partager le lien du post</string>
@@ -728,7 +728,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <!-- Fuzzy -->
     <string name="reset_all_settings_success">Réinitialisation des paramètres réussie</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">r/Infinity_For_Reddit</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Texte principal</string>
     <string name="secondary_text_preview">Texte secondaire</string>
     <string name="post_title_preview">C\'est une publication</string>
@@ -1226,4 +1226,32 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="app_lock_timeout_immediately">Immédiatement</string>
     <string name="settings_save_nsfw_media_in_different_folder_title">Sauvegarder les médias NSFW à un autre endroit</string>
     <string name="settings_app_lock_timeout_title">Expiration du verrouillage de l\'application</string>
+    <string name="active_users_number_detail">%1$,d utilisateurs actifs</string>
+    <string name="message_change_avatar_success">Avatar modifié</string>
+    <string name="message_change_avatar_failed">Échec de la modification de l’avatar %s</string>
+    <string name="unable_to_get_font_file">Impossible d’obtenir votre police</string>
+    <string name="user_agreement_message">Vous devez accepter le contrat d’utilisation de Reddit (%1$s) et la politique de confidentialité d’Infinity pour Reddit (%2$s) avant de vous connecter.</string>
+    <string name="user_agreement_dialog_title">Contrat d’utilisateur</string>
+    <string name="agree">J’accepte</string>
+    <string name="post_count_detail">%1$,d publications</string>
+    <string name="comment_count_detail">%1$,d commentaires</string>
+    <string name="message_change_banner_success">Bannière modifiée</string>
+    <string name="message_change_banner_failed">Échec de la modification de la bannière %s</string>
+    <string name="message_save_profile_success">Profil enregistré</string>
+    <string name="message_save_profile_failed">Échec de l’enregistrement du profil %s</string>
+    <string name="select_a_ttf_font">Sélectionnez un fichier de police TTF</string>
+    <string name="unable_to_load_font">Impossible de charger votre police personnalisée</string>
+    <string name="unable_to_copy_font_file">Impossible de copier votre police</string>
+    <string name="reddit_gallery_item_caption_hint">Légende (180 caractères max)</string>
+    <string name="reddit_gallery_item_url_hint">URL</string>
+    <string name="do_not_agree">Je refuse</string>
+    <string name="option_1_hint">Option 1 (Requise)</string>
+    <string name="option_2_hint">Option 2 (Requise)</string>
+    <string name="option_3_hint">Option 3</string>
+    <string name="option_4_hint">Option 4</string>
+    <string name="option_5_hint">Option 5</string>
+    <string name="option_6_hint">Option 6</string>
+    <string name="not_a_valid_number">Nombre non valide</string>
+    <string name="post_karma">Karma de la publication :</string>
+    <string name="comment_karma">Karma du commentaire :</string>
 </resources>
