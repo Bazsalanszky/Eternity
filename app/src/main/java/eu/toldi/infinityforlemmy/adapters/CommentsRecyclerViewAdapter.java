@@ -664,21 +664,19 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                 mExpandChildren, 1, new FetchComment.FetchCommentListener() {
                                     @Override
                                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
-                                        if (mVisibleComments.size() > parentPosition
-                                                && parentComment.getId() == mVisibleComments.get(parentPosition).getId()) {
+                                        if (parentComment.getId() == mVisibleComments.get(parentPosition).getId()) {
                                             if (mVisibleComments.get(parentPosition).isExpanded()) {
 
                                                 mVisibleComments.get(parentPosition).getChildren()
                                                         .remove(mVisibleComments.get(parentPosition).getChildren().size() - 1);
                                                 // mVisibleComments.get(parentPosition).removeMoreChildrenIds();
 
-                                                int placeholderPosition = findLoadMoreCommentsPlaceholderPosition(parentComment.getFullName(), commentPosition);
-                                                if (placeholderPosition != -1) {
-                                                    mVisibleComments.remove(placeholderPosition);
+                                                if (position != -1) {
+                                                    mVisibleComments.remove(position);
                                                     if (mIsSingleCommentThreadMode) {
-                                                        notifyItemRemoved(placeholderPosition + 1);
+                                                        notifyItemRemoved(position + 1);
                                                     } else {
-                                                        notifyItemRemoved(placeholderPosition);
+                                                        notifyItemRemoved(position);
                                                     }
                                                     List<Comment> trulyNewComments = new ArrayList<>();
                                                     for (int i = 0; i < expandedComments.size(); i++) {
@@ -688,11 +686,13 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                                         trulyNewComments.add(expandedComments.get(i));
                                                         loadedComments.add(expandedComments.get(i).getId());
                                                     }
-                                                    mVisibleComments.addAll(placeholderPosition, trulyNewComments);
-                                                    if (mIsSingleCommentThreadMode) {
-                                                        notifyItemRangeInserted(placeholderPosition + 1, trulyNewComments.size());
-                                                    } else {
-                                                        notifyItemRangeInserted(placeholderPosition, trulyNewComments.size());
+                                                    if (!trulyNewComments.isEmpty()) {
+                                                        mVisibleComments.addAll(position, trulyNewComments);
+                                                        if (mIsSingleCommentThreadMode) {
+                                                            notifyItemRangeInserted(position + 1, trulyNewComments.size());
+                                                        } else {
+                                                            notifyItemRangeInserted(position, trulyNewComments.size());
+                                                        }
                                                     }
                                                 }
 
@@ -722,7 +722,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                                 if (mVisibleComments.get(i).getFullName().equals(parentComment.getFullName())) {
                                                     if (mVisibleComments.get(i).isExpanded()) {
                                                         int placeholderPositionHint = i + mVisibleComments.get(i).getChildren().size();
-                                                        int placeholderPosition = findLoadMoreCommentsPlaceholderPosition(parentComment.getFullName(), placeholderPositionHint);
+                                                        int placeholderPosition = findLoadMoreCommentsPlaceholderPosition(parentComment.getId(), placeholderPositionHint);
 
                                                         if (placeholderPosition != -1) {
                                                             mVisibleComments.get(placeholderPosition).setLoadingMoreChildren(false);
@@ -760,7 +760,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                                     @Override
                                     public void onFetchCommentFailed() {
-                                        int currentParentPosition = findCommentPosition(parentComment.getFullName(), parentPosition);
+                                        int currentParentPosition = findCommentPosition(parentComment.getId(), parentPosition);
                                         if (currentParentPosition == -1) {
                                             // note: returning here is probably a mistake, because
                                             // parent is just not visible, but it can still exist in the comments tree.
@@ -770,7 +770,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
                                         if (currentParentComment.isExpanded()) {
                                             int placeholderPositionHint = currentParentPosition + currentParentComment.getChildren().size();
-                                            int placeholderPosition = findLoadMoreCommentsPlaceholderPosition(parentComment.getFullName(), placeholderPositionHint);
+                                            int placeholderPosition = findLoadMoreCommentsPlaceholderPosition(parentComment.getId(), placeholderPositionHint);
 
                                             if (placeholderPosition != -1) {
                                                 mVisibleComments.get(placeholderPosition).setLoadingMoreChildren(false);
@@ -819,7 +819,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
      *
      * @return position of the placeholder or -1 if not found
      */
-    private int findCommentPosition(String fullName, int positionHint) {
+    private int findCommentPosition(int fullName, int positionHint) {
         return findCommentPosition(fullName, positionHint, Comment.NOT_PLACEHOLDER);
     }
 
@@ -829,20 +829,20 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
      *
      * @return position of the placeholder or -1 if not found
      */
-    private int findLoadMoreCommentsPlaceholderPosition(String fullName, int positionHint) {
-        return findCommentPosition(fullName, positionHint, Comment.PLACEHOLDER_LOAD_MORE_COMMENTS);
+    private int findLoadMoreCommentsPlaceholderPosition(int id, int positionHint) {
+        return findCommentPosition(id, positionHint, Comment.PLACEHOLDER_LOAD_MORE_COMMENTS);
     }
 
-    private int findCommentPosition(String fullName, int positionHint, int placeholderType) {
+    private int findCommentPosition(int id, int positionHint, int placeholderType) {
         if (0 <= positionHint && positionHint < mVisibleComments.size()
-                && mVisibleComments.get(positionHint).getFullName().equals(fullName)
+                && mVisibleComments.get(positionHint).getId() == id
                 && mVisibleComments.get(positionHint).getPlaceholderType() == placeholderType) {
             return positionHint;
         }
 
         for (int i = 0; i < mVisibleComments.size(); i++) {
             Comment comment = mVisibleComments.get(i);
-            if (comment.getFullName().equals(fullName) && comment.getPlaceholderType() == placeholderType) {
+            if (comment.getId() == id && comment.getPlaceholderType() == placeholderType) {
                 return i;
             }
         }
