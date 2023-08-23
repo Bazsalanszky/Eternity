@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Se connecter</string>
     <string name="comment_activity_label">Envoyer le commentaire</string>
     <string name="comment_activity_label_is_replying">Répondre</string>
@@ -11,36 +11,36 @@
     <string name="rules_activity_label">Règles</string>
     <!-- Everyone in france uses the english word for subreddits -->
     <string name="search_community_activity_label">Communautés</string>
-    <string name="edit_post_activity_label">Éditer le post</string>
-    <string name="edit_comment_activity_label">Éditer le commentaire</string>
+    <string name="edit_post_activity_label">Modifier la publication</string>
+    <string name="edit_comment_activity_label">Modifier le commentaire</string>
     <string name="view_message_activity_label">Boîte de réception</string>
     <string name="settings_activity_label">Paramètres</string>
     <!-- Fuzzy -->
-    <string name="account_saved_thing_activity_label">Sauvegardé</string>
+    <string name="account_saved_thing_activity_label">Enregistré</string>
     <string name="create_multi_reddit_activity_label">Créer une multi-communauté</string>
     <string name="community_multiselection_activity_label">Sélectionner les communautés</string>
     <string name="custom_theme_listing_activity_label">Thèmes personnalisés</string>
     <string name="customize_theme_activity_label">Personnaliser le thème</string>
     <string name="customize_theme_activity_create_theme_label">Créer un thème</string>
     <string name="theme_preview_activity_label">Prévisualiser le thème</string>
-    <string name="edit_multi_reddit_activity_label">Éditer la multi-communauté</string>
+    <string name="edit_multi_reddit_activity_label">Modifier la multi-communauté</string>
     <string name="selected_subeddits_activity_label">Communautés sélectionnées</string>
     <string name="report_activity_label">Signaler</string>
     <string name="view_imgur_media_activity_image_label">Image %1$d/%2$d</string>
     <string name="view_imgur_media_activity_video_label">Vidéo %1$d/%2$d</string>
-    <string name="send_private_message_activity_label">Envoyer un message privé</string>
+    <string name="send_private_message_activity_label">Envoyer un MP</string>
     <string name="view_reddit_gallery_activity_image_label">Image %1$d/%2$d</string>
-    <string name="view_reddit_gallery_activity_gif_label">Gif %1$d/%2$d</string>
+    <string name="view_reddit_gallery_activity_gif_label">GIF %1$d/%2$d</string>
     <string name="view_reddit_gallery_activity_video_label">Vidéo %1$d/%2$d</string>
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
     <string name="action_download">Télécharger</string>
     <string name="action_refresh">Actualiser</string>
     <string name="action_add_comment">Ajouter un commentaire</string>
-    <string name="action_save_post">Sauvegarder le post</string>
+    <string name="action_save_post">Enregistrer la publication</string>
     <!-- "Poste" isn't an equivalent to post. I'd use "publication" here but it's kind of long. The english word "Post" should be understood by everyone -->
     <!-- Fuzzy -->
-    <string name="action_view_crosspost_parent">Voir les reposts</string>
+    <string name="action_view_crosspost_parent">Voir les republications</string>
     <string name="action_search">Rechercher</string>
     <!-- Fuzzy -->
     <string name="action_start_lazy_mode">Lancer le mode automatique</string>
@@ -48,59 +48,66 @@
     <string name="action_stop_lazy_mode">Arrêter le mode automatique</string>
     <string name="action_send">Envoyer</string>
     <string name="action_sort">Trier</string>
-    <string name="action_hide_post">Masquer le post</string>
-    <string name="action_unhide_post">Afficher le post</string>
-    <string name="action_edit_post">Éditer le post</string>
-    <string name="action_delete_post">Supprimer le post</string>
+    <string name="action_hide_post">Masquer la publication</string>
+    <string name="action_unhide_post">Afficher la publication</string>
+    <string name="action_edit_post">Modifier la publication</string>
+    <string name="action_delete_post">Supprimer la publication</string>
     <string name="action_mark_nsfw">Marquer comme NSFW</string>
     <!-- Fuzzy -->
-    <string name="action_unmark_nsfw">Enlever la marque NSFW</string>
+    <string name="action_unmark_nsfw">Marquer comme SFW</string>
     <string name="action_mark_spoiler">Marquer comme spoiler</string>
     <!-- Fuzzy -->
     <string name="action_unmark_spoiler">Enlever la marque Spoiler</string>
-    <string name="action_edit_flair">Éditer le flair</string>
-    <string name="action_change_post_layout">Modifier la mise en page des posts</string>
-    <string name="action_save">Sauvegarder</string>
-    <string name="action_edit_multi_reddit">Éditer la multi-communauté</string>
+    <string name="action_edit_flair">Modifier le flair</string>
+    <string name="action_change_post_layout">Modifier la mise en page des publications</string>
+    <string name="action_save">Enregistrer</string>
+    <string name="action_edit_multi_reddit">Modifier la multi-communauté</string>
     <string name="action_delete_multi_reddit">Supprimer la multi-communauté</string>
     <string name="action_share">Partager</string>
     <string name="action_preview">Prévisualiser</string>
-    <string name="action_report">Reporter</string>
-    <string name="action_see_removed">Afficher les posts supprimées</string>
-    <string name="action_set_wallpaper">Définir comme fond d\'écran</string>
+    <string name="action_report">Signaler</string>
+    <string name="action_see_removed">Afficher les publications supprimées</string>
+    <string name="action_set_wallpaper">Définir comme fond d’écran</string>
     <string name="action_send_private_message">Envoyer un message privé</string>
-    <string name="parse_json_response_error">Une erreur s\'est produite lors de l\'analyse de la réponse JSON</string>
+    <string name="parse_json_response_error">Une erreur s’est produite lors de l’analyse de la réponse JSON</string>
     <string name="retrieve_token_error">Erreur dans la récupération du jeton</string>
-    <string name="something_went_wrong">Une erreur s\'est produite. Veuillez réessayer plus tard.</string>
+    <string name="something_went_wrong">Une erreur s’est produite. Veuillez réessayer plus tard.</string>
     <string name="access_denied">Accès refusé</string>
-    <string name="parse_user_info_error">Une erreur s\'est produite lors de l\'analyse des informations d\'utilisation</string>
+    <string name="parse_user_info_error">Une erreur s’est produite lors de l’analyse des informations d’utilisateur</string>
     <string name="no_system_webview_error">Erreur lors de l\'ouverture du WebView Système</string>
     <string name="error_loading_image_tap_to_retry">Erreur de chargement de l\'image. Appuyez pour réessayer.</string>
-    <string name="load_posts_error">Erreur de chargement des posts. Appuyez pour réessayer.</string>
+    <string name="load_posts_error">Erreur de chargement des publications.
+\nAppuyez pour réessayer.</string>
     <string name="load_more_posts_error">Erreur de chargement des posts.</string>
-    <string name="load_post_error">Erreur de chargement du post. Appuyez pour réessayer.</string>
-    <string name="search_communities_error">Erreur de recherche des communautés. Appuyez pour réessayer.</string>
-    <string name="search_users_error">Erreur de recherche des comptes. Appuyez pour réessayer.</string>
+    <string name="load_post_error">Erreur de chargement de la publication.
+\nAppuyez pour réessayer.</string>
+    <string name="search_communities_error">Erreur lors de la recherche des communautés.
+\nAppuyez pour réessayer.</string>
+    <string name="search_users_error">Erreur lors de recherche d’utilisateurs.
+\nAppuyez pour réessayer.</string>
     <string name="no_posts">Aucune post trouvée</string>
     <string name="no_comments">Aucun commentaire trouvé</string>
     <string name="no_communities">Aucune communauté trouvée</string>
     <string name="no_users">Aucun compte trouvé</string>
     <string name="no_multi_reddits">Aucune multi-communauté trouvée</string>
     <string name="no_storage_permission">Pas d\'autorisation de stockage pour enregistrer ce fichier</string>
-    <string name="load_comments_failed">Erreur de chargement des commentaires. Appuyez pour réessayer.</string>
+    <string name="load_comments_failed">Erreur lors du chargement des commentaires.
+\nAppuyez pour réessayer.</string>
     <string name="retry">Réessayer</string>
     <string name="comments">Commentaires</string>
     <string name="no_comments_yet">Aucun commentaire pour l\'instant. Écrire un commentaire \?</string>
     <string name="vote_failed">Le vote a échoué</string>
     <string name="refresh_post_failed">Erreur d\'actualisation du post</string>
-    <string name="load_messages_failed">Erreur de chargement des messages. Appuyez pour réessayer.</string>
+    <string name="load_messages_failed">Erreur lors du chargement des messages.
+\nAppuyez pour réessayer.</string>
     <string name="no_messages">Vide</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma : %1$d</string>
-    <string name="karma_info_user_detail">Karma :
-\n%1$d (%2$d + %3$d)</string>
-    <string name="cakeday_info">Date de création du compte: %1$s</string>
-    <string name="since">Depuis</string>
+    <string name="karma_info">Karma : %1$,d</string>
+    <string name="karma_info_user_detail">Karma :
+\n%1$,d (%2$d + %3$d)</string>
+    <string name="cakeday_info">Création du compte :
+\n%1$s</string>
+    <string name="since">Depuis :</string>
     <string name="profile">Profil</string>
     <string name="subscriptions">Abonnements</string>
     <string name="multi_reddit">Multi-communauté</string>
@@ -111,8 +118,8 @@
     <string name="saved">Enregistré</string>
     <string name="gilded">Doré</string>
     <string name="settings">Paramètres</string>
-    <string name="subscribers_number_detail">Suivi par : %1$d</string>
-    <string name="online_subscribers_number_detail">En ligne : %1$d</string>
+    <string name="subscribers_number_detail">%1$,d abonnés</string>
+    <string name="online_subscribers_number_detail">En ligne : %1$,d</string>
     <string name="cannot_fetch_community_info">Impossible d\'obtenir des informations sur la communauté</string>
     <string name="cannot_fetch_user_info">Impossible d\'obtenir des informations sur le compte</string>
     <string name="cannot_fetch_sidebar">Impossible d\'obtenir la barre latérale</string>
@@ -136,7 +143,7 @@
     <string name="lazy_mode_start">Le mode automatique commence dans %1$.1fs</string>
     <string name="lazy_mode_stop">Mode automatique interrompu</string>
     <string name="write_comment_hint">Partagez vos réflexions intéressantes</string>
-    <string name="comment_content_required">Vous n\'avez rien dit !</string>
+    <string name="comment_content_required">Où se trouvent vos idées intéressantes \?</string>
     <string name="sending_comment">Envoi</string>
     <string name="send_comment_success">Commentaire envoyé</string>
     <string name="send_comment_failed">Échec de l\'envoi de ce commentaire</string>
@@ -180,7 +187,7 @@
     <string name="select_again">Sélectionner à nouveau</string>
     <string name="error_getting_image">Erreur dans l\'obtention de l\'image</string>
     <string name="error_getting_video">Erreur dans l\'obtention de la vidéo</string>
-    <string name="no_camera_available">Aucune application de caméra disponible.</string>
+    <string name="no_camera_available">Aucune application d’appareil photo disponible</string>
     <string name="error_creating_temp_file">Erreur de création d\'un fichier temporaire</string>
     <string name="video_is_processing">La vidéo est en cours de traitement. Veuillez patienter.</string>
     <string name="image_is_processing">L\'image est en cours de traitement. Veuillez patienter.</string>
@@ -236,7 +243,7 @@
     <string name="posting_video">post de la vidéo</string>
     <string name="posting_image">post de l\'image</string>
     <!-- Fuzzy -->
-    <string name="please_wait">Veuillez patienter.</string>
+    <string name="please_wait">Veuillez patienter</string>
     <!-- Fuzzy -->
     <string name="add_account">Ajouter un compte</string>
     <string name="anonymous_account">Anonyme</string>
@@ -441,7 +448,7 @@
     <string name="exit_when_edit_post_detail">Ce sera peut-être publié même si vous quittez cette page.</string>
     <string name="exit_when_edit_comment_detail">Ce commentaire pourra être envoyé même si vous quittez cette page.</string>
     <string name="discard">Abandonner \?</string>
-    <string name="discard_detail">Votre brouillon ne sera PAS sauvegardé</string>
+    <string name="discard_detail">Le brouillon ne sera PAS enregistré.</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="no_data_received">Aucune donnée reçue</string>
@@ -515,7 +522,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="cannot_save_image">L\'image ne peut pas être enregistrée</string>
     <string name="cannot_save_gif">Le GIF ne peut pas être enregistré</string>
     <string name="cannot_get_storage">Ne peut pas accéder au stockage</string>
-    <string name="save_image_first">Enregistrement de l\'image. Patientez</string>
+    <string name="save_image_first">Enregistrement de l’image. Veuillez patienter.</string>
     <string name="save_gif_first">Enregistrement du GIF. Patientez.</string>
     <string name="theme_name_description">Appuyer pour changer le nom de ce thème.</string>
     <string name="theme_item_is_light_theme">Défini en thème clair</string>
@@ -526,7 +533,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="theme_item_color_primary_dark">Couleur principale sombre</string>
     <string name="theme_item_color_primary_dark_detail">Appliqué à : barre de statut</string>
     <string name="theme_item_color_accent">Couleur accentuée</string>
-    <string name="theme_item_color_accent_detail">Appliqué à : barre de progression, etc.</string>
+    <string name="theme_item_color_accent_detail">Appliqué à : barre de progression, etc.</string>
     <string name="theme_item_color_primary_light_theme">Couleur principale thème clair</string>
     <string name="theme_item_color_primary_light_theme_detail">Appliqué à : fond du bouton d\'action flottant et du bouton</string>
     <string name="theme_item_primary_text_color">Couleur du texte principal</string>
@@ -672,8 +679,8 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="theme_item_light_status_bar">Couleur de l\'icône de la barre d\'état sombre</string>
     <string name="theme_item_light_nav_bar">Couleur de l\'icône de la barre de navigation sombre</string>
     <string name="theme_item_change_status_bar_icon_color_after_toolbar_collapsed_in_immersive_interface">Modifier la couleur de l\'icône de la barre d\'état après la réduction de la barre d\'outils dans l\'interface immersive</string>
-    <string name="theme_item_available_on_android_8">Seulement disponible pour Android 8.0 ou versions ultérieures</string>
-    <string name="theme_item_available_on_android_6">Seulement disponible pour Android 6.0 ou versions ultérieures</string>
+    <string name="theme_item_available_on_android_8">Seulement disponible pour Android 8.0 ou ultérieur.</string>
+    <string name="theme_item_available_on_android_6">Seulement disponible pour Android 6.0 ou ultérieur.</string>
     <string name="predefined_themes">Thèmes prédéfinis</string>
     <string name="user_themes">Vos thèmes</string>
     <string name="no_theme_name">Quel est le nom de ce thème \?</string>
@@ -693,15 +700,16 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
 \nBasé sur le thème Indigo</string>
     <string name="create_dark_theme">Créer un thème sombre
 \nBasé sur le thème sombre Indigo</string>
-    <string name="create_amoled_theme">Créer un thème amoled basé sur le thème amoled indigo</string>
-    <string name="create_theme_info">Si vous voulez créer un thème basé sur un autre thème, cliquez sur le bouton \"+\" sur un thème</string>
+    <string name="create_amoled_theme">Créer un thème Amoled
+\nBasé sur le thème Indigo Amoled</string>
+    <string name="create_theme_info">Si vous voulez créer un thème basé sur un autre thème, cliquez sur le bouton + à côté du nom du thème.</string>
     <string name="edit_theme_name">Modifier le nom du thème</string>
     <string name="edit_theme">Modifier le thème</string>
     <string name="delete_theme">Supprimer le thème</string>
-    <string name="delete_theme_dialog_message">Êtes-vous sûr de vouloir supprimer %1$s\?</string>
+    <string name="delete_theme_dialog_message">Êtes-vous sûr de vouloir supprimer %1$s \?</string>
     <string name="share_theme">Partager le thème</string>
     <string name="change_theme_name">Changer le nom du thème</string>
-    <string name="theme_copied">Copié ! Collez et partagez-le à d\'autres personnes</string>
+    <string name="theme_copied">Copié ! Collez et partagez-le à d’autres personnes.</string>
     <string name="copy_theme_faied">Impossible de copier la configuration du thème</string>
     <string name="cannot_find_theme">Impossible de trouver ce thème</string>
     <string name="import_theme">Importer un thème</string>
@@ -739,10 +747,11 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="awards_preview">4 récompenses</string>
     <string name="author_flair_preview">Flair de l\'auteur</string>
     <!-- A completely different joke -->
-    <string name="comment_content_preview">C’est l’histoire de deux pommes de terre. Une d’elles se fait écraser et l’autre s’écrie « Oh purée ! »</string>
+    <string name="comment_content_preview">C’est l’histoire de deux pommes de terre.
+\nUne d’elles se fait écraser et l’autre s’écrie « Oh purée ! »</string>
     <string name="edit_multi_reddit">Éditer la multi-communauté</string>
     <string name="delete_multi_reddit">Supprimer la multi-communauté</string>
-    <string name="n_awards">%1$d récompenses</string>
+    <string name="n_awards">%1$,d récompenses</string>
     <string name="one_award">Une récompense</string>
     <string name="report">Signaler</string>
     <!-- Not sure about the tense.. -->
@@ -783,11 +792,11 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="default_font_font_preview">Par défaut</string>
     <string name="load_video_in_redgifs">Essayez de charger la vidéo sur Redgifs</string>
     <string name="top_score">%1$s points</string>
-    <string name="login_activity_2fa_prompt">Si vous avez activé l\'authentification à 2 facteurs, mettez votre mot de passe normalement puis remplissez le champ du jeton d\'identification.</string>
+    <string name="login_activity_2fa_prompt">Si l’authentification à 2 facteurs est activée, vous devez remplir le champ du jeton 2FA. Sinon, laissez le vide.</string>
     <string name="submit_crosspost_activity_label">Republier</string>
     <string name="give_award_activity_label">Récompenser</string>
     <string name="action_crosspost">Republier</string>
-    <string name="action_select_user_flair">Sélectionner un flair de compte</string>
+    <string name="action_select_user_flair">Sélectionner un flair utilisateur</string>
     <string name="action_give_award">Récompenser</string>
     <string name="posts">Posts</string>
     <string name="only_for_logged_in_user">Seulement pour Les comptes connectés</string>
@@ -800,8 +809,8 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="settings_tab_count">Nombre d\'onglets</string>
     <string name="settings_show_tab_names">Montrer le nom des onglets</string>
     <string name="settings_more_tabs_summary">Plus d\'onglets</string>
-    <string name="settings_more_tabs_info_summary">Activer les options suivantes va causer un comportement inattendu :
-\nLes onglets pourraient perdre tout leur contenu quand vous passez d\'un onglet à l\'autre, de même quand vous rafraîchissez les onglets</string>
+    <string name="settings_more_tabs_info_summary">L’activation des options suivantes entraînera un comportement inattendu :
+\nLes onglets peuvent perdre tout leur contenu après le passage à d’autres onglets. Cela revient à rafraîchir la page.</string>
     <string name="settings_more_tabs_show_favorite_subscribed_communities_title">Montrer les communautés favories suivies</string>
     <string name="settings_more_tabs_show_subscribed_communities_title">Montrer les communautés suivies</string>
     <string name="settings_download_location_title">Chemin du téléchargement</string>
@@ -838,9 +847,9 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="copy_failed">Échec de la copie</string>
     <string name="delete_all_legacy_settings_success">Suppression des anciens paramètres avec succès</string>
     <string name="downloading_media_finished">Téléchargé</string>
-    <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Échec du téléchargement: le répertoire de la destination est inaccessible</string>
+    <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Échec du téléchargement : impossible d’accéder au répertoire de destination</string>
     <string name="downloading_media_failed_cannot_download_media">Échec du téléchargement</string>
-    <string name="downloading_media_failed_cannot_save_to_destination_directory">Échec du téléchargement: le fichier ne peut pas être sauvegardé dans le répertoire de destination</string>
+    <string name="downloading_media_failed_cannot_save_to_destination_directory">Échec du téléchargement : impossible d’enregistrer le fichier dans le répertoire de destination</string>
     <string name="select_user_flair_success">Flair sélectionné</string>
     <string name="select_this_user_flair">Sélectionner ce flair \?</string>
     <string name="select_header_size">Sélectionner la taille de l\'en-tête</string>
@@ -858,9 +867,10 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="give_award_dialog_title">Voulez-vous vraiment récompenser ce post \?</string>
     <string name="anonymous">Anonyme</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">Erreur: %2$s, code: %1$d/</string>
-    <string name="give_award_success">Succès !</string>
-    <string name="give_award_failed">Échec de la récompense.</string>
+    <string name="give_award_error_message">Code : %1$d/
+\n Message : %2$s</string>
+    <string name="give_award_success">Récompense attribuée</string>
+    <string name="give_award_failed">Échec</string>
     <string name="warning">Avertissement</string>
     <string name="this_is_a_nsfw_community">Cette communauté est NSFW.</string>
     <string name="this_user_has_nsfw_content">Cet compte poste du contenu NSFW</string>
@@ -878,12 +888,12 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="random_nsfw_post">Post NSFW aléatoire</string>
     <string name="fetch_random_thing_failed">Réessayer plus tard</string>
     <string name="downloading">Téléchargement</string>
-    <string name="community_filter_popular_and_all_activity_label">Tout / Local</string>
+    <string name="community_filter_popular_and_all_activity_label">r/all et r/popular</string>
     <string name="settings_miscellaneous_title">Divers</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Respecter l\'ordre de tri recommandé par la communauté pour les commentaires</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">L\'ordre de tri des commentaires ne sera pas sauvegardé</string>
     <string name="settings_community_filter_category">Cacher des communautés</string>
-    <string name="settings_community_filter_popular_and_all">Tout / Local</string>
+    <string name="settings_community_filter_popular_and_all">Dans r/popular et r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Animation de capture de l\'OVNI</string>
     <string name="select_video_quality">Sélectionner la qualité vidéo</string>
     <string name="settings_swipe_action_haptic_feedback_title">Retour haptique</string>
@@ -897,17 +907,17 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="theme_item_no_preview_post_type_background_color">Couleur d\'arrière-plan du type de post sans prévisualisation</string>
     <string name="theme_item_no_preview_post_type_background_color_detail">Appliqué à : Espace réservé indiquant le type de post lorsqu\'aucun aperçu n\'est disponible</string>
     <string name="settings_language_title">Langage</string>
-    <string name="customize_post_filter_activity_label">Personnaliser le filtre de post</string>
-    <string name="filtered_posts_activity_subtitle">Posts filtrés</string>
-    <string name="post_filter_preference_activity_label">Filtre des posts</string>
-    <string name="search_users_result_activity_label">Comptes</string>
+    <string name="customize_post_filter_activity_label">Personnaliser le filtre de publication</string>
+    <string name="filtered_posts_activity_subtitle">Publications filtrées</string>
+    <string name="post_filter_preference_activity_label">Filtre des publications</string>
+    <string name="search_users_result_activity_label">Utilisateurs</string>
     <string name="multireddit_selection_activity_label">Sélectionnez une multi-communauté</string>
-    <string name="action_save_to_database">Sauvegarder dans la base de données</string>
+    <string name="action_save_to_database">Enregistrer dans la base de données</string>
     <string name="action_read_all_messages">Lire tous les messages</string>
     <string name="action_add_to_multireddit">Ajouter à la multi-communauté</string>
     <string name="search_only_communities_hint">Chercher des communautés</string>
     <string name="search_only_users_hint">Chercher des comptes</string>
-    <string name="post_type_gif">Gif</string>
+    <string name="post_type_gif">GIF</string>
     <string name="post_type_gallery">Gallerie</string>
     <string name="settings_disable_immersive_interface_in_landscape_mode">Désactiver l\'interface immersive en mode paysage</string>
     <string name="settings_privacy_policy_title">Politique de confidentialité</string>
@@ -968,7 +978,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="vote">Vote</string>
     <string name="action_share_link">Partager le lien</string>
     <string name="action_copy_link">Copier le lien</string>
-    <string name="action_add_to_post_filter">Ajouter aux filtres de post</string>
+    <string name="action_add_to_post_filter">Ajouter aux filtres de publication</string>
     <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">Ne pas cacher les images NSFW dans les communautés</string>
     <string name="settings_show_avatar_on_the_right">Voir l\'avatar à droite</string>
     <string name="settings_backup_settings_title">Paramètres de sauvegarde</string>
@@ -1014,8 +1024,8 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="exclude_domain">Exclure cette instance</string>
     <string name="suggest_title">Suggérer un titre</string>
     <string name="suggest_title_failed">Échec de la suggestion de titre</string>
-    <string name="action_delete_logs">Supprimer les logs</string>
-    <string name="inbox_with_count">Boîte de réception (%1$d)</string>
+    <string name="action_delete_logs">Supprimer les journaux</string>
+    <string name="inbox_with_count">Boîte de réception (%1$,d)</string>
     <string name="comment_continue_thread">Continuer le fil</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Balayez verticalement pour revenir à l\'image et au gif</string>
     <string name="settings_hide_post_flair">Cacher le flair du post</string>
@@ -1031,7 +1041,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
 \nVoulez-vous toujours l\'activer \?</string>
     <string name="reply">Répondre</string>
     <string name="trending_activity_label">Tendance</string>
-    <string name="action_share_post_link">Partager le lien du Post</string>
+    <string name="action_share_post_link">Partager le lien de la publication</string>
     <string name="trending">Tendance</string>
     <string name="receive_post_reply_notifications">Recevoir des notifications de réponse de post</string>
     <string name="bottom_sheet_post_gallery">Gallerie</string>
@@ -1080,7 +1090,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="no_wiki">Ce communauté n\'a pas de page wiki</string>
     <string name="material_you_notification_title">Application de Material You</string>
     <string name="about">À propos de</string>
-    <string name="action_create_github_issue">Créer un ticket GitHub</string>
+    <string name="action_create_github_issue">Créer un ticket Codeberg</string>
     <string name="settings_credits_love_animation_title">Animation Cœur</string>
     <string name="settings_fixed_height_preview_in_card_title">Hauteur de carte fixe</string>
     <string name="app_lock_timeout_4_hours">4 heures</string>
@@ -1115,7 +1125,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="invalid_username_or_password">Nom ou mot de passe invalide</string>
     <string name="settings_user_default_sort_type_title">Type de tri des comptes par défaut</string>
     <string name="app_lock_timeout_6_hours">6 heures</string>
-    <string name="edit_profile_activity_label">Éditer le profil</string>
+    <string name="edit_profile_activity_label">Modifier le profil</string>
     <string name="post_gallery_activity_label">Album</string>
     <string name="select_communities_and_users">Sélectionner des communautés et des comptes</string>
     <string name="bottom_sheet_post_poll">Sondage</string>
@@ -1126,12 +1136,12 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="edited">Édité</string>
     <string name="post_poll_activity_label">Sondage</string>
     <string name="history_activity_label">Historique</string>
-    <string name="action_block_user">Bloquer le compte</string>
+    <string name="action_block_user">Bloquer l’utilisateur</string>
     <string name="action_open_external_browser">Ouvrir dans le navigateur</string>
-    <string name="action_go_to_wiki">Voir le wiki</string>
+    <string name="action_go_to_wiki">Aller au wiki</string>
     <string name="action_playback_speed">Vitesse de lecture</string>
-    <string name="action_contact_mods">Contacter la modération</string>
-    <string name="action_more_options">Plus d\'options</string>
+    <string name="action_contact_mods">Contacter les modérateurs</string>
+    <string name="action_more_options">Plus d’options</string>
     <string name="anonymous_homepage_not_implemented">La page d\'accueil anonyme n\'est pas encore disponible</string>
     <string name="history">Historique</string>
     <string name="invalid_response">Réponse invalide du serveur</string>
@@ -1175,7 +1185,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="max_comments_hint">Commentaires maximum (-1 : pas de limite)</string>
     <string name="min_awards_hint">Récompenses minimum (-1 : pas de limite)</string>
     <string name="post_filter_name_hint">Nom du filtre de posts</string>
-    <string name="anonymous_multireddit_no_community">Cette multi-communauté n\'inclut aucune communauté.</string>
+    <string name="anonymous_multireddit_no_community">Cette multi-communauté ne comporte aucune communauté !</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post">Erreur d\'accès à la vidéo v.redd.it : échec de l\'accès au post</string>
     <string name="contain_flair">Inclure ce flair</string>
     <string name="contain_domain">Inclure cette instance</string>
@@ -1254,4 +1264,86 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="not_a_valid_number">Nombre non valide</string>
     <string name="post_karma">Karma de la publication :</string>
     <string name="comment_karma">Karma du commentaire :</string>
+    <string name="settings_show_statistics">Afficher statistiques</string>
+    <string name="settings_show_post_and_comment_score">Afficher les scores des publications et des commentaires</string>
+    <string name="settings_category_community_and_user_pages_title">Communauté et pages utilisateurs</string>
+    <string name="moderators">Modérateurs</string>
+    <string name="community_number_detail">%1$,d communautés</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="reddit_api_info_title">Avis important concernant les modifications apportées à l’API de Reddit</string>
+    <string name="instance_url_hint">L’URL de votre instance Lemmy préférée avec ou sans le préfixe https://</string>
+    <string name="user_password">Mot de passe</string>
+    <string name="user_2fa_token">Jeton 2FA (si nécessaire)</string>
+    <string name="user_login">Connexion</string>
+    <string name="sort_time_6hours">6 heures</string>
+    <string name="sort_time_12hours">12 heures</string>
+    <string name="sort_time_9months">9 mois</string>
+    <string name="anonymous_account_instance">Instance de compte anonyme</string>
+    <string name="url_cannot_be_null_or_empty">L’URL ne peut pas être nulle ou vide</string>
+    <string name="could_not_resolve_link">Impossible de résoudre l’URL :(</string>
+    <string name="upload_image">Téléverser une image</string>
+    <string name="mentions">Mentions</string>
+    <string name="replies">Réponses</string>
+    <string name="use_circular_fab">Utiliser un FAB circulaire</string>
+    <string name="block_community">Bloquer communauté
+\n</string>
+    <string name="not_implemented">Fonctionnalité non implémentée :(</string>
+    <string name="instance_cannot_be_empty">Le champ instance ne peut pas être vide.</string>
+    <string name="password_cannot_be_empty">Le champ mot de passe ne peut être vide.</string>
+    <string name="separate_down_and_up_votes">Séparer les plussage et les moinsage</string>
+    <string name="block_community_failed">Échec du blocage de la communauté</string>
+    <string name="unblock_community">Débloquer la communauté</string>
+    <string name="unblock_community_success">Communauté débloquée !</string>
+    <string name="unblock_community_failed">Échec du déblocage de la communauté</string>
+    <string name="blocked_communities">Communautés bloquées</string>
+    <string name="admins">Administrateurs</string>
+    <string name="settings_hide_user_instance">Masquer l’instance utilisateur</string>
+    <string name="block_community_success">Communauté bloquée !</string>
+    <string name="blocks">Blocages</string>
+    <string name="blocked_users">Utilisateurs bloqués</string>
+    <string name="unblock_user_success">Débloqué</string>
+    <string name="action_unblock_user">Débloquer utilisateur</string>
+    <string name="unblock_user_failed">Échec du déblocage de l’utilisateur</string>
+    <string name="share_links_on_your_local_instance">Partager les liens sur votre instance locale</string>
+    <string name="user_number_detail">%1$,d utilisateurs</string>
+    <string name="go_to_settings">Paramètres</string>
+    <string name="instance_info">Information sur l’instance</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="reddit_api_info">À partir du 1er juillet 2023, l’API Reddit sera payante pour les clients tiers, dont Infinity for Reddit. L’annonce de Reddit est disponible ici : %1$s
+\n
+\nAfin de survivre à ce changement, Infinity deviendra une application à abonnement uniquement après le 1er juillet. Pour en savoir plus sur les changements, consultez ce billet : %2$s
+\n
+\nVous devez mettre à jour Infinity après le 1er juillet afin d’obtenir la nouvelle version avec les options d’abonnement. Aucune des versions précédentes (y compris celle-ci) ne fonctionnera après le 1er juillet. Mais en raison d’un calendrier serré donné par Reddit, la mise à jour peut ne pas être disponible immédiatement le 1er juillet car elle nécessite des tests appropriés. Nous vous remercions de votre compréhension !</string>
+    <string name="user_username">Nom d’utilisateur</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Partager les liens sur votre instance locale plutôt que sur l’instance de création originelle.</string>
+    <string name="sort_time_3months">3 mois</string>
+    <string name="mark_post_as_read_failed">Échec du marquage de la publication comme lue</string>
+    <string name="username_cannot_be_empty">Le champ nom d’utilisateur ne peut être vide.</string>
+    <string name="i_understand">Je comprends</string>
+    <string name="instance_url">URL de l’instance</string>
+    <string name="send_report">Envoyer le rapport</string>
+    <string name="report_post">Signaler la publication</string>
+    <string name="settings_hide_fab_in_post_feed">Masquer FAB dans le flux de publications</string>
+    <string name="sort_time_6months">6 mois</string>
+    <string name="settings_hide_community_and_user_instance">Masquer la communauté et l’instance utilisateur</string>
+    <string name="settings_show_display_name_instead_of_user_name">Afficher la communauté et le nom d’affichage de l’utilisateur</string>
+    <string name="load_more_posts_failed">Échec du chargement des messages supplémentaires.
+\nAppuyez pour réessayer.</string>
+    <string name="no_more_posts">Aucun autre publication</string>
+    <string name="image_index_in_gallery">%1$d/%2$d</string>
+    <string name="denied_notification_permission">L’autorisation de notification n’a pas été accordée</string>
+    <string name="awarder_karma">Karma de l’adjudicateur :</string>
+    <string name="awardee_karma">Karma du lauréat :</string>
+    <string name="handle_link">Gestion du lien</string>
+    <string name="invalid_link">Lien non valide</string>
+    <string name="unexpected_intent_action">Action d’intent inattendue : <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="enable_random_adaptation">Activer l’adaptation aléatoire</string>
+    <string name="error_unsupported_video">Le média comprend des pistes vidéo, mais aucune n’est lisible par cet appareil</string>
+    <string name="error_unsupported_audio">Le média comprend des pistes audio, mais aucune n’est lisible par cet appareil</string>
+    <string name="storage_permission_denied">L’autorisation d’accéder au stockage a été refusée</string>
+    <string name="sample_list_load_error">Une ou plusieurs listes d’échantillons n’ont pas pu être chargées</string>
+    <string name="exo_controls_volume_up_description">Volume +</string>
+    <string name="exo_controls_volume_off_description">Volume −</string>
+    <string name="invalid_regex">Motif d’expression rationnelle non valide</string>
 </resources>
