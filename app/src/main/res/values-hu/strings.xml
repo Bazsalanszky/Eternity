@@ -861,7 +861,7 @@
     <string name="multireddit_selection_activity_label">Multireddit kiválasztása</string>
     <string name="action_save_to_database">Mentés adatbázisba</string>
     <string name="action_read_all_messages">Összes üzenet olvasása</string>
-    <string name="action_add_to_multireddit">Multireddithez adás</string>
+    <string name="action_add_to_multireddit">Mulitközösséghez adás</string>
     <string name="search_only_communities_hint">Közösségek keresése</string>
     <string name="search_only_users_hint">Felhasználók keresése</string>
     <string name="post_type_gif">Gif</string>
@@ -1052,4 +1052,10 @@
     <string name="mark_post_as_read_failed">Nem sikerült a posztot olvasottként megjelölni</string>
     <string name="user_2fa_token">2FA token (ha szükséges)</string>
     <string name="instance_url_hint">Az Ön által preferált Lemmy példány URL címe a https:// előtaggal vagy anélkül.</string>
+    <string name="settings_category_community_and_user_pages_title">Közösségi és Felhasználói oldalak</string>
+    <string name="settings_show_statistics">Statisztikák mutatása</string>
+    <string name="moderators">Moderátorok</string>
+    <string name="admins">Adminok</string>
+    <string name="settings_hide_user_instance">Felhasználó példányának elrejtése</string>
+    <string name="report_post">Poszt jelentése</string>
 </resources>
