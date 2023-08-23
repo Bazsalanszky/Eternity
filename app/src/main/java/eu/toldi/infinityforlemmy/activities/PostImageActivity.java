@@ -511,7 +511,7 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
     }
 
     private void loadSubredditIcon() {
-        LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, communityData.getQualified_name(), mAccessToken, mOauthRetrofit, mRetrofit.getRetrofit(), iconImageUrl -> {
+        LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, communityData.getQualified_name(), mAccessToken, mRetrofit.getRetrofit(), iconImageUrl -> {
             iconUrl = iconImageUrl;
             displaySubredditIcon();
             loadSubredditIconSuccessful = true;

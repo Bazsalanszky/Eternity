@@ -67,6 +67,7 @@ import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
 import eu.toldi.infinityforlemmy.SavePost;
 import eu.toldi.infinityforlemmy.SaveThing;
@@ -135,8 +136,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private BaseActivity mActivity;
     private ViewPostDetailFragment mFragment;
     private Executor mExecutor;
-    private Retrofit mRetrofit;
-    private Retrofit mOauthRetrofit;
+    private RetrofitHolder mRetrofit;
     private Retrofit mGfycatRetrofit;
     private Retrofit mRedgifsRetrofit;
     private final Provider<StreamableAPI> mStreamableApiProvider;
@@ -172,6 +172,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private boolean mHideUpvoteRatio;
     private boolean mHideTheNumberOfAwards;
     private boolean mHideSubredditAndUserPrefix;
+    private boolean mShareOnLocalInstance;
 
     private boolean mShowDisplayNames;
     private boolean mHideTheNumberOfVotes;
@@ -223,7 +224,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
     public PostDetailRecyclerViewAdapter(BaseActivity activity, ViewPostDetailFragment fragment,
                                          Executor executor, CustomThemeWrapper customThemeWrapper,
-                                         Retrofit retrofit, Retrofit gfycatRetrofit,
+                                         RetrofitHolder retrofit, Retrofit gfycatRetrofit,
                                          Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
                                          RedditDataRoomDatabase redditDataRoomDatabase, RequestManager glide,
                                          boolean separatePostAndComments, String accessToken,
@@ -347,6 +348,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mHideUpvoteRatio = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_UPVOTE_RATIO, false);
         mHideTheNumberOfAwards = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
         mHideSubredditAndUserPrefix = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
+        mShareOnLocalInstance = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.SHARE_LINK_ON_LOCAL_INSTANCE, false);
         mShowDisplayNames = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_DISPLAY_NAME_INSTEAD_OF_USERNAME, true);
         mHideTheNumberOfVotes = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
         mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
@@ -485,7 +487,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ((PostDetailBaseViewHolder) holder).mTitleTextView.setText(mPost.getTitle());
             if (mPost.getSubredditNamePrefixed().startsWith("u/")) {
                 if (mPost.getAuthorIconUrl() == null) {
-                    LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase,mPost.getAuthorNamePrefixed(), mOauthRetrofit, iconImageUrl -> {
+                    LoadUserData.loadUserData(mExecutor, new Handler(), mRedditDataRoomDatabase, mPost.getAuthorNamePrefixed(), mRetrofit.getRetrofit(), iconImageUrl -> {
                         if (mActivity != null && getItemCount() > 0) {
                             if (iconImageUrl == null || iconImageUrl.equals("")) {
                                 mGlide.load(R.drawable.subreddit_default_icon)
@@ -519,7 +521,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 if (mPost.getSubredditIconUrl() == null) {
                     LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(),
                             mRedditDataRoomDatabase, mPost.getSubredditNamePrefixed(),
-                            mAccessToken, mOauthRetrofit, mRetrofit, iconImageUrl -> {
+                            mAccessToken, mRetrofit.getRetrofit(), iconImageUrl -> {
                                 if (iconImageUrl == null || iconImageUrl.equals("")) {
                                     mGlide.load(R.drawable.subreddit_default_icon)
                                             .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0)))
@@ -1385,7 +1387,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
 
-                VoteThing.votePost(mActivity, mRetrofit, mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
+                VoteThing.votePost(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
                     @Override
                     public void onVoteThingSuccess() {
                         if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
@@ -1491,13 +1493,13 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
 
-                VoteThing.votePost(mActivity, mRetrofit, mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
+                VoteThing.votePost(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
                     @Override
                     public void onVoteThingSuccess() {
                         if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                             mPost.setVoteType(-1);
                             mDownvoteButton.setColorFilter(mDownvotedColor, PorterDuff.Mode.SRC_IN);
-                            if(mSeperateUpvoteAndDownvote) {
+                            if (mSeperateUpvoteAndDownvote) {
                                 mDownvoteTextView.setTextColor(mDownvotedColor);
                             } else {
                                 mScoreTextView.setTextColor(mDownvotedColor);
@@ -1587,7 +1589,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 SavePost savePost = new SavePost();
                 if (mPost.isSaved()) {
                     mSaveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                    savePost.unsaveThing(mRetrofit, mAccessToken, mPost.getId(),
+                    savePost.unsaveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
@@ -1607,7 +1609,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                             });
                 } else {
                     mSaveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                    savePost.saveThing(mRetrofit, mAccessToken, mPost.getId(),
+                    savePost.saveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
                             new SaveThing.SaveThingListener() {
                                 @Override
                                 public void success() {
@@ -1629,8 +1631,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             });
 
             mShareButton.setOnClickListener(view -> {
+                String link = (mShareOnLocalInstance) ? mRetrofit.getBaseURL() + "/post/" + mPost.getId() : mPost.getPermalink();
                 Bundle bundle = new Bundle();
-                bundle.putString(ShareLinkBottomSheetFragment.EXTRA_POST_LINK, mPost.getPermalink());
+                bundle.putString(ShareLinkBottomSheetFragment.EXTRA_POST_LINK, link);
                 if (mPost.getPostType() != Post.TEXT_TYPE) {
                     bundle.putInt(ShareLinkBottomSheetFragment.EXTRA_MEDIA_TYPE, mPost.getPostType());
                     switch (mPost.getPostType()) {
@@ -1651,7 +1654,8 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             });
 
             mShareButton.setOnLongClickListener(view -> {
-                mActivity.copyLink(mPost.getPermalink());
+                String link = (mShareOnLocalInstance) ? mRetrofit.getBaseURL() + "/post/" + mPost.getId() : mPost.getPermalink();
+                mActivity.copyLink(link);
                 return true;
             });
 

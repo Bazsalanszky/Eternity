@@ -46,6 +46,12 @@
         app:title="@string/anonymous_account_instance"
         app:useSimpleSummaryProvider="true" />
 
+    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
+        app:defaultValue="false"
+        app:key="share_link_on_local_instance"
+        app:title="@string/share_links_on_your_local_instance"
+        app:summary="@string/share_links_on_your_local_instance_rather_than_the_original_creation_instance" />
+
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceCategory app:title="@string/settings_miscellaneous_dangerous_group_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference

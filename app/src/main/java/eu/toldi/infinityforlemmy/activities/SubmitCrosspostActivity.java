@@ -499,11 +499,11 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
 
     private void loadSubredditIcon() {
         LoadSubredditIcon.loadSubredditIcon(mExecutor, new Handler(), mRedditDataRoomDatabase, subredditName,
-                mAccessToken, mOauthRetrofit, mRetrofit.getRetrofit(), iconImageUrl -> {
-            iconUrl = iconImageUrl;
-            displaySubredditIcon();
-            loadSubredditIconSuccessful = true;
-        });
+                mAccessToken, mRetrofit.getRetrofit(), iconImageUrl -> {
+                    iconUrl = iconImageUrl;
+                    displaySubredditIcon();
+                    loadSubredditIconSuccessful = true;
+                });
     }
 
     private void promptAlertDialog(int titleResId, int messageResId) {

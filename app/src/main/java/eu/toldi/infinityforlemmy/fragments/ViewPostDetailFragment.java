@@ -614,7 +614,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             setupMenu();
 
             mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
-                    this, mExecutor, mCustomThemeWrapper, mRetrofit.getRetrofit(), mGfycatRetrofit,
+                    this, mExecutor, mCustomThemeWrapper, mRetrofit, mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mRedditDataRoomDatabase, mGlide,
                     mSeparatePostAndComments, mAccessToken, mAccountName, mPost, mLocale,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostDetailsSharedPreferences,
@@ -1338,7 +1338,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         mPost = post;
                         mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
                                 ViewPostDetailFragment.this, mExecutor, mCustomThemeWrapper,
-                                mRetrofit.getRetrofit(), mGfycatRetrofit, mRedgifsRetrofit,
+                                mRetrofit, mGfycatRetrofit, mRedgifsRetrofit,
                                 mStreamableApiProvider, mRedditDataRoomDatabase, mGlide, mSeparatePostAndComments,
                                 mAccessToken, mAccountName, mPost, mLocale, mSharedPreferences,
                                 mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences,

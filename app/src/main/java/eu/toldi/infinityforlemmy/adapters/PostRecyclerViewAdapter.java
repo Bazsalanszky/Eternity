@@ -71,6 +71,7 @@ import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
 import eu.toldi.infinityforlemmy.SavePost;
 import eu.toldi.infinityforlemmy.SaveThing;
@@ -150,7 +151,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private SharedPreferences mSharedPreferences;
     private SharedPreferences mCurrentAccountSharedPreferences;
     private Executor mExecutor;
-    private Retrofit retrofit;
+    private RetrofitHolder retrofit;
     private Retrofit mGfycatRetrofit;
     private Retrofit mRedgifsRetrofit;
     private Provider<StreamableAPI> mStreamableApiProvider;
@@ -230,6 +231,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean mShowDisplayNames;
     private boolean mHideTheNumberOfVotes;
 
+    private boolean mShareLinkOnLocalInstance;
+
     private boolean mSeparateUpandDownVotes;
 
     private boolean mHideDownvotes;
@@ -244,7 +247,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean canPlayVideo = true;
     private RecyclerView.RecycledViewPool mGalleryRecycledViewPool;
 
-    public PostRecyclerViewAdapter(BaseActivity activity, PostFragment fragment, Executor executor, Retrofit oauthRetrofit,
+    public PostRecyclerViewAdapter(BaseActivity activity, PostFragment fragment, Executor executor, RetrofitHolder retrofit,
                                    Retrofit gfycatRetrofit, Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
                                    CustomThemeWrapper customThemeWrapper, Locale locale,
                                    String accessToken, String accountName, int postType, int postLayout, boolean displaySubredditName,
@@ -259,7 +262,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mSharedPreferences = sharedPreferences;
             mCurrentAccountSharedPreferences = currentAccountSharedPreferences;
             mExecutor = executor;
-            retrofit = oauthRetrofit;
+            this.retrofit = retrofit;
             mGfycatRetrofit = gfycatRetrofit;
             mRedgifsRetrofit = redgifsRetrofit;
             mStreamableApiProvider = streamableApiProvider;
@@ -316,6 +319,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mHideSubredditAndUserPrefix = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
             mShowDisplayNames = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_DISPLAY_NAME_INSTEAD_OF_USERNAME, true);
             mHideTheNumberOfVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
+            mShareLinkOnLocalInstance = sharedPreferences.getBoolean(SharedPreferencesUtils.SHARE_LINK_ON_LOCAL_INSTANCE, false);
             mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
             mSeparateUpandDownVotes = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_SEPARATE_UP_AND_DOWN_VOTES, true) && !mHideDownvotes;
             mHideTheNumberOfComments = sharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_COMMENTS, false);
@@ -1893,8 +1897,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     }
 
     private void shareLink(Post post) {
+        String link = (mShareLinkOnLocalInstance) ? retrofit.getBaseURL() + "/post/" + post.getId() : post.getPermalink();
         Bundle bundle = new Bundle();
-        bundle.putString(ShareLinkBottomSheetFragment.EXTRA_POST_LINK, post.getPermalink());
+        bundle.putString(ShareLinkBottomSheetFragment.EXTRA_POST_LINK, link);
         if (post.getPostType() != Post.TEXT_TYPE) {
             bundle.putInt(ShareLinkBottomSheetFragment.EXTRA_MEDIA_TYPE, post.getPostType());
             switch (post.getPostType()) {
@@ -2666,7 +2671,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -2782,7 +2787,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -2790,9 +2795,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 post.setVoteType(-1);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                                    if(mSeparateUpandDownVotes){
+                                    if (mSeparateUpandDownVotes) {
                                         downvoteTextView.setTextColor(mDownvotedColor);
-                                    }else {
+                                    } else {
                                         scoreTextView.setTextColor(mDownvotedColor);
                                     }
                                 }
@@ -2855,7 +2860,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     SavePost savePost = new SavePost();
                     if (post.isSaved()) {
                         saveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        savePost.unsaveThing(retrofit, mAccessToken, post.getId(),
+                        savePost.unsaveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -2879,7 +2884,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 });
                     } else {
                         saveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                        savePost.saveThing(retrofit, mAccessToken, post.getId(),
+                        savePost.saveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -2923,7 +2928,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
                 Post post = getItem(position);
                 if (post != null) {
-                    mActivity.copyLink(post.getPermalink());
+                    String link = (mShareLinkOnLocalInstance) ? retrofit.getBaseURL() + "/post/" + post.getId() : post.getPermalink();
+                    mActivity.copyLink(link);
                     return true;
                 }
                 return false;
@@ -4118,7 +4124,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -4224,7 +4230,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -4232,7 +4238,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 post.setVoteType(-1);
                                 if (currentPosition == position) {
                                     downvoteButton.setColorFilter(mDownvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
-                                    if(mSeparateUpandDownVotes) {
+                                    if (mSeparateUpandDownVotes) {
                                         downvoteTextView.setTextColor(mDownvotedColor);
                                     } else {
                                         scoreTextView.setTextColor(mDownvotedColor);
@@ -4297,7 +4303,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     SavePost postSave = new SavePost();
                     if (post.isSaved()) {
                         saveButton.setImageResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        postSave.unsaveThing(retrofit, mAccessToken, post.getId(),
+                        postSave.unsaveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -4321,7 +4327,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 });
                     } else {
                         saveButton.setImageResource(R.drawable.ic_bookmark_grey_24dp);
-                        postSave.saveThing(retrofit, mAccessToken, post.getId(),
+                        postSave.saveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
                                 new SaveThing.SaveThingListener() {
                                     @Override
                                     public void success() {
@@ -4365,7 +4371,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
                 Post post = getItem(position);
                 if (post != null) {
-                    mActivity.copyLink(post.getPermalink());
+                    String link = (mShareLinkOnLocalInstance) ? retrofit.getBaseURL() + "/post/" + post.getId() : post.getPermalink();
+                    mActivity.copyLink(link);
                     return true;
                 }
                 return false;

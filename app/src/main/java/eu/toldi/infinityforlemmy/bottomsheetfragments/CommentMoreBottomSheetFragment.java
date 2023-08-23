@@ -4,6 +4,7 @@ package eu.toldi.infinityforlemmy.bottomsheetfragments;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +39,7 @@ import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LandscapeExpandedRoundedBottomSheetDialogFragment;
+import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 
 
@@ -72,7 +75,13 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
     @Inject
     CustomThemeWrapper mCustomThemeWrapper;
 
+    @Inject
+    @Named("default")
+    SharedPreferences mSharedPreferences;
+
     private BaseActivity activity;
+
+    private boolean mShareLinksOnLocalInstance;
 
     public CommentMoreBottomSheetFragment() {
         // Required empty public constructor
@@ -103,6 +112,7 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
         String accessToken = bundle.getString(EXTRA_ACCESS_TOKEN);
         boolean editAndDeleteAvailable = bundle.getBoolean(EXTRA_EDIT_AND_DELETE_AVAILABLE, false);
         boolean showReplyAndSaveOption = bundle.getBoolean(EXTRA_SHOW_REPLY_AND_SAVE_OPTION, false);
+        mShareLinksOnLocalInstance = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHARE_LINK_ON_LOCAL_INSTANCE, false);
 
         if (accessToken != null && !accessToken.equals("")) {
 
@@ -167,13 +177,13 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
                 dismiss();
             });
         }
-
+        String link = (mShareLinksOnLocalInstance) ? lemmyCommentAPI.getRetrofitHolder().getBaseURL() + "/comment/" + comment.getId() : comment.getPermalink();
         shareTextView.setOnClickListener(view -> {
             dismiss();
             try {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, comment.getPermalink());
+                intent.putExtra(Intent.EXTRA_TEXT, link);
                 activity.startActivity(Intent.createChooser(intent, getString(R.string.share)));
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(activity, R.string.no_activity_found_for_share, Toast.LENGTH_SHORT).show();
@@ -182,7 +192,7 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
 
         shareTextView.setOnLongClickListener(view -> {
             dismiss();
-            activity.copyLink(comment.getPermalink());
+            activity.copyLink(link);
             return true;
         });
 
