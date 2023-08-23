@@ -535,11 +535,14 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             }
             boolean displaySubredditName = subredditName != null && (subredditName.equals("local") || subredditName.equals("all"));
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SUBREDDIT_POST_BASE + subredditName, defaultPostLayout);
-
+            SortType.Type st = SortType.Type.fromValue(sort);
+            st = st == null ? SortType.Type.HOT : st;
             if (sortTime != null) {
-                sortType = new SortType(SortType.Type.fromValue(sortTime));
+                st = SortType.Type.fromValue(sortTime);
+                st = st == null ? SortType.Type.TOP_ALL : st;
+                sortType = new SortType(st);
             } else {
-                sortType = new SortType(SortType.Type.valueOf(sort));
+                sortType = new SortType(st);
             }
 
             mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
@@ -607,10 +610,12 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_MULTI_REDDIT_POST_BASE + multiRedditPath,
                     defaultPostLayout);
 
+            SortType.Type st = SortType.Type.fromValue(sort);
+            st = st == null ? SortType.Type.HOT : st;
             if (sortTime != null) {
-                sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
+                sortType = new SortType(st, SortType.Time.valueOf(sortTime));
             } else {
-                sortType = new SortType(SortType.Type.valueOf(sort));
+                sortType = new SortType(st);
             }
 
             mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
@@ -669,12 +674,16 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_USER_POST_BASE + username,
                     mSharedPreferences.getString(SharedPreferencesUtils.USER_DEFAULT_SORT_TYPE, SortType.Type.NEW.name()));
+            SortType.Type st = SortType.Type.fromValue(sort);
+            st = st == null ? SortType.Type.NEW : st;
             if (sort.equalsIgnoreCase(SortType.Type.TOP.value)) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_USER_POST_BASE + username,
                         mSharedPreferences.getString(SharedPreferencesUtils.USER_DEFAULT_SORT_TIME, SortType.Time.ALL.name()));
-                sortType = new SortType(SortType.Type.fromValue(sortTime));
+                st = SortType.Type.fromValue(sortTime);
+                st = st == null ? SortType.Type.NEW : st;
+                sortType = new SortType(st);
             } else {
-                sortType = new SortType(SortType.Type.valueOf(sort));
+                sortType = new SortType(st);
             }
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_USER_POST_BASE + username, defaultPostLayout);
 
@@ -732,11 +741,13 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             subredditName = getArguments().getString(EXTRA_NAME);
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SUBREDDIT_POST_BASE + "-", SortType.Type.HOT.name());
+            SortType.Type st = SortType.Type.fromValue(sort);
+            st = st == null ? SortType.Type.NEW : st;
             if (sort.equals(SortType.Type.TOP.name())) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SUBREDDIT_POST_BASE + "-", SortType.Time.ALL.name());
-                sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
+                sortType = new SortType(st, SortType.Time.valueOf(sortTime));
             } else {
-                sortType = new SortType(SortType.Type.valueOf(sort));
+                sortType = new SortType(st);
             }
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_FRONT_PAGE_POST, defaultPostLayout);
@@ -792,11 +803,13 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             nameOfUsage = multiRedditPath;
 
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_MULTI_REDDIT_POST_BASE + multiRedditPath, SortType.Type.HOT.name());
+            SortType.Type st = SortType.Type.fromValue(sort);
+            st = st == null ? SortType.Type.NEW : st;
             if (sort.equals(SortType.Type.TOP.name())) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_MULTI_REDDIT_POST_BASE + multiRedditPath, SortType.Time.ALL.name());
-                sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
+                sortType = new SortType(st, SortType.Time.valueOf(sortTime));
             } else {
-                sortType = new SortType(SortType.Type.valueOf(sort));
+                sortType = new SortType(st);
             }
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_MULTI_REDDIT_POST_BASE + multiRedditPath, defaultPostLayout);
@@ -850,11 +863,13 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             nameOfUsage = PostFilterUsage.NO_USAGE;
             subredditName = getArguments().getString(EXTRA_NAME);
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_BEST_POST, SortType.Type.ACTIVE.name());
+            SortType.Type st = SortType.Type.fromValue(sort);
+            st = st == null ? SortType.Type.NEW : st;
             if (sort.equals(SortType.Type.TOP.name())) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_BEST_POST, SortType.Time.ALL.name());
-                sortType = new SortType(SortType.Type.valueOf(sort), SortType.Time.valueOf(sortTime));
+                sortType = new SortType(st, SortType.Time.valueOf(sortTime));
             } else {
-                sortType = new SortType(SortType.Type.valueOf(sort));
+                sortType = new SortType(st);
             }
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_FRONT_PAGE_POST, defaultPostLayout);
 
