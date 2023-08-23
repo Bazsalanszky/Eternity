@@ -1271,4 +1271,13 @@
     <string name="enable_random_adaptation">Увімкнути випадкову адаптацію</string>
     <string name="handle_link">Обробка посилань</string>
     <string name="sample_list_load_error">Не вдалося завантажити один або кілька списків зразків</string>
+    <string name="community_number_detail">%1$,d спільнот</string>
+    <string name="settings_hide_user_instance">Ховати сервер користувача</string>
+    <string name="user_number_detail">%1$,d користувачів</string>
+    <string name="admins">Адміністратори</string>
+    <string name="reddit_api_info">Починаючи з 1 липня 2023 року, API Reddit стане платним за використання для сторонніх клієнтів, зокрема Infinity for Reddit. Оголошення від Reddit можна знайти тут: %1$s
+\n
+\nЩоб пережити цю зміну, після 1 липня Infinity стане додатком лише за підпискою. Більше про зміни можна дізнатися з цієї публікації: %2$s
+\n
+\nПісля 1 липня Infinity необхідно оновити, щоб отримати нову версію з можливістю підписки. Жодна з попередніх версій (включаючи цю) не працюватиме після 1 липня. Але через стислі терміни, надані Reddit, оновлення може не бути доступним одразу 1 липня, оскільки воно потребує належного тестування. Дякуємо за розуміння!</string>
 </resources>
