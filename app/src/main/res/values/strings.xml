@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="application_name" translatable="false">Eternity</string>
     <string name="login_activity_label">Login</string>
@@ -84,7 +85,7 @@
     <string name="action_give_award">Give Award</string>
     <string name="action_save_to_database">Save to Database</string>
     <string name="action_read_all_messages">Read All Messages</string>
-    <string name="action_add_to_multireddit">Add to Multicommuity</string>
+    <string name="action_add_to_multireddit">Add to Multicommunity</string>
     <string name="action_share_link">Share Link</string>
     <string name="action_copy_link">Copy Link</string>
     <string name="action_open_external_browser">Open in browser</string>
@@ -135,7 +136,7 @@
 
     <string name="profile">Profile</string>
     <string name="subscriptions">Subscriptions</string>
-    <string name="multi_reddit">Multicommuity</string>
+    <string name="multi_reddit">Multicommunity</string>
     <string name="history">History</string>
     <string name="inbox">Inbox</string>
     <string name="inbox_with_count">Inbox (%1$,d)</string>
