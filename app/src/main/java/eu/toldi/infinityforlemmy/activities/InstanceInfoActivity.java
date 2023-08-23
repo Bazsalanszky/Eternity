@@ -204,6 +204,9 @@ public class InstanceInfoActivity extends BaseActivity {
     protected void applyCustomTheme() {
         coordinatorLayout.setBackgroundColor(mCustomThemeWrapper.getBackgroundColor());
         applyAppBarLayoutAndCollapsingToolbarLayoutAndToolbarTheme(appBarLayout, null, toolbar);
+        mStatisticsCardView.setCardBackgroundColor(mCustomThemeWrapper.getCardViewBackgroundColor());
+        mDescriptionCardView.setCardBackgroundColor(mCustomThemeWrapper.getCardViewBackgroundColor());
+        mAdminsCardView.setCardBackgroundColor(mCustomThemeWrapper.getCardViewBackgroundColor());
         mUsersImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         mCommunitiesImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         mPostsImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
