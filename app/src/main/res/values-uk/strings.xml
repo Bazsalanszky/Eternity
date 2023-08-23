@@ -144,7 +144,7 @@
     <string name="send_message_content_hint">Повідомлення</string>
     <string name="reply_message_failed">Не вдалося відповісти на це повідомлення</string>
     <string name="error_getting_message">Помилка отримання цього повідомлення</string>
-    <string name="message_username_required">Чуєш, кому ти хочеш надіслати це повідомлення\?</string>
+    <string name="message_username_required">Кому ж Ви хочете надіслати це повідомлення\?</string>
     <string name="message_subject_required">Ваше повідомлення повинно мати тему</string>
     <string name="message_content_required">Отримувачу треба щось написати</string>
     <string name="sending_message">Надсилання</string>
@@ -152,7 +152,7 @@
     <string name="send_message_failed">Не вдалося надіслати це повідомлення</string>
     <string name="select_a_community">Спочатку оберіть спільноту</string>
     <string name="title_required">Допису треба дати хороший заголовок</string>
-    <string name="link_required">Чуєш, де посилання\?</string>
+    <string name="link_required">Де ж посилання\?</string>
     <string name="select_an_image">Спочатку оберіть зображення</string>
     <string name="posting">Публікування</string>
     <string name="post_failed">Не вдалося це опублікувати</string>
@@ -1280,4 +1280,7 @@
 \nЩоб пережити цю зміну, після 1 липня Infinity стане додатком лише за підпискою. Більше про зміни можна дізнатися з цієї публікації: %2$s
 \n
 \nПісля 1 липня Infinity необхідно оновити, щоб отримати нову версію з можливістю підписки. Жодна з попередніх версій (включаючи цю) не працюватиме після 1 липня. Але через стислі терміни, надані Reddit, оновлення може не бути доступним одразу 1 липня, оскільки воно потребує належного тестування. Дякуємо за розуміння!</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="theme_name_nightfox">Nightfox</string>
 </resources>
