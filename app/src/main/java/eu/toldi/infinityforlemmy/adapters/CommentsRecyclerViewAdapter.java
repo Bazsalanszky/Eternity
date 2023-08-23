@@ -572,7 +572,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         } else if (holder instanceof CommentFullyCollapsedViewHolder) {
             Comment comment = getCurrentComment(position);
             if (comment != null) {
-                String authorWithPrefix = "u/" + comment.getAuthorName();
+                String author_name = (mShowUserDisplayName) ? comment.getAuthorName() : comment.getAuthor().getUsername();
+                String authorInstance = (mHideUserInstance) ? "" : "@" + comment.getAuthor().getQualifiedName().split(Pattern.quote("@"))[1];
+                String authorWithPrefix = author_name + authorInstance;
                 ((CommentFullyCollapsedViewHolder) holder).usernameTextView.setText(authorWithPrefix);
 
                 if (comment.getAuthorIconUrl() == null) {
