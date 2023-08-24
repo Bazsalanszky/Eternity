@@ -1276,4 +1276,13 @@
     <string name="settings_hide_community_and_user_instance">Ocultar instância da comunidade e do utilizador</string>
     <string name="post_count_detail">%1$,d Publicações</string>
     <string name="send_report">Enviar Denuncia</string>
+    <string name="user_number_detail">%1$,d Utilizadores</string>
+    <string name="community_number_detail">%1$,d Comunidades</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="admins">Administradores</string>
+    <string name="settings_hide_user_instance">Ocultar instância do utilizador</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Partilhar ligações na sua instância local em vez de na instância de criação original.</string>
+    <string name="share_links_on_your_local_instance">Partilhar ligações na sua instância local</string>
 </resources>
