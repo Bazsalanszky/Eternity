@@ -475,6 +475,8 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
         nsfwTextView.setTextColor(primaryTextColor);
         titleEditText.setTextColor(primaryTextColor);
         titleEditText.setHintTextColor(secondaryTextColor);
+        contentEditText.setTextColor(primaryTextColor);
+        contentEditText.setHintTextColor(secondaryTextColor);
         boolean circleFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.USE_CIRCULAR_FAB, false);
         applyFABTheme(captureFab, circleFab);
         applyFABTheme(selectFromLibraryFab, circleFab);
@@ -486,6 +488,10 @@ public class PostImageActivity extends BaseActivity implements FlairBottomSheetF
             nsfwTextView.setTypeface(typeface);
             titleEditText.setTypeface(typeface);
             selectAgainTextView.setTypeface(typeface);
+        }
+
+        if (contentTypeface != null) {
+            contentEditText.setTypeface(contentTypeface);
         }
     }
 

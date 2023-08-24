@@ -458,6 +458,8 @@ public class PostLinkActivity extends BaseActivity implements FlairBottomSheetFr
         titleEditText.setHintTextColor(secondaryTextColor);
         suggestTitleButton.setBackgroundColor(mCustomThemeWrapper.getColorPrimaryLightTheme());
         suggestTitleButton.setTextColor(mCustomThemeWrapper.getButtonTextColor());
+        contentEditText.setTextColor(primaryTextColor);
+        contentEditText.setHintTextColor(secondaryTextColor);
         linkEditText.setTextColor(primaryTextColor);
         linkEditText.setHintTextColor(secondaryTextColor);
         if (typeface != null) {
@@ -470,6 +472,7 @@ public class PostLinkActivity extends BaseActivity implements FlairBottomSheetFr
         }
         if (contentTypeface != null) {
             linkEditText.setTypeface(contentTypeface);
+            contentEditText.setTypeface(contentTypeface);
         }
     }
 

@@ -211,6 +211,12 @@ public class CommentMoreBottomSheetFragment extends LandscapeExpandedRoundedBott
             LayoutInflater dialog_inflater = LayoutInflater.from(activity);
             View dialog_view = dialog_inflater.inflate(R.layout.dialog_report, null);
             EditText reasonEditText = dialog_view.findViewById(R.id.reasonEditText);
+            reasonEditText.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+            reasonEditText.setHintTextColor(mCustomThemeWrapper.getSecondaryTextColor());
+            if (activity.typeface != null) {
+                reasonEditText.setTypeface(activity.typeface);
+            }
+            reasonEditText.setHighlightColor(mCustomThemeWrapper.getColorAccent());
 
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity)
                     .setTitle(R.string.report_post)

@@ -1159,14 +1159,14 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
                 return true;
             }
-            if (mAccessToken == null) {
-                Toast.makeText(activity, R.string.login_first, Toast.LENGTH_SHORT).show();
-                return true;
-            }
             LayoutInflater inflater = LayoutInflater.from(activity);
             View view = inflater.inflate(R.layout.dialog_report, null);
             EditText reasonEditText = view.findViewById(R.id.reasonEditText);
-
+            reasonEditText.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
+            reasonEditText.setHintTextColor(mCustomThemeWrapper.getSecondaryTextColor());
+            if (activity.typeface != null) {
+                reasonEditText.setTypeface(activity.typeface);
+            }
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity)
                     .setTitle(R.string.report_post)
                     .setView(view)
