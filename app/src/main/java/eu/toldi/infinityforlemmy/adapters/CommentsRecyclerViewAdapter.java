@@ -672,10 +672,12 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                                 // mVisibleComments.get(parentPosition).removeMoreChildrenIds();
 
                                                 if (position != -1) {
-                                                    mVisibleComments.remove(position);
+
                                                     if (mIsSingleCommentThreadMode) {
+                                                        mVisibleComments.remove(position - 1);
                                                         notifyItemRemoved(position + 1);
                                                     } else {
+                                                        mVisibleComments.remove(position);
                                                         notifyItemRemoved(position);
                                                     }
                                                     List<Comment> trulyNewComments = new ArrayList<>();
