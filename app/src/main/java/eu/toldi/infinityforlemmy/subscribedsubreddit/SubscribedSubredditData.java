@@ -129,13 +129,13 @@ public class SubscribedSubredditData implements Parcelable {
 
     @Override
     public int hashCode() {
-        return id;
+        return id + username.hashCode();
     }
 
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj instanceof SubscribedSubredditData) {
-            return id == ((SubscribedSubredditData) obj).getId();
+            return id == ((SubscribedSubredditData) obj).getId() && username.equalsIgnoreCase(((SubscribedSubredditData) obj).getUsername());
         }
         return false;
     }

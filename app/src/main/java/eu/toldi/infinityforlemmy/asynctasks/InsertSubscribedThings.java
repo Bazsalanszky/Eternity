@@ -118,25 +118,20 @@ public class InsertSubscribedThings {
             (List<SubscribedSubredditData> newSubscribedSubreddits,
              List<SubscribedSubredditData> oldSubscribedSubreddits,
              List<String> unsubscribedSubredditNames) {
-        int newIndex = 0;
-        for (int oldIndex = 0; oldIndex < oldSubscribedSubreddits.size(); oldIndex++) {
-            if (newIndex >= newSubscribedSubreddits.size()) {
-                for (; oldIndex < oldSubscribedSubreddits.size(); oldIndex++) {
-                    unsubscribedSubredditNames.add(oldSubscribedSubreddits.get(oldIndex).getQualified_name());
-                }
-                return;
-            }
+        List<String> oldSubredditNames = new ArrayList<>();
+        for (SubscribedSubredditData subredditData : oldSubscribedSubreddits) {
+            oldSubredditNames.add(subredditData.getQualified_name());
+        }
 
-            SubscribedSubredditData old = oldSubscribedSubreddits.get(oldIndex);
-            for (; newIndex < newSubscribedSubreddits.size(); newIndex++) {
-                if (newSubscribedSubreddits.get(newIndex).getQualified_name().compareToIgnoreCase(old.getQualified_name()) == 0) {
-                    newIndex++;
-                    break;
-                }
-                if (newSubscribedSubreddits.get(newIndex).getQualified_name().compareToIgnoreCase(old.getQualified_name()) > 0) {
-                    unsubscribedSubredditNames.add(old.getQualified_name());
-                    break;
-                }
+        List<String> newSubredditNames = new ArrayList<>();
+        for (SubscribedSubredditData subredditData : newSubscribedSubreddits) {
+            newSubredditNames.add(subredditData.getQualified_name());
+        }
+
+
+        for (String subredditName : oldSubredditNames) {
+            if (!newSubredditNames.contains(subredditName)) {
+                unsubscribedSubredditNames.add(subredditName);
             }
         }
     }
