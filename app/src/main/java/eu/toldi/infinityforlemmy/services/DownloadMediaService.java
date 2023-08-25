@@ -153,7 +153,7 @@ public class DownloadMediaService extends Service {
                         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                             File directory = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                             if (directory != null) {
-                                String directoryPath = separateDownloadFolder && subredditName != null && !subredditName.equals("") ? directory.getAbsolutePath() + "/Infinity/" + subredditName + "/" : directory.getAbsolutePath() + "/Infinity/";
+                                String directoryPath = separateDownloadFolder && subredditName != null && !subredditName.equals("") ? directory.getAbsolutePath() + "/Eternity/" + subredditName + "/" : directory.getAbsolutePath() + "/Eternity/";
                                 File infinityDir = new File(directoryPath);
                                 if (!infinityDir.exists() && !infinityDir.mkdirs()) {
                                     downloadFinished(mediaType, randomNotificationIdOffset, mimeType,
@@ -168,7 +168,7 @@ public class DownloadMediaService extends Service {
                             }
                         } else {
                             String dir = mediaType == EXTRA_MEDIA_TYPE_VIDEO ? Environment.DIRECTORY_MOVIES : Environment.DIRECTORY_PICTURES;
-                            destinationFileUriString = separateDownloadFolder && subredditName != null && !subredditName.equals("") ? dir + "/Infinity/" + subredditName + "/" : dir + "/Infinity/";
+                            destinationFileUriString = separateDownloadFolder && subredditName != null && !subredditName.equals("") ? dir + "/Eternity/" + subredditName + "/" : dir + "/Eternity/";
                         }
                         isDefaultDestination = true;
                     } else {
