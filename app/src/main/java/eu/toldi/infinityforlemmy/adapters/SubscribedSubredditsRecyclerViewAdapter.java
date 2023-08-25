@@ -87,9 +87,9 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                     return VIEW_TYPE_SUBREDDIT;
                 } else if (position == 1) {
                     return VIEW_TYPE_FAVORITE_SUBREDDIT_DIVIDER;
-                } else if (position == mFavoriteSubscribedSubredditData.size() + 2) {
+                } else if (position == mFavoriteSubscribedSubredditData.size() + 1) {
                     return VIEW_TYPE_SUBREDDIT_DIVIDER;
-                } else if (position <= mFavoriteSubscribedSubredditData.size() + 1) {
+                } else if (position < mFavoriteSubscribedSubredditData.size() + 1) {
                     return VIEW_TYPE_FAVORITE_SUBREDDIT;
                 } else {
                     return VIEW_TYPE_SUBREDDIT;
@@ -98,12 +98,10 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 if (position == 0) {
                     return VIEW_TYPE_SUBREDDIT;
                 } else if (position == 1) {
-                    return VIEW_TYPE_SUBREDDIT;
-                } else if (position == 2) {
                     return VIEW_TYPE_FAVORITE_SUBREDDIT_DIVIDER;
-                } else if (position == mFavoriteSubscribedSubredditData.size() + 3) {
+                } else if (position == mFavoriteSubscribedSubredditData.size() + 2) {
                     return VIEW_TYPE_SUBREDDIT_DIVIDER;
-                } else if (position <= mFavoriteSubscribedSubredditData.size() + 2) {
+                } else if (position < mFavoriteSubscribedSubredditData.size() + 2) {
                     return VIEW_TYPE_FAVORITE_SUBREDDIT;
                 } else {
                     return VIEW_TYPE_SUBREDDIT;
@@ -159,7 +157,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 if (itemClickListener != null) {
                     if (hasClearSelectionRow) {
                         offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                mFavoriteSubscribedSubredditData.size() + 4 : 2;
+                                mFavoriteSubscribedSubredditData.size() + 3 : 1;
                     } else {
                         offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
                                 mFavoriteSubscribedSubredditData.size() + 3 : 1;
@@ -170,7 +168,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 }
 
 
-                SubscribedSubredditData communityData = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset);
+
                 name = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
                 fullname = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name();
                 iconUrl = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
@@ -195,6 +193,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 });
 
                 if (itemClickListener != null) {
+                    SubscribedSubredditData communityData = mSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset);
                     viewHolder.itemView.setOnClickListener(view -> itemClickListener.onClick(communityData));
                 }
             }
@@ -227,7 +226,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             int offset;
             if (itemClickListener != null) {
                 if (hasClearSelectionRow) {
-                    offset = 3;
+                    offset = 2;
                 } else {
                     offset = 2;
                 }
@@ -289,24 +288,15 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         if (mSubscribedSubredditData != null) {
             if (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) {
                 if (itemClickListener != null) {
-                    if (hasClearSelectionRow) {
-                        return mSubscribedSubredditData.size() > 0 ?
-                                mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 4 : 0;
-                    } else {
-                        return mSubscribedSubredditData.size() > 0 ?
-                                mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 3 : 0;
-                    }
+                    return mSubscribedSubredditData.size() > 0 ?
+                            mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 3 : 0;
                 }
                 return mSubscribedSubredditData.size() > 0 ?
                         mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 2 : 0;
             }
 
             if (itemClickListener != null) {
-                if (hasClearSelectionRow) {
-                    return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 2 : 0;
-                } else {
-                    return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
-                }
+                return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
             }
 
             return mSubscribedSubredditData.size();
@@ -356,7 +346,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                     if (itemClickListener != null) {
                         if (hasClearSelectionRow) {
                             offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                    mFavoriteSubscribedSubredditData.size() + 4 : 0;
+                                    mFavoriteSubscribedSubredditData.size() + 3 : 0;
                         } else {
                             offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
                                     mFavoriteSubscribedSubredditData.size() + 3 : 0;
@@ -372,7 +362,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 int offset;
                 if (itemClickListener != null) {
                     if (hasClearSelectionRow) {
-                        offset = 3;
+                        offset = 2;
                     } else {
                         offset = 2;
                     }

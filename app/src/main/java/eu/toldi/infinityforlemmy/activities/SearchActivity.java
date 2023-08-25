@@ -433,12 +433,14 @@ public class SearchActivity extends BaseActivity {
         if (resultCode == RESULT_OK && data != null) {
             if (requestCode == SUBREDDIT_SELECTION_REQUEST_CODE) {
                 communityData = data.getParcelableExtra(SubredditSelectionActivity.EXTRA_RETURN_COMMUNITY_DATA);
-                subredditName = communityData.getName();
+
                 subredditIsUser = false;
 
-                if (subredditName == null) {
+                if (communityData == null) {
                     subredditNameTextView.setText(R.string.all_communities);
                 } else {
+                    subredditName = communityData.getName();
+                    communityQualifiedName = communityData.getQualified_name();
                     subredditNameTextView.setText(subredditName);
                 }
             } else if (requestCode == SUBREDDIT_SEARCH_REQUEST_CODE) {
