@@ -8,7 +8,7 @@ steps:
   sign:
     image: alvrme/alpine-android:android-33-jdk11
     commands:
-      - ./scripts/apk-sign.sh LemmInfinity-signed.apk app/build/outputs/apk/release/app-release-unsigned.apk
+      - ./scripts/apk-sign.sh Eternity-signed.apk app/build/outputs/apk/release/app-release-unsigned.apk
     secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
     when:
       event: [ tag ]
@@ -17,7 +17,7 @@ steps:
     settings:
       base_url: https://codeberg.org
       files:
-        - LemmInfinity-signed.apk
+        - Eternity-signed.apk
       api_key:
         from_secret: GITEA_ACCESS_TOKEN
       target: main
