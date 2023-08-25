@@ -365,7 +365,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         super.onResume();
         if (mAccessToken == null) {
             String instancePreference = mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI);
-            if (!mRetrofit.getBaseURL().equalsIgnoreCase(instancePreference)) {
+            if (!instancePreference.startsWith(mRetrofit.getBaseURL())) {
+                mRetrofit.setBaseURL(instancePreference);
                 this.recreate();
             }
         }
