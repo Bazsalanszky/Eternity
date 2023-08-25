@@ -5,7 +5,7 @@
     <string name="comment_activity_label_is_replying">Відповісти</string>
     <string name="post_text_activity_label">Текстовий допис</string>
     <string name="community_selection_activity_label">Виберіть спільноту</string>
-    <string name="post_link_activity_label">Допис ланки</string>
+    <string name="post_link_activity_label">Допис-посилання</string>
     <string name="post_image_activity_label">Зображення</string>
     <string name="post_video_activity_label">Відеозапис</string>
     <string name="rules_activity_label">Правила</string>
@@ -28,7 +28,7 @@
     <string name="view_imgur_media_activity_video_label">Відеозапис %1$d/%2$d</string>
     <string name="send_private_message_activity_label">Надіслати ПП</string>
     <string name="view_reddit_gallery_activity_image_label">Зображення %1$d/%2$d</string>
-    <string name="view_reddit_gallery_activity_gif_label">Gif %1$d/%2$d</string>
+    <string name="view_reddit_gallery_activity_gif_label">GIF %1$d/%2$d</string>
     <string name="view_reddit_gallery_activity_video_label">Відеозапис %1$d/%2$d</string>
     <string name="navigation_drawer_open">Відкрити шторку переходів</string>
     <string name="navigation_drawer_close">Закрити шторку переходів</string>
@@ -61,11 +61,11 @@
     <string name="action_see_removed">Переглянути вилучені</string>
     <string name="action_set_wallpaper">Зробити шпалерами</string>
     <string name="action_send_private_message">Надіслати приватне повідомлення</string>
-    <string name="parse_json_response_error">Помилка відбулася під час аналізу відповіді JSON</string>
+    <string name="parse_json_response_error">Сталася помилка під час аналізу відповіді JSON</string>
     <string name="retrieve_token_error">Помилка отримання токена</string>
     <string name="something_went_wrong">Щось пішло не так. Спробуйте пізніше.</string>
     <string name="access_denied">У доступі відмовлено</string>
-    <string name="parse_user_info_error">Помилка відбулася під час аналізу інформації користувача</string>
+    <string name="parse_user_info_error">Сталася помилка під час аналізу інформації користувача</string>
     <string name="no_system_webview_error">Помилка відкривання системного вебперегляду</string>
     <string name="error_loading_image_tap_to_retry">Помилка завантаження зображення. Натисніть, щоб повторити.</string>
     <string name="load_posts_error">Помилка завантаження дописів.
@@ -171,7 +171,7 @@
     <string name="users">Користувачі</string>
     <string name="multi_reddits">Мультиспільноти</string>
     <string name="bottom_sheet_post_text">Текст</string>
-    <string name="bottom_sheet_post_link">Ланка</string>
+    <string name="bottom_sheet_post_link">Посилання</string>
     <string name="bottom_sheet_post_image">Зображення</string>
     <string name="bottom_sheet_post_video">Відео</string>
     <string name="select_from_gallery">Вибрати картинку</string>
@@ -182,7 +182,7 @@
     <string name="error_creating_temp_file">Помилка створення тимчасового файлу</string>
     <string name="video_is_processing">Відеозапис обробляється. Будь ласка, зачекайте.</string>
     <string name="image_is_processing">Зображення обробляється. Будь ласка, зачекайте.</string>
-    <string name="gif_is_processing">Gif обробляється. Будь ласка, зачекайте.</string>
+    <string name="gif_is_processing">GIF обробляється. Будь ласка, зачекайте.</string>
     <string name="flair">Личка</string>
     <string name="spoiler">Спойлер</string>
     <string name="no_flair">Без лички</string>
@@ -221,7 +221,7 @@
     <string name="locked_post_comment_unavailable">Допис замкнено. Коментувати неможливо.</string>
     <string name="locked_post_reply_unavailable">Допис замкнено. Відповідати неможливо.</string>
     <string name="text">ТЕКСТ</string>
-    <string name="link">ЛАНКА</string>
+    <string name="link">ПОСИЛАННЯ</string>
     <string name="image">КАРТИНКА</string>
     <string name="video">ВІДЕО</string>
     <string name="gif">GIF</string>
@@ -231,7 +231,7 @@
     <string name="posting_video">Публікування відеозапису</string>
     <string name="posting_image">Публікування зображення</string>
     <string name="please_wait">Будь ласка, зачекайте</string>
-    <string name="add_account">Додати обліківку</string>
+    <string name="add_account">Додати обліковий запис</string>
     <string name="anonymous_account">Анонім</string>
     <string name="log_out">Вийти</string>
     <string name="press_here_to_login">Натисніть тут, щоб увійти</string>
@@ -274,17 +274,17 @@
     <string name="edit_flair">Змінити личку</string>
     <string name="only_allow_64_chars">Дозволено лише не більше 64 знаків</string>
     <string name="view_all_comments">Клацніть тут, щоб переглянути всі коментарі</string>
-    <string name="notification_summary_account">Обліківка</string>
+    <string name="notification_summary_account">Обліковий запис</string>
     <string name="notification_summary_message">Нове повідомлення</string>
     <string name="notification_summary_community">Спільнота</string>
     <string name="notification_summary_award">Нагорода</string>
     <string name="notification_new_messages">%1$d нових повідомлень</string>
-    <string name="label_account">Обліківка</string>
+    <string name="label_account">Обліковий запис</string>
     <string name="label_post">Допис</string>
     <string name="label_preferences">Властивості</string>
-    <string name="account_switched">Обліківку змінено. Тому всі інші сторінки втрачено.</string>
+    <string name="account_switched">Обліковий запис змінено, тож усі інші сторінки зникли.</string>
     <string name="settings_notification_master_title">Сповіщення</string>
-    <string name="settings_notification_enable_notification_title">Дозволити сповіщення</string>
+    <string name="settings_notification_enable_notification_title">Увімкнути сповіщення</string>
     <string name="settings_notification_interval_title">Період перевірки сповіщень</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_amoled_dark_title">Темна Amoled</string>
@@ -374,7 +374,7 @@
     <string name="settings_rate_summary">Дай мені 5 зірочок і я буду щаслива</string>
     <string name="settings_email_title">Mastodon</string>
     <string name="settings_email_summary">\@bazsalanszky@fosstodon.org</string>
-    <string name="settings_reddit_account_title">Обліківка Lemmy</string>
+    <string name="settings_reddit_account_title">Обліковий запис Lemmy</string>
     <string name="settings_reddit_account_summary">\@bazsalanszky@lemmy.toldi.eu</string>
     <string name="settings_community_title">Спільнота</string>
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
@@ -440,23 +440,23 @@
     <string name="elapsed_time_a_year_ago">1 рік</string>
     <string name="elapsed_time_years_ago">%1$d років</string>
     <string name="error_getting_multi_reddit_data">Помилка отримання даних мультиспільноти</string>
-    <string name="error_loading_multi_reddit_list">Неможливо синхронувати мультиспільноти</string>
-    <string name="error_loading_subscriptions">Неможливо синхронувати підписки</string>
+    <string name="error_loading_multi_reddit_list">Неможливо синхронізувати мультиспільноти</string>
+    <string name="error_loading_subscriptions">Неможливо синхронізувати підписки</string>
     <string name="share_this_app">Спробуйте Eternity — чудовий клієнт для Lemmy!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Помилка отримання назви спільноти</string>
-    <string name="share_post_link">Поширити ланку допису</string>
-    <string name="share_image_link">Поширити ланку зображення</string>
-    <string name="share_gif_link">Поширити ланку Gif</string>
-    <string name="share_video_link">Поширити ланку відео</string>
-    <string name="share_link">Поширити ланку</string>
-    <string name="copy_post_link">Копіювати ланку допису</string>
-    <string name="copy_image_link">Копіювати ланку зображення</string>
-    <string name="copy_gif_link">Копіювати ланку Gif</string>
-    <string name="copy_video_link">Копіювати ланку відео</string>
-    <string name="copy_link">Копіювати ланку</string>
+    <string name="share_post_link">Поділитися посиланням на допис</string>
+    <string name="share_image_link">Поділитися посиланням на зображення</string>
+    <string name="share_gif_link">Поділитися посиланням на GIF</string>
+    <string name="share_video_link">Поділитися посиланням на відео</string>
+    <string name="share_link">Поділитися посиланням</string>
+    <string name="copy_post_link">Копіювати посилання на допис</string>
+    <string name="copy_image_link">Копіювати посилання на зображення</string>
+    <string name="copy_gif_link">Копіювати посилання на GIF</string>
+    <string name="copy_video_link">Копіювати посилання на відео</string>
+    <string name="copy_link">Копіювати посилання</string>
     <string name="copy_success">Скопійовано</string>
-    <string name="copy_link_failed">Неможливо скопіювати ланку</string>
+    <string name="copy_link_failed">Неможливо скопіювати посилання</string>
     <string name="copy_text">Копіювати</string>
     <string name="copy_all">Копіювати все</string>
     <string name="copy_markdown">Копіювати з розміткою</string>
@@ -479,10 +479,10 @@
     <string name="enable_nsfw">Дозволити НБДР</string>
     <string name="disable_nsfw">Заборонити НБДР</string>
     <string name="cannot_save_image">Неможливо зберегти зображення</string>
-    <string name="cannot_save_gif">Неможливо зберегти gif</string>
+    <string name="cannot_save_gif">Неможливо зберегти GIF</string>
     <string name="cannot_get_storage">Нема доступу до сховища програми</string>
     <string name="save_image_first">Зберігання зображення. Будь ласка, зачекайте.</string>
-    <string name="save_gif_first">Збереження gif. Будь ласка, зачекайте.</string>
+    <string name="save_gif_first">Збереження GIF. Будь ласка, зачекайте.</string>
     <string name="theme_name_description">Натисніть, щоб змінити назву цієї теми.</string>
     <string name="theme_item_is_light_theme">Зробити світлою темою</string>
     <string name="theme_item_is_dark_theme">Зробити темною темою</string>
@@ -494,7 +494,7 @@
     <string name="theme_item_color_accent">Акцент кольору</string>
     <string name="theme_item_color_accent_detail">Задіяно до: Панель поступу тощо</string>
     <string name="theme_item_color_primary_light_theme">Основний колір світлої теми</string>
-    <string name="theme_item_color_primary_light_theme_detail">Задіяно до: Тло плаваючої кнопки дії і кнопок</string>
+    <string name="theme_item_color_primary_light_theme_detail">Задіяно до: Тло кнопок і плаваючої кнопки дії</string>
     <string name="theme_item_primary_text_color">Колір основного тексту</string>
     <string name="theme_item_primary_text_color_detail">Задіяно до: Основний текст</string>
     <string name="theme_item_secondary_text_color">Колір додаткового тексту</string>
@@ -508,7 +508,7 @@
     <string name="theme_item_button_text_color">Колір тексту кнопки</string>
     <string name="theme_item_button_text_color_detail">Задіяно до: Текст на кнопці</string>
     <string name="theme_item_chip_text_color">Колір тексту чіпа</string>
-    <string name="theme_item_chip_text_color_detail">Задіяно до: Кнопка Підписатися</string>
+    <string name="theme_item_chip_text_color_detail">Задіяно до: Кнопка «Підписатися»</string>
     <string name="theme_item_link_color">Колір посилання</string>
     <string name="theme_item_link_color_detail">Задіяно до: URL</string>
     <string name="theme_item_received_message_text_color">Колір тексту отриманого повідомлення</string>
@@ -566,9 +566,9 @@
     <string name="theme_item_downvoted_color">Колір з голосами вниз</string>
     <string name="theme_item_downvoted_color_detail">Задіяно до: Кнопки голосування і оцінок (голос вниз)</string>
     <string name="theme_item_post_type_background_color">Колір тла типу допису</string>
-    <string name="theme_item_post_type_background_color_detail">Задіяно до: Тло типу дописів (ЗОБРАЖЕННЯ, ТЕКСТ, ВІДЕО, GIF, ЛАНКА)</string>
+    <string name="theme_item_post_type_background_color_detail">Задіяно до: Тло типу дописів (ЗОБРАЖЕННЯ, ТЕКСТ, ВІДЕО, GIF, ПОСИЛАННЯ)</string>
     <string name="theme_item_post_type_text_color">Колір тексту типу допису</string>
-    <string name="theme_item_post_type_text_color_detail">Задіяно до: Колір тексту типу дописів (ЗОБРАЖЕННЯ, ТЕКСТ, ВІДЕО, GIF, ЛАНКА)</string>
+    <string name="theme_item_post_type_text_color_detail">Задіяно до: Колір тексту типу дописів (ЗОБРАЖЕННЯ, ТЕКСТ, ВІДЕО, GIF, ПОСИЛАННЯ)</string>
     <string name="theme_item_spoiler_background_color">Колір тла спойлера</string>
     <string name="theme_item_spoiler_background_color_detail">Задіяно до: Тло позначки спойлера</string>
     <string name="theme_item_spoiler_text_color">Колір тексту спойлера</string>
@@ -586,17 +586,17 @@
     <string name="theme_item_awards_text_color">Колір тексту нагороди</string>
     <string name="theme_item_awards_text_color_detail">Задіяно до: Колір тексту позначки нагород</string>
     <string name="theme_item_archived_tint">Колір тексту заархівованого</string>
-    <string name="theme_item_archived_tint_detail">Задіяно до: Значок Заархівовано</string>
+    <string name="theme_item_archived_tint_detail">Задіяно до: Значок «Заархівовано»</string>
     <string name="theme_item_locked_icon_tint">Колір значка замкненого</string>
-    <string name="theme_item_locked_icon_tint_detail">Задіяно до: Значок Замкнено</string>
+    <string name="theme_item_locked_icon_tint_detail">Задіяно до: Значок «Замкнено»</string>
     <string name="theme_item_crosspost_icon_tint">Колір значка передопису</string>
     <string name="theme_item_crosspost_icon_tint_detail">Задіяно до: Значок передопису</string>
     <string name="theme_item_stickied_post_icon_tint">Колір значка закріпленого допису</string>
     <string name="theme_item_stickied_post_icon_tint_detail">Задіяно до: Значок закріпленого допису</string>
     <string name="theme_item_subscribed_color">Підписано</string>
-    <string name="theme_item_subscribed_color_detail">Задіяно до: Кнопка Відписатися</string>
+    <string name="theme_item_subscribed_color_detail">Задіяно до: Кнопка «Відписатися»</string>
     <string name="theme_item_unsubscribed_color">Відписано</string>
-    <string name="theme_item_unsubscribed_color_detail">Задіяно до: Кнопка Підписатися</string>
+    <string name="theme_item_unsubscribed_color_detail">Задіяно до: Кнопка «Підписатися»</string>
     <string name="theme_item_username_color">Колір імені користувача</string>
     <string name="theme_item_username_color_detail">Задіяно до: Імʼя користувача</string>
     <string name="theme_item_community_color">Колір спільноти</string>
@@ -652,11 +652,11 @@
     <string name="theme_name_dracula">Dracula</string>
     <string name="theme_name_calm_pastel">Спокійно-пастельна</string>
     <string name="create_light_theme">Створити світлу тему
-\nна основі теми Індиґо</string>
+\nна основі теми «Індиґо»</string>
     <string name="create_dark_theme">Створити темну тему
-\nна основі теми Темної Індиґо</string>
+\nна основі теми «Темна Індиґо»</string>
     <string name="create_amoled_theme">Створити тему Amoled
-\nна основі теми Індиґо Amoled</string>
+\nна основі теми «Індиґо Amoled»</string>
     <string name="create_theme_info">Якщо бажаєте створити тему на основі іншої теми, клацніть кнопку «+» біля неї.</string>
     <string name="edit_theme_name">Змінити назву теми</string>
     <string name="edit_theme">Змінити тему</string>
@@ -672,7 +672,7 @@
     <string name="import_theme_success">Тему вдало імпортовано</string>
     <string name="parse_theme_failed">Не вдалося розпізнати тему</string>
     <string name="duplicate_theme_name_dialog_title">Знайдено дублювання теми</string>
-    <string name="duplicate_theme_name_dialog_message">Тема в базі даних також називається %1$s. Бажаєте змінити назву для цієї імпортованої теми\?</string>
+    <string name="duplicate_theme_name_dialog_message">Тема в базі даних також називається «%1$s». Бажаєте змінити назву для цієї імпортованої теми\?</string>
     <string name="rename">Переназвати</string>
     <string name="override">Перезаписати</string>
     <string name="color_picker">Вибір кольору</string>
@@ -710,7 +710,7 @@
     <string name="report_reason_general_child_pornography">Містить дитячу порнографію</string>
     <string name="report_reason_general_abusive_content">Містить образливий вміст</string>
     <string name="subscribed_feed">Домівка</string>
-    <string name="local">Популярне</string>
+    <string name="local">Локальне</string>
     <string name="notifications">Сповіщення</string>
     <string name="messages">Повідомлення</string>
     <string name="message">Повідомлення</string>
@@ -739,10 +739,10 @@
     <string name="top_score">%1$s балів</string>
     <string name="login_activity_2fa_prompt">Якщо у Вас увімкнено 2-факторну автентифікацію, Вам треба заповнити поле «Токен 2FA». Якщо ні — залиште його порожнім</string>
     <string name="submit_crosspost_activity_label">Передопис</string>
-    <string name="give_award_activity_label">Дати нагороду</string>
+    <string name="give_award_activity_label">Нагородити</string>
     <string name="action_crosspost">Передопис</string>
     <string name="action_select_user_flair">Вибрати личку користувача</string>
-    <string name="action_give_award">Дати нагороду</string>
+    <string name="action_give_award">Нагородити</string>
     <string name="posts">Дописи</string>
     <string name="only_for_logged_in_user">Лише для користувачів, що ввійшли</string>
     <string name="settings_number_of_columns_in_post_feed_title">Кількість стовпців у стрічці дописів</string>
@@ -760,7 +760,7 @@
     <string name="settings_more_tabs_show_subscribed_communities_title">Показувати підписані спільноти</string>
     <string name="settings_download_location_title">Розташування завантажень</string>
     <string name="settings_image_download_location_title">Розташування завантажених зображень</string>
-    <string name="settings_gif_download_location_title">Розташування завантажених Gif</string>
+    <string name="settings_gif_download_location_title">Розташування завантажених GIF</string>
     <string name="settings_video_download_location_title">Розташування завантажених відеозаписів</string>
     <string name="settings_separate_folder_for_each_community">Окрема тека для кожної спільноти</string>
     <string name="settings_swipe_action_title">Дії ковзанням</string>
@@ -797,20 +797,20 @@
     <string name="select_header_size">Вибрати розмір заголовка</string>
     <string name="large">Великий</string>
     <string name="small">Малий</string>
-    <string name="insert_link">Вставити ланку</string>
+    <string name="insert_link">Вставити посилання</string>
     <string name="text_hint">Текст</string>
-    <string name="link_hint">Ланка</string>
-    <string name="unlock_account_section">Розблокувати розділ обліківки</string>
+    <string name="link_hint">Посилання</string>
+    <string name="unlock_account_section">Розблокувати розділ «Обліковий запис»</string>
     <string name="unlock">Розблокувати</string>
     <string name="submit_post">Надіслати допис</string>
     <string name="refresh">Оновити</string>
     <string name="change_sort_type">Змінити тип сортування</string>
     <string name="change_post_layout">Змінити форму дописів</string>
-    <string name="give_award_dialog_title">Дати нагороду\?</string>
+    <string name="give_award_dialog_title">Нагородити\?</string>
     <string name="anonymous">Анонімно</string>
     <string name="give_award_error_message">Код: %1$d/
 \nПовідомлення: %2$s</string>
-    <string name="give_award_success">Дано нагороду</string>
+    <string name="give_award_success">Нагороджено</string>
     <string name="give_award_failed">Не вдалося</string>
     <string name="warning">Попередження</string>
     <string name="this_is_a_nsfw_community">Це спільнота НБДР.</string>
@@ -856,14 +856,14 @@
     <string name="action_add_to_multireddit">Додати в мультиспільноту</string>
     <string name="search_only_communities_hint">Пошук спільнот</string>
     <string name="search_only_users_hint">Пошук користувачів</string>
-    <string name="post_type_gif">Gif</string>
+    <string name="post_type_gif">GIF</string>
     <string name="post_type_gallery">Галерея</string>
     <string name="settings_disable_immersive_interface_in_landscape_mode">Вимкнути заглиблений інтерфейс в альбомному режимі</string>
     <string name="settings_privacy_policy_title">Політика приватності</string>
     <string name="settings_delete_read_posts_in_database_title">Видалити всі прочитані дописи з бази даних</string>
     <string name="settings_post_filter_title">Фільтр дописів</string>
-    <string name="settings_only_disable_preview_in_video_and_gif_posts_title">Вимкнути передперегляд лише для відео і дописів Gif</string>
-    <string name="settings_enable_search_history_title">Дозволити історію пошуку</string>
+    <string name="settings_only_disable_preview_in_video_and_gif_posts_title">Вимкнути передперегляд лише для відео і дописів GIF</string>
+    <string name="settings_enable_search_history_title">Увімкнути історію пошуку</string>
     <string name="settings_post_history_title">Історія дописів</string>
     <string name="settings_mark_posts_as_read_title">Позначати дописи прочитаними</string>
     <string name="settings_mark_posts_as_read_after_voting_title">Позначати дописи прочитаними після голосування</string>
@@ -875,7 +875,7 @@
     <string name="settings_community_default_sort_time_title">Типовий для спільноти час сортування</string>
     <string name="settings_user_default_sort_type_title">Користувацький типовий тип сортування</string>
     <string name="settings_user_default_sort_time_title">Користувацький типовий час сортування</string>
-    <string name="open_link">Відкрити ланку</string>
+    <string name="open_link">Відкрити посилання</string>
     <string name="select_communities_and_users">Вибрати спільноти і користувачів</string>
     <string name="theme_item_read_post_title_color">Колір заголовка прочитаного допису</string>
     <string name="theme_item_read_post_title_color_detail">Задіяно до: Заголовок прочитаного допису</string>
@@ -902,7 +902,7 @@
     <string name="max_awards_hint">Найбільше нагород (-1: необмежено)</string>
     <string name="post_filter_name_hint">Назва фільтру дописів</string>
     <string name="post_filter_requires_a_name">Яка назва для цього фільтру дописів\?</string>
-    <string name="duplicate_post_filter_dialog_title">\'%1$s\' вже існує</string>
+    <string name="duplicate_post_filter_dialog_title">«%1$s» вже існує</string>
     <string name="duplicate_post_filter_dialog_message">Перезаписати його\?</string>
     <string name="apply_post_filter_to">Задіяно до</string>
     <string name="post_filter_usage_home">Домівка</string>
@@ -933,8 +933,8 @@
     <string name="have_trouble_login_title">Є проблеми з входом</string>
     <string name="have_trouble_login_message">Бажаєте спробувати інший спосіб входу\?</string>
     <string name="vote">Голос</string>
-    <string name="action_share_link">Поширити ланку</string>
-    <string name="action_copy_link">Копіювати ланку</string>
+    <string name="action_share_link">Поділитися посиланням</string>
+    <string name="action_copy_link">Копіювати посилання</string>
     <string name="action_add_to_post_filter">Додати до фільтру дописів</string>
     <string name="settings_do_not_blur_nsfw_in_nsfw_communities_title">Не розмивати зображення НБДР для спільнот НБДР</string>
     <string name="settings_show_avatar_on_the_right">Показувати аватарку праворуч</string>
@@ -943,9 +943,9 @@
     <string name="settings_credits_love_animation_title">Анімація любові</string>
     <string name="settings_swipe_between_posts_title">Ковзати між дописами</string>
     <string name="settings_navigation_drawer_title">Шторка переходів</string>
-    <string name="settings_collapse_account_section_title">Згорнути розділ Обліківка</string>
-    <string name="settings_collapse_post_section_title">Згорнути розділ Допис</string>
-    <string name="settings_collapse_preferences_section_title">Згорнути розділ Властивості</string>
+    <string name="settings_collapse_account_section_title">Згорнути розділ «Обліковий запис»</string>
+    <string name="settings_collapse_post_section_title">Згорнути розділ «Допис»</string>
+    <string name="settings_collapse_preferences_section_title">Згорнути розділ «Властивості»</string>
     <string name="settings_collapse_favorite_communities_section_title">Згорнути розділ вибраних спільнот</string>
     <string name="settings_collapse_subscribed_communities_section_title">Згорнути розділ підписаних спільнот</string>
     <string name="settings_hide_favorite_communities_sections_title">Сховати розділ вибраних спільнот</string>
@@ -994,11 +994,11 @@
     <string name="action_delete_logs">Видалити журнали</string>
     <string name="inbox_with_count">Вхідні (%1$,d)</string>
     <string name="comment_continue_thread">Продовжити гілку</string>
-    <string name="settings_swipe_vertically_to_go_back_from_media_title">Ковзніть вертикально, щоб вернутися назад від зображення або Gif</string>
+    <string name="settings_swipe_vertically_to_go_back_from_media_title">Ковзніть вертикально, щоб вернутися назад від зображення або GIF</string>
     <string name="settings_hide_post_flair">Ховати лички дописів</string>
     <string name="settings_crash_reports_title">Звіти про збої</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Небезпечно</string>
-    <string name="settings_disable_nsfw_forever_title">Заборонити НБДР назавжди</string>
+    <string name="settings_disable_nsfw_forever_title">Назавжди заборонити НБДР</string>
     <string name="settings_show_only_one_comment_level_indicator">Показувати лише один показник рівня коментарів</string>
     <string name="save_comment">Зберегти</string>
     <string name="unsave_comment">Не зберігати</string>
@@ -1011,7 +1011,7 @@
     <string name="reply">Відповісти</string>
     <string name="post_gallery_activity_label">Допис галереї</string>
     <string name="trending_activity_label">Тенденції</string>
-    <string name="action_share_post_link">Поширити ланку допису</string>
+    <string name="action_share_post_link">Поділитися посиланням на допис</string>
     <string name="trending">Тенденції</string>
     <string name="receive_post_reply_notifications">Отримувати сповіщення про відповіді на дописи</string>
     <string name="bottom_sheet_post_gallery">Галерея</string>
@@ -1020,9 +1020,9 @@
     <string name="settings_default_link_post_layout">Типовий вигляд посилань дописів</string>
     <string name="settings_category_material_you_title">Material You</string>
     <string name="settings_enable_material_you_warning_summary">Переконайтеся, що Ви не маєте тем із назвою
-\n\"Material You\",
-\n\"Material You Dark\" або
-\n\"Material You Amoled\".
+\n«Material You»,
+\n«Material You Dark» або
+\n«Material You Amoled».
 \nВ іншому випадку переназвіть їх перед увімкненням Material You.</string>
     <string name="settings_enable_material_you_title">Дозволити Material You</string>
     <string name="settings_enable_material_you_summary">Персоналізувати Infinity на основі Ваших шпалер</string>
@@ -1030,17 +1030,17 @@
     <string name="settings_apply_material_you_summary">На випадок, якщо Infinity не змінює тему</string>
     <string name="settings_more_tabs_show_favorite_multireddits_title">Показувати вибрані мультиспільноти</string>
     <string name="settings_more_tabs_show_multireddits_title">Показувати мультиспільноти</string>
-    <string name="settings_collapse_reddit_section_title">Згорнути розділ Lemmy</string>
+    <string name="settings_collapse_reddit_section_title">Згорнути розділ «Lemmy»</string>
     <string name="settings_video_player_automatic_landscape_orientation">Автоматично перемикати на альбомну орієнтацію у відеопрогравачі</string>
     <string name="settings_remember_muting_option_in_post_feed">Запамʼятати опцію приглушення в стрічці дописів</string>
     <string name="link_post_layout_auto">Авто</string>
-    <string name="uploaded_images">Відвантажені зображення</string>
+    <string name="uploaded_images">Надіслані зображення</string>
     <string name="select_image">Вибрати зображення</string>
     <string name="capture">Захопити</string>
-    <string name="uploading_image">Відвантаження</string>
-    <string name="upload_image_success">Зображення успішно відвантажене. Клацніть кнопку зображення ще раз, щоб переглянути відвантажені зображення.</string>
+    <string name="uploading_image">Надсилання</string>
+    <string name="upload_image_success">Зображення успішно надіслане. Щоб переглянути надіслані зображення, клацніть кнопку зображення ще раз.</string>
     <string name="get_image_bitmap_failed">Неможливо отримати bitmap зображення</string>
-    <string name="upload_image_failed">Неможливо відвантажити зображення</string>
+    <string name="upload_image_failed">Неможливо надіслати зображення</string>
     <string name="search_comments">Пошук коментарів</string>
     <string name="please_wait_image_is_uploading">Зображення все ще завантажується. Будь ласка, зачекайте.</string>
     <string name="error_fetch_trending_search">Не вдалося отримати тенденції пошуку.
@@ -1053,10 +1053,10 @@
     <string name="settings_post_details_title">Відомості дописів</string>
     <string name="settings_separate_post_and_comments_in_portrait_mode_title">Відокремлювати дописи і коментарі в портретному режимі</string>
     <string name="settings_separate_post_and_comments_in_landscape_mode_title">Відокремлювати дописи і коментарі в альбомному режимі</string>
-    <string name="settings_separate_post_and_comments_summary">Автовідтворення відео не дозволене на сторінці відомостей допису</string>
+    <string name="settings_separate_post_and_comments_summary">Автовідтворення відео буде вимкнено на сторінці відомостей про допис</string>
     <string name="settings_use_bottom_toolbar_in_media_viewer_title">Викор. нижню панель засобів під час перегляду медіа</string>
     <string name="settings_secure_mode_title">Безпечний режим</string>
-    <string name="settings_secure_mode_summary">Заборонено зімки екрана і запис відео. Нема передперегляду при перемиканні застосунків.</string>
+    <string name="settings_secure_mode_summary">Заборонено знімки екрана і запис відео. Нема передперегляду при перемиканні застосунків.</string>
     <string name="discard_dialog_button">Скасувати зміни</string>
     <string name="error_loading_wiki">Помилка завантаження вікі</string>
     <string name="no_wiki">Ця спільнота не має вікі-сторінки</string>
@@ -1075,7 +1075,7 @@
     <string name="settings_app_lock_title">Замикання застосунку</string>
     <string name="settings_app_lock_summary">Вимагати автентифікацію перед використанням застосунку</string>
     <string name="settings_app_lock_timeout_title">Час замикання застосунку</string>
-    <string name="settings_enable_fold_support_title">Дозволити підтримку згортання телефона</string>
+    <string name="settings_enable_fold_support_title">Увімкнути підтримку згортання телефона</string>
     <string name="settings_default_playback_speed_title">Типова швидкість відтворення</string>
     <string name="settings_link_handler_value_external_browser">Зовнішній оглядач</string>
     <string name="settings_link_handler_value_custom_tab">Власна вкладка</string>
@@ -1145,7 +1145,7 @@
     <string name="two_options_required">Хороше опитування потребує два або більше варіантів!</string>
     <string name="bottom_sheet_post_poll">Опитування</string>
     <string name="no_activity_found_for_external_browser">Нема програми, яка може обробити дію відкривання в зовнішньому оглядачі</string>
-    <string name="settings_require_authentication_to_show_accounts">Вимагати автентифікацію, щоб показати обліківки</string>
+    <string name="settings_require_authentication_to_show_accounts">Вимагати автентифікацію, щоб показати облікові записи</string>
     <string name="settings_custom_font_family_title">Власне сімейство шрифтів</string>
     <string name="settings_custom_title_font_family_title">Власне сімейство шрифтів для заголовку</string>
     <string name="settings_custom_content_font_family_title">Власне сімейство шрифтів для вмісту</string>
@@ -1181,7 +1181,7 @@
     <string name="not_a_valid_number">Неправильне число</string>
     <string name="post_karma">Карма за дописи:</string>
     <string name="comment_karma">Карма за коментарі:</string>
-    <string name="awarder_karma">Карма за надання нагород:</string>
+    <string name="awarder_karma">Карма за нагородження:</string>
     <string name="awardee_karma">Карма за отримання нагород:</string>
     <string name="comment_count_detail">%1$,d коментарів</string>
     <string name="user_2fa_token">Токен 2FA (якщо є)</string>
@@ -1217,7 +1217,7 @@
     <string name="active_users_number_detail">%1$,d активних користувачів</string>
     <string name="post_count_detail">%1$,d дописів</string>
     <string name="invalid_response">Неправильна відповідь від сервера</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Сховати карму обліківки</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Сховати карму облікового запису</string>
     <string name="settings_backup_settings_summary">Пароль для файлу резервної копії — 123321.</string>
     <string name="settings_easier_to_watch_in_full_screen_title">Простіше переглядати в повноекранному режимі</string>
     <string name="block_user">Заблокувати користувача</string>
@@ -1229,7 +1229,7 @@
     <string name="clear_user_flair_success">Личку користувача очищено</string>
     <string name="extra_small">Дуже малий</string>
     <string name="error_unsupported_audio">Медіа містить звукову доріжку, проте її неможливо відтворити на цьому пристрої</string>
-    <string name="invalid_link">Неправильна ланка</string>
+    <string name="invalid_link">Неправильне посилання</string>
     <string name="i_understand">Зрозуміло</string>
     <string name="user_password">Пароль</string>
     <string name="sort_time_12hours">12 годин</string>
@@ -1265,7 +1265,7 @@
     <string name="settings_show_post_and_comment_score">Показувати оцінки дописів і коментарів</string>
     <string name="instance_info">Про сервер</string>
     <string name="instance_url">URL сервера</string>
-    <string name="anonymous_account_instance">Сервер анонімної обліківки</string>
+    <string name="anonymous_account_instance">Сервер анонімного облікового запису</string>
     <string name="instance_url_hint">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
     <string name="moderators">Модератори</string>
     <string name="enable_random_adaptation">Увімкнути випадкову адаптацію</string>
@@ -1283,4 +1283,6 @@
     <string name="theme_name_dayfox">Dayfox</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
     <string name="theme_name_nightfox">Nightfox</string>
+    <string name="share_links_on_your_local_instance">Ділитися посиланнями на своєму локальному сервері</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Ділитися посиланнями на своєму локальному сервері, а не на оригінальному сервері створення.</string>
 </resources>
