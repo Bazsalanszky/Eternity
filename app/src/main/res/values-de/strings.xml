@@ -990,7 +990,7 @@
     <string name="settings_credits_love_animation_title">Liebes-Animation</string>
     <string name="settings_swipe_between_posts_title">Zwischen Beiträgen wischen</string>
     <string name="settings_navigation_drawer_title">Navigationsmenü</string>
-    <string name="settings_collapse_account_section_title">Sektion für Konten zusammenklappen</string>
+    <string name="settings_collapse_account_section_title">Accountbereich zuklappen</string>
     <string name="settings_collapse_post_section_title">Sektion für Beiträge zusammenklappen</string>
     <string name="settings_collapse_preferences_section_title">Sektion für Einstellungen zusammenklappen</string>
     <string name="settings_collapse_favorite_communities_section_title">Sektion für favorisierte Subreddits zusammenklappen</string>
@@ -1245,7 +1245,7 @@
     <string name="invalid_username_or_password">Falscher Nutzername/Passwort</string>
     <string name="action_block_user">Nutzer blockieren</string>
     <string name="active_users_number_detail">%1$,d Aktive Nutzer</string>
-    <string name="settings_backup_settings_summary">Das Password für die Backup-Datei ist \"123321\".</string>
+    <string name="settings_backup_settings_summary">Das Passwort der Backup Datei ist \"123321\".</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Verstecke Account Karma</string>
     <string name="block_user">Nutzer Blockieren</string>
     <string name="clear_user_flair">Flair Löschen</string>
