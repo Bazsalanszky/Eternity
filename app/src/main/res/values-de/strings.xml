@@ -1316,4 +1316,6 @@
     <string name="unexpected_intent_action">Unerwartete Aufruf Parameter: <xliff:g id="action">%1$s</xliff:g></string>
     <string name="theme_name_dayfox">Dayfox</string>
     <string name="handle_link">Link öffnen</string>
+    <string name="i_understand">Ich verstehe</string>
+    <string name="sample_list_load_error">Eine oder mehrere Beispiellisten konnten nicht geladen werden</string>
 </resources>
