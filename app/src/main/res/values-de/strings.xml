@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Anmelden</string>
     <string name="comment_activity_label">Kommentar senden</string>
     <string name="comment_activity_label_is_replying">Antworten</string>
@@ -10,7 +10,7 @@
     <string name="post_image_activity_label">Bild-Beitrag</string>
     <string name="post_video_activity_label">Video-Beitrag</string>
     <string name="rules_activity_label">Regeln</string>
-    <string name="search_community_activity_label">Subreddits</string>
+    <string name="search_community_activity_label">Communities</string>
     <string name="edit_post_activity_label">Beitrag bearbeiten</string>
     <string name="edit_comment_activity_label">Kommentar bearbeiten</string>
     <string name="view_message_activity_label">Posteingang</string>
@@ -37,7 +37,7 @@
     <string name="action_refresh">Aktualisieren</string>
     <string name="action_add_comment">Kommentar hinzufügen</string>
     <string name="action_save_post">Beitrag speichern</string>
-    <string name="action_view_crosspost_parent">Originalbeitrag crossposten</string>
+    <string name="action_view_crosspost_parent">Originalbeitrag ansehen</string>
     <string name="action_search">Suchen</string>
     <string name="action_start_lazy_mode">Lazy Mode starten</string>
     <string name="action_stop_lazy_mode">Lazy Mode stoppen</string>
@@ -47,9 +47,9 @@
     <string name="action_unhide_post">Beitrag wieder anzeigen</string>
     <string name="action_edit_post">Beitrag bearbeiten</string>
     <string name="action_delete_post">Beitrag löschen</string>
-    <string name="action_mark_nsfw">NSFW-Markierung setzen</string>
+    <string name="action_mark_nsfw">Als NSFW markieren</string>
     <string name="action_unmark_nsfw">NSFW-Markierung entfernen</string>
-    <string name="action_mark_spoiler">Spoiler-Markierung setzen</string>
+    <string name="action_mark_spoiler">Als Spoiler markieren</string>
     <string name="action_unmark_spoiler">Spoiler-Markierung entfernen</string>
     <string name="action_edit_flair">Flair bearbeiten</string>
     <string name="action_change_post_layout">Beitragslayout ändern</string>
@@ -62,11 +62,11 @@
     <string name="action_see_removed">Entfernten Beitrag ansehen</string>
     <string name="action_set_wallpaper">Als Hintergrundbild einstellen</string>
     <string name="action_send_private_message">Private Nachricht senden</string>
-    <string name="parse_json_response_error">Ein Fehler trat beim Abruf der JSON-Antwort auf</string>
+    <string name="parse_json_response_error">Beim Abruf der JSON-Antwort ist ein Fehler aufgetreten</string>
     <string name="retrieve_token_error">Fehler beim Abruf des Tokens</string>
     <string name="something_went_wrong">Etwas ist schiefgelaufen. Versuche es später erneut.</string>
     <string name="access_denied">Zugriff verweigert</string>
-    <string name="parse_user_info_error">Ein Fehler trat beim Abruf der Benutzerinformationen auf</string>
+    <string name="parse_user_info_error">Beim Abruf der Benutzerinformationen ist ein Fehler aufgetreten</string>
     <string name="no_system_webview_error">Fehler beim Öffnen des System-WebView</string>
     <string name="error_loading_image_tap_to_retry">Fehler beim Laden des Bildes. Tippen für Neuversuch.</string>
     <string name="load_posts_error">Fehler beim Laden der Beiträge.
@@ -74,13 +74,13 @@
     <string name="load_more_posts_error">Fehler beim Laden der Beiträge.</string>
     <string name="load_post_error">Fehler beim Laden des Beitrags.
 \nTippen für Neuversuch.</string>
-    <string name="search_communities_error">Fehler beim Suchen von Subreddits.
+    <string name="search_communities_error">Fehler beim Suchen von Communities.
 \nTippen für Neuversuch.</string>
     <string name="search_users_error">Fehler beim Suchen nach Benutzern.
 \nTippen für Neuversuch.</string>
     <string name="no_posts">Keine Beiträge gefunden</string>
     <string name="no_comments">Keine Kommentare gefunden</string>
-    <string name="no_communities">Keine Subreddits gefunden</string>
+    <string name="no_communities">Keine Communities gefunden</string>
     <string name="no_users">Keine Benutzer gefunden</string>
     <string name="no_multi_reddits">Keine Multicommunities gefunden</string>
     <string name="no_storage_permission">Keine Speicherberechtigung, um diese Datei zu speichern</string>
@@ -113,7 +113,7 @@
     <string name="settings">Einstellungen</string>
     <string name="subscribers_number_detail">%1$,d Abonnenten</string>
     <string name="online_subscribers_number_detail">Online: %1$d</string>
-    <string name="cannot_fetch_community_info">Kann Subredddit-Info nicht abrufen</string>
+    <string name="cannot_fetch_community_info">Kann Community-Info nicht abrufen</string>
     <string name="cannot_fetch_user_info">Kann Benutzer-Info nicht abrufen</string>
     <string name="cannot_fetch_sidebar">Kann Seitenleiste nicht abrufen</string>
     <string name="cannot_fetch_multireddit">Kann Multicommunity-Info nicht abrufen</string>
@@ -770,8 +770,7 @@
     <string name="default_font_font_preview">Standard</string>
     <string name="load_video_in_redgifs">Versuche Video von Redgifs zu laden</string>
     <string name="top_score">%1$s Punkte</string>
-    <string name="login_activity_2fa_prompt">Wenn du die Zwei-Faktor-Authentifizierung aktiviert hast, tippe dein Passwort wie folgt ein: &lt;passwort&gt;:&lt;2FA code&gt;.
-\nBeispiel: DeinPasswort:123456</string>
+    <string name="login_activity_2fa_prompt">Sofern du Zwei-Faktor-Authentifizierung aktiviert hast, trage den Code im Feld ein.</string>
     <string name="submit_crosspost_activity_label">Crossposten</string>
     <string name="give_award_activity_label">Auszeichnung verleihen</string>
     <string name="action_crosspost">Crossposten</string>
@@ -896,8 +895,8 @@
     <string name="search_users_result_activity_label">Benutzer</string>
     <string name="multireddit_selection_activity_label">Wähle eine Multicommunity</string>
     <string name="action_save_to_database">In der Datenbank speichern</string>
-    <string name="action_read_all_messages">Alle Nachrichten lesen</string>
-    <string name="action_add_to_multireddit">Zum Multicommunity hinzufügen</string>
+    <string name="action_read_all_messages">Alle Nachrichten als gelesen markieren</string>
+    <string name="action_add_to_multireddit">Zu Multicommunity hinzufügen</string>
     <string name="search_only_communities_hint">Subreddits durchsuchen</string>
     <string name="search_only_users_hint">Benutzer durchsuchen</string>
     <string name="post_type_gif">GIF</string>
@@ -1247,14 +1246,14 @@
     <string name="active_users_number_detail">%1$,d Aktive Nutzer</string>
     <string name="settings_backup_settings_summary">Das Passwort der Backup Datei ist \"123321\".</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Verstecke Account Karma</string>
-    <string name="block_user">Nutzer Blockieren</string>
+    <string name="block_user">Nutzer blockieren</string>
     <string name="clear_user_flair">Flair Löschen</string>
     <string name="clear_user_flair_success">Nutzer-Flair gelöscht</string>
     <string name="extra_small">Extra Klein</string>
     <string name="invalid_link">Ungültiger Link</string>
     <string name="error_unsupported_video">Media enthält Videospuren, aber keine davon sind mit diesem Gerät abspielbar</string>
-    <string name="exo_controls_volume_up_description">Lautstärke erhöhen</string>
-    <string name="exo_controls_volume_off_description">Lautstärke Aus</string>
+    <string name="exo_controls_volume_up_description">Lauter</string>
+    <string name="exo_controls_volume_off_description">Lautlos</string>
     <string name="url_cannot_be_null_or_empty">Die URL darf nicht leer oder ungültig sein</string>
     <string name="block_community_success">Community blockiert!</string>
     <string name="block_community_failed">Community konnte nicht blockiert werden</string>
@@ -1264,7 +1263,7 @@
     <string name="blocked_communities">Blockierte Communities</string>
     <string name="blocked_users">Blockierte Benutzer</string>
     <string name="action_unblock_user">Benutzer Freigeben</string>
-    <string name="post_count_detail">%1$,d Posts</string>
+    <string name="post_count_detail">%1$,d Beiträge</string>
     <string name="comment_count_detail">%1$,d Kommentare</string>
     <string name="invalid_regex">Ungültiges regex-Muster</string>
     <string name="load_more_posts_failed">Weitere Beiträge konnten nicht geladen werden.
@@ -1305,4 +1304,16 @@
     <string name="enable_random_adaptation">Zufallsanpassung einschalten</string>
     <string name="error_unsupported_audio">Media enthält Audiospuren, aber keine davon sind mit diesem Gerät abspielbar</string>
     <string name="storage_permission_denied">Die Berechtigung auf den Speicher wurde verweigert</string>
+    <string name="settings_comment_divider_type">Kommentartrenner-Typ</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="share_links_on_your_local_instance">Share Links führen zu Deiner lokalen Instanz</string>
+    <string name="use_circular_fab">Rundes FAB benutzen</string>
+    <string name="instance_url_hint">Die URL deiner bevorzugten Lemmy-Instanz, mit oder ohne das \"https://\" Präfix</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Share Links zeigen auf Deine lokale Instanz anstatt auf die Instanz des Posts.</string>
+    <string name="user_number_detail">%1$,d Benutzer</string>
+    <string name="community_number_detail">%1$,d Communities</string>
+    <string name="unexpected_intent_action">Unerwartete Aufruf Parameter: <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="handle_link">Link öffnen</string>
 </resources>
