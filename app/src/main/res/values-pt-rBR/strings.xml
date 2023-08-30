@@ -896,8 +896,8 @@
     <string name="title_excludes_regex_hint">Título: excluir expressão regular</string>
     <string name="exclude_communities_hint">Excluir comunidades (por exemplo, memes, AskLemmy)</string>
     <string name="exclude_users_hint">Excluir usuários (e.g. Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Excluir flairs (e.g. flair1,flair2)</string>
-    <string name="contain_flairs_hint">Contém flairs (e.g. flair1,flair2)</string>
+    <string name="exclude_flairs_hint">Excluir etiquetas (ex. etiqueta1,etiqueta2)</string>
+    <string name="contain_flairs_hint">Contém etiquetas (ex. etiqueta1,etiqueta2)</string>
     <string name="min_vote_hint">Voto Mínimo (-1: sem restrição)</string>
     <string name="max_vote_hint">Voto máximo (-1: sem restrição)</string>
     <string name="min_comments_hint">Comentários mínimos (-1: sem restrição)</string>
@@ -970,7 +970,7 @@
     <string name="restore_settings_partially_failed">Algumas configurações não foram restauradas. Reinicie o app para aplicar as mudanças.</string>
     <string name="restore_settings_failed_file_corrupted">Não foi possível restaurar as configurações. O arquivo pode estar corrompido.</string>
     <string name="restore_settings_failed_cannot_get_file">Não foi possível acessar o arquivo</string>
-    <string name="suicide_prevention_quote">Se você está procurando um sinal para não se matar é isto. ❤</string>
+    <string name="suicide_prevention_quote">Se você está procurando um sinal para não se matar, é isto. ❤</string>
     <string name="do_not_show_this_again">Não exibir novamente</string>
     <string name="continue_suicide_prevention_activity">Continuar</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">Erro ao buscar vídeo v.redd.it: Não foi possível obter o url de redirecionamento</string>
@@ -991,7 +991,7 @@
     <string name="exclude_community">Excluir esta comunidade</string>
     <string name="exclude_user">Excluir este usuário</string>
     <string name="exclude_flair">Excluir esta etiqueta</string>
-    <string name="contain_flair">Conter esta estiqueta</string>
+    <string name="contain_flair">Contém esta etiqueta</string>
     <string name="exclude_domain">Retirar este domínio</string>
     <string name="suggest_title">Sugerir Título</string>
     <string name="suggest_title_failed">Erro ao sugerir título</string>
@@ -1269,4 +1269,6 @@
     <string name="active_users_number_detail">%1$,d Usuários ativos</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Ocultar Karma da conta</string>
     <string name="denied_notification_permission">A permissão de notificação não foi concedida</string>
+    <string name="clear_user_flair_success">Etiqueta de usuário limpa</string>
+    <string name="clear_user_flair">Limpar etiqueta</string>
 </resources>
