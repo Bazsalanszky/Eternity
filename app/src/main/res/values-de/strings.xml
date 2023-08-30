@@ -1235,9 +1235,9 @@
     <string name="awarder_karma">Auszeichnungskarma:</string>
     <string name="awardee_karma">Ausgezeichnetenkarma:</string>
     <string name="anonymous_homepage_not_implemented">Anonyme Homepage ist noch nicht implementiert</string>
-    <string name="action_create_github_issue">Codeberg issue erstellen</string>
+    <string name="action_create_github_issue">Codeberg Issue erstellen</string>
     <string name="action_more_options">Erweiterte Optionen</string>
-    <string name="invalid_response">Ungültige antwort vom Server erhalten</string>
+    <string name="invalid_response">Ungültige Antwort vom Server erhalten</string>
     <string name="settings_hide_fab_in_post_feed">FAB im Post Feed verstecken</string>
     <string name="history_activity_label">Verlauf</string>
     <string name="history">Verlauf</string>
