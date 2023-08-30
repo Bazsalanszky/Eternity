@@ -10,22 +10,28 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
 
 <br>
 <div align="center">
-<img src="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/raw/branch/master/fastlane/metadata/android/en-US/images/icon.png" width=256>
+<img src="https://codeberg.org/Bazsalanszky/Eternity/raw/branch/master/fastlane/metadata/android/en-US/images/icon.png" width=256>
 
 [![status-badge](https://ci.codeberg.org/api/badges/12474/status.svg)](https://ci.codeberg.org/repos/12474)
 [![Liberapay patrons](https://img.shields.io/liberapay/patrons/bazsalanszky)](https://liberapay.com/Bazsalanszky)
 
-<a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues">Report a Bug</a>
+<a href="https://codeberg.org/Bazsalanszky/Eternity/issues">Report a Bug</a>
 
 </div>
 
 <div align="center">
+<a href="https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy">
+    <img src="./.assets/google-play-badge.png" height="80">
+</a>
 <a href="https://apt.izzysoft.de/fdroid/index/apk/eu.toldi.infinityforlemmy">
     <img src="./.assets/IzzyOnDroid.png" height="80">
 </a>
-<a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/releases/">
+<a href="https://codeberg.org/Bazsalanszky/Eternity/releases/">
     <img src="./.assets/codeberg.png" height="80">
 </a>
+
+
+
 </div>
 
 ---
@@ -66,19 +72,19 @@ Don't forget to give the project a star! Thanks again!
 
 ### Translation
 
-You can alos help Eternity by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/infinity-for-lemmy/app/)!
+You can alos help Eternity by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/Eternity/app/)!
 
-[![Translation](https://translate.codeberg.org/widgets/infinity-for-lemmy/-/app/multi-auto.svg)](https://translate.codeberg.org/engage/infinity-for-lemmy/)
+[![Translation](https://translate.codeberg.org/widgets/Eternity/-/app/multi-auto.svg)](https://translate.codeberg.org/engage/Eternity/)
 
 ### Reporting bugs
 
-You can also contribute by [reporting bugs](https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/issues)
+You can also contribute by [reporting bugs](https://codeberg.org/Bazsalanszky/Eternity/issues)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## License
 
-Distributed under the AGPL-3.0 License. See <a href="https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy/src/branch/master/LICENSE">LICENSE</a> for more information.
+Distributed under the AGPL-3.0 License. See <a href="https://codeberg.org/Bazsalanszky/Eternity/src/branch/master/LICENSE">LICENSE</a> for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -86,6 +92,6 @@ Distributed under the AGPL-3.0 License. See <a href="https://codeberg.org/Bazsal
 
 [@bazsalanszky@lemmy.toldi.eu](https://lemmy.toldi.eu/u/bazsalanszky) - (Owner)
 
-Project Link: [https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy](https://codeberg.org/Bazsalanszky/Infinity-For-Lemmy)
+Project Link: [https://codeberg.org/Bazsalanszky/Eternity](https://codeberg.org/Bazsalanszky/Eternity)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
