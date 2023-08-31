@@ -1217,4 +1217,5 @@
     <string name="comment_karma">Karma de la Comentarii:</string>
     <string name="awarder_karma">Karma pentru Acordarea Premiilor:</string>
     <string name="awardee_karma">Karma pentru Primirea Premiilor:</string>
+    <string name="action_block_user">Blochează Utilizator</string>
 </resources>
