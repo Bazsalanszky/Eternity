@@ -1292,4 +1292,5 @@
     <string name="active_users_number_detail">%1$,d активных пользователей</string>
     <string name="post_count_detail">%1$,d записей</string>
     <string name="comment_count_detail">%1$,d комментариев</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Скрыть карму аккаунта</string>
 </resources>
