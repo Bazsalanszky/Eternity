@@ -84,12 +84,10 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         if (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) {
             if (itemClickListener != null && !hasClearSelectionRow) {
                 if (position == 0) {
-                    return VIEW_TYPE_SUBREDDIT;
-                } else if (position == 1) {
                     return VIEW_TYPE_FAVORITE_SUBREDDIT_DIVIDER;
                 } else if (position == mFavoriteSubscribedSubredditData.size() + 1) {
                     return VIEW_TYPE_SUBREDDIT_DIVIDER;
-                } else if (position < mFavoriteSubscribedSubredditData.size() + 1) {
+                } else if (position <= mFavoriteSubscribedSubredditData.size()) {
                     return VIEW_TYPE_FAVORITE_SUBREDDIT;
                 } else {
                     return VIEW_TYPE_SUBREDDIT;
@@ -160,7 +158,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                                 mFavoriteSubscribedSubredditData.size() + 3 : 1;
                     } else {
                         offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                mFavoriteSubscribedSubredditData.size() + 3 : 1;
+                                mFavoriteSubscribedSubredditData.size() + 2 : 1;
                     }
                 } else {
                     offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
@@ -228,7 +226,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                 if (hasClearSelectionRow) {
                     offset = 2;
                 } else {
-                    offset = 2;
+                    offset = 1;
                 }
             } else {
                 offset = 1;
@@ -289,7 +287,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             if (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) {
                 if (itemClickListener != null) {
                     return mSubscribedSubredditData.size() > 0 ?
-                            mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 3 : 0;
+                            mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + ((hasClearSelectionRow) ? 3 : 2) : 0;
                 }
                 return mSubscribedSubredditData.size() > 0 ?
                         mFavoriteSubscribedSubredditData.size() + mSubscribedSubredditData.size() + 2 : 0;
@@ -349,7 +347,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                                     mFavoriteSubscribedSubredditData.size() + 3 : 0;
                         } else {
                             offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                    mFavoriteSubscribedSubredditData.size() + 3 : 0;
+                                    mFavoriteSubscribedSubredditData.size() + 2 : 0;
                         }
                     } else {
                         offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
@@ -364,7 +362,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                     if (hasClearSelectionRow) {
                         offset = 2;
                     } else {
-                        offset = 2;
+                        offset = 1;
                     }
                 } else {
                     offset = 1;
