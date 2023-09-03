@@ -1,14 +1,19 @@
 package eu.toldi.infinityforlemmy.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -40,6 +45,9 @@ import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
+import io.noties.markwon.MarkwonConfiguration;
+import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.core.MarkwonTheme;
 import io.noties.markwon.recycler.MarkwonAdapter;
 
 public class InstanceInfoActivity extends BaseActivity {
@@ -105,16 +113,43 @@ public class InstanceInfoActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
+
         // Remove transparency from navigation bar
         getWindow().setNavigationBarColor(mCustomThemeWrapper.getBackgroundColor());
 
         int markdownColor = customThemeWrapper.getPostContentColor();
         int postSpoilerBackgroundColor = markdownColor | 0xFF000000;
         int linkColor = customThemeWrapper.getLinkColor();
+
+
+        MarkwonPlugin miscPlugin = new AbstractMarkwonPlugin() {
+            @Override
+            public void beforeSetText(@NonNull TextView textView, @NonNull Spanned markdown) {
+                if (InstanceInfoActivity.this.contentTypeface != null) {
+                    textView.setTypeface(InstanceInfoActivity.this.contentTypeface);
+                }
+                textView.setTextColor(markdownColor);
+                textView.setHighlightColor(Color.TRANSPARENT);
+            }
+
+            @Override
+            public void configureConfiguration(@NonNull MarkwonConfiguration.Builder builder) {
+                builder.linkResolver((view, link) -> {
+                    Intent intent = new Intent(InstanceInfoActivity.this, LinkResolverActivity.class);
+                    Uri uri = Uri.parse(link);
+                    intent.setData(uri);
+                    InstanceInfoActivity.this.startActivity(intent);
+                });
+            }
+
+            @Override
+            public void configureTheme(@NonNull MarkwonTheme.Builder builder) {
+                builder.linkColor(linkColor);
+            }
+        };
+
         mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(this,
-                new AbstractMarkwonPlugin() {
-                }, markdownColor, postSpoilerBackgroundColor, null);
+                miscPlugin, markdownColor, postSpoilerBackgroundColor, null);
         mMarkwonAdapter = MarkdownUtils.createTablesAdapter();
         mContentMarkdownView.setAdapter(mMarkwonAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
