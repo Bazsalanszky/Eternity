@@ -10,9 +10,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
-import eu.toldi.infinityforlemmy.privatemessage.LemmyPrivateMessageAPI;
 import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
 import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
+import eu.toldi.infinityforlemmy.privatemessage.LemmyPrivateMessageAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
@@ -34,6 +34,19 @@ abstract class NetworkModule {
                 .build();
     }
 
+    @Provides
+    @Named("glide")
+    @Singleton
+    static OkHttpClient provideGlideOkHttp(@Named("base") OkHttpClient baseOkHttp) {
+        return baseOkHttp.newBuilder()
+                .addInterceptor(chain -> chain.proceed(
+                        chain.request()
+                                .newBuilder()
+                                .header("User-Agent", APIUtils.USER_AGENT)
+                                .build()
+                ))
+                .build();
+    }
 
     @Provides
     @Named("base")

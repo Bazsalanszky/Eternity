@@ -78,6 +78,7 @@ import eu.toldi.infinityforlemmy.font.TitleFontStyle;
 import eu.toldi.infinityforlemmy.services.DownloadMediaService;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import okhttp3.OkHttpClient;
 
 public class ViewImageOrGifActivity extends AppCompatActivity implements SetAsWallpaperCallback, CustomFontReceiver {
 
@@ -107,6 +108,9 @@ public class ViewImageOrGifActivity extends AppCompatActivity implements SetAsWa
     @Inject
     @Named("default")
     SharedPreferences mSharedPreferences;
+    @Inject
+    @Named("glide")
+    OkHttpClient okHttpClient;
     @Inject
     Executor mExecutor;
     private boolean isActionBarHidden = false;
@@ -146,7 +150,7 @@ public class ViewImageOrGifActivity extends AppCompatActivity implements SetAsWa
         getTheme().applyStyle(ContentFontFamily.valueOf(mSharedPreferences
                 .getString(SharedPreferencesUtils.CONTENT_FONT_FAMILY_KEY, ContentFontFamily.Default.name())).getResId(), true);
 
-        BigImageViewer.initialize(GlideImageLoader.with(this.getApplicationContext()));
+        BigImageViewer.initialize(GlideImageLoader.with(this.getApplicationContext(), okHttpClient));
 
         setContentView(R.layout.activity_view_image_or_gif);
 
