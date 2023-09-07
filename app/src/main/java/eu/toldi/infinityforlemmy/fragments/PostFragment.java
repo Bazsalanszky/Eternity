@@ -135,6 +135,7 @@ import eu.toldi.infinityforlemmy.events.ShowThumbnailOnTheRightInCompactLayoutEv
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.post.PostViewModel;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterUsage;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -222,6 +223,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
     ExoCreator mExoCreator;
     @Inject
     Executor mExecutor;
+    @Inject
+    PostEnricher postEnricher;
     private RequestManager mGlide;
     private BaseActivity activity;
     private LinearLayoutManagerBugFixed mLinearLayoutManager;
@@ -1221,30 +1224,36 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                     mRetrofit, accessToken,
                     accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, mPostHistorySharedPreferences, subredditName,
-                    query, trendingSource, postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
+                    query, trendingSource, postType, sortType, postFilter, readPosts, postEnricher))
+                    .get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_SUBREDDIT) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
-                    mPostHistorySharedPreferences, subredditName, postType, sortType, postFilter, readPosts))
+                    mPostHistorySharedPreferences, subredditName, postType, sortType, postFilter, readPosts,
+                    postEnricher))
                     .get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_MULTI_REDDIT) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
-                    mPostHistorySharedPreferences, multiRedditPath, postType, sortType, postFilter, readPosts))
+                    mPostHistorySharedPreferences, multiRedditPath, postType, sortType, postFilter, readPosts,
+                    postEnricher))
                     .get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_USER) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
-                    mPostHistorySharedPreferences, username, postType, sortType, postFilter, where, readPosts))
+                    mPostHistorySharedPreferences, username, postType, sortType, postFilter, where, readPosts,
+                    postEnricher))
                     .get(PostViewModel.class);
         } else {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, accessToken,
                     accountName, mSharedPreferences, mPostFeedScrolledPositionSharedPreferences,
-                    mPostHistorySharedPreferences, postType, sortType, postFilter, readPosts, subredditName)).get(PostViewModel.class);
+                    mPostHistorySharedPreferences, postType, sortType, postFilter, readPosts, subredditName,
+                    postEnricher))
+                    .get(PostViewModel.class);
         }
 
         bindPostViewModel();
@@ -1256,26 +1265,27 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, subredditName, query, trendingSource,
-                    postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
+                    postType, sortType, postFilter, readPosts, postEnricher)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_SUBREDDIT) {
             mPostViewModel = new ViewModelProvider(this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, subredditName, postType, sortType,
-                    postFilter, readPosts)).get(PostViewModel.class);
+                    postFilter, readPosts, postEnricher)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_MULTI_REDDIT) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, multiRedditPath,
-                    postType, sortType, postFilter, readPosts)).get(PostViewModel.class);
+                    postType, sortType, postFilter, readPosts, postEnricher)).get(PostViewModel.class);
         } else if (postType == PostPagingSource.TYPE_USER) {
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
                     mRetrofit, null, accountName, mSharedPreferences,
                     mPostFeedScrolledPositionSharedPreferences, null, username, postType, sortType, postFilter,
-                    where, readPosts)).get(PostViewModel.class);
+                    where, readPosts, postEnricher)).get(PostViewModel.class);
         } else {
             //Anonymous Front Page
             mPostViewModel = new ViewModelProvider(PostFragment.this, new PostViewModel.Factory(mExecutor,
-                    mRetrofit, mSharedPreferences, concatenatedSubredditNames, postType, sortType, postFilter, subredditName))
+                    mRetrofit, mSharedPreferences, concatenatedSubredditNames, postType, sortType, postFilter, subredditName,
+                    postEnricher))
                     .get(PostViewModel.class);
         }
 

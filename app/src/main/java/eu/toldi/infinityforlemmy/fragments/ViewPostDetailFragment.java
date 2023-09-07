@@ -112,6 +112,7 @@ import eu.toldi.infinityforlemmy.post.HidePost;
 import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
 import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
@@ -200,6 +201,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     MarkPostAsRead markPostAsRead;
     @Inject
     LemmyPostAPI mLemmyPostAPI;
+    @Inject
+    PostEnricher postEnricher;
     @State
     Post mPost;
     @State
@@ -1329,7 +1332,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         mSwipeRefreshLayout.setRefreshing(true);
         mGlide.clear(mFetchPostInfoImageView);
         FetchPost.fetchPost(mExecutor, new Handler(), mRetrofit.getRetrofit(), String.valueOf(subredditId), mAccessToken,
-                new FetchPost.FetchPostListener() {
+                postEnricher, new FetchPost.FetchPostListener() {
                     @Override
                     public void fetchPostSuccess(Post post) {
                         if (!isAdded()) {
@@ -1588,7 +1591,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 Retrofit retrofit = mRetrofit.getRetrofit();
 
                 FetchPost.fetchPost(mExecutor, new Handler(), retrofit, String.valueOf(mPost.getId()), mAccessToken,
-                        new FetchPost.FetchPostListener() {
+                        postEnricher, new FetchPost.FetchPostListener() {
                             @Override
                             public void fetchPostSuccess(Post post) {
                                 if (isAdded()) {

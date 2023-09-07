@@ -113,7 +113,7 @@ import eu.toldi.infinityforlemmy.settings.TranslationFragment;
 import eu.toldi.infinityforlemmy.settings.VideoPreferenceFragment;
 
 @Singleton
-@Component(modules = {AppModule.class, NetworkModule.class})
+@Component(modules = {AppModule.class, NetworkModule.class, PostEnricherModule.class})
 public interface AppComponent {
     void inject(MainActivity mainActivity);
 

@@ -108,6 +108,7 @@ import eu.toldi.infinityforlemmy.font.TitleFontFamily;
 import eu.toldi.infinityforlemmy.font.TitleFontStyle;
 import eu.toldi.infinityforlemmy.post.FetchPost;
 import eu.toldi.infinityforlemmy.post.Post;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.services.DownloadMediaService;
 import eu.toldi.infinityforlemmy.services.DownloadRedditVideoService;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -230,6 +231,9 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
 
     @Inject
     SimpleCache mSimpleCache;
+
+    @Inject
+    PostEnricher postEnricher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -787,7 +791,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                     int commentsIndex = segments.lastIndexOf("comments");
                     String postId = segments.get(commentsIndex + 1);
                     FetchPost.fetchPost(mExecutor, new Handler(), retrofit.getRetrofit(), postId, null,
-                            new FetchPost.FetchPostListener() {
+                            postEnricher, new FetchPost.FetchPostListener() {
                                 @Override
                                 public void fetchPostSuccess(Post post) {
                                     if (post.isGfycat()) {

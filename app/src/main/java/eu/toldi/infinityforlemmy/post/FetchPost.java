@@ -8,6 +8,7 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,7 +16,7 @@ import retrofit2.Retrofit;
 
 public class FetchPost {
     public static void fetchPost(Executor executor, Handler handler, Retrofit retrofit, String id, String accessToken,
-                                 FetchPostListener fetchPostListener) {
+                                 PostEnricher postEnricher, FetchPostListener fetchPostListener) {
         Call<String> postCall;
         // Use LemmyAPI.postInfo() instead of RedditAPI.getPost()
         postCall = retrofit.create(LemmyAPI.class).postInfo(Integer.parseInt(id), null, accessToken);
@@ -24,7 +25,7 @@ public class FetchPost {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
-                    ParsePost.parsePost(executor, handler, response.body(), new ParsePost.ParsePostListener() {
+                    ParsePost.parsePost(executor, handler, postEnricher, response.body(), new ParsePost.ParsePostListener() {
                         @Override
                         public void onParsePostSuccess(Post post) {
                             fetchPostListener.fetchPostSuccess(post);

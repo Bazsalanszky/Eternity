@@ -124,6 +124,7 @@ import eu.toldi.infinityforlemmy.events.ShowThumbnailOnTheRightInCompactLayoutEv
 import eu.toldi.infinityforlemmy.post.HistoryPostPagingSource;
 import eu.toldi.infinityforlemmy.post.HistoryPostViewModel;
 import eu.toldi.infinityforlemmy.post.Post;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilterUsage;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -195,6 +196,8 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
     ExoCreator mExoCreator;
     @Inject
     Executor mExecutor;
+    @Inject
+    PostEnricher postEnricher;
     private RequestManager mGlide;
     private BaseActivity activity;
     private LinearLayoutManagerBugFixed mLinearLayoutManager;
@@ -651,15 +654,10 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
     }
 
     private void initializeAndBindPostViewModel(String accessToken) {
-        if (postType == HistoryPostPagingSource.TYPE_READ_POSTS) {
-            mHistoryPostViewModel = new ViewModelProvider(HistoryPostFragment.this, new HistoryPostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
-                    accountName, mSharedPreferences, HistoryPostPagingSource.TYPE_READ_POSTS, postFilter)).get(HistoryPostViewModel.class);
-        } else {
-            mHistoryPostViewModel = new ViewModelProvider(HistoryPostFragment.this, new HistoryPostViewModel.Factory(mExecutor,
-                    accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
-                    accountName, mSharedPreferences, HistoryPostPagingSource.TYPE_READ_POSTS, postFilter)).get(HistoryPostViewModel.class);
-        }
+        mHistoryPostViewModel = new ViewModelProvider(HistoryPostFragment.this, new HistoryPostViewModel.Factory(mExecutor,
+                accessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit, mRedditDataRoomDatabase, accessToken,
+                accountName, mSharedPreferences, HistoryPostPagingSource.TYPE_READ_POSTS, postFilter, postEnricher))
+                .get(HistoryPostViewModel.class);
 
         bindPostViewModel();
     }

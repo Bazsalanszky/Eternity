@@ -81,6 +81,7 @@ import eu.toldi.infinityforlemmy.post.HistoryPostPagingSource;
 import eu.toldi.infinityforlemmy.post.ParsePost;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.readpost.ReadPost;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -151,6 +152,8 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     @Inject
     @Named("glide")
     OkHttpClient okHttpClient;
+    @Inject
+    PostEnricher postEnricher;
     @State
     ArrayList<Post> posts;
     @State
@@ -592,7 +595,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                     Response<String> response = call.execute();
                     if (response.isSuccessful()) {
                         String responseString = response.body();
-                        LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, readPostList);
+                        LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, readPostList, postEnricher);
                         if (newPosts == null) {
                             handler.post(() -> {
                                 loadingMorePostsStatus = LoadingMorePostsStatus.NO_MORE_POSTS;
@@ -674,7 +677,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                     Response<String> response = historyPosts.execute();
                     if (response.isSuccessful()) {
                         String responseString = response.body();
-                        LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, null);
+                        LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, null, postEnricher);
                         if (newPosts == null || newPosts.isEmpty()) {
                             handler.post(() -> {
                                 loadingMorePostsStatus = LoadingMorePostsStatus.NO_MORE_POSTS;

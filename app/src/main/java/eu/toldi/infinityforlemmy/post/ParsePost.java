@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import eu.toldi.infinityforlemmy.community.BasicCommunityInfo;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
@@ -45,7 +46,8 @@ import eu.toldi.infinityforlemmy.utils.Utils;
  */
 
 public class ParsePost {
-    public static LinkedHashSet<Post> parsePostsSync(String response, int nPosts, PostFilter postFilter, List<String> readPostList) {
+    public static LinkedHashSet<Post> parsePostsSync(String response, int nPosts, PostFilter postFilter,
+                                                     List<String> readPostList, PostEnricher postEnricher) {
         LinkedHashSet<Post> newPosts = new LinkedHashSet<>();
         try {
             JSONObject jsonResponse = new JSONObject(response);
@@ -80,6 +82,8 @@ public class ParsePost {
                 }
             }
 
+            postEnricher.enrich(newPosts);
+
             return newPosts;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -87,21 +91,9 @@ public class ParsePost {
         }
     }
 
-    public static String getLastItem(String response) {
-        try {
-            JSONObject object = new JSONObject(response).getJSONObject(JSONUtils.DATA_KEY);
-            return object.isNull(JSONUtils.AFTER_KEY) ? null : object.getString(JSONUtils.AFTER_KEY);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
-
-    public static void parsePost(Executor executor, Handler handler, String response, ParsePostListener parsePostListener) {
-        PostFilter postFilter = new PostFilter();
-        postFilter.allowNSFW = true;
-
+    public static void parsePost(Executor executor, Handler handler, PostEnricher postEnricher,
+                                 String response, ParsePostListener parsePostListener) {
         executor.execute(() -> {
             try {
                 JSONObject allData = new JSONObject(response).getJSONObject("post_view");
@@ -111,6 +103,7 @@ public class ParsePost {
                 }
 
                 Post post = parseBasicData(allData);
+                postEnricher.enrich(List.of(post));
                 handler.post(() -> parsePostListener.onParsePostSuccess(post));
             } catch (JSONException e) {
                 e.printStackTrace();

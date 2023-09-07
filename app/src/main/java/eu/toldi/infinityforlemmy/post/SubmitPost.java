@@ -15,6 +15,7 @@ import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.UploadImageUtils;
 import retrofit2.Call;
@@ -25,22 +26,24 @@ public class SubmitPost {
     public static void submitTextOrLinkPost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,
                                             int communityId, String title, String body, String url,
                                             Flair flair, boolean isSpoiler, boolean isNSFW,
-                                            boolean receivePostReplyNotifications, String kind,
+                                            boolean receivePostReplyNotifications, String kind, PostEnricher postEnricher,
                                             SubmitPostListener submitPostListener) {
         submitPost(executor, handler, oauthRetrofit, accessToken, communityId, title, body,
-                isNSFW, receivePostReplyNotifications, kind, url, submitPostListener);
+                isNSFW, receivePostReplyNotifications, kind, url, postEnricher, submitPostListener);
     }
 
     public static void submitImagePost(Executor executor, Handler handler, RetrofitHolder mRetrofit,
                                        String accessToken, int communityId, String title, String body, Bitmap image,
                                        Flair flair, boolean isSpoiler, boolean isNSFW,
-                                       boolean receivePostReplyNotifications, SubmitPostListener submitPostListener) {
+                                       boolean receivePostReplyNotifications, PostEnricher postEnricher,
+                                       SubmitPostListener submitPostListener) {
         try {
             String imageUrlOrError = UploadImageUtils.uploadImage(mRetrofit, accessToken, image);
             if (imageUrlOrError != null && !imageUrlOrError.startsWith("Error: ")) {
                 submitPost(executor, handler, mRetrofit.getRetrofit(), accessToken,
                         communityId, title, body, isNSFW,
-                        receivePostReplyNotifications, APIUtils.KIND_IMAGE, imageUrlOrError, submitPostListener);
+                        receivePostReplyNotifications, APIUtils.KIND_IMAGE, imageUrlOrError,
+                        postEnricher, submitPostListener);
             } else {
                 submitPostListener.submitFailed(imageUrlOrError);
             }
@@ -53,17 +56,18 @@ public class SubmitPost {
     public static void submitCrosspost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,
                                        int communityId, String title, String crosspostFullname,
                                        Flair flair, boolean isSpoiler, boolean isNSFW,
-                                       boolean receivePostReplyNotifications, String kind,
+                                       boolean receivePostReplyNotifications, String kind, PostEnricher postEnricher,
                                        SubmitPostListener submitPostListener) {
         submitPost(executor, handler, oauthRetrofit, accessToken, communityId, title, crosspostFullname,
-                isNSFW, receivePostReplyNotifications, kind, null, submitPostListener);
+                isNSFW, receivePostReplyNotifications, kind, null, postEnricher, submitPostListener);
     }
 
     private static void submitPost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,
                                    int communityId, String title, String content,
                                    boolean isNSFW,
                                    boolean receivePostReplyNotifications, String kind,
-                                   @Nullable String posterUrl, SubmitPostListener submitPostListener) {
+                                   @Nullable String posterUrl, PostEnricher postEnricher,
+                                   SubmitPostListener submitPostListener) {
         LemmyAPI api = oauthRetrofit.create(LemmyAPI.class);
 
 
@@ -73,7 +77,7 @@ public class SubmitPost {
             Response<String> response = submitPostCall.execute();
             if (response.isSuccessful()) {
                 getSubmittedPost(executor, handler, response.body(), kind, oauthRetrofit, accessToken,
-                        submitPostListener);
+                        postEnricher, submitPostListener);
             } else {
                 submitPostListener.submitFailed(response.message());
             }
@@ -84,10 +88,10 @@ public class SubmitPost {
     }
 
     private static void getSubmittedPost(Executor executor, Handler handler, String response, String kind,
-                                         Retrofit oauthRetrofit, String accessToken,
+                                         Retrofit oauthRetrofit, String accessToken, PostEnricher postEnricher,
                                          SubmitPostListener submitPostListener) throws JSONException, IOException {
 
-        ParsePost.parsePost(executor, handler, response, new ParsePost.ParsePostListener() {
+        ParsePost.parsePost(executor, handler, postEnricher, response, new ParsePost.ParsePostListener() {
             @Override
             public void onParsePostSuccess(Post post) {
                 submitPostListener.submitSuccessful(post);
