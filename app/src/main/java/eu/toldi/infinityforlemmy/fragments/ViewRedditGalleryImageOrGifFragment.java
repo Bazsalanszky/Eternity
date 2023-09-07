@@ -52,6 +52,7 @@ import java.io.File;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,6 +70,7 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.services.DownloadMediaService;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import okhttp3.OkHttpClient;
 
 public class ViewRedditGalleryImageOrGifFragment extends Fragment {
 
@@ -105,6 +107,9 @@ public class ViewRedditGalleryImageOrGifFragment extends Fragment {
     ImageView wallpaperImageView;
     @Inject
     Executor mExecutor;
+    @Inject
+    @Named("glide")
+    OkHttpClient okHttpClient;
 
     private ViewRedditGalleryActivity activity;
     private RequestManager glide;
@@ -122,7 +127,7 @@ public class ViewRedditGalleryImageOrGifFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        BigImageViewer.initialize(GlideImageLoader.with(activity.getApplicationContext()));
+        BigImageViewer.initialize(GlideImageLoader.with(activity.getApplicationContext(), okHttpClient));
 
         View rootView = inflater.inflate(R.layout.fragment_view_reddit_gallery_image_or_gif, container, false);
 

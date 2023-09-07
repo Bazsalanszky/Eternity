@@ -85,6 +85,7 @@ import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.readpost.ReadPost;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -147,6 +148,9 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+    @Inject
+    @Named("glide")
+    OkHttpClient okHttpClient;
     @State
     ArrayList<Post> posts;
     @State
@@ -195,7 +199,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
 
         super.onCreate(savedInstanceState);
 
-        BigImageViewer.initialize(GlideImageLoader.with(this.getApplicationContext()));
+        BigImageViewer.initialize(GlideImageLoader.with(this.getApplicationContext(), okHttpClient));
 
         setContentView(R.layout.activity_view_post_detail);
 
