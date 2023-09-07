@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
 import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
@@ -37,7 +38,8 @@ abstract class NetworkModule {
     @Provides
     @Named("glide")
     @Singleton
-    static OkHttpClient provideGlideOkHttp(@Named("base") OkHttpClient baseOkHttp) {
+    static OkHttpClient provideGlideOkHttp(@Named("base") OkHttpClient baseOkHttp,
+                                           @Named("RedgifsAccessTokenAuthenticator") Interceptor redGifsAuthenticator) {
         return baseOkHttp.newBuilder()
                 .addInterceptor(chain -> chain.proceed(
                         chain.request()
@@ -45,6 +47,7 @@ abstract class NetworkModule {
                                 .header("User-Agent", APIUtils.USER_AGENT)
                                 .build()
                 ))
+                .addInterceptor(redGifsAuthenticator)
                 .build();
     }
 
@@ -176,6 +179,12 @@ abstract class NetworkModule {
                 .baseUrl(APIUtils.REDGIFS_API_BASE_URI)
                 .client(okHttpClientBuilder.build())
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    static RedgifsAPI provideRedgifsAPI(@Named("redgifs") Retrofit redgifsRetrofit) {
+        return redgifsRetrofit.create(RedgifsAPI.class);
     }
 
     @Provides

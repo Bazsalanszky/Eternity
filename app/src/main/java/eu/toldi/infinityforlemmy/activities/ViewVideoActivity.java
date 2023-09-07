@@ -223,10 +223,6 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
     SharedPreferences mSharedPreferences;
 
     @Inject
-    @Named("current_account")
-    SharedPreferences mCurrentAccountSharedPreferences;
-
-    @Inject
     CustomThemeWrapper mCustomThemeWrapper;
 
     @Inject
@@ -756,8 +752,8 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                         }
                     });
         } else {
-            FetchGfycatOrRedgifsVideoLinks.fetchRedgifsVideoLinks(this, mExecutor, new Handler(), redgifsRetrofit,
-                    mCurrentAccountSharedPreferences, gfycatId, new FetchGfycatOrRedgifsVideoLinks.FetchGfycatOrRedgifsVideoLinksListener() {
+            FetchGfycatOrRedgifsVideoLinks.fetchRedgifsVideoLinks(mExecutor, new Handler(), redgifsRetrofit,
+                    gfycatId, new FetchGfycatOrRedgifsVideoLinks.FetchGfycatOrRedgifsVideoLinksListener() {
                         @Override
                         public void success(String webm, String mp4) {
                             progressBar.setVisibility(View.GONE);

@@ -178,9 +178,6 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
     @Named("default")
     SharedPreferences mSharedPreferences;
     @Inject
-    @Named("current_account")
-    SharedPreferences mCurrentAccountSharedPreferences;
-    @Inject
     @Named("post_layout")
     SharedPreferences mPostLayoutSharedPreferences;
     @Inject
@@ -383,7 +380,7 @@ public class HistoryPostFragment extends Fragment implements FragmentCommunicato
             mAdapter = new HistoryPostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit.getRetrofit(), mGfycatRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
-                    mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences,
+                    mSharedPreferences, mNsfwAndSpoilerSharedPreferences,
                     mExoCreator, new HistoryPostRecyclerViewAdapter.Callback() {
                 @Override
                 public void typeChipClicked(int filter) {
