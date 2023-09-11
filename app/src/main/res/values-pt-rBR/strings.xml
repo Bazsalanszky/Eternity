@@ -1271,4 +1271,5 @@
     <string name="denied_notification_permission">A permissão de notificação não foi concedida</string>
     <string name="clear_user_flair_success">Etiqueta de usuário limpa</string>
     <string name="clear_user_flair">Limpar etiqueta</string>
+    <string name="blocks">Bloqueios</string>
 </resources>
