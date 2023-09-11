@@ -188,7 +188,7 @@ public class ParsePost {
         boolean nsfw = post.getBoolean("nsfw");
         boolean locked = post.getBoolean("locked");
         boolean saved = data.getBoolean("saved");
-        String distinguished = (creator.getBoolean("admin") ? "admin" : "");
+        String distinguished = creator.optBoolean("admin") ? "admin" : "";
         String suggestedSort = "";
         ArrayList<Post.Preview> previews = new ArrayList<>();
         if (!post.isNull("thumbnail_url")) {

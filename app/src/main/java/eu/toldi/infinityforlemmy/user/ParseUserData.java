@@ -48,7 +48,7 @@ public class ParseUserData {
         boolean isBot = personJson.getBoolean("bot_account");
         boolean isBanned = personJson.getBoolean("banned");
         boolean isLocal = personJson.getBoolean("local");
-        boolean isAdmin = personJson.getBoolean("admin");
+        boolean isAdmin = personJson.optBoolean("admin");
         boolean isDeleted = personJson.getBoolean("deleted");
 
         String description = "";
