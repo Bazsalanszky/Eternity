@@ -24,10 +24,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="32dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="?attr/font_default"
         android:fontFamily="?attr/font_family"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/user_icon_gif_image_view_item_user_listing"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_instance_text_view_item_user_listing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:fontFamily="?attr/font_family"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="?attr/font_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/user_name_text_view_item_user_listing"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

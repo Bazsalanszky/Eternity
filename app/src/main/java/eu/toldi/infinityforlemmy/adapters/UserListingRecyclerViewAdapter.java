@@ -136,7 +136,9 @@ public class UserListingRecyclerViewAdapter extends PagedListAdapter<UserData, R
                             .into(((DataViewHolder) holder).iconGifImageView);
                 }
 
-                ((DataViewHolder) holder).userNameTextView.setText(userData.getName());
+                ((DataViewHolder) holder).userNameTextView.setText(userData.getTitle().equals("") ? userData.getName() : userData.getTitle());
+                String qualifiedName = LemmyUtils.actorID2FullName(userData.getActorId());
+                ((DataViewHolder) holder).userInstanceTextView.setText(qualifiedName.substring(qualifiedName.indexOf('@')));
 
                 if (!isMultiSelection) {
                     CheckIsFollowingUser.checkIsFollowingUser(executor, new Handler(), redditDataRoomDatabase,
@@ -237,6 +239,9 @@ public class UserListingRecyclerViewAdapter extends PagedListAdapter<UserData, R
         GifImageView iconGifImageView;
         @BindView(R.id.user_name_text_view_item_user_listing)
         TextView userNameTextView;
+
+        @BindView(R.id.user_instance_text_view_item_user_listing)
+        TextView userInstanceTextView;
         @BindView(R.id.subscribe_image_view_item_user_listing)
         ImageView subscribeButton;
         @BindView(R.id.checkbox__item_user_listing)
@@ -246,6 +251,7 @@ public class UserListingRecyclerViewAdapter extends PagedListAdapter<UserData, R
             super(itemView);
             ButterKnife.bind(this, itemView);
             userNameTextView.setTextColor(primaryTextColor);
+            userInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(primaryTextColor, 0.7f));
             subscribeButton.setColorFilter(unsubscribedColor, android.graphics.PorterDuff.Mode.SRC_IN);
 
             if (activity.typeface != null) {
