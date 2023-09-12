@@ -220,6 +220,9 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                         .into(((SubredditViewHolder) viewHolder).iconGifImageView);
             }
             ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(name);
+            if (fullname.contains("@")) {
+                ((SubredditViewHolder) viewHolder).communityInstanceTextView.setText(fullname.substring(fullname.indexOf("@")));
+            }
         } else if (viewHolder instanceof FavoriteSubredditViewHolder) {
             int offset;
             if (itemClickListener != null) {
@@ -233,6 +236,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             }
             SubscribedSubredditData communityData = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset);
             String name = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getName();
+            String fullname = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getQualified_name();
             String iconUrl = mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).getIconUrl();
 
             if (mFavoriteSubscribedSubredditData.get(viewHolder.getBindingAdapterPosition() - offset).isFavorite()) {
@@ -278,6 +282,9 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                         .into(((FavoriteSubredditViewHolder) viewHolder).iconGifImageView);
             }
             ((FavoriteSubredditViewHolder) viewHolder).subredditNameTextView.setText(name);
+            if (fullname.contains("@")) {
+                ((FavoriteSubredditViewHolder) viewHolder).communityInstanceTextView.setText(fullname.substring(fullname.indexOf("@")));
+            }
         }
     }
 
@@ -382,6 +389,9 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
+
+        @BindView(R.id.thing_instance_text_view_item_subscribed_thing)
+        TextView communityInstanceTextView;
         @BindView(R.id.favorite_image_view_item_subscribed_thing)
         ImageView favoriteImageView;
 
@@ -390,8 +400,10 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             ButterKnife.bind(this, itemView);
             if (mActivity.typeface != null) {
                 subredditNameTextView.setTypeface(mActivity.typeface);
+                communityInstanceTextView.setTypeface(mActivity.typeface);
             }
             subredditNameTextView.setTextColor(primaryTextColor);
+            communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(primaryTextColor, 0.7f));
         }
     }
 
@@ -400,6 +412,9 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
+
+        @BindView(R.id.thing_instance_text_view_item_subscribed_thing)
+        TextView communityInstanceTextView;
         @BindView(R.id.favorite_image_view_item_subscribed_thing)
         ImageView favoriteImageView;
 
@@ -409,8 +424,10 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             ButterKnife.bind(this, itemView);
             if (mActivity.typeface != null) {
                 subredditNameTextView.setTypeface(mActivity.typeface);
+                communityInstanceTextView.setTypeface(mActivity.typeface);
             }
             subredditNameTextView.setTextColor(primaryTextColor);
+            communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(primaryTextColor, 0.7f));
         }
     }
 

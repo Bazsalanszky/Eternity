@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -186,6 +187,10 @@ public class BlockedCommunitiesRecyclerViewAdapter extends RecyclerView.Adapter<
                         .into(((SubredditViewHolder) viewHolder).iconGifImageView);
             }
             ((SubredditViewHolder) viewHolder).subredditNameTextView.setText(name);
+            if (fullname.contains("@")) {
+                ((SubredditViewHolder) viewHolder).communityInstanceTextView.setText("@" + fullname.split(Pattern.quote("@"), 2)[1]);
+                ((SubredditViewHolder) viewHolder).communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(primaryTextColor, 0.7f));
+            }
         } else if (viewHolder instanceof FavoriteSubredditViewHolder) {
             int offset;
             if (itemClickListener != null) {
@@ -317,6 +322,9 @@ public class BlockedCommunitiesRecyclerViewAdapter extends RecyclerView.Adapter<
         GifImageView iconGifImageView;
         @BindView(R.id.thing_name_text_view_item_subscribed_thing)
         TextView subredditNameTextView;
+
+        @BindView(R.id.thing_instance_text_view_item_subscribed_thing)
+        TextView communityInstanceTextView;
 
         SubredditViewHolder(View itemView) {
             super(itemView);

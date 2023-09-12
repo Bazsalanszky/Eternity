@@ -141,7 +141,8 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
                             .into(((DataViewHolder) holder).iconGifImageView);
                 }
 
-                ((DataViewHolder) holder).subredditNameTextView.setText(subredditData.getName());
+                ((DataViewHolder) holder).subredditNameTextView.setText(subredditData.getTitle());
+                ((DataViewHolder) holder).communityInstanceTextView.setText('@' + LemmyUtils.actorID2FullName(subredditData.getActorId()).split("@")[1]);
                 ((DataViewHolder) holder).subscriberCountTextView.setText(activity.getString(R.string.subscribers_number_detail, subredditData.getNSubscribers()));
 
                 if (!isMultiSelection) {
@@ -262,6 +263,9 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
         GifImageView iconGifImageView;
         @BindView(R.id.subreddit_name_text_view_item_subreddit_listing)
         TextView subredditNameTextView;
+
+        @BindView(R.id.community_instance_text_view_item_subreddit_listing)
+        TextView communityInstanceTextView;
         @BindView(R.id.subscriber_count_text_view_item_subreddit_listing)
         TextView subscriberCountTextView;
         @BindView(R.id.subscribe_image_view_item_subreddit_listing)
@@ -273,6 +277,7 @@ public class SubredditListingRecyclerViewAdapter extends PagedListAdapter<Subred
             super(itemView);
             ButterKnife.bind(this, itemView);
             subredditNameTextView.setTextColor(primaryTextColor);
+            communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(primaryTextColor, 0.7f));
             subscriberCountTextView.setTextColor(secondaryTextColor);
             subscribeButton.setColorFilter(unsubscribed, android.graphics.PorterDuff.Mode.SRC_IN);
             if (isMultiSelection) {

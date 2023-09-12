@@ -20,14 +20,23 @@
 
     <TextView
         android:id="@+id/subreddit_name_text_view_item_subreddit_listing"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:fontFamily="?attr/font_family"
         android:textSize="?attr/font_default"
         app:layout_constraintStart_toEndOf="@+id/subreddit_icon_gif_image_view_item_subreddit_listing"
-        app:layout_constraintEnd_toStartOf="@id/barrier3"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/community_instance_text_view_item_subreddit_listing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="?attr/font_family"
+        android:textSize="?attr/font_default"
+        app:layout_constraintStart_toEndOf="@+id/subreddit_name_text_view_item_subreddit_listing"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/subscriber_count_text_view_item_subreddit_listing"
