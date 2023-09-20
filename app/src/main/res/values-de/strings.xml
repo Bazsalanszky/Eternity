@@ -5,7 +5,7 @@
     <string name="comment_activity_label_is_replying">Antworten</string>
     <!-- Ja wür ich auch sagen -->
     <string name="post_text_activity_label">Text-Beitrag</string>
-    <string name="community_selection_activity_label">Wähle ein Subreddit</string>
+    <string name="community_selection_activity_label">Wähle eine Community</string>
     <string name="post_link_activity_label">Link-Beitrag</string>
     <string name="post_image_activity_label">Bild-Beitrag</string>
     <string name="post_video_activity_label">Video-Beitrag</string>
@@ -60,7 +60,7 @@
     <string name="action_preview">Vorschau</string>
     <string name="action_report">Melden</string>
     <string name="action_see_removed">Entfernten Beitrag ansehen</string>
-    <string name="action_set_wallpaper">Als Hintergrundbild einstellen</string>
+    <string name="action_set_wallpaper">Als Hintergrundbild benutzen</string>
     <string name="action_send_private_message">Private Nachricht senden</string>
     <string name="parse_json_response_error">Beim Abruf der JSON-Antwort ist ein Fehler aufgetreten</string>
     <string name="retrieve_token_error">Fehler beim Abruf des Tokens</string>
@@ -111,7 +111,7 @@
     <string name="saved">Gespeichert</string>
     <string name="gilded">Vergoldet</string>
     <string name="settings">Einstellungen</string>
-    <string name="subscribers_number_detail">%1$,d Abonnenten</string>
+    <string name="subscribers_number_detail">%1$d Abonnenten</string>
     <string name="online_subscribers_number_detail">Online: %1$d</string>
     <string name="cannot_fetch_community_info">Kann Community-Info nicht abrufen</string>
     <string name="cannot_fetch_user_info">Kann Benutzer-Info nicht abrufen</string>
@@ -129,7 +129,7 @@
     <string name="follow_failed">Folgen fehlgeschlagen</string>
     <string name="unfollowed">Entfolgt</string>
     <string name="unfollow_failed">Entfolgen fehlgeschlagen</string>
-    <string name="content_description_banner_imageview">Subreddit Banner-Bild</string>
+    <string name="content_description_banner_imageview">Community-Banner</string>
     <string name="app_label">Infinity</string>
     <string name="search_hint">Alles durchsuchen</string>
     <string name="no_posts_no_lazy_mode">Keine Beiträge verfügbar</string>
@@ -151,7 +151,7 @@
     <string name="sending_message">Sende</string>
     <string name="send_message_success">Nachricht gesendet</string>
     <string name="send_message_failed">Nachricht konnte nicht gesendet werden</string>
-    <string name="select_a_community">Bitte wähle zuerst ein Subreddit aus</string>
+    <string name="select_a_community">Bitte wähle zuerst eine Community aus</string>
     <!-- Fuzzy -->
     <string name="title_required">Der Beitrag braucht einen guten Titel</string>
     <string name="link_required">Hey, wo ist der Link\?</string>
@@ -460,7 +460,7 @@
     <string name="error_getting_multi_reddit_data">Fehler beim Abrufen der Multicommunity-Daten</string>
     <string name="error_loading_multi_reddit_list">Kann Multicommunities nicht synchronisieren</string>
     <string name="error_loading_subscriptions">Kann Abonnements nicht synchronisieren</string>
-    <string name="share_this_app">Probier Eternity aus, ein fantastischer Lemmy Client!
+    <string name="share_this_app">Probier Eternity aus, ein fantastischer Lemmy-Client!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Fehler beim Abrufen des Subreddit-Namens</string>
     <string name="share_post_link">Beitrags-Link teilen</string>
@@ -818,8 +818,8 @@
     <string name="settings_data_saving_mode">Datensparmodus</string>
     <!-- Fuzzy -->
     <string name="settings_data_saving_mode_info_summary">Im Datensparmodus:
-\nVorschaubilder haben eine geringere Auflösung.
-\nLemmy-Videos haben eine geringere Auflösung.
+\nHaben Vorschaubilder eine geringere Auflösung.
+\nHaben Lemmy-Videos eine geringere Auflösung.
 \nAutomatisches Abspielen von Videos ist deaktiviert.</string>
     <string name="settings_translation_title">Übersetzung</string>
     <string name="settings_translation_summary">Übersetze diese App auf POEditor. Danke an alle Beitragenden.</string>
@@ -1244,7 +1244,7 @@
     <string name="invalid_username_or_password">Falscher Nutzername/Passwort</string>
     <string name="action_block_user">Nutzer blockieren</string>
     <string name="active_users_number_detail">%1$,d Aktive Nutzer</string>
-    <string name="settings_backup_settings_summary">Das Passwort der Backup Datei ist \"123321\".</string>
+    <string name="settings_backup_settings_summary">Das Passwort für die Sicherungsdatei ist \"123321\"</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Verstecke Account Karma</string>
     <string name="block_user">Nutzer blockieren</string>
     <string name="clear_user_flair">Flair Löschen</string>
@@ -1322,7 +1322,12 @@
     <string name="settings_hide_community_and_user_instance">Community- und Nutzerinstanz verbergen</string>
     <string name="unblock_user_failed">Aufheben des Blocks fehlgeschlagen</string>
     <string name="send_report">Bericht senden</string>
-    <string name="settings_show_display_name_instead_of_user_name">Community- und Nutzeranzeigename verbergen</string>
-    <string name="settings_category_community_and_user_pages_title">Community- und Nutzerlisten</string>
+    <string name="settings_show_display_name_instead_of_user_name">Community- und Nutzeranzeigenamen zeigen</string>
+    <string name="settings_category_community_and_user_pages_title">Community- und Nutzerseiten</string>
     <string name="unblock_user_success">Block aufgehoben</string>
+    <string name="settings_show_statistics">Statistiken einblenden</string>
+    <string name="moderators">Moderatoren</string>
+    <string name="settings_show_post_and_comment_score">Beitrags- und Kommentarpunktzahlen einblenden</string>
+    <string name="admins">Administratoren</string>
+    <string name="settings_hide_user_instance">Benutzerinstanz verbergen</string>
 </resources>
