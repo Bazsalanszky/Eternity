@@ -1304,7 +1304,7 @@
     <string name="enable_random_adaptation">Zufallsanpassung einschalten</string>
     <string name="error_unsupported_audio">Media enthält Audiospuren, aber keine davon sind mit diesem Gerät abspielbar</string>
     <string name="storage_permission_denied">Die Berechtigung auf den Speicher wurde verweigert</string>
-    <string name="settings_comment_divider_type">Kommentartrenner-Typ</string>
+    <string name="settings_comment_divider_type">Kommentartrennungstyp</string>
     <string name="theme_name_nightfox">Nightfox</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
     <string name="share_links_on_your_local_instance">Share Links führen zu Deiner lokalen Instanz</string>
