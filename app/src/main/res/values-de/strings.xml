@@ -1238,7 +1238,7 @@
     <string name="action_create_github_issue">Codeberg Issue erstellen</string>
     <string name="action_more_options">Erweiterte Optionen</string>
     <string name="invalid_response">Ungültige Antwort vom Server erhalten</string>
-    <string name="settings_hide_fab_in_post_feed">FAB im Post Feed verstecken</string>
+    <string name="settings_hide_fab_in_post_feed">FAB im Beitragsfeed verstecken</string>
     <string name="history_activity_label">Verlauf</string>
     <string name="history">Verlauf</string>
     <string name="invalid_username_or_password">Falscher Nutzername/Passwort</string>
@@ -1330,4 +1330,5 @@
     <string name="settings_show_post_and_comment_score">Beitrags- und Kommentarpunktzahlen einblenden</string>
     <string name="admins">Administratoren</string>
     <string name="settings_hide_user_instance">Benutzerinstanz verbergen</string>
+    <string name="anonymous_account_instance">Instanz für anonyme Benutzung</string>
 </resources>
