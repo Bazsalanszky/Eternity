@@ -614,4 +614,30 @@
     <string name="notification_summary_message">Uusi viesti</string>
     <string name="multireddit_selection_activity_label">Valitse moniyhteisö</string>
     <string name="sort_time_3months">3 kuukautta</string>
+    <string name="view_all_comments">Napsauta tästä selataksesi kaikkia kommentteja</string>
+    <string name="settings_enable_bottom_app_bar_title">Käytä alaosan navigaatiota</string>
+    <string name="settings_category_post_and_comment_title">Viesti ja kommentti</string>
+    <string name="settings_vote_buttons_on_the_right_title">Äänestyspainikkeet oikealla</string>
+    <string name="settings_confirm_to_exit">Vahvista lopetus</string>
+    <string name="settings_main_page_back_button_action">Takaisin-painikkeen toiminta pääsivulla</string>
+    <string name="settings_fully_collapse_comment_title">Laajenna kommentti täysin</string>
+    <string name="settings_show_absolute_number_of_votes_title">Näytä äänten absoluuttinen määrä</string>
+    <string name="settings_category_post_title">Viesti</string>
+    <string name="settings_show_thumbnail_on_the_left_in_compact_layout">Näytä pikkukuva vasemmalla</string>
+    <string name="settings_number_of_columns_in_post_feed_title">Sarakkeiden määrä viestisyötteessä</string>
+    <string name="settings_number_of_columns_in_post_feed_portrait_title">Pystysuunta</string>
+    <string name="settings_number_of_columns_in_post_feed_landscape_title">Vaakasuunta</string>
+    <string name="settings_swipe_to_go_back_title">Pyyhkäise oikealle siirtyäksesi takaisin</string>
+    <string name="load_comments_failed">Virhe ladatessa kommentteja.
+\nNapauta yrittääksesi uudelleen.</string>
+    <string name="error_processing_video">Virhe videota käsiteltäessä</string>
+    <string name="error_processing_image">Virhe kuvaa käsiteltäessä</string>
+    <string name="error_loading_rules">Virhe ladatessa sääntöjä.
+\nNapauta yrittääksesi uudelleen.</string>
+    <string name="archived_post_comment_unavailable">Arkistoitu viesti. Kommentointi ei saatavilla.</string>
+    <string name="archived_post_reply_unavailable">Arkistoitu viesti. Vastaus ei saatavilla.</string>
+    <string name="locked_post_comment_unavailable">Lukittu viesti. Kommentointi ei saatavilla.</string>
+    <string name="locked_post_reply_unavailable">Lukittu viesti. Vastaus ei saatavilla.</string>
+    <string name="load_messages_failed">Virhe ladatessa viestejä.
+\nNapauta yrittääksesi uudelleen.</string>
 </resources>
