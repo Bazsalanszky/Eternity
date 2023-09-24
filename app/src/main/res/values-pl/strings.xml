@@ -104,7 +104,7 @@
     <string name="saved">Zapisane</string>
     <string name="gilded">Nagrodzone</string>
     <string name="settings">Ustawienia</string>
-    <string name="subscribers_number_detail">Subskrybenci: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d subskrybujących</string>
     <string name="online_subscribers_number_detail">Online: %1$d</string>
     <string name="cannot_fetch_community_info">Nie można pobrać informacji o subreddicie</string>
     <string name="cannot_fetch_user_info">Nie można pobrać informacji o użytkowniku</string>
@@ -377,7 +377,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Udostępnij</string>
     <string name="settings_share_summary">Udostępnij tą aplikację, jeśli ci się ona podoba</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Wersja %s</string>
     <string name="settings_category_customization_title">Personalizacja</string>
     <string name="settings_customize_light_theme_title">Jasny motyw</string>
@@ -1132,4 +1132,23 @@
 \n</string>
     <string name="unblock_community_success">Społeczność została odblokowana!</string>
     <string name="action_create_github_issue">Stwórz zgłoszenie na Codeberg</string>
+    <string name="invalid_username_or_password">Niepoprawna nazwa użytkownika lub hasło</string>
+    <string name="settings_collapse_account_section_title">Zwiń sekcję konta</string>
+    <string name="community_number_detail">%1$,d społeczności</string>
+    <string name="settings_collapse_preferences_section_title">Zwiń sekcję preferencji</string>
+    <string name="settings_collapse_reddit_section_title">Zwiń sekcję Lemmy</string>
+    <string name="invalid_response">Nieprawidłowa odpowiedź serwera</string>
+    <string name="user_number_detail">%1$,d użytkowników</string>
+    <string name="settings_save_nsfw_media_in_different_folder_title">Zapisuj treści NSFW w innej lokacji</string>
+    <string name="anonymous_homepage_not_implemented">Anonimowe strony główne nie są jeszcze zaimplementowane</string>
+    <string name="settings_enable_material_you_warning_summary">Upewnij się, że żaden z motywów nie jest nazwany
+\n\"Material You\",
+\n\"Material You Dark\" lub
+\n\"Material You Amoled\".
+\nW przeciwnym wypadku, zmień nazwę tego motywu przed włączeniem Material You.</string>
+    <string name="settings_collapse_post_section_title">Zwiń sekcję wpisu</string>
+    <string name="settings_backup_settings_summary">Hasło do pliku kopii zapasowej to \"123321\".</string>
+    <string name="active_users_number_detail">%1$,d aktywnych użytkowników</string>
+    <string name="post_count_detail">%1$,d wpisów</string>
+    <string name="comment_count_detail">%1$,d komentarzy</string>
 </resources>
