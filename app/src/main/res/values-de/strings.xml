@@ -1331,4 +1331,10 @@
     <string name="admins">Administratoren</string>
     <string name="settings_hide_user_instance">Benutzerinstanz verbergen</string>
     <string name="anonymous_account_instance">Instanz für anonyme Benutzung</string>
+    <string name="blocks">Blöcke</string>
+    <string name="reddit_api_info">Ab dem 1. Juli 2023 wird die Reddit-API für Drittanbieter-Clients, zu denen auch Infinity for Reddit gehört, nutzungsabhängig sein. Die Ankündigung von Reddit finden Sie hier: %1$s
+\n
+\nUm diese Änderung zu überstehen, wird Infinity ab dem 1. Juli zu einer reinen Abonnement-App. Weitere Informationen zu den Änderungen finden Sie in diesem Beitrag: %2$s
+\n
+\nSie müssen Infinity nach dem 1. Juli aktualisieren, damit Sie die neue Version mit Abonnementoptionen erhalten. Keine der vorherigen Versionen (einschließlich dieser) wird nach dem 1. Juli funktionieren. Aufgrund des engen Zeitrahmens von Reddit ist das Update jedoch möglicherweise nicht sofort am 1. Juli verfügbar, da es ordnungsgemäßer Tests bedarf. Danke für Ihr Verständnis!</string>
 </resources>
