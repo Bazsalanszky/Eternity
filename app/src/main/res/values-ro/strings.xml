@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Autentificare</string>
     <string name="comment_activity_label">Trimite Comentariu</string>
     <string name="comment_activity_label_is_replying">Răspunde</string>
@@ -109,7 +109,7 @@
     <string name="since">Din:</string>
     <string name="profile">Profil</string>
     <string name="subscriptions">Abonamente</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">Multicomunitate</string>
     <string name="inbox">Mesaje</string>
     <string name="upvoted">Susvotat</string>
     <string name="downvoted">Josvotat</string>
@@ -118,7 +118,7 @@
     <string name="gilded">Premiat</string>
     <string name="settings">Setări</string>
     <!-- Fuzzy -->
-    <string name="subscribers_number_detail">Abonați: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d Abonați</string>
     <!-- Fuzzy -->
     <string name="online_subscribers_number_detail">Online: %1$d</string>
     <string name="cannot_fetch_community_info">Nu s-au găsit informații despre subreddit</string>
@@ -393,7 +393,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Distribuie</string>
     <string name="settings_share_summary">Distribuie această aplicație altor persoane dacă îți place</string>
-    <string name="settings_version_title">Infinit Pentru Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Versiunea %s</string>
     <string name="settings_category_customization_title">Personalizare</string>
     <string name="settings_customize_light_theme_title">Temă Luminoasă</string>
@@ -460,7 +460,7 @@
     <string name="error_getting_multi_reddit_data">Eroare la obținerea datelor multireddit</string>
     <string name="error_loading_multi_reddit_list">Nu s-a putut sincroniza multireddit-urile</string>
     <string name="error_loading_subscriptions">Nu s-a putut sincroniza abonamentele</string>
-    <string name="share_this_app">Aruncă o privire la Infinit Pentru Reddit, un client Reddit grozav!
+    <string name="share_this_app">Aruncați o privire la Eternity, un client Lemmy grozav!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Eroare la obținerea numelui subreddit-ului</string>
     <string name="share_post_link">Distribuie Link-ul Postării</string>
@@ -705,7 +705,7 @@
     <string name="delete_all_front_page_scrolled_positions_success">Toate pozițiile de derulare în pagina principală au fost șterse cu succes</string>
     <string name="reset_all_settings_success">Au fost resetate cu succes toate setările</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">r/Infinity_For_Reddit</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Text Primar</string>
     <string name="secondary_text_preview">Text Secundar</string>
     <string name="post_title_preview">Aceasta este o postare</string>
@@ -879,7 +879,7 @@
     <string name="multireddit_selection_activity_label">Selectează un Multireddit</string>
     <string name="action_save_to_database">Salvează în Baza de Date</string>
     <string name="action_read_all_messages">Citește Toate Mesajele</string>
-    <string name="action_add_to_multireddit">Adaugă la Multireddit</string>
+    <string name="action_add_to_multireddit">Adaugă la Multicomunitate</string>
     <string name="search_only_communities_hint">Caută subreddit-uri</string>
     <string name="search_only_users_hint">Caută utilizatori</string>
     <string name="post_type_gif">Gif</string>
@@ -951,7 +951,7 @@
     <string name="settings_click_to_show_media_in_gallery_layout">Apăsă pentru a Afișa Fișierele Media din Galerie</string>
     <string name="settings_hide_post_type">Ascunde Tipul de Postare</string>
     <string name="settings_hide_the_number_of_awards">Ascunde Numărul de Premii</string>
-    <string name="settings_hide_community_and_user_prefix">"Ascunde  Prefixul Subreddit-urilor și Utilizatorilor"</string>
+    <string name="settings_hide_community_and_user_prefix">Ascundeți prefixul comunităților și al utilizatorilor</string>
     <string name="settings_hide_the_number_of_votes">Ascunde Numărul de Voturi</string>
     <string name="settings_hide_the_number_of_comments">Ascunde Numărul de Comentarii</string>
     <string name="post_layout_gallery">Aspectul Galeriei</string>
@@ -1218,4 +1218,106 @@
     <string name="awarder_karma">Karma pentru Acordarea Premiilor:</string>
     <string name="awardee_karma">Karma pentru Primirea Premiilor:</string>
     <string name="action_block_user">Blochează Utilizator</string>
+    <string name="user_2fa_token">Jeton 2FA (dacă e necesar)</string>
+    <string name="username_cannot_be_empty">Câmpul numelui de utilizator nu poate fi lăsat liber.</string>
+    <string name="clear_user_flair_success">Flair utilizator curățat</string>
+    <string name="mark_post_as_read_failed">Eșec la marcarea postării ca citită</string>
+    <string name="handle_link">Gestionare Link</string>
+    <string name="invalid_username_or_password">Nume de utilizator sau parolă incorectă</string>
+    <string name="block_user_success">Blocat</string>
+    <string name="moderators">Moderatori</string>
+    <string name="anonymous_account_instance">Instanță Cont Anonim</string>
+    <string name="exo_controls_volume_off_description">Volum Oprit</string>
+    <string name="reddit_api_info">Începând din 1 Iulie, 2023, API-ul Reddit va fi plătit-per-utilizare pentru aplicațiile terțe, care includ și Infinity for Reddit. Anunțul de la Reddit poate fi găsit aici: %1$s
+\n
+\nPentru a supraviețui această modificare, Infinity va deveni o aplicație pe abonament după 1 Iulie. Puteți citi mai multe despre aceste modificări în această postare: %2$s
+\n
+\nEste necesar pentru dumneavoastră să actualizați Infinity după 1 Iulie pentru a primi noua versiune cu opțiunile pentru abonament. Niciuna din versiunile anterioare (inclusiv aceasta) nu vor funcționa după 1 Iulie. Dar deoarece programul dat de Reddit este strâns, este posibil ca actualizarea să nu fie valabilă imediat după 1 Iulie deoarece necesită testare adecvată. Mulțumesc pentru înțelegere!</string>
+    <string name="user_username">Nume de utilizator</string>
+    <string name="settings_comment_divider_type">Tip Divizor Comentarii</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Ascundeți Karma de la Cont</string>
+    <string name="sample_list_load_error">Una sau mai multe liste eșantion nu au putut fi încărcate</string>
+    <string name="storage_permission_denied">Permisiunea pentru accesarea memoriei a fost refuzată</string>
+    <string name="denied_notification_permission">Permisiunea pentru notificări nu este acordată</string>
+    <string name="community_number_detail">%1$,d Comunități</string>
+    <string name="block_user">Blocați Utilizator</string>
+    <string name="not_implemented">Funcționalitatea nu a fost încă implementată :(</string>
+    <string name="mentions">Mențiuni</string>
+    <string name="url_cannot_be_null_or_empty">URL nu poate fi nul sau liber</string>
+    <string name="block_user_failed">Eroare la blocarea utilizatorului</string>
+    <string name="block_community">Blocați Comunitate
+\n</string>
+    <string name="report_post">Raportați postare</string>
+    <string name="action_more_options">Mai multe opțiuni</string>
+    <string name="blocked_communities">Comunități blocate</string>
+    <string name="unblock_community_failed">Eșec la deblocarea comunității</string>
+    <string name="clear_user_flair">Curățați Flair</string>
+    <string name="instance_url_hint">URL pentru instanța preferată de Lemmy cu sau fără prefixul https://</string>
+    <string name="sort_time_12hours">12 Ore</string>
+    <string name="settings_hide_community_and_user_instance">Ascundeți comunitate și instanță utilizator</string>
+    <string name="load_more_posts_failed">Eșec la încărcarea a mai multor postări.
+\nApăsați pentru a reîncerca.</string>
+    <string name="invalid_response">Răspuns invalid de la server</string>
+    <string name="upload_image">Încărcați o imagine</string>
+    <string name="invalid_regex">Model regex invalid</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="reddit_api_info_title">Aviz important privind modificările API-ului Reddit</string>
+    <string name="could_not_resolve_link">URL nu a putut fi rezolvat :(</string>
+    <string name="settings_hide_fab_in_post_feed">Ascundeți FAB în fluxul de postări</string>
+    <string name="i_understand">Înțeleg</string>
+    <string name="extra_small">Extra Mic</string>
+    <string name="admins">Admini</string>
+    <string name="unblock_user_failed">Eșec la deblocarea utilizatorului</string>
+    <string name="action_create_github_issue">Creați problemă Codeberg</string>
+    <string name="password_cannot_be_empty">Câmpul parolei nu poate fi lăsat liber.</string>
+    <string name="settings_show_statistics">Afișați statistici</string>
+    <string name="user_login">Logare</string>
+    <string name="user_number_detail">%1$,d Utilizatori</string>
+    <string name="settings_show_post_and_comment_score">Afișați scorurile postărilor și comentariilor</string>
+    <string name="image_index_in_gallery">%1$d/%2$d</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">Mai ușor de văzut în ecran complet</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="send_report">Trimiteți raport</string>
+    <string name="history_activity_label">Istoric</string>
+    <string name="sort_time_9months">9 Luni</string>
+    <string name="no_more_posts">Nu mai sunt postări</string>
+    <string name="sort_time_6months">6 Luni</string>
+    <string name="sort_time_6hours">6 Ore</string>
+    <string name="unexpected_intent_action">Acțiune de intenție neașteptată: <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="invalid_link">Link invalid</string>
+    <string name="block_community_success">Comunitate blocată!</string>
+    <string name="enable_random_adaptation">Activați adaptarea aleatorie</string>
+    <string name="separate_down_and_up_votes">Voturi separate pentru Jos și Sus</string>
+    <string name="history">Istoric</string>
+    <string name="anonymous_homepage_not_implemented">Pagina anonimă de acasă nu este încă implementată</string>
+    <string name="share_links_on_your_local_instance">Partajați link-uri pe instanța dvs. locală</string>
+    <string name="error_unsupported_video">Media include piste video, dar niciuna nu pot fi redată de acest dispozitiv</string>
+    <string name="settings_show_display_name_instead_of_user_name">Afișați comunitate și numele afișat de utilizator</string>
+    <string name="instance_cannot_be_empty">Câmpul instanței nu poate fi lăsat liber.</string>
+    <string name="exo_controls_volume_up_description">Volum Înalt</string>
+    <string name="block_community_failed">Eșec la blocarea comunității</string>
+    <string name="unblock_community">Deblocați Comunitate</string>
+    <string name="action_unblock_user">Deblocați utilizator</string>
+    <string name="replies">Răspunsuri</string>
+    <string name="blocks">Blocuri</string>
+    <string name="blocked_users">Utilizatori blocați</string>
+    <string name="error_unsupported_audio">Media include piste audio, dar niciuna nu poate fi redată de acest dispozitiv</string>
+    <string name="instance_url">URL instanță</string>
+    <string name="settings_hide_user_instance">Ascundeți instanță utilizator</string>
+    <string name="edited">Editat</string>
+    <string name="settings_backup_settings_summary">Parola de backup pentru fișier este \"123321\".</string>
+    <string name="unblock_community_success">Comunitate deblocată!</string>
+    <string name="go_to_settings">Setări</string>
+    <string name="use_circular_fab">Folosiți FAB circular</string>
+    <string name="active_users_number_detail">%1$,d Utilizatori Activi</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="post_count_detail">%1$,d Postări</string>
+    <string name="settings_category_community_and_user_pages_title">Pagini comunitate și utilizatori</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Partajați link-uri pe instanța dvs. locală în loc de instanța creației originale.</string>
+    <string name="edited_time">Editat la %s</string>
+    <string name="instance_info">Informații despre instanță</string>
+    <string name="user_password">Parolă</string>
+    <string name="unblock_user_success">Deblocat</string>
+    <string name="comment_count_detail">%1$,d Comentarii</string>
+    <string name="sort_time_3months">3 Luni</string>
 </resources>
