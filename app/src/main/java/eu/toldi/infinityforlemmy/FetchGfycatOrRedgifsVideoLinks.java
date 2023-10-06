@@ -1,7 +1,5 @@
 package eu.toldi.infinityforlemmy;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 
 import org.json.JSONException;
@@ -12,9 +10,7 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.apis.GfycatAPI;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
-import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -44,14 +40,12 @@ public class FetchGfycatOrRedgifsVideoLinks {
         });
     }
 
-    public static void fetchRedgifsVideoLinks(Context context, Executor executor, Handler handler, Retrofit redgifsRetrofit,
-                                              SharedPreferences currentAccountSharedPreferences,
+    public static void fetchRedgifsVideoLinks(Executor executor, Handler handler, Retrofit redgifsRetrofit,
                                               String gfycatId,
                                               FetchGfycatOrRedgifsVideoLinksListener fetchGfycatOrRedgifsVideoLinksListener) {
         executor.execute(() -> {
             try {
-                Response<String> response = redgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(APIUtils.getRedgifsOAuthHeader(currentAccountSharedPreferences.getString(SharedPreferencesUtils.REDGIFS_ACCESS_TOKEN, "")),
-                         gfycatId, APIUtils.USER_AGENT).execute();
+                Response<String> response = redgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(gfycatId).execute();
                 if (response.isSuccessful()) {
                     parseRedgifsVideoLinks(handler, response.body(), fetchGfycatOrRedgifsVideoLinksListener);
                 } else {

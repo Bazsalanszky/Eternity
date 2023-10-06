@@ -6,14 +6,16 @@ import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.HeaderMap;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface RedgifsAPI {
     @GET("/v2/gifs/{id}")
-    Call<String> getRedgifsData(@HeaderMap Map<String, String> headers, @Path("id") String id, @Query("user-agent") String userAgent);
+    Call<String> getRedgifsData(@Path("id") String id);
+
+    @GET("/v2/gifs")
+    Call<String> getRedgifsMultipleData(@Query("ids") String ids);
 
     @FormUrlEncoded
     @POST("/v2/oauth/client")

@@ -54,6 +54,7 @@ import eu.toldi.infinityforlemmy.events.SubmitPollPostEvent;
 import eu.toldi.infinityforlemmy.events.SubmitTextOrLinkPostEvent;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.SubmitPost;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.NotificationUtils;
@@ -102,6 +103,8 @@ public class SubmitPostService extends Service {
     CustomThemeWrapper mCustomThemeWrapper;
     @Inject
     Executor mExecutor;
+    @Inject
+    PostEnricher postEnricher;
     private Handler handler;
     private ServiceHandler serviceHandler;
 
@@ -221,7 +224,7 @@ public class SubmitPostService extends Service {
                                       String kind) {
         SubmitPost.submitTextOrLinkPost(mExecutor, handler, newAuthenticatorOauthRetrofit, selectedAccount.getAccessToken(),
                 communityId, title, body, url, flair, isSpoiler,
-                isNSFW, receivePostReplyNotifications, kind, new SubmitPost.SubmitPostListener() {
+                isNSFW, receivePostReplyNotifications, kind, postEnricher, new SubmitPost.SubmitPostListener() {
                     @Override
                     public void submitSuccessful(Post post) {
                         handler.post(() -> EventBus.getDefault().post(new SubmitTextOrLinkPostEvent(true, post, null)));
@@ -243,7 +246,7 @@ public class SubmitPostService extends Service {
                                  String title, String content, Flair flair, boolean isSpoiler, boolean isNSFW,
                                  boolean receivePostReplyNotifications) {
         SubmitPost.submitCrosspost(executor, handler, newAuthenticatorOauthRetrofit, selectedAccount.getAccessToken(), communityId, title,
-                content, flair, isSpoiler, isNSFW, receivePostReplyNotifications, APIUtils.KIND_CROSSPOST,
+                content, flair, isSpoiler, isNSFW, receivePostReplyNotifications, APIUtils.KIND_CROSSPOST, postEnricher,
                 new SubmitPost.SubmitPostListener() {
                     @Override
                     public void submitSuccessful(Post post) {
@@ -266,7 +269,8 @@ public class SubmitPostService extends Service {
         try {
             Bitmap resource = Glide.with(this).asBitmap().load(mediaUri).submit().get();
             SubmitPost.submitImagePost(mExecutor, handler, newAuthenticatorOauthRetrofit,
-                    selectedAccount.getAccessToken(), communityId, title, body, resource, flair, isSpoiler, isNSFW, receivePostReplyNotifications,
+                    selectedAccount.getAccessToken(), communityId, title, body, resource, flair, isSpoiler,
+                    isNSFW, receivePostReplyNotifications, postEnricher,
                     new SubmitPost.SubmitPostListener() {
                         @Override
                         public void submitSuccessful(Post post) {

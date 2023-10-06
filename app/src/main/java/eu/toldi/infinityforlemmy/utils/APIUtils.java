@@ -142,12 +142,6 @@ public class APIUtils {
         return params;
     }
 
-    public static Map<String, String> getRedgifsOAuthHeader(String redgifsAccessToken) {
-        Map<String, String> params = new HashMap<>();
-        params.put(APIUtils.AUTHORIZATION_KEY, APIUtils.AUTHORIZATION_BASE + redgifsAccessToken);
-        return params;
-    }
-
     public static RequestBody getRequestBody(String s) {
         return RequestBody.create(s, MediaType.parse("text/plain"));
     }

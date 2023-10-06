@@ -17,6 +17,7 @@ import androidx.paging.PagingLiveData;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import retrofit2.Retrofit;
 
@@ -29,6 +30,7 @@ public class HistoryPostViewModel extends ViewModel {
     private SharedPreferences sharedPreferences;
     private int postType;
     private PostFilter postFilter;
+    private PostEnricher postEnricher;
 
     private LiveData<PagingData<Post>> posts;
 
@@ -36,7 +38,7 @@ public class HistoryPostViewModel extends ViewModel {
 
     public HistoryPostViewModel(Executor executor, Retrofit retrofit, RedditDataRoomDatabase redditDataRoomDatabase,
                                 String accessToken, String accountName, SharedPreferences sharedPreferences,
-                                int postType, PostFilter postFilter) {
+                                int postType, PostFilter postFilter, PostEnricher postEnricher) {
         this.executor = executor;
         this.retrofit = retrofit;
         this.redditDataRoomDatabase = redditDataRoomDatabase;
@@ -45,11 +47,12 @@ public class HistoryPostViewModel extends ViewModel {
         this.sharedPreferences = sharedPreferences;
         this.postType = postType;
         this.postFilter = postFilter;
+        this.postEnricher = postEnricher;
 
         postFilterLiveData = new MutableLiveData<>();
         postFilterLiveData.postValue(postFilter);
 
-        Pager<String, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSoruce);
+        Pager<String, Post> pager = new Pager<>(new PagingConfig(25, 25, false), this::returnPagingSource);
 
         posts = Transformations.switchMap(postFilterLiveData, postFilterValue -> PagingLiveData.cachedIn(PagingLiveData.getLiveData(pager), ViewModelKt.getViewModelScope(this)));
     }
@@ -58,19 +61,9 @@ public class HistoryPostViewModel extends ViewModel {
         return posts;
     }
 
-    public HistoryPostPagingSource returnPagingSoruce() {
-        HistoryPostPagingSource paging3PagingSource;
-        switch (postType) {
-            case HistoryPostPagingSource.TYPE_READ_POSTS:
-                paging3PagingSource = new HistoryPostPagingSource(retrofit, executor, redditDataRoomDatabase, accessToken, accountName,
-                        sharedPreferences, accountName, postType, postFilter);
-                break;
-            default:
-                paging3PagingSource = new HistoryPostPagingSource(retrofit, executor, redditDataRoomDatabase, accessToken, accountName,
-                        sharedPreferences, accountName, postType, postFilter);
-                break;
-        }
-        return paging3PagingSource;
+    public HistoryPostPagingSource returnPagingSource() {
+        return new HistoryPostPagingSource(retrofit, executor, redditDataRoomDatabase, accessToken, accountName,
+                sharedPreferences, accountName, postType, postFilter, postEnricher);
     }
 
     public void changePostFilter(PostFilter postFilter) {
@@ -86,10 +79,11 @@ public class HistoryPostViewModel extends ViewModel {
         private SharedPreferences sharedPreferences;
         private int postType;
         private PostFilter postFilter;
+        private PostEnricher postEnricher;
 
         public Factory(Executor executor, Retrofit retrofit, RedditDataRoomDatabase redditDataRoomDatabase,
                        String accessToken, String accountName, SharedPreferences sharedPreferences, int postType,
-                       PostFilter postFilter) {
+                       PostFilter postFilter, PostEnricher postEnricher) {
             this.executor = executor;
             this.retrofit = retrofit;
             this.redditDataRoomDatabase = redditDataRoomDatabase;
@@ -98,18 +92,14 @@ public class HistoryPostViewModel extends ViewModel {
             this.sharedPreferences = sharedPreferences;
             this.postType = postType;
             this.postFilter = postFilter;
+            this.postEnricher = postEnricher;
         }
 
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (postType == HistoryPostPagingSource.TYPE_READ_POSTS) {
-                return (T) new HistoryPostViewModel(executor, retrofit, redditDataRoomDatabase, accessToken, accountName, sharedPreferences,
-                        postType, postFilter);
-            } else {
-                return (T) new HistoryPostViewModel(executor, retrofit, redditDataRoomDatabase, accessToken, accountName, sharedPreferences,
-                        postType, postFilter);
-            }
+            return (T) new HistoryPostViewModel(executor, retrofit, redditDataRoomDatabase, accessToken, accountName, sharedPreferences,
+                        postType, postFilter, postEnricher);
         }
     }
 }

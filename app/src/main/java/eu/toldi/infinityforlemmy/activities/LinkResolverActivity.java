@@ -36,6 +36,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.post.FetchPost;
 import eu.toldi.infinityforlemmy.post.ObjectResolver;
 import eu.toldi.infinityforlemmy.post.Post;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
@@ -82,6 +83,9 @@ public class LinkResolverActivity extends AppCompatActivity {
 
     @Inject
     Executor mExecutor;
+
+    @Inject
+    PostEnricher postEnricher;
 
     private String mAccessToken;
 
@@ -214,7 +218,7 @@ public class LinkResolverActivity extends AppCompatActivity {
                                     URL baseURL = new URL(mRetrofit.getBaseURL());
                                     if (baseURL.getHost().equalsIgnoreCase(uri.getHost())) {
                                         local = true;
-                                        FetchPost.fetchPost(mExecutor, new Handler(), mRetrofit.getRetrofit(), segments.get(segments.size() - 1), mAccessToken, new FetchPost.FetchPostListener() {
+                                        FetchPost.fetchPost(mExecutor, new Handler(), mRetrofit.getRetrofit(), segments.get(segments.size() - 1), mAccessToken, postEnricher, new FetchPost.FetchPostListener() {
                                             @Override
                                             public void fetchPostSuccess(Post post) {
 

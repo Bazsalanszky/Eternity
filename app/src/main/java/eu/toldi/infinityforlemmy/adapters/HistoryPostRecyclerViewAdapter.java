@@ -139,7 +139,6 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
     private BaseActivity mActivity;
     private HistoryPostFragment mFragment;
     private SharedPreferences mSharedPreferences;
-    private SharedPreferences mCurrentAccountSharedPreferences;
     private Executor mExecutor;
     private Retrofit retrofit;
     private Retrofit mGfycatRetrofit;
@@ -227,7 +226,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                                           Retrofit gfycatRetrofit, Retrofit redgifsRetrofit, Provider<StreamableAPI> streambleApiProvider,
                                           CustomThemeWrapper customThemeWrapper, Locale locale,
                                           String accessToken, String accountName, int postType, int postLayout, boolean displaySubredditName,
-                                          SharedPreferences sharedPreferences, SharedPreferences currentAccountSharedPreferences,
+                                          SharedPreferences sharedPreferences,
                                           SharedPreferences nsfwAndSpoilerSharedPreferences,
                                           ExoCreator exoCreator, Callback callback) {
         super(DIFF_CALLBACK);
@@ -235,7 +234,6 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
             mActivity = activity;
             mFragment = fragment;
             mSharedPreferences = sharedPreferences;
-            mCurrentAccountSharedPreferences = currentAccountSharedPreferences;
             mExecutor = executor;
             retrofit = oauthRetrofit;
             mGfycatRetrofit = gfycatRetrofit;
@@ -698,7 +696,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                     if ((post.isGfycat() || post.isRedgifs()) && !post.isLoadGfycatOrStreamableVideoSuccess()) {
                         ((PostVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
                                 post.isGfycat() ? mGfycatRetrofit.create(GfycatAPI.class).getGfycatData(post.getGfycatId()) :
-                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(APIUtils.getRedgifsOAuthHeader(mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.REDGIFS_ACCESS_TOKEN, "")), post.getGfycatId(), APIUtils.USER_AGENT);
+                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getGfycatId());
                         FetchGfycatOrRedgifsVideoLinks.fetchGfycatOrRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
                                 ((PostVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
                                 post.isGfycat(), mAutomaticallyTryRedgifs,
@@ -875,7 +873,7 @@ public class HistoryPostRecyclerViewAdapter extends PagingDataAdapter<Post, Recy
                     if ((post.isGfycat() || post.isRedgifs()) && !post.isLoadGfycatOrStreamableVideoSuccess()) {
                         ((PostCard2VideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
                                 post.isGfycat() ? mGfycatRetrofit.create(GfycatAPI.class).getGfycatData(post.getGfycatId()) :
-                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(APIUtils.getRedgifsOAuthHeader(mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.REDGIFS_ACCESS_TOKEN, "")), post.getGfycatId(), APIUtils.USER_AGENT);
+                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getGfycatId());
                         FetchGfycatOrRedgifsVideoLinks.fetchGfycatOrRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
                                 ((PostCard2VideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
                                 post.isGfycat(), mAutomaticallyTryRedgifs,

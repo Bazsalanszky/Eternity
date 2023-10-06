@@ -19,6 +19,7 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.readpost.ReadPost;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -39,10 +40,11 @@ public class HistoryPostPagingSource extends ListenableFuturePagingSource<String
     private String username;
     private int postType;
     private PostFilter postFilter;
+    private PostEnricher postEnricher;
 
     public HistoryPostPagingSource(Retrofit retrofit, Executor executor, RedditDataRoomDatabase redditDataRoomDatabase,
                                    String accessToken, String accountName, SharedPreferences sharedPreferences,
-                                   String username, int postType, PostFilter postFilter) {
+                                   String username, int postType, PostFilter postFilter, PostEnricher postEnricher) {
         this.retrofit = retrofit;
         this.executor = executor;
         this.redditDataRoomDatabase = redditDataRoomDatabase;
@@ -52,6 +54,7 @@ public class HistoryPostPagingSource extends ListenableFuturePagingSource<String
         this.username = username;
         this.postType = postType;
         this.postFilter = postFilter;
+        this.postEnricher = postEnricher;
     }
 
     @Nullable
@@ -92,7 +95,7 @@ public class HistoryPostPagingSource extends ListenableFuturePagingSource<String
             Response<String> response = historyPosts.execute();
             if (response.isSuccessful()) {
                 String responseString = response.body();
-                LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, null);
+                LinkedHashSet<Post> newPosts = ParsePost.parsePostsSync(responseString, -1, postFilter, null, postEnricher);
                 if (newPosts == null) {
                     return new LoadResult.Error<>(new Exception("Error parsing posts"));
                 } else {

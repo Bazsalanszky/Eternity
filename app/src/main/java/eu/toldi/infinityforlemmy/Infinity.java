@@ -11,6 +11,16 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ProcessLifecycleOwner;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.evernote.android.state.StateSaver;
 import com.livefront.bridge.Bridge;
 import com.livefront.bridge.SavedStateHandler;
@@ -18,15 +28,11 @@ import com.livefront.bridge.SavedStateHandler;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.InputStream;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ProcessLifecycleOwner;
 import eu.toldi.infinityforlemmy.activities.LockScreenActivity;
 import eu.toldi.infinityforlemmy.broadcastreceivers.NetworkWifiStatusReceiver;
 import eu.toldi.infinityforlemmy.broadcastreceivers.WallpaperChangeReceiver;
@@ -38,6 +44,8 @@ import eu.toldi.infinityforlemmy.font.FontFamily;
 import eu.toldi.infinityforlemmy.font.TitleFontFamily;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
 
 public class Infinity extends Application implements LifecycleObserver {
     public Typeface typeface;
@@ -55,6 +63,9 @@ public class Infinity extends Application implements LifecycleObserver {
     @Inject
     @Named("security")
     SharedPreferences mSecuritySharedPreferences;
+    @Inject
+    @Named("glide")
+    OkHttpClient glideOkHttpClient;
 
     @Override
     public void onCreate() {
@@ -159,6 +170,9 @@ public class Infinity extends Application implements LifecycleObserver {
         registerReceiver(mNetworkWifiStatusReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         registerReceiver(new WallpaperChangeReceiver(mSharedPreferences), new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED));
+
+        OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory((Call.Factory) glideOkHttpClient);
+        Glide.get(this).getRegistry().replace(GlideUrl.class, InputStream.class, factory);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

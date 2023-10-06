@@ -14,7 +14,6 @@ import java.util.Map;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
-import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 import retrofit2.Call;
@@ -22,6 +21,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RedgifsAccessTokenAuthenticator implements Interceptor {
+    private static final String REDGIFS_HOST = "redgifs.com";
+
     private SharedPreferences mCurrentAccountSharedPreferences;
 
     public RedgifsAccessTokenAuthenticator(SharedPreferences currentAccountSharedPreferences) {
@@ -60,7 +61,17 @@ public class RedgifsAccessTokenAuthenticator implements Interceptor {
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-        Response response = chain.proceed(chain.request());
+        if (!chain.request().url().host().endsWith(REDGIFS_HOST)) {
+            return chain.proceed(chain.request());
+        }
+
+        String currentAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.REDGIFS_ACCESS_TOKEN, "");
+        Response response = chain.proceed(
+                chain.request().newBuilder()
+                        .addHeader(APIUtils.AUTHORIZATION_KEY, APIUtils.AUTHORIZATION_BASE + currentAccessToken)
+                        .build()
+        );
+
         if (response.code() == 401 || response.code() == 400) {
             String accessTokenHeader = response.request().header(APIUtils.AUTHORIZATION_KEY);
             if (accessTokenHeader == null) {
@@ -74,13 +85,21 @@ public class RedgifsAccessTokenAuthenticator implements Interceptor {
                     String newAccessToken = refreshAccessToken();
                     if (!newAccessToken.equals("")) {
                         response.close();
-                        return chain.proceed(response.request().newBuilder().headers(Headers.of(APIUtils.getRedgifsOAuthHeader(newAccessToken))).build());
+                        return chain.proceed(
+                                chain.request().newBuilder()
+                                        .addHeader(APIUtils.AUTHORIZATION_KEY, APIUtils.AUTHORIZATION_BASE + newAccessToken)
+                                        .build()
+                        );
                     } else {
                         return response;
                     }
                 } else {
                     response.close();
-                    return chain.proceed(response.request().newBuilder().headers(Headers.of(APIUtils.getRedgifsOAuthHeader(accessTokenFromSharedPreferences))).build());
+                    return chain.proceed(
+                            chain.request().newBuilder()
+                                    .addHeader(APIUtils.AUTHORIZATION_KEY, APIUtils.AUTHORIZATION_BASE + accessTokenFromSharedPreferences)
+                                    .build()
+                    );
                 }
             }
         }
