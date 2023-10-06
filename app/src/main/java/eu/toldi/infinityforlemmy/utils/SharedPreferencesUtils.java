@@ -359,6 +359,8 @@ public class SharedPreferencesUtils {
     public static final String CURRENT_ACCOUNT_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.current_account";
     public static final String ACCOUNT_NAME = "account_name";
     public static final String ACCESS_TOKEN = "access_token";
+
+    public static final String BEARER_TOKEN_AUTH = "bearer_token_auth";
     public static final String ACCOUNT_IMAGE_URL = "account_image_url";
     public static final String REDGIFS_ACCESS_TOKEN = "redgifs_access_token";
 

@@ -20,13 +20,16 @@ public class SiteInfo {
     private boolean enable_nsfw;
     private boolean community_creation_admin_only;
 
+    private String version;
+
     private List<BasicUserInfo> admins;
 
     SiteStatistics siteStatistics;
 
-    public SiteInfo(int id, String name, String sidebar, String description, boolean enable_downvotes, boolean enable_nsfw, boolean community_creation_admin_only, List<BasicUserInfo> admins, SiteStatistics siteStatistics) {
+    public SiteInfo(int id, String name, String version, String sidebar, String description, boolean enable_downvotes, boolean enable_nsfw, boolean community_creation_admin_only, List<BasicUserInfo> admins, SiteStatistics siteStatistics) {
         this.id = id;
         this.name = name;
+        this.version = version;
         this.sidebar = sidebar;
         this.description = description;
         this.enable_downvotes = enable_downvotes;
@@ -72,6 +75,10 @@ public class SiteInfo {
         return siteStatistics;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
     public static SiteInfo parseSiteInfo(String siteInfoJson) {
         try {
             JSONObject siteInfo = new JSONObject(siteInfoJson);
@@ -84,6 +91,7 @@ public class SiteInfo {
             String sidebar = null;
             if (site.has("sidebar"))
                 sidebar = site.getString("sidebar");
+            String version = siteInfo.getString("version");
 
             String description = null;
             if (site.has("description"))
@@ -106,7 +114,7 @@ public class SiteInfo {
                 }
             }
 
-            return new SiteInfo(id, name, sidebar, description, enable_downvotes, enable_nsfw, community_creation_admin_only, admins, SiteStatistics.parseSiteStatistics(counts));
+            return new SiteInfo(id, name, version, sidebar, description, enable_downvotes, enable_nsfw, community_creation_admin_only, admins, SiteStatistics.parseSiteStatistics(counts));
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

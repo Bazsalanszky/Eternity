@@ -5,7 +5,9 @@ import android.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
@@ -152,5 +154,14 @@ public class APIUtils {
         params.put(APIUtils.REFERER_KEY, APIUtils.REVEDDIT_REFERER);
         params.put(APIUtils.USER_AGENT_KEY, APIUtils.USER_AGENT);
         return params;
+    }
+
+    public static Interceptor getOAuthInterceptor(String accessToken) {
+        return chain -> {
+            Request newRequest = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer " + accessToken)
+                    .build();
+            return chain.proceed(newRequest);
+        };
     }
 }
