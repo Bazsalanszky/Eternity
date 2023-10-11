@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.InflateException;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -180,6 +179,7 @@ public class LoginActivity extends BaseActivity {
                         try {
                             JSONObject responseJSON = new JSONObject(accountResponse);
                             String accessToken = responseJSON.getString("jwt");
+                            mRetrofit.setAccessToken(null);
 
                             FetchMyInfo.fetchAccountInfo(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, username,
                                     accessToken, new FetchMyInfo.FetchMyInfoListener() {
@@ -189,13 +189,23 @@ public class LoginActivity extends BaseActivity {
                                                 @Override
                                                 public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
                                                     boolean canDownvote = siteInfo.isEnable_downvotes();
-                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode, finalInstance,canDownvote, mRedditDataRoomDatabase.accountDao(),
+                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name, display_name, accessToken, profileImageUrl, bannerImageUrl, authCode, finalInstance, canDownvote, mRedditDataRoomDatabase.accountDao(),
                                                             () -> {
                                                                 Intent resultIntent = new Intent();
                                                                 setResult(Activity.RESULT_OK, resultIntent);
                                                                 finish();
                                                             });
                                                     mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, canDownvote).apply();
+                                                    String[] version = siteInfo.getVersion().split("\\.");
+                                                    if (version.length > 0) {
+                                                        Log.d("SwitchAccount", "Lemmy Version: " + version[0] + "." + version[1]);
+                                                        int majorVersion = Integer.parseInt(version[0]);
+                                                        int minorVersion = Integer.parseInt(version[1]);
+                                                        if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
+                                                            mRetrofit.setAccessToken(accessToken);
+                                                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
+                                                        }
+                                                    }
                                                 }
 
                                                 @Override
