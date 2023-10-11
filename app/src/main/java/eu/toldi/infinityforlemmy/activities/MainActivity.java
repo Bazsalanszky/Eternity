@@ -336,11 +336,14 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         fragmentManager = getSupportFragmentManager();
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
+        if (mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true)) {
+            mRetrofit.setAccessToken(mAccessToken);
+        }
 
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
         String instance = (mAccessToken == null) ? mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI) : mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
-        if(instance != null) {
+        if (instance != null) {
             mRetrofit.setBaseURL(instance);
         }
 

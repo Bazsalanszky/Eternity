@@ -106,6 +106,9 @@ public class LinkResolverActivity extends AppCompatActivity {
         if (mAccessToken != null) {
             String instance = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
             mRetrofit.setBaseURL(instance);
+            if (mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true)) {
+                mRetrofit.setAccessToken(mAccessToken);
+            }
         }
 
         Uri uri = getIntent().getData();
