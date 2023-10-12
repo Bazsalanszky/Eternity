@@ -1514,7 +1514,12 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             if (i == EditorInfo.IME_ACTION_DONE) {
                 Utils.hideKeyboard(this);
                 Intent subredditIntent = new Intent(this, ViewSubredditDetailActivity.class);
-                subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, thingEditText.getText().toString());
+                String communityName = thingEditText.getText().toString();
+                if (communityName.startsWith("!")) {
+                    communityName = communityName.substring(1);
+                }
+                subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, communityName);
+
                 startActivity(subredditIntent);
                 return true;
             }
@@ -1572,7 +1577,11 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         -> {
                     Utils.hideKeyboard(this);
                     Intent subredditIntent = new Intent(this, ViewSubredditDetailActivity.class);
-                    subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, thingEditText.getText().toString());
+                    String communityName = thingEditText.getText().toString();
+                    if (communityName.startsWith("!")) {
+                        communityName = communityName.substring(1);
+                    }
+                    subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, communityName);
                     startActivity(subredditIntent);
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
@@ -1593,7 +1602,11 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             if (i == EditorInfo.IME_ACTION_DONE) {
                 Utils.hideKeyboard(this);
                 Intent userIntent = new Intent(this, ViewUserDetailActivity.class);
-                userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, thingEditText.getText().toString());
+                String qualifiedName = thingEditText.getText().toString();
+                if (qualifiedName.startsWith("@")) {
+                    qualifiedName = qualifiedName.substring(1);
+                }
+                userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, qualifiedName);
                 startActivity(userIntent);
                 return true;
             }
@@ -1606,7 +1619,11 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         -> {
                     Utils.hideKeyboard(this);
                     Intent userIntent = new Intent(this, ViewUserDetailActivity.class);
-                    userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, thingEditText.getText().toString());
+                    String qualifiedName = thingEditText.getText().toString();
+                    if (qualifiedName.startsWith("@")) {
+                        qualifiedName = qualifiedName.substring(1);
+                    }
+                    userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, qualifiedName);
                     startActivity(userIntent);
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
