@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Вхід</string>
     <string name="comment_activity_label">Надіслати коментар</string>
     <string name="comment_activity_label_is_replying">Відповісти</string>
@@ -1285,4 +1285,5 @@
     <string name="theme_name_nightfox">Nightfox</string>
     <string name="share_links_on_your_local_instance">Ділитися посиланнями на своєму локальному сервері</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Ділитися посиланнями на своєму локальному сервері, а не на оригінальному сервері створення.</string>
+    <string name="unexpected_intent_action">Неочікувана дія наміру: <xliff:g id="action">%1$s</xliff:g></string>
 </resources>
