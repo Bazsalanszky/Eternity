@@ -283,7 +283,7 @@ public class AccountSavedThingActivity extends BaseActivity implements ActivityT
                 PostFragment fragment = new PostFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(PostFragment.EXTRA_POST_TYPE, PostPagingSource.TYPE_USER);
-                bundle.putString(PostFragment.EXTRA_USER_NAME, mAccountName);
+                bundle.putString(PostFragment.EXTRA_USER_NAME, mAccountQualifiedName);
                 bundle.putString(PostFragment.EXTRA_USER_WHERE, PostPagingSource.USER_WHERE_SAVED);
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                 bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
@@ -293,7 +293,7 @@ public class AccountSavedThingActivity extends BaseActivity implements ActivityT
             }
             CommentsListingFragment fragment = new CommentsListingFragment();
             Bundle bundle = new Bundle();
-            bundle.putString(CommentsListingFragment.EXTRA_USERNAME, mAccountName);
+            bundle.putString(CommentsListingFragment.EXTRA_USERNAME, mAccountQualifiedName);
             bundle.putString(CommentsListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
             bundle.putString(CommentsListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
             bundle.putBoolean(CommentsListingFragment.EXTRA_ARE_SAVED_COMMENTS, true);
