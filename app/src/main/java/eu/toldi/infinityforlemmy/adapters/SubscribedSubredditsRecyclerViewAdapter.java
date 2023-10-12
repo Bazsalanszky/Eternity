@@ -158,7 +158,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
                                 mFavoriteSubscribedSubredditData.size() + 3 : 1;
                     } else {
                         offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
-                                mFavoriteSubscribedSubredditData.size() + 2 : 1;
+                                mFavoriteSubscribedSubredditData.size() + 2 : 0;
                     }
                 } else {
                     offset = (mFavoriteSubscribedSubredditData != null && mFavoriteSubscribedSubredditData.size() > 0) ?
@@ -301,7 +301,7 @@ public class SubscribedSubredditsRecyclerViewAdapter extends RecyclerView.Adapte
             }
 
             if (itemClickListener != null) {
-                return mSubscribedSubredditData.size() > 0 ? mSubscribedSubredditData.size() + 1 : 0;
+                return (hasClearSelectionRow) ? mSubscribedSubredditData.size() + 1 : mSubscribedSubredditData.size();
             }
 
             return mSubscribedSubredditData.size();
