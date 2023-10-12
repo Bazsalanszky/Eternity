@@ -543,17 +543,17 @@
     </string-array>
 
     <string-array name="settings_default_sort_time_values">
-        <item>TopHour</item>
-        <item>TopSixHour</item>
-        <item>TopTwelveHour</item>
-        <item>TopDay</item>
-        <item>TopWeek</item>
-        <item>TopMonth</item>
-        <item>TopThreeMonths</item>
-        <item>TopSixMonths</item>
-        <item>TopNineMonths</item>
-        <item>TopYear</item>
-        <item>TopAll</item>
+        <item>hour</item>
+        <item>SixHour</item>
+        <item>TwelveHour</item>
+        <item>day</item>
+        <item>week</item>
+        <item>month</item>
+        <item>ThreeMonths</item>
+        <item>SixMonths</item>
+        <item>NineMonths</item>
+        <item>year</item>
+        <item>all</item>
     </string-array>
 
     <string-array name="settings_default_search_result_tab">

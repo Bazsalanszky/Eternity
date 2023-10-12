@@ -69,15 +69,15 @@ public class SortType {
     }
 
     public enum Time {
-        HOUR("TopHour", "Top Hour"),
-        SIX_HOURS("TopSixHour", "Top Six Hours"),
-        TWELVE_HOURS("TopTwelveHour", "Top Twelve Hours"),
+        HOUR("hour", "Hour"),
+        SIX_HOURS("SixHour", "Six Hours"),
+        TWELVE_HOURS("TwelveHour", "Twelve Hours"),
         DAY("day", "Day"),
         WEEK("week", "Week"),
         MONTH("month", "Month"),
-        THREE_MONTHS("TopThreeMonth", "Top Three Months"),
-        SIX_MONTHS("TopSixMonth", "Top Six Months"),
-        NINE_MONTHS("TopNineMonth", "Top Nine Months"),
+        THREE_MONTHS("ThreeMonths", "Three Months"),
+        SIX_MONTHS("SixMonths", "Six Months"),
+        NINE_MONTHS("NineMonths", "Nine Months"),
         YEAR("year", "Year"),
         ALL("all", "All Time");
 
@@ -87,6 +87,15 @@ public class SortType {
         Time(String value, String fullName) {
             this.value = value;
             this.fullName = fullName;
+        }
+
+        public static Time fromValue(String value) {
+            for (Time time : values()) {
+                if (time.value.equalsIgnoreCase(value)) {
+                    return time;
+                }
+            }
+            return null;
         }
     }
 }
