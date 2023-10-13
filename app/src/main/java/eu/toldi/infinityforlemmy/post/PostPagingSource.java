@@ -243,7 +243,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         }
         String feed_type = Objects.equals(subredditOrUserName, "all") ? "All" : Objects.equals(subredditOrUserName, "local") ? "Local" : "Subscribed";
 
-        bestPost = api.getPosts(feed_type,sortType.getType().value,page,25,null,null,false,accessToken);
+        bestPost = api.getPostsListenableFuture(feed_type, sortType.getType().value, page, 25, null, null, false, accessToken);
 
         ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(bestPost, this::transformData, executor);
 
@@ -258,7 +258,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
     private ListenableFuture<LoadResult<Integer, Post>> loadSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> subredditPost;
 
-        subredditPost = api.getPosts(null,sortType.getType().value,loadParams.getKey(),25,null,subredditOrUserName,false,accessToken);
+        subredditPost = api.getPostsListenableFuture(null, sortType.getType().value, loadParams.getKey(), 25, null, subredditOrUserName, false, accessToken);
 
 
         ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(subredditPost, this::transformData, executor);
@@ -273,7 +273,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
 
     private ListenableFuture<LoadResult<Integer, Post>> loadUserPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
         ListenableFuture<Response<String>> userPosts;
-        userPosts = api.getUserPosts(subredditOrUserName, sortType.getType().value, loadParams.getKey(), 25, userWhere.equals(USER_WHERE_SAVED), accessToken);
+        userPosts = api.getUserPostsListenableFuture(subredditOrUserName, sortType.getType().value, loadParams.getKey(), 25, userWhere.equals(USER_WHERE_SAVED), accessToken);
 
 
         ListenableFuture<LoadResult<Integer, Post>> pageFuture = Futures.transform(userPosts, this::transformData, executor);

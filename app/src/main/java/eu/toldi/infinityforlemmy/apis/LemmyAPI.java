@@ -101,7 +101,16 @@ public interface LemmyAPI {
     Call<String> postDelete(@Body DeletePostDTO params);
 
     @GET("api/v3/user")
-    ListenableFuture<Response<String>> getUserPosts(
+    ListenableFuture<Response<String>> getUserPostsListenableFuture(
+            @Query("username") String username,
+            @Query("sort") String sort,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("saved_only") Boolean saved_only,
+            @Query("auth") String access_token);
+
+    @GET("api/v3/user")
+    Call<String> getUserPosts(
             @Query("username") String username,
             @Query("sort") String sort,
             @Query("page") Integer page,
@@ -129,7 +138,19 @@ public interface LemmyAPI {
     );
 
     @GET("api/v3/post/list")
-    ListenableFuture<Response<String>> getPosts(
+    ListenableFuture<Response<String>> getPostsListenableFuture(
+            @Query("type_") String type_,
+            @Query("sort") String sort,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit,
+            @Query("community_id") Integer community_id,
+            @Query("community_name") String community_name,
+            @Query("saved_only") Boolean saved_only,
+            @Query("auth") String auth
+    );
+
+    @GET("api/v3/post/list")
+    Call<String> getPosts(
             @Query("type_") String type_,
             @Query("sort") String sort,
             @Query("page") Integer page,

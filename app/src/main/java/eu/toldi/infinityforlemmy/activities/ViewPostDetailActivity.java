@@ -67,6 +67,7 @@ import eu.toldi.infinityforlemmy.SaveComment;
 import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.comment.Comment;
@@ -533,62 +534,31 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
         Handler handler = new Handler(Looper.getMainLooper());
 
         if (postType != HistoryPostPagingSource.TYPE_READ_POSTS) {
+            int nextPage = posts.size() / 25 + 1;
+
             mExecutor.execute(() -> {
-                RedditAPI api = (mAccessToken == null ? mRetrofit.getRetrofit() : mOauthRetrofit).create(RedditAPI.class);
+                LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
                 Call<String> call;
-                String afterKey = posts.isEmpty() ? null : posts.get(posts.size() - 1).getFullName();
+
                 switch (postType) {
                     case PostPagingSource.TYPE_SUBREDDIT:
-                        if (mAccessToken == null) {
-                            call = api.getSubredditBestPosts(subredditName, sortType, sortTime, afterKey);
-                        } else {
-                            call = api.getSubredditBestPostsOauth(subredditName, sortType,
-                                   sortTime, afterKey, APIUtils.getOAuthHeader(mAccessToken));
-                        }
+                        call = api.getPosts(null, sortType.value, nextPage, 25, null, post.getSubredditNamePrefixed(), false, mAccessToken);
                         break;
                     case PostPagingSource.TYPE_USER:
-                        if (mAccessToken == null) {
-                            call = api.getUserPosts(username, afterKey, sortType, sortTime);
-                        } else {
-                            call = api.getUserPostsOauth(username, userWhere, afterKey, sortType,
-                                    sortTime, APIUtils.getOAuthHeader(mAccessToken));
-                        }
+                        call = api.getUserPosts(username, sortType.value, nextPage, 25, false, mAccessToken);
                         break;
                     case PostPagingSource.TYPE_SEARCH:
-                        if (subredditName == null) {
-                            if (mAccessToken == null) {
-                                call = api.searchPosts(query, afterKey, sortType, sortTime,
-                                        trendingSource);
-                            } else {
-                                call = api.searchPostsOauth(query, afterKey, sortType,
-                                        sortTime, trendingSource, APIUtils.getOAuthHeader(mAccessToken));
-                            }
-                        } else {
-                            if (mAccessToken == null) {
-                                call = api.searchPostsInSpecificSubreddit(subredditName, query,
-                                        sortType, sortTime, afterKey);
-                            } else {
-                                call = api.searchPostsInSpecificSubredditOauth(subredditName, query,
-                                        sortType, sortTime, afterKey,
-                                        APIUtils.getOAuthHeader(mAccessToken));
-                            }
-                        }
+                        call = api.search(query, null, subredditName, null, "Post", sortType.value, "All", nextPage, 25, mAccessToken);
                         break;
                     case PostPagingSource.TYPE_MULTI_REDDIT:
-                        if (mAccessToken == null) {
-                            call = api.getMultiRedditPosts(multiPath, afterKey, sortTime);
-                        } else {
-                            call = api.getMultiRedditPostsOauth(multiPath, afterKey,
-                                    sortTime, APIUtils.getOAuthHeader(mAccessToken));
-                        }
-                        break;
+                        // TODO: Implement multi community
+
                     case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
-                        //case PostPagingSource.TYPE_ANONYMOUS_MULTIREDDIT
-                        call = api.getSubredditBestPosts(subredditName, sortType, sortTime, afterKey);
-                        break;
+                        // TODO: Implement anonymous front page
+
                     default:
-                        call = api.getBestPosts(sortType, sortTime, afterKey,
-                                APIUtils.getOAuthHeader(mAccessToken));
+                        String type = (subredditName.equals("all")) ? "All" : (subredditName.equals("local")) ? "Local" : "Subscribed";
+                        call = api.getPosts(type, sortType.value, nextPage, 25, null, null, false, mAccessToken);
                 }
 
                 try {
