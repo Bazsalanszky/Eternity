@@ -984,7 +984,7 @@
     <string name="restore_settings_failed_file_corrupted">設定を復元できません。ファイルが破損している可能性があります。</string>
     <string name="restore_settings_failed_cannot_get_file">ファイルにアクセスできません</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">v.redd.itからの動画の取得に失敗しました: Cannot get the redirect url</string>
-    <string name="error_fetching_v_redd_it_video_cannot_get_post">"v.redd.itからの動画の取得に失敗しました:  Cannot get the post"</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_post">v.redd.itからの動画の取得に失敗しました: Cannot get the post</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post_id">v.redd.itからの動画の取得に失敗しました: Cannot get the post id</string>
     <string name="always_on">常にオン</string>
     <string name="only_on_wifi">Wifiのみ</string>
