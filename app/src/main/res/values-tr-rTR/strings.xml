@@ -942,7 +942,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="community">Subreddit</string>
     <string name="user">Kullanıcı</string>
     <string name="edit_post_filter_name_of_usage_info">Bu gönderi filtresini tüm subredditlere / kullanıcılara / multiredditlere uygulamak için boş bırakın</string>
-    <string name="read_all_messages_time_limit">"Bunu çok fazla yaptınız.  Daha sonra tekrar deneyin.  Bu, Reddit API\'sinin limit sınırıdır."</string>
+    <string name="read_all_messages_time_limit">Bunu çok fazla yaptınız. Daha sonra tekrar deneyin. Bu, Reddit API\'sinin limit sınırıdır.</string>
     <string name="read_all_messages_success">Tüm mesajlar başarıyla okundu</string>
     <string name="read_all_messages_failed">Tüm mesajlar okunamadı</string>
     <string name="add_community_or_user_to_multireddit_success">%1$s, %2$s multireddit\'ine eklendi</string>
