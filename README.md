@@ -72,9 +72,9 @@ Don't forget to give the project a star! Thanks again!
 
 ### Translation
 
-You can alos help Eternity by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/Eternity/app/)!
+You can alos help Eternity by translating it to your native langugage! Translations are done via [Weblate](https://translate.codeberg.org/projects/infinity-for-lemmy/app/)!
 
-[![Translation](https://translate.codeberg.org/widgets/Eternity/-/app/multi-auto.svg)](https://translate.codeberg.org/engage/Eternity/)
+[![Translation](https://translate.codeberg.org/widgets/infinity-for-lemmy/-/app/multi-auto.svg)](https://translate.codeberg.org/engage/Eternity/)
 
 ### Reporting bugs
 
