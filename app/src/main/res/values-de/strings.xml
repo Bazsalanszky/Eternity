@@ -1310,7 +1310,7 @@
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Share Links zeigen auf Deine lokale Instanz anstatt auf die Instanz des Posts.</string>
     <string name="user_number_detail">%1$,d Benutzer</string>
     <string name="community_number_detail">%1$,d Communities</string>
-    <string name="unexpected_intent_action">Unerwartete Aufruf Parameter: <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="unexpected_intent_action">Unerwartete intent action: <xliff:g id="action">%1$s</xliff:g></string>
     <string name="theme_name_dayfox">Dayfox</string>
     <string name="handle_link">Link öffnen</string>
     <string name="i_understand">Ich verstehe</string>
