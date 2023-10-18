@@ -95,9 +95,9 @@
 \nTippen für Neuversuch.</string>
     <string name="no_messages">Leer</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Cake Day:
 \n%1$s</string>
     <string name="since">Seit:</string>
@@ -111,8 +111,8 @@
     <string name="saved">Gespeichert</string>
     <string name="gilded">Vergoldet</string>
     <string name="settings">Einstellungen</string>
-    <string name="subscribers_number_detail">%1$d Abonnenten</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d Abonnenten</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Kann Community-Info nicht abrufen</string>
     <string name="cannot_fetch_user_info">Kann Benutzer-Info nicht abrufen</string>
     <string name="cannot_fetch_sidebar">Kann Seitenleiste nicht abrufen</string>
@@ -197,7 +197,7 @@
     <string name="search_in">Suchen in</string>
     <string name="all_communities">Alle Subreddits</string>
     <string name="sort_best">Beste</string>
-    <string name="sort_hot">Hot</string>
+    <string name="sort_hot">Beliebt</string>
     <string name="sort_new">Neu</string>
     <string name="sort_random">Zufällig</string>
     <string name="sort_rising">Aufsteigend</string>
@@ -291,7 +291,7 @@
     <string name="notification_new_messages">%1$d neue Nachrichten</string>
     <string name="label_account">Konto</string>
     <string name="label_post">Beitrag</string>
-    <string name="label_preferences">Einstellungen</string>
+    <string name="label_preferences">Präferenzen</string>
     <string name="account_switched">Konto gewechselt. Alle anderen Seiten sind verschwunden.</string>
     <string name="settings_notification_master_title">Benachrichtigung</string>
     <string name="settings_notification_enable_notification_title">Benachrichtigungen aktivieren</string>
@@ -491,7 +491,7 @@
     <string name="create_multi_reddit_failed">Kann dieses Multicommunity nicht erstellen</string>
     <string name="duplicate_multi_reddit">Dieses Multicommunity existiert bereits</string>
     <string name="edit_multi_reddit_failed">Kann diese Multicommunity nicht bearbeiten</string>
-    <string name="delete_multi_reddit_success">Löschen erfolgreich</string>
+    <string name="delete_multi_reddit_success">Erfolgreich gelöscht</string>
     <string name="delete_multi_reddit_failed">Löschen fehlgeschlagen</string>
     <string name="delete_multi_reddit_dialog_message">Bist du sicher\?</string>
     <string name="enable_nsfw">NSFW aktivieren</string>
@@ -510,7 +510,7 @@
     <string name="theme_item_color_primary_dark">Primärfarbe Dunkel</string>
     <string name="theme_item_color_primary_dark_detail">Angewandt auf: Statusleiste</string>
     <string name="theme_item_color_accent">Akzentfarbe</string>
-    <string name="theme_item_color_accent_detail">Angewandt auf: Fortschrittsleiste, usw.</string>
+    <string name="theme_item_color_accent_detail">Angewandt auf: Fortschrittsleiste, usw</string>
     <string name="theme_item_color_primary_light_theme">Primärfarbe Helles Thema</string>
     <string name="theme_item_color_primary_light_theme_detail">Angewandt auf: Hintergrund des schwebenden Aktionsknopfes und Knöpfe</string>
     <string name="theme_item_primary_text_color">Primäre Textfarbe</string>
@@ -728,7 +728,7 @@
 \nSie ist nicht krank oder so, aber sie könnte sich definitiv bessern.</string>
     <string name="edit_multi_reddit">Multicommunity bearbeiten</string>
     <string name="delete_multi_reddit">Multicommunity löschen</string>
-    <string name="n_awards">%1$d Auszeichnungen</string>
+    <string name="n_awards">%1$,d Auszeichnungen</string>
     <string name="one_award">1 Auszeichnung</string>
     <string name="report">Melden</string>
     <string name="reporting">Melde</string>
@@ -739,8 +739,8 @@
     <string name="report_reason_general_copyright_issue">Es enthält urheberrechtlich geschütztes Material</string>
     <string name="report_reason_general_child_pornography">Es enthält Kinderpornografie</string>
     <string name="report_reason_general_abusive_content">Es enthält gewalttätiges Material</string>
-    <string name="subscribed_feed">Home</string>
-    <string name="local">Beliebt</string>
+    <string name="subscribed_feed">Abonniert</string>
+    <string name="local">Lokal</string>
     <string name="notifications">Benachrichtigungen</string>
     <string name="messages">Nachrichten</string>
     <string name="message">Nachricht</string>
@@ -770,7 +770,7 @@
     <string name="default_font_font_preview">Standard</string>
     <string name="load_video_in_redgifs">Versuche Video von Redgifs zu laden</string>
     <string name="top_score">%1$s Punkte</string>
-    <string name="login_activity_2fa_prompt">Sofern du Zwei-Faktor-Authentifizierung aktiviert hast, trage den Code im Feld ein.</string>
+    <string name="login_activity_2fa_prompt">Sofern du Zwei-Faktor-Authentifizierung aktiviert hast, trage den Code im 2FA-Feld ein. Ansonsten leer lassen</string>
     <string name="submit_crosspost_activity_label">Crossposten</string>
     <string name="give_award_activity_label">Auszeichnung verleihen</string>
     <string name="action_crosspost">Crossposten</string>
@@ -817,10 +817,7 @@
     <string name="settings_bottom_app_bar_fab">Schwebender Aktionsknopf</string>
     <string name="settings_data_saving_mode">Datensparmodus</string>
     <!-- Fuzzy -->
-    <string name="settings_data_saving_mode_info_summary">Im Datensparmodus:
-\nHaben Vorschaubilder eine geringere Auflösung.
-\nHaben Lemmy-Videos eine geringere Auflösung.
-\nAutomatisches Abspielen von Videos ist deaktiviert.</string>
+    <string name="settings_data_saving_mode_info_summary">Im Datensparmodus: Vorschaubilder haben eine geringere Auflösung. Lemmy-Videos haben eine geringere Auflösung. Automatische Videowiedergabe ist deaktiviert.</string>
     <string name="settings_translation_title">Übersetzung</string>
     <string name="settings_translation_summary">Übersetze diese App auf POEditor. Danke an alle Beitragenden.</string>
     <string name="settings_credits_national_flags">Nationalflaggen</string>
@@ -958,7 +955,7 @@
     <!-- This is inconsistant. Sometimes we call it Multireddit, other times MultiReddit. -->
     <string name="post_filter_usage_multireddit_all">Multicommunity</string>
     <string name="post_filter_usage_search">Suche</string>
-    <string name="community">Subreddit</string>
+    <string name="community">Community</string>
     <string name="user">Benutzer</string>
     <string name="edit_post_filter_name_of_usage_info">Leer lassen, um diesen Beitragsfilter auf alle Subreddits / Benutzer / Multicommunities anzuwenden</string>
     <string name="read_all_messages_time_limit">Du machst das zu oft hintereinander. Versuche es später noch einmal. Dies ist eine Beschränkung der Reddit-API.</string>
@@ -1040,7 +1037,7 @@
     <string name="suggest_title">Titel vorschlagen</string>
     <string name="suggest_title_failed">Konnte Titel nicht vorschlagen</string>
     <string name="action_delete_logs">Logs löschen</string>
-    <string name="inbox_with_count">Posteingang (%1$d)</string>
+    <string name="inbox_with_count">Posteingang (%1$,d)</string>
     <string name="comment_continue_thread">Thread fortsetzen</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Vertikal wischen, um zurück zu den Medien zu gelangen</string>
@@ -1059,9 +1056,9 @@
 \nMöchtest du trotzdem fortfahren\?</string>
     <string name="reply">Antworten</string>
     <string name="post_gallery_activity_label">Galeriebeitrag</string>
-    <string name="trending_activity_label">Trending</string>
+    <string name="trending_activity_label">Aktuell</string>
     <string name="action_share_post_link">Teile Beitragslink</string>
-    <string name="trending">Trending</string>
+    <string name="trending">Aktuell</string>
     <string name="receive_post_reply_notifications">Benachrichtigungen für Antworten auf Beiträge empfangen</string>
     <string name="bottom_sheet_post_gallery">Galerie</string>
     <string name="posting_gallery">Posts Galerie</string>
@@ -1129,7 +1126,7 @@
     <string name="settings_enable_fold_support_title">Fold-Handy Unterstützung aktivieren</string>
     <string name="settings_default_playback_speed_title">Standard Wiedergabegeschwindigkeit</string>
     <string name="settings_link_handler_value_external_browser">Externer Browser</string>
-    <string name="settings_link_handler_value_custom_tab">Custom Tab</string>
+    <string name="settings_link_handler_value_custom_tab">Benutzerdefinierter Tab</string>
     <string name="settings_link_handler_value_internal_browser">Interner Browser</string>
     <string name="settings_legacy_autoplay_video_controller_ui_title">Altes Video-Steuerungs UI</string>
     <string name="settings_pinch_to_zoom_video_title">Pinch-To-Zoom Video</string>
@@ -1244,12 +1241,12 @@
     <string name="invalid_username_or_password">Falscher Nutzername/Passwort</string>
     <string name="action_block_user">Nutzer blockieren</string>
     <string name="active_users_number_detail">%1$,d Aktive Nutzer</string>
-    <string name="settings_backup_settings_summary">Das Passwort für die Sicherungsdatei ist \"123321\"</string>
+    <string name="settings_backup_settings_summary">Das Passwort für die Sicherungsdatei ist \"123321\".</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Verstecke Account Karma</string>
     <string name="block_user">Nutzer blockieren</string>
     <string name="clear_user_flair">Flair Löschen</string>
     <string name="clear_user_flair_success">Nutzer-Flair gelöscht</string>
-    <string name="extra_small">Extra Klein</string>
+    <string name="extra_small">Extra klein</string>
     <string name="invalid_link">Ungültiger Link</string>
     <string name="error_unsupported_video">Media enthält Videospuren, aber keine davon sind mit diesem Gerät abspielbar</string>
     <string name="exo_controls_volume_up_description">Lauter</string>
