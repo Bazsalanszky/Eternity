@@ -327,7 +327,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         mLockFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_JUMP_TO_NEXT_TOP_LEVEL_COMMENT_BUTTON, false);
         mSwipeUpToHideFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.SWIPE_UP_TO_HIDE_JUMP_TO_NEXT_TOP_LEVEL_COMMENT_BUTTON, false);
         mExpandChildren = !mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_TOP_LEVEL_COMMENTS_FIRST, false);
-        mMarkPostsAsRead = mPostHistorySharedPreferences.getBoolean(mAccountQualifiedName + SharedPreferencesUtils.MARK_POSTS_AS_READ_BASE, false);
+        mMarkPostsAsRead = mPostHistorySharedPreferences.getBoolean(mAccountName + SharedPreferencesUtils.MARK_POSTS_AS_READ_BASE, false);
         if (savedInstanceState == null) {
             mRespectSubredditRecommendedSortType = mSharedPreferences.getBoolean(SharedPreferencesUtils.RESPECT_SUBREDDIT_RECOMMENDED_COMMENT_SORT_TYPE, false);
             viewPostDetailFragmentId = System.currentTimeMillis();
