@@ -2,6 +2,7 @@ steps:
   build:
     image: alvrme/alpine-android:android-33-jdk11
     commands:
+      - apk add --no-cache python3
       - ./gradlew :app:assembleRelease
     when:
       path: [ app/**, build.gradle ]
