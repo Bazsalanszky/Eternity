@@ -1,5 +1,5 @@
 <h1 align="center">
-  Eternity (formerly Infinity for Lemmy)
+  Eternity for Lemmy
 </h1>
 
 <div align="center">
