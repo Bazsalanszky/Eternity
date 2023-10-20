@@ -1,17 +1,45 @@
- <h1>Eternity</h1>
-<p>A client for Lemmy, specifically designed for Android and written in Java. This project is a fork of the Infinity for Reddit project, and it is currently in the early stages of development. As such, expect many unfinished features and potential bugs!</p>
+<h1>Eternity</h1>
+<p>A client for Lemmy, specifically designed for Android and written in Java. This project is a fork of the Infinity for
+    Reddit project, and it is currently in the early stages of development. As such, expect many unfinished features and
+    potential bugs!</p>
 
-<h2>Development Progress</h2>
+<h2>Features</h2>
+<p>Eternity is currently in the early stages of development. Expect many
+    unfinished features and bugs!</p>
+<h3>Browsing Lemmy</h3>
 <ul>
-    <li>[x] Implementation of basic post browsing feature</li>
-    <li>[x] Support for multiple account handling</li>
-    <li>[x] Functionality for post upvotes/downvotes</li>
-    <li>[x] Functionality to browse comments</li>
-    <li>[ ] Capability for creating a new post</li>
-    <li>[x] Ability to create comments</li>
-    <li>[ ] Elimination of code/string references specific to Reddit</li>
-    <li>[ ] Incorporation of private messaging feature</li>
-    <li>[ ] Feature for saving posts</li>
-    <li>[ ] Account editing function</li>
-    <li>[ ] Multi community view?</li>
+    <li>Explore various feeds (Subscribed/Local/All) and communities</li>
+    <li>Subscribe or unsubscribe from specific communities, with the option
+        to block</li>
+    <li>Discover communities federated with the current instance</li>
+    <li>Favorite a community for quick access</li>
+    <li>Manage your subscriptions and blocked communities</li>
+</ul>
+<h3>Content Engagement</h3>
+<ul>
+    <li>Engage with content by voting, saving, sharing, and creating posts
+        or comments</li>
+    <li>Enjoy endless scrolling through feeds and posts</li>
+    <li>Tailor the view settings for posts (card,compact, gallery)</li>
+    <li>Set default preferences for post and comment sorting</li>
+    <li>Stay updated with notifications for replies</li>
+</ul>
+<h3>Account Management</h3>
+<ul>
+    <li>Sign in to multiple accounts or instances, and effortlessly switch
+        between them</li>
+    <li>Use the inbox features to view replies, mentions, and private
+        messages</li>
+    <li>Access your profile to view your posts, comments, and saved
+        content</li>
+</ul>
+<h3>Customization</h3>
+<ul>
+    <li>Choose between various theme options including Light, Dark,
+        OLED</li>
+    <li>Support Material You theming</li>
+    <li>Explore user-created themes</li>
+    <li>Customize font settings</li>
+    <li>Optional bottom navigation bar</li>
+    <li>Discover a plethora of other customization features</li>
 </ul>

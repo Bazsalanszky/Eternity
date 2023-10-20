@@ -36,24 +36,62 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
 
 ---
 
-## Action Items for Eternity
+## Features
 
 Eternity is currently in the early stages of development. Expect many unfinished features and bugs!
 
-- [x] Implementation of basic post browsing feature
-- [x] Support for multiple account handling
-- [x] Functionality for post upvotes/downvotes
-- [x] Functionality to browse comments
-- [x] Capability for creating a new post
-- [x] Ability to create comments
-- [x] Edit/Delete posts and comments
-- [x] Basic inbox
-- [ ] Elimination of code/string references specific to Reddit
-- [x] Incorporation of private messaging feature
-- [x] Feature for saving posts/comments
-- [x] Resolving links
-- [ ] Account editing function
-- [ ] Multi community view?
+### Browsing Lemmy
+
+ - Explore various feeds (Subscribed/Local/All) and communities
+ - Subscribe or unsubscribe from specific communities, with the option to block
+ - Discover communities federated with the current instance
+ - Favorite a community for quick access
+ - Manage your subscriptions and blocked communities
+
+### Content Engagement
+
+- Engage with content by voting, saving, sharing, and creating posts or comments
+- Enjoy endless scrolling through feeds and posts
+- Tailor the view settings for posts (card,compact, gallery)
+- Set default preferences for post and comment sorting
+- Stay updated with notifications for replies
+
+### Account Management
+
+- Sign in to multiple accounts or instances, and effortlessly switch between them
+- Use the inbox features to view replies, mentions, and private messages
+- Access your profile to view your posts, comments, and saved content
+
+### Customization
+
+- Choose between various theme options including Light, Dark, OLED
+- Support Material You theming
+- Explore user-created themes
+- Customize font settings
+- Optional bottom navigation bar
+- Discover a plethora of other customization features
+
+<img 
+  src="https://codeberg.org/Bazsalanszky/Eternity/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" 
+  alt="Screenshot 1"
+  height="200" >
+<img 
+  src="https://codeberg.org/Bazsalanszky/Eternity/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" 
+  alt="Screenshot 2"
+  height="200" >
+<img 
+  src="https://codeberg.org/Bazsalanszky/Eternity/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" 
+  alt="Screenshot 3"
+  height="200" >
+<img 
+  src="https://codeberg.org/Bazsalanszky/Eternity/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" 
+  alt="Screenshot 4"
+  height="200" >
+<img 
+  src="https://codeberg.org/Bazsalanszky/Eternity/raw/branch/master/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" 
+  alt="Screenshot 5"
+  height="200" >
+
 
 ## Contributing
 
