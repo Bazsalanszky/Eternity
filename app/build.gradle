@@ -121,7 +121,11 @@ android {
             }
         }
     }
-
+    tasks.whenTaskAdded {
+        if (name.contains("ArtProfile")) {
+            enabled = false
+        }
+    }
 
 }
 
