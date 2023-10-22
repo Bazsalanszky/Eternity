@@ -304,8 +304,7 @@
     <string name="settings_start_autoplay_visible_area_offset_landscape_summary">Započni automatski pokretati videozapise kada ih je %1$d%% vidljivo</string>
     <string name="settings_immersive_interface_title">Imerzivno sučelje</string>
     <!-- Fuzzy -->
-    <string name="settings_immersive_interface_summary">Ne odnosi se na sve stranice
-\n</string>
+    <string name="settings_immersive_interface_summary">Ne odnosi se na sve stranice</string>
     <string name="settings_immersive_interface_ignore_nav_bar_title">Ignoriraj navigacijsku traku u imerzivnom sučelju</string>
     <string name="settings_immersive_interface_ignore_nav_bar_summary">Onemogući dodatnu podlogu na donjoj navigacijskoj traci</string>
     <string name="settings_customize_tabs_in_main_page_title">Uredi kartice na Glavnoj stranici</string>
