@@ -353,9 +353,9 @@
     <string name="settings_about_master_title">Про застосунок</string>
     <string name="settings_acknowledgement_master_title">Вдячність</string>
     <string name="settings_credits_master_title">Подяка</string>
-    <string name="settings_credits_icon_foreground_title">Значок переднього фону</string>
+    <string name="settings_credits_icon_foreground_title">Передній план значка</string>
     <string name="settings_credits_icon_foreground_summary">Векторна технологія створена freepik - www.freepik.com</string>
-    <string name="settings_credits_icon_background_title">Значок заднього фону</string>
+    <string name="settings_credits_icon_background_title">Фон значка</string>
     <string name="settings_credits_icon_background_summary">Векторне тло створене freepik - www.freepik.com</string>
     <string name="settings_credits_error_image_title">Зображення помилки</string>
     <string name="settings_credits_error_image_summary">Векторна технологія створена freepik - www.freepik.com</string>
@@ -633,7 +633,7 @@
     <string name="theme_item_nav_bar_color_detail">Задіяно до: Панель пересування</string>
     <string name="theme_item_light_status_bar">Колір значка темної панелі стану</string>
     <string name="theme_item_light_nav_bar">Колір значка темної панелі пересування</string>
-    <string name="theme_item_change_status_bar_icon_color_after_toolbar_collapsed_in_immersive_interface">Змінити колір панелі стану після згортання панелі засобів у заглибленому інтерфейсі</string>
+    <string name="theme_item_change_status_bar_icon_color_after_toolbar_collapsed_in_immersive_interface">Змінити колір значка панелі стану після згортання панелі засобів у заглибленому інтерфейсі</string>
     <string name="theme_item_available_on_android_8">Доступна лише для Android 8.0 або вище.</string>
     <string name="theme_item_available_on_android_6">Доступна лише для Android 6.0 або вище.</string>
     <string name="predefined_themes">Підготовлені теми</string>
@@ -1286,4 +1286,5 @@
     <string name="share_links_on_your_local_instance">Ділитися посиланнями на своєму локальному сервері</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Ділитися посиланнями на своєму локальному сервері, а не на оригінальному сервері створення.</string>
     <string name="unexpected_intent_action">Неочікувана дія наміру: <xliff:g id="action">%1$s</xliff:g></string>
+    <string name="icon_original_label">Оригінальний значок</string>
 </resources>
