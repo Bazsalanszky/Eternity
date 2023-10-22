@@ -1388,4 +1388,6 @@
     <string name="share_links_on_your_local_instance">Share links on your local instance</string>
 
     <string name="icon_original_label">Original Icon</string>
+    <string name="settings_credits_new_icon">New app icon (Cosmic Lemmy)</string>
+    <string name="settings_credits_new_icon_summary">Made by David Gerla</string>
 </resources>

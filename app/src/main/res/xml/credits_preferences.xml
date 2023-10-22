@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
+        android:key="new_icon_foreground"
+        app:title="@string/settings_credits_new_icon"
+        android:summary="@string/settings_credits_new_icon_summary" />
+
+    <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         android:key="icon_foreground"
         app:title="@string/settings_credits_icon_foreground_title"
         android:summary="@string/settings_credits_icon_foreground_summary" />
