@@ -109,8 +109,7 @@
     <string name="upvoted">उत्थापित</string>
     <string name="downvoted">पतित</string>
     <string name="hidden">छिपी हुई</string>
-    <string name="saved">सहेजी हुई
-\n</string>
+    <string name="saved">सहेजी हुई</string>
     <string name="gilded">पदक प्राप्त</string>
     <string name="settings">सैटिंग्स</string>
     <string name="subscribers_number_detail">सब्सक्राइबर्स: %1$,d</string>
@@ -141,8 +140,7 @@
     <string name="comment_content_required">आपका रूचिकर विचार कहाँ है\?</string>
     <string name="sending_comment">जा रहा है</string>
     <string name="send_comment_success">टिप्पणी भेज दी गई</string>
-    <string name="send_comment_failed">टिप्पणी भेजी नहीं जा सकी
-\n</string>
+    <string name="send_comment_failed">टिप्पणी भेजी नहीं जा सकी</string>
     <string name="send_message_username_hint">उपयोगकर्ता</string>
     <string name="send_message_subject_hint">बिषय (अधिकतम १०० अक्षर)</string>
     <string name="send_message_content_hint">संदेश</string>
@@ -163,8 +161,7 @@
     <string name="post_failed">पोस्ट नहीं कर सका</string>
     <string name="error_processing_image">चित्र प्रसंस्करण में दिक्कत</string>
     <string name="error_processing_video">प्रसंस्करण में दिक्कत</string>
-    <string name="download_started">डाउनलोड शुरू हो गया है। प्रगति देखने के लिए नोटिफिकेशन देखें।
-\n</string>
+    <string name="download_started">डाउनलोड शुरू हो गया है। प्रगति देखने के लिए नोटिफिकेशन देखें।</string>
     <string name="comment_load_more_comments">और टिप्पणियां देखें</string>
     <string name="comment_load_more_comments_failed">लोड असफल। पुनः प्रयास के लिए यहां दबाएं।</string>
     <string name="loading">लोड हो रहा है</string>
@@ -793,10 +790,7 @@ Behavior -->
     <string name="settings_show_tab_names">टैब के नाम दिखाएं</string>
     <string name="settings_more_tabs_summary">अतिरिक्त टैब्स</string>
     <string name="settings_more_tabs_info_summary">निम्नलिखित विकल्प को शुरू करना अनपेक्षित व्यवहार का कारण बन जाएगा:
-\nदूसरी टैब में जाने पर टैब्स अपनी अंत:वस्तु खो सकती हैं।
-\n यह पृष्ट को ताजा करने जैसा ही है।
-\n
-\n</string>
+\nदूसरी टैब में जाने पर टैब्स अपनी अंत:वस्तु खो सकती हैं। यह पृष्ट को ताजा करने जैसा ही है।</string>
     <string name="settings_more_tabs_show_favorite_subscribed_communities_title">"पसंदीदा सब्सक्राइब्ड सबरैडिट्स दिखाएं "</string>
     <string name="settings_more_tabs_show_subscribed_communities_title">सब्सक्राइब्ड सबरैडिट्स दिखाएं</string>
     <string name="settings_download_location_title">"डाउनलोड अवस्थिति "</string>
