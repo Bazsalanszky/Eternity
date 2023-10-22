@@ -441,11 +441,36 @@
             android:theme="@style/AppTheme.Launcher"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".DefaultIcon"
+            android:targetActivity=".activities.MainActivity"
+            android:label="@string/application_name"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".OriginalIcon"
+            android:targetActivity=".activities.MainActivity"
+            android:label="@string/application_name"
+            android:enabled="false"
+            android:icon="@mipmap/original_ic_launcher"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
         <activity
             android:name=".activities.LoginActivity"
             android:configChanges="orientation|screenLayout|screenSize|layoutDirection"

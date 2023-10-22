@@ -1386,4 +1386,6 @@
     <string name="settings_hide_user_instance">Hide user instance</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Share links on your local instance rather than the original creation instance.</string>
     <string name="share_links_on_your_local_instance">Share links on your local instance</string>
+
+    <string name="icon_original_label">Original Icon</string>
 </resources>

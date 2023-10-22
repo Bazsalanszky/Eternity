@@ -52,6 +52,13 @@
         app:title="@string/share_links_on_your_local_instance"
         app:summary="@string/share_links_on_your_local_instance_rather_than_the_original_creation_instance" />
 
+    <ListPreference
+        app:key="icon_preference"
+        app:title="Change App Icon"
+        app:entries="@array/icon_labels"
+        app:entryValues="@array/icon_values"
+        app:defaultValue="default_icon" />
+
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceCategory app:title="@string/settings_miscellaneous_dangerous_group_title" />
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference

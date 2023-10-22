@@ -1,6 +1,8 @@
 package eu.toldi.infinityforlemmy.settings;
 
+import android.content.ComponentName;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ public class MiscellaneousPreferenceFragment extends CustomFontPreferenceFragmen
         ListPreference languageListPreference = findPreference(SharedPreferencesUtils.LANGUAGE);
         EditTextPreference anonymousAccountInstance = findPreference(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE);
         EditTextPreference postFeedMaxResolution = findPreference(SharedPreferencesUtils.POST_FEED_MAX_RESOLUTION);
+        ListPreference iconPreference = findPreference(SharedPreferencesUtils.ICON_PREFERENCE);
 
         if (mainPageBackButtonActionListPreference != null) {
             mainPageBackButtonActionListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -102,5 +105,41 @@ public class MiscellaneousPreferenceFragment extends CustomFontPreferenceFragmen
                 return true;
             });
         }
+
+        if (iconPreference != null) {
+            iconPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                updateIcon((String) newValue);
+                return true;
+            });
+        }
     }
+
+    private void updateIcon(String iconValue) {
+        PackageManager pm = getActivity().getPackageManager();
+
+        // Disable all the alternative icons
+        pm.setComponentEnabledSetting(
+                new ComponentName(getActivity(), "eu.toldi.infinityforlemmy.OriginalIcon"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+
+        pm.setComponentEnabledSetting(
+                new ComponentName(getActivity(), "eu.toldi.infinityforlemmy.DefaultIcon"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+
+        // Enable the chosen icon
+        if ("original_icon".equals(iconValue)) {
+            pm.setComponentEnabledSetting(
+                    new ComponentName(getActivity(), "eu.toldi.infinityforlemmy.OriginalIcon"),
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        } else {
+            pm.setComponentEnabledSetting(
+                    new ComponentName(getActivity(), "eu.toldi.infinityforlemmy.DefaultIcon"),
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        }
+    }
+
 }

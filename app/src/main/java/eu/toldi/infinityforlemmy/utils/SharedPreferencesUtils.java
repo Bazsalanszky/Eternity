@@ -420,4 +420,6 @@ public class SharedPreferencesUtils {
     public static final String SHOW_POST_AND_COMMENT_SCORE = "show_score";
 
     public static final String SHARE_LINK_ON_LOCAL_INSTANCE = "share_link_on_local_instance";
+
+    public static final String ICON_PREFERENCE = "icon_preference";
 }
