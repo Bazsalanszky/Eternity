@@ -373,8 +373,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="settings_credits_error_image_summary">Vector de tecnología creado por Freepik - www.freepik.com</string>
     <string name="settings_credits_gilded_icon_title">Ícono de Gold</string>
     <string name="settings_credits_gilded_icon_summary">Ícono hecho por Freepik desde www.flaticon.com</string>
-    <string name="settings_credits_crosspost_icon_title">Ícono de crosspost
-\n</string>
+    <string name="settings_credits_crosspost_icon_title">Ícono de crosspost</string>
     <string name="settings_credits_crosspost_icon_summary">Ícono hecho por Freepik desde www.flaticon.com</string>
     <string name="settings_credits_thumbtack_icon_title">Ícono de tachuela</string>
     <string name="settings_credits_thumbtack_icon_summary">Ícono hecho por Freepik desde www.flaticon.com</string>
@@ -607,8 +606,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="theme_item_archived_tint_detail">Aplicado a: Ícono de archivado</string>
     <string name="theme_item_locked_icon_tint">Color del ícono de bloqueado</string>
     <string name="theme_item_locked_icon_tint_detail">Aplicado a: Ícono de bloqueado</string>
-    <string name="theme_item_crosspost_icon_tint">Color del ícono de crosspost
-\n</string>
+    <string name="theme_item_crosspost_icon_tint">Color del ícono de crosspost</string>
     <string name="theme_item_crosspost_icon_tint_detail">Aplicado a: Ícono de crosspost</string>
     <string name="theme_item_stickied_post_icon_tint">Color del ícono de publicación fijada</string>
     <string name="theme_item_stickied_post_icon_tint_detail">Aplicado a: Ícono de publicación fijada</string>
