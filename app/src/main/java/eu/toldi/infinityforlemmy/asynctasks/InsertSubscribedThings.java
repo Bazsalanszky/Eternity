@@ -49,7 +49,7 @@ public class InsertSubscribedThings {
 
                 for (SubscribedSubredditData s : subscribedSubredditDataList) {
                     if (existingSubscribedSubredditDataList.contains(s)) {
-                        subscribedSubredditDao.updateSubscribedSubreddit(s.getQualified_name(), s.getName(), s.getIconUrl());
+                        subscribedSubredditDao.updateSubscribedSubreddit(s.getQualified_name(), s.getName(), s.getIconUrl(), accountName);
                         continue;
                     }
                     subscribedSubredditDao.insert(s);

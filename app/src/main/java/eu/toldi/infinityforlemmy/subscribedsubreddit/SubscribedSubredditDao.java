@@ -37,6 +37,6 @@ public interface SubscribedSubredditDao {
     @Query("SELECT * from subscribed_subreddits WHERE username = :qualified_name AND name LIKE '%' || :searchQuery || '%' COLLATE NOCASE AND is_favorite = 1 ORDER BY name COLLATE NOCASE ASC")
     LiveData<List<SubscribedSubredditData>> getAllFavoriteSubscribedSubredditsWithSearchQuery(String qualified_name, String searchQuery);
 
-    @Query("UPDATE subscribed_subreddits SET name = :displayName, icon = :icon WHERE qualified_name = :qualified_name")
-    void updateSubscribedSubreddit(String qualified_name, String displayName, String icon);
+    @Query("UPDATE subscribed_subreddits SET name = :displayName, icon = :icon WHERE qualified_name = :qualified_name AND username = :accountName COLLATE NOCASE")
+    void updateSubscribedSubreddit(String qualified_name, String displayName, String icon, String accountName);
 }
