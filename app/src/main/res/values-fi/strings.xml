@@ -640,4 +640,9 @@
     <string name="locked_post_reply_unavailable">Lukittu viesti. Vastaus ei saatavilla.</string>
     <string name="load_messages_failed">Virhe ladatessa viestejä.
 \nNapauta yrittääksesi uudelleen.</string>
+    <string name="icon_original_label">Alkuperäinen kuvake</string>
+    <string name="settings_credits_new_icon_summary">Tehnyt David Gerla</string>
+    <string name="settings_credits_new_icon">Uusi sovelluskuvake (Cosmic Lemmy)</string>
+    <string name="about_you_text">Tietoja sinusta</string>
+    <string name="about_you_hint">Lyhyt kuvaus itsestä</string>
 </resources>
