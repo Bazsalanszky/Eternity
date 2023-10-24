@@ -101,7 +101,7 @@ android {
 
 
     task rearrangeClass(type: Exec) {
-        commandLine 'python', '../scripts/fixEventBus.py'
+        commandLine 'python3', '../scripts/fixEventBus.py'
     }
 
     applicationVariants.all { variant ->
