@@ -1291,4 +1291,6 @@
     <string name="settings_show_post_and_comment_score">Zobrazit skóre příspěvků a komentářů</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Sdílet odkazy na vaší místní instanci místo původní instanci vytvoření.</string>
     <string name="icon_original_label">Původní ikona</string>
+    <string name="settings_credits_new_icon">Nová ikona aplikace (kosmické Lemmy)</string>
+    <string name="settings_credits_new_icon_summary">Vytvořil David Gerla</string>
 </resources>
