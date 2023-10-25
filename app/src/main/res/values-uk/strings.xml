@@ -805,7 +805,7 @@
     <string name="submit_post">Надіслати допис</string>
     <string name="refresh">Оновити</string>
     <string name="change_sort_type">Змінити тип сортування</string>
-    <string name="change_post_layout">Змінити форму дописів</string>
+    <string name="change_post_layout">Змінити вигляд дописів</string>
     <string name="give_award_dialog_title">Нагородити\?</string>
     <string name="anonymous">Анонімно</string>
     <string name="give_award_error_message">Код: %1$d/
