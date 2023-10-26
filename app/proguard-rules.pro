@@ -5,6 +5,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontobfuscate
+-keepattributes SourceFile,LineNumberTable
 
 ## Preferences reflection
 -keep class * extends androidx.preference.PreferenceFragmentCompat

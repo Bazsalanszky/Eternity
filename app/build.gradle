@@ -33,7 +33,8 @@ android {
     buildTypes {
 
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -97,6 +98,12 @@ android {
     packagingOptions {
         doNotStrip '**/*.so'
     }
+
+    // Kotlin jvm target
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
     namespace 'eu.toldi.infinityforlemmy'
 
 
