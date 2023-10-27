@@ -100,10 +100,10 @@
     <string name="no_messages">Gol</string>
     <string name="nsfw">NSFW</string>
     <!-- Fuzzy -->
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <!-- Fuzzy -->
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Aniversare:
 \n%1$s</string>
     <string name="since">Din:</string>
@@ -120,7 +120,7 @@
     <!-- Fuzzy -->
     <string name="subscribers_number_detail">%1$,d Abonați</string>
     <!-- Fuzzy -->
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Nu s-au găsit informații despre subreddit</string>
     <string name="cannot_fetch_user_info">Nu s-au găsit informații despre utilizator</string>
     <string name="cannot_fetch_sidebar">Nu s-a putut prelua bara laterală</string>
@@ -719,7 +719,7 @@
     <string name="edit_multi_reddit">Editează Multireddit</string>
     <string name="delete_multi_reddit">Șterge Multireddit</string>
     <!-- Fuzzy -->
-    <string name="n_awards">%1$d Premii</string>
+    <string name="n_awards">%1$,d Premii</string>
     <string name="one_award">1 Premiu</string>
     <string name="report">Raportează</string>
     <string name="reporting">Se raportează</string>
@@ -1019,7 +1019,7 @@
     <string name="suggest_title_failed">Nu s-a putut sugera un titlu</string>
     <string name="action_delete_logs">Șterge Registrul</string>
     <!-- Fuzzy -->
-    <string name="inbox_with_count">Mesaje (%1$d)</string>
+    <string name="inbox_with_count">Mesaje (%1$,d)</string>
     <string name="comment_continue_thread">Continuă firul</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Glisează pe Vertical pentru a vă Întoarce de la Imagine și Gif</string>
     <string name="settings_hide_post_flair">Ascunde Insigna Postării</string>
