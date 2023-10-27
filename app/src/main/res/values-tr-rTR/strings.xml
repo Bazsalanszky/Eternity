@@ -87,16 +87,16 @@
 \nTekrar denemek için tıklayın.</string>
     <string name="retry">Tekrar dene</string>
     <string name="comments">Yorumlar</string>
-    <string name="no_comments_yet">Henüz yorum yok, ilk yorumu yapan siz olun.</string>
+    <string name="no_comments_yet">Henüz yorum yok, ilk yorumu yapan siz olun\?</string>
     <string name="vote_failed">Oylama başarısız oldu</string>
     <string name="refresh_post_failed">Gönderi yenilenirken hata oluştu</string>
     <string name="load_messages_failed">Mesajlar yüklenirken hata oluştu.
 \nTekrar denemek için tıklayın.</string>
     <string name="no_messages">Boş</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Üyelik tarihi:
 \n%1$s</string>
     <!-- Since Turkish is an agglutinative lang, there is no good translation.
@@ -114,8 +114,8 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="saved">Kaydedilenler</string>
     <string name="gilded">Yaldızlananlar</string>
     <string name="settings">Ayarlar</string>
-    <string name="subscribers_number_detail">%1$d Abone</string>
-    <string name="online_subscribers_number_detail">Çevrimiçi: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d Abone</string>
+    <string name="online_subscribers_number_detail">Çevrimiçi: %1$,d</string>
     <string name="cannot_fetch_community_info">Subreddit bilgisi getirilemiyor</string>
     <string name="cannot_fetch_user_info">Kullanıcı bilgisi getirilemiyor</string>
     <string name="cannot_fetch_sidebar">Hakkındakiler getirilemiyor</string>
@@ -382,7 +382,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_open_source_title">Açık Kaynak</string>
     <string name="settings_open_source_summary">Bu uygulamayı beğendiyseniz Github\'da yıldız verin</string>
     <string name="settings_rate_title">Google Play\'de Değerlendirin</string>
-    <string name="settings_rate_summary">Bize 5 yıldız verirseniz gerçekten mutlu oluruz.</string>
+    <string name="settings_rate_summary">Bize 5 yıldız verirseniz gerçekten mutlu oluruz</string>
     <string name="settings_email_title">E-posta</string>
     <string name="settings_email_summary">docilealligator.app@gmail.com</string>
     <string name="settings_reddit_account_title">Reddit Hesabı</string>
@@ -578,11 +578,9 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="theme_item_downvoted_color">Olumsuz Oylananlar Rengi</string>
     <string name="theme_item_downvoted_color_detail">Uygulandığı yer: Oy düğmeleri ve puanları (olumsuz oylananlar)</string>
     <string name="theme_item_post_type_background_color">Gönderi Türü Arka Plan Rengi</string>
-    <string name="theme_item_post_type_background_color_detail">Uygulandığı yer: Gönderi türü arka planı
-\n(FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
+    <string name="theme_item_post_type_background_color_detail">Uygulandığı yer: Gönderi türü arka planı (FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
     <string name="theme_item_post_type_text_color">Gönderi Türü Metin Rengi</string>
-    <string name="theme_item_post_type_text_color_detail">Uygulandığı yer: Gönderi türü metin rengi
-\n(FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
+    <string name="theme_item_post_type_text_color_detail">Uygulandığı yer: Gönderi türü metin rengi (FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
     <string name="theme_item_spoiler_background_color">Spoiler Arka Plan Rengi</string>
     <string name="theme_item_spoiler_background_color_detail">Uygulandığı yer: Spoiler etiketinin arka planı</string>
     <string name="theme_item_spoiler_text_color">Spoiler Metin Rengi</string>
@@ -708,16 +706,17 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="flair_preview">Etiket</string>
     <string name="awards_preview">4 Ödül</string>
     <string name="author_flair_preview">Yazar Rozeti</string>
-    <string name="comment_content_preview">Kız arkadaşıma üstünde \"yakında iyileşmen dileğiyle\" yazan bir kart aldım. Hasta falan değildi, ama kesinlikle iyileşmeliydi.</string>
+    <string name="comment_content_preview">Kız arkadaşıma üstünde \"yakında iyileşmen dileğiyle\" yazan bir kart aldım.
+\nHasta falan değildi, ama kesinlikle iyileşmeliydi.</string>
     <string name="edit_multi_reddit">Multireddit\'i Düzenle</string>
     <string name="delete_multi_reddit">Multireddit\'i Sil</string>
-    <string name="n_awards">%1$d Ödül</string>
+    <string name="n_awards">%1$,d Ödül</string>
     <string name="one_award">1 Ödül</string>
     <string name="report">Bildir</string>
     <string name="reporting">Bildiriliyor</string>
     <string name="report_successful">Bildirildi</string>
     <string name="report_failed">Bildirme başarısız oldu</string>
-    <string name="report_reason_not_selected">Bir neden seçmediniz.</string>
+    <string name="report_reason_not_selected">Bir neden seçmediniz</string>
     <string name="report_reason_general_spam">Spam</string>
     <string name="report_reason_general_copyright_issue">Telif Hakkı Meselesi İçeriyor</string>
     <string name="report_reason_general_child_pornography">Çocuk Pornografisi İçeriyor</string>
@@ -751,8 +750,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="default_font_font_preview">Varsayılan</string>
     <string name="load_video_in_redgifs">Videoyu Redgifs\'e yüklemeyi deneyin</string>
     <string name="top_score">%1$s puan</string>
-    <string name="login_activity_2fa_prompt">2 faktörlü kimlik doğrulamasını etkinleştirdiyseniz, lütfen şifrenizi aşağıdaki gibi yazınız: &lt;parola&gt;: &lt;2FA code&gt;.
-\nÖrnek: yourpass:123456</string>
+    <string name="login_activity_2fa_prompt">2 faktörlü kimlik doğrulamasını etkinleştirdiyseniz, lütfen şifrenizi aşağıdaki gibi yazınız: &lt;parola&gt;: &lt;2FA code&gt;</string>
     <string name="submit_crosspost_activity_label">Çapraz Gönderi</string>
     <string name="give_award_activity_label">Ödül Ver</string>
     <string name="action_crosspost">Çapraz Gönderi</string>
@@ -799,10 +797,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_bottom_app_bar_fab">Kayan İşlem Düğmesi</string>
     <string name="settings_data_saving_mode">Veri Tasarrufu Modu</string>
     <!-- Fuzzy -->
-    <string name="settings_data_saving_mode_info_summary">Veri tasarrufu modunda:
-\nResim önizlemelerinin çözünürlüğü düşer.
-\nReddit videolarının çözünürlüğü düşer.
-\nOtomatik video oynatma kapatılır.</string>
+    <string name="settings_data_saving_mode_info_summary">Veri tasarrufu modunda: Resim önizlemelerinin çözünürlüğü düşer. Reddit videolarının çözünürlüğü düşer. Otomatik video oynatma kapatılır.</string>
     <string name="settings_translation_title">Çeviri</string>
     <string name="settings_translation_summary">POEditor\'da bu uygulamayı çevirin. Tüm katkıda bulunanlara teşekkürler.</string>
     <string name="settings_credits_national_flags">Ulusal Bayraklar</string>
@@ -930,7 +925,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="post_filter_requires_a_name">Bu gönderi filtresinin adı nedir\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' Zaten Var</string>
     <string name="duplicate_post_filter_dialog_message">Geçersiz kılınsın mı\?</string>
-    <string name="apply_post_filter_to">Uygulanan:</string>
+    <string name="apply_post_filter_to">Uygulanan</string>
     <string name="post_filter_usage_home">Ana Sayfa</string>
     <string name="post_filter_usage_community">Subreddit: %1$s</string>
     <string name="post_filter_usage_community_all">Subreddit</string>
@@ -1021,7 +1016,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="suggest_title">Başlık Öner</string>
     <string name="suggest_title_failed">Bir başlık önerilemedi</string>
     <string name="action_delete_logs">Seyir Defterini Sil</string>
-    <string name="inbox_with_count">Gelen Kutusu (%1$d)</string>
+    <string name="inbox_with_count">Gelen Kutusu (%1$,d)</string>
     <string name="comment_continue_thread">Konuya devam et</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Resim ve GIF\'ten Geri Dönmek İçin Dikey Kaydır</string>
