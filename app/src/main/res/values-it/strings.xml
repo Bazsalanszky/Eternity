@@ -91,9 +91,9 @@
     <string name="load_messages_failed">Errore durante il caricamento messaggi. Tocca per riprovare.</string>
     <string name="no_messages">Vuoto</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Compleanno account:
 \n%1$s</string>
     <string name="since">Da:</string>
@@ -108,7 +108,7 @@
     <string name="gilded">Premiati</string>
     <string name="settings">Impostazioni</string>
     <string name="subscribers_number_detail">Iscritti: %1$d</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Impossibile recuperare le informazioni del subreddit</string>
     <string name="cannot_fetch_user_info">Impossibile recuperare le informazioni dell\'utente</string>
     <string name="cannot_fetch_sidebar">Impossibile caricare barra laterale</string>
@@ -691,7 +691,7 @@
     <string name="comment_content_preview">Non mi fido molto delle statistiche, perché un uomo con la testa nel forno acceso e i piedi nel congelatore statisticamente ha una temperatura media.</string>
     <string name="edit_multi_reddit">Modifica multireddit</string>
     <string name="delete_multi_reddit">Cancella Multireddit</string>
-    <string name="n_awards">%1$d premi</string>
+    <string name="n_awards">%1$,d premi</string>
     <string name="one_award">1 Premio</string>
     <string name="report">Segnala</string>
     <string name="reporting">Segnala</string>
@@ -990,7 +990,7 @@
     <string name="suggest_title">Suggerisci titolo</string>
     <string name="suggest_title_failed">Impossibile suggerire un titolo</string>
     <string name="action_delete_logs">Cancella i log</string>
-    <string name="inbox_with_count">Posta (%1$d)</string>
+    <string name="inbox_with_count">Posta (%1$,d)</string>
     <string name="comment_continue_thread">Continua thread</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Scorri verticalmente per tornare indietro dai media</string>
     <string name="settings_hide_post_flair">Nascondi i flair dei post</string>
