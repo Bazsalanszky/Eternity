@@ -91,9 +91,9 @@
 \nDruk om opnieuw te proberen.</string>
     <string name="no_messages">Leeg</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Taartdag:
 \n%1$s</string>
     <string name="since">Sinds:</string>
@@ -108,7 +108,7 @@
     <string name="gilded">Verguld</string>
     <string name="settings">Instellingen</string>
     <string name="subscribers_number_detail">Aantal abonnees: %1$d</string>
-    <string name="online_subscribers_number_detail">Aantal online: %1$d</string>
+    <string name="online_subscribers_number_detail">Aantal online: %1$,d</string>
     <string name="cannot_fetch_community_info">De gemeenschap-informatie kan niet worden opgehaald</string>
     <string name="cannot_fetch_user_info">De gebruikersinformatie kan niet worden opgehaald</string>
     <string name="cannot_fetch_sidebar">De zijbalk kan niet worden geopend</string>
@@ -706,7 +706,7 @@ not: "5 uren" -->
 \nZe is niet ziek of zo, maar ze kan zeker beter worden.</string>
     <string name="edit_multi_reddit">Wijzig Multireddit</string>
     <string name="delete_multi_reddit">Verwijder Multireddit</string>
-    <string name="n_awards">%1$d Awards</string>
+    <string name="n_awards">%1$,d Awards</string>
     <string name="one_award">1 Award</string>
     <string name="report">Meld</string>
     <string name="reporting">Aan het melden</string>
