@@ -38,7 +38,12 @@
     <item
         android:id="@+id/unblock_community_view_subreddit_detail_activity"
         android:orderInCategory="5"
-        android:title="@string/unblock_community"
+        android:title="@string/unblock_community" />
+
+    <item
+        android:id="@+id/action_add_to_home_screen_view_subreddit_detail_activity"
+        android:orderInCategory="6"
+        android:title="@string/action_add_to_home_screen"
         app:showAsAction="never" />
 
 
@@ -54,6 +59,11 @@
         android:title="@string/action_share"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_go_to_wiki_view_subreddit_detail_activity"
+        android:orderInCategory="9"
+        android:title="@string/action_go_to_wiki"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_contact_mods_view_subreddit_detail_activity"

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
 
     <item android:drawable="@color/backgroundColor" />
 
     <item>
         <bitmap
-            android:src="@drawable/splash_icon"
+            android:src="@drawable/ic_launcher_foreground"
             android:gravity="center" />
+    </item>
+
+    <item android:bottom="100dp">
+        <bitmap
+            android:gravity="bottom"
+            android:src="@drawable/splash_branding" />
     </item>
 
 </layer-list>

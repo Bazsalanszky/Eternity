@@ -69,10 +69,8 @@ public class PostViewModel extends ViewModel {
         this.name = option;
         this.postEnricher = postEnricher;
 
-        sortTypeLiveData = new MutableLiveData<>();
-        sortTypeLiveData.postValue(sortType);
-        postFilterLiveData = new MutableLiveData<>();
-        postFilterLiveData.postValue(postFilter);
+        sortTypeLiveData = new MutableLiveData<>(sortType);
+        postFilterLiveData = new MutableLiveData<>(postFilter);
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
@@ -112,10 +110,8 @@ public class PostViewModel extends ViewModel {
         this.name = subredditName;
         this.postEnricher = postEnricher;
 
-        sortTypeLiveData = new MutableLiveData<>();
-        sortTypeLiveData.postValue(sortType);
-        postFilterLiveData = new MutableLiveData<>();
-        postFilterLiveData.postValue(postFilter);
+        sortTypeLiveData = new MutableLiveData<>(sortType);
+        postFilterLiveData = new MutableLiveData<>(postFilter);
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
@@ -158,10 +154,8 @@ public class PostViewModel extends ViewModel {
         this.userWhere = userWhere;
         this.postEnricher = postEnricher;
 
-        sortTypeLiveData = new MutableLiveData<>();
-        sortTypeLiveData.postValue(sortType);
-        postFilterLiveData = new MutableLiveData<>();
-        postFilterLiveData.postValue(postFilter);
+        sortTypeLiveData = new MutableLiveData<>(sortType);
+        postFilterLiveData = new MutableLiveData<>(postFilter);
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 
@@ -204,10 +198,8 @@ public class PostViewModel extends ViewModel {
         this.trendingSource = trendingSource;
         this.postEnricher = postEnricher;
 
-        sortTypeLiveData = new MutableLiveData<>();
-        sortTypeLiveData.postValue(sortType);
-        postFilterLiveData = new MutableLiveData<>();
-        postFilterLiveData.postValue(postFilter);
+        sortTypeLiveData = new MutableLiveData<>(sortType);
+        postFilterLiveData = new MutableLiveData<>(postFilter);
 
         sortTypeAndPostFilterLiveData = new SortTypeAndPostFilterLiveData(sortTypeLiveData, postFilterLiveData);
 

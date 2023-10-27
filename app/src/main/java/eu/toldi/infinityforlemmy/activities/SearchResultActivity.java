@@ -38,6 +38,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -130,10 +131,11 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
     SharedPreferences mCurrentAccountSharedPreferences;
     @Inject
     CustomThemeWrapper mCustomThemeWrapper;
+    @Inject
+    Executor executor;
     private Call<String> subredditAutocompleteCall;
     private String mAccessToken;
     private String mAccountName;
-
     private String mAccountQualifiedName;
     private String mQuery;
     private String mSubredditName;
@@ -244,7 +246,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
     private void bindView(Bundle savedInstanceState) {
         sectionsPagerAdapter = new SectionsPagerAdapter(this);
         viewPager2.setAdapter(sectionsPagerAdapter);
-        viewPager2.setOffscreenPageLimit(3);
+        viewPager2.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         viewPager2.setUserInputEnabled(!mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_SWIPING_BETWEEN_TABS, false));
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -392,8 +394,8 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
         });
 
         if (mAccountName != null && mSharedPreferences.getBoolean(SharedPreferencesUtils.ENABLE_SEARCH_HISTORY, true) && !mInsertSearchQuerySuccess && mQuery != null) {
-            InsertRecentSearchQuery.insertRecentSearchQueryListener(mRedditDataRoomDatabase, mAccountQualifiedName,
-                    mQuery, () -> mInsertSearchQuerySuccess = true);
+            InsertRecentSearchQuery.insertRecentSearchQueryListener(executor, new Handler(getMainLooper()),
+                    mRedditDataRoomDatabase, mAccountQualifiedName, mQuery, () -> mInsertSearchQuerySuccess = true);
         }
     }
 

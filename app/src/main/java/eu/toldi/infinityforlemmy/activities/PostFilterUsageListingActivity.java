@@ -126,9 +126,9 @@ public class PostFilterUsageListingActivity extends BaseActivity {
     }
 
     private void editAndPostFilterUsageNameOfUsage(int type, String nameOfUsage) {
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_post_filter_name_of_usage, null);
-        TextInputLayout textInputLayout = dialogView.findViewById(R.id.text_input_layout_edit_post_filter_name_of_usage_dialog);
-        TextInputEditText textInputEditText = dialogView.findViewById(R.id.text_input_edit_text_edit_post_filter_name_of_usage_dialog);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_post_or_comment_filter_name_of_usage, null);
+        TextInputLayout textInputLayout = dialogView.findViewById(R.id.text_input_layout_edit_post_or_comment_filter_name_of_usage_dialog);
+        TextInputEditText textInputEditText = dialogView.findViewById(R.id.text_input_edit_text_edit_post_or_comment_filter_name_of_usage_dialog);
         int primaryTextColor = customThemeWrapper.getPrimaryTextColor();
         textInputLayout.setBoxStrokeColor(primaryTextColor);
         textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));

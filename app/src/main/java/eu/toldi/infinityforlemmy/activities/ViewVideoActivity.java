@@ -23,14 +23,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -70,6 +67,7 @@ import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.video.VideoSize;
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.common.collect.ImmutableList;
 import com.otaliastudios.zoom.ZoomEngine;
@@ -132,7 +130,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
     public static final String EXTRA_VIDEO_DOWNLOAD_URL = "EVDU";
     public static final String EXTRA_SUBREDDIT = "ES";
     public static final String EXTRA_ID = "EI";
-    public static final String EXTRA_POST_TITLE = "EPT";
+    public static final String EXTRA_POST = "EP";
     public static final String EXTRA_PROGRESS_SECONDS = "EPS";
     public static final String EXTRA_VIDEO_TYPE = "EVT";
     public static final String EXTRA_GFYCAT_ID = "EGI";
@@ -163,17 +161,19 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
     @BindView(R.id.progress_bar_view_video_activity)
     ProgressBar progressBar;
     @BindView(R.id.mute_exo_playback_control_view)
-    ImageButton muteButton;
+    MaterialButton muteButton;
     @BindView(R.id.hd_exo_playback_control_view)
-    ImageButton hdButton;
+    MaterialButton hdButton;
     @BindView(R.id.bottom_navigation_exo_playback_control_view)
     BottomAppBar bottomAppBar;
     @BindView(R.id.title_text_view_exo_playback_control_view)
     TextView titleTextView;
+    @BindView(R.id.back_button_exo_playback_control_view)
+    MaterialButton backButton;
     @BindView(R.id.download_image_view_exo_playback_control_view)
-    ImageView downloadImageView;
+    MaterialButton downloadButton;
     @BindView(R.id.playback_speed_image_view_exo_playback_control_view)
-    ImageView playbackSpeedImageView;
+    MaterialButton playbackSpeedButton;
     @BindView(R.id.lockable_nested_scroll_view_view_video_activity)
     LockableNestedScrollView nestedScrollView;
 
@@ -301,6 +301,12 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
         ButterKnife.bind(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
+        setTitle(" ");
+
+        if (typeface != null) {
+            titleTextView.setTypeface(typeface);
+        }
+
         Resources resources = getResources();
 
         getWindow().getDecorView().setSystemUiVisibility(
@@ -312,7 +318,11 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
         if (useBottomAppBar) {
             getSupportActionBar().hide();
             bottomAppBar.setVisibility(View.VISIBLE);
-            downloadImageView.setOnClickListener(view -> {
+            backButton.setOnClickListener(view -> {
+                finish();
+            });
+
+            downloadButton.setOnClickListener(view -> {
                 if (isDownloading) {
                     return;
                 }
@@ -326,12 +336,8 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                 requestPermissionAndDownload();
             });
 
-            playbackSpeedImageView.setOnClickListener(view -> {
-                PlaybackSpeedBottomSheetFragment playbackSpeedBottomSheetFragment = new PlaybackSpeedBottomSheetFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(PlaybackSpeedBottomSheetFragment.EXTRA_PLAYBACK_SPEED, playbackSpeed);
-                playbackSpeedBottomSheetFragment.setArguments(bundle);
-                playbackSpeedBottomSheetFragment.show(getSupportFragmentManager(), playbackSpeedBottomSheetFragment.getTag());
+            playbackSpeedButton.setOnClickListener(view -> {
+                changePlaybackSpeed();
             });
         } else {
             ActionBar actionBar = getSupportActionBar();
@@ -402,12 +408,15 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                         };
                         orientationEventListener.enable();
                     }
-                } catch (Exception ignore) {}
+                } catch (Exception ignore) {
+                }
             }
         }
 
-        String postTitle = intent.getStringExtra(EXTRA_POST_TITLE);
-        setSmallTitle(postTitle);
+        Post post = intent.getParcelableExtra(EXTRA_POST);
+        if (post != null) {
+            titleTextView.setText(post.getTitle());
+        }
 
         trackSelector = new DefaultTrackSelector(this);
         if (videoType == VIDEO_TYPE_NORMAL && isDataSavingMode && dataSavingModeDefaultResolution > 0) {
@@ -598,20 +607,6 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
         }
     }
 
-    private void setSmallTitle(String title) {
-        if (title != null) {
-            if (useBottomAppBar) {
-                titleTextView.setText(Html.fromHtml(String.format("<font color=\"#FFFFFF\"><small>%s</small></font>", title)));
-            } else {
-                setTitle(Utils.getTabTextWithCustomFont(typeface, Html.fromHtml(String.format("<font color=\"#FFFFFF\"><small>%s</small></font>", title))));
-            }
-        } else {
-            if (!useBottomAppBar) {
-                setTitle("");
-            }
-        }
-    }
-
     private void preparePlayer(Bundle savedInstanceState) {
         if (mSharedPreferences.getBoolean(SharedPreferencesUtils.LOOP_VIDEO, true)) {
             player.setRepeatMode(Player.REPEAT_MODE_ALL);
@@ -631,17 +626,17 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
             isMute = savedInstanceState.getBoolean(IS_MUTE_STATE);
             if (isMute) {
                 player.setVolume(0f);
-                muteButton.setImageResource(R.drawable.ic_mute_24dp);
+                muteButton.setIconResource(R.drawable.ic_mute_24dp);
             } else {
                 player.setVolume(1f);
-                muteButton.setImageResource(R.drawable.ic_unmute_24dp);
+                muteButton.setIconResource(R.drawable.ic_unmute_24dp);
             }
         } else if (muteVideo) {
             isMute = true;
             player.setVolume(0f);
-            muteButton.setImageResource(R.drawable.ic_mute_24dp);
+            muteButton.setIconResource(R.drawable.ic_mute_24dp);
         } else {
-            muteButton.setImageResource(R.drawable.ic_unmute_24dp);
+            muteButton.setIconResource(R.drawable.ic_unmute_24dp);
         }
 
         player.addListener(new Player.Listener() {
@@ -685,11 +680,11 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                                     if (isMute) {
                                         isMute = false;
                                         player.setVolume(1f);
-                                        muteButton.setImageResource(R.drawable.ic_unmute_24dp);
+                                        muteButton.setIconResource(R.drawable.ic_unmute_24dp);
                                     } else {
                                         isMute = true;
                                         player.setVolume(0f);
-                                        muteButton.setImageResource(R.drawable.ic_mute_24dp);
+                                        muteButton.setIconResource(R.drawable.ic_mute_24dp);
                                     }
                                 });
                             }
@@ -700,6 +695,14 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                 }
             }
         });
+    }
+
+    private void changePlaybackSpeed() {
+        PlaybackSpeedBottomSheetFragment playbackSpeedBottomSheetFragment = new PlaybackSpeedBottomSheetFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(PlaybackSpeedBottomSheetFragment.EXTRA_PLAYBACK_SPEED, playbackSpeed);
+        playbackSpeedBottomSheetFragment.setArguments(bundle);
+        playbackSpeedBottomSheetFragment.show(getSupportFragmentManager(), playbackSpeedBottomSheetFragment.getTag());
     }
 
     private int inferPrimaryTrackType(Format format) {
@@ -884,7 +887,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
                             Toast.makeText(ViewVideoActivity.this, R.string.fetch_streamable_video_failed, Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        setSmallTitle(streamableVideo.title);
+                        titleTextView.setText(streamableVideo.title);
                         progressBar.setVisibility(View.GONE);
                         videoDownloadUrl = streamableVideo.mp4 == null ? streamableVideo.mp4Mobile.url : streamableVideo.mp4.url;
                         mVideoUri = Uri.parse(videoDownloadUrl);
@@ -939,11 +942,7 @@ public class ViewVideoActivity extends AppCompatActivity implements CustomFontRe
             requestPermissionAndDownload();
             return true;
         } else if (itemId == R.id.action_playback_speed_view_video_activity) {
-            PlaybackSpeedBottomSheetFragment playbackSpeedBottomSheetFragment = new PlaybackSpeedBottomSheetFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(PlaybackSpeedBottomSheetFragment.EXTRA_PLAYBACK_SPEED, playbackSpeed);
-            playbackSpeedBottomSheetFragment.setArguments(bundle);
-            playbackSpeedBottomSheetFragment.show(getSupportFragmentManager(), playbackSpeedBottomSheetFragment.getTag());
+            changePlaybackSpeed();
             return true;
         }
 

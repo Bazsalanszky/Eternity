@@ -1,5 +1,4 @@
 package eu.toldi.infinityforlemmy.utils;
-
 import android.util.Base64;
 
 import java.util.HashMap;
@@ -116,11 +115,6 @@ public class APIUtils {
     public static final String REVEDDIT_ORIGIN = "https://www.reveddit.com";
     public static final String REFERER_KEY = "Referer";
     public static final String REVEDDIT_REFERER = "https://www.reveddit.com/";
-
-    /*public static final String HOST_KEY = "Host";
-    public static final String REDGIFS_HOST = "api.redgifs.com";
-    public static final String CONTENT_TYPE_KEY = "Content-Type";
-    public static final String */
 
     public static Map<String, String> getHttpBasicAuthHeader() {
         Map<String, String> params = new HashMap<>();

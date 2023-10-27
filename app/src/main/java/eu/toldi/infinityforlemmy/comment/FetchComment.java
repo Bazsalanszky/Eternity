@@ -13,6 +13,7 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,19 +23,20 @@ public class FetchComment {
     public static void fetchComments(Executor executor, Handler handler, Retrofit retrofit,
                                      @Nullable String accessToken, Integer article,
                                      Integer commentId, SortType.Type sortType, boolean expandChildren,
-                                     Integer page, FetchCommentListener fetchCommentListener) {
+                                     Integer page, CommentFilter commentFilter, FetchCommentListener fetchCommentListener) {
         LemmyAPI api = retrofit.create(LemmyAPI.class);
         Call<String> comments;
 
         comments = api.getComments("All", sortType.value, 8, page, 25, null, null, article, commentId, false, accessToken);
 
 
-        comments.enqueue(new Callback<String>() {
+        comments.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     ParseComment.parseComments(executor, handler, response.body(), commentId,
-                            expandChildren, new ParseComment.ParseCommentListener() {
+                            expandChildren, commentFilter,
+                            new ParseComment.ParseCommentListener() {
                                 @Override
                                 public void onParseCommentSuccess(ArrayList<Comment> topLevelComments,
                                                                   ArrayList<Comment> expandedComments,
@@ -70,7 +72,7 @@ public class FetchComment {
         moreComments = api.getComments("All", sortType.value, 8, page, 25, null, null, article, commentId, false, accessToken);
 
 
-        moreComments.enqueue(new Callback<String>() {
+        moreComments.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {

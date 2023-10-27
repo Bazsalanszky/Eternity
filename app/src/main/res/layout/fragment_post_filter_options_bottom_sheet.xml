@@ -33,7 +33,7 @@
             android:id="@+id/apply_to_text_view_post_filter_options_bottom_sheet_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/apply_post_filter_to"
+            android:text="@string/apply_to"
             android:textColor="?attr/primaryTextColor"
             android:textSize="?attr/font_default"
             android:fontFamily="?attr/font_family"

@@ -17,6 +17,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -94,6 +95,9 @@ import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.FetchComment;
 import eu.toldi.infinityforlemmy.comment.FetchRemovedComment;
 import eu.toldi.infinityforlemmy.comment.FetchRemovedCommentReveddit;
+import eu.toldi.infinityforlemmy.comment.ParseComment;
+import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
+import eu.toldi.infinityforlemmy.commentfilter.FetchCommentFilter;
 import eu.toldi.infinityforlemmy.community.BlockCommunity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.CustomToroContainer;
@@ -232,6 +236,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     boolean mRespectSubredditRecommendedSortType;
     @State
     long viewPostDetailFragmentId;
+    @State
+    boolean commentFilterFetched;
+    @State
+    CommentFilter mCommentFilter;
 
     @State
     boolean isCommunityBlocked;
@@ -292,7 +300,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         applyTheme();
 
-        mRecyclerView.addOnWindowFocusChangedListener(this::onWindowFocusChanged);
+
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
@@ -459,7 +467,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
             @Override
             public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                if (!(viewHolder instanceof CommentsRecyclerViewAdapter.CommentViewHolder)) {
+                if (!(viewHolder instanceof CommentsRecyclerViewAdapter.CommentBaseViewHolder)) {
                     return makeMovementFlags(0, 0);
                 }
                 int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
@@ -554,7 +562,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             touchHelper.attachToRecyclerView((mCommentsRecyclerView == null ? mRecyclerView : mCommentsRecyclerView));
         }
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refresh(true, true));
+        mSwipeRefreshLayout.setOnRefreshListener(() -> refresh());
 
         mSmoothScroller = new LinearSmoothScroller(activity) {
             @Override
@@ -644,7 +652,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         public SortType.Type getSortType() {
                             return sortType;
                         }
-                    } );
+                    });
             if (mCommentsRecyclerView != null) {
                 mRecyclerView.setAdapter(mPostAdapter);
                 mCommentsRecyclerView.setAdapter(mCommentsAdapter);
@@ -653,21 +661,15 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                 mRecyclerView.setAdapter(mConcatAdapter);
             }
 
-            if (comments == null) {
-                fetchCommentsRespectRecommendedSort(false);
+            if (commentFilterFetched) {
+                fetchCommentsAfterCommentFilterAvailable();
             } else {
-                if (isRefreshing) {
-                    isRefreshing = false;
-                    refresh(true, true);
-                } else if (isFetchingComments) {
-                    fetchCommentsRespectRecommendedSort(false);
-                } else {
-                    mCommentsAdapter.addComments(comments, hasMoreChildren);
-                    if (isLoadingMoreChildren) {
-                        isLoadingMoreChildren = false;
-                        fetchMoreComments();
-                    }
-                }
+                FetchCommentFilter.fetchCommentFilter(mExecutor, new Handler(Looper.getMainLooper()), mRedditDataRoomDatabase, mPost.getSubredditName(),
+                        commentFilter -> {
+                            mCommentFilter = commentFilter;
+                            commentFilterFetched = true;
+                            fetchCommentsAfterCommentFilterAvailable();
+                        });
             }
         }
 
@@ -676,6 +678,25 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             VolumeInfo volumeInfo = new VolumeInfo(true, 0f);
             return new PlaybackInfo(INDEX_UNSET, TIME_UNSET, volumeInfo);
         });
+    }
+
+    public void fetchCommentsAfterCommentFilterAvailable() {
+        if (comments == null) {
+            fetchCommentsRespectRecommendedSort(false);
+        } else {
+            if (isRefreshing) {
+                isRefreshing = false;
+                refresh(true, true);
+            } else if (isFetchingComments) {
+                fetchCommentsRespectRecommendedSort(false);
+            } else {
+                mCommentsAdapter.addComments(comments, hasMoreChildren);
+                if (isLoadingMoreChildren) {
+                    isLoadingMoreChildren = false;
+                    fetchMoreComments();
+                }
+            }
+        }
     }
 
     private void setupMenu() {
@@ -1348,7 +1369,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 mPostDetailsSharedPreferences, mExoCreator,
                                 post1 -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
                         mSwipeRefreshLayout.setRefreshing(false);
-                        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, post.getId(), mSingleCommentId == null || mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, 1, new FetchComment.FetchCommentListener() {
+                        FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, post.getId(), mSingleCommentId == null || mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, 1, mCommentFilter, new FetchComment.FetchCommentListener() {
                             @Override
                             public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
                                 pages_loaded++;
@@ -1387,12 +1408,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                     fetchCommentsRespectRecommendedSort(false);
                                 }
                                 ViewPostDetailFragment.this.children = children;
-
-                                hasMoreChildren = false;
-                                mCommentsAdapter.addComments(expandedComments, hasMoreChildren);
-
-
                             }
+
 
                             @Override
                             public void onFetchCommentFailed() {
@@ -1468,7 +1485,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
 
         FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken, mPost.getId(), mSingleCommentId == null || mSingleCommentId == 0 ? null : mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId, sortType, mExpandChildren, pages_loaded + 1,
-                new FetchComment.FetchCommentListener() {
+                mCommentFilter, new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments,
                                                       Integer parentId, ArrayList<Integer> children) {
@@ -1557,7 +1574,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         isLoadingMoreChildren = true;
 
         FetchComment.fetchComments(mExecutor, new Handler(), mRetrofit.getRetrofit(), mAccessToken,
-                mPost.getId(), (mSingleCommentId == null || mSingleCommentId  == 0) ? null : (mSingleCommentParentId == null || mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId), sortType, mExpandChildren, pages_loaded + 1, new FetchComment.FetchCommentListener() {
+                mPost.getId(), (mSingleCommentId == null || mSingleCommentId == 0) ? null : (mSingleCommentParentId == null || mSingleCommentParentId == 0 ? mSingleCommentId : mSingleCommentParentId), sortType, mExpandChildren, pages_loaded + 1, mCommentFilter, new FetchComment.FetchCommentListener() {
                     @Override
                     public void onFetchCommentSuccess(ArrayList<Comment> expandedComments, Integer parentId, ArrayList<Integer> children) {
                         pages_loaded++;

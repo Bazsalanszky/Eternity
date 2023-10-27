@@ -1,9 +1,13 @@
 package eu.toldi.infinityforlemmy.activities;
 
+import static android.graphics.BitmapFactory.decodeResource;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +44,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.evernote.android.state.State;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -104,6 +110,7 @@ import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
+import eu.toldi.infinityforlemmy.shortcut.ShortcutManager;
 import eu.toldi.infinityforlemmy.subreddit.CommunitySubscription;
 import eu.toldi.infinityforlemmy.subreddit.FetchSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
@@ -260,6 +267,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private int subscribedColor;
     private int fabOption;
     private MaterialAlertDialogBuilder nsfwWarningBuilder;
+    private Bitmap subredditIconBitmap;
 
     private boolean showStatistics;
 
@@ -575,11 +583,23 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                             .into(iconGifImageView);
                     iconGifImageView.setOnClickListener(null);
                 } else {
-                    glide.load(subredditData.getIconUrl())
+                    glide.asBitmap()
+                            .load(subredditData.getIconUrl())
                             .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(216, 0)))
                             .error(glide.load(R.drawable.subreddit_default_icon)
                                     .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(216, 0))))
-                            .into(iconGifImageView);
+                            .into(new CustomTarget<Bitmap>() {
+                                @Override
+                                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                    subredditIconBitmap = resource;
+                                    iconGifImageView.setImageBitmap(resource);
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable Drawable placeholder) {
+                                    subredditIconBitmap = null;
+                                }
+                            });
                     iconGifImageView.setOnClickListener(view -> {
                         Intent intent = new Intent(ViewSubredditDetailActivity.this, ViewImageOrGifActivity.class);
                         intent.putExtra(ViewImageOrGifActivity.EXTRA_IMAGE_URL_KEY, subredditData.getIconUrl());
@@ -1148,7 +1168,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
         });
         viewPager2.setAdapter(sectionsPagerAdapter);
-        viewPager2.setOffscreenPageLimit(2);
+        viewPager2.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         viewPager2.setUserInputEnabled(!mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_SWIPING_BETWEEN_TABS, false));
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             switch (position) {
@@ -1274,6 +1294,9 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                 }
             });
             return true;
+        } else if (itemId == R.id.action_add_to_home_screen_view_subreddit_detail_activity) {
+            Bitmap icon = subredditIconBitmap == null ? decodeResource(getResources(), R.drawable.subreddit_default_icon) : subredditIconBitmap;
+            return ShortcutManager.requestPinShortcut(this, qualifiedName, icon);
         }
         return false;
     }
