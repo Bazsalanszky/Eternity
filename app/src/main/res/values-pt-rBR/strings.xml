@@ -701,7 +701,7 @@
 \nEla não está doente nem nada, mas definitivamente poderia melhorar.</string>
     <string name="edit_multi_reddit">Editar Multicomunidade</string>
     <string name="delete_multi_reddit">Excluir Multicomunidade</string>
-    <string name="n_awards">%1$d Prêmios</string>
+    <string name="n_awards">%1$,d Prêmios</string>
     <string name="one_award">1 Prêmio</string>
     <string name="report">Reportar</string>
     <string name="reporting">Reportando</string>
