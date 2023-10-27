@@ -88,9 +88,9 @@
     <string name="load_messages_failed">信息加载失败，请点击重试。</string>
     <string name="no_messages">空</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">声望：%1$d</string>
+    <string name="karma_info">声望：%1$,d</string>
     <string name="karma_info_user_detail">声望：
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">注册日：
 \n%1$s</string>
     <string name="since">创建于：</string>
@@ -105,7 +105,7 @@
     <string name="gilded">镀金帖</string>
     <string name="settings">设置</string>
     <string name="subscribers_number_detail">关注者：%1$d</string>
-    <string name="online_subscribers_number_detail">在线：%1$d</string>
+    <string name="online_subscribers_number_detail">在线：%1$,d</string>
     <string name="cannot_fetch_community_info">无法获取版块信息</string>
     <string name="cannot_fetch_user_info">无法获取用户信息</string>
     <string name="cannot_fetch_sidebar">无法获取侧边栏</string>
@@ -723,7 +723,7 @@
 \n她没有生病或遇到任何问题，但是她肯定会好起来的。</string>
     <string name="edit_multi_reddit">编辑聚合版块</string>
     <string name="delete_multi_reddit">删除聚合版块</string>
-    <string name="n_awards">%1$d 个奖励</string>
+    <string name="n_awards">%1$,d 个奖励</string>
     <string name="one_award">1 个奖励</string>
     <string name="report">举报</string>
     <string name="reporting">正在举报</string>
@@ -1035,7 +1035,7 @@
     <string name="suggest_title">推荐标题</string>
     <string name="suggest_title_failed">推荐标题失败</string>
     <string name="action_delete_logs">删除日志</string>
-    <string name="inbox_with_count">收件箱 (%1$d)</string>
+    <string name="inbox_with_count">收件箱 (%1$,d)</string>
     <string name="comment_continue_thread">继续帖子</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">垂直滑动离开媒体界面</string>
