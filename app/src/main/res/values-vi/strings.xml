@@ -88,9 +88,9 @@
     <string name="load_messages_failed">Lỗi khi tải tin nhắn. Chạm để thử lại</string>
     <string name="no_messages">Không có tin nhắn</string>
     <string name="nsfw">NSFW (18+)</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Ngày bánh ga tô:
 \n%1$s</string>
     <string name="since">Từ khi</string>
@@ -105,7 +105,7 @@
     <string name="gilded">Mạ vàng</string>
     <string name="settings">Cài đặt</string>
     <string name="subscribers_number_detail">Người đăng ký: %1$d</string>
-    <string name="online_subscribers_number_detail">Trực tuyến: %1$d</string>
+    <string name="online_subscribers_number_detail">Trực tuyến: %1$,d</string>
     <string name="cannot_fetch_community_info">Không thể lấy thông tin subreddit</string>
     <string name="cannot_fetch_user_info">Không thể lấy thông tin người dùng</string>
     <string name="cannot_fetch_sidebar">Không thể lấy thanh bên</string>
@@ -702,7 +702,7 @@
 \nCô ta không ốm hay gì cả, nhưng cô ấy chắc chắn có thể khá hơn.</string>
     <string name="edit_multi_reddit">Sửa Multireddit</string>
     <string name="delete_multi_reddit">Xoá Multireddit</string>
-    <string name="n_awards">%1$d giải thưởng</string>
+    <string name="n_awards">%1$,d giải thưởng</string>
     <string name="one_award">1 giải thưởng</string>
     <string name="report">Báo cáo</string>
     <string name="reporting">Đang báo cáo</string>
@@ -1002,7 +1002,7 @@
     <string name="suggest_title">Đề xuất tiêu đề</string>
     <string name="suggest_title_failed">Đề xuất tiêu đề thất bại</string>
     <string name="action_delete_logs">Xoá nhật ký</string>
-    <string name="inbox_with_count">Hộp thư đến (%1$d)</string>
+    <string name="inbox_with_count">Hộp thư đến (%1$,d)</string>
     <string name="comment_continue_thread">Tiếp tục thread</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Vuốt dọc để quay lại từ phương tiện</string>
