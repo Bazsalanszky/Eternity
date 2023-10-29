@@ -1095,7 +1095,7 @@
     <string name="settings_pinch_to_zoom_video_title">Chạm để thu phóng Video</string>
     <string name="settings_experimental_feature">Tính năng thử nghiệm</string>
     <string name="theme_item_media_indicator_icon_color">Màu biểu tượng chỉ phương tiện</string>
-    <string name="theme_item_media_indicator_icon_color_detail">"Đã áp dụng cho: xem trước bài đăng cho Video hoặc Thư viện "</string>
+    <string name="theme_item_media_indicator_icon_color_detail">Đã áp dụng cho: xem trước bài đăng cho Video hoặc Thư viện</string>
     <string name="theme_item_media_indicator_background_color">Màu nền chỉ phương tiện</string>
     <string name="theme_item_media_indicator_background_color_detail">Áp dụng cho: Nền của biểu tượng video hoặc thư viện ở mục xem trước bài đăng</string>
     <string name="go_to_top">Lên trên cùng</string>
