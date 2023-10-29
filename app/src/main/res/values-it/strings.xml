@@ -155,7 +155,7 @@
     <string name="post_failed">Pubblicazione non riuscita</string>
     <string name="error_processing_image">Errore durante l\'elaborazione dell\'immagine</string>
     <string name="error_processing_video">Errore durante l\'elaborazione del video</string>
-    <string name="download_started">"Download avviato. Ulteriori dettagli nella notifica. "</string>
+    <string name="download_started">Download avviato. Ulteriori dettagli nella notifica.</string>
     <string name="comment_load_more_comments">Carica altri commenti</string>
     <string name="comment_load_more_comments_failed">Caricamento fallito. Tocca per riprovare.</string>
     <string name="loading">Caricamento...</string>
@@ -178,7 +178,7 @@
     <string name="no_camera_available">Nessuna app disponibile per la fotocamera</string>
     <string name="error_creating_temp_file">Errore creazione file temporaneo</string>
     <string name="video_is_processing">Video in elaborazione. Attendere...</string>
-    <string name="image_is_processing">"Immagine in elaborazione. Attendere. "</string>
+    <string name="image_is_processing">Immagine in elaborazione. Attendere.</string>
     <string name="gif_is_processing">Gif in elaborazione. Attendere...</string>
     <string name="flair">Flair</string>
     <string name="spoiler">Spoiler</string>
@@ -211,11 +211,11 @@
     <string name="sort_time_year">Anno</string>
     <string name="sort_time_all_time">Sempre</string>
     <string name="no_activity_found_for_share">Nessun\'app in grado di condividere</string>
-    <string name="archived_post_vote_unavailable">"Impossibile votare, il post è archiviato. "</string>
-    <string name="archived_post_comment_unavailable">"Impossibile commentare, il post è archiviato. "</string>
+    <string name="archived_post_vote_unavailable">Impossibile votare, il post è archiviato.</string>
+    <string name="archived_post_comment_unavailable">Impossibile commentare, il post è archiviato.</string>
     <string name="archived_post_reply_unavailable">Impossibile rispondere, il post è archiviato.</string>
     <string name="locked_post_comment_unavailable">Impossibile commentare, il post è bloccato.</string>
-    <string name="locked_post_reply_unavailable">"Impossibile rispondere, il post è bloccato. "</string>
+    <string name="locked_post_reply_unavailable">Impossibile rispondere, il post è bloccato.</string>
     <string name="text">TESTO</string>
     <string name="link">LINK</string>
     <string name="image">IMMAGINE</string>
@@ -442,7 +442,7 @@
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Errore durante il recupero dei nomi subreddit</string>
     <string name="share_post_link">Condividi il link al post</string>
-    <string name="share_image_link">"Condividi il link all\'immagine "</string>
+    <string name="share_image_link">Condividi il link all\'immagine</string>
     <string name="share_gif_link">Condividi il link alla Gif</string>
     <string name="share_video_link">Condividi il link al video</string>
     <string name="share_link">Condividi il link</string>
@@ -536,7 +536,7 @@
     <string name="theme_item_comment_icon_and_info_color">Icona Commento e Colore Info</string>
     <string name="theme_item_comment_icon_and_info_color_detail">Applicato a: Icone e punteggio nei commenti</string>
     <string name="theme_item_fab_icon_color">Colore Icona Bottone Fluttuante</string>
-    <string name="theme_item_fab_icon_color_detail">"Applicato a: Pulsante "</string>
+    <string name="theme_item_fab_icon_color_detail">Applicato a: Icona del pulsante di azione mobile</string>
     <string name="theme_item_send_message_icon_color">Colore Icona Invia Messaggio</string>
     <string name="theme_item_send_message_icon_color_detail">Applicato a: Icona invio messaggio privato</string>
     <string name="theme_item_toolbar_primary_text_and_icon_color">Testo Principale della Barra degli Strumenti e Colore Icona</string>
