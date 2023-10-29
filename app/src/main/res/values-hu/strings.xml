@@ -554,7 +554,7 @@
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background">Fül elrendezés háttérszín kiterjesztett eszköztárban</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background_detail">Beállítva: Fül elrendezés hátterére (kiterjesztett eszköztár)</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color">Fül elrendezés szöveg szín kiterjesztett eszköztárban</string>
-    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color_detail">"Beállítva:  Fül elrendezés szöveg színére (kiterjesztett eszköztár)"</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color_detail">Beállítva: Fül elrendezés szöveg színére (kiterjesztett eszköztár)</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_indicator">Fül elrendezés fül indikátor kiterjesztett eszköztárban</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_indicator_detail">Beállítva: Fül indikátor színére fül elrendezésben (kiterjesztett eszköztár)</string>
     <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_tab_background">Fül elrendezés háttérszíne összecsukott eszköztárban</string>
@@ -950,7 +950,7 @@
     <string name="settings_backup_settings_title">Beállítások biztonsági mentése</string>
     <string name="settings_restore_settings_title">Beállítások visszaállítása</string>
     <string name="settings_credits_love_animation_title">Love animáció</string>
-    <string name="settings_swipe_between_posts_title">"Váltás "</string>
+    <string name="settings_swipe_between_posts_title">Váltás</string>
     <string name="settings_navigation_drawer_title">Navigációs fiók</string>
     <string name="settings_default_search_result_tab">Alapértelmezett keresési találatok fül</string>
     <string name="device_default">Eszköz alapértelmezett</string>
