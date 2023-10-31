@@ -1189,13 +1189,13 @@
     <!-- Fuzzy -->
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Nivel %1$d</string>
     <string name="settings_show_author_avatar_title">Arată Avatarul Autorului</string>
-    <string name="settings_reddit_user_agreement_title">Acordul Utilizatorului Reddit</string>
+    <string name="settings_reddit_user_agreement_title">Acordul Utilizatorului Lemmy</string>
     <string name="settings_always_show_child_comment_count_title">Mereu Arată Numărul de Comentarii Răspuns</string>
     <string name="settings_hide_upvote_ratio_title">Ascunde Rația de Susvot</string>
     <string name="settings_miscellaneous_dangerous_group_title">Periculos</string>
     <string name="settings_post_feed_max_resolution_warning_title">Mărește valoarea pentru a vedea previzualizările în rezoluție mai mare, dar aplicația ar putea să cadă subit.</string>
     <string name="settings_post_feed_max_resolution_title">Rezoluția Maximă a Previzulizării Fluxului de Postări (Lătime * Lungime)</string>
-    <string name="settings_reddit_video_default_resolution">Rezoluția Implicită a Videoclipurilor Reddit</string>
+    <string name="settings_reddit_video_default_resolution">Rezoluția Implicită a Videoclipurilor Lemmy</string>
     <string name="select_a_ttf_font">Selectează un fișier font de format ttf</string>
     <string name="unable_to_get_font_file">Nu s-a putut obține fontul tău</string>
     <string name="unable_to_load_font">Nu s-a putut încărca fontul personalizat</string>
