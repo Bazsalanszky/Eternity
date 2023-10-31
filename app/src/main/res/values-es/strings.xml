@@ -362,7 +362,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="settings_enable_nsfw_title">Permitir NSFW</string>
     <string name="settings_blur_nsfw_title">Difuminar imágenes NSFW</string>
     <string name="settings_blur_spoiler_title">Difuminar Imágenes con Spoiler</string>
-    <string name="settings_about_master_title">Acerca de Infinity for Reddit</string>
+    <string name="settings_about_master_title">Acerca de Eternity</string>
     <string name="settings_acknowledgement_master_title">Reconocimientos</string>
     <string name="settings_credits_master_title">Créditos</string>
     <string name="settings_credits_icon_foreground_title">ícono de primer plano</string>
@@ -392,7 +392,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Compartir</string>
     <string name="settings_share_summary">Si te gusta esta aplicación ¡Compártela!</string>
-    <string name="settings_version_title">Infinity for Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Versión %s</string>
     <string name="settings_category_customization_title">Personalización</string>
     <string name="settings_customize_light_theme_title">Tema Claro</string>
