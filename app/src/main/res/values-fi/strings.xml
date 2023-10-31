@@ -645,4 +645,5 @@
     <string name="settings_credits_new_icon">Uusi sovelluskuvake (Cosmic Lemmy)</string>
     <string name="about_you_text">Tietoja sinusta</string>
     <string name="about_you_hint">Lyhyt kuvaus itsestä</string>
+    <string name="comment_load_more_comments_failed">Lataaminen epäonnistui. Napauta yrittääksesi uudelleen.</string>
 </resources>
