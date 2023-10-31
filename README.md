@@ -20,9 +20,13 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
 </div>
 
 <div align="center">
+<a href="https://f-droid.org/packages/eu.toldi.infinityforlemmy/">
+    <img src="./.assets/fdroid-badge.png" height="80">
+</a>
 <a href="https://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy">
     <img src="./.assets/google-play-badge.png" height="80">
 </a>
+
 <a href="https://apt.izzysoft.de/fdroid/index/apk/eu.toldi.infinityforlemmy">
     <img src="./.assets/IzzyOnDroid.png" height="80">
 </a>
