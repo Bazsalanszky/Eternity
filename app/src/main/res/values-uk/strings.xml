@@ -1288,5 +1288,5 @@
     <string name="unexpected_intent_action">Неочікувана дія наміру: <xliff:g id="action">%1$s</xliff:g></string>
     <string name="icon_original_label">Оригінальний значок</string>
     <string name="settings_credits_new_icon_summary">Автор: David Gerla</string>
-    <string name="settings_credits_new_icon">Новий значок застосунку (Cosmic Lemmy)</string>
+    <string name="settings_credits_new_icon">Новий значок (Cosmic Lemmy)</string>
 </resources>
