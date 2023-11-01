@@ -399,12 +399,12 @@ Behavior -->
     <string name="settings_email_title">ई मेल</string>
     <string name="settings_email_summary">docilealligator.app@gmail.com</string>
     <string name="settings_reddit_account_title">रैडिट खाता</string>
-    <string name="settings_reddit_account_summary">u/Hostilenemy</string>
+    <string name="settings_reddit_account_summary">\@bazsalanszky@lemmy.toldi.eu</string>
     <string name="settings_community_title">सबरैडिट</string>
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">साझा करें</string>
     <string name="settings_share_summary">यदि आप इसका आनंद लेते हैं तो एप्प को अन्य लोगों के साथ साझा करें</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">संस्करण %s</string>
     <string name="settings_category_customization_title">अनुकूलन</string>
     <string name="settings_customize_light_theme_title">हल्की थीम</string>
@@ -719,7 +719,7 @@ Behavior -->
     <!-- Fuzzy -->
     <string name="reset_all_settings_success">सभी सेटिंग्स सफलतापूर्वक रीसेट कर दी गई</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">r/Infinity_for_Reddit</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">प्राथमिक टेक्स्ट</string>
     <string name="secondary_text_preview">द्वितीयक टेक्स्ट</string>
     <string name="post_title_preview">यह एक पोस्ट है</string>
