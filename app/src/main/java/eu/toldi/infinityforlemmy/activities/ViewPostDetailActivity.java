@@ -557,7 +557,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                         // TODO: Implement anonymous front page
 
                     default:
-                        String type = (subredditName.equals("all")) ? "All" : (subredditName.equals("local")) ? "Local" : "Subscribed";
+                        String type = (subredditName == null) ? "Subscribed" : (subredditName.equals("all")) ? "All" : "Local";
                         call = api.getPosts(type, sortType.value, nextPage, 25, null, null, false, mAccessToken);
                 }
 
