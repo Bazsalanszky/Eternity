@@ -58,7 +58,6 @@ import java.util.regex.Pattern;
 
 import javax.inject.Provider;
 
-
 import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
@@ -1254,7 +1253,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                          MaterialButton shareButton) {
             this.iconGifImageView = iconGifImageView;
             this.subredditTextView = subredditTextView;
+            this.mCommunityInstanceTextView = mCommunityInstanceTextView;
             this.userTextView = userTextView;
+            this.mUserInstanceTextView = mUserInstanceTextView;
             this.authorFlairTextView = authorFlairTextView;
             this.postTimeTextView = postTimeTextView;
             this.titleTextView = titleTextView;

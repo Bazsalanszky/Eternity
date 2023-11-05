@@ -1244,6 +1244,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                          MaterialButton upvoteButton,
                          TextView scoreTextView,
                          MaterialButton downvoteButton,
+                         TextView downvoteTextView,
                          View placeholder,
                          MaterialButton moreButton,
                          MaterialButton saveButton,
@@ -1264,6 +1265,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             this.upvoteButton = upvoteButton;
             this.scoreTextView = scoreTextView;
             this.downvoteButton = downvoteButton;
+            this.downvoteTextView = downvoteTextView;
             this.placeholder = placeholder;
             this.moreButton = moreButton;
             this.saveButton = saveButton;
@@ -1880,6 +1882,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     binding.upvoteButtonItemPostComment,
                     binding.scoreTextViewItemPostComment,
                     binding.downvoteButtonItemPostComment,
+                    binding.downvoteTextViewItemPostComment,
                     binding.placeholderItemPostComment,
                     binding.moreButtonItemPostComment,
                     binding.saveButtonItemPostComment,

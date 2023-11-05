@@ -213,7 +213,7 @@
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/down_vote_button_item_post_comment"
+                app:layout_constraintStart_toEndOf="@+id/downvote_button_item_post_comment"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
