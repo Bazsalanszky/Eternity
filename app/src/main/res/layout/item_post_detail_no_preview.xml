@@ -73,7 +73,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toTopOf="@+id/author_flair_text_view_item_post_detail_no_preview_link"
+            app:layout_constraintBottom_toTopOf="@+id/community_instance_text_view_item_post_detail_no_preview_link"
             app:layout_constraintStart_toEndOf="@+id/user_text_view_item_post_detail_no_preview"
             app:layout_constraintTop_toBottomOf="@+id/subreddit_text_view_item_post_detail_no_preview" />
 

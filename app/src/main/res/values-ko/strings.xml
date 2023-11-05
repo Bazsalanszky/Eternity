@@ -4,19 +4,16 @@
     <string name="comment_activity_label">"댓글 전송"</string>
     <string name="comment_activity_label_is_replying">"답장"</string>
     <string name="post_text_activity_label">"텍스트 글"</string>
-    <string name="subreddit_selection_activity_label">"서브레딧 선택"</string>
     <string name="post_link_activity_label">"링크 글"</string>
     <string name="post_image_activity_label">"사진 글"</string>
     <string name="post_video_activity_label">"둥영상 글"</string>
     <string name="rules_activity_label">"규칙"</string>
-    <string name="search_subreddits_activity_label">"서브레딧"</string>
     <string name="edit_post_activity_label">"글 편집"</string>
     <string name="edit_comment_activity_label">"댓글 편집"</string>
     <string name="view_message_activity_label">"받은편지함"</string>
     <string name="settings_activity_label">"설정"</string>
     <string name="account_saved_thing_activity_label">"저장함"</string>
     <string name="create_multi_reddit_activity_label">"멀티레딧 생성"</string>
-    <string name="subreddit_multiselection_activity_label">"서브레딧 선택"</string>
     <string name="custom_theme_listing_activity_label">"커스텀 테마"</string>
     <string name="customize_theme_activity_label">"테마 편집하기"</string>
     <string name="customize_theme_activity_create_theme_label">"테마 만들기"</string>
@@ -83,13 +80,11 @@
     <string name="load_more_posts_error">"글들을 불러오는데 오류가 발생했습니다."</string>
     <string name="load_post_error">"이 글을 로드하는데 오류가 발생했습니다.
 재시도하려면 탭하세요."</string>
-    <string name="search_subreddits_error">"서브레딧을 검색하는데 오류가 발생했습니다.
-재시도하려면 탭하세요."</string>
+
     <string name="search_users_error">"사용자를 검색하는데 오류가 발생했습니다.
 재시도하려면 탭하세요."</string>
     <string name="no_posts">"글들을 찾지 못함"</string>
     <string name="no_comments">"댓글들을 찾지 못함"</string>
-    <string name="no_subreddits">"서브레딧들을 찾지 못함"</string>
     <string name="no_users">"사용자들을 찾지 못함"</string>
     <string name="no_multi_reddits">"멀티레딧들을 찾지 못함"</string>
     <string name="no_storage_permission">"이 파일을 저장할 저장소 권한이 없음"</string>
@@ -130,7 +125,6 @@
 
     <!-- Fuzzy -->
     <string name="online_subscribers_number_detail">"온라인: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"서브레딧 정보 불러올 수 없음"</string>
     <string name="cannot_fetch_user_info">"사용자 정보 불러올 수 없음"</string>
     <string name="cannot_fetch_sidebar">"사이드바 불러올 수 없음"</string>
     <string name="cannot_fetch_multireddit">"멀티레딧 불러올 수 없음"</string>
@@ -168,7 +162,6 @@
     <string name="sending_message">"전송 중"</string>
     <string name="send_message_success">"메시지 전송됨"</string>
     <string name="send_message_failed">"이 메시지를 전송할 수 없습니다"</string>
-    <string name="select_a_subreddit">"서브레딧을 먼저 선택하세요"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"글은 좋은 제목이 필요합니다"</string>
@@ -184,10 +177,8 @@
     <string name="loading">"로딩 중"</string>
     <string name="post_title_hint">"제목"</string>
     <string name="post_text_content_hint">"내용"</string>
-    <string name="choose_a_subreddit">"서브레딧을 선택하세요"</string>
     <string name="rules">"규칙"</string>
     <string name="post_link_hint">"URL"</string>
-    <string name="subreddits">"서브레딧들"</string>
     <string name="users">"사용자들"</string>
     <string name="multi_reddits">"멀티레딧들"</string>
     <string name="bottom_sheet_post_text">"텍스트"</string>
@@ -215,7 +206,6 @@
 재시도하려면 탭하세요."</string>
     <string name="error_loading_rules_without_retry">"규칙을 로드하는데 오류가 발생했습니다"</string>
     <string name="search_in">"여기에서 검색"</string>
-    <string name="all_subreddits">"모든 서브레딧"</string>
     <string name="sort_best">"최고"</string>
     <string name="sort_hot">"인기"</string>
     <string name="sort_new">"신규"</string>
@@ -300,7 +290,6 @@
     <string name="view_all_comments">"여기를 눌러 모든 댓글을 확인하세요"</string>
     <string name="notification_summary_account">"계정"</string>
     <string name="notification_summary_message">"새로운 메시지"</string>
-    <string name="notification_summary_subreddit">"서브레딧"</string>
     <string name="notification_summary_award">"수상"</string>
 
     <!-- Fuzzy -->
@@ -373,8 +362,6 @@
     <string name="settings_email_summary">"docilealligator.app@gmail.com"</string>
     <string name="settings_reddit_account_title">"레딧 계정"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"서브레딧"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"공유"</string>
     <string name="settings_version_summary">"버전 %s"</string>
     <string name="settings_customize_light_theme_title">"라이트 테마"</string>
@@ -382,7 +369,6 @@
     <string name="settings_customize_amoled_theme_title">"아몰레드 테마"</string>
     <string name="settings_manage_themes_title">"테마 관리"</string>
     <string name="settings_advanced_master_title">"고급"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"데이터베이스의 모든 서브레딧 삭제"</string>
     <string name="settings_delete_all_users_data_in_database_title">"데이터베이스의 모든 사용자 삭제"</string>
     <string name="settings_reset_all_settings_title">"모든 설정 초기화"</string>
     <string name="share">"공유"</string>
@@ -498,7 +484,6 @@
     <string name="theme_item_unsubscribed_color">"구독 해제됨"</string>
     <string name="theme_item_unsubscribed_color_detail">"적용 대상: 구독 버튼"</string>
     <string name="settings_nsfw_and_spoiler_title">"NSFW와 스포일러"</string>
-    <string name="settings_more_tabs_show_subscribed_subreddits_title">"구독한 서브레딧 보기"</string>
     <string name="only_spoiler">"스포일러만"</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">"위험"</string>
     <string name="about">"정보"</string>

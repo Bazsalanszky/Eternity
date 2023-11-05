@@ -943,7 +943,6 @@ Behavior -->
     <string name="error_fetching_v_redd_it_video_cannot_get_post_id">v.redd.it वीडियो लाने में दिक्कत: पोस्ट आईडी नहीं मिल सकी</string>
     <string name="error_parse_trending_search">रुझान वाली खोजों को पार्स करना विफल रहा।
 \nपुन: प्रयास करने के लिए दबाए।</string>
-    <string name="sample_list_load_error">एक या अधिक नमूना सूचियाँ लोड होने में विफल रहीं</string>
     <string name="post_gallery_activity_label">गैलरी पोस्ट</string>
     <string name="settings_hide_the_number_of_awards">पुरस्कारों की संख्या छिपाएँ</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">v.redd.it वीडियो लाने में दिक्कत: रीडायरेक्ट यूआरएल नहीं मिल सका</string>

@@ -913,7 +913,6 @@
     <string name="post_filter_requires_a_name">Как называется этот фильтр постов\?</string>
     <string name="duplicate_post_filter_dialog_title">«%1$s» уже существует</string>
     <string name="duplicate_post_filter_dialog_message">Перезаписать его\?</string>
-    <string name="apply_post_filter_to">Применить к</string>
     <string name="post_filter_usage_home">Домашняя</string>
     <string name="post_filter_usage_community">Сообщество: %1$s</string>
     <string name="post_filter_usage_community_all">Сообщество</string>
@@ -1213,7 +1212,6 @@
     <string name="edited">Отредактирован</string>
     <string name="edited_time">Отредактирован в %s</string>
     <string name="error_unsupported_audio">Медиафайл содержит аудиодорожку, но она не поддерживается на этом устройстве</string>
-    <string name="storage_permission_denied">В доступе к хранилищу отказано</string>
     <string name="invalid_regex">Неверное регулярное выражение</string>
     <string name="no_more_posts">Больше постов нет</string>
     <string name="image_index_in_gallery">%1$d/%2$d</string>

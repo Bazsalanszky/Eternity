@@ -904,7 +904,6 @@
     <string name="post_filter_requires_a_name">Яка назва для цього фільтру дописів\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' вже існує</string>
     <string name="duplicate_post_filter_dialog_message">Перезаписати його\?</string>
-    <string name="apply_post_filter_to">Задіяно до</string>
     <string name="post_filter_usage_home">Домівка</string>
     <string name="post_filter_usage_community">Спільнота: %1$s</string>
     <string name="post_filter_usage_community_all">Спільнота</string>
@@ -1197,7 +1196,6 @@
     <string name="password_cannot_be_empty">Пароль не може бути порожнім.</string>
     <string name="settings_comment_divider_type">Роздільник коментарів</string>
     <string name="url_cannot_be_null_or_empty">URL не може бути порожнім</string>
-    <string name="storage_permission_denied">Дозвіл на доступ до сховища відхилено</string>
     <string name="error_unsupported_video">Медіа містить відеодоріжку, проте її неможливо відтворити на цьому пристрої</string>
     <string name="unblock_community">Розблокувати спільноту</string>
     <string name="block_community_failed">Не вдалося заблокувати спільноту</string>
@@ -1258,7 +1256,6 @@
     <string name="exo_controls_volume_up_description">Гучніше</string>
     <string name="exo_controls_volume_off_description">Без звуку</string>
     <string name="could_not_resolve_link">Не вдалося визначити URL :(</string>
-    <string name="reddit_api_info_title">Важливе повідомлення щодо змін у Reddit API</string>
     <string name="separate_down_and_up_votes">Розділяти голоси вгору і вниз</string>
     <string name="settings_show_statistics">Показувати статистику</string>
     <string name="settings_category_community_and_user_pages_title">Сторінки спільнот і користувачів</string>
@@ -1268,18 +1265,12 @@
     <string name="anonymous_account_instance">Сервер анонімної обліківки</string>
     <string name="instance_url_hint">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
     <string name="moderators">Модератори</string>
-    <string name="enable_random_adaptation">Увімкнути випадкову адаптацію</string>
     <string name="handle_link">Обробка посилань</string>
-    <string name="sample_list_load_error">Не вдалося завантажити один або кілька списків зразків</string>
     <string name="community_number_detail">%1$,d спільнот</string>
     <string name="settings_hide_user_instance">Ховати сервер користувача</string>
     <string name="user_number_detail">%1$,d користувачів</string>
     <string name="admins">Адміністратори</string>
-    <string name="reddit_api_info">Починаючи з 1 липня 2023 року, API Reddit стане платним за використання для сторонніх клієнтів, зокрема Infinity for Reddit. Оголошення від Reddit можна знайти тут: %1$s
-\n
-\nЩоб пережити цю зміну, після 1 липня Infinity стане додатком лише за підпискою. Більше про зміни можна дізнатися з цієї публікації: %2$s
-\n
-\nПісля 1 липня Infinity необхідно оновити, щоб отримати нову версію з можливістю підписки. Жодна з попередніх версій (включаючи цю) не працюватиме після 1 липня. Але через стислі терміни, надані Reddit, оновлення може не бути доступним одразу 1 липня, оскільки воно потребує належного тестування. Дякуємо за розуміння!</string>
+
     <string name="theme_name_dayfox">Dayfox</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
     <string name="theme_name_nightfox">Nightfox</string>

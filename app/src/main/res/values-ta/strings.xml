@@ -4,19 +4,16 @@
     <string name="comment_activity_label">"கருத்தனுப்பு"</string>
     <string name="comment_activity_label_is_replying">"பதிலளி"</string>
     <string name="post_text_activity_label">"உரை இடுகை"</string>
-    <string name="subreddit_selection_activity_label">"துணைரெட்டிடைத் தேர்ந்தெடு"</string>
     <string name="post_link_activity_label">"இணைப்பு இடுகை"</string>
     <string name="post_image_activity_label">"பட இடுகை"</string>
     <string name="post_video_activity_label">"காணொளி இடுகை"</string>
     <string name="rules_activity_label">"விதிகள்"</string>
-    <string name="search_subreddits_activity_label">"துணைரெட்டிட்"</string>
     <string name="edit_post_activity_label">"இடுகையைத் திருத்து"</string>
     <string name="edit_comment_activity_label">"கருத்தைத் திருத்து"</string>
     <string name="view_message_activity_label">"உட்பெட்டி"</string>
     <string name="settings_activity_label">"அமைவுகள்"</string>
     <string name="account_saved_thing_activity_label">"சேமித்தவை"</string>
     <string name="create_multi_reddit_activity_label">"பல்ரெட்டிட்டை உருவாக்கு"</string>
-    <string name="subreddit_multiselection_activity_label">"துனைரெட்டிட்களைத் தேர்ந்தெடு"</string>
     <string name="custom_theme_listing_activity_label">"தனிப்பயன் தோற்றங்கள்"</string>
     <string name="customize_theme_activity_label">"தோற்றத்தைத் தனிப்பயனாக்கு"</string>
     <string name="customize_theme_activity_create_theme_label">"தோற்றம் உருவாக்கு"</string>
@@ -79,13 +76,11 @@
     <string name="load_more_posts_error">"இடுகைகளை ஏற்றுவதில் பிழை."</string>
     <string name="load_post_error">"இவ்விடுகையை ஏற்றுவதில் பிழை.
 மறுமுயல தட்டுக."</string>
-    <string name="search_subreddits_error">"துணைரெட்டிட்டுகளைத் தேடுவதில் பிழை.
-மறுமுயல தட்டுக."</string>
+
     <string name="search_users_error">"பயனர்களைத் தேடுவதில் பிழை.
 மறுமுயல தட்டுக."</string>
     <string name="no_posts">"இடுகைகள் ஏதுமில்லை"</string>
     <string name="no_comments">"கருத்துகள் ஏதுமில்லை"</string>
-    <string name="no_subreddits">"துணைரெட்டிடுகள் ஏதுமில்லை"</string>
     <string name="no_users">"பயனர்கள் எவருமில்லை"</string>
     <string name="no_multi_reddits">"பல்ரெட்டிட்டுகள் ஏதுமில்லை"</string>
     <string name="no_storage_permission">"இக்கோப்பைச் சேமிக்க சேமிப்பக அனுமதி இல்லை"</string>
@@ -123,7 +118,6 @@
 
     <!-- Fuzzy -->
     <string name="online_subscribers_number_detail">"இணைப்பில்: %1$d"</string>
-    <string name="cannot_fetch_subreddit_info">"துணைரெட்டிட் தகவலைப் பெற முடியவில்லை"</string>
     <string name="cannot_fetch_user_info">"பயனர் தகவலைப் பெற முடியவில்லை"</string>
     <string name="cannot_fetch_sidebar">"ஓரப்பட்டையைப் கொணர முடியவில்லை"</string>
     <string name="cannot_fetch_multireddit">"பல்ரெட்டிட் தகவலைப் பெற முடியவில்லை"</string>
@@ -159,7 +153,6 @@
     <string name="sending_message">"அனுப்புகிறது"</string>
     <string name="send_message_success">"தகவல் அனுப்பப்பட்டது"</string>
     <string name="send_message_failed">"இத்தகவலை அனுப்ப முடியவில்லை"</string>
-    <string name="select_a_subreddit">"முதலில் துணைரெட்டிட்டைத் தேர்ந்தெடுக்கவும்"</string>
 
     <!-- Fuzzy -->
     <string name="title_required">"இந்த இடுகைக்கு தலைப்பு தேவை"</string>
@@ -175,10 +168,8 @@
     <string name="loading">"ஏற்றுகிறது"</string>
     <string name="post_title_hint">"தலைப்பு"</string>
     <string name="post_text_content_hint">"உள்ளடக்கம்"</string>
-    <string name="choose_a_subreddit">"துணைரெட்டிட்டைத் தெரிவுசெய்"</string>
     <string name="rules">"விதிகள்"</string>
     <string name="post_link_hint">"உரலி"</string>
-    <string name="subreddits">"துனைரெட்டிட்டுகள்"</string>
     <string name="users">"பயனர்கள்"</string>
     <string name="multi_reddits">"பல்ரெட்டிட்டுகள்"</string>
     <string name="bottom_sheet_post_text">"சொற்சரம்"</string>
@@ -201,7 +192,6 @@
 மீண்டும் முயல தட்டுக."</string>
     <string name="error_loading_rules_without_retry">"விதிகளை ஏற்றுவதில் பிழை"</string>
     <string name="search_in">"இதில் தேடு"</string>
-    <string name="all_subreddits">"எல்லா துணைரெட்டிட்டுகளும்"</string>
     <string name="sort_best">"சிறந்த"</string>
     <string name="sort_hot">"சூடான"</string>
     <string name="sort_new">"புதிய"</string>
@@ -277,7 +267,6 @@
     <string name="view_all_comments">"எல்லா கருத்துகளையும் உலாவ இங்குச் சொடுக்கு"</string>
     <string name="notification_summary_account">"கணக்கு"</string>
     <string name="notification_summary_message">"புதிய தகவல்"</string>
-    <string name="notification_summary_subreddit">"துணைரெட்டிட்"</string>
     <string name="notification_summary_award">"விருது"</string>
 
     <!-- Fuzzy -->
@@ -347,8 +336,6 @@
     <string name="settings_email_title">"மின்னஞ்சல்"</string>
     <string name="settings_reddit_account_title">"ரெட்டிட் கணக்கு"</string>
     <string name="settings_reddit_account_summary">"u/Hostilenemy"</string>
-    <string name="settings_subreddit_title">"துணைரெட்டிட்"</string>
-    <string name="settings_subreddit_summary">"r/Infinity_For_Reddit"</string>
     <string name="settings_share_title">"பகிர்"</string>
     <string name="settings_share_summary">"இன்புறுகிறீர்களெனில் மற்ற மக்களுக்கும் இச்செயலியை அனுப்புக"</string>
     <string name="settings_version_summary">"பதிப்பு %s"</string>
@@ -358,7 +345,6 @@
     <string name="settings_customize_amoled_theme_title">"கருந்தோற்றம்"</string>
     <string name="settings_manage_themes_title">"தோற்றங்களை நிர்வகி"</string>
     <string name="settings_advanced_master_title">"மேம்பட்ட"</string>
-    <string name="settings_delete_all_subreddits_data_in_database_title">"தரவுதளத்தில் அனைத்து துணைரெட்டிட்களை அழி"</string>
     <string name="settings_delete_all_users_data_in_database_title">"தரவுதளத்தில் அனைத்து பயனர்களை அழி"</string>
     <string name="settings_delete_all_sort_type_data_in_database_title">"தரவுதளத்தில் அனைத்து வரிசை வகைகளை அழி"</string>
     <string name="settings_delete_all_post_layout_data_in_database_title">"தரவுதளத்தில் அனைத்து இடுகை தளவமைப்புகளை அழி"</string>
@@ -408,7 +394,6 @@
     <string name="elapsed_time_years_ago">"%1$d வருடங்கள்"</string>
     <string name="error_getting_multi_reddit_data">"பல்ரெட்டிட் தரவைப் பெருவதில் பிழை"</string>
     <string name="error_loading_multi_reddit_list">"பல்ரெட்டிட்களை ஒத்திசைக்க முடியவில்லை"</string>
-    <string name="error_getting_subreddit_name">"துணைரெட்டிட் பெயரைப் பெறுவதில் பிழை"</string>
     <string name="share_post_link">"இடுகை தொடுப்பைப் பகிர்"</string>
     <string name="share_image_link">"பட தொடுப்பைப் பகிர்"</string>
     <string name="share_video_link">"காணொளி தொடுப்பைப் பகிர்"</string>
@@ -509,7 +494,6 @@
     <string name="rename">"மறுபெயரிடு"</string>
     <string name="color_picker">"நிறத்தெரிவி"</string>
     <string name="invalid_color">"செல்லாத நிறம்"</string>
-    <string name="delete_all_subreddits_success">"அனைத்து துணைரெட்டிட்களை அழித்தல் வெற்றி"</string>
     <string name="delete_all_users_success">"அனைத்து பயனர்களை அழித்தல் வெற்றி"</string>
     <string name="delete_all_sort_types_success">"அனைத்து வரிசை வகைகளை அழித்தல் வெற்றி"</string>
     <string name="delete_all_post_layouts_success">"அனைத்து இடுகை தளவமைப்புகளை அழித்தல் வெற்றி"</string>
@@ -534,8 +518,6 @@
     <string name="report_reason_general_copyright_issue">"பதிப்புரிமைச் சிக்கல் கொண்டுள்ளது"</string>
     <string name="report_reason_general_child_pornography">"சிறார் ஆபாசவியல் கொண்டுள்ளது"</string>
     <string name="report_reason_general_abusive_content">"வன்கொடுமை உள்ளடக்கம் கொண்டுள்ளது"</string>
-    <string name="home">"வீடு"</string>
-    <string name="popular">"பிரபலமான"</string>
     <string name="notifications">"அறிவிப்புகள்"</string>
     <string name="messages">"தகவல்கள்"</string>
     <string name="message">"தகவல்"</string>
@@ -598,26 +580,18 @@
     <string name="give_award_success">"விருது அளிக்கப்பட்டது"</string>
     <string name="give_award_failed">"தோல்வியுற்றது"</string>
     <string name="warning">"எச்சரிக்கை"</string>
-    <string name="this_is_a_nsfw_subreddit">"இது ஓர் NSFW துணைரெட்டிட்."</string>
     <string name="this_user_has_nsfw_content">"இப்பயனர் NSFW உள்ளடக்கம் கொண்டுள்ளார்"</string>
     <string name="dismiss">"நிராகரி"</string>
     <string name="leave">"விலகு"</string>
-    <string name="go_to_subreddit">"துணைரெட்டிட்டுக்குச் செல்"</string>
     <string name="go_to_user">"பயனருக்குச் செல்"</string>
     <string name="go_to_thing_hint">"பெயர்"</string>
     <string name="random">"சீரற்ற"</string>
-    <string name="random_subreddit">"சீரற்ற துணைரெட்டிட்"</string>
-    <string name="random_nsfw_subreddit">"சீரற்ற NSFW கணக்கு"</string>
     <string name="random_post">"சீரற்ற இடுகை"</string>
     <string name="random_nsfw_post">"சீரற்ற NSFW இடுகை"</string>
     <string name="fetch_random_thing_failed">"பின்னர் மீண்டும் முயல்"</string>
     <string name="downloading">"பதிவிறக்குகிறது"</string>
-    <string name="subreddit_filter_popular_and_all_activity_label">"r/all மற்றும் r/popular"</string>
     <string name="settings_miscellaneous_title">"இதர"</string>
-    <string name="settings_subreddit_filter_category">"துணைரெட்டிட்டுகளை மறை"</string>
-    <string name="settings_subreddit_filter_popular_and_all">"r/popular மற்றும் r/all இல்"</string>
     <string name="select_video_quality">"காணொளி தரத்தைத் தேர்ந்தெடு"</string>
-    <string name="settings_hide_subreddit_description_title">"துணைரெட்டிட் விளக்கத்தை மறை"</string>
     <string name="settings_swipe_action_swipe_left_title">"இடப்புறம் தேய்"</string>
     <string name="settings_swipe_action_swipe_right_title">"வலப்புறம் தேய்"</string>
     <string name="settings_language_title">"மொழி"</string>
@@ -628,7 +602,6 @@
     <string name="action_save_to_database">"தரவுத்தளத்தில் சேமி"</string>
     <string name="action_read_all_messages">"எல்லா தகவல்களையும் வாசி"</string>
     <string name="action_add_to_multireddit">"பல்ரெட்டிட்டுக்குச் சேர்"</string>
-    <string name="search_only_subreddits_hint">"துணைரெட்டிட்டுகளைத் தேடு"</string>
     <string name="search_only_users_hint">"பயனர்களைத் தேடு"</string>
     <string name="post_type_gallery">"காட்சியகம்"</string>
     <string name="settings_privacy_policy_title">"தனியுரிமைக் கொள்கை"</string>
@@ -642,20 +615,16 @@
     <string name="settings_sort_type_title">"வரிசைப்படுத்தல் வகை"</string>
     <string name="settings_save_sort_type_title">"வரிசைப்படுத்தல் வகையைச் சேமி"</string>
     <string name="open_link">"தொடுப்பைத் திற"</string>
-    <string name="select_subreddits_and_users">"துணைரெட்டிட்டுகள் மற்றும் பயனர்களைத் தேர்ந்தெடு"</string>
     <string name="hide_read_posts">"வாசித்த இடுகைகளை மறை"</string>
     <string name="filter_posts">"இடுகைகளை வடிகட்டு"</string>
     <string name="only_nsfw">"NSFW மட்டும்"</string>
     <string name="only_spoiler">"கெடுப்பி மட்டும்"</string>
     <string name="post_filter_usage_home">"முகப்பு"</string>
-    <string name="post_filter_usage_subreddit">"துணைரெட்டிட்: %1$s"</string>
-    <string name="post_filter_usage_subreddit_all">"துணைரெட்டிட்"</string>
     <string name="post_filter_usage_user">"பயனர்: %1$s"</string>
     <string name="post_filter_usage_user_all">"பயனர்"</string>
     <string name="post_filter_usage_multireddit">"பல்ரெட்டிட்: %1$s"</string>
     <string name="post_filter_usage_multireddit_all">"பல்ரெட்டிட்"</string>
     <string name="post_filter_usage_search">"தேடு"</string>
-    <string name="subreddit">"துணைரெட்டிட்"</string>
     <string name="user">"பயனர்"</string>
     <string name="read_all_messages_success">"எல்லா தகவல்களையும் வெற்றிகரமாக வாசித்தாச்சு"</string>
     <string name="read_all_messages_failed">"எல்லா தகவல்களையும் வாசிக்க இயலவில்லை"</string>
@@ -688,7 +657,6 @@
     <string name="upvote">"மேல்வாக்களி"</string>
     <string name="downvote">"கீழ்வாக்களி"</string>
     <string name="select">"தேர்ந்தெடு"</string>
-    <string name="exclude_subreddit">"இத்துணைரெட்டிட்டை விலக்கு"</string>
     <string name="exclude_user">"இப்பயனரை விலக்கு"</string>
     <string name="suggest_title">"தலைப்பைப் பரிந்துரை"</string>
     <string name="suggest_title_failed">"தலைப்பைப் பரிந்துரைப்பதில் தோல்வி"</string>
