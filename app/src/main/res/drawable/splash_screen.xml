@@ -13,7 +13,7 @@
     <item android:bottom="100dp">
         <bitmap
             android:gravity="bottom"
-            android:src="@drawable/splash_branding" />
+            android:src="@drawable/branding" />
     </item>
 
 </layer-list>
