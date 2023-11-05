@@ -1334,4 +1334,7 @@
 \nUm diese Änderung zu überstehen, wird Infinity ab dem 1. Juli zu einer reinen Abonnement-App. Weitere Informationen zu den Änderungen finden Sie in diesem Beitrag: %2$s
 \n
 \nSie müssen Infinity nach dem 1. Juli aktualisieren, damit Sie die neue Version mit Abonnementoptionen erhalten. Keine der vorherigen Versionen (einschließlich dieser) wird nach dem 1. Juli funktionieren. Aufgrund des engen Zeitrahmens von Reddit ist das Update jedoch möglicherweise nicht sofort am 1. Juli verfügbar, da es ordnungsgemäßer Tests bedarf. Danke für Ihr Verständnis!</string>
+    <string name="icon_original_label">Originales Symbol</string>
+    <string name="settings_credits_new_icon">Neues App Symbol (Cosmic Lemmy)</string>
+    <string name="settings_credits_new_icon_summary">Erstellt von David Gerla</string>
 </resources>
