@@ -907,7 +907,6 @@ not: "5 uren" -->
     <string name="post_filter_requires_a_name">Wat is de naam van deze post filter\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' Bestaat Al</string>
     <string name="duplicate_post_filter_dialog_message">Overschrijven\?</string>
-    <string name="apply_post_filter_to">Toepassen op</string>
     <string name="post_filter_usage_home">Thuis</string>
     <string name="post_filter_usage_community">Gemeenschap: %1$s</string>
     <string name="post_filter_usage_community_all">Gemeenschap</string>

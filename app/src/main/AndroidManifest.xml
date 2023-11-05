@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="eu.toldi.infinityforlemmy">
 
     <queries>
         <intent>
@@ -22,6 +23,7 @@
         android:maxSdkVersion="28" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -40,6 +42,23 @@
             android:configChanges="orientation|screenLayout|screenSize|layoutDirection"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.Slidable" />
+        <activity
+            android:name=".activities.CommentFilterUsageListingActivity"
+            android:parentActivityName=".activities.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CustomizeCommentFilterActivity"
+            android:label="@string/customize_comment_filter_activity_label"
+            android:parentActivityName=".activities.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CommentFilterPreferenceActivity"
+            android:label="@string/comment_filter_preference_activity_label"
+            android:parentActivityName=".activities.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
         <activity
             android:name=".activities.HistoryActivity"
             android:exported="false"
@@ -408,11 +427,6 @@
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.Slidable" />
         <activity
-            android:name=".activities.BlockedThingListingActivity"
-            android:label="@string/blocks"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme.Slidable" />
-        <activity
             android:name=".activities.SubredditSelectionActivity"
             android:label="@string/community_selection_activity_label"
             android:parentActivityName=".activities.MainActivity"
@@ -454,6 +468,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
@@ -499,6 +514,7 @@
             android:name=".activities.ViewUserDetailActivity"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.Slidable" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

@@ -911,7 +911,6 @@
     <string name="post_filter_requires_a_name">Qual é o nome deste filtro de post\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' Já existe</string>
     <string name="duplicate_post_filter_dialog_message">Sobrescrever isso\?</string>
-    <string name="apply_post_filter_to">Aplicar para</string>
     <string name="post_filter_usage_home">Início</string>
     <string name="post_filter_usage_community">Subreddit: %1$s</string>
     <string name="post_filter_usage_community_all">Subreddit</string>

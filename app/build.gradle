@@ -232,7 +232,7 @@ dependencies {
     implementation 'com.github.santalu:aspect-ratio-imageview:1.0.9'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
     def bivVersion = "1.8.1"
-    implementation "com.github.piasy:BigImageViewer:bivVersion"
+    implementation "com.github.piasy:BigImageViewer:$bivVersion"
     implementation "com.github.piasy:GlideImageLoader:$bivVersion"
     implementation "com.github.piasy:GlideImageViewFactory:$bivVersion"
 
@@ -270,6 +270,8 @@ dependencies {
     implementation 'me.zhanghai.android.fastscroll:library:1.1.8'
 
     implementation 'com.otaliastudios:zoomlayout:1.9.0'
+
+    implementation 'androidx.core:core-splashscreen:1.0.1'
 
 
 /**** Builds and flavors ****/

@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -26,13 +28,14 @@ import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
-import eu.toldi.infinityforlemmy.adapters.PostFilterRecyclerViewAdapter;
+import eu.toldi.infinityforlemmy.adapters.PostFilterWithUsageRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostFilterOptionsBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.postfilter.DeletePostFilter;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
-import eu.toldi.infinityforlemmy.postfilter.PostFilterViewModel;
+import eu.toldi.infinityforlemmy.postfilter.PostFilterWithUsageViewModel;
+import eu.toldi.infinityforlemmy.postfilter.PostFilterWithUsage;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class PostFilterPreferenceActivity extends BaseActivity {
@@ -62,8 +65,8 @@ public class PostFilterPreferenceActivity extends BaseActivity {
     CustomThemeWrapper customThemeWrapper;
     @Inject
     Executor executor;
-    public PostFilterViewModel postFilterViewModel;
-    private PostFilterRecyclerViewAdapter adapter;
+    public PostFilterWithUsageViewModel postFilterWithUsageViewModel;
+    private PostFilterWithUsageRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +102,7 @@ public class PostFilterPreferenceActivity extends BaseActivity {
             }
         });
 
-        adapter = new PostFilterRecyclerViewAdapter(this, customThemeWrapper, postFilter -> {
+        adapter = new PostFilterWithUsageRecyclerViewAdapter(this, customThemeWrapper, postFilter -> {
             if (post != null) {
                 showPostFilterOptions(post, postFilter);
             } else if (subredditName != null) {
@@ -117,10 +120,15 @@ public class PostFilterPreferenceActivity extends BaseActivity {
 
         recyclerView.setAdapter(adapter);
 
-        postFilterViewModel = new ViewModelProvider(this,
-                new PostFilterViewModel.Factory(redditDataRoomDatabase)).get(PostFilterViewModel.class);
+        postFilterWithUsageViewModel = new ViewModelProvider(this,
+                new PostFilterWithUsageViewModel.Factory(redditDataRoomDatabase)).get(PostFilterWithUsageViewModel.class);
 
-        postFilterViewModel.getPostFilterListLiveData().observe(this, postFilters -> adapter.setPostFilterList(postFilters));
+        postFilterWithUsageViewModel.getPostFilterWithUsageListLiveData().observe(this, new Observer<List<PostFilterWithUsage>>() {
+            @Override
+            public void onChanged(List<PostFilterWithUsage> postFilterWithUsages) {
+                adapter.setPostFilterWithUsageList(postFilterWithUsages);
+            }
+        });
     }
 
     public void showPostFilterOptions(Post post, PostFilter postFilter) {

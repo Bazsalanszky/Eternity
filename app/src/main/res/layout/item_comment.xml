@@ -152,15 +152,18 @@
             android:paddingStart="4dp"
             android:paddingEnd="4dp">
 
-            <ImageView
-                android:id="@+id/up_vote_button_item_post_comment"
+            <com.google.android.material.button.MaterialButton
+                style="?attr/materialIconButtonStyle"
+                android:id="@+id/upvote_button_item_post_comment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?actionBarItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="8dp"
-                android:src="@drawable/ic_arrow_upward_grey_24dp"
+                android:layout_height="match_parent"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:minWidth="0dp"
+                android:backgroundTint="#00000000"
+                app:strokeWidth="0dp"
+                app:icon="@drawable/ic_upvote_24dp"
+                app:iconSize="24dp"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/score_text_view_item_post_comment"
@@ -172,25 +175,28 @@
                 android:id="@+id/score_text_view_item_post_comment"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="?attr/font_family"
                 android:gravity="center"
                 android:textSize="?attr/font_12"
                 android:textStyle="bold"
+                android:fontFamily="?attr/font_family"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/down_vote_button_item_post_comment"
+                app:layout_constraintEnd_toStartOf="@+id/downvote_button_item_post_comment"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/up_vote_button_item_post_comment"
+                app:layout_constraintStart_toEndOf="@+id/upvote_button_item_post_comment"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/down_vote_button_item_post_comment"
+            <com.google.android.material.button.MaterialButton
+                style="?attr/materialIconButtonStyle"
+                android:id="@+id/downvote_button_item_post_comment"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?actionBarItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="8dp"
-                android:src="@drawable/ic_arrow_downward_grey_24dp"
+                android:layout_height="match_parent"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:minWidth="0dp"
+                android:backgroundTint="#00000000"
+                app:strokeWidth="0dp"
+                app:icon="@drawable/ic_downvote_24dp"
+                app:iconSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/placeholder_item_post_comment"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -207,7 +213,7 @@
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/down_vote_button_item_post_comment"
+                app:layout_constraintStart_toEndOf="@+id/downvote_button_item_post_comment"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
@@ -219,23 +225,22 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/more_button_item_post_comment"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/down_vote_button_item_post_comment"
+                app:layout_constraintStart_toEndOf="@+id/downvote_button_item_post_comment"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/more_button_item_post_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?actionBarItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="8dp"
-                android:src="@drawable/ic_more_vert_grey_24dp"
+                app:strokeWidth="0dp"
+                app:icon="@drawable/ic_more_vert_grey_24dp"
+                app:iconSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/expand_button_item_post_comment"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/placeholder_item_post_comment"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="?attr/materialIconButtonOutlinedStyle" />
 
             <TextView
                 android:id="@+id/expand_button_item_post_comment"
@@ -256,34 +261,32 @@
                 app:layout_constraintStart_toEndOf="@+id/more_button_item_post_comment"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_button_item_post_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?actionBarItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="8dp"
+                app:strokeWidth="0dp"
+                app:iconSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/reply_button_item_post_comment"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/expand_button_item_post_comment"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="?attr/materialIconButtonOutlinedStyle" />
 
-            <ImageView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/reply_button_item_post_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?actionBarItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="8dp"
-                android:src="@drawable/ic_reply_grey_24dp"
+                app:strokeWidth="0dp"
+                app:icon="@drawable/ic_reply_grey_24dp"
+                app:iconSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/save_button_item_post_comment"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="?attr/materialIconButtonOutlinedStyle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

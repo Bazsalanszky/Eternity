@@ -89,6 +89,7 @@ public class SharedPreferencesUtils {
     public static final int POST_LAYOUT_COMPACT = 1;
     public static final int POST_LAYOUT_GALLERY = 2;
     public static final int POST_LAYOUT_CARD_2 = 3;
+    public static final int POST_LAYOUT_CARD_3 = 4;
 
     public static final String FRONT_PAGE_SCROLLED_POSITION_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.front_page_scrolled_position";
     public static final String FRONT_PAGE_SCROLLED_POSITION_FRONT_PAGE_BASE = "_front_page";
@@ -233,6 +234,8 @@ public class SharedPreferencesUtils {
     public static final String EASIER_TO_WATCH_IN_FULL_SCREEN = "easier_to_watch_in_full_screen";
     public static final String HIDE_THE_NUMBER_OF_VOTES_IN_COMMENTS = "hide_the_number_of_votes_in_comments";
     public static final String COMMENT_DIVIDER_TYPE = "comment_divider_type";
+    public static final String SUBSCRIBED_THINGS_SYNC_TIME = "subscribed_things_sync_time";
+    public static final String COMMENT_FILTER = "comment_filter";
 
     public static final String DEFAULT_PREFERENCES_FILE = "eu.toldi.infinityforlemmy_preferences";
     public static final String MAIN_PAGE_TABS_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.main_page_tabs";
@@ -387,7 +390,7 @@ public class SharedPreferencesUtils {
 
     public static final String INTERNAL_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.internal";
     public static final String HAS_REQUESTED_NOTIFICATION_PERMISSION = "has_requested_notification_permission";
-    public static final String DO_NOT_SHOW_REDDIT_API_INFO_AGAIN = "do_not_show_reddit_api_info_again";
+    public static final String DO_NOT_SHOW_REDDIT_API_INFO_V2_AGAIN = "do_not_show_reddit_api_info_v2_again";
 
     //Legacy Settings
     public static final String MAIN_PAGE_TAB_1_TITLE_LEGACY = "main_page_tab_1_title";

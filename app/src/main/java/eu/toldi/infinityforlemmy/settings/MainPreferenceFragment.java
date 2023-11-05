@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.biometric.BiometricManager;
 import androidx.preference.Preference;
 
@@ -19,6 +20,10 @@ import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.PostFilterPreferenceActivity;
 import eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceFragmentCompat;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import eu.toldi.infinityforlemmy.activities.CommentFilterPreferenceActivity;
+import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
+import eu.toldi.infinityforlemmy.activities.PostFilterPreferenceActivity;
+import eu.toldi.infinityforlemmy.customviews.CustomFontPreferenceFragmentCompat;
 
 public class MainPreferenceFragment extends CustomFontPreferenceFragmentCompat {
 
@@ -33,6 +38,7 @@ public class MainPreferenceFragment extends CustomFontPreferenceFragmentCompat {
 
         Preference securityPreference = findPreference(SharedPreferencesUtils.SECURITY);
         Preference postFilterPreference = findPreference(SharedPreferencesUtils.POST_FILTER);
+        Preference commentFilterPreference = findPreference(SharedPreferencesUtils.COMMENT_FILTER);
         Preference privacyPolicyPreference = findPreference(SharedPreferencesUtils.PRIVACY_POLICY_KEY);
         Preference redditUserAgreementPreference = findPreference(SharedPreferencesUtils.REDDIT_USER_AGREEMENT_KEY);
 
@@ -48,6 +54,17 @@ public class MainPreferenceFragment extends CustomFontPreferenceFragmentCompat {
                 Intent intent = new Intent(activity, PostFilterPreferenceActivity.class);
                 activity.startActivity(intent);
                 return true;
+            });
+        }
+
+        if (commentFilterPreference != null) {
+            commentFilterPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(@NonNull Preference preference) {
+                    Intent intent = new Intent(activity, CommentFilterPreferenceActivity.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
             });
         }
     }

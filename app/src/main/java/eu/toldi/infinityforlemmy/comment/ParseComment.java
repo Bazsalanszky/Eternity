@@ -24,14 +24,14 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
+import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
 import eu.toldi.infinityforlemmy.user.BasicUserInfo;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
-
 public class ParseComment {
     public static void parseComments(Executor executor, Handler handler, String response, Integer commentId,
-                                     boolean expandChildren,
+                                     boolean expandChildren, CommentFilter commentFilter,
                                      ParseCommentListener parseCommentListener) {
         executor.execute(() -> {
             try {
@@ -50,6 +50,9 @@ public class ParseComment {
                     orderedComments.add(singleComment);
                     parsedComments.put(singleComment.getId(), singleComment);
                     if (singleComment.getDepth() == 0) {
+                        if (!CommentFilter.isCommentAllowed(singleComment, commentFilter)) {
+                            continue;
+                        }
                         topLevelComments.add(singleComment);
                     }
                 }
@@ -58,7 +61,9 @@ public class ParseComment {
                     if (parentComment.getDepth() == 0) {
                         parentComment = null;
                     } else {
-                        expandedNewComments.add(parentComment);
+                        if (CommentFilter.isCommentAllowed(parentComment, commentFilter)) {
+                            expandedNewComments.add(parentComment);
+                        }
                     }
                 }
 
@@ -68,6 +73,9 @@ public class ParseComment {
                     if (c.getParentId() != null) {
                         Comment parent = parsedComments.get(c.getParentId());
                         if (parent != null) {
+                            if (!CommentFilter.isCommentAllowed(c, commentFilter)) {
+                                continue;
+                            }
                             parent.addChild(c);
                         }
                     }
@@ -81,8 +89,13 @@ public class ParseComment {
                 if (topLevelComments.isEmpty() && !parsedComments.isEmpty() && parentComment != null) {
                     for (int i = 0; i < orderedComments.size(); i++) {
                         Comment c = orderedComments.get(i);
-                        if (c.getParentId() == parentComment.getId())
+                        if (c.getParentId() == parentComment.getId()) {
+                            if (!CommentFilter.isCommentAllowed(c, commentFilter)) {
+                                continue;
+                            }
                             expandedNewComments.add(c);
+                        }
+
                     }
                 }
 
@@ -205,7 +218,8 @@ public class ParseComment {
     }
 
     private static void parseCommentRecursion(JSONArray comments, ArrayList<Comment> newCommentData,
-                                              ArrayList<String> moreChildrenIds, int depth) throws JSONException {
+                                              ArrayList<String> moreChildrenIds, int depth,
+                                              CommentFilter commentFilter) throws JSONException {
         int actualCommentLength;
 
         if (comments.length() == 0) {

@@ -5,26 +5,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.PostFilterPreferenceActivity;
 import eu.toldi.infinityforlemmy.customviews.LandscapeExpandedRoundedBottomSheetDialogFragment;
+import eu.toldi.infinityforlemmy.databinding.FragmentPostFilterOptionsBottomSheetBinding;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.Utils;
 
 public class PostFilterOptionsBottomSheetFragment extends LandscapeExpandedRoundedBottomSheetDialogFragment {
 
-    @BindView(R.id.edit_text_view_post_filter_options_bottom_sheet_fragment)
-    TextView editTextView;
-    @BindView(R.id.apply_to_text_view_post_filter_options_bottom_sheet_fragment)
-    TextView applyToTextView;
-    @BindView(R.id.delete_text_view_post_filter_options_bottom_sheet_fragment)
-    TextView deleteTextView;
     public static final String EXTRA_POST_FILTER = "EPF";
     private PostFilterPreferenceActivity activity;
 
@@ -36,32 +27,30 @@ public class PostFilterOptionsBottomSheetFragment extends LandscapeExpandedRound
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_post_filter_options_bottom_sheet, container, false);
-
-        ButterKnife.bind(this, rootView);
+        FragmentPostFilterOptionsBottomSheetBinding binding = FragmentPostFilterOptionsBottomSheetBinding.inflate(inflater, container, false);
 
         PostFilter postFilter = getArguments().getParcelable(EXTRA_POST_FILTER);
 
-        editTextView.setOnClickListener(view -> {
+        binding.editTextViewPostFilterOptionsBottomSheetFragment.setOnClickListener(view -> {
             activity.editPostFilter(postFilter);
             dismiss();
         });
 
-        applyToTextView.setOnClickListener(view -> {
+        binding.applyToTextViewPostFilterOptionsBottomSheetFragment.setOnClickListener(view -> {
             activity.applyPostFilterTo(postFilter);
             dismiss();
         });
 
-        deleteTextView.setOnClickListener(view -> {
+        binding.deleteTextViewPostFilterOptionsBottomSheetFragment.setOnClickListener(view -> {
             activity.deletePostFilter(postFilter);
             dismiss();
         });
 
         if (activity.typeface != null) {
-            Utils.setFontToAllTextViews(rootView, activity.typeface);
+            Utils.setFontToAllTextViews(binding.getRoot(), activity.typeface);
         }
 
-        return rootView;
+        return binding.getRoot();
     }
 
     @Override

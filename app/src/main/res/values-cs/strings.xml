@@ -907,7 +907,6 @@
     <string name="post_filter_requires_a_name">Jak se jmenuje tento filtr příspěvků\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' již existuje</string>
     <string name="duplicate_post_filter_dialog_message">Chcete jej přepsat\?</string>
-    <string name="apply_post_filter_to">Použít na</string>
     <string name="post_filter_usage_home">Domů</string>
     <string name="post_filter_usage_community">Subreddit: %1$s</string>
     <string name="post_filter_usage_community_all">Subreddit</string>
@@ -1165,16 +1164,10 @@
     <string name="select_a_ttf_font">Vyberte soubor s písmem ttf</string>
     <string name="unable_to_load_font">Nepodařilo se načíst vlastní písmo</string>
     <string name="user_agreement_message">Před přihlášením musíte souhlasit s uživatelskou smlouvou Lemmy (%1$s) a zásadami ochrany osobních údajů Infinity pro Lemmy (%2$s).</string>
-    <string name="unexpected_intent_action">Neočekávaná akce intentu: <xliff:g id="action">%1$s</xliff:g></string>
-    <string name="storage_permission_denied">Oprávnění přístupu k úložišti bylo zamítnuto</string>
     <string name="load_more_posts_failed">Nepodařilo se načíst další příspěvky.
 \nKlepnutím to zkusíte znovu.</string>
     <string name="denied_notification_permission">Oprávnění k oznámením nebylo uděleno</string>
-    <string name="reddit_api_info">Od 1. července 2023 bude rozhraní Reddit API pro klienty třetích stran, mezi něž patří i Infinity for Reddit, placené. Oznámení společnosti Reddit naleznete zde: %1$s
-\n
-\nAbychom přežili tuto změnu, stane se aplikace Infinity po 1. červenci aplikací pouze s předplatným. Více informací o změnách najdete v tomto příspěvku: %2$s
-\n
-\nJe nutné, abyste po 1. červenci aktualizovali aplikaci Infinity, abyste získali novou verzi s možností předplatného. Žádná z předchozích verzí (včetně této) nebude po 1. červenci fungovat. Ale vzhledem k napjatému časovému plánu, který Reddit poskytl, nemusí být aktualizace k dispozici hned 1. července, protože vyžaduje řádné testování. Děkujeme za pochopení!</string>
+
     <string name="block_community_success">Komunita zablokována!</string>
     <string name="block_community_failed">Nepodařilo se zablokovat komunitu</string>
     <string name="unblock_community">Odblokovat komunitu</string>
@@ -1235,17 +1228,14 @@
     <string name="awardee_karma">Karma z ocenění:</string>
     <string name="handle_link">Zpracovat odkaz</string>
     <string name="invalid_link">Neplatný odkaz</string>
-    <string name="enable_random_adaptation">Povolit náhodnou adaptaci</string>
     <string name="error_unsupported_video">Médium zahrnuje stopy videa, žádné ale nelze na tomto zařízení přehrát</string>
     <string name="error_unsupported_audio">Médium zahrnuje stopy zvuku, žádné ale nelze na tomto zařízení přehrát</string>
-    <string name="sample_list_load_error">Nepodařilo se načíst jeden nebo více vzorových seznamů</string>
     <string name="exo_controls_volume_up_description">Zvýšení hlasitosti</string>
     <string name="exo_controls_volume_off_description">Vypnutí hlasitosti</string>
     <string name="invalid_regex">Neplatný vzor regex</string>
     <string name="no_more_posts">Žádné další příspěvky</string>
     <string name="image_index_in_gallery">%1$d/%2$d</string>
     <string name="go_to_settings">Nastavení</string>
-    <string name="reddit_api_info_title">Důležité upozornění ohledně změn v API Redditu</string>
     <string name="i_understand">Chápu</string>
     <string name="instance_url">URL instance</string>
     <string name="instance_url_hint">Adresa URL vaší preferované instance Lemmy s nebo bez předpony https://</string>

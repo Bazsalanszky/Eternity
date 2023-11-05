@@ -12,9 +12,12 @@ import eu.toldi.infinityforlemmy.activities.AccountPostsActivity;
 import eu.toldi.infinityforlemmy.activities.AccountSavedThingActivity;
 import eu.toldi.infinityforlemmy.activities.BlockedThingListingActivity;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
+import eu.toldi.infinityforlemmy.activities.CommentFilterPreferenceActivity;
+import eu.toldi.infinityforlemmy.activities.CommentFilterUsageListingActivity;
 import eu.toldi.infinityforlemmy.activities.CreateMultiRedditActivity;
 import eu.toldi.infinityforlemmy.activities.CustomThemeListingActivity;
 import eu.toldi.infinityforlemmy.activities.CustomThemePreviewActivity;
+import eu.toldi.infinityforlemmy.activities.CustomizeCommentFilterActivity;
 import eu.toldi.infinityforlemmy.activities.CustomizePostFilterActivity;
 import eu.toldi.infinityforlemmy.activities.CustomizeThemeActivity;
 import eu.toldi.infinityforlemmy.activities.EditCommentActivity;
@@ -25,7 +28,6 @@ import eu.toldi.infinityforlemmy.activities.FetchRandomSubredditOrPostActivity;
 import eu.toldi.infinityforlemmy.activities.FilteredPostsActivity;
 import eu.toldi.infinityforlemmy.activities.FullMarkdownActivity;
 import eu.toldi.infinityforlemmy.activities.GiveAwardActivity;
-import eu.toldi.infinityforlemmy.activities.HistoryActivity;
 import eu.toldi.infinityforlemmy.activities.InboxActivity;
 import eu.toldi.infinityforlemmy.activities.InstanceInfoActivity;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
@@ -75,7 +77,6 @@ import eu.toldi.infinityforlemmy.fragments.BlockedCommunitiesListingFragment;
 import eu.toldi.infinityforlemmy.fragments.BlockedUsersListingFragment;
 import eu.toldi.infinityforlemmy.fragments.CommentsListingFragment;
 import eu.toldi.infinityforlemmy.fragments.FollowedUsersListingFragment;
-import eu.toldi.infinityforlemmy.fragments.HistoryPostFragment;
 import eu.toldi.infinityforlemmy.fragments.InboxFragment;
 import eu.toldi.infinityforlemmy.fragments.MorePostsInfoFragment;
 import eu.toldi.infinityforlemmy.fragments.MultiRedditListingFragment;
@@ -309,10 +310,6 @@ public interface AppComponent {
 
     void inject(MaterialYouWorker materialYouWorker);
 
-    void inject(HistoryPostFragment historyPostFragment);
-
-    void inject(HistoryActivity historyActivity);
-
     void inject(MorePostsInfoFragment morePostsInfoFragment);
 
     void inject(BlockedThingListingActivity blockedThingListingActivity);
@@ -326,6 +323,12 @@ public interface AppComponent {
     void inject(PrivateMessageFragment privateMessageFragment);
 
     void inject(@NotNull InstanceInfoActivity instanceInfoActivity);
+
+    void inject(CommentFilterPreferenceActivity commentFilterPreferenceActivity);
+
+    void inject(CustomizeCommentFilterActivity customizeCommentFilterActivity);
+
+    void inject(CommentFilterUsageListingActivity commentFilterUsageListingActivity);
 
     @Component.Factory
     interface Factory {
