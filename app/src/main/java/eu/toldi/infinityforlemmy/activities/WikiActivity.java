@@ -176,7 +176,7 @@ public class WikiActivity extends BaseActivity {
             return true;
         };
         markwon = MarkdownUtils.createFullRedditMarkwon(this,
-                miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener);
+                miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
 
         markwonAdapter = MarkdownUtils.createTablesAdapter();
         LinearLayoutManagerBugFixed linearLayoutManager = new SwipeLockLinearLayoutManager(this, new SwipeLockInterface() {

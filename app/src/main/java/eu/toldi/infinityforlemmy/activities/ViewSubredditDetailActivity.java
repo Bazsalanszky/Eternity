@@ -5,8 +5,8 @@ import static android.graphics.BitmapFactory.decodeResource;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -271,6 +271,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
     private boolean showStatistics;
 
+    private boolean disableImagePreview;
+
     private boolean hideSubredditDescription;
 
     @Override
@@ -285,6 +287,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
 
         hideFab = mSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_FAB_IN_POST_FEED, false);
         showStatistics = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_STATISTICS, true);
+        disableImagePreview = mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false);
         showBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.BOTTOM_APP_BAR_KEY, false);
         navigationWrapper = new NavigationWrapper(findViewById(R.id.bottom_app_bar_bottom_app_bar), findViewById(R.id.linear_layout_bottom_app_bar),
                 findViewById(R.id.option_1_bottom_app_bar), findViewById(R.id.option_2_bottom_app_bar),
@@ -546,7 +549,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             return true;
         };
 
-        Markwon markwon = MarkdownUtils.createDescriptionMarkwon(this, miscPlugin, onLinkLongClickListener);
+        Markwon markwon = MarkdownUtils.createDescriptionMarkwon(this, miscPlugin, onLinkLongClickListener, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
 
         descriptionTextView.setOnLongClickListener(view -> {
             if (description != null && !description.equals("") && descriptionTextView.getSelectionStart() == -1 && descriptionTextView.getSelectionEnd() == -1) {
@@ -1731,6 +1734,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             bundle.putString(SidebarFragment.EXTRA_SUBREDDIT_NAME, communityName);
             bundle.putString(SidebarFragment.EXTRA_COMMUNITY_QUALIFIED_NAME, qualifiedName);
             bundle.putBoolean(SidebarFragment.EXTRA_SHOW_STATISTICS, !showStatistics);
+            bundle.putBoolean(SidebarFragment.EXTRA_DISABLE_IMAGE_PREVIEW, disableImagePreview);
             fragment.setArguments(bundle);
             return fragment;
         }

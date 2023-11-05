@@ -299,7 +299,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             return true;
         };
         mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
-                miscPlugin, markdownColor, postSpoilerBackgroundColor, onLinkLongClickListener);
+                miscPlugin, markdownColor, postSpoilerBackgroundColor, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         mMarkwonAdapter = MarkdownUtils.createTablesAdapter();
 
         mSeparatePostAndComments = separatePostAndComments;

@@ -205,7 +205,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
                 }
             };
             Markwon postBodyMarkwon = MarkdownUtils.createFullRedditMarkwon(this,
-                    miscPlugin, parentTextColor, parentSpoilerBackgroundColor, null);
+                    miscPlugin, parentTextColor, parentSpoilerBackgroundColor, null, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
             MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();
             binding.commentContentMarkdownView.setLayoutManager(new LinearLayoutManagerBugFixed(this));
             binding.commentContentMarkdownView.setAdapter(markwonAdapter);

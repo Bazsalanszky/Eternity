@@ -139,7 +139,7 @@ public class FullMarkdownActivity extends BaseActivity {
             }
         };
         Markwon markwon = MarkdownUtils.createFullRedditMarkwon(this,
-                miscPlugin, markdownColor, spoilerBackgroundColor, null);
+                miscPlugin, markdownColor, spoilerBackgroundColor, null, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
 
         MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();
         LinearLayoutManagerBugFixed linearLayoutManager = new SwipeLockLinearLayoutManager(this, new SwipeLockInterface() {

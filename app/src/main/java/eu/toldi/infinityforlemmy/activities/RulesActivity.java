@@ -132,7 +132,7 @@ public class RulesActivity extends BaseActivity {
 
         mSubredditName = getIntent().getExtras().getString(EXTRA_SUBREDDIT_NAME);
 
-        mAdapter = new RulesRecyclerViewAdapter(this, mCustomThemeWrapper, sliderPanel);
+        mAdapter = new RulesRecyclerViewAdapter(this, mCustomThemeWrapper, sliderPanel, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         recyclerView.setAdapter(mAdapter);
         FetchSubredditData.fetchSubredditData(mRetrofit.getRetrofit(), mSubredditName, mAccessToken, new FetchSubredditData.FetchSubredditDataListener() {
             @Override

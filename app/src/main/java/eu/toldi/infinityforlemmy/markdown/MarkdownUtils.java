@@ -38,44 +38,84 @@ public class MarkdownUtils {
                                                   @NonNull MarkwonPlugin miscPlugin,
                                                   int markdownColor,
                                                   int spoilerBackgroundColor,
-                                                  @Nullable BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener) {
-        return Markwon.builder(context)
-                .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
-                .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
-                    plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
-                }))
-                .usePlugin(miscPlugin)
-                .usePlugin(SuperscriptPlugin.create())
-                .usePlugin(SpoilerParserPlugin.create(markdownColor, spoilerBackgroundColor))
-                .usePlugin(RedditHeadingPlugin.create())
-                .usePlugin(StrikethroughPlugin.create())
-                .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()
-                        .setOnLinkLongClickListener(onLinkLongClickListener)))
-                .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
-                .usePlugin(TableEntryPlugin.create(context))
-                .usePlugin(ClickableGlideImagesPlugin.create(context))
-                .usePlugin(new MarkwonLemmyLinkPlugin())
-                .build();
+                                                  @Nullable BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener, boolean dataSaverEnabled) {
+        Markwon result;
+        if (dataSaverEnabled) {
+            result = Markwon.builder(context)
+                    .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
+                        plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
+                    }))
+                    .usePlugin(miscPlugin)
+                    .usePlugin(SuperscriptPlugin.create())
+                    .usePlugin(SpoilerParserPlugin.create(markdownColor, spoilerBackgroundColor))
+                    .usePlugin(RedditHeadingPlugin.create())
+                    .usePlugin(StrikethroughPlugin.create())
+                    .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()
+                            .setOnLinkLongClickListener(onLinkLongClickListener)))
+                    .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
+                    .usePlugin(TableEntryPlugin.create(context))
+                    .usePlugin(new MarkwonLemmyLinkPlugin())
+                    .build();
+        } else {
+            result = Markwon.builder(context)
+                    .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
+                    .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
+                        plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
+                    }))
+                    .usePlugin(miscPlugin)
+                    .usePlugin(SuperscriptPlugin.create())
+                    .usePlugin(SpoilerParserPlugin.create(markdownColor, spoilerBackgroundColor))
+                    .usePlugin(RedditHeadingPlugin.create())
+                    .usePlugin(StrikethroughPlugin.create())
+                    .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()
+                            .setOnLinkLongClickListener(onLinkLongClickListener)))
+                    .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
+                    .usePlugin(TableEntryPlugin.create(context))
+                    .usePlugin(ClickableGlideImagesPlugin.create(context))
+                    .usePlugin(new MarkwonLemmyLinkPlugin())
+                    .build();
+        }
+
+        return result;
     }
 
     @NonNull
     public static Markwon createDescriptionMarkwon(Activity context, MarkwonPlugin miscPlugin,
-                                                   BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener) {
-        return Markwon.builder(context)
-                .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
-                    plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
-                }))
-                .usePlugin(miscPlugin)
-                .usePlugin(SuperscriptPlugin.create())
-                .usePlugin(RedditHeadingPlugin.create())
-                .usePlugin(StrikethroughPlugin.create())
-                .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()
-                        .setOnLinkLongClickListener(onLinkLongClickListener)))
-                .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
-                .usePlugin(TableEntryPlugin.create(context))
-                .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
-                .usePlugin(new MarkwonLemmyLinkPlugin())
-                .build();
+                                                   BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener, boolean dataSaverEnabled) {
+        Markwon result;
+        if (dataSaverEnabled) {
+            result = Markwon.builder(context)
+                    .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
+                        plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
+                    }))
+                    .usePlugin(miscPlugin)
+                    .usePlugin(SuperscriptPlugin.create())
+                    .usePlugin(RedditHeadingPlugin.create())
+                    .usePlugin(StrikethroughPlugin.create())
+                    .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()
+                            .setOnLinkLongClickListener(onLinkLongClickListener)))
+                    .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
+                    .usePlugin(TableEntryPlugin.create(context))
+                    .usePlugin(new MarkwonLemmyLinkPlugin())
+                    .build();
+        } else {
+            result = Markwon.builder(context)
+                    .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
+                        plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
+                    }))
+                    .usePlugin(miscPlugin)
+                    .usePlugin(SuperscriptPlugin.create())
+                    .usePlugin(RedditHeadingPlugin.create())
+                    .usePlugin(StrikethroughPlugin.create())
+                    .usePlugin(MovementMethodPlugin.create(new SpoilerAwareMovementMethod()
+                            .setOnLinkLongClickListener(onLinkLongClickListener)))
+                    .usePlugin(LinkifyPlugin.create(Linkify.WEB_URLS))
+                    .usePlugin(TableEntryPlugin.create(context))
+                    .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
+                    .usePlugin(new MarkwonLemmyLinkPlugin())
+                    .build();
+        }
+        return result;
     }
 
     /**

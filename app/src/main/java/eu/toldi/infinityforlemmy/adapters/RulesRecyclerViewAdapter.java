@@ -37,6 +37,7 @@ import me.saket.bettermovementmethod.BetterLinkMovementMethod;
 public class RulesRecyclerViewAdapter extends RecyclerView.Adapter<RulesRecyclerViewAdapter.RuleViewHolder> {
     private BaseActivity activity;
     private Markwon markwon;
+    private boolean mDisableImagePreview;
     @Nullable
     private final SliderPanel sliderPanel;
     private ArrayList<Rule> rules;
@@ -44,10 +45,11 @@ public class RulesRecyclerViewAdapter extends RecyclerView.Adapter<RulesRecycler
 
     public RulesRecyclerViewAdapter(@NonNull BaseActivity activity,
                                     @NonNull CustomThemeWrapper customThemeWrapper,
-                                    @Nullable SliderPanel sliderPanel) {
+                                    @Nullable SliderPanel sliderPanel, boolean disableImagePreview) {
         this.activity = activity;
         this.sliderPanel = sliderPanel;
         mPrimaryTextColor = customThemeWrapper.getPrimaryTextColor();
+        mDisableImagePreview = disableImagePreview;
         int spoilerBackgroundColor = mPrimaryTextColor | 0xFF000000;
         MarkwonPlugin miscPlugin = new AbstractMarkwonPlugin() {
             @Override
@@ -82,7 +84,7 @@ public class RulesRecyclerViewAdapter extends RecyclerView.Adapter<RulesRecycler
             return true;
         };
         markwon = MarkdownUtils.createFullRedditMarkwon(activity,
-                miscPlugin, mPrimaryTextColor, spoilerBackgroundColor, onLinkLongClickListener);
+                miscPlugin, mPrimaryTextColor, spoilerBackgroundColor, onLinkLongClickListener, mDisableImagePreview);
     }
 
     @NonNull

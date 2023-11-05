@@ -149,7 +149,7 @@ public class InstanceInfoActivity extends BaseActivity {
         };
 
         mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(this,
-                miscPlugin, markdownColor, postSpoilerBackgroundColor, null);
+                miscPlugin, markdownColor, postSpoilerBackgroundColor, null, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         mMarkwonAdapter = MarkdownUtils.createTablesAdapter();
         mContentMarkdownView.setAdapter(mMarkwonAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

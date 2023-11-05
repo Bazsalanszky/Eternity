@@ -66,6 +66,7 @@ public class SidebarFragment extends Fragment {
     public static final String EXTRA_COMMUNITY_QUALIFIED_NAME = "ECQN";
 
     public static final String EXTRA_SHOW_STATISTICS = "ESS";
+    public static final String EXTRA_DISABLE_IMAGE_PREVIEW = "EDIP";
     public SubredditViewModel mSubredditViewModel;
     @BindView(R.id.swipe_refresh_layout_sidebar_fragment)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -126,6 +127,8 @@ public class SidebarFragment extends Fragment {
 
     private boolean mShowStatistics;
 
+    private boolean mDisableImagePreview;
+
     private String communityQualifiedName;
     private LinearLayoutManagerBugFixed linearLayoutManager;
     private int markdownColor;
@@ -153,6 +156,7 @@ public class SidebarFragment extends Fragment {
         subredditName = getArguments().getString(EXTRA_SUBREDDIT_NAME);
         communityQualifiedName = getArguments().getString(EXTRA_COMMUNITY_QUALIFIED_NAME);
         mShowStatistics = getArguments().getBoolean(EXTRA_SHOW_STATISTICS, true);
+        mDisableImagePreview = getArguments().getBoolean(EXTRA_DISABLE_IMAGE_PREVIEW, false);
         if (communityQualifiedName == null) {
             Toast.makeText(activity, R.string.error_getting_community_name, Toast.LENGTH_SHORT).show();
             return rootView;
@@ -224,7 +228,7 @@ public class SidebarFragment extends Fragment {
             return true;
         };
         Markwon markwon = MarkdownUtils.createFullRedditMarkwon(activity,
-                miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener);
+                miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener, mDisableImagePreview);
         MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();
 
         linearLayoutManager = new LinearLayoutManagerBugFixed(activity);

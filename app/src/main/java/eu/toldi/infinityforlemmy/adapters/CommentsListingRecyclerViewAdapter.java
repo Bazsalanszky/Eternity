@@ -170,7 +170,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
             return true;
         };
         mMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
-                miscPlugin, mCommentColor, commentSpoilerBackgroundColor, onLinkLongClickListener);
+                miscPlugin, mCommentColor, commentSpoilerBackgroundColor, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         recycledViewPool = new RecyclerView.RecycledViewPool();
     }
 
