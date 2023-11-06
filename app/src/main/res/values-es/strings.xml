@@ -1191,4 +1191,5 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="settings_require_authentication_to_show_accounts">Requiere Autenticación para Mostrar Cuentas</string>
     <string name="settings_backup_settings_summary">El archivo de respaldo de la contraseña es \"123321\".</string>
     <string name="settings_custom_font_family_title">Fuentes Personalizadas</string>
+    <string name="active_users_number_detail">%1$,d Usuarios activos</string>
 </resources>
