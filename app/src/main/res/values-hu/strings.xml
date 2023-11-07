@@ -88,15 +88,15 @@
     <string name="load_messages_failed">Hiba az üzenetek betöltése közben. Koppints az újraprbálkozáshoz.</string>
     <string name="no_messages">Üres</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Születésnap:
 \n%1$s</string>
     <string name="since">Ez óta:</string>
     <string name="profile">Profil</string>
     <string name="subscriptions">Feliratkozások</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">MultiKözösség</string>
     <string name="inbox">Postaláda</string>
     <string name="upvoted">Upvoteolt</string>
     <string name="downvoted">Downvoteolt</string>
@@ -104,8 +104,8 @@
     <string name="saved">Mentett</string>
     <string name="gilded">Jutalmazott</string>
     <string name="settings">Beállítások</string>
-    <string name="subscribers_number_detail">Feliratkozók: %1$d</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d Feliratkozó</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Közösség infó nem szerezhető meg</string>
     <string name="cannot_fetch_user_info">Felhasználó infó nem megszerezhető</string>
     <string name="cannot_fetch_sidebar">Oldalsáv infó nem megszerezhető</string>
@@ -380,7 +380,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Megosztás</string>
     <string name="settings_share_summary">Ha tetszik az app oszd meg másokkal is</string>
-    <string name="settings_version_title">Infiniti Reddithez</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Verzió %s</string>
     <string name="settings_category_customization_title">Testreszabás</string>
     <string name="settings_customize_light_theme_title">Világos téma</string>
@@ -554,7 +554,7 @@
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background">Fül elrendezés háttérszín kiterjesztett eszköztárban</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background_detail">Beállítva: Fül elrendezés hátterére (kiterjesztett eszköztár)</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color">Fül elrendezés szöveg szín kiterjesztett eszköztárban</string>
-    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color_detail">"Beállítva:  Fül elrendezés szöveg színére (kiterjesztett eszköztár)"</string>
+    <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color_detail">Beállítva: Fül elrendezés szöveg színére (kiterjesztett eszköztár)</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_indicator">Fül elrendezés fül indikátor kiterjesztett eszköztárban</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_indicator_detail">Beállítva: Fül indikátor színére fül elrendezésben (kiterjesztett eszköztár)</string>
     <string name="theme_item_tab_layout_with_collapsed_collapsing_toolbar_tab_background">Fül elrendezés háttérszíne összecsukott eszköztárban</string>
@@ -701,7 +701,7 @@
 \nŐ nem beteg vagy valami, de azért jobban lehetne már.</string>
     <string name="edit_multi_reddit">Multireddit szerkeztése</string>
     <string name="delete_multi_reddit">Multireddit törlése</string>
-    <string name="n_awards">%1$d kitüntetés</string>
+    <string name="n_awards">%1$,d kitüntetés</string>
     <string name="one_award">1 kitüntetés</string>
     <string name="report">Jelent</string>
     <string name="reporting">Jelentés</string>
@@ -949,7 +949,7 @@
     <string name="settings_backup_settings_title">Beállítások biztonsági mentése</string>
     <string name="settings_restore_settings_title">Beállítások visszaállítása</string>
     <string name="settings_credits_love_animation_title">Love animáció</string>
-    <string name="settings_swipe_between_posts_title">"Váltás "</string>
+    <string name="settings_swipe_between_posts_title">Váltás posztok között csúsztatással</string>
     <string name="settings_navigation_drawer_title">Navigációs fiók</string>
     <string name="settings_default_search_result_tab">Alapértelmezett keresési találatok fül</string>
     <string name="device_default">Eszköz alapértelmezett</string>
@@ -1057,4 +1057,50 @@
     <string name="admins">Adminok</string>
     <string name="settings_hide_user_instance">Felhasználó példányának elrejtése</string>
     <string name="report_post">Poszt jelentése</string>
+    <string name="community_number_detail">%1$,d Közösség</string>
+    <string name="posting_gallery">Poszt galéria</string>
+    <string name="settings_number_of_columns_in_post_feed_unfolded_landscape_title">Döntve (kihajtva)</string>
+    <string name="settings_hide_post_flair">Poszt Flair elrejtése</string>
+    <string name="settings_backup_settings_summary">A mentési fájl jelszava \"123321\".</string>
+    <string name="settings_collapse_account_section_title">Fiók rész összecsukása</string>
+    <string name="settings_collapse_reddit_section_title">Lemmy szekció összecsukása</string>
+    <string name="settings_collapse_preferences_section_title">Preferenciák szekció összecsukása</string>
+    <string name="settings_collapse_favorite_communities_section_title">Kedvenc közösségek szekció összecsukása</string>
+    <string name="settings_collapse_subscribed_communities_section_title">Feliratkozások szekció összecsukása</string>
+    <string name="settings_hide_favorite_communities_sections_title">Kedvenc közösségek szekció elrejtése</string>
+    <string name="settings_crash_reports_title">Összeomlási jelentések</string>
+    <string name="settings_nsfw_and_spoiler_dangerous_group_title">Veszélyes</string>
+    <string name="settings_disable_nsfw_forever_title">NSFW kikapcsolódása örökre</string>
+    <string name="settings_show_only_one_comment_level_indicator">Csak egy komment szint indikátor mutatása</string>
+    <string name="settings_loop_video_summary">Indítsa újra az alkalmazást, hogy ezt a beállítást alkalmazza az automatikusan lejátszott videókra</string>
+    <string name="settings_post_details_title">Poszt részletek</string>
+    <string name="settings_separate_post_and_comments_in_landscape_mode_title">Posztok és kommentek szétválasztása fektetett módban</string>
+    <string name="settings_separate_post_and_comments_summary">A videó automatikus lejátszása le lesz tiltva a poszt részletes oldalán</string>
+    <string name="settings_use_bottom_toolbar_in_media_viewer_title">Alsó eszköztár használata a Médianézőben</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Felhasználói karma elrejtése</string>
+    <string name="settings_secure_mode_title">Biztonságos mód</string>
+    <string name="settings_credits_lock_screen_animation_title">Zárképernyő animáció</string>
+    <string name="settings_app_lock_title">Alkalmazás zár</string>
+    <string name="settings_app_lock_summary">Hitelesítés megkövetelése az alkalmazás használata előtt</string>
+    <string name="settings_app_lock_timeout_title">Alkalmazás zár időkorlátja</string>
+    <string name="settings_enable_fold_support_title">Összecsukható telefon támogatás engedélyezése</string>
+    <string name="settings_link_handler_value_external_browser">Külső alkalmazás</string>
+    <string name="action_contact_mods">Kapcsolatfelvétel moderátorokkal</string>
+    <string name="settings_loop_video_title">Videók ismétlése</string>
+    <string name="post_count_detail">%1$,d Poszt</string>
+    <string name="comment_count_detail">%1$,d Komment</string>
+    <string name="settings_video_player_automatic_landscape_orientation">Döntött képernyőre váltás a videólejátszóban automatikusan</string>
+    <string name="settings_secure_mode_summary">Képernyőfotók és videofelvételek tiltása. Nincs előnézet a legutóbbi alkalmazások képernyőjén.</string>
+    <string name="voting_length">Szabazás hossza: %1$d nap</string>
+    <string name="two_options_required">A jó szavazáshoz legalább két opció kell!</string>
+    <string name="settings_require_authentication_to_show_accounts">Hitelesítés megkövetelése a fiókok megjelenítéséhez</string>
+    <string name="settings_default_playback_speed_title">Alapértelmezett lejátszási sebesség</string>
+    <string name="active_users_number_detail">%1$,d Aktív felhasználó</string>
+    <string name="settings_number_of_columns_in_post_feed_unfolded_portrait_title">Állított (kihajtva)</string>
+    <string name="settings_remember_muting_option_in_post_feed">Némítás opció megjegyzése az idővonalon</string>
+    <string name="user_number_detail">%1$,d Felhasználó</string>
+    <string name="settings_swipe_vertically_to_go_back_from_media_title">Függőlegesen csúsztatás a képről és a Gif-ről való visszalépés</string>
+    <string name="settings_collapse_post_section_title">Poszt szekció összecsukása</string>
+    <string name="settings_hide_subscribed_communities_sections_title">Feliratkozások szekció elrejtése</string>
+    <string name="settings_separate_post_and_comments_in_portrait_mode_title">Posztok és kommentek szétválasztása álló módban</string>
 </resources>

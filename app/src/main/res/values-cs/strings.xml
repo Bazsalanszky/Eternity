@@ -382,7 +382,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Sdílet</string>
     <string name="settings_share_summary">Pokud máte rádi tuto aplikaci, sdílejte ji s ostatními lidmi</string>
-    <string name="settings_version_title">Infinity pro Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Verze %s</string>
     <string name="settings_category_customization_title">Přizpůsobení</string>
     <string name="settings_customize_light_theme_title">Světlý motiv</string>
@@ -445,7 +445,7 @@
     <string name="error_getting_multi_reddit_data">Chyba při získávání dat o multiredditu</string>
     <string name="error_loading_multi_reddit_list">Nelze synchronizovat multireddity</string>
     <string name="error_loading_subscriptions">Nelze synchronizovat odběry</string>
-    <string name="share_this_app">Mrkni na Infinity pro Reddit, úžasný Reddit klient!
+    <string name="share_this_app">Mrkni na Eternity, úžasný klient pro síť Lemmy!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Chyba při získávání názvu subredditu</string>
     <string name="share_post_link">Sdílet odkaz příspěvku</string>
@@ -688,7 +688,7 @@
     <string name="delete_all_front_page_scrolled_positions_success">Všechny pozice posouvání na hlavní straně úspěšně odstraněny</string>
     <string name="reset_all_settings_success">Všechna nastavení úspěšně obnovena</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">r/Infinity_For_Reddit</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Primární text</string>
     <string name="secondary_text_preview">Sekundární text</string>
     <string name="post_title_preview">Toto je příspěvek</string>
@@ -856,7 +856,7 @@
     <string name="multireddit_selection_activity_label">Vybrat multireddit</string>
     <string name="action_save_to_database">Uložit do databáze</string>
     <string name="action_read_all_messages">Přečíst všechny zprávy</string>
-    <string name="action_add_to_multireddit">Přidat do multiredditu</string>
+    <string name="action_add_to_multireddit">Přidat do multikomunity</string>
     <string name="search_only_communities_hint">Hledat subreddity</string>
     <string name="search_only_users_hint">Hledat uživatele</string>
     <string name="post_type_gif">GIF</string>
@@ -1267,4 +1267,20 @@
     <string name="blocked_users">Zablokovaní uživatelé</string>
     <string name="blocks">Blokování</string>
     <string name="send_report">Odeslat hlášení</string>
+    <string name="settings_category_community_and_user_pages_title">Stránky komunity a uživatelů</string>
+    <string name="moderators">Moderátoři</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="admins">Správci</string>
+    <string name="settings_hide_user_instance">Skrýt uživatelskou instanci</string>
+    <string name="share_links_on_your_local_instance">Sdílet odkazy na vaší lokální instanci</string>
+    <string name="user_number_detail">%1$,d uživatelů</string>
+    <string name="community_number_detail">%1$,d komunit</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="settings_show_statistics">Zobrazit statistiky</string>
+    <string name="settings_show_post_and_comment_score">Zobrazit skóre příspěvků a komentářů</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Sdílet odkazy na vaší místní instanci místo původní instanci vytvoření.</string>
+    <string name="icon_original_label">Původní ikona</string>
+    <string name="settings_credits_new_icon">Nová ikona aplikace (kosmické Lemmy)</string>
+    <string name="settings_credits_new_icon_summary">Vytvořil David Gerla</string>
 </resources>

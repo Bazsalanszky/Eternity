@@ -85,7 +85,8 @@
     <string name="no_users">ユーザーが見つかりませんでした</string>
     <string name="no_multi_reddits">カスタムフィードが見つかりませんでした</string>
     <string name="no_storage_permission">ファイルを保存するためのストレージアクセス許可がありません</string>
-    <string name="load_comments_failed">コメントをロード中にエラーが発生しました。タップでリトライします。</string>
+    <string name="load_comments_failed">コメントをロード中にエラーが発生しました。
+\nタップでリトライします。</string>
     <string name="retry">リトライ</string>
     <string name="comments">コメント</string>
     <string name="no_comments_yet">まだコメントがありません。コメントを書いてみませんか？</string>
@@ -95,9 +96,9 @@
 \nタップでリトライします。</string>
     <string name="no_messages">なし</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">カルマ: %1$d</string>
+    <string name="karma_info">カルマ: %1$,d</string>
     <string name="karma_info_user_detail">カルマ:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">ケーキの日:
 \n%1$s</string>
     <!-- Fuzzy -->
@@ -117,8 +118,8 @@
 (2) Someone's posts that I gave (gold or better only?) rewards for them. -->
     <string name="gilded">アワードを贈った投稿</string>
     <string name="settings">設定</string>
-    <string name="subscribers_number_detail">登録者数: %1$d</string>
-    <string name="online_subscribers_number_detail">オンライン: %1$d</string>
+    <string name="subscribers_number_detail">登録者数: %1$,d</string>
+    <string name="online_subscribers_number_detail">オンライン: %1$,d</string>
     <string name="cannot_fetch_community_info">Subredditの情報が取得できませんでした</string>
     <string name="cannot_fetch_user_info">ユーザー情報が取得できませんでした</string>
     <string name="cannot_fetch_sidebar">サイドバー情報が取得できませんでした</string>
@@ -244,7 +245,7 @@
     <string name="posting_video">動画を投稿中</string>
     <string name="posting_image">画像を投稿中</string>
     <!-- Fuzzy -->
-    <string name="please_wait">少々お待ちください。</string>
+    <string name="please_wait">少々お待ちください</string>
     <!-- Fuzzy -->
     <string name="add_account">アカウントを追加</string>
     <string name="anonymous_account">匿名</string>
@@ -741,7 +742,7 @@
     <string name="comment_content_preview">オチがないのがオチなんですね。</string>
     <string name="edit_multi_reddit">カスタムフィードを編集</string>
     <string name="delete_multi_reddit">カスタムフィードを削除</string>
-    <string name="n_awards">%1$d個のアワード</string>
+    <string name="n_awards">%1$,d個のアワード</string>
     <string name="one_award">1個のアワード</string>
     <string name="report">通報</string>
     <string name="reporting">通報しています</string>
@@ -783,8 +784,7 @@
     <string name="default_font_font_preview">Default</string>
     <string name="load_video_in_redgifs">Redgifsから動画のロードを試行</string>
     <string name="top_score">%1$s点</string>
-    <string name="login_activity_2fa_prompt">2段階認証を有効にしている場合、パスワードは次のように入力してください 「&lt;パスワード&gt;:&lt;2段階認証コード&gt;」。
-\n例「yourpass:123456」</string>
+    <string name="login_activity_2fa_prompt">2段階認証を有効にしている場合、パスワードは次のように入力してください 「&lt;パスワード&gt;:&lt;2段階認証コード&gt;」</string>
     <string name="submit_crosspost_activity_label">クロスポスト</string>
     <string name="give_award_activity_label">アワードを贈る</string>
     <string name="action_crosspost">クロスポスト</string>
@@ -983,7 +983,7 @@
     <string name="restore_settings_failed_file_corrupted">設定を復元できません。ファイルが破損している可能性があります。</string>
     <string name="restore_settings_failed_cannot_get_file">ファイルにアクセスできません</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">v.redd.itからの動画の取得に失敗しました: Cannot get the redirect url</string>
-    <string name="error_fetching_v_redd_it_video_cannot_get_post">"v.redd.itからの動画の取得に失敗しました:  Cannot get the post"</string>
+    <string name="error_fetching_v_redd_it_video_cannot_get_post">v.redd.itからの動画の取得に失敗しました: Cannot get the post</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post_id">v.redd.itからの動画の取得に失敗しました: Cannot get the post id</string>
     <string name="always_on">常にオン</string>
     <string name="only_on_wifi">Wifiのみ</string>
@@ -998,7 +998,7 @@
     <string name="exclude_flair">このFlairを除外</string>
     <string name="contain_flair">このFlairを含む</string>
     <string name="exclude_domain">このドメインを除外</string>
-    <string name="inbox_with_count">受信トレイ (%1$d)</string>
+    <string name="inbox_with_count">受信トレイ (%1$,d)</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">縦方向にスワイプして画像やGIF動画の画面から戻る</string>
     <string name="settings_crash_reports_title">クラッシュレポート</string>
     <string name="settings_disable_nsfw_forever_title">NSFWを永久に無効にする</string>
@@ -1041,7 +1041,7 @@
     <string name="settings_secure_mode_summary">スクリーンショットや画面録画は許可されません。アプリの履歴画面ではプレビューが表示されません。</string>
     <string name="discard_dialog_button">破棄</string>
     <string name="error_loading_wiki">Wikiの読み込み中にエラーが発生しました</string>
-    <string name="no_wiki">このSubredditにはwikiのページがありません。</string>
+    <string name="no_wiki">このSubredditにはwikiのページがありません</string>
     <string name="action_playback_speed">再生速度</string>
     <string name="about">About</string>
     <string name="settings_loop_video_title">動画をループ再生する</string>

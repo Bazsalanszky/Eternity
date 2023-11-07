@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Anmelden</string>
     <string name="comment_activity_label">Kommentar senden</string>
     <string name="comment_activity_label_is_replying">Antworten</string>
     <!-- Ja wür ich auch sagen -->
     <string name="post_text_activity_label">Text-Beitrag</string>
-    <string name="community_selection_activity_label">Wähle ein Subreddit</string>
+    <string name="community_selection_activity_label">Wähle eine Community</string>
     <string name="post_link_activity_label">Link-Beitrag</string>
     <string name="post_image_activity_label">Bild-Beitrag</string>
     <string name="post_video_activity_label">Video-Beitrag</string>
     <string name="rules_activity_label">Regeln</string>
-    <string name="search_community_activity_label">Subreddits</string>
+    <string name="search_community_activity_label">Communities</string>
     <string name="edit_post_activity_label">Beitrag bearbeiten</string>
     <string name="edit_comment_activity_label">Kommentar bearbeiten</string>
     <string name="view_message_activity_label">Posteingang</string>
@@ -37,7 +37,7 @@
     <string name="action_refresh">Aktualisieren</string>
     <string name="action_add_comment">Kommentar hinzufügen</string>
     <string name="action_save_post">Beitrag speichern</string>
-    <string name="action_view_crosspost_parent">Originalbeitrag crossposten</string>
+    <string name="action_view_crosspost_parent">Originalbeitrag ansehen</string>
     <string name="action_search">Suchen</string>
     <string name="action_start_lazy_mode">Lazy Mode starten</string>
     <string name="action_stop_lazy_mode">Lazy Mode stoppen</string>
@@ -47,9 +47,9 @@
     <string name="action_unhide_post">Beitrag wieder anzeigen</string>
     <string name="action_edit_post">Beitrag bearbeiten</string>
     <string name="action_delete_post">Beitrag löschen</string>
-    <string name="action_mark_nsfw">NSFW-Markierung setzen</string>
+    <string name="action_mark_nsfw">Als NSFW markieren</string>
     <string name="action_unmark_nsfw">NSFW-Markierung entfernen</string>
-    <string name="action_mark_spoiler">Spoiler-Markierung setzen</string>
+    <string name="action_mark_spoiler">Als Spoiler markieren</string>
     <string name="action_unmark_spoiler">Spoiler-Markierung entfernen</string>
     <string name="action_edit_flair">Flair bearbeiten</string>
     <string name="action_change_post_layout">Beitragslayout ändern</string>
@@ -60,13 +60,13 @@
     <string name="action_preview">Vorschau</string>
     <string name="action_report">Melden</string>
     <string name="action_see_removed">Entfernten Beitrag ansehen</string>
-    <string name="action_set_wallpaper">Als Hintergrundbild einstellen</string>
+    <string name="action_set_wallpaper">Als Hintergrundbild benutzen</string>
     <string name="action_send_private_message">Private Nachricht senden</string>
-    <string name="parse_json_response_error">Ein Fehler trat beim Abruf der JSON-Antwort auf</string>
+    <string name="parse_json_response_error">Beim Abruf der JSON-Antwort ist ein Fehler aufgetreten</string>
     <string name="retrieve_token_error">Fehler beim Abruf des Tokens</string>
     <string name="something_went_wrong">Etwas ist schiefgelaufen. Versuche es später erneut.</string>
     <string name="access_denied">Zugriff verweigert</string>
-    <string name="parse_user_info_error">Ein Fehler trat beim Abruf der Benutzerinformationen auf</string>
+    <string name="parse_user_info_error">Beim Abruf der Benutzerinformationen ist ein Fehler aufgetreten</string>
     <string name="no_system_webview_error">Fehler beim Öffnen des System-WebView</string>
     <string name="error_loading_image_tap_to_retry">Fehler beim Laden des Bildes. Tippen für Neuversuch.</string>
     <string name="load_posts_error">Fehler beim Laden der Beiträge.
@@ -74,13 +74,13 @@
     <string name="load_more_posts_error">Fehler beim Laden der Beiträge.</string>
     <string name="load_post_error">Fehler beim Laden des Beitrags.
 \nTippen für Neuversuch.</string>
-    <string name="search_communities_error">Fehler beim Suchen von Subreddits.
+    <string name="search_communities_error">Fehler beim Suchen von Communities.
 \nTippen für Neuversuch.</string>
     <string name="search_users_error">Fehler beim Suchen nach Benutzern.
 \nTippen für Neuversuch.</string>
     <string name="no_posts">Keine Beiträge gefunden</string>
     <string name="no_comments">Keine Kommentare gefunden</string>
-    <string name="no_communities">Keine Subreddits gefunden</string>
+    <string name="no_communities">Keine Communities gefunden</string>
     <string name="no_users">Keine Benutzer gefunden</string>
     <string name="no_multi_reddits">Keine Multicommunities gefunden</string>
     <string name="no_storage_permission">Keine Speicherberechtigung, um diese Datei zu speichern</string>
@@ -95,9 +95,9 @@
 \nTippen für Neuversuch.</string>
     <string name="no_messages">Leer</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Cake Day:
 \n%1$s</string>
     <string name="since">Seit:</string>
@@ -112,8 +112,8 @@
     <string name="gilded">Vergoldet</string>
     <string name="settings">Einstellungen</string>
     <string name="subscribers_number_detail">%1$,d Abonnenten</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
-    <string name="cannot_fetch_community_info">Kann Subredddit-Info nicht abrufen</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
+    <string name="cannot_fetch_community_info">Kann Community-Info nicht abrufen</string>
     <string name="cannot_fetch_user_info">Kann Benutzer-Info nicht abrufen</string>
     <string name="cannot_fetch_sidebar">Kann Seitenleiste nicht abrufen</string>
     <string name="cannot_fetch_multireddit">Kann Multicommunity-Info nicht abrufen</string>
@@ -129,7 +129,7 @@
     <string name="follow_failed">Folgen fehlgeschlagen</string>
     <string name="unfollowed">Entfolgt</string>
     <string name="unfollow_failed">Entfolgen fehlgeschlagen</string>
-    <string name="content_description_banner_imageview">Subreddit Banner-Bild</string>
+    <string name="content_description_banner_imageview">Community-Banner</string>
     <string name="app_label">Infinity</string>
     <string name="search_hint">Alles durchsuchen</string>
     <string name="no_posts_no_lazy_mode">Keine Beiträge verfügbar</string>
@@ -151,7 +151,7 @@
     <string name="sending_message">Sende</string>
     <string name="send_message_success">Nachricht gesendet</string>
     <string name="send_message_failed">Nachricht konnte nicht gesendet werden</string>
-    <string name="select_a_community">Bitte wähle zuerst ein Subreddit aus</string>
+    <string name="select_a_community">Bitte wähle zuerst eine Community aus</string>
     <!-- Fuzzy -->
     <string name="title_required">Der Beitrag braucht einen guten Titel</string>
     <string name="link_required">Hey, wo ist der Link\?</string>
@@ -197,7 +197,7 @@
     <string name="search_in">Suchen in</string>
     <string name="all_communities">Alle Subreddits</string>
     <string name="sort_best">Beste</string>
-    <string name="sort_hot">Hot</string>
+    <string name="sort_hot">Beliebt</string>
     <string name="sort_new">Neu</string>
     <string name="sort_random">Zufällig</string>
     <string name="sort_rising">Aufsteigend</string>
@@ -291,7 +291,7 @@
     <string name="notification_new_messages">%1$d neue Nachrichten</string>
     <string name="label_account">Konto</string>
     <string name="label_post">Beitrag</string>
-    <string name="label_preferences">Einstellungen</string>
+    <string name="label_preferences">Präferenzen</string>
     <string name="account_switched">Konto gewechselt. Alle anderen Seiten sind verschwunden.</string>
     <string name="settings_notification_master_title">Benachrichtigung</string>
     <string name="settings_notification_enable_notification_title">Benachrichtigungen aktivieren</string>
@@ -460,7 +460,7 @@
     <string name="error_getting_multi_reddit_data">Fehler beim Abrufen der Multicommunity-Daten</string>
     <string name="error_loading_multi_reddit_list">Kann Multicommunities nicht synchronisieren</string>
     <string name="error_loading_subscriptions">Kann Abonnements nicht synchronisieren</string>
-    <string name="share_this_app">Schau dir Infinity for Reddit an, ein super Reddit-Client!
+    <string name="share_this_app">Probier Eternity aus, ein fantastischer Lemmy-Client!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Fehler beim Abrufen des Subreddit-Namens</string>
     <string name="share_post_link">Beitrags-Link teilen</string>
@@ -491,7 +491,7 @@
     <string name="create_multi_reddit_failed">Kann dieses Multicommunity nicht erstellen</string>
     <string name="duplicate_multi_reddit">Dieses Multicommunity existiert bereits</string>
     <string name="edit_multi_reddit_failed">Kann diese Multicommunity nicht bearbeiten</string>
-    <string name="delete_multi_reddit_success">Löschen erfolgreich</string>
+    <string name="delete_multi_reddit_success">Erfolgreich gelöscht</string>
     <string name="delete_multi_reddit_failed">Löschen fehlgeschlagen</string>
     <string name="delete_multi_reddit_dialog_message">Bist du sicher\?</string>
     <string name="enable_nsfw">NSFW aktivieren</string>
@@ -510,7 +510,7 @@
     <string name="theme_item_color_primary_dark">Primärfarbe Dunkel</string>
     <string name="theme_item_color_primary_dark_detail">Angewandt auf: Statusleiste</string>
     <string name="theme_item_color_accent">Akzentfarbe</string>
-    <string name="theme_item_color_accent_detail">Angewandt auf: Fortschrittsleiste, usw.</string>
+    <string name="theme_item_color_accent_detail">Angewandt auf: Fortschrittsleiste, usw</string>
     <string name="theme_item_color_primary_light_theme">Primärfarbe Helles Thema</string>
     <string name="theme_item_color_primary_light_theme_detail">Angewandt auf: Hintergrund des schwebenden Aktionsknopfes und Knöpfe</string>
     <string name="theme_item_primary_text_color">Primäre Textfarbe</string>
@@ -728,7 +728,7 @@
 \nSie ist nicht krank oder so, aber sie könnte sich definitiv bessern.</string>
     <string name="edit_multi_reddit">Multicommunity bearbeiten</string>
     <string name="delete_multi_reddit">Multicommunity löschen</string>
-    <string name="n_awards">%1$d Auszeichnungen</string>
+    <string name="n_awards">%1$,d Auszeichnungen</string>
     <string name="one_award">1 Auszeichnung</string>
     <string name="report">Melden</string>
     <string name="reporting">Melde</string>
@@ -739,8 +739,8 @@
     <string name="report_reason_general_copyright_issue">Es enthält urheberrechtlich geschütztes Material</string>
     <string name="report_reason_general_child_pornography">Es enthält Kinderpornografie</string>
     <string name="report_reason_general_abusive_content">Es enthält gewalttätiges Material</string>
-    <string name="subscribed_feed">Home</string>
-    <string name="local">Beliebt</string>
+    <string name="subscribed_feed">Abonniert</string>
+    <string name="local">Lokal</string>
     <string name="notifications">Benachrichtigungen</string>
     <string name="messages">Nachrichten</string>
     <string name="message">Nachricht</string>
@@ -770,8 +770,7 @@
     <string name="default_font_font_preview">Standard</string>
     <string name="load_video_in_redgifs">Versuche Video von Redgifs zu laden</string>
     <string name="top_score">%1$s Punkte</string>
-    <string name="login_activity_2fa_prompt">Wenn du die Zwei-Faktor-Authentifizierung aktiviert hast, tippe dein Passwort wie folgt ein: &lt;passwort&gt;:&lt;2FA code&gt;.
-\nBeispiel: DeinPasswort:123456</string>
+    <string name="login_activity_2fa_prompt">Sofern du Zwei-Faktor-Authentifizierung aktiviert hast, trage den Code im 2FA-Feld ein. Ansonsten leer lassen</string>
     <string name="submit_crosspost_activity_label">Crossposten</string>
     <string name="give_award_activity_label">Auszeichnung verleihen</string>
     <string name="action_crosspost">Crossposten</string>
@@ -818,10 +817,7 @@
     <string name="settings_bottom_app_bar_fab">Schwebender Aktionsknopf</string>
     <string name="settings_data_saving_mode">Datensparmodus</string>
     <!-- Fuzzy -->
-    <string name="settings_data_saving_mode_info_summary">Im Datensparmodus:
-\nVorschaubilder haben eine geringere Auflösung.
-\nLemmy-Videos haben eine geringere Auflösung.
-\nAutomatisches Abspielen von Videos ist deaktiviert.</string>
+    <string name="settings_data_saving_mode_info_summary">Im Datensparmodus: Vorschaubilder haben eine geringere Auflösung. Lemmy-Videos haben eine geringere Auflösung. Automatische Videowiedergabe ist deaktiviert.</string>
     <string name="settings_translation_title">Übersetzung</string>
     <string name="settings_translation_summary">Übersetze diese App auf POEditor. Danke an alle Beitragenden.</string>
     <string name="settings_credits_national_flags">Nationalflaggen</string>
@@ -896,8 +892,8 @@
     <string name="search_users_result_activity_label">Benutzer</string>
     <string name="multireddit_selection_activity_label">Wähle eine Multicommunity</string>
     <string name="action_save_to_database">In der Datenbank speichern</string>
-    <string name="action_read_all_messages">Alle Nachrichten lesen</string>
-    <string name="action_add_to_multireddit">Zum Multicommunity hinzufügen</string>
+    <string name="action_read_all_messages">Alle Nachrichten als gelesen markieren</string>
+    <string name="action_add_to_multireddit">Zu Multicommunity hinzufügen</string>
     <string name="search_only_communities_hint">Subreddits durchsuchen</string>
     <string name="search_only_users_hint">Benutzer durchsuchen</string>
     <string name="post_type_gif">GIF</string>
@@ -958,7 +954,7 @@
     <!-- This is inconsistant. Sometimes we call it Multireddit, other times MultiReddit. -->
     <string name="post_filter_usage_multireddit_all">Multicommunity</string>
     <string name="post_filter_usage_search">Suche</string>
-    <string name="community">Subreddit</string>
+    <string name="community">Community</string>
     <string name="user">Benutzer</string>
     <string name="edit_post_filter_name_of_usage_info">Leer lassen, um diesen Beitragsfilter auf alle Subreddits / Benutzer / Multicommunities anzuwenden</string>
     <string name="read_all_messages_time_limit">Du machst das zu oft hintereinander. Versuche es später noch einmal. Dies ist eine Beschränkung der Reddit-API.</string>
@@ -989,7 +985,7 @@
     <string name="settings_credits_love_animation_title">Liebes-Animation</string>
     <string name="settings_swipe_between_posts_title">Zwischen Beiträgen wischen</string>
     <string name="settings_navigation_drawer_title">Navigationsmenü</string>
-    <string name="settings_collapse_account_section_title">Sektion für Konten zusammenklappen</string>
+    <string name="settings_collapse_account_section_title">Accountbereich zuklappen</string>
     <string name="settings_collapse_post_section_title">Sektion für Beiträge zusammenklappen</string>
     <string name="settings_collapse_preferences_section_title">Sektion für Einstellungen zusammenklappen</string>
     <string name="settings_collapse_favorite_communities_section_title">Sektion für favorisierte Subreddits zusammenklappen</string>
@@ -1040,7 +1036,7 @@
     <string name="suggest_title">Titel vorschlagen</string>
     <string name="suggest_title_failed">Konnte Titel nicht vorschlagen</string>
     <string name="action_delete_logs">Logs löschen</string>
-    <string name="inbox_with_count">Posteingang (%1$d)</string>
+    <string name="inbox_with_count">Posteingang (%1$,d)</string>
     <string name="comment_continue_thread">Thread fortsetzen</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Vertikal wischen, um zurück zu den Medien zu gelangen</string>
@@ -1059,9 +1055,9 @@
 \nMöchtest du trotzdem fortfahren\?</string>
     <string name="reply">Antworten</string>
     <string name="post_gallery_activity_label">Galeriebeitrag</string>
-    <string name="trending_activity_label">Trending</string>
+    <string name="trending_activity_label">Aktuell</string>
     <string name="action_share_post_link">Teile Beitragslink</string>
-    <string name="trending">Trending</string>
+    <string name="trending">Aktuell</string>
     <string name="receive_post_reply_notifications">Benachrichtigungen für Antworten auf Beiträge empfangen</string>
     <string name="bottom_sheet_post_gallery">Galerie</string>
     <string name="posting_gallery">Posts Galerie</string>
@@ -1129,7 +1125,7 @@
     <string name="settings_enable_fold_support_title">Fold-Handy Unterstützung aktivieren</string>
     <string name="settings_default_playback_speed_title">Standard Wiedergabegeschwindigkeit</string>
     <string name="settings_link_handler_value_external_browser">Externer Browser</string>
-    <string name="settings_link_handler_value_custom_tab">Custom Tab</string>
+    <string name="settings_link_handler_value_custom_tab">Benutzerdefinierter Tab</string>
     <string name="settings_link_handler_value_internal_browser">Interner Browser</string>
     <string name="settings_legacy_autoplay_video_controller_ui_title">Altes Video-Steuerungs UI</string>
     <string name="settings_pinch_to_zoom_video_title">Pinch-To-Zoom Video</string>
@@ -1235,25 +1231,25 @@
     <string name="awarder_karma">Auszeichnungskarma:</string>
     <string name="awardee_karma">Ausgezeichnetenkarma:</string>
     <string name="anonymous_homepage_not_implemented">Anonyme Homepage ist noch nicht implementiert</string>
-    <string name="action_create_github_issue">Codeberg issue erstellen</string>
+    <string name="action_create_github_issue">Codeberg Issue erstellen</string>
     <string name="action_more_options">Erweiterte Optionen</string>
-    <string name="invalid_response">Ungültige antwort vom Server erhalten</string>
-    <string name="settings_hide_fab_in_post_feed">FAB im Post Feed verstecken</string>
+    <string name="invalid_response">Ungültige Antwort vom Server erhalten</string>
+    <string name="settings_hide_fab_in_post_feed">FAB im Beitragsfeed verstecken</string>
     <string name="history_activity_label">Verlauf</string>
     <string name="history">Verlauf</string>
     <string name="invalid_username_or_password">Falscher Nutzername/Passwort</string>
     <string name="action_block_user">Nutzer blockieren</string>
     <string name="active_users_number_detail">%1$,d Aktive Nutzer</string>
-    <string name="settings_backup_settings_summary">Das Password für die Backup-Datei ist \"123321\".</string>
+    <string name="settings_backup_settings_summary">Das Passwort für die Sicherungsdatei ist \"123321\".</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Verstecke Account Karma</string>
-    <string name="block_user">Nutzer Blockieren</string>
+    <string name="block_user">Nutzer blockieren</string>
     <string name="clear_user_flair">Flair Löschen</string>
     <string name="clear_user_flair_success">Nutzer-Flair gelöscht</string>
-    <string name="extra_small">Extra Klein</string>
+    <string name="extra_small">Extra klein</string>
     <string name="invalid_link">Ungültiger Link</string>
     <string name="error_unsupported_video">Media enthält Videospuren, aber keine davon sind mit diesem Gerät abspielbar</string>
-    <string name="exo_controls_volume_up_description">Lautstärke erhöhen</string>
-    <string name="exo_controls_volume_off_description">Lautstärke Aus</string>
+    <string name="exo_controls_volume_up_description">Lauter</string>
+    <string name="exo_controls_volume_off_description">Lautlos</string>
     <string name="url_cannot_be_null_or_empty">Die URL darf nicht leer oder ungültig sein</string>
     <string name="block_community_success">Community blockiert!</string>
     <string name="block_community_failed">Community konnte nicht blockiert werden</string>
@@ -1262,8 +1258,8 @@
     <string name="instance_info">Infos zur Instanz</string>
     <string name="blocked_communities">Blockierte Communities</string>
     <string name="blocked_users">Blockierte Benutzer</string>
-    <string name="action_unblock_user">Benutzer Freigeben</string>
-    <string name="post_count_detail">%1$,d Posts</string>
+    <string name="action_unblock_user">Benutzer-Block aufheben</string>
+    <string name="post_count_detail">%1$,d Beiträge</string>
     <string name="comment_count_detail">%1$,d Kommentare</string>
     <string name="invalid_regex">Ungültiges regex-Muster</string>
     <string name="load_more_posts_failed">Weitere Beiträge konnten nicht geladen werden.
@@ -1301,4 +1297,33 @@
     <string name="edited">Bearbeitet</string>
     <string name="edited_time">Bearbeitet am %s</string>
     <string name="error_unsupported_audio">Media enthält Audiospuren, aber keine davon sind mit diesem Gerät abspielbar</string>
+    <string name="settings_comment_divider_type">Kommentartrennungstyp</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="share_links_on_your_local_instance">Share Links führen zu Deiner lokalen Instanz</string>
+    <string name="use_circular_fab">Rundes FAB benutzen</string>
+    <string name="instance_url_hint">Die URL deiner bevorzugten Lemmy-Instanz, mit oder ohne das \"https://\" Präfix</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Share Links zeigen auf Deine lokale Instanz anstatt auf die Instanz des Posts.</string>
+    <string name="user_number_detail">%1$,d Benutzer</string>
+    <string name="community_number_detail">%1$,d Communities</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="handle_link">Link öffnen</string>
+    <string name="i_understand">Ich verstehe</string>
+    <string name="report_post">Beitrag melden</string>
+    <string name="settings_hide_community_and_user_instance">Community- und Nutzerinstanz verbergen</string>
+    <string name="unblock_user_failed">Aufheben des Blocks fehlgeschlagen</string>
+    <string name="send_report">Bericht senden</string>
+    <string name="settings_show_display_name_instead_of_user_name">Community- und Nutzeranzeigenamen zeigen</string>
+    <string name="settings_category_community_and_user_pages_title">Community- und Nutzerseiten</string>
+    <string name="unblock_user_success">Block aufgehoben</string>
+    <string name="settings_show_statistics">Statistiken einblenden</string>
+    <string name="moderators">Moderatoren</string>
+    <string name="settings_show_post_and_comment_score">Beitrags- und Kommentarpunktzahlen einblenden</string>
+    <string name="admins">Administratoren</string>
+    <string name="settings_hide_user_instance">Benutzerinstanz verbergen</string>
+    <string name="anonymous_account_instance">Instanz für anonyme Benutzung</string>
+    <string name="blocks">Blöcke</string>
+    <string name="icon_original_label">Originales Symbol</string>
+    <string name="settings_credits_new_icon">Neues App Symbol (Cosmic Lemmy)</string>
+    <string name="settings_credits_new_icon_summary">Erstellt von David Gerla</string>
 </resources>

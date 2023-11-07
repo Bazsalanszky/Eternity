@@ -91,15 +91,15 @@
     <string name="load_messages_failed">Errore durante il caricamento messaggi. Tocca per riprovare.</string>
     <string name="no_messages">Vuoto</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Compleanno account:
 \n%1$s</string>
     <string name="since">Da:</string>
     <string name="profile">Profilo</string>
     <string name="subscriptions">Iscrizioni</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">Multicommunity</string>
     <string name="inbox">Notifiche</string>
     <string name="upvoted">Upvotato</string>
     <string name="downvoted">Downvotato</string>
@@ -108,7 +108,7 @@
     <string name="gilded">Premiati</string>
     <string name="settings">Impostazioni</string>
     <string name="subscribers_number_detail">Iscritti: %1$d</string>
-    <string name="online_subscribers_number_detail">Online: %1$d</string>
+    <string name="online_subscribers_number_detail">Online: %1$,d</string>
     <string name="cannot_fetch_community_info">Impossibile recuperare le informazioni del subreddit</string>
     <string name="cannot_fetch_user_info">Impossibile recuperare le informazioni dell\'utente</string>
     <string name="cannot_fetch_sidebar">Impossibile caricare barra laterale</string>
@@ -155,7 +155,7 @@
     <string name="post_failed">Pubblicazione non riuscita</string>
     <string name="error_processing_image">Errore durante l\'elaborazione dell\'immagine</string>
     <string name="error_processing_video">Errore durante l\'elaborazione del video</string>
-    <string name="download_started">"Download avviato. Ulteriori dettagli nella notifica. "</string>
+    <string name="download_started">Download avviato. Ulteriori dettagli nella notifica.</string>
     <string name="comment_load_more_comments">Carica altri commenti</string>
     <string name="comment_load_more_comments_failed">Caricamento fallito. Tocca per riprovare.</string>
     <string name="loading">Caricamento...</string>
@@ -178,7 +178,7 @@
     <string name="no_camera_available">Nessuna app disponibile per la fotocamera</string>
     <string name="error_creating_temp_file">Errore creazione file temporaneo</string>
     <string name="video_is_processing">Video in elaborazione. Attendere...</string>
-    <string name="image_is_processing">"Immagine in elaborazione. Attendere. "</string>
+    <string name="image_is_processing">Immagine in elaborazione. Attendere.</string>
     <string name="gif_is_processing">Gif in elaborazione. Attendere...</string>
     <string name="flair">Flair</string>
     <string name="spoiler">Spoiler</string>
@@ -211,11 +211,11 @@
     <string name="sort_time_year">Anno</string>
     <string name="sort_time_all_time">Sempre</string>
     <string name="no_activity_found_for_share">Nessun\'app in grado di condividere</string>
-    <string name="archived_post_vote_unavailable">"Impossibile votare, il post è archiviato. "</string>
-    <string name="archived_post_comment_unavailable">"Impossibile commentare, il post è archiviato. "</string>
+    <string name="archived_post_vote_unavailable">Impossibile votare, il post è archiviato.</string>
+    <string name="archived_post_comment_unavailable">Impossibile commentare, il post è archiviato.</string>
     <string name="archived_post_reply_unavailable">Impossibile rispondere, il post è archiviato.</string>
     <string name="locked_post_comment_unavailable">Impossibile commentare, il post è bloccato.</string>
-    <string name="locked_post_reply_unavailable">"Impossibile rispondere, il post è bloccato. "</string>
+    <string name="locked_post_reply_unavailable">Impossibile rispondere, il post è bloccato.</string>
     <string name="text">TESTO</string>
     <string name="link">LINK</string>
     <string name="image">IMMAGINE</string>
@@ -376,7 +376,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Condividi</string>
     <string name="settings_share_summary">Condividi questa app con altre persone se la apprezzi</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Versione %s</string>
     <string name="settings_category_customization_title">Personalizzazione</string>
     <string name="settings_customize_light_theme_title">Tema Chiaro</string>
@@ -442,7 +442,7 @@
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Errore durante il recupero dei nomi subreddit</string>
     <string name="share_post_link">Condividi il link al post</string>
-    <string name="share_image_link">"Condividi il link all\'immagine "</string>
+    <string name="share_image_link">Condividi il link all\'immagine</string>
     <string name="share_gif_link">Condividi il link alla Gif</string>
     <string name="share_video_link">Condividi il link al video</string>
     <string name="share_link">Condividi il link</string>
@@ -536,7 +536,7 @@
     <string name="theme_item_comment_icon_and_info_color">Icona Commento e Colore Info</string>
     <string name="theme_item_comment_icon_and_info_color_detail">Applicato a: Icone e punteggio nei commenti</string>
     <string name="theme_item_fab_icon_color">Colore Icona Bottone Fluttuante</string>
-    <string name="theme_item_fab_icon_color_detail">"Applicato a: Pulsante "</string>
+    <string name="theme_item_fab_icon_color_detail">Applicato a: Icona del pulsante di azione mobile</string>
     <string name="theme_item_send_message_icon_color">Colore Icona Invia Messaggio</string>
     <string name="theme_item_send_message_icon_color_detail">Applicato a: Icona invio messaggio privato</string>
     <string name="theme_item_toolbar_primary_text_and_icon_color">Testo Principale della Barra degli Strumenti e Colore Icona</string>
@@ -691,7 +691,7 @@
     <string name="comment_content_preview">Non mi fido molto delle statistiche, perché un uomo con la testa nel forno acceso e i piedi nel congelatore statisticamente ha una temperatura media.</string>
     <string name="edit_multi_reddit">Modifica multireddit</string>
     <string name="delete_multi_reddit">Cancella Multireddit</string>
-    <string name="n_awards">%1$d premi</string>
+    <string name="n_awards">%1$,d premi</string>
     <string name="one_award">1 Premio</string>
     <string name="report">Segnala</string>
     <string name="reporting">Segnala</string>
@@ -850,7 +850,7 @@
     <string name="multireddit_selection_activity_label">Seleziona un Multireddit</string>
     <string name="action_save_to_database">Salva nel database</string>
     <string name="action_read_all_messages">Leggi tutti i messaggi</string>
-    <string name="action_add_to_multireddit">Aggiungi a Multireddit</string>
+    <string name="action_add_to_multireddit">Aggiungi a Multicommunity</string>
     <string name="search_only_communities_hint">Cerca subreddit</string>
     <string name="search_only_users_hint">Cerca utenti</string>
     <string name="post_type_gif">GIF</string>
@@ -989,7 +989,7 @@
     <string name="suggest_title">Suggerisci titolo</string>
     <string name="suggest_title_failed">Impossibile suggerire un titolo</string>
     <string name="action_delete_logs">Cancella i log</string>
-    <string name="inbox_with_count">Posta (%1$d)</string>
+    <string name="inbox_with_count">Posta (%1$,d)</string>
     <string name="comment_continue_thread">Continua thread</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Scorri verticalmente per tornare indietro dai media</string>
     <string name="settings_hide_post_flair">Nascondi i flair dei post</string>
@@ -1158,4 +1158,22 @@
     <string name="no_activity_found_for_external_browser">Non ci sono app che possono gestire l\'azione di apertura in app esterna</string>
     <string name="settings_backup_settings_summary">La password del file di backup è \"123321\".</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Nascondi karma dell\'accout</string>
+    <string name="user_number_detail">Utenti: %1$,d</string>
+    <string name="community_number_detail">Community: %1$,d</string>
+    <string name="settings_miscellaneous_dangerous_group_title">Pericoloso</string>
+    <string name="settings_post_feed_max_resolution_title">Massima Risoluzione delle Anteprime dei Post (Larghezza * Altezza)</string>
+    <string name="settings_reddit_video_default_resolution">Risoluzione predefinita dei video di Lemmy</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">Più facile da vedere a Schermo Intero</string>
+    <string name="settings_hide_fab_in_post_feed">Nascondi il FAB (Pulsante Galleggiante) nei Feed dei Post</string>
+    <string name="settings_comment_divider_type">Tipologia di Divisore dei Commenti</string>
+    <string name="settings_show_fewer_toolbar_options_threshold_summary">Livello %1$d</string>
+    <string name="settings_show_author_avatar_title">Mostra avatar dell\'autore</string>
+    <string name="settings_reddit_user_agreement_title">Condizioni di utilizzo di Lemmy</string>
+    <string name="settings_hide_upvote_ratio_title">Nascondi la percentuale di voti positivi</string>
+    <string name="settings_require_authentication_to_show_accounts">È necessario autenticarsi per mostrare gli account</string>
+    <string name="settings_post_feed_max_resolution_warning_title">Incrementa il valore per mostrare le anteprime in risoluzione più alta. L\'app potrebbe arrestarsi inaspettatamente.</string>
+    <string name="settings_always_show_child_comment_count_title">Mostra Sempre il Numero di Sotto-Commenti</string>
+    <string name="active_users_number_detail">Utenti Attivi: %1$,d</string>
+    <string name="post_count_detail">Post: %1$,d</string>
+    <string name="comment_count_detail">Commenti: %1$,d</string>
 </resources>

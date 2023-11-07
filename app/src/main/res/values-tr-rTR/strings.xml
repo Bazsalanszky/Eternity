@@ -87,16 +87,16 @@
 \nTekrar denemek için tıklayın.</string>
     <string name="retry">Tekrar dene</string>
     <string name="comments">Yorumlar</string>
-    <string name="no_comments_yet">Henüz yorum yok, ilk yorumu yapan siz olun.</string>
+    <string name="no_comments_yet">Henüz yorum yok, ilk yorumu yapan siz olun\?</string>
     <string name="vote_failed">Oylama başarısız oldu</string>
     <string name="refresh_post_failed">Gönderi yenilenirken hata oluştu</string>
     <string name="load_messages_failed">Mesajlar yüklenirken hata oluştu.
 \nTekrar denemek için tıklayın.</string>
     <string name="no_messages">Boş</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$d</string>
+    <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Üyelik tarihi:
 \n%1$s</string>
     <!-- Since Turkish is an agglutinative lang, there is no good translation.
@@ -106,7 +106,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="since">Kuruluş:</string>
     <string name="profile">Profil</string>
     <string name="subscriptions">Abonelikler</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">Multicommunity</string>
     <string name="inbox">Gelen Kutusu</string>
     <string name="upvoted">Olumlu Oylananlar</string>
     <string name="downvoted">Olumsuz Oylananlar</string>
@@ -114,8 +114,8 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="saved">Kaydedilenler</string>
     <string name="gilded">Yaldızlananlar</string>
     <string name="settings">Ayarlar</string>
-    <string name="subscribers_number_detail">Aboneler: %1$d</string>
-    <string name="online_subscribers_number_detail">Çevrimiçi: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d Abone</string>
+    <string name="online_subscribers_number_detail">Çevrimiçi: %1$,d</string>
     <string name="cannot_fetch_community_info">Subreddit bilgisi getirilemiyor</string>
     <string name="cannot_fetch_user_info">Kullanıcı bilgisi getirilemiyor</string>
     <string name="cannot_fetch_sidebar">Hakkındakiler getirilemiyor</string>
@@ -199,7 +199,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="error_loading_rules_without_retry">Kuralllar Yüklenirken Hata Oluştu</string>
     <string name="search_in">Arama</string>
     <string name="all_communities">Tüm subredditler</string>
-    <string name="sort_best">En iyi</string>
+    <string name="sort_best">Aktif</string>
     <string name="sort_hot">Sıcak</string>
     <string name="sort_new">Yeni</string>
     <string name="sort_random">Rastgele</string>
@@ -382,7 +382,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_open_source_title">Açık Kaynak</string>
     <string name="settings_open_source_summary">Bu uygulamayı beğendiyseniz Github\'da yıldız verin</string>
     <string name="settings_rate_title">Google Play\'de Değerlendirin</string>
-    <string name="settings_rate_summary">Bize 5 yıldız verirseniz gerçekten mutlu oluruz.</string>
+    <string name="settings_rate_summary">Bize 5 yıldız verirseniz gerçekten mutlu oluruz</string>
     <string name="settings_email_title">E-posta</string>
     <string name="settings_email_summary">docilealligator.app@gmail.com</string>
     <string name="settings_reddit_account_title">Reddit Hesabı</string>
@@ -391,7 +391,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Paylaş</string>
     <string name="settings_share_summary">Bu uygulamayı beğendiyseniz başkalarıyla paylaşın</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">%s Sürümü</string>
     <string name="settings_category_customization_title">Özelleştirme</string>
     <string name="settings_customize_light_theme_title">Açık Tema</string>
@@ -454,7 +454,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="error_getting_multi_reddit_data">Multireddit verileri alınırken hata oluştu</string>
     <string name="error_loading_multi_reddit_list">Multireddit senkronize edilemiyor</string>
     <string name="error_loading_subscriptions">Abonelikler senkronize edilemiyor</string>
-    <string name="share_this_app">Harika bir Reddit uygulaması olan Infinity For Reddit\'e bir göz atın!
+    <string name="share_this_app">Harika bir Lemmy uygulaması olan Eternity\'e bir göz atın!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Subreddit adı alınırken hata oluştu</string>
     <string name="share_post_link">Gönderi Bağlantısını Paylaş</string>
@@ -578,11 +578,9 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="theme_item_downvoted_color">Olumsuz Oylananlar Rengi</string>
     <string name="theme_item_downvoted_color_detail">Uygulandığı yer: Oy düğmeleri ve puanları (olumsuz oylananlar)</string>
     <string name="theme_item_post_type_background_color">Gönderi Türü Arka Plan Rengi</string>
-    <string name="theme_item_post_type_background_color_detail">Uygulandığı yer: Gönderi türü arka planı
-\n(FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
+    <string name="theme_item_post_type_background_color_detail">Uygulandığı yer: Gönderi türü arka planı (FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
     <string name="theme_item_post_type_text_color">Gönderi Türü Metin Rengi</string>
-    <string name="theme_item_post_type_text_color_detail">Uygulandığı yer: Gönderi türü metin rengi
-\n(FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
+    <string name="theme_item_post_type_text_color_detail">Uygulandığı yer: Gönderi türü metin rengi (FOTOĞRAF, METİN, VİDEO, GIF, BAĞLANTI)</string>
     <string name="theme_item_spoiler_background_color">Spoiler Arka Plan Rengi</string>
     <string name="theme_item_spoiler_background_color_detail">Uygulandığı yer: Spoiler etiketinin arka planı</string>
     <string name="theme_item_spoiler_text_color">Spoiler Metin Rengi</string>
@@ -699,7 +697,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="delete_all_front_page_scrolled_positions_success">Ön sayfadaki tüm kaydırılmış pozisyonlar başarıyla silindi</string>
     <string name="reset_all_settings_success">Tüm ayarlar başarıyla sıfırlandı</string>
     <string name="username_preview">u/Hostilenemy</string>
-    <string name="community_preview">r/Infinity_For_Reddit</string>
+    <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Birincil Metin</string>
     <string name="secondary_text_preview">İkincil Metin</string>
     <string name="post_title_preview">Bu bir gönderidir</string>
@@ -708,16 +706,17 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="flair_preview">Etiket</string>
     <string name="awards_preview">4 Ödül</string>
     <string name="author_flair_preview">Yazar Rozeti</string>
-    <string name="comment_content_preview">Kız arkadaşıma üstünde \"yakında iyileşmen dileğiyle\" yazan bir kart aldım. Hasta falan değildi, ama kesinlikle iyileşmeliydi.</string>
+    <string name="comment_content_preview">Kız arkadaşıma üstünde \"yakında iyileşmen dileğiyle\" yazan bir kart aldım.
+\nHasta falan değildi, ama kesinlikle iyileşmeliydi.</string>
     <string name="edit_multi_reddit">Multireddit\'i Düzenle</string>
     <string name="delete_multi_reddit">Multireddit\'i Sil</string>
-    <string name="n_awards">%1$d Ödül</string>
+    <string name="n_awards">%1$,d Ödül</string>
     <string name="one_award">1 Ödül</string>
     <string name="report">Bildir</string>
     <string name="reporting">Bildiriliyor</string>
     <string name="report_successful">Bildirildi</string>
     <string name="report_failed">Bildirme başarısız oldu</string>
-    <string name="report_reason_not_selected">Bir neden seçmediniz.</string>
+    <string name="report_reason_not_selected">Bir neden seçmediniz</string>
     <string name="report_reason_general_spam">Spam</string>
     <string name="report_reason_general_copyright_issue">Telif Hakkı Meselesi İçeriyor</string>
     <string name="report_reason_general_child_pornography">Çocuk Pornografisi İçeriyor</string>
@@ -751,8 +750,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="default_font_font_preview">Varsayılan</string>
     <string name="load_video_in_redgifs">Videoyu Redgifs\'e yüklemeyi deneyin</string>
     <string name="top_score">%1$s puan</string>
-    <string name="login_activity_2fa_prompt">2 faktörlü kimlik doğrulamasını etkinleştirdiyseniz, lütfen şifrenizi aşağıdaki gibi yazınız: &lt;parola&gt;: &lt;2FA code&gt;.
-\nÖrnek: yourpass:123456</string>
+    <string name="login_activity_2fa_prompt">2 faktörlü kimlik doğrulamasını etkinleştirdiyseniz, lütfen şifrenizi aşağıdaki gibi yazınız: &lt;parola&gt;: &lt;2FA code&gt;</string>
     <string name="submit_crosspost_activity_label">Çapraz Gönderi</string>
     <string name="give_award_activity_label">Ödül Ver</string>
     <string name="action_crosspost">Çapraz Gönderi</string>
@@ -799,10 +797,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_bottom_app_bar_fab">Kayan İşlem Düğmesi</string>
     <string name="settings_data_saving_mode">Veri Tasarrufu Modu</string>
     <!-- Fuzzy -->
-    <string name="settings_data_saving_mode_info_summary">Veri tasarrufu modunda:
-\nResim önizlemelerinin çözünürlüğü düşer.
-\nReddit videolarının çözünürlüğü düşer.
-\nOtomatik video oynatma kapatılır.</string>
+    <string name="settings_data_saving_mode_info_summary">Veri tasarrufu modunda: Resim önizlemelerinin çözünürlüğü düşer. Reddit videolarının çözünürlüğü düşer. Otomatik video oynatma kapatılır.</string>
     <string name="settings_translation_title">Çeviri</string>
     <string name="settings_translation_summary">POEditor\'da bu uygulamayı çevirin. Tüm katkıda bulunanlara teşekkürler.</string>
     <string name="settings_credits_national_flags">Ulusal Bayraklar</string>
@@ -877,7 +872,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="multireddit_selection_activity_label">Bir Multireddit Seç</string>
     <string name="action_save_to_database">Veritabanına Kaydet</string>
     <string name="action_read_all_messages">Tümünü Okundu Olarak İşaretle</string>
-    <string name="action_add_to_multireddit">Multireddit\'e Ekle</string>
+    <string name="action_add_to_multireddit">Multicommunity\'e Ekle</string>
     <string name="search_only_communities_hint">Subredditleri ara</string>
     <string name="search_only_users_hint">Kullanıcıları ara</string>
     <string name="post_type_gif">Gif</string>
@@ -941,7 +936,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="community">Subreddit</string>
     <string name="user">Kullanıcı</string>
     <string name="edit_post_filter_name_of_usage_info">Bu gönderi filtresini tüm subredditlere / kullanıcılara / multiredditlere uygulamak için boş bırakın</string>
-    <string name="read_all_messages_time_limit">"Bunu çok fazla yaptınız.  Daha sonra tekrar deneyin.  Bu, Reddit API\'sinin limit sınırıdır."</string>
+    <string name="read_all_messages_time_limit">Bunu çok fazla yaptınız. Daha sonra tekrar deneyin. Bu, Reddit API\'sinin limit sınırıdır.</string>
     <string name="read_all_messages_success">Tüm mesajlar başarıyla okundu</string>
     <string name="read_all_messages_failed">Tüm mesajlar okunamadı</string>
     <string name="add_community_or_user_to_multireddit_success">%1$s, %2$s multireddit\'ine eklendi</string>
@@ -1020,7 +1015,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="suggest_title">Başlık Öner</string>
     <string name="suggest_title_failed">Bir başlık önerilemedi</string>
     <string name="action_delete_logs">Seyir Defterini Sil</string>
-    <string name="inbox_with_count">Gelen Kutusu (%1$d)</string>
+    <string name="inbox_with_count">Gelen Kutusu (%1$,d)</string>
     <string name="comment_continue_thread">Konuya devam et</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Resim ve GIF\'ten Geri Dönmek İçin Dikey Kaydır</string>
@@ -1169,4 +1164,24 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="message_change_banner_failed">%s bannerı değiştirilemedi</string>
     <string name="message_save_profile_success">Profil başarıyla kaydedildi</string>
     <string name="message_save_profile_failed">%s profili kaydedilemedi</string>
+    <string name="active_users_number_detail">%1$,d Aktif Kullanıcı</string>
+    <string name="post_count_detail">%1$,d Gönderi</string>
+    <string name="comment_count_detail">%1$,d Yorum</string>
+    <string name="invalid_response">Sunucudan geçersiz yanıt</string>
+    <string name="invalid_username_or_password">Yanlış kullanıcı adı veya şifre</string>
+    <string name="two_options_required">İyi bir anketin iki veya daha fazla seçeneğe ihtiyacı vardır!</string>
+    <string name="settings_backup_settings_summary">Yedek dosyanın şifresi \"123321\".</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Hesap Karmasını Gizle</string>
+    <string name="settings_custom_title_font_family_title">Özel Başlık Yazı Tipi Ailesi</string>
+    <string name="user_number_detail">%1$,d Kullanıcı</string>
+    <string name="community_number_detail">%1$,d Topluluk</string>
+    <string name="voting_length">Oy verme süresi: %1$d gün</string>
+    <string name="bottom_sheet_post_poll">Anket</string>
+    <string name="settings_custom_font_family_title">Özel Yazı Tipi Ailesi</string>
+    <string name="settings_custom_content_font_family_title">Özel İçerik Yazı Tipi Ailesi</string>
+    <string name="history_activity_label">Geçmiş</string>
+    <string name="action_block_user">Kullanıcıyı Engelle</string>
+    <string name="action_open_external_browser">Tarayıcı içinde aç</string>
+    <string name="action_more_options">Daha Fazla Seçenekler</string>
+    <string name="history">Geçmiş</string>
 </resources>

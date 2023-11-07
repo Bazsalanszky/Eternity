@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="login_activity_label">Войти</string>
     <string name="comment_activity_label">Отправить комментарий</string>
     <string name="comment_activity_label_is_replying">Ответить</string>
@@ -113,7 +113,7 @@
     <string name="saved">Сохранённые</string>
     <string name="gilded">Позолоченные</string>
     <string name="settings">Настройки</string>
-    <string name="subscribers_number_detail">Подписчики: %1$d</string>
+    <string name="subscribers_number_detail">%1$,d подписчиков</string>
     <string name="online_subscribers_number_detail">Онлайн: %1$d</string>
     <string name="cannot_fetch_community_info">Невозможно получить информацию о сообществе</string>
     <string name="cannot_fetch_user_info">Невозможно получить информацию о пользователе</string>
@@ -387,7 +387,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">Поделиться</string>
     <string name="settings_share_summary">Поделитесь этим приложением с другими людьми, если оно вам нравится</string>
-    <string name="settings_version_title">Infinity для Lemmy</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">Версия %s</string>
     <string name="settings_category_customization_title">Персонализация</string>
     <string name="settings_customize_light_theme_title">Светлая тема</string>
@@ -451,7 +451,7 @@
     <string name="error_getting_multi_reddit_data">Ошибка при получении данных о мультисообществе</string>
     <string name="error_loading_multi_reddit_list">Невозможно синхронизировать мультисообщества</string>
     <string name="error_loading_subscriptions">Невозможно синхронизировать подписки</string>
-    <string name="share_this_app">Попробуйте Infinity для Lemmy, отличный клиент для Lemmy!
+    <string name="share_this_app">Попробуйте Eternity - отличный клиент для Lemmy!
 \nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">Ошибка при получении названия сообщества</string>
     <string name="share_post_link">Поделиться ссылкой на пост</string>
@@ -809,7 +809,7 @@
     <string name="insert_link">Вставить ссылку</string>
     <string name="text_hint">Текст</string>
     <string name="link_hint">Ссылка</string>
-    <string name="unlock_account_section">Выбранный аккаунт разблокирован</string>
+    <string name="unlock_account_section">Разблокировать раздел учётной записи</string>
     <string name="unlock">Разблокировать</string>
     <string name="submit_post">Отправить пост</string>
     <string name="refresh">Обновить</string>
@@ -1246,4 +1246,52 @@
     <string name="denied_notification_permission">Разрешение на уведомления не выдано</string>
     <string name="instance_url_hint">Ссылка на выбранный вами сервер Lemmy с или без https://</string>
     <string name="instance_cannot_be_empty">Поле сервера не может быть пустым.</string>
+    <string name="moderators">Модераторы</string>
+    <string name="block_community_success">Сообщество заблокировано!</string>
+    <string name="block_community_failed">Не удалось заблокировать сообщество</string>
+    <string name="unblock_community">Разблокировать сообщество</string>
+    <string name="unblock_community_success">Сообщество разблокировано!</string>
+    <string name="unblock_community_failed">Не удалось разблокировать сообщество</string>
+    <string name="instance_info">О сервере</string>
+    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="exo_controls_volume_off_description">Выкл. звук</string>
+    <string name="admins">Администраторы</string>
+    <string name="blocked_communities">Заблокированные сообщества</string>
+    <string name="blocked_users">Заблокированные пользователи</string>
+    <string name="user_number_detail">%1$,d пользователей</string>
+    <string name="community_number_detail">%1$,d сообществ</string>
+    <string name="blocks">Блокировки</string>
+    <string name="action_unblock_user">Разблокировать пользователя</string>
+    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="unblock_user_success">Разблокирован</string>
+    <string name="unblock_user_failed">Не удалось разблокировать пользователя</string>
+    <string name="handle_link">Обработать ссылку</string>
+    <string name="report_post">Пожаловаться на запись</string>
+    <string name="unexpected_intent_action">Неожиданное действие: &lt;xliff:g xmlns:xliff=\"urn:oasis:names:tc:xliff:document:1.2\" id=\"action\"&gt;</string>
+    <string name="send_report">Отправить жалобу</string>
+    <string name="exo_controls_volume_up_description">Ув. громкость</string>
+    <string name="settings_category_community_and_user_pages_title">Страницы пользователей и сообществ</string>
+    <string name="settings_show_statistics">Показывать статистику</string>
+    <string name="settings_show_post_and_comment_score">Показывать оценки записей и комментариев</string>
+    <string name="settings_hide_user_instance">Скрыть сервер пользователя</string>
+    <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Делиться ссылками на своём сервере вместо изначального.</string>
+    <string name="share_links_on_your_local_instance">Делиться ссылками на своём сервере</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">Удобнее просматривать в полном экране</string>
+    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="i_understand">Понятно</string>
+    <string name="reddit_api_info_title">Важное уведомление касаемо изменений в API Reddit</string>
+    <string name="reddit_api_info">С 1 июля 2023 Reddit переводит сторонние приложения на модель оплаты по активности использования, что также коснётся Infinity for Reddit. Читать сообщение от Reddit здесь: %1$s
+\n
+\nЧтобы пережить эти изменения, после 1 июля Infinity станет доступен только по подписке. Подробности об этом изменении можно прочесть тут: %2$s
+\n
+\nВам потребуется обновить Infinity после 1 июля, чтобы получить доступ к функциям подписки. Старые версии (включая эту) перестанут работать после 1 июля. Но из-за сжатых сроков, предоставленных Reddit, обновление может не быть доступно сразу, т.к. потребуется полноценное тестирование. Спасибо за понимание!</string>
+    <string name="settings_hide_community_and_user_instance">Не показывать сообщество и сервер пользователя</string>
+    <string name="settings_show_display_name_instead_of_user_name">Показывать сообщество и отображать имена пользователей</string>
+    <string name="active_users_number_detail">%1$,d активных пользователей</string>
+    <string name="post_count_detail">%1$,d записей</string>
+    <string name="comment_count_detail">%1$,d комментариев</string>
+    <string name="settings_navigation_drawer_enable_hide_karma_title">Скрыть карму аккаунта</string>
+    <string name="icon_original_label">Классическая иконка</string>
+    <string name="settings_credits_new_icon">Новая иконка (Космический Lemmy)</string>
+    <string name="settings_credits_new_icon_summary">от David Gerla</string>
 </resources>
