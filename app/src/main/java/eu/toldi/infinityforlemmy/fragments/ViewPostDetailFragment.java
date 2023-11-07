@@ -95,7 +95,6 @@ import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.FetchComment;
 import eu.toldi.infinityforlemmy.comment.FetchRemovedComment;
 import eu.toldi.infinityforlemmy.comment.FetchRemovedCommentReveddit;
-import eu.toldi.infinityforlemmy.comment.ParseComment;
 import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
 import eu.toldi.infinityforlemmy.commentfilter.FetchCommentFilter;
 import eu.toldi.infinityforlemmy.community.BlockCommunity;
@@ -239,7 +238,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @State
     boolean commentFilterFetched;
     @State
-    CommentFilter mCommentFilter;
+    CommentFilter mCommentFilter = new CommentFilter();
 
     @State
     boolean isCommunityBlocked;
