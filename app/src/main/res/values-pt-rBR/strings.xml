@@ -1202,8 +1202,6 @@
     <string name="edited_time">Editado em %s</string>
     <string name="extra_small">Muito pequeno</string>
     <string name="invalid_link">Link inválido</string>
-    <string name="unexpected_intent_action">Ação intencional inesperada: <xliff:g id="action">%1$s</xliff:g></string>
-    <string name="storage_permission_denied">A permissão para acessar o armazenamento foi negada</string>
     <string name="exo_controls_volume_up_description">Aumentar o volume</string>
     <string name="exo_controls_volume_off_description">Volume desligado</string>
     <string name="invalid_regex">Padrão regex inválido</string>

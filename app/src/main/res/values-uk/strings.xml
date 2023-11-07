@@ -1276,7 +1276,6 @@
     <string name="theme_name_nightfox">Nightfox</string>
     <string name="share_links_on_your_local_instance">Ділитися посиланнями на своєму локальному сервері</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Ділитися посиланнями на своєму локальному сервері, а не на оригінальному сервері створення.</string>
-    <string name="unexpected_intent_action">Неочікувана дія наміру: <xliff:g id="action">%1$s</xliff:g></string>
     <string name="icon_original_label">Оригінальний значок</string>
     <string name="settings_credits_new_icon_summary">Автор: David Gerla</string>
     <string name="settings_credits_new_icon">Новий значок (Cosmic Lemmy)</string>

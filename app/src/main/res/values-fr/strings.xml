@@ -1270,7 +1270,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="community_number_detail">%1$,d communautés</string>
     <string name="theme_name_dayfox">Dayfox</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
-    <string name="reddit_api_info_title">Avis important concernant les modifications apportées à l’API de Reddit</string>
     <string name="instance_url_hint">L’URL de votre instance Lemmy préférée avec ou sans le préfixe https://</string>
     <string name="user_password">Mot de passe</string>
     <string name="user_2fa_token">Jeton 2FA (si nécessaire)</string>
@@ -1309,11 +1308,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="go_to_settings">Paramètres</string>
     <string name="instance_info">Information sur l’instance</string>
     <string name="theme_name_nightfox">Nightfox</string>
-    <string name="reddit_api_info">À partir du 1er juillet 2023, l’API Reddit sera payante pour les clients tiers, dont Infinity for Reddit. L’annonce de Reddit est disponible ici : %1$s
-\n
-\nAfin de survivre à ce changement, Infinity deviendra une application à abonnement uniquement après le 1er juillet. Pour en savoir plus sur les changements, consultez ce billet : %2$s
-\n
-\nVous devez mettre à jour Infinity après le 1er juillet afin d’obtenir la nouvelle version avec les options d’abonnement. Aucune des versions précédentes (y compris celle-ci) ne fonctionnera après le 1er juillet. Mais en raison d’un calendrier serré donné par Reddit, la mise à jour peut ne pas être disponible immédiatement le 1er juillet car elle nécessite des tests appropriés. Nous vous remercions de votre compréhension !</string>
+
     <string name="user_username">Nom d’utilisateur</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Partager les liens sur votre instance locale plutôt que sur l’instance de création originelle.</string>
     <string name="sort_time_3months">3 mois</string>
@@ -1336,12 +1331,8 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="awardee_karma">Karma du lauréat :</string>
     <string name="handle_link">Gestion du lien</string>
     <string name="invalid_link">Lien non valide</string>
-    <string name="unexpected_intent_action">Action d’intent inattendue : <xliff:g id="action">%1$s</xliff:g></string>
-    <string name="enable_random_adaptation">Activer l’adaptation aléatoire</string>
     <string name="error_unsupported_video">Le média comprend des pistes vidéo, mais aucune n’est lisible par cet appareil</string>
     <string name="error_unsupported_audio">Le média comprend des pistes audio, mais aucune n’est lisible par cet appareil</string>
-    <string name="storage_permission_denied">L’autorisation d’accéder au stockage a été refusée</string>
-    <string name="sample_list_load_error">Une ou plusieurs listes d’échantillons n’ont pas pu être chargées</string>
     <string name="exo_controls_volume_up_description">Volume +</string>
     <string name="exo_controls_volume_off_description">Volume −</string>
     <string name="invalid_regex">Motif d’expression rationnelle non valide</string>
