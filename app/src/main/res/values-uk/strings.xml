@@ -1278,7 +1278,7 @@
     <string name="icon_original_label">Оригінальний значок</string>
     <string name="settings_credits_new_icon_summary">Автор: David Gerla</string>
     <string name="settings_credits_new_icon">Новий значок (Cosmic Lemmy)</string>
-    <string name="customize_comment_filter_activity_label">Налаштувати фільтр дописів</string>
+    <string name="customize_comment_filter_activity_label">Налаштувати фільтр коментарів</string>
     <string name="continue_to_app">Продовжити у додатку</string>
     <string name="confirm_delete_all_recent_searches">Ви впевнені, що хочете видалити всі нещодавні пошукові запити\?</string>
     <string name="monthly">Щомісяця</string>
@@ -1325,4 +1325,16 @@
     <string name="theme_item_filled_card_view_background_color_detail">Задіяно до: Тло дописів вигляду заповненої картки, деякі поля вводу тексту</string>
     <string name="billing_error_user_canceled">Користувач скасував транзакцію.</string>
     <string name="acknowledging_subscription">Підтвердження Вашої підписки. Будь ласка, зачекайте.</string>
+    <string name="comment_filter_applied_to_all_subreddits">Задіяно до всіх спільнот</string>
+    <string name="acknowledgement_purchase_failed_description">На жаль, під час підтвердження покупки сталася помилка. Якщо ця проблема не зникне протягом трьох днів, Ви автоматично отримаєте відшкодування.
+\nНе хвилюйтеся, Ви все ще можете користуватися Infinity for Reddit.</string>
+    <string name="welcome_to_infinity">Ласкаво просимо до Infinity for Reddit — Вашого доступу до абсолютно нового виміру перегляду Reddit!</string>
+    <string name="important_info">Infinity for Reddit з підпискою використовує новий ключ API від Reddit. Вам потрібно повторно ввійти, щоб продовжити користуватися застосунком.
+\n
+\nЩоб знову увійти в Reddit, використовуючи той самий обліковий запис, просто відкрийте шторку переходів, торкніться заголовка свого облікового запису та виберіть «Додати обліковий запис». Інакше Infinity може взагалі не завантажувати дописи. Вибачте за незручності.</string>
+    <string name="subscription_prompt">Перш ніж Ви поринете в незліченні можливості, які пропонує цей застосунок, я хочу зробити відверту і прозору заяву щодо суттєвих змін, які я впровадив, щоб забезпечити Вам найкраще обслуговування.
+\n
+\nВідтепер для доступу до Reddit API в Infinity for Reddit Вам знадобиться місячна підписка — і це тому, що з 1 липня 2023 року Reddit почав стягувати плату за доступ до API.
+\n
+\nУсі рівні працюють однаково. Якщо хочете підтримати Infinity, можете підписатися на вищий рівень. Більшість грошей з найнижчого рівня йде на Reddit.</string>
 </resources>
