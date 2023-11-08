@@ -48,11 +48,9 @@
     <string name="history_activity_label">History</string>
     <string name="subscription_activity_label">Subscription</string>
     <string name="comment_filter_preference_activity_label">Comment Filter</string>
-    <string name="customize_comment_filter_activity_label">Customize Post Filter</string>
-
+    <string name="customize_comment_filter_activity_label">Customize Comment Filter</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_download">Download</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_add_comment">Add a comment</string>
@@ -101,14 +99,12 @@
     <string name="action_contact_mods">Contact Mods</string>
     <string name="action_more_options">More Options</string>
     <string name="action_add_to_home_screen">Add to Home screen</string>
-
     <string name="parse_json_response_error">Error occurred when parsing the JSON response</string>
     <string name="retrieve_token_error">Error Retrieving the token</string>
     <string name="something_went_wrong">Something went wrong. Try again later.</string>
     <string name="access_denied">Access denied</string>
     <string name="parse_user_info_error">Error occurred when parsing the user info</string>
     <string name="no_system_webview_error">Error opening System\'s WebView</string>
-
     <string name="error_loading_image_tap_to_retry">Error loading the image. Tap to retry.</string>
     <string name="load_posts_error">Error loading posts.\nTap to retry.</string>
     <string name="load_more_posts_error">Error loading posts.</string>
@@ -122,22 +118,18 @@
     <string name="no_multi_reddits">No Multicommunities found</string>
     <string name="no_storage_permission">No storage permission to save this file</string>
     <string name="anonymous_homepage_not_implemented">Anonymous homepage is not implemented yet</string>
-
     <string name="load_comments_failed">Error loading comments.\nTap to retry.</string>
     <string name="retry">Retry</string>
     <string name="no_comments_yet">No comments yet. Write a comment?</string>
     <string name="vote_failed">Vote failed</string>
     <string name="refresh_post_failed">Error refreshing the post</string>
-
     <string name="load_messages_failed">Error loading messages.\nTap to retry.</string>
     <string name="no_messages">Empty</string>
-
     <string name="nsfw">NSFW</string>
     <string name="karma_info">Karma: %1$,d</string>
     <string name="karma_info_user_detail">Karma:\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Cake day:\n%1$s</string>
     <string name="since">Since:</string>
-
     <string name="profile">Profile</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="multi_reddit">Multicommunity</string>
@@ -164,38 +156,31 @@
     <string name="invalid_username_or_password">Invalid username or password</string>
     <string name="cannot_fetch_sidebar">Cannot fetch sidebar</string>
     <string name="cannot_fetch_multireddit">Cannot fetch multicommunity info</string>
-
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
     <string name="subscribed">Subscribed</string>"
     <string name="subscribe_failed">Subscribe Failed</string>
     <string name="unsubscribed">Unsubscribed</string>"
     <string name="unsubscribe_failed">Unsubscribe Failed</string>
-
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
     <string name="followed">Followed</string>
     <string name="follow_failed">Following Failed</string>
     <string name="unfollowed">Unfollowed</string>
     <string name="unfollow_failed">Unfollowing Failed</string>
-
     <string name="content_description_banner_imageview">Community Banner Image</string>
-
     <string name="app_label">Infinity</string>
     <string name="search_hint">Search anything</string>
     <string name="search_only_communities_hint">Search communities</string>
     <string name="search_only_users_hint">Search users</string>
-
     <string name="no_posts_no_lazy_mode">No posts available</string>
     <string name="lazy_mode_start">Lazy Mode starts in %1$.1fs</string>
     <string name="lazy_mode_stop">Lazy Mode stopped</string>
-
     <string name="write_comment_hint">Your interesting thoughts here</string>
     <string name="comment_content_required">Where is your interesting thought?</string>
     <string name="sending_comment">Sending</string>
     <string name="send_comment_success">Comment sent</string>
     <string name="send_comment_failed">Could not send this comment</string>
-
     <string name="send_message_username_hint">User</string>
     <string name="send_message_subject_hint">Subject (100 characters max)</string>
     <string name="send_message_content_hint">Message</string>
@@ -207,7 +192,6 @@
     <string name="sending_message">Sending</string>
     <string name="send_message_success">Message sent</string>
     <string name="send_message_failed">Could not send this message</string>
-
     <string name="select_a_community">Please select a community first</string>
     <string name="title_required">The post needs a good title</string>
     <string name="link_required">Hey where is the link?</string>
@@ -218,29 +202,23 @@
     <string name="error_processing_image">Error processing image</string>
     <string name="error_processing_video">Error processing video</string>
     <string name="two_options_required">A good poll needs two or more options!</string>
-
     <string name="download_started">Download Started. Check the notification for progress.</string>
-
     <string name="comment_load_more_comments">Load more comments</string>
     <string name="comment_load_more_comments_failed">Load failed. Tap to retry.</string>
     <string name="comment_continue_thread">Continue thread</string>
-
     <string name="loading">Loading</string>
-
     <string name="post_title_hint">Title</string>
     <string name="post_text_content_hint">Content</string>
     <string name="choose_a_communities">Choose a community</string>
     <string name="rules">Rules</string>
     <string name="post_link_hint">URL</string>
     <string name="receive_post_reply_notifications">Receive post reply notifications</string>
-
     <string name="communities">Communities</string>
     <string name="users">Users</string>
     <string name="multi_reddits">MultiCommunity</string>
     <string name="posts">Posts</string>
     <string name="comments">Comments</string>
     <string name="about">About</string>
-
     <string name="bottom_sheet_post_text">Text</string>
     <string name="bottom_sheet_post_link">Link</string>
     <string name="bottom_sheet_post_image">Image</string>
@@ -249,34 +227,26 @@
     <string name="bottom_sheet_post_poll">Poll</string>
     <string name="post_type_gif">Gif</string>
     <string name="post_type_gallery">Gallery</string>
-
     <string name="select_from_gallery">Select a picture</string>
     <string name="select_again">Select again</string>
     <string name="error_getting_image">Error getting the image</string>
     <string name="error_getting_video">Error getting the video</string>
     <string name="no_camera_available">No camera app available</string>
     <string name="error_creating_temp_file">Error creating temp file</string>
-
     <string name="video_is_processing">Video is processing. Please wait.</string>
     <string name="image_is_processing">Image is processing. Please wait.</string>
     <string name="gif_is_processing">Gif is processing. Please wait.</string>
-
     <string name="flair">Flair</string>
     <string name="spoiler">Spoiler</string>
-
     <string name="no_flair">No flair</string>
     <string name="error_loading_flairs">Error loading flairs.\nTap to retry.</string>
-
     <string name="no_rule">No rules</string>
     <string name="error_loading_rules">Error loading rules.\nTap to retry.</string>
     <string name="error_loading_rules_without_retry">Error Loading Rules</string>
-
     <string name="search_in">Search in</string>
     <string name="all_communities">All communities</string>
-
     <string name="confirm">Confirm</string>
     <string name="confirm_delete_all_recent_searches">Are you sure you want to delete all recent search queries?</string>
-
     <string name="sort_best">Active</string>
     <string name="sort_hot">Hot</string>
     <string name="sort_new">New</string>
@@ -297,16 +267,13 @@
     <string name="sort_time_month">Month</string>
     <string name="sort_time_year">Year</string>
     <string name="sort_time_all_time">All Time</string>
-
     <string name="no_activity_found_for_share">There is no app that can handle the share action</string>
     <string name="no_activity_found_for_external_browser">There is no app that can handle the open in external app action</string>
-
     <string name="archived_post_vote_unavailable">Archived post. Vote unavailable.</string>
     <string name="archived_post_comment_unavailable">Archived post. Comment unavailable.</string>
     <string name="archived_post_reply_unavailable">Archived post. Reply unavailable.</string>
     <string name="locked_post_comment_unavailable">Locked post. Comment unavailable.</string>
     <string name="locked_post_reply_unavailable">Locked post. Reply unavailable.</string>
-
     <string name="text">TEXT</string>
     <string name="link">LINK</string>
     <string name="image">IMAGE</string>
@@ -315,18 +282,15 @@
     <string name="gallery">GALLERY</string>
     <string name="best">Best</string>
     <string name="search">Search</string>
-
     <string name="posting_video">Posting Video</string>
     <string name="posting_image">Posting Image</string>
     <string name="posting_gallery">Posting Gallery</string>
     <string name="please_wait">Please wait</string>
-
     <string name="add_account">Add an account</string>
     <string name="anonymous_account">Anonymous</string>
     <string name="log_out">Log out</string>
     <string name="press_here_to_login">Press here to login</string>
     <string name="login_first">Login first</string>
-
     <string name="post_saved_success">Post saved</string>
     <string name="post_saved_failed">Unable to save post</string>
     <string name="post_unsaved_success">Post unsaved</string>
@@ -362,25 +326,19 @@
     <string name="unmark_spoiler_failed">Unmark spoiler failed</string>
     <string name="update_flair_success">Update flair successfully</string>
     <string name="update_flair_failed">Update flair failed</string>
-
     <string name="edit_flair">Edit Flair</string>
     <string name="only_allow_64_chars">Only allow less than 64 characters</string>
-
     <string name="view_all_comments">Click here to browse all comments</string>
-
     <string name="notification_summary_account">Account</string>
     <string name="notification_summary_message">New Message</string>
     <string name="notification_summary_community">Community</string>
     <string name="notification_summary_award">Award</string>
     <string name="notification_new_messages">%1$d New Messages</string>
-
     <string name="label_account">Account</string>
     <string name="label_reddit">Lemmy</string>
     <string name="label_post">Post</string>
     <string name="label_preferences">Preferences</string>
-
     <string name="account_switched">Account Switched. So all other pages are gone.</string>
-
     <string name="settings_notification_master_title">Notification</string>
     <string name="settings_notification_enable_notification_title">Enable Notifications</string>
     <string name="settings_notification_interval_title">Check Notifications Interval</string>
@@ -663,9 +621,7 @@
     <string name="settings_hide_fab_in_post_feed">Hide FAB in Post Feed</string>
     <string name="settings_comment_divider_type">Comment Divider Type</string>
     <string name="settings_comment_filter_title">Comment Filter</string>
-
     <string name="no_link_available">Cannot get the link</string>
-
     <string name="exit_when_submit">Leave?</string>
     <string name="exit_when_submit_post_detail">The post will still be submitted even if you leave here.</string>
     <string name="exit_when_edit_post_detail">The post may still be submitted even if you leave here.</string>
@@ -675,34 +631,27 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="discard_dialog_button">Discard</string>
-
     <string name="no_data_received">No data received</string>
     <string name="no_image_path_received">No image path received</string>
     <string name="no_video_path_received">No video path received</string>
     <string name="cannot_handle_intent">Could not handle the share request</string>
-
     <string name="share">Share</string>
-
     <string name="no_email_client">No Email client found</string>
     <string name="no_app">No app available</string>
-
     <string name="save_comment">Save</string>
     <string name="unsave_comment">Unsave</string>
     <string name="comment_saved_success">Comment saved</string>
     <string name="comment_saved_failed">Unable to save comment</string>
     <string name="comment_unsaved_success">Comment unsaved</string>
     <string name="comment_unsaved_failed">Unable to unsave comment</string>
-
     <string name="favorites">Favorites</string>
     <string name="all">All</string>
-
     <string name="link_post_layout_auto">Auto</string>
     <string name="post_layout_card">Card Layout</string>
     <string name="post_layout_compact">Compact Layout</string>
     <string name="post_layout_gallery">Gallery Layout</string>
     <string name="post_layout_card_2">Card Layout 2</string>
     <string name="post_layout_card_3">Card Layout 3</string>
-
     <string name="elapsed_time_just_now">Just Now</string>
     <string name="elapsed_time_a_minute_ago">1 Minute</string>
     <string name="elapsed_time_minutes_ago">%1$d Minutes</string>
@@ -714,15 +663,11 @@
     <string name="elapsed_time_months_ago">%1$d Months</string>
     <string name="elapsed_time_a_year_ago">1 Year</string>
     <string name="elapsed_time_years_ago">%1$d Years</string>
-
     <string name="error_getting_multi_reddit_data">Error getting multicommunity data</string>
     <string name="error_loading_multi_reddit_list">Cannot sync multicommunities</string>
     <string name="error_loading_subscriptions">Cannot sync subscriptions</string>
-
     <string name="share_this_app">Check out Eternity, an awesome Lemmy client!\nhttps://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy</string>
-
     <string name="error_getting_community_name">Error getting community name</string>
-
     <string name="share_post_link">Share Post Link</string>
     <string name="share_image_link">Share Image Link</string>
     <string name="share_gif_link">Share Gif Link</string>
@@ -734,7 +679,6 @@
     <string name="copy_video_link">Copy Video Link</string>
     <string name="copy_link">Copy Link</string>
     <string name="open_link">Open Link</string>
-
     <string name="copy_success">Copied</string>
     <string name="copy_link_failed">Cannot copy the link</string>
     <string name="copy_text">Copy</string>
@@ -744,14 +688,11 @@
     <string name="copy_all_markdown">Copy All Markdown</string>
     <string name="copy_all_raw_text">Copy All Raw Text</string>
     <string name="copy_failed">Copy failed</string>
-
     <string name="exit_app">Exit?</string>
-
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="device_default">Device Default</string>
     <string name="set_by_battery_saver">Set by Battery Saver</string>
-
     <string name="multi_reddit_name_hint">Name (Max 50 Characters)</string>
     <string name="multi_reddit_description_hint">Description</string>
     <string name="private_multi_reddit">Private</string>
@@ -763,16 +704,13 @@
     <string name="delete_multi_reddit_success">Deleted successfully</string>
     <string name="delete_multi_reddit_failed">Delete failed</string>
     <string name="delete_multi_reddit_dialog_message">Are you sure?</string>
-
     <string name="enable_nsfw">Enable NSFW</string>
     <string name="disable_nsfw">Disable NSFW</string>
-
     <string name="cannot_save_image">Cannot save the image</string>
     <string name="cannot_save_gif">Cannot save the gif</string>
     <string name="cannot_get_storage">Cannot access the app storage</string>
     <string name="save_image_first">Saving the image. Please wait.</string>
     <string name="save_gif_first">Saving the gif. Please wait.</string>
-
     <string name="theme_name_description">Tap to change the name of this theme.</string>
     <string name="theme_item_is_light_theme">Set as Light Theme</string>
     <string name="theme_item_is_dark_theme">Set as Dark Theme</string>
@@ -948,7 +886,6 @@
     <string name="theme_item_change_status_bar_icon_color_after_toolbar_collapsed_in_immersive_interface">Change Status Bar Icon Color After Toolbar Collapsed In Immersive Interface</string>
     <string name="theme_item_available_on_android_8">Only available for Android 8.0 or above.</string>
     <string name="theme_item_available_on_android_6">Only available for Android 6.0 or above.</string>
-
     <string name="predefined_themes">Predefined Themes</string>
     <string name="user_themes">Your Themes</string>
     <string name="no_theme_name">What is the name of this theme?</string>
@@ -988,10 +925,8 @@
     <string name="duplicate_theme_name_dialog_message">A theme in the database is also called %1$s. Do you want to change the name of this imported theme?</string>
     <string name="rename">Rename</string>
     <string name="override">Override</string>
-
     <string name="color_picker">Color Picker</string>
     <string name="invalid_color">Invalid Color</string>
-
     <string name="delete_all_communities_success">Delete all communities successfully</string>
     <string name="delete_all_users_success">Delete all users successfully</string>
     <string name="delete_all_sort_types_success">Delete all sort types successfully</string>
@@ -1001,7 +936,6 @@
     <string name="delete_all_read_posts_success">Delete all read posts successfully</string>
     <string name="delete_all_legacy_settings_success">Delete all legacy settings successfully</string>
     <string name="reset_all_settings_success">Reset all settings successfully</string>
-
     <string name="username_preview">\@bazsalanszky@lemmy.toldi.eu</string>
     <string name="community_preview">!eternityapp@lemdro.id</string>
     <string name="primary_text_preview">Primary Text</string>
@@ -1013,39 +947,31 @@
     <string name="awards_preview">4 Awards</string>
     <string name="author_flair_preview">Author Flair</string>
     <string name="comment_content_preview">I got my girlfriend a “Get better soon” card.\nShe\'s not ill or anything, but she could definitely get better.</string>
-
     <string name="copy_multi_reddit_path">Copy Multicommunity\'s Path</string>
     <string name="copy_multi_reddit_path_failed">Unable to copy multicommunity\'s path</string>
     <string name="edit_multi_reddit">Edit Multicommunity</string>
     <string name="delete_multi_reddit">Delete Multicommunity</string>
-
     <string name="n_awards">%1$,d Awards</string>
     <string name="one_award">1 Award</string>
-
     <string name="report">Report</string>
     <string name="reporting">Reporting</string>
     <string name="report_successful">Reported</string>
     <string name="report_failed">Report failed</string>
     <string name="report_reason_not_selected">You haven\'t selected a reason</string>
-
     <string name="report_reason_general_spam">It Is Spam</string>
     <string name="report_reason_general_copyright_issue">It Contains Copyright Issue</string>
     <string name="report_reason_general_child_pornography">It Contains Child Pornography</string>
     <string name="report_reason_general_abusive_content">It Contains Abusive Content</string>
-
     <string name="subscribed_feed">Subscribed</string>
     <string name="local">Local</string>
     <string name="notifications">Notifications</string>
     <string name="messages">Messages</string>
     <string name="message">Message</string>
-
     <string name="fetch_gfycat_video_failed">Fetch Gfycat video failed</string>
     <string name="fetch_redgifs_video_failed">Fetch Redgifs video failed</string>
     <string name="fetching_video_info_please_wait">Fetching video info. Please wait.</string>
     <string name="fetch_streamable_video_failed">Fetch Streamable video failed</string>
-
     <string name="error_fetching_imgur_media">Cannot load images</string>
-
     <string name="downloading_reddit_video">Downloading Video Track</string>
     <string name="downloading_reddit_video_audio_track">Downloading Audio Track</string>
     <string name="downloading_reddit_video_muxing">Muxing Video and Audio</string>
@@ -1057,67 +983,51 @@
     <string name="downloading_reddit_video_failed_cannot_save_audio">Download failed: cannot save audio to cache directory</string>
     <string name="downloading_reddit_video_failed_cannot_mux">Download failed: cannot mux video and audio</string>
     <string name="downloading_reddit_video_failed_cannot_save_mux_video">Download failed: cannot save the video to public directory</string>
-
     <string name="downloading">Downloading</string>
     <string name="downloading_media_finished">Downloaded</string>
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Download failed: cannot access destination directory</string>
     <string name="downloading_media_failed_cannot_download_media">Download failed</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Download failed: cannot save the file to destination directory</string>
-
     <string name="wallpaper_set">Wallpaper set</string>
     <string name="error_set_wallpaper">Cannot set wallpaper</string>
-
     <string name="set_to_home_screen">Set to Home Screen</string>
     <string name="set_to_lock_screen">Set to Lock Screen</string>
     <string name="set_to_both">Set to Both</string>
-
     <string name="default_font_font_preview">Default</string>
-
     <string name="load_video_in_redgifs">Try loading the video on Redgifs</string>
-
     <string name="top_score">%1$s pts</string>
-
     <string name="login_activity_2fa_prompt">If you have 2-factor authentication enabled, you need to fill the 2FA token filed. Leave empty otherwise</string>
-
     <string name="block_user">Block User</string>
     <string name="block_user_success">Blocked</string>
     <string name="block_user_failed">Failed to block user</string>
-
     <string name="select_user_flair_success">User flair selected</string>
     <string name="select_this_user_flair">Select this user flair?</string>
     <string name="clear_user_flair">Clear Flair</string>
     <string name="clear_user_flair_success">User flair cleared</string>
-
     <string name="select_header_size">Select Header Size</string>
     <string name="large">Large</string>
     <string name="small">Small</string>
     <string name="insert_link">Insert Link</string>
     <string name="text_hint">Text</string>
     <string name="link_hint">Link</string>
-
     <string name="unlock_account_section">Unlock Account Section</string>
     <string name="unlock">Unlock</string>
-
     <string name="submit_post">Submit Post</string>
     <string name="refresh">Refresh</string>
     <string name="change_sort_type">Change Sort Type</string>
     <string name="change_post_layout">Change Post Layout</string>
-
     <string name="give_award_dialog_title">Give Award?</string>
     <string name="anonymous">Anonymous</string>
     <string name="give_award_error_message">Code: %1$d/\n Message: %2$s</string>
     <string name="give_award_success">Award given</string>
     <string name="give_award_failed">Failed</string>
-
     <string name="edited">Edited</string>
     <string name="edited_time">Edited on %s</string>
-
     <string name="warning">Warning</string>
     <string name="this_is_a_nsfw_community">This is a NSFW community.</string>
     <string name="this_user_has_nsfw_content">This user has NSFW content</string>
     <string name="dismiss">Dismiss</string>
     <string name="leave">Leave</string>
-
     <string name="go_to_community">Go to Community</string>
     <string name="go_to_user">Go to User</string>
     <string name="go_to_thing_hint">Name</string>
@@ -1128,12 +1038,9 @@
     <string name="random_post">Random Post</string>
     <string name="random_nsfw_post">Random NSFW post</string>
     <string name="fetch_random_thing_failed">Try again later</string>
-
     <string name="select_video_quality">Select Video Quality</string>
-
     <string name="hide_read_posts">Hide Read Posts</string>
     <string name="filter_posts">Filter Posts</string>
-
     <string name="only_nsfw">Only NSFW</string>
     <string name="only_spoiler">Only Spoiler</string>
     <string name="title_excludes_strings_hint">Title: excludes keywords (key1,key2)</string>
@@ -1173,32 +1080,24 @@
     <string name="edit_post_filter_name_of_usage_info">Leave it blank to apply this post filter to all the communities / users / multicommunities</string>
     <string name="click_to_apply_post_filter">Click here to apply it to some post feeds</string>
     <string name="post_filter_usage_embedded_more_count">and %1$d more</string>
-
     <string name="excludes_strings_hint">Exclude keywords (key1,key2)</string>
     <string name="comment_filter_name_hint">Comment Filter Name</string>
     <string name="comment_filter_requires_a_name">What is the name of this comment filter?</string>
     <string name="duplicate_comment_filter_dialog_title">\'%1$s\' Already Exists</string>
     <string name="duplicate_comment_filter_dialog_message">Override it?</string>
-    <string name="comment_filter_applied_to_all_subreddits">Applied to all subreddits</string>
+    <string name="comment_filter_applied_to_all_subreddits">Applied to all communities</string>
     <string name="comment_filter_usage_embedded_more_count">and %1$d more</string>
-
     <string name="read_all_messages_time_limit">You are doing this too frequently. Try again later. This is Reddit API\'s rate limit.</string>
     <string name="read_all_messages_success">Read all messages successfully</string>
     <string name="read_all_messages_failed">Unable to read all messages</string>
-
     <string name="add_community_or_user_to_multireddit_success">%1$s is added to multicommunity %2$s</string>
     <string name="add_community_or_user_to_multireddit_failed">Unable to add %1$s to multicommunity %2$s</string>
-
     <string name="choose_a_user">Choose a user</string>
-
     <string name="have_trouble_login_title">Having Trouble Login</string>
     <string name="have_trouble_login_message">Do you want to try another way to login?</string>
-
     <string name="vote">Vote</string>
-
     <string name="anonymous_front_page_no_subscriptions">Start by joining a community!</string>
     <string name="anonymous_multireddit_no_community">This multicommunity does not have a community!</string>
-
     <string name="backup_settings_success">Successfully exported settings to the destination directory.</string>
     <string name="create_zip_in_destination_directory_failed">Could not create backup zip in the destination directory</string>
     <string name="backup_some_settings_failed">Could not backup some settings but others were successfully exported to the destination directory</string>
@@ -1206,16 +1105,13 @@
     <string name="restore_settings_partially_failed">Some settings may not be restored successfully. Restart the app to see the changes.</string>
     <string name="restore_settings_failed_file_corrupted">Cannot restore settings. The file may be corrupted.</string>
     <string name="restore_settings_failed_cannot_get_file">Cannot access the file</string>
-
     <string name="suicide_prevention_quote">If you are looking for a sign not to kill yourself, this is it.\u2764</string>
     <string name="do_not_show_this_again">Don\'t show this again</string>
     <string name="continue_suicide_prevention_activity">Continue</string>
-
     <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">Error fetching v.redd.it video: Cannot get the redirect url</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post">Error fetching v.redd.it video: Cannot get the post</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post_id">Error fetching v.redd.it video: Cannot get the post id</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">Error fetching v.redd.it video: Cannot get the video url</string>
-
     <string name="always_on">Always On</string>
     <string name="only_on_wifi">Only on Wifi</string>
     <string name="never">Never</string>
@@ -1228,7 +1124,6 @@
     <string name="only_on_cellular_data">Only on Cellular Data</string>
     <string name="upvote">Upvote</string>
     <string name="downvote">Downvote</string>
-
     <string name="select">Select</string>
     <string name="exclude_community">Exclude this community</string>
     <string name="exclude_user">Exclude this user</string>
@@ -1236,16 +1131,11 @@
     <string name="contain_flair">Contain this flair</string>
     <string name="exclude_domain">Exclude this domain</string>
     <string name="contain_domain">Contain this domain</string>
-
     <string name="suggest_title">Suggest Title</string>
     <string name="suggest_title_failed">Failed to suggest a title</string>
-
     <string name="crash_reports_deleted">Crash reports have been deleted</string>
-
     <string name="disable_nsfw_forever_message">Once enabled, NSFW will be permanently disabled, regardless of whether the NSFW setting is enabled or not. This option is irreversible, the only way to re-enable NSFW is to clear the app data.\n\nDo you still want to enable it?</string>
-
     <string name="reply">Reply</string>
-
     <string name="uploaded_images">Uploaded Images</string>
     <string name="select_image">Select an Image</string>
     <string name="capture">Capture</string>
@@ -1253,20 +1143,14 @@
     <string name="upload_image_success">Upload image successfully. Click the image button again to see the uploaded images.</string>
     <string name="get_image_bitmap_failed">Unable to get the bitmap of the image</string>
     <string name="upload_image_failed">Unable to upload the image</string>
-
     <string name="search_comments">Search Comments</string>
-
     <string name="please_wait_image_is_uploading">An image is still being uploaded. Please wait.</string>
-
     <string name="error_fetch_trending_search">Fetch trending searches failed.\nTap to retry.</string>
     <string name="error_parse_trending_search">Parse trending searches failed.\nTap to retry.</string>
     <string name="no_trending_search">No trending searches found.\nTap to retry.</string>
-
     <string name="error_loading_wiki">Error loading wiki</string>
     <string name="no_wiki">This community has no wiki page</string>
-
     <string name="material_you_notification_title">Applying Material You</string>
-
     <string name="lock_screen_text">Whoa there!!!</string>
     <string name="app_lock_timeout_immediately">Immediately</string>
     <string name="app_lock_timeout_1_min">1 minute</string>
@@ -1284,12 +1168,10 @@
     <string name="app_lock_timeout_6_hours">6 hours</string>
     <string name="app_lock_timeout_12_hours">12 hours</string>
     <string name="app_lock_timeout_24_hours">24 hours</string>
-
     <!--EditProfileService Notification-->
     <string name="submit_change_avatar">Submit Change Avatar</string>
     <string name="submit_change_banner">Submit Change Banner</string>
     <string name="submit_save_profile">Submit Save Profile</string>
-
     <!--EditProfileActivity-->
     <string name="action_edit_profile">Edit Profile</string>
     <string name="remove_avatar">Remove Avatar</string>
@@ -1309,53 +1191,39 @@
     <string name="message_change_banner_failed">Failed to change banner %s</string>
     <string name="message_save_profile_success">Save profile successfully</string>
     <string name="message_save_profile_failed">Failed to save profile %s</string>
-
     <string name="select_a_ttf_font">Select a ttf font file</string>
     <string name="unable_to_get_font_file">Unable to get your font</string>
     <string name="unable_to_load_font">Unable to load custom font</string>
     <string name="unable_to_copy_font_file">Unable to copy your font</string>
-
     <string name="reddit_gallery_item_caption_hint">Caption (max 180 characters)</string>
     <string name="reddit_gallery_item_url_hint">Url</string>
-
     <string name="user_agreement_dialog_title">User Agreement</string>
     <string name="user_agreement_message">You need to agree to Reddit User Agreement (%1$s) and Infinity for Reddit\'s Privacy Policy (%2$s) before logging in.</string>
     <string name="agree">Agree</string>
     <string name="do_not_agree">Don\'t Agree</string>
-
     <string name="option_1_hint">Option 1 (Required)</string>
     <string name="option_2_hint">Option 2 (Required)</string>
     <string name="option_3_hint">Option 3</string>
     <string name="option_4_hint">Option 4</string>
     <string name="option_5_hint">Option 5</string>
     <string name="option_6_hint">Option 6</string>
-
     <string name="not_a_valid_number">Not a valid number</string>
-
     <string name="post_karma">Post Karma:</string>
     <string name="comment_karma">Comment Karma:</string>
     <string name="awarder_karma">Awarder Karma:</string>
     <string name="awardee_karma">Awardee Karma:</string>
-
     <string name="handle_link">Handle Link</string>
     <string name="invalid_link">Invalid link</string>
-
     <string name="error_unsupported_video">Media includes video tracks, but none are playable by this device</string>
     <string name="error_unsupported_audio">Media includes audio tracks, but none are playable by this device</string>
-
     <string name="exo_controls_volume_up_description">Volume Up</string>
     <string name="exo_controls_volume_off_description">Volume Off</string>
-
     <string name="invalid_regex">Invalid regex pattern</string>
-
     <string name="load_more_posts_failed">Failed to load more posts.\nTap to retry.</string>
     <string name="no_more_posts">No more posts</string>
-
     <string name="image_index_in_gallery">%1$d/%2$d</string>
-
     <string name="denied_notification_permission">Notification permission is not granted</string>
     <string name="go_to_settings">Settings</string>
-
     <string name="welcome_to_infinity">Welcome to Infinity for Reddit, your gateway to a whole new dimension of Reddit browsing!</string>
     <string name="subscription_prompt">Before you dive into the countless possibilities this app offers,
         I want to be upfront and transparent about a significant change I\'ve implemented to ensure the best possible service for you.
@@ -1393,7 +1261,6 @@
     <string name="continue_to_app">Continue to app</string>
     <string name="restore_subscription_purchase_details">Already paid for the subscription?</string>
     <string name="restore_subscription_purchase">Restore subscription purchase</string>
-
     <string name="important_info_title">Please re-login your account</string>
     <string name="important_info">Infinity for Reddit with subscription uses a new API key from Reddit and you have to re-login to continue using the app.\n\nJust
         open the navigation drawer and click your account header and select \"Add an account\" to login to Reddit using the same account again.
@@ -1448,7 +1315,6 @@
     <string name="settings_hide_user_instance">Hide user instance</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Share links on your local instance rather than the original creation instance.</string>
     <string name="share_links_on_your_local_instance">Share links on your local instance</string>
-
     <string name="icon_original_label">Original Icon</string>
     <string name="settings_credits_new_icon">New app icon (Cosmic Lemmy)</string>
     <string name="settings_credits_new_icon_summary">Made by David Gerla</string>
