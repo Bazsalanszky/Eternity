@@ -130,6 +130,8 @@ public class SidebarFragment extends Fragment {
     private boolean mDisableImagePreview;
 
     private String communityQualifiedName;
+
+    private boolean isKbinMagazine = false;
     private LinearLayoutManagerBugFixed linearLayoutManager;
     private int markdownColor;
     private String sidebarDescription;
@@ -137,6 +139,8 @@ public class SidebarFragment extends Fragment {
     @State
     CommunityStats mCommunityStats;
     private BasicUserRecyclerViewAdapter moderatorAdapter;
+    private Markwon markwon;
+    private MarkwonAdapter markwonAdapter;
 
     public SidebarFragment() {
         // Required empty public constructor
@@ -227,9 +231,9 @@ public class SidebarFragment extends Fragment {
             urlMenuBottomSheetFragment.show(getChildFragmentManager(), null);
             return true;
         };
-        Markwon markwon = MarkdownUtils.createFullRedditMarkwon(activity,
+        markwon = MarkdownUtils.createFullRedditMarkwon(activity,
                 miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener, mDisableImagePreview);
-        MarkwonAdapter markwonAdapter = MarkdownUtils.createTablesAdapter();
+        markwonAdapter = MarkdownUtils.createTablesAdapter();
 
         linearLayoutManager = new LinearLayoutManagerBugFixed(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -252,8 +256,17 @@ public class SidebarFragment extends Fragment {
         moderatorsRecyclerView.setAdapter(moderatorAdapter);
 
         mSubredditViewModel = new ViewModelProvider(activity,
-                new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, LemmyUtils.qualifiedCommunityName2ActorId(communityQualifiedName)))
+                new SubredditViewModel.Factory(activity.getApplication(), mRedditDataRoomDatabase, (!isKbinMagazine) ? LemmyUtils.qualifiedCommunityName2ActorId(communityQualifiedName) :
+                        LemmyUtils.qualifiedMagazineName2ActorId(communityQualifiedName)))
                 .get(SubredditViewModel.class);
+        addLiveDataObserver();
+
+        swipeRefreshLayout.setOnRefreshListener(this::fetchSubredditData);
+
+        return rootView;
+    }
+
+    private void addLiveDataObserver() {
         mSubredditViewModel.getSubredditLiveData().observe(getViewLifecycleOwner(), subredditData -> {
             if (subredditData != null) {
                 sidebarDescription = subredditData.getSidebarDescription();
@@ -276,10 +289,6 @@ public class SidebarFragment extends Fragment {
                 fetchSubredditData();
             }
         });
-
-        swipeRefreshLayout.setOnRefreshListener(this::fetchSubredditData);
-
-        return rootView;
     }
 
     @Override
@@ -296,6 +305,12 @@ public class SidebarFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 mCommunityStats = subredditData.getCommunityStats();
                 moderatorAdapter.setUsers(subredditData.getModerators());
+                if (subredditData.getActorId().contains("/m/")) {
+                    isKbinMagazine = true;
+                    mSubredditViewModel.getSubredditLiveData().removeObservers(getViewLifecycleOwner());
+                    mSubredditViewModel.setSubredditName(LemmyUtils.qualifiedMagazineName2ActorId(communityQualifiedName));
+                    addLiveDataObserver();
+                }
                 InsertSubredditData.insertSubredditData(mExecutor, new Handler(), mRedditDataRoomDatabase,
                         subredditData, () -> swipeRefreshLayout.setRefreshing(false));
             }

@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,14 +15,38 @@ public class SubredditViewModel extends AndroidViewModel {
     private SubredditRepository mSubredditRepository;
     private LiveData<SubredditData> mSubredditLiveData;
 
+    private MutableLiveData<String> mSubredditNameLiveData;
+    private RedditDataRoomDatabase mRedditDataRoomDatabase;
+
     public SubredditViewModel(Application application, RedditDataRoomDatabase redditDataRoomDatabase, String id) {
         super(application);
         mSubredditRepository = new SubredditRepository(redditDataRoomDatabase, id);
         mSubredditLiveData = mSubredditRepository.getSubredditLiveData();
+        mSubredditNameLiveData = new MutableLiveData<>(id);
+        mRedditDataRoomDatabase = redditDataRoomDatabase;
     }
 
     public LiveData<SubredditData> getSubredditLiveData() {
         return mSubredditLiveData;
+    }
+
+    public LiveData<String> getSubredditNameLiveData() {
+        return mSubredditNameLiveData;
+    }
+
+    public void setSubredditName(String subredditName) {
+        mSubredditNameLiveData.setValue(subredditName);
+        updateSubredditRepository();
+    }
+
+    private void updateSubredditRepository() {
+        String subredditName = mSubredditNameLiveData.getValue();
+        if (subredditName != null) {
+            mSubredditRepository = new SubredditRepository(mRedditDataRoomDatabase, subredditName);
+
+            mSubredditLiveData = mSubredditRepository.getSubredditLiveData();
+
+        }
     }
 
     public void insert(SubredditData subredditData) {

@@ -274,6 +274,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private boolean disableImagePreview;
 
     private boolean hideSubredditDescription;
+    private boolean isKbinMagazine = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -557,10 +558,14 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
             }
             return true;
         });
-
+        String actorID = (!isKbinMagazine) ? LemmyUtils.qualifiedCommunityName2ActorId(qualifiedName) : LemmyUtils.qualifiedMagazineName2ActorId(qualifiedName);
         mSubredditViewModel = new ViewModelProvider(this,
-                new SubredditViewModel.Factory(getApplication(), mRedditDataRoomDatabase, LemmyUtils.qualifiedCommunityName2ActorId(qualifiedName)))
+                new SubredditViewModel.Factory(getApplication(), mRedditDataRoomDatabase, actorID))
                 .get(SubredditViewModel.class);
+        addObserverToLiveData();
+    }
+
+    private void addObserverToLiveData() {
         mSubredditViewModel.getSubredditLiveData().observe(this, subredditData -> {
             if (subredditData != null) {
                 isNsfwSubreddit = subredditData.isNSFW();
@@ -768,6 +773,14 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
                         communityName = communityData.getTitle();
                     }
                     mCommunityStats = communityData.getCommunityStats();
+                    if (communityData.getActorId().contains("/m/")) {
+                        isKbinMagazine = true;
+                        if (mSubredditViewModel != null) {
+                            // Remove current observer
+                            mSubredditViewModel.getSubredditLiveData().removeObservers(ViewSubredditDetailActivity.this);
+                            addObserverToLiveData();
+                        }
+                    }
                     setupVisibleElements();
                     communityId = communityData.getId();
                     ViewSubredditDetailActivity.this.communityData = communityData;

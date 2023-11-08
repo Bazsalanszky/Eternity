@@ -31,6 +31,14 @@ public class LemmyUtils {
         return "https://" + domain + "/u/" + userName;
     }
 
+    public static String qualifiedMagazineName2ActorId(String qualifiedName) {
+        String[] splitQualifiedName = qualifiedName.split("@");
+        String userName = splitQualifiedName[0];
+        String domain = splitQualifiedName[1];
+        return "https://" + domain + "/m/" + userName;
+    }
+
+
     public static Long dateStringToMills(String dateStr) {
         long postTimeMillis = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

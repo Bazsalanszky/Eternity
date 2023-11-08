@@ -51,7 +51,7 @@ public class ParseSubredditData {
         String name = community.getString("name");
         String description = "";
         if (!community.isNull("description")) {
-            description = community.getString("description");
+            description = community.getString("description").trim();
         }
 
         boolean removed = community.getBoolean("removed");
