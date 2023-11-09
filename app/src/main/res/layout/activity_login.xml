@@ -50,13 +50,15 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/instance_url">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/instance_url_input"
+                    style="@style/Widget.MaterialComponents.AutoCompleteTextView.FilledBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/instance_url"
                     android:inputType="textUri"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:paddingTop="16dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="The URL of you prefered Lemmy instance with or without the https:// prefix" />
+                android:text="@string/the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

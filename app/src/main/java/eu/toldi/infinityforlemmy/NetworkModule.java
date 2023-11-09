@@ -255,4 +255,13 @@ abstract class NetworkModule {
     static LemmyPrivateMessageAPI provideLemmyPrivateMessageAPI(@Named("base") RetrofitHolder retrofit) {
         return new LemmyPrivateMessageAPI(retrofit);
     }
+
+    @Provides
+    @Named("lemmyVerse")
+    @Singleton
+    static Retrofit provideLemmyVerseRetrofit(@Named("base") RetrofitHolder retrofit) {
+        return retrofit.getRetrofit().newBuilder()
+                .baseUrl(APIUtils.LEMMYVERSE_API_BASE_URI)
+                .build();
+    }
 }

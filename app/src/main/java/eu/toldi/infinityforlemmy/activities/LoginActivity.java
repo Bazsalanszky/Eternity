@@ -10,12 +10,14 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
@@ -28,6 +30,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
@@ -40,11 +44,15 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.adapters.CustomArrayAdapter;
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
 import eu.toldi.infinityforlemmy.asynctasks.ParseAndInsertNewAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
+import eu.toldi.infinityforlemmy.lemmyverse.FetchInstancesListener;
+import eu.toldi.infinityforlemmy.lemmyverse.LemmyInstance;
+import eu.toldi.infinityforlemmy.lemmyverse.LemmyVerseFetchInstances;
 import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -69,7 +77,7 @@ public class LoginActivity extends BaseActivity {
     TextView twoFAInfoTextView;
 
     @BindView(R.id.instance_url_input)
-    TextInputEditText instance_input;
+    AppCompatAutoCompleteTextView instance_input;
     @BindView(R.id.username_input)
     TextInputEditText username_input;
     @BindView(R.id.user_password_input)
@@ -86,9 +94,11 @@ public class LoginActivity extends BaseActivity {
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
+
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+    @Named("lemmyVerse")
+    Retrofit mLemmyVerseRetrofit;
+
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -139,9 +149,23 @@ public class LoginActivity extends BaseActivity {
             isAgreeToUserAgreement = savedInstanceState.getBoolean(IS_AGREE_TO_USER_AGGREMENT_STATE);
         }
 
+        LemmyVerseFetchInstances.INSTANCE.fetchInstances(mLemmyVerseRetrofit, new FetchInstancesListener() {
+
+            @Override
+            public void onFetchInstancesSuccess(@NonNull List<LemmyInstance> instances) {
+                ArrayList<String> instanceNames = new ArrayList<>();
+                for (LemmyInstance instance : instances) {
+                    instanceNames.add(instance.getFqdn());
+                }
+                ArrayAdapter<String> adapter = new CustomArrayAdapter(LoginActivity.this, android.R.layout.simple_dropdown_item_1line, instanceNames, mCustomThemeWrapper);
+                instance_input.setAdapter(adapter);
+            }
+        });
+
+
         loginButton.setOnClickListener(view -> {
             Log.i("LoginActivity", "Login button clicked");
-            if(!checkFields())
+            if (!checkFields())
                 return;
             loginButton.setEnabled(false);
             progressBar.setVisibility(ProgressBar.VISIBLE);
@@ -338,6 +362,7 @@ public class LoginActivity extends BaseActivity {
         if (typeface != null) {
             twoFAInfoTextView.setTypeface(typeface);
         }
+        instance_input.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
     }
 
     @Override
