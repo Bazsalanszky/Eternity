@@ -1337,4 +1337,6 @@
 \nВідтепер для доступу до Reddit API в Infinity for Reddit Вам знадобиться місячна підписка — і це тому, що з 1 липня 2023 року Reddit почав стягувати плату за доступ до API.
 \n
 \nУсі рівні працюють однаково. Якщо хочете підтримати Infinity, можете підписатися на вищий рівень. Більшість грошей з найнижчого рівня йде на Reddit.</string>
+    <string name="settings_credits_original_app_description">"Infinity створив редитор u/Hostilenemy "</string>
+    <string name="original_app">Оригінальний застосунок для Reddit</string>
 </resources>
