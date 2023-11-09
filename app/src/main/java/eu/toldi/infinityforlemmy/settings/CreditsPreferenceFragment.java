@@ -34,6 +34,16 @@ public class CreditsPreferenceFragment extends CustomFontPreferenceFragmentCompa
         Preference ufoAndCowPreference = findPreference(SharedPreferencesUtils.UFO_CAPTURING_ANIMATION);
         Preference loveAnimationPreference = findPreference(SharedPreferencesUtils.LOVE_ANIMATION);
         Preference lockScreenPreference = findPreference(SharedPreferencesUtils.LOCK_SCREEN_ANIMATION);
+        Preference originalAppPreference = findPreference(SharedPreferencesUtils.ORIGINAL_APP);
+
+        if (originalAppPreference != null) {
+            originalAppPreference.setOnPreferenceClickListener(preference -> {
+                Intent intent = new Intent(activity, LinkResolverActivity.class);
+                intent.setData(Uri.parse("https://www.reddit.com/user/Hostilenemy/"));
+                startActivity(intent);
+                return true;
+            });
+        }
 
         if (iconForegroundPreference != null) {
             iconForegroundPreference.setOnPreferenceClickListener(preference -> {

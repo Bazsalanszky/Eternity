@@ -217,6 +217,8 @@ public class SharedPreferencesUtils {
     public static final String USE_BOTTOM_TOOLBAR_IN_MEDIA_VIEWER = "use_bottom_toolbar_in_media_viewer";
     public static final String HIDE_ACCOUNT_KARMA_NAV_BAR = "hide_account_karma";
     public static final String LOCK_SCREEN_ANIMATION = "lock_screen_animation";
+
+    public static final String ORIGINAL_APP = "original_app";
     public static final String ENABLE_FOLD_SUPPORT = "enable_fold_support";
     public static final String LOOP_VIDEO = "loop_video";
     public static final String DEFAULT_PLAYBACK_SPEED = "default_playback_speed";

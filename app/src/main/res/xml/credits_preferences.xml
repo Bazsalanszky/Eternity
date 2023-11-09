@@ -2,6 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
+        android:key="original_app"
+        app:title="@string/original_app"
+        android:summary="@string/settings_credits_original_app_description" />
+
     <eu.toldi.infinityforlemmy.customviews.CustomFontPreference
         android:key="new_icon_foreground"
         app:title="@string/settings_credits_new_icon"

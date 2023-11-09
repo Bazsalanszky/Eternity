@@ -488,7 +488,7 @@ public class LinkResolverActivity extends AppCompatActivity {
 
         String authority = uri.getAuthority();
         if(authority != null && (authority.contains("reddit.com") || authority.contains("redd.it") || authority.contains("reddit.app.link"))) {
-            openInCustomTabs(uri, pm, false);
+            openInBrowser(uri, pm, false);
             return;
         }
 

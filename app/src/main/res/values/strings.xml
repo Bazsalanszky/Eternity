@@ -1452,4 +1452,6 @@
     <string name="icon_original_label">Original Icon</string>
     <string name="settings_credits_new_icon">New app icon (Cosmic Lemmy)</string>
     <string name="settings_credits_new_icon_summary">Made by David Gerla</string>
+    <string name="original_app">The original Reddit app</string>
+    <string name="settings_credits_original_app_description">"Infinity was created by u/Hostilenemy "</string>
 </resources>
