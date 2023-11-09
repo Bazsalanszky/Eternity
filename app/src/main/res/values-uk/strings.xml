@@ -1339,4 +1339,5 @@
 \nУсі рівні працюють однаково. Якщо хочете підтримати Infinity, можете підписатися на вищий рівень. Більшість грошей з найнижчого рівня йде на Reddit.</string>
     <string name="settings_credits_original_app_description">"Infinity створив редитор u/Hostilenemy "</string>
     <string name="original_app">Оригінальний застосунок для Reddit</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
 </resources>
