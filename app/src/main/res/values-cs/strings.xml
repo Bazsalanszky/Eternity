@@ -961,7 +961,7 @@
     <string name="theme_item_current_user_color_detail">Použito na: aktuálního uživatele v komentářích</string>
     <string name="exclude_domains_hint">Vyloučit domény</string>
     <string name="anonymous_front_page_no_subscriptions">Začněte připojením se do subredditu!</string>
-    <string name="backup_settings_success">Nastavení byla úspěšně exportována do cílového adresáře. Heslo vygenerovaného zip souboru je 123321. Neupravujte prosím daný zip soubor.</string>
+    <string name="backup_settings_success">Nastavení byla úspěšně exportována do cílového adresáře.</string>
     <string name="create_zip_in_destination_directory_failed">Nelze vytvořit záložní zip v cílovém adresáři</string>
     <string name="backup_some_settings_failed">Některá nastavení nebyla zálohována, ale ostatní byla exportována do cílového adresáře</string>
     <string name="restore_settings_success">Nastavení úspěšně obnovena. Restartujte aplikaci pro zobrazení změn.</string>
@@ -1167,7 +1167,6 @@
     <string name="load_more_posts_failed">Nepodařilo se načíst další příspěvky.
 \nKlepnutím to zkusíte znovu.</string>
     <string name="denied_notification_permission">Oprávnění k oznámením nebylo uděleno</string>
-
     <string name="block_community_success">Komunita zablokována!</string>
     <string name="block_community_failed">Nepodařilo se zablokovat komunitu</string>
     <string name="unblock_community">Odblokovat komunitu</string>
@@ -1283,4 +1282,71 @@
     <string name="icon_original_label">Původní ikona</string>
     <string name="settings_credits_new_icon">Nová ikona aplikace (kosmické Lemmy)</string>
     <string name="settings_credits_new_icon_summary">Vytvořil David Gerla</string>
+    <string name="billing_error_item_unavailable">Požadovaný produkt není k dispozici ke koupi.</string>
+    <string name="restore_subscription_purchase">Obnovení nákupu předplatného</string>
+    <string name="restore_subscription_purchase_details">Už jste zaplatili předplatné\?</string>
+    <string name="monthly">Měsíčně</string>
+    <string name="post_filter_usage_embedded_user_all">Všichni uživatelé</string>
+    <string name="action_add_to_home_screen">Přidat na domovskou obrazovku</string>
+    <string name="load_subscription_options">Načíst možnosti předplatného</string>
+    <string name="subscription_prompt">Než se ponoříte do nesčetných možností, které tato aplikace nabízí, chci vám předem transparentně sdělit významnou změnu, kterou jsem zavedl, abych pro vás zajistil co nejlepší služby.
+\n
+\nOd nynějška budete potřebovat měsíční předplatné pro přístup k rozhraní API Redditu v aplikaci Infinity for Reddit, a to proto, že Reddit začal od 1. července 2023 přístup k rozhraní API zpoplatňovat.
+\n
+\nVšechny úrovně fungují stejně. Pokud chcete podporovat službu Infinity, můžete si předplatit vyšší úroveň. Většina peněz z nejnižší úrovně jde společnosti Reddit.</string>
+    <string name="subscription_activity_label">Odběr</string>
+    <string name="comment_filter_name_hint">Název filtru komentářů</string>
+    <string name="connecting_to_billing_system">Připojování k fakturačnímu systému. Vyčkejte prosím.</string>
+    <string name="settings_comment_filter_title">Filtr komentářů</string>
+    <string name="confirm_delete_all_recent_searches">Opravdu chcete odstranit všechny poslední vyhledávací dotazy\?</string>
+    <string name="post_filter_usage_embedded_multireddit_all">Všechny multikomunity</string>
+    <string name="comment_filter_requires_a_name">Jak se jmenuje tento filtr komentářů\?</string>
+    <string name="billing_error_feature_not_supported">Požadovaná funkce není v aktuálním zařízení podporována Obchodem Play.</string>
+    <string name="original_app">Původní aplikace pro Reddit</string>
+    <string name="billing_error_billing_unavailable">Fakturační služba není v zařízení dostupná.</string>
+    <string name="subscription_plan_description_monthly_499">Zlatý - skvělá volba!</string>
+    <string name="subscription_plan_description_monthly_399">Stříbrný</string>
+    <string name="thank_you_for_subscription">Děkujeme za vaše předplatné</string>
+    <string name="important_info">Aplikace Infinity for Reddit s předplatným používá nový klíč API od Redditu a pro další používání aplikace se musíte znovu přihlásit.
+\n
+\nStačí otevřít navigační panel, klepnout na záhlaví účtu a zvolit možnost „Přidat účet“ a znovu se přihlásit k Redditu pomocí stejného účtu. Jinak se může stát, že se příspěvky v aplikaci Infinity vůbec nenačtou. Omlouváme se za nepříjemnosti.</string>
+    <string name="theme_item_read_post_filled_card_view_background_color">Barva pozadí přečteného příspěvku u plného zobrazení karet</string>
+    <string name="post_layout_card_3">Rozložení karet 3</string>
+    <string name="billing_error_error">Fatální chyba během akce API.</string>
+    <string name="billing_error_service_disconnected">Aplikace není připojena ke službě Obchod Play prostřednictvím fakturační knihovny Google Play.</string>
+    <string name="acknowledging_subscription">Potvrzování vašeho odběru. Počkejte prosím.</string>
+    <string name="billing_error_user_canceled">Transakce byla uživatelem zrušena.</string>
+    <string name="subscription_plan_description_monthly_899">Diamantová</string>
+    <string name="comment_filter_preference_activity_label">Filtr komentářů</string>
+    <string name="connect_to_billing_system_failed">Nepodařilo se připojit k fakturačnímu systému</string>
+    <string name="theme_item_read_post_filled_card_view_background_color_detail">Použito na: pozadí přečteného příspěvku v plném zobrazení karet</string>
+    <string name="billing_error_developer_error">Vývojář se dopustil několika chyb. Není to vaše chyba.</string>
+    <string name="comment_filter_applied_to_all_subreddits">Použito na všechny komunity</string>
+    <string name="subscription_plan_description_monthly_999">Infinity</string>
+    <string name="excludes_strings_hint">Vyjmout klíčová slova (slovo1,slovo2)</string>
+    <string name="billing_error_item_already_owned">Nákup se nezdařil, protože položku již vlastníte.</string>
+    <string name="confirm">Potvrdit</string>
+    <string name="subscription_plan_description_monthly">Bronzový</string>
+    <string name="post_filter_usage_embedded_more_count">a %1$d dalších</string>
+    <string name="theme_item_filled_card_view_background_color">Barva pozadí plného zobrazení karet</string>
+    <string name="important_info_title">Znovu se přihlaste ke svému účtu</string>
+    <string name="customize_comment_filter_activity_label">Přizpůsobit filtr komentářů</string>
+    <string name="billing_error_service_unavailable">Služba je v současné době nedostupná.</string>
+    <string name="weekly">Týdně</string>
+    <string name="continue_to_app">Pokračovat do aplikace</string>
+    <string name="apply_to">Použít na</string>
+    <string name="duplicate_comment_filter_dialog_title">Filtr „%1$s“ již existuje</string>
+    <string name="acknowledge_purchase_failed">Nelze potvrdit nákup</string>
+    <string name="click_to_apply_post_filter">Klikněte sem pro použití na některých příspěvcích</string>
+    <string name="yearly">Ročně</string>
+    <string name="welcome_to_infinity">Vítejte v Infinity pro Reddit, vaší bráně do zbrusu nového vesmíru prohlížení Redditu!</string>
+    <string name="post_filter_usage_embedded_subreddit_all">Všechny komunity</string>
+    <string name="acknowledgement_purchase_failed_description">Jejda, při potvrzování nákupu došlo k chybě. Pokud tento problém přetrvává po dobu tří dnů, budou vám automaticky vráceny peníze.
+\nNebojte se, Infinity for Reddit si můžete užívat i nadále.</string>
+    <string name="theme_item_filled_card_view_background_color_detail">Použito na: pozadí příspěvku v plném zobrazení karet, některé pole úpravy textu</string>
+    <string name="duplicate_comment_filter_dialog_message">Přepsat ho\?</string>
+    <string name="settings_credits_original_app_description">"Infinity vytvořil u/Hostilenemy "</string>
+    <string name="subscription_plan_description_monthly_699">Platinová</string>
+    <string name="comment_filter_usage_embedded_more_count">a %1$d dalších</string>
+    <string name="billing_error_network_error">Během operace došlo k chybě sítě.</string>
 </resources>
