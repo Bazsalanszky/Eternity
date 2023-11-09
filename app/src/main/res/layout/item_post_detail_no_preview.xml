@@ -68,14 +68,13 @@
             android:id="@+id/user_instance_text_view_item_post_detail_no_preview_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="?attr/font_family"
-            android:textSize="?attr/font_default"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:fontFamily="?attr/font_family"
+            android:maxLines="1"
+            android:textSize="?attr/font_default"
             app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toTopOf="@+id/community_instance_text_view_item_post_detail_no_preview_link"
             app:layout_constraintStart_toEndOf="@+id/user_text_view_item_post_detail_no_preview"
-            app:layout_constraintTop_toBottomOf="@+id/subreddit_text_view_item_post_detail_no_preview" />
+            app:layout_constraintTop_toBottomOf="@+id/community_instance_text_view_item_post_detail_no_preview_link" />
 
         <TextView
             android:id="@+id/author_flair_text_view_item_post_detail_no_preview"
