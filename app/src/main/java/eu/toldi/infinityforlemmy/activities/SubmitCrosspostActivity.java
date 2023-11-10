@@ -112,8 +112,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
     View divider1;
     @BindView(R.id.flair_custom_text_view_submit_crosspost_activity)
     CustomTextView flairTextView;
-    @BindView(R.id.spoiler_custom_text_view_submit_crosspost_activity)
-    CustomTextView spoilerTextView;
     @BindView(R.id.nsfw_custom_text_view_submit_crosspost_activity)
     CustomTextView nsfwTextView;
     @BindView(R.id.divider_2_submit_crosspost_activity)
@@ -259,11 +257,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
                 flairTextView.setBorderColor(flairBackgroundColor);
                 flairTextView.setTextColor(flairTextColor);
             }
-            if (isSpoiler) {
-                spoilerTextView.setBackgroundColor(spoilerBackgroundColor);
-                spoilerTextView.setBorderColor(spoilerBackgroundColor);
-                spoilerTextView.setTextColor(spoilerTextColor);
-            }
             if (isNSFW) {
                 nsfwTextView.setBackgroundColor(nsfwBackgroundColor);
                 nsfwTextView.setBorderColor(nsfwBackgroundColor);
@@ -287,13 +280,14 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             titleEditText.setText(post.getTitle());
         }
 
-        if (post.getPostType() == Post.TEXT_TYPE) {
+        if (post.getPostType() == Post.TEXT_TYPE || post.getPostType() == Post.LINK_TYPE || post.getPostType() == Post.NO_PREVIEW_LINK_TYPE) {
             contentTextView.setVisibility(View.VISIBLE);
-            contentTextView.setText(post.getSelfTextPlain());
-        } else if (post.getPostType() == Post.LINK_TYPE || post.getPostType() == Post.NO_PREVIEW_LINK_TYPE) {
-            contentTextView.setVisibility(View.VISIBLE);
-            contentTextView.setText(post.getUrl());
+            contentTextView.setText(generateCrossPostText(post));
         } else {
+            if (post.getSelfTextPlain() != null && !post.getSelfTextPlain().equals("")) {
+                contentTextView.setVisibility(View.VISIBLE);
+                contentTextView.setText(generateCrossPostText(post));
+            }
             Post.Preview preview = getPreview(post);
             if (preview != null) {
                 frameLayout.setVisibility(View.VISIBLE);
@@ -368,18 +362,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             }
         });
 
-        spoilerTextView.setOnClickListener(view -> {
-            if (!isSpoiler) {
-                spoilerTextView.setBackgroundColor(spoilerBackgroundColor);
-                spoilerTextView.setBorderColor(spoilerBackgroundColor);
-                spoilerTextView.setTextColor(spoilerTextColor);
-                isSpoiler = true;
-            } else {
-                spoilerTextView.setBackgroundColor(resources.getColor(android.R.color.transparent));
-                spoilerTextView.setTextColor(primaryTextColor);
-                isSpoiler = false;
-            }
-        });
 
         nsfwTextView.setOnClickListener(view -> {
             if (!isNSFW) {
@@ -461,7 +443,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
         nsfwBackgroundColor = mCustomThemeWrapper.getNsfwBackgroundColor();
         nsfwTextColor = mCustomThemeWrapper.getNsfwTextColor();
         flairTextView.setTextColor(primaryTextColor);
-        spoilerTextView.setTextColor(primaryTextColor);
         nsfwTextView.setTextColor(primaryTextColor);
         titleEditText.setTextColor(primaryTextColor);
         titleEditText.setHintTextColor(secondaryTextColor);
@@ -474,7 +455,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             rulesButton.setTypeface(typeface);
             receivePostReplyNotificationsTextView.setTypeface(typeface);
             flairTextView.setTypeface(typeface);
-            spoilerTextView.setTypeface(typeface);
             nsfwTextView.setTypeface(typeface);
             titleEditText.setTypeface(typeface);
         }
@@ -561,22 +541,19 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
 
             mPostingSnackbar.show();
 
-            String subredditName;
-            if (subredditIsUser) {
-                subredditName = "u_" + subredditNameTextView.getText().toString();
-            } else {
-                subredditName = subredditNameTextView.getText().toString();
-            }
+            String subredditName = subredditNameTextView.getText().toString();
+
 
             Intent intent = new Intent(this, SubmitPostService.class);
             intent.putExtra(SubmitPostService.EXTRA_ACCOUNT, selectedAccount);
             intent.putExtra(SubmitPostService.EXTRA_SUBREDDIT_NAME, communityData.getId());
             intent.putExtra(SubmitPostService.EXTRA_TITLE, titleEditText.getText().toString());
-            if (post.isCrosspost()) {
-                intent.putExtra(SubmitPostService.EXTRA_BODY, "t3_" + post.getCrosspostParentId());
-            } else {
-                intent.putExtra(SubmitPostService.EXTRA_BODY, post.getFullName());
+
+            intent.putExtra(SubmitPostService.EXTRA_BODY, generateCrossPostText(post));
+            if (post.getUrl() != null && !post.getUrl().equals("")) {
+                intent.putExtra(SubmitPostService.EXTRA_URL, post.getUrl());
             }
+
             intent.putExtra(SubmitPostService.EXTRA_KIND, APIUtils.KIND_CROSSPOST);
             intent.putExtra(SubmitPostService.EXTRA_FLAIR, flair);
             intent.putExtra(SubmitPostService.EXTRA_IS_SPOILER, isSpoiler);
@@ -698,5 +675,16 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
                         + submitCrosspostEvent.errorMessage.substring(1), Snackbar.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private static String generateCrossPostText(Post post) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("cross-posted from: ").append(post.getPermalink()).append("\n");
+        String[] lines = post.getSelfTextPlain().split("\n");
+        for (String line : lines) {
+            stringBuilder.append("> ").append(line).append("\n");
+        }
+
+        return stringBuilder.toString();
     }
 }

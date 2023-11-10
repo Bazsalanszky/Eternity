@@ -55,11 +55,11 @@ public class SubmitPost {
 
     public static void submitCrosspost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,
                                        int communityId, String title, String crosspostFullname,
-                                       Flair flair, boolean isSpoiler, boolean isNSFW,
+                                       String url, boolean isSpoiler, boolean isNSFW,
                                        boolean receivePostReplyNotifications, String kind, PostEnricher postEnricher,
                                        SubmitPostListener submitPostListener) {
         submitPost(executor, handler, oauthRetrofit, accessToken, communityId, title, crosspostFullname,
-                isNSFW, receivePostReplyNotifications, kind, null, postEnricher, submitPostListener);
+                isNSFW, receivePostReplyNotifications, kind, url, postEnricher, submitPostListener);
     }
 
     private static void submitPost(Executor executor, Handler handler, Retrofit oauthRetrofit, String accessToken,

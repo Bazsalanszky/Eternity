@@ -144,7 +144,7 @@ public class SubmitPostService extends Service {
                         receivePostReplyNotifications, kind);
             } else if (postType == EXTRA_POST_TYPE_CROSSPOST) {
                 submitCrosspost(mExecutor, handler, mRetrofit.getRetrofit(), account, subredditName, title, body,
-                        flair, isSpoiler, isNSFW, receivePostReplyNotifications);
+                        url, isSpoiler, isNSFW, receivePostReplyNotifications);
             } else if (postType == EXTRA_POST_TYPE_IMAGE) {
                 Uri mediaUri = Uri.parse(bundle.getString(EXTRA_MEDIA_URI));
                 submitImagePost(mRetrofit, account, mediaUri, subredditName, title, body, flair, isSpoiler, isNSFW,
@@ -243,10 +243,10 @@ public class SubmitPostService extends Service {
 
     private void submitCrosspost(Executor executor, Handler handler, Retrofit newAuthenticatorOauthRetrofit,
                                  Account selectedAccount, int communityId,
-                                 String title, String content, Flair flair, boolean isSpoiler, boolean isNSFW,
+                                 String title, String content, String url, boolean isSpoiler, boolean isNSFW,
                                  boolean receivePostReplyNotifications) {
         SubmitPost.submitCrosspost(executor, handler, newAuthenticatorOauthRetrofit, selectedAccount.getAccessToken(), communityId, title,
-                content, flair, isSpoiler, isNSFW, receivePostReplyNotifications, APIUtils.KIND_CROSSPOST, postEnricher,
+                content, url, isSpoiler, isNSFW, receivePostReplyNotifications, APIUtils.KIND_CROSSPOST, postEnricher,
                 new SubmitPost.SubmitPostListener() {
                     @Override
                     public void submitSuccessful(Post post) {
