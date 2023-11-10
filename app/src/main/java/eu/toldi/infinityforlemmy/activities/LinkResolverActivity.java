@@ -342,64 +342,6 @@ public class LinkResolverActivity extends AppCompatActivity {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_V_REDD_IT);
                             intent.putExtra(ViewVideoActivity.EXTRA_V_REDD_IT_URL, uri.toString());
                             startActivity(intent);
-                        } else if (authority.contains("reddit.com") || authority.contains("redd.it") || authority.contains("reddit.app")) {
-                            if (authority.equals("reddit.app.link") && path.isEmpty()) {
-                                String redirect = uri.getQueryParameter("$og_redirect");
-                                if (redirect != null) {
-                                    handleUri(Uri.parse(redirect));
-                                } else {
-                                    deepLinkError(uri);
-                                }
-                            } else if (path.isEmpty()) {
-                                Intent intent = new Intent(this, MainActivity.class);
-                                startActivity(intent);
-                            } else if (path.equals("/report")) {
-                                openInWebView(uri);
-                            } else if (path.matches(POST_PATTERN_3)) {
-                                Intent intent = new Intent(this, ViewPostDetailActivity.class);
-                                intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, path.substring(1));
-                                intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                startActivity(intent);
-                            } else if (path.matches(WIKI_PATTERN)) {
-                                String[] pathSegments = path.split("/");
-                                String wikiPage;
-                                if (pathSegments.length == 4) {
-                                    wikiPage = "index";
-                                } else {
-                                    int lengthThroughWiki = 0;
-                                    for (int i = 1; i <= 3; ++i) {
-                                        lengthThroughWiki += pathSegments[i].length() + 1;
-                                    }
-                                    wikiPage = path.substring(lengthThroughWiki);
-                                }
-                                Intent intent = new Intent(this, WikiActivity.class);
-                                intent.putExtra(WikiActivity.EXTRA_SUBREDDIT_NAME, segments.get(1));
-                                intent.putExtra(WikiActivity.EXTRA_WIKI_PATH, wikiPage);
-                                startActivity(intent);
-                            } else if (path.matches(SIDEBAR_PATTERN)) {
-                                Intent intent = new Intent(this, ViewSubredditDetailActivity.class);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, path.substring(3, path.length() - 14));
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_VIEW_SIDEBAR, true);
-                                startActivity(intent);
-                            } else if (path.matches(MULTIREDDIT_PATTERN)) {
-                                Intent intent = new Intent(this, ViewMultiRedditDetailActivity.class);
-                                intent.putExtra(ViewMultiRedditDetailActivity.EXTRA_MULTIREDDIT_PATH, path);
-                                startActivity(intent);
-                            } else if (path.matches(MULTIREDDIT_PATTERN_2)) {
-                                String subredditName = path.substring(3);
-                                Intent intent = new Intent(this, ViewSubredditDetailActivity.class);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, subredditName);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                intent.putExtra(ViewSubredditDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                startActivity(intent);
-                            } else if (authority.equals("redd.it") && path.matches(REDD_IT_POST_PATTERN)) {
-                                Intent intent = new Intent(this, ViewPostDetailActivity.class);
-                                intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, path.substring(1));
-                                startActivity(intent);
-                            } else {
-                                deepLinkError(uri);
-                            }
                         } else if (authority.equals("click.redditmail.com")) {
                             if (path.startsWith("/CL0/")) {
                                 handleUri(Uri.parse(path.substring("/CL0/".length())));
