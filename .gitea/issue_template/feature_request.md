@@ -10,12 +10,6 @@ labels:
 
 ---
 
-
----
-
-### Feature Request Title
-<!-- A concise title that reflects the feature -->
-
 ### Description
 <!-- A clear and concise description of what the feature is and what problem it solves. -->
 
