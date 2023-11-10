@@ -1349,4 +1349,5 @@
     <string name="subscription_plan_description_monthly_699">Platinová</string>
     <string name="comment_filter_usage_embedded_more_count">a %1$d dalších</string>
     <string name="billing_error_network_error">Během operace došlo k chybě sítě.</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">Adresa URL vaší preferované instance Lemmy s nebo bez předpony https://</string>
 </resources>
