@@ -53,7 +53,6 @@ import com.google.android.exoplayer2.ui.DefaultTimeBar;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.TimeBar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.common.collect.ImmutableList;
 import com.libRG.CustomTextView;
 
@@ -806,6 +805,12 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     if (post.isFeaturedOnInstance()) {
                         ((PostBaseViewHolder) holder).stickiedPostImageView.setColorFilter(mModeratorColor, android.graphics.PorterDuff.Mode.SRC_IN);
                     }
+                }
+
+                if (post.isDeleted()) {
+                    mGlide.load(R.drawable.ic_delete_outline_24).into(((PostBaseViewHolder) holder).stickiedPostImageView);
+                    ((PostBaseViewHolder) holder).stickiedPostImageView.setVisibility(View.VISIBLE);
+                    ((PostBaseViewHolder) holder).stickiedPostImageView.setColorFilter(mUpvotedColor, android.graphics.PorterDuff.Mode.SRC_IN);
                 }
 
                 if (post.isArchived()) {

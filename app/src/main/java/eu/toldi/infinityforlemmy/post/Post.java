@@ -72,6 +72,8 @@ public class Post implements Parcelable {
     private boolean saved;
     private boolean isCrosspost;
     private boolean isRead;
+
+    private boolean deleted;
     private String crosspostParentId;
     private String distinguished;
     private String suggestedSort;
@@ -82,7 +84,7 @@ public class Post implements Parcelable {
                 BasicUserInfo userInfo, long postTimeMillis,
                 String title, String permalink, int downvotes, int upvotes, int postType, int voteType, int nComments,
                 int upvoteRatio,
-                boolean nsfw, boolean locked, boolean saved,
+                boolean nsfw, boolean locked, boolean saved, boolean deleted,
                 String distinguished, String suggestedSort) {
         this.id = id;
         this.communityInfo = communityInfo;
@@ -99,6 +101,7 @@ public class Post implements Parcelable {
         this.hidden = hidden;
         this.nsfw = nsfw;
         this.archived = archived;
+        this.deleted = deleted;
         this.locked = locked;
         this.saved = saved;
         this.isCrosspost = isCrosspost;
@@ -111,7 +114,7 @@ public class Post implements Parcelable {
                 BasicUserInfo author, long postTimeMillis, String title,
                 String url, String permalink, int downvotes, int upvotes, int postType, int voteType, int nComments,
                 int upvoteRatio,
-                boolean nsfw, boolean locked, boolean saved, String distinguished, String suggestedSort) {
+                boolean nsfw, boolean locked, boolean saved, boolean deleted, String distinguished, String suggestedSort) {
         this.id = id;
         this.communityInfo = communityInfo;
         this.author = author;
@@ -130,6 +133,7 @@ public class Post implements Parcelable {
         this.archived = archived;
         this.locked = locked;
         this.saved = saved;
+        this.deleted = deleted;
         this.isCrosspost = isCrosspost;
         this.distinguished = distinguished;
         this.suggestedSort = suggestedSort;
@@ -168,6 +172,7 @@ public class Post implements Parcelable {
         archived = in.readByte() != 0;
         locked = in.readByte() != 0;
         saved = in.readByte() != 0;
+        deleted = in.readByte() != 0;
         isCrosspost = in.readByte() != 0;
         isRead = in.readByte() != 0;
         crosspostParentId = in.readString();
@@ -503,6 +508,10 @@ public class Post implements Parcelable {
         return author;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
@@ -536,6 +545,7 @@ public class Post implements Parcelable {
         parcel.writeByte((byte) (archived ? 1 : 0));
         parcel.writeByte((byte) (locked ? 1 : 0));
         parcel.writeByte((byte) (saved ? 1 : 0));
+        parcel.writeByte((byte) (deleted ? 1 : 0));
         parcel.writeByte((byte) (isCrosspost ? 1 : 0));
         parcel.writeByte((byte) (isRead ? 1 : 0));
         parcel.writeString(crosspostParentId);

@@ -181,6 +181,7 @@ public class ParsePost {
         boolean nsfw = post.getBoolean("nsfw");
         boolean locked = post.getBoolean("locked");
         boolean saved = data.getBoolean("saved");
+        boolean deleted = post.getBoolean("deleted");
         String distinguished = creator.optBoolean("admin") ? "admin" : "";
         String suggestedSort = "";
         ArrayList<Post.Preview> previews = new ArrayList<>();
@@ -194,7 +195,7 @@ public class ParsePost {
 
         return parseData(data, permalink, id, communityInfo,
                 authorInfo, postTimeMillis, title, previews,
-                downvotes, upvotes, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                downvotes, upvotes, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted,
                 distinguished, suggestedSort);
 
     }
@@ -203,7 +204,7 @@ public class ParsePost {
                                   long postTimeMillis, String title, ArrayList<Post.Preview> previews,
                                   int downvotes, int upvotes, int voteType, int nComments, int upvoteRatio,
                                   boolean nsfw, boolean locked,
-                                  boolean saved,
+                                  boolean saved, boolean deleted,
                                   String distinguished, String suggestedSort) throws JSONException {
         Post post;
 
@@ -223,7 +224,7 @@ public class ParsePost {
                 post = new Post(id, communityInfo, author,
                         postTimeMillis, title, permalink, downvotes, upvotes,
                         postType, voteType, nComments, upvoteRatio, nsfw,
-                        locked, saved, distinguished, suggestedSort);
+                        locked, saved, deleted, distinguished, suggestedSort);
                 String body = data.getJSONObject("post").getString("body");
                 post.setSelfText(body);
                 post.setSelfTextPlain(body);
@@ -235,7 +236,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
 
                     if (previews.isEmpty()) {
                         previews.add(new Post.Preview(url, 0, 0, "", ""));
@@ -247,7 +248,7 @@ public class ParsePost {
                         int postType = Post.VIDEO_TYPE;
 
                         post = new Post(id, communityInfo, author, postTimeMillis, title, permalink, downvotes, upvotes, postType, voteType,
-                                nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                                nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
 
                         post.setVideoUrl(url);
                         post.setVideoDownloadUrl(url);
@@ -256,7 +257,7 @@ public class ParsePost {
                         int postType = Post.NO_PREVIEW_LINK_TYPE;
                         post = new Post(id, communityInfo, author,
                                 postTimeMillis, title, url, permalink, downvotes, upvotes,
-                                postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                                postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
                         if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
                             post.setSelfText("");
                         } else {
@@ -291,7 +292,7 @@ public class ParsePost {
                         post = new Post(id, communityInfo, author,
                                 postTimeMillis, title, permalink, downvotes, upvotes,
                                 postType, voteType, nComments, upvoteRatio, nsfw,
-                                locked, saved, distinguished, suggestedSort);
+                                locked, saved, deleted, distinguished, suggestedSort);
                         String body = "";
                         post.setSelfText(body);
                         post.setSelfTextPlain(body);
@@ -328,7 +329,7 @@ public class ParsePost {
                 String videoDownloadUrl = redditVideoObject.getString(JSONUtils.FALLBACK_URL_KEY);
 
                 post = new Post(id, communityInfo, author, postTimeMillis, title, permalink, downvotes, upvotes, postType, voteType,
-                        nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                        nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
 
                 post.setPreviews(previews);
                 post.setVideoUrl(videoUrl);
@@ -340,7 +341,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted,
                             distinguished, suggestedSort);
 
                     if (previews.isEmpty()) {
@@ -353,7 +354,7 @@ public class ParsePost {
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio,
-                            nsfw, locked, saved,
+                            nsfw, locked, saved, deleted,
                             distinguished, suggestedSort);
 
                     post.setPreviews(previews);
@@ -369,7 +370,7 @@ public class ParsePost {
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
                             postType, voteType, nComments, upvoteRatio,
-                            nsfw, locked, saved,
+                            nsfw, locked, saved, deleted,
                             distinguished, suggestedSort);
                     post.setPreviews(previews);
                     post.setVideoUrl(url);
@@ -381,7 +382,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted,
                             distinguished, suggestedSort);
                     post.setPreviews(previews);
                     post.setVideoUrl(url);
@@ -392,7 +393,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved,
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted,
                             distinguished, suggestedSort);
                     if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
                         post.setSelfText("");
@@ -433,7 +434,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
 
                     if (previews.isEmpty()) {
                         previews.add(new Post.Preview(url, 0, 0, "", ""));
@@ -445,7 +446,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
                     post.setPreviews(previews);
                     post.setVideoUrl(url);
                     post.setVideoDownloadUrl(url);
@@ -455,7 +456,7 @@ public class ParsePost {
 
                     post = new Post(id, communityInfo, author,
                             postTimeMillis, title, url, permalink, downvotes, upvotes,
-                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, distinguished, suggestedSort);
+                            postType, voteType, nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
                     //Need attention
                     if (data.isNull(JSONUtils.SELFTEXT_KEY)) {
                         post.setSelfText("");
