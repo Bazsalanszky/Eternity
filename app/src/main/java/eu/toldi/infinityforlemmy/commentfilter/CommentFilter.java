@@ -52,10 +52,11 @@ public class CommentFilter implements Parcelable {
     };
 
     public static boolean isCommentAllowed(Comment comment, CommentFilter commentFilter) {
-        if (commentFilter.maxVote > 0 && comment.getVoteType() + comment.getScore() > commentFilter.maxVote) {
+        int score = comment.getScore() + comment.getVoteType();
+        if (commentFilter.maxVote >= 0 && score > commentFilter.maxVote) {
             return false;
         }
-        if (commentFilter.minVote > 0 && comment.getVoteType() + comment.getScore() < commentFilter.minVote) {
+        if (commentFilter.minVote >= 0 && score < commentFilter.minVote) {
             return false;
         }
         if (commentFilter.excludeStrings != null && !commentFilter.excludeStrings.equals("")) {
