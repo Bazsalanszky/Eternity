@@ -1340,4 +1340,10 @@
     <string name="settings_credits_original_app_description">"Infinity створив редитор u/Hostilenemy "</string>
     <string name="original_app">Оригінальний застосунок для Reddit</string>
     <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
+    <string name="subscription_plan_description_monthly_499">Золота — ідеальний вибір!</string>
+    <string name="subscription_plan_description_monthly_399">Срібна</string>
+    <string name="subscription_plan_description_monthly_899">Діамантова</string>
+    <string name="subscription_plan_description_monthly_999">Infinity</string>
+    <string name="subscription_plan_description_monthly">Бронзова</string>
+    <string name="subscription_plan_description_monthly_699">Платинова</string>
 </resources>
