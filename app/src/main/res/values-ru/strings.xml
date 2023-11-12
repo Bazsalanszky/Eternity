@@ -1278,7 +1278,6 @@
     <string name="settings_easier_to_watch_in_full_screen_title">Удобнее просматривать в полном экране</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
     <string name="i_understand">Понятно</string>
-
     <string name="settings_hide_community_and_user_instance">Не показывать сообщество и сервер пользователя</string>
     <string name="settings_show_display_name_instead_of_user_name">Показывать сообщество и отображать имена пользователей</string>
     <string name="active_users_number_detail">%1$,d активных пользователей</string>
@@ -1288,4 +1287,39 @@
     <string name="icon_original_label">Классическая иконка</string>
     <string name="settings_credits_new_icon">Новая иконка (Космический Lemmy)</string>
     <string name="settings_credits_new_icon_summary">от David Gerla</string>
+    <string name="duplicate_comment_filter_dialog_message">Перезаписать его\?</string>
+    <string name="comment_filter_usage_embedded_more_count">и ещё %1$d</string>
+    <string name="comment_filter_preference_activity_label">Фильтр комментариев</string>
+    <string name="action_add_to_home_screen">Добавить на главный экран</string>
+    <string name="subscription_activity_label">Подписка</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="post_filter_usage_embedded_subreddit_all">Все сообщества</string>
+    <string name="weekly">Еженедельно</string>
+    <string name="important_info_title">Пожалуйста, войдите в учётную запись заново</string>
+    <string name="restore_subscription_purchase_details">Подписка уже оплачена\?</string>
+    <string name="subscription_plan_description_monthly_399">Серебряный</string>
+    <string name="confirm_delete_all_recent_searches">Вы точно хотите удалить все недавние поисковые запросы\?</string>
+    <string name="post_filter_usage_embedded_user_all">Все пользователи</string>
+    <string name="subscription_plan_description_monthly_499">Золотой - Отличный выбор!</string>
+    <string name="settings_comment_filter_title">Фильтр комментариев</string>
+    <string name="comment_filter_requires_a_name">Как назвать этот фильтр\?</string>
+    <string name="monthly">Ежемесячно</string>
+    <string name="subscription_plan_description_monthly_699">Платиновый</string>
+    <string name="post_layout_card_3">Разметка карты 3</string>
+    <string name="duplicate_comment_filter_dialog_title">«%1$s» уже существует</string>
+    <string name="billing_error_billing_unavailable">Служба оплаты недоступна на этом устройстве.</string>
+    <string name="settings_credits_original_app_description">"Infinity - разработка u/Hostilenemy "</string>
+    <string name="customize_comment_filter_activity_label">Настроить фильтр комментариев</string>
+    <string name="restore_subscription_purchase">Восстановить покупку подписки</string>
+    <string name="thank_you_for_subscription">Спасибо за подписку</string>
+    <string name="subscription_plan_description_monthly_899">Алмазный</string>
+    <string name="post_filter_usage_embedded_multireddit_all">Все мультисообщества</string>
+    <string name="click_to_apply_post_filter">Коснитесь здесь, чтобы применить это к каким-либо лентам</string>
+    <string name="post_filter_usage_embedded_more_count">и ещё %1$d</string>
+    <string name="yearly">Ежегодно</string>
+    <string name="billing_error_developer_error">Разработчик допустил некоторые ошибки. Это не ваша вина.</string>
+    <string name="billing_error_error">Критическая ошибка при работе с API.</string>
+    <string name="billing_error_user_canceled">Оплата отменена пользователем.</string>
+    <string name="subscription_plan_description_monthly">Бронзовый</string>
+    <string name="comment_filter_applied_to_all_subreddits">Применяется ко всем сообществам</string>
 </resources>
