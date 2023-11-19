@@ -731,7 +731,7 @@
     <string name="report_reason_general_child_pornography">Conține Pornografie Infantilă</string>
     <string name="report_reason_general_abusive_content">Conține Conținut Abuziv</string>
     <string name="subscribed_feed">Acasă</string>
-    <string name="local">Popular</string>
+    <string name="local">Local</string>
     <string name="notifications">Notificări</string>
     <string name="messages">Mesaje</string>
     <string name="message">Mesaj</string>
@@ -758,8 +758,7 @@
     <string name="default_font_font_preview">Implicit</string>
     <string name="load_video_in_redgifs">Încearcă să încarci videoclipul pe Redgifs</string>
     <string name="top_score">%1$s pct</string>
-    <string name="login_activity_2fa_prompt">Dacă ai activat autentificarea cu 2 factori, te rugăm să introduci parola ta după cum urmează: &lt;parolă&gt;:&lt;cod 2FA&gt;.
-\nExemplu: parolata:123456</string>
+    <string name="login_activity_2fa_prompt">Dacă aveți autentificarea cu doi pași activată, va trebui să umpleți câmpul jetonului 2FA. Lăsați-l gol altfel</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
     <string name="give_award_activity_label">Acordă un Premiu</string>
     <string name="action_crosspost">Crosspost</string>
@@ -803,10 +802,7 @@
     <string name="settings_bottom_app_bar_option_4">Opțiunea 4</string>
     <string name="settings_bottom_app_bar_fab">Buton de Acțiune Plutitor</string>
     <string name="settings_data_saving_mode">Regim de Economisire a Datelor</string>
-    <string name="settings_data_saving_mode_info_summary">În regimul de economisire a datelor:
-\nImaginile de previzualizare au o rezoluție mai mică.
-\nVideoclipurile Reddit au o rezoluție mai mică.
-\nRedarea automată a videoclipurilor este dezactivată.</string>
+    <string name="settings_data_saving_mode_info_summary">În regimul de economisire a datelor: Imaginile de previzualizare au o rezoluție mai mică. Videoclipurile Lemmy au o rezoluție mai mică. Redarea automată a videoclipurilor este dezactivată.</string>
     <string name="settings_translation_title">Traducere</string>
     <string name="settings_translation_summary">Tradu această aplicație pe POEditor. Mulțumiri tuturor contribuitorilor.</string>
     <string name="settings_credits_national_flags">Steaguri Naționale</string>
@@ -984,7 +980,7 @@
     <string name="theme_item_current_user_color_detail">Aplicat pe: Utilizatorul curent în comentarii</string>
     <string name="exclude_domains_hint">Exclude domeniile</string>
     <string name="anonymous_front_page_no_subscriptions">Începe prin a te alătura unui subreddit!</string>
-    <string name="backup_settings_success">A fost exportat cu succes setările în directorul de destinație. Parola fișierului zip generat este 123321. Vă rugăm să nu modificați fișierul zip.</string>
+    <string name="backup_settings_success">Au fost exportate cu succes setările în directorul de destinație.</string>
     <string name="create_zip_in_destination_directory_failed">Nu s-a putut crea fișierul zip de rezervă în directorul de destinație</string>
     <string name="backup_some_settings_failed">Nu s-a putut include în copia de rezervă unele setări, dar celelalte au fost exportate cu succes în directorul de destinație</string>
     <string name="restore_settings_success">Setările au fost restaurate cu succes. Repornește aplicația pentru a vedea modificările.</string>
@@ -1065,7 +1061,7 @@
     <string name="uploaded_images">Imagini Încărcate</string>
     <string name="select_image">Selectează o Imagine</string>
     <string name="capture">Capturează</string>
-    <string name="uploading_image">Se încarcă</string>
+    <string name="uploading_image">Încărcare</string>
     <string name="upload_image_success">Imaginea a fost încărcată cu succes. Apasă din nou pe butonul de imagine pentru a vedea imaginile încărcate.</string>
     <string name="get_image_bitmap_failed">Nu s-a putut obține bitmap-ul imaginii</string>
     <string name="upload_image_failed">Nu s-a putut încărca imaginea</string>
@@ -1227,7 +1223,6 @@
     <string name="moderators">Moderatori</string>
     <string name="anonymous_account_instance">Instanță Cont Anonim</string>
     <string name="exo_controls_volume_off_description">Volum Oprit</string>
-
     <string name="user_username">Nume de utilizator</string>
     <string name="settings_comment_divider_type">Tip Divizor Comentarii</string>
     <string name="settings_navigation_drawer_enable_hide_karma_title">Ascundeți Karma de la Cont</string>
@@ -1310,4 +1305,75 @@
     <string name="unblock_user_success">Deblocat</string>
     <string name="comment_count_detail">%1$,d Comentarii</string>
     <string name="sort_time_3months">3 Luni</string>
+    <string name="apply_to">Aplicați la</string>
+    <string name="post_filter_usage_embedded_user_all">Toți utilizatorii</string>
+    <string name="post_filter_usage_embedded_multireddit_all">Toate Multicomunitățile</string>
+    <string name="welcome_to_infinity">Bine ați venit la Infinity pentru Reddit, poarta dumneavoastră la o nouă dimensiune a navigării pe Reddit!</string>
+    <string name="comment_filter_preference_activity_label">Filtru Comentarii</string>
+    <string name="post_layout_card_3">Aspect Card 3</string>
+    <string name="confirm">Confirmați</string>
+    <string name="confirm_delete_all_recent_searches">Sunteți sigur că doriți să ștergeți toate căutările recente\?</string>
+    <string name="icon_original_label">Iconița originală</string>
+    <string name="theme_item_read_post_filled_card_view_background_color">Culoare de fundal pentru cardul umplut unei postări citite</string>
+    <string name="theme_item_read_post_filled_card_view_background_color_detail">Aplicat la: Fundalul unei postări citite într-un card umplut</string>
+    <string name="settings_credits_new_icon_summary">Creată de David Gerla</string>
+    <string name="settings_comment_filter_title">Filtru Comentarii</string>
+    <string name="theme_item_filled_card_view_background_color_detail">Aplicat la: Fundalul unei postări într-un card umplut, unele câmpuri de editare text</string>
+    <string name="post_filter_usage_embedded_subreddit_all">Toate Comunitățile</string>
+    <string name="subscription_prompt">Înainte să vă aruncați în posibilitățile nelimitate oferite de această aplicație, doresc să fiu anticipat și transparent despre o schimbare semnificativă pe care am implementat-o pentru a mă asigura că aveți cel mai bun serviciu.
+\n
+\nDe acum înainte, veți avea nevoie de un abonament lunar pentru a accesa API-ul Reddit din Infinity pentru Reddit și este din pricină că Reddit a început să ceară plăți pentru accesul la API din 1 Iulie, 2023.
+\n
+\nToate nivelele funcționează la fel. Dacă vreți să ajutați Infinity, puteți să vă abonați la un nivel mai înalt. Majoritatea banilor din nivelele joase se duc la Reddit.</string>
+    <string name="acknowledgement_purchase_failed_description">Ups, a avut loc o eroare la recunoașterea plății dumneavoastră. Dacă problema persistă pentru trei zile, veți primi un retur gratuit.
+\nNu vă faceți griji, vă puteți bucura în continuare de Infinity pentru Reddit.</string>
+    <string name="settings_credits_new_icon">Noua iconiță a aplicației (Cosmic Lemmy)</string>
+    <string name="subscription_activity_label">Abonament</string>
+    <string name="important_info">Infinity pentru Reddit cu un abonament folosește o cheie API nouă de la Reddit și trebuie să vă logați din nou pentru a putea să continuați utilizarea aplicației.
+\n
+\nDoar deschideți sertarul de navigare și apăsați pe antetul contului dumneavoastră și selectați \"Adăugați un cont\" pentru a vă loga la Reddit folosind același cont din nou. Altfel, Infinity s-ar putea să nu mai încarce postări din nou. Scuze pentru inconveniență.</string>
+    <string name="action_add_to_home_screen">Adăugați la ecranul Acasă</string>
+    <string name="theme_item_filled_card_view_background_color">Culoare de fundal pentru cardul umplut vizibil</string>
+    <string name="billing_error_service_disconnected">Aplicația nu este conectată la serviciul Magazin Play prin librăria Facturări Google Play.</string>
+    <string name="acknowledging_subscription">Recunoașterea abonamentului dumneavoastră. Vă rugăm așteptați.</string>
+    <string name="click_to_apply_post_filter">Clic aici pentru a aplica la unele câmpuri ale postărilor</string>
+    <string name="post_filter_usage_embedded_more_count">și %1$d mai mult</string>
+    <string name="excludes_strings_hint">Excludeți cuvinte cheie (cuvânt1, cuvânt2)</string>
+    <string name="comment_filter_name_hint">Nume Filtru Comentarii</string>
+    <string name="comment_filter_requires_a_name">Care este numele acestui filtru de comentarii\?</string>
+    <string name="duplicate_comment_filter_dialog_title">\'%1$s\' Există deja</string>
+    <string name="duplicate_comment_filter_dialog_message">Scrieți peste\?</string>
+    <string name="comment_filter_usage_embedded_more_count">și %1$d mai mult</string>
+    <string name="monthly">Lunar</string>
+    <string name="yearly">Anual</string>
+    <string name="weekly">Săptămânal</string>
+    <string name="billing_error_billing_unavailable">Serviciul de plăți este indisponibil pe dispozitiv.</string>
+    <string name="billing_error_developer_error">Dezvoltatorul a făcut unele erori. Nu este problema dumneavoastră.</string>
+    <string name="billing_error_error">Eroare fatală în timpul acțiunii API.</string>
+    <string name="billing_error_feature_not_supported">Cererea nu este suportată de Magazin Play pe dispozitivul curent.</string>
+    <string name="billing_error_item_already_owned">Tranzacția a eșuat deoarece acest obiect este deja deținut.</string>
+    <string name="billing_error_item_unavailable">Produsul cerut nu este valabil pentru cumpărare.</string>
+    <string name="billing_error_network_error">O problemă de conexiune s-a întâmplat în timpul operațiunii.</string>
+    <string name="billing_error_service_unavailable">Serviciul este indisponibil momentan.</string>
+    <string name="billing_error_user_canceled">Tranzacția a fost anulată de utilizator.</string>
+    <string name="subscription_plan_description_monthly">Bronz</string>
+    <string name="subscription_plan_description_monthly_399">Argint</string>
+    <string name="subscription_plan_description_monthly_499">Aur - Alegerea Perfectă!</string>
+    <string name="subscription_plan_description_monthly_699">Platină</string>
+    <string name="subscription_plan_description_monthly_899">Diamant</string>
+    <string name="subscription_plan_description_monthly_999">Infinit</string>
+    <string name="acknowledge_purchase_failed">Achiziția nu a putut fi recunoscută</string>
+    <string name="connect_to_billing_system_failed">Eșuare în conectarea la sistemul de facturare</string>
+    <string name="connecting_to_billing_system">Conectare la sistemul de facturare. Vă rugăm așteptați.</string>
+    <string name="thank_you_for_subscription">Mulțumim pentru abonare</string>
+    <string name="load_subscription_options">Încărcați opțiunile de abonare</string>
+    <string name="continue_to_app">Continuați la aplicație</string>
+    <string name="restore_subscription_purchase_details">Ați plătit deja pentru un abonament\?</string>
+    <string name="restore_subscription_purchase">Restaurați cumpărarea abonamentului</string>
+    <string name="important_info_title">Vă rugăm să vă logați din nou în cont</string>
+    <string name="comment_filter_applied_to_all_subreddits">Aplicat la toate comunitățile</string>
+    <string name="customize_comment_filter_activity_label">Personalizați Filtrul de Comentarii</string>
+    <string name="original_app">Iconița originală a aplicației Reddit</string>
+    <string name="settings_credits_original_app_description">"Infinity a fost creat de u/Hostilenemy "</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">URL-ul instanței preferate de Lemmy cu sau fără prefixul https://</string>
 </resources>
