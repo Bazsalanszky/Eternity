@@ -312,7 +312,6 @@
     <string name="settings_mute_video_title">静音视频</string>
     <string name="settings_mute_nsfw_video_title">静音 NSFW 视频</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">如果 Gfycat 上的视频已被删除，则自动尝试访问 Redgifs。</string>
     <string name="settings_video_player_ignore_nav_bar_title">视频播放器中忽略导航栏</string>
     <!-- Fuzzy -->
     <string name="settings_video_player_ignore_nav_bar_summary">防止视频控制栏有额外的外边距</string>
@@ -739,7 +738,6 @@
     <string name="notifications">通知</string>
     <string name="messages">消息</string>
     <string name="message">消息</string>
-    <string name="fetch_gfycat_video_failed">获取 Gfycat 视频失败</string>
     <string name="fetch_redgifs_video_failed">获取 Redgifs 视频失败</string>
     <string name="fetching_video_info_please_wait">正在获取视频信息，请稍候。</string>
     <string name="error_fetching_imgur_media">无法加载图像</string>
@@ -761,7 +759,6 @@
     <string name="set_to_lock_screen">设置到锁定屏幕</string>
     <string name="set_to_both">设置到主屏幕和锁定屏幕</string>
     <string name="default_font_font_preview">默认字体</string>
-    <string name="load_video_in_redgifs">尝试加载 Redgifs 上的视频</string>
     <!-- Don't know how to translate it, never seen this before. -->
     <string name="top_score">%1$s 分</string>
     <string name="login_activity_2fa_prompt">如果您启用了两步验证，请按如下格式输入密码（使用英文的冒号）：&lt;密码&gt;:&lt;两步验证代码&gt;。

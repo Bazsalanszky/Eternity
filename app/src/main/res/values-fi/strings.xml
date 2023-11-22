@@ -213,7 +213,6 @@
     <string name="theme_preview_activity_label">Teeman esikatselu</string>
     <string name="no_theme_name">Mikä on tämän teeman nimi\?</string>
     <string name="copy_all_raw_text">Kopioi kaikki raakatekstinä</string>
-    <string name="load_video_in_redgifs">Yritä ladata video Redgifsistä</string>
     <string name="invalid_response">Virheellinen vastaus palvelimelta</string>
     <string name="action_share_link">Jaa linkki</string>
     <string name="yes">Kyllä</string>
@@ -384,7 +383,6 @@
 \nNapauta yrittääksesi uudelleen.</string>
     <string name="custom_theme_listing_activity_label">Mukautetut teemat</string>
     <string name="action_change_post_layout">Muuta viestien asettelua</string>
-    <string name="settings_automatically_try_redgifs_title">Yritä automaattisesti videoita Redgifsistä jos video Gfycatista on poistettu.</string>
     <string name="sort_time_6hours">6 tuntia</string>
     <string name="app_lock_timeout_1_hour">1 tunti</string>
     <string name="settings_swipe_action_title">Pyyhkäisyn toiminto</string>

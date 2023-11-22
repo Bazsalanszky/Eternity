@@ -111,7 +111,6 @@ public class JSONUtils {
     public static final String PATH_KEY = "path";
     public static final String ALL_AWARDINGS_KEY = "all_awardings";
     public static final String RESIZED_ICONS_KEY = "resized_icons";
-    public static final String GFY_ITEM_KEY = "gfyItem";
     public static final String MP4_URL_KEY = "mp4Url";
     public static final String TYPE_KEY = "type";
     public static final String MP4_KEY = "mp4";

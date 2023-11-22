@@ -315,7 +315,6 @@
     <string name="settings_mute_video_title">Tắt tiếng Video</string>
     <string name="settings_mute_nsfw_video_title">Tắt tiếng video NSFW</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Tự động thử truy cập Redgifs nếu Video trên Gfycat bị xóa.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Bỏ qua thanh điều hướng trong trình phát video</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Ngăn trình điều khiển video có thêm lề</string>
     <string name="settings_confirm_to_exit">Xác nhận để thoát</string>
@@ -718,7 +717,6 @@
     <string name="notifications">Thông báo</string>
     <string name="messages">Tin nhắn</string>
     <string name="message">Tin nhắn</string>
-    <string name="fetch_gfycat_video_failed">Lấy video Gfycat thất bại</string>
     <string name="fetch_redgifs_video_failed">Lấy video Redgifs thất bại</string>
     <string name="fetching_video_info_please_wait">Đang lấy thông tin video. Vui lòng đợi.</string>
     <string name="error_fetching_imgur_media">Không thể tải hình ảnh</string>
@@ -739,7 +737,6 @@
     <string name="set_to_lock_screen">Đặt làm màn hình khoá</string>
     <string name="set_to_both">Đặt làm cả hai</string>
     <string name="default_font_font_preview">Mặc định</string>
-    <string name="load_video_in_redgifs">Thử tải video trên Redgifs</string>
     <string name="top_score">%1$s điểm</string>
     <string name="login_activity_2fa_prompt">Nếu bạn đã bật xác thực 2 yếu tố, hãy vui lòng nhập mật khẩu như sau: &lt;mật khẩu&gt;:&lt;mã 2FA&gt;.
 \nVí dụ: yourpass:123456</string>

@@ -323,7 +323,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="settings_volume_keys_navigate_posts_title">Usar las teclas de volumen para navegar publicaciones</string>
     <string name="settings_mute_video_title">Silenciar vídeos</string>
     <string name="settings_mute_nsfw_video_title">Silenciar vídeos NSFW</string>
-    <string name="settings_automatically_try_redgifs_title">Intentar acceder automáticamente a Redgifs si se eliminan los videos en Gfycat.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ignorar la barra de navegación en el reproductor de vídeo</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Bloquear al controlador de vídeo para que no tenga margen extra</string>
     <string name="settings_confirm_to_exit">Confirmar para salir</string>
@@ -737,7 +736,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="notifications">Notificaciones</string>
     <string name="messages">Mensajes</string>
     <string name="message">Mensaje</string>
-    <string name="fetch_gfycat_video_failed">No fue posible obtener el vídeo de Gfycat</string>
     <string name="fetch_redgifs_video_failed">No fue posible obtener el vídeo de Redgifs</string>
     <string name="fetching_video_info_please_wait">Obteniendo información del vídeo. Por favor espera.</string>
     <string name="error_fetching_imgur_media">No fue posible cargar las imágenes</string>
@@ -758,7 +756,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="set_to_lock_screen">Establecer como pantalla de bloqueo</string>
     <string name="set_to_both">Establecer ambos</string>
     <string name="default_font_font_preview">Por defecto</string>
-    <string name="load_video_in_redgifs">Intentar cargando el vídeo en Redgifs</string>
     <string name="top_score">%1$s puntos</string>
     <string name="login_activity_2fa_prompt">Si tiene habilitada la autenticación de 2 factores, por favor escriba su contraseña como la siguiente: &lt;contraseña&gt;:&lt;código 2FA&gt;</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>

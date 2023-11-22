@@ -315,7 +315,6 @@
     <string name="settings_volume_keys_navigate_posts_title">Usar as teclas de volume para navegar entre posts</string>
     <string name="settings_mute_video_title">Silenciar vídeos</string>
     <string name="settings_mute_nsfw_video_title">Silenciar vídeos NSFW</string>
-    <string name="settings_automatically_try_redgifs_title">Tentar acessar automaticamente o Redgifs se os vídeos do Gfycat forem removidos.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ignorar barra de navegação no reprodutor de vídeos</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Evitar que o controle de vídeo tenha margens largas</string>
     <string name="settings_confirm_to_exit">Confirmar para sair</string>
@@ -717,7 +716,6 @@
     <string name="notifications">Notificações</string>
     <string name="messages">Mensagens</string>
     <string name="message">Mensagem</string>
-    <string name="fetch_gfycat_video_failed">Falha ao buscar vídeos do Gfycat</string>
     <string name="fetch_redgifs_video_failed">Erro ao buscar vídeos do Redgifs</string>
     <string name="fetching_video_info_please_wait">Obtendo informações do vídeo. Por favor aguarde.</string>
     <string name="error_fetching_imgur_media">Não foi possível carregar as imagens</string>
@@ -738,7 +736,6 @@
     <string name="set_to_lock_screen">Aplicar na tela de bloqueio</string>
     <string name="set_to_both">Aplicar em ambos</string>
     <string name="default_font_font_preview">Padrão</string>
-    <string name="load_video_in_redgifs">Tente carregar o vídeo no Redgifs</string>
     <string name="top_score">%1$s pontos</string>
     <string name="login_activity_2fa_prompt">Se você tem a Autenticação em 2 Etapas ativada, digite a senha da seguinte forma: &lt;senha&gt;:&lt;código de autenticação&gt;.
 \nExemplo: suasenha:123456</string>

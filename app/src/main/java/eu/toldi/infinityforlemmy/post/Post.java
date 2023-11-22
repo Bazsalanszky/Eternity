@@ -45,13 +45,12 @@ public class Post implements Parcelable {
     private String url;
     private String videoUrl;
     private String videoDownloadUrl;
-    private String gfycatId;
+    private String redgifsId;
     private String streamableShortCode;
     private boolean isImgur;
-    private boolean isGfycat;
     private boolean isRedgifs;
     private boolean isStreamable;
-    private boolean loadGfyOrStreamableVideoSuccess;
+    private boolean loadVideoSuccess;
     private String permalink;
     private long postTimeMillis;
 
@@ -152,13 +151,12 @@ public class Post implements Parcelable {
         url = in.readString();
         videoUrl = in.readString();
         videoDownloadUrl = in.readString();
-        gfycatId = in.readString();
+        redgifsId = in.readString();
         streamableShortCode = in.readString();
         isImgur = in.readByte() != 0;
-        isGfycat = in.readByte() != 0;
         isRedgifs = in.readByte() != 0;
         isStreamable = in.readByte() != 0;
-        loadGfyOrStreamableVideoSuccess = in.readByte() != 0;
+        loadVideoSuccess = in.readByte() != 0;
         permalink = in.readString();
         downvotes = in.readInt();
         upvotes = in.readInt();
@@ -303,12 +301,12 @@ public class Post implements Parcelable {
         this.videoDownloadUrl = videoDownloadUrl;
     }
 
-    public String getGfycatId() {
-        return gfycatId;
+    public String getRedgifsId() {
+        return redgifsId;
     }
 
-    public void setGfycatId(String gfycatId) {
-        this.gfycatId = gfycatId;
+    public void setRedgifsId(String redgifsId) {
+        this.redgifsId = redgifsId;
     }
 
     public String getStreamableShortCode() {
@@ -327,14 +325,6 @@ public class Post implements Parcelable {
         return isImgur;
     }
 
-    public boolean isGfycat() {
-        return isGfycat;
-    }
-
-    public void setIsGfycat(boolean isGfycat) {
-        this.isGfycat = isGfycat;
-    }
-
     public boolean isRedgifs() {
         return isRedgifs;
     }
@@ -351,12 +341,12 @@ public class Post implements Parcelable {
         this.isStreamable = isStreamable;
     }
 
-    public boolean isLoadGfycatOrStreamableVideoSuccess() {
-        return loadGfyOrStreamableVideoSuccess;
+    public boolean isLoadVideoSuccess() {
+        return loadVideoSuccess;
     }
 
-    public void setLoadGfyOrStreamableVideoSuccess(boolean loadGfyOrStreamableVideoSuccess) {
-        this.loadGfyOrStreamableVideoSuccess = loadGfyOrStreamableVideoSuccess;
+    public void setLoadVideoSuccess(boolean loadVideoSuccess) {
+        this.loadVideoSuccess = loadVideoSuccess;
     }
 
     public String getPermalink() {
@@ -525,13 +515,12 @@ public class Post implements Parcelable {
         parcel.writeString(url);
         parcel.writeString(videoUrl);
         parcel.writeString(videoDownloadUrl);
-        parcel.writeString(gfycatId);
+        parcel.writeString(redgifsId);
         parcel.writeString(streamableShortCode);
         parcel.writeByte((byte) (isImgur ? 1 : 0));
-        parcel.writeByte((byte) (isGfycat ? 1 : 0));
         parcel.writeByte((byte) (isRedgifs ? 1 : 0));
         parcel.writeByte((byte) (isStreamable ? 1 : 0));
-        parcel.writeByte((byte) (loadGfyOrStreamableVideoSuccess ? 1 : 0));
+        parcel.writeByte((byte) (loadVideoSuccess ? 1 : 0));
         parcel.writeString(permalink);
         parcel.writeInt(downvotes);
         parcel.writeInt(upvotes);
