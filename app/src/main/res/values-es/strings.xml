@@ -104,7 +104,7 @@
     <string name="since">Desde:</string>
     <string name="profile">Perfil de usuario</string>
     <string name="subscriptions">Suscripciones</string>
-    <string name="multi_reddit">Multireddit</string>
+    <string name="multi_reddit">Multicomunidad</string>
     <!-- Bandeja de Entrada -->
     <string name="inbox">Bandeja de entrada</string>
     <string name="upvoted">Upvoted</string>
@@ -113,7 +113,7 @@
     <string name="saved">Guardado</string>
     <string name="gilded">Premiado</string>
     <string name="settings">Configuración</string>
-    <string name="subscribers_number_detail">Suscriptores: %1$,d</string>
+    <string name="subscribers_number_detail">%1$,d suscriptores</string>
     <string name="online_subscribers_number_detail">En línea: %1$,d</string>
     <string name="cannot_fetch_community_info">No fue posible obtener información del subreddit</string>
     <string name="cannot_fetch_user_info">No fue posible obtener información del usuario</string>
@@ -882,7 +882,7 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="multireddit_selection_activity_label">Seleccionar multireddit</string>
     <string name="action_save_to_database">Guardar a la base de datos</string>
     <string name="action_read_all_messages">Leer todos los mensajes</string>
-    <string name="action_add_to_multireddit">Añadir a multireddit</string>
+    <string name="action_add_to_multireddit">Añadir a la multicomunidad</string>
     <string name="search_only_communities_hint">Buscar subreddits</string>
     <string name="search_only_users_hint">Buscar usuarios</string>
     <string name="post_type_gif">GIF</string>
@@ -1192,4 +1192,27 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="settings_custom_font_family_title">Fuentes Personalizadas</string>
     <string name="active_users_number_detail">%1$,d Usuarios activos</string>
     <string name="subscription_activity_label">Suscripción</string>
+    <string name="settings_miscellaneous_dangerous_group_title">Peligroso</string>
+    <string name="settings_show_fewer_toolbar_options_threshold_summary">Nivel %1$d</string>
+    <string name="action_add_to_home_screen">Añadir a la página de inicio</string>
+    <string name="community_number_detail">%1$,d comunidades</string>
+    <string name="settings_hide_upvote_ratio_title">Ocultar proporción de votos positivos</string>
+    <string name="confirm_delete_all_recent_searches">¿Estás seguro de que quieres borrar todas las consultas de búsqueda recientes?</string>
+    <string name="settings_hide_comment_awards_title">Ocultar premios de los comentarios</string>
+    <string name="settings_hide_text_post_content">Ocultar el contenido de la publicación</string>
+    <string name="settings_post_feed_max_resolution_warning_title">Aumenta el valor para mostrar vistas previas con mayor resolución, pero la aplicación puede bloquearse inesperadamente.</string>
+    <string name="user_number_detail">%1$,d usuarios</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">Más fácil de ver en pantalla completa</string>
+    <string name="comment_filter_preference_activity_label">Filtro de comentarios</string>
+    <string name="settings_show_author_avatar_title">Mostrar avatar del autor</string>
+    <string name="settings_reddit_video_default_resolution">Resolución predeterminada de los videos en Lemmy</string>
+    <string name="confirm">Confirmar</string>
+    <string name="settings_fixed_height_preview_in_card_title">Altura fija en la tarjeta</string>
+    <string name="customize_comment_filter_activity_label">Personalizar el filtro de comentarios</string>
+    <string name="settings_post_feed_max_resolution_title">Resolución máxima de la vista previa de las publicaciones del feed (Anchura * Altura)</string>
+    <string name="settings_reddit_user_agreement_title">Acuerdo de usuario de Lemmy</string>
+    <string name="settings_always_show_child_comment_count_title">Mostrar siempre el número de comentarios «hijo»</string>
+    <string name="post_count_detail">%1$,d publicaciones</string>
+    <string name="settings_show_fewer_toolbar_options_threshold_title">Mostrar menos opciones de la barra de herramientas a partir de</string>
+    <string name="comment_count_detail">%1$,d comentarios</string>
 </resources>
