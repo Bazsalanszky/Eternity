@@ -48,7 +48,10 @@ public class SortType {
         TOP_SIX_MONTHS("TopSixMonths", "Top"),
         TOP_NINE_MONTHS("TopNineMonths", "Top"),
         TOP_YEAR("TopYear", "Top"),
-        TOP_ALL("TopAll", "Top");
+        TOP_ALL("TopAll", "Top"),
+
+        SCALED("Scaled", "Scaled"),
+        CONTROVERSIAL("Controversial", "Controversial");
 
         public final String value;
         public final String fullName;

@@ -43,6 +43,12 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
     @BindView(R.id.top_type_text_view_sort_type_bottom_sheet_fragment)
     TextView topTypeTextView;
 
+    @BindView(R.id.scaled_type_text_view_sort_type_bottom_sheet_fragment)
+    TextView scaledTypeTextView;
+
+    @BindView(R.id.controversial_type_text_view_sort_type_bottom_sheet_fragment)
+    TextView controversialTypeTextView;
+
     private BaseActivity activity;
 
     public SortTypeBottomSheetFragment() {
@@ -89,6 +95,10 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             oldTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(oldTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.TOP.fullName)) {
             topTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(topTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+        } else if (currentSortType.equals(SortType.Type.SCALED.fullName)) {
+            scaledTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(scaledTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+        } else if (currentSortType.equals(SortType.Type.CONTROVERSIAL.fullName)) {
+            controversialTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(controversialTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
         hotTypeTextView.setOnClickListener(view -> {
@@ -108,6 +118,16 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
 
         topTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.TOP.name());
+            dismiss();
+        });
+
+        scaledTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.SCALED));
+            dismiss();
+        });
+
+        controversialTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.CONTROVERSIAL));
             dismiss();
         });
 
