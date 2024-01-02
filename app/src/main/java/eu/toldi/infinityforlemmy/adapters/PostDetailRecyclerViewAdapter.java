@@ -351,7 +351,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mHideUpvoteRatio = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_UPVOTE_RATIO, false);
         mHideTheNumberOfAwards = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_AWARDS, false);
         mHideSubredditAndUserPrefix = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_SUBREDDIT_AND_USER_PREFIX, false);
-        mShareOnLocalInstance = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.SHARE_LINK_ON_LOCAL_INSTANCE, false);
+        mShareOnLocalInstance = sharedPreferences.getBoolean(SharedPreferencesUtils.SHARE_LINK_ON_LOCAL_INSTANCE, false);
         mShowDisplayNames = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.POST_DETAIL_DISPLAY_NAME_INSTEAD_OF_USERNAME, true);
         mHideTheNumberOfVotes = postDetailsSharedPreferences.getBoolean(SharedPreferencesUtils.HIDE_THE_NUMBER_OF_VOTES, false);
         mHideDownvotes = !currentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true);
