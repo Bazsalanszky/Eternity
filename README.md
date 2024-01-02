@@ -27,9 +27,6 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
     <img src="./.assets/google-play-badge.png" height="80">
 </a>
 
-<a href="https://apt.izzysoft.de/fdroid/index/apk/eu.toldi.infinityforlemmy">
-    <img src="./.assets/IzzyOnDroid.png" height="80">
-</a>
 <a href="https://codeberg.org/Bazsalanszky/Eternity/releases/">
     <img src="./.assets/codeberg.png" height="80">
 </a>
