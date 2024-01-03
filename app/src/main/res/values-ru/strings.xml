@@ -319,7 +319,6 @@
     <string name="settings_mute_video_title">Видео без звука</string>
     <string name="settings_mute_nsfw_video_title">NSFW-видео без звука</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Пытаться использовать Redgifs, если видео на Gfycat удалены.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Не использовать панель навигации в видеоплеере</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Предотвратить случайные нажатия</string>
     <string name="settings_confirm_to_exit">Подтверждать выход</string>
@@ -723,7 +722,6 @@
     <string name="notifications">Уведомления</string>
     <string name="messages">Сообщения</string>
     <string name="message">Сообщение</string>
-    <string name="fetch_gfycat_video_failed">Невозможно получить видео Gfycat</string>
     <string name="fetch_redgifs_video_failed">Невозможно получить видео Redgifs</string>
     <string name="fetching_video_info_please_wait">Получение информации о видео. Пожалуйста, подождите.</string>
     <string name="error_fetching_imgur_media">Невозможно загрузить изображения</string>
@@ -744,7 +742,6 @@
     <string name="set_to_lock_screen">Установить на экран блокировки</string>
     <string name="set_to_both">Установить на оба экрана</string>
     <string name="default_font_font_preview">По умолчанию</string>
-    <string name="load_video_in_redgifs">Попробуйте загрузить видео на Redgifs</string>
     <string name="top_score">%1$s пойнтов</string>
     <string name="login_activity_2fa_prompt">Если у вас включена двухфакторная аутентификация, введите 2FA токен в поле. Иначе оставьте его пустым</string>
     <string name="submit_crosspost_activity_label">Кросспост</string>

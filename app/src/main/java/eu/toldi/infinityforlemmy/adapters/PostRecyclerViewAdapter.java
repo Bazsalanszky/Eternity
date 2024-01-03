@@ -67,7 +67,7 @@ import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
+import eu.toldi.infinityforlemmy.FetchRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
 import eu.toldi.infinityforlemmy.R;
@@ -86,7 +86,6 @@ import eu.toldi.infinityforlemmy.activities.ViewRedditGalleryActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewVideoActivity;
-import eu.toldi.infinityforlemmy.apis.GfycatAPI;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.ShareLinkBottomSheetFragment;
@@ -171,7 +170,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private SharedPreferences mCurrentAccountSharedPreferences;
     private Executor mExecutor;
     private RetrofitHolder retrofit;
-    private Retrofit mGfycatRetrofit;
     private Retrofit mRedgifsRetrofit;
     private Provider<StreamableAPI> mStreamableApiProvider;
     private String mAccessToken;
@@ -236,7 +234,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean mShowThumbnailOnTheRightInCompactLayout;
     private double mStartAutoplayVisibleAreaOffset;
     private boolean mMuteNSFWVideo;
-    private boolean mAutomaticallyTryRedgifs;
     private boolean mLongPressToHideToolbarInCompactLayout;
     private boolean mCompactLayoutToolbarHiddenByDefault;
     private boolean mDataSavingMode = false;
@@ -269,7 +266,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private RecyclerView.RecycledViewPool mGalleryRecycledViewPool;
 
     public PostRecyclerViewAdapter(BaseActivity activity, PostFragment fragment, Executor executor, RetrofitHolder retrofit,
-                                   Retrofit gfycatRetrofit, Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
+                                   Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
                                    CustomThemeWrapper customThemeWrapper, Locale locale,
                                    String accessToken, String accountName, int postType, int postLayout, boolean displaySubredditName,
                                    SharedPreferences sharedPreferences, SharedPreferences currentAccountSharedPreferences,
@@ -284,7 +281,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mCurrentAccountSharedPreferences = currentAccountSharedPreferences;
             mExecutor = executor;
             this.retrofit = retrofit;
-            mGfycatRetrofit = gfycatRetrofit;
             mRedgifsRetrofit = redgifsRetrofit;
             mStreamableApiProvider = streamableApiProvider;
             mAccessToken = accessToken;
@@ -316,7 +312,6 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     sharedPreferences.getInt(SharedPreferencesUtils.START_AUTOPLAY_VISIBLE_AREA_OFFSET_LANDSCAPE, 50) / 100.0;
 
             mMuteNSFWVideo = sharedPreferences.getBoolean(SharedPreferencesUtils.MUTE_NSFW_VIDEO, false);
-            mAutomaticallyTryRedgifs = sharedPreferences.getBoolean(SharedPreferencesUtils.AUTOMATICALLY_TRY_REDGIFS, true);
 
             mLongPressToHideToolbarInCompactLayout = sharedPreferences.getBoolean(SharedPreferencesUtils.LONG_PRESS_TO_HIDE_TOOLBAR_IN_COMPACT_LAYOUT, false);
             mCompactLayoutToolbarHiddenByDefault = sharedPreferences.getBoolean(SharedPreferencesUtils.POST_COMPACT_LAYOUT_TOOLBAR_HIDDEN_BY_DEFAULT, false);
@@ -881,19 +876,17 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    if ((post.isGfycat() || post.isRedgifs()) && !post.isLoadGfycatOrStreamableVideoSuccess()) {
-                        ((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
-                                post.isGfycat() ? mGfycatRetrofit.create(GfycatAPI.class).getGfycatData(post.getGfycatId()) :
-                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getGfycatId());
-                        FetchGfycatOrRedgifsVideoLinks.fetchGfycatOrRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
-                                ((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
-                                post.isGfycat(), mAutomaticallyTryRedgifs,
-                                new FetchGfycatOrRedgifsVideoLinks.FetchGfycatOrRedgifsVideoLinksListener() {
+                    if (post.isRedgifs() && !post.isLoadVideoSuccess()) {
+                        ((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
+                                mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getRedgifsId());
+                        FetchRedgifsVideoLinks.fetchRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
+                                ((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
+                                new FetchRedgifsVideoLinks.FetchRedgifsVideoLinksListener() {
                                     @Override
                                     public void success(String webm, String mp4) {
                                         post.setVideoDownloadUrl(mp4);
                                         post.setVideoUrl(mp4);
-                                        post.setLoadGfyOrStreamableVideoSuccess(true);
+                                        post.setLoadVideoSuccess(true);
                                         if (position == holder.getBindingAdapterPosition()) {
                                             ((PostBaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(post.getVideoUrl()));
                                         }
@@ -902,22 +895,22 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     @Override
                                     public void failed(int errorCode) {
                                         if (position == holder.getBindingAdapterPosition()) {
-                                            ((PostBaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                            ((PostBaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
-                    } else if (post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
-                        ((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
+                    } else if (post.isStreamable() && !post.isLoadVideoSuccess()) {
+                        ((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
                                 mStreamableApiProvider.get().getStreamableData(post.getStreamableShortCode());
                         FetchStreamableVideo.fetchStreamableVideoInRecyclerViewAdapter(mExecutor, new Handler(),
-                                ((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
+                                ((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
                                 new FetchStreamableVideo.FetchStreamableVideoListener() {
                                     @Override
                                     public void success(StreamableVideo streamableVideo) {
                                         StreamableVideo.Media media = streamableVideo.mp4 == null ? streamableVideo.mp4Mobile : streamableVideo.mp4;
                                         post.setVideoDownloadUrl(media.url);
                                         post.setVideoUrl(media.url);
-                                        post.setLoadGfyOrStreamableVideoSuccess(true);
+                                        post.setLoadVideoSuccess(true);
                                         if (position == holder.getBindingAdapterPosition()) {
                                             ((PostBaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(post.getVideoUrl()));
                                         }
@@ -926,7 +919,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     @Override
                                     public void failed() {
                                         if (position == holder.getBindingAdapterPosition()) {
-                                            ((PostBaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                            ((PostBaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -1073,19 +1066,17 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    if ((post.isGfycat() || post.isRedgifs()) && !post.isLoadGfycatOrStreamableVideoSuccess()) {
-                        ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
-                                post.isGfycat() ? mGfycatRetrofit.create(GfycatAPI.class).getGfycatData(post.getGfycatId()) :
-                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getGfycatId());
-                        FetchGfycatOrRedgifsVideoLinks.fetchGfycatOrRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
-                                ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
-                                post.isGfycat(), mAutomaticallyTryRedgifs,
-                                new FetchGfycatOrRedgifsVideoLinks.FetchGfycatOrRedgifsVideoLinksListener() {
+                    if (post.isRedgifs() && !post.isLoadVideoSuccess()) {
+                        ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
+                                mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getRedgifsId());
+                        FetchRedgifsVideoLinks.fetchRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
+                                ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
+                                new FetchRedgifsVideoLinks.FetchRedgifsVideoLinksListener() {
                                     @Override
                                     public void success(String webm, String mp4) {
                                         post.setVideoDownloadUrl(mp4);
                                         post.setVideoUrl(mp4);
-                                        post.setLoadGfyOrStreamableVideoSuccess(true);
+                                        post.setLoadVideoSuccess(true);
                                         if (position == holder.getBindingAdapterPosition()) {
                                             ((PostCard2BaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(post.getVideoUrl()));
                                         }
@@ -1094,22 +1085,22 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     @Override
                                     public void failed(int errorCode) {
                                         if (position == holder.getBindingAdapterPosition()) {
-                                            ((PostCard2BaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                            ((PostCard2BaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
-                    } else if (post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
-                        ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
+                    } else if (post.isStreamable() && !post.isLoadVideoSuccess()) {
+                        ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
                                 mStreamableApiProvider.get().getStreamableData(post.getStreamableShortCode());
                         FetchStreamableVideo.fetchStreamableVideoInRecyclerViewAdapter(mExecutor, new Handler(),
-                                ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
+                                ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
                                 new FetchStreamableVideo.FetchStreamableVideoListener() {
                                     @Override
                                     public void success(StreamableVideo streamableVideo) {
                                         StreamableVideo.Media media = streamableVideo.mp4 == null ? streamableVideo.mp4Mobile : streamableVideo.mp4;
                                         post.setVideoDownloadUrl(media.url);
                                         post.setVideoUrl(media.url);
-                                        post.setLoadGfyOrStreamableVideoSuccess(true);
+                                        post.setLoadVideoSuccess(true);
                                         if (position == holder.getBindingAdapterPosition()) {
                                             ((PostCard2BaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(post.getVideoUrl()));
                                         }
@@ -1118,7 +1109,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     @Override
                                     public void failed() {
                                         if (position == holder.getBindingAdapterPosition()) {
-                                            ((PostCard2BaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                            ((PostCard2BaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -1890,19 +1881,17 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    if ((post.isGfycat() || post.isRedgifs()) && !post.isLoadGfycatOrStreamableVideoSuccess()) {
-                        ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
-                                post.isGfycat() ? mGfycatRetrofit.create(GfycatAPI.class).getGfycatData(post.getGfycatId()) :
-                                        mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getGfycatId());
-                        FetchGfycatOrRedgifsVideoLinks.fetchGfycatOrRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
-                                ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
-                                post.isGfycat(), mAutomaticallyTryRedgifs,
-                                new FetchGfycatOrRedgifsVideoLinks.FetchGfycatOrRedgifsVideoLinksListener() {
+                    if (post.isRedgifs() && !post.isLoadVideoSuccess()) {
+                        ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
+                                mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(post.getRedgifsId());
+                        FetchRedgifsVideoLinks.fetchRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
+                                ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
+                                new FetchRedgifsVideoLinks.FetchRedgifsVideoLinksListener() {
                                     @Override
                                     public void success(String webm, String mp4) {
                                         post.setVideoDownloadUrl(mp4);
                                         post.setVideoUrl(mp4);
-                                        post.setLoadGfyOrStreamableVideoSuccess(true);
+                                        post.setLoadVideoSuccess(true);
                                         if (position == holder.getBindingAdapterPosition()) {
                                             ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(post.getVideoUrl()));
                                         }
@@ -1911,22 +1900,22 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     @Override
                                     public void failed(int errorCode) {
                                         if (position == holder.getBindingAdapterPosition()) {
-                                            ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                            ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
-                    } else if (post.isStreamable() && !post.isLoadGfycatOrStreamableVideoSuccess()) {
-                        ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
+                    } else if (post.isStreamable() && !post.isLoadVideoSuccess()) {
+                        ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
                                 mStreamableApiProvider.get().getStreamableData(post.getStreamableShortCode());
                         FetchStreamableVideo.fetchStreamableVideoInRecyclerViewAdapter(mExecutor, new Handler(),
-                                ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
+                                ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
                                 new FetchStreamableVideo.FetchStreamableVideoListener() {
                                     @Override
                                     public void success(StreamableVideo streamableVideo) {
                                         StreamableVideo.Media media = streamableVideo.mp4 == null ? streamableVideo.mp4Mobile : streamableVideo.mp4;
                                         post.setVideoDownloadUrl(media.url);
                                         post.setVideoUrl(media.url);
-                                        post.setLoadGfyOrStreamableVideoSuccess(true);
+                                        post.setLoadVideoSuccess(true);
                                         if (position == holder.getBindingAdapterPosition()) {
                                             ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(post.getVideoUrl()));
                                         }
@@ -1935,7 +1924,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     @Override
                                     public void failed() {
                                         if (position == holder.getBindingAdapterPosition()) {
-                                            ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                            ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -2551,11 +2540,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             ((PostBaseViewHolder) holder).titleTextView.setTextColor(mPostTitleColor);
             if (holder instanceof PostBaseVideoAutoplayViewHolder) {
                 ((PostBaseVideoAutoplayViewHolder) holder).mediaUri = null;
-                if (((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall != null && !((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.isCanceled()) {
-                    ((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.cancel();
-                    ((PostBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall = null;
+                if (((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall != null && !((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.isCanceled()) {
+                    ((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.cancel();
+                    ((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall = null;
                 }
-                ((PostBaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.GONE);
+                ((PostBaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.GONE);
                 ((PostBaseVideoAutoplayViewHolder) holder).muteButton.setVisibility(View.GONE);
                 if (!((PostBaseVideoAutoplayViewHolder) holder).isManuallyPaused) {
                     ((PostBaseVideoAutoplayViewHolder) holder).resetVolume();
@@ -2581,11 +2570,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 ((PostTextTypeViewHolder) holder).binding.contentTextViewItemPostTextType.setVisibility(View.GONE);
             } else if (holder instanceof PostCard2BaseVideoAutoplayViewHolder) {
                 ((PostCard2BaseVideoAutoplayViewHolder) holder).mediaUri = null;
-                if (((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall != null && !((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.isCanceled()) {
-                    ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.cancel();
-                    ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall = null;
+                if (((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall != null && !((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.isCanceled()) {
+                    ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.cancel();
+                    ((PostCard2BaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall = null;
                 }
-                ((PostCard2BaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.GONE);
+                ((PostCard2BaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.GONE);
                 ((PostCard2BaseVideoAutoplayViewHolder) holder).muteButton.setVisibility(View.GONE);
                 ((PostCard2BaseVideoAutoplayViewHolder) holder).resetVolume();
                 mGlide.clear(((PostCard2BaseVideoAutoplayViewHolder) holder).previewImageView);
@@ -2695,11 +2684,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             ((PostMaterial3CardBaseViewHolder) holder).titleTextView.setTextColor(mPostTitleColor);
             if (holder instanceof PostMaterial3CardBaseVideoAutoplayViewHolder) {
                 ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).mediaUri = null;
-                if (((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall != null && !((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.isCanceled()) {
-                    ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.cancel();
-                    ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall = null;
+                if (((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall != null && !((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.isCanceled()) {
+                    ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.cancel();
+                    ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall = null;
                 }
-                ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).errorLoadingGfycatImageView.setVisibility(View.GONE);
+                ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).errorLoadingVideoImageView.setVisibility(View.GONE);
                 ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).muteButton.setVisibility(View.GONE);
                 if (!((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).isManuallyPaused) {
                     ((PostMaterial3CardBaseVideoAutoplayViewHolder) holder).resetVolume();
@@ -2822,12 +2811,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 if (post.isImgur()) {
                     intent.setData(Uri.parse(post.getVideoUrl()));
                     intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_IMGUR);
-                } else if (post.isGfycat()) {
-                    intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                    intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
                 } else if (post.isRedgifs()) {
                     intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                    intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
+                    intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, post.getRedgifsId());
                 } else if (post.isStreamable()) {
                     intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_STREAMABLE);
                     intent.putExtra(ViewVideoActivity.EXTRA_STREAMABLE_SHORT_CODE, post.getStreamableShortCode());
@@ -3546,7 +3532,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     class PostBaseVideoAutoplayViewHolder extends PostBaseViewHolder implements ToroPlayer {
         AspectRatioFrameLayout aspectRatioFrameLayout;
         GifImageView previewImageView;
-        ImageView errorLoadingGfycatImageView;
+        ImageView errorLoadingVideoImageView;
         PlayerView videoPlayer;
         ImageView muteButton;
         ImageView fullscreenButton;
@@ -3559,7 +3545,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ExoPlayerViewHelper helper;
         private Uri mediaUri;
         private float volume;
-        public Call<String> fetchGfycatOrStreamableVideoCall;
+        public Call<String> fetchStreamableVideoCall;
         private boolean isManuallyPaused;
 
         PostBaseVideoAutoplayViewHolder(View rootView,
@@ -3581,7 +3567,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                         CustomTextView awardsTextView,
                                         AspectRatioFrameLayout aspectRatioFrameLayout,
                                         GifImageView previewImageView,
-                                        ImageView errorLoadingGfycatImageView,
+                                        ImageView errorLoadingVideoImageView,
                                         PlayerView videoPlayer,
                                         ImageView muteButton,
                                         ImageView fullscreenButton,
@@ -3625,7 +3611,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
             this.aspectRatioFrameLayout = aspectRatioFrameLayout;
             this.previewImageView = previewImageView;
-            this.errorLoadingGfycatImageView = errorLoadingGfycatImageView;
+            this.errorLoadingVideoImageView = errorLoadingVideoImageView;
             this.videoPlayer = videoPlayer;
             this.muteButton = muteButton;
             this.fullscreenButton = fullscreenButton;
@@ -3665,17 +3651,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         if (post.isImgur()) {
                             intent.setData(Uri.parse(post.getVideoUrl()));
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_IMGUR);
-                        } else if (post.isGfycat()) {
-                            intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
-                            if (post.isLoadGfycatOrStreamableVideoSuccess()) {
-                                intent.setData(Uri.parse(post.getVideoUrl()));
-                                intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, post.getVideoDownloadUrl());
-                            }
                         } else if (post.isRedgifs()) {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
-                            if (post.isLoadGfycatOrStreamableVideoSuccess()) {
+                            intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, post.getRedgifsId());
+                            if (post.isLoadVideoSuccess()) {
                                 intent.setData(Uri.parse(post.getVideoUrl()));
                                 intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, post.getVideoDownloadUrl());
                             }
@@ -3876,7 +3855,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.awardsTextViewItemPostVideoTypeAutoplay,
                     binding.aspectRatioFrameLayoutItemPostVideoTypeAutoplay,
                     binding.previewImageViewItemPostVideoTypeAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostVideoTypeAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostVideoTypeAutoplay,
                     binding.playerViewItemPostVideoTypeAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
@@ -3915,7 +3894,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.awardsTextViewItemPostVideoTypeAutoplay,
                     binding.aspectRatioFrameLayoutItemPostVideoTypeAutoplay,
                     binding.previewImageViewItemPostVideoTypeAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostVideoTypeAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostVideoTypeAutoplay,
                     binding.playerViewItemPostVideoTypeAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
@@ -5329,7 +5308,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     class PostCard2BaseVideoAutoplayViewHolder extends PostBaseViewHolder implements ToroPlayer {
         AspectRatioFrameLayout aspectRatioFrameLayout;
         GifImageView previewImageView;
-        ImageView errorLoadingGfycatImageView;
+        ImageView errorLoadingVideoImageView;
         PlayerView videoPlayer;
         ImageView muteButton;
         ImageView fullscreenButton;
@@ -5343,7 +5322,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ExoPlayerViewHelper helper;
         private Uri mediaUri;
         private float volume;
-        public Call<String> fetchGfycatOrStreamableVideoCall;
+        public Call<String> fetchStreamableVideoCall;
         private boolean isManuallyPaused;
 
         PostCard2BaseVideoAutoplayViewHolder(View itemView,
@@ -5365,7 +5344,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                              CustomTextView awardsTextView,
                                              AspectRatioFrameLayout aspectRatioFrameLayout,
                                              GifImageView previewImageView,
-                                             ImageView errorLoadingGfycatImageView,
+                                             ImageView errorLoadingVideoImageView,
                                              PlayerView videoPlayer,
                                              ImageView muteButton,
                                              ImageView fullscreenButton,
@@ -5411,7 +5390,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
             this.aspectRatioFrameLayout = aspectRatioFrameLayout;
             this.previewImageView = previewImageView;
-            this.errorLoadingGfycatImageView = errorLoadingGfycatImageView;
+            this.errorLoadingVideoImageView = errorLoadingVideoImageView;
             this.videoPlayer = videoPlayer;
             this.muteButton = muteButton;
             this.fullscreenButton = fullscreenButton;
@@ -5452,17 +5431,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     if (post.isImgur()) {
                         intent.setData(Uri.parse(post.getVideoUrl()));
                         intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_IMGUR);
-                    } else if (post.isGfycat()) {
-                        intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                        intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
-                        if (post.isLoadGfycatOrStreamableVideoSuccess()) {
-                            intent.setData(Uri.parse(post.getVideoUrl()));
-                            intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, post.getVideoDownloadUrl());
-                        }
                     } else if (post.isRedgifs()) {
                         intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                        intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
-                        if (post.isLoadGfycatOrStreamableVideoSuccess()) {
+                        intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, post.getRedgifsId());
+                        if (post.isLoadVideoSuccess()) {
                             intent.setData(Uri.parse(post.getVideoUrl()));
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, post.getVideoDownloadUrl());
                         }
@@ -5662,7 +5634,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.awardsTextViewItemPostCard2VideoAutoplay,
                     binding.aspectRatioFrameLayoutItemPostCard2VideoAutoplay,
                     binding.previewImageViewItemPostCard2VideoAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostCard2VideoAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostCard2VideoAutoplay,
                     binding.playerViewItemPostCard2VideoAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
@@ -5702,7 +5674,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.awardsTextViewItemPostCard2VideoAutoplay,
                     binding.aspectRatioFrameLayoutItemPostCard2VideoAutoplay,
                     binding.previewImageViewItemPostCard2VideoAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostCard2VideoAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostCard2VideoAutoplay,
                     binding.playerViewItemPostCard2VideoAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
@@ -6397,7 +6369,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     class PostMaterial3CardBaseVideoAutoplayViewHolder extends PostMaterial3CardBaseViewHolder implements ToroPlayer {
         AspectRatioFrameLayout aspectRatioFrameLayout;
         GifImageView previewImageView;
-        ImageView errorLoadingGfycatImageView;
+        ImageView errorLoadingVideoImageView;
         PlayerView videoPlayer;
         ImageView muteButton;
         ImageView fullscreenButton;
@@ -6410,7 +6382,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ExoPlayerViewHelper helper;
         private Uri mediaUri;
         private float volume;
-        public Call<String> fetchGfycatOrStreamableVideoCall;
+        public Call<String> fetchStreamableVideoCall;
         private boolean isManuallyPaused;
 
         PostMaterial3CardBaseVideoAutoplayViewHolder(View rootView,
@@ -6422,7 +6394,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                                      TextView titleTextView,
                                                      AspectRatioFrameLayout aspectRatioFrameLayout,
                                                      GifImageView previewImageView,
-                                                     ImageView errorLoadingGfycatImageView,
+                                                     ImageView errorLoadingVideoImageView,
                                                      PlayerView videoPlayer,
                                                      ImageView muteButton,
                                                      ImageView fullscreenButton,
@@ -6457,7 +6429,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
             this.aspectRatioFrameLayout = aspectRatioFrameLayout;
             this.previewImageView = previewImageView;
-            this.errorLoadingGfycatImageView = errorLoadingGfycatImageView;
+            this.errorLoadingVideoImageView = errorLoadingVideoImageView;
             this.videoPlayer = videoPlayer;
             this.muteButton = muteButton;
             this.fullscreenButton = fullscreenButton;
@@ -6497,17 +6469,10 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         if (post.isImgur()) {
                             intent.setData(Uri.parse(post.getVideoUrl()));
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_IMGUR);
-                        } else if (post.isGfycat()) {
-                            intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
-                            if (post.isLoadGfycatOrStreamableVideoSuccess()) {
-                                intent.setData(Uri.parse(post.getVideoUrl()));
-                                intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, post.getVideoDownloadUrl());
-                            }
                         } else if (post.isRedgifs()) {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, post.getGfycatId());
-                            if (post.isLoadGfycatOrStreamableVideoSuccess()) {
+                            intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, post.getRedgifsId());
+                            if (post.isLoadVideoSuccess()) {
                                 intent.setData(Uri.parse(post.getVideoUrl()));
                                 intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, post.getVideoDownloadUrl());
                             }
@@ -6698,7 +6663,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.titleTextViewItemPostCard3VideoTypeAutoplay,
                     binding.aspectRatioFrameLayoutItemPostCard3VideoTypeAutoplay,
                     binding.previewImageViewItemPostCard3VideoTypeAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostCard3VideoTypeAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostCard3VideoTypeAutoplay,
                     binding.playerViewItemPostCard3VideoTypeAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
@@ -6726,7 +6691,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     binding.titleTextViewItemPostCard3VideoTypeAutoplay,
                     binding.aspectRatioFrameLayoutItemPostCard3VideoTypeAutoplay,
                     binding.previewImageViewItemPostCard3VideoTypeAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostCard3VideoTypeAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostCard3VideoTypeAutoplay,
                     binding.playerViewItemPostCard3VideoTypeAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),

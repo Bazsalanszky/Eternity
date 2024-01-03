@@ -267,18 +267,12 @@ public class ParsePost {
                         String authority = uri.getAuthority();
 
                         if (authority != null) {
-                            if (authority.contains("gfycat.com")) {
-                                String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
-                                post.setPostType(Post.VIDEO_TYPE);
-                                post.setIsGfycat(true);
-                                post.setVideoUrl(url);
-                                post.setGfycatId(gfycatId);
-                            } else if (authority.contains("redgifs.com")) {
-                                String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
+                            if (authority.contains("redgifs.com")) {
+                                String redgifsId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
                                 post.setPostType(Post.VIDEO_TYPE);
                                 post.setIsRedgifs(true);
                                 post.setVideoUrl(url);
-                                post.setGfycatId(gfycatId);
+                                post.setRedgifsId(redgifsId);
                             } else if (authority.equals("streamable.com")) {
                                 String shortCode = url.substring(url.lastIndexOf("/") + 1);
                                 post.setPostType(Post.VIDEO_TYPE);
@@ -406,18 +400,12 @@ public class ParsePost {
                     String authority = uri.getAuthority();
 
                     if (authority != null) {
-                        if (authority.contains("gfycat.com")) {
-                            String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
-                            post.setPostType(Post.VIDEO_TYPE);
-                            post.setIsGfycat(true);
-                            post.setVideoUrl(url);
-                            post.setGfycatId(gfycatId);
-                        } else if (authority.contains("redgifs.com")) {
-                            String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
+                        if (authority.contains("redgifs.com")) {
+                            String redgifsId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
                             post.setPostType(Post.VIDEO_TYPE);
                             post.setIsRedgifs(true);
                             post.setVideoUrl(url);
-                            post.setGfycatId(gfycatId);
+                            post.setRedgifsId(redgifsId);
                         } else if (authority.equals("streamable.com")) {
                             String shortCode = url.substring(url.lastIndexOf("/") + 1);
                             post.setPostType(Post.VIDEO_TYPE);
@@ -467,18 +455,12 @@ public class ParsePost {
                     String authority = uri.getAuthority();
 
                     if (authority != null) {
-                        if (authority.contains("gfycat.com")) {
-                            String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
-                            post.setPostType(Post.VIDEO_TYPE);
-                            post.setIsGfycat(true);
-                            post.setVideoUrl(url);
-                            post.setGfycatId(gfycatId);
-                        } else if (authority.contains("redgifs.com")) {
-                            String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
+                        if (authority.contains("redgifs.com")) {
+                            String redgifsId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
                             post.setPostType(Post.VIDEO_TYPE);
                             post.setIsRedgifs(true);
                             post.setVideoUrl(url);
-                            post.setGfycatId(gfycatId);
+                            post.setRedgifsId(redgifsId);
                         } else if (authority.equals("streamable.com")) {
                             String shortCode = url.substring(url.lastIndexOf("/") + 1);
                             post.setPostType(Post.VIDEO_TYPE);
@@ -495,22 +477,14 @@ public class ParsePost {
             try {
                 String authority = uri.getAuthority();
                 if (authority != null) {
-                    if (authority.contains("gfycat.com")) {
-                        post.setIsGfycat(true);
-                        post.setVideoUrl(url);
-                        String gfycatId = url.substring(url.lastIndexOf("/") + 1);
-                        if (gfycatId.contains("-")) {
-                            gfycatId = gfycatId.substring(0, gfycatId.indexOf('-'));
-                        }
-                        post.setGfycatId(gfycatId.toLowerCase());
-                    } else if (authority.contains("redgifs.com")) {
-                        String gfycatId = url.substring(url.lastIndexOf("/") + 1);
-                        if (gfycatId.contains("-")) {
-                            gfycatId = gfycatId.substring(0, gfycatId.indexOf('-'));
+                    if (authority.contains("redgifs.com")) {
+                        String redgifsId = url.substring(url.lastIndexOf("/") + 1);
+                        if (redgifsId.contains("-")) {
+                            redgifsId = redgifsId.substring(0, redgifsId.indexOf('-'));
                         }
                         post.setIsRedgifs(true);
                         post.setVideoUrl(url);
-                        post.setGfycatId(gfycatId.toLowerCase());
+                        post.setRedgifsId(redgifsId.toLowerCase());
                     } else if (authority.equals("streamable.com")) {
                         String shortCode = url.substring(url.lastIndexOf("/") + 1);
                         post.setPostType(Post.VIDEO_TYPE);
@@ -593,18 +567,12 @@ public class ParsePost {
                 String authority = uri.getAuthority();
 
                 if (authority != null) {
-                    if (authority.contains("gfycat.com")) {
-                        String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
-                        post.setPostType(Post.VIDEO_TYPE);
-                        post.setIsGfycat(true);
-                        post.setVideoUrl(url);
-                        post.setGfycatId(gfycatId);
-                    } else if (authority.contains("redgifs.com")) {
-                        String gfycatId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
+                    if (authority.contains("redgifs.com")) {
+                        String redgifsId = url.substring(url.lastIndexOf("/") + 1).toLowerCase();
                         post.setPostType(Post.VIDEO_TYPE);
                         post.setIsRedgifs(true);
                         post.setVideoUrl(url);
-                        post.setGfycatId(gfycatId);
+                        post.setRedgifsId(redgifsId);
                     } else if (authority.equals("streamable.com")) {
                         String shortCode = url.substring(url.lastIndexOf("/") + 1);
                         post.setPostType(Post.VIDEO_TYPE);

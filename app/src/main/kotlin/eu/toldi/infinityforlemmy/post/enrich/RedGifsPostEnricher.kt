@@ -12,7 +12,7 @@ import java.io.IOException
 class RedGifsPostEnricher(private val redgifsAPI: RedgifsAPI) : PostEnricher {
     override fun enrich(posts: Collection<Post>) {
         val redGifsPosts = posts.filter { it.isRedgifs && it.previews.isEmpty() }
-            .groupBy { it.gfycatId }
+            .groupBy { it.redgifsId }
 
         if (redGifsPosts.isEmpty()) {
             return

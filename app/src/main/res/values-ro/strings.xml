@@ -325,7 +325,6 @@
     <string name="settings_volume_keys_navigate_posts_title">Utilizează Tastele de Volum pentru a Naviga Postările</string>
     <string name="settings_mute_video_title">Amuțire Videoclip</string>
     <string name="settings_mute_nsfw_video_title">Amuțire Videoclipurilor NSFW</string>
-    <string name="settings_automatically_try_redgifs_title">Încearcă Automat să Accesați Redgifs dacă Videoclipurile de pe Gfycat sunt Eliminate.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ignoră Bara de Navigare în Player-ul pentru Video</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Împiedică Controller-ul Video să aibă Margine Suplimentară</string>
     <string name="settings_confirm_to_exit">Confirmă pentru a Ieși</string>
@@ -735,7 +734,6 @@
     <string name="notifications">Notificări</string>
     <string name="messages">Mesaje</string>
     <string name="message">Mesaj</string>
-    <string name="fetch_gfycat_video_failed">Obținerea videoclipului Gfycat a eșuat</string>
     <string name="fetch_redgifs_video_failed">Obținerea videoclipului Redgifs a eșuat</string>
     <string name="fetching_video_info_please_wait">Se obțin informații despre video. Te rugăm să aștepți.</string>
     <string name="error_fetching_imgur_media">Nu s-au putut încărca imaginile</string>
@@ -756,7 +754,6 @@
     <string name="set_to_lock_screen">Setează pe Ecranul de Blocare</string>
     <string name="set_to_both">Setează pe Ambele</string>
     <string name="default_font_font_preview">Implicit</string>
-    <string name="load_video_in_redgifs">Încearcă să încarci videoclipul pe Redgifs</string>
     <string name="top_score">%1$s pct</string>
     <string name="login_activity_2fa_prompt">Dacă aveți autentificarea cu doi pași activată, va trebui să umpleți câmpul jetonului 2FA. Lăsați-l gol altfel</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>

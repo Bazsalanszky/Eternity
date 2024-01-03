@@ -337,7 +337,6 @@
     <string name="settings_mute_video_title">動画をミュート再生</string>
     <string name="settings_mute_nsfw_video_title">NSFWの動画をミュート再生</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Gfycatの動画が削除されていた場合、自動的にRedgifsでリトライ</string>
     <string name="settings_video_player_ignore_nav_bar_title">動画プレーヤーでナビゲーションバーを無視</string>
     <string name="settings_video_player_ignore_nav_bar_summary">動画コントローラーが余分な余白を使用することを防止します</string>
     <string name="settings_confirm_to_exit">アプリの終了確認を表示</string>
@@ -758,7 +757,6 @@
     <string name="notifications">通知</string>
     <string name="messages">メッセージ</string>
     <string name="message">メッセージ</string>
-    <string name="fetch_gfycat_video_failed">Gfycat動画を取得できませんでした</string>
     <string name="fetch_redgifs_video_failed">Redgifs動画を取得できませんでした</string>
     <string name="fetching_video_info_please_wait">動画の情報を取得中です。少々お待ちください。</string>
     <string name="error_fetching_imgur_media">画像をロードできませんでした</string>
@@ -782,7 +780,6 @@
     <string name="set_to_lock_screen">ロック画面に設定</string>
     <string name="set_to_both">両方に設定</string>
     <string name="default_font_font_preview">Default</string>
-    <string name="load_video_in_redgifs">Redgifsから動画のロードを試行</string>
     <string name="top_score">%1$s点</string>
     <string name="login_activity_2fa_prompt">2段階認証を有効にしている場合、パスワードは次のように入力してください 「&lt;パスワード&gt;:&lt;2段階認証コード&gt;」</string>
     <string name="submit_crosspost_activity_label">クロスポスト</string>

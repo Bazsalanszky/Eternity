@@ -343,7 +343,6 @@
     <string name="settings_mute_video_title">Couper le son des vidéos</string>
     <string name="settings_mute_nsfw_video_title">Couper le son des Vidéos NSFW</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Essayez d\'accéder automatiquement à redgif si les vidéos sur gfycat sont supprimées.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ignorer la barre de navigation dans le lecteur vidéo</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Empêcher le contrôleur vidéo de créer une marge supplémentaire</string>
     <string name="settings_confirm_to_exit">Confirmer pour quitter</string>
@@ -768,7 +767,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="notifications">Notifications</string>
     <string name="messages">Messages</string>
     <string name="message">Message</string>
-    <string name="fetch_gfycat_video_failed">Échec de la récupération de la vidéo Gfycat</string>
     <string name="fetch_redgifs_video_failed">Échec de la récupération de la vidéo Redgifs</string>
     <string name="fetching_video_info_please_wait">Récupération des informations vidéo. Veuillez patienter.</string>
     <string name="error_fetching_imgur_media">Impossible de charger les images</string>
@@ -790,7 +788,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="set_to_lock_screen">Ajouter à l\'écran de verrouillage</string>
     <string name="set_to_both">Définir pour les deux</string>
     <string name="default_font_font_preview">Par défaut</string>
-    <string name="load_video_in_redgifs">Essayez de charger la vidéo sur Redgifs</string>
     <string name="top_score">%1$s points</string>
     <string name="login_activity_2fa_prompt">Si l’authentification à 2 facteurs est activée, vous devez remplir le champ du jeton 2FA. Sinon, laissez le vide.</string>
     <string name="submit_crosspost_activity_label">Republier</string>
