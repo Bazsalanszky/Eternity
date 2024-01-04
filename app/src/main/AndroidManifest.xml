@@ -323,7 +323,7 @@
                 <data android:host="feddit.de" />
                 <data android:host="lemmy.fmhy.ml" />
                 <data android:host="lemmy.ca" />
-                <data android:host="www.hexbear.net" />
+                <data android:host="hexbear.net" />
                 <data android:host="programming.dev" />
                 <data android:host="lemmy.dbzer0.com" />
                 <data android:host="lemmy.blahaj.zone" />
