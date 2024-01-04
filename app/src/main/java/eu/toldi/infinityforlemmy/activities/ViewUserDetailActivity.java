@@ -1233,7 +1233,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         getMenuInflater().inflate(R.menu.view_user_detail_activity, menu);
         if (username.equals(mAccountName)) {
             menu.findItem(R.id.action_send_private_message_view_user_detail_activity).setVisible(false);
-            menu.findItem(R.id.action_report_view_user_detail_activity).setVisible(false);
             menu.findItem(R.id.action_block_user_view_user_detail_activity).setVisible(false);
         } else {
             menu.findItem(R.id.action_edit_profile_view_user_detail_activity).setVisible(false);
@@ -1298,11 +1297,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
             Intent intent = new Intent(this, PostFilterPreferenceActivity.class);
             intent.putExtra(PostFilterPreferenceActivity.EXTRA_USER_NAME, username);
             startActivity(intent);
-            return true;
-        } else if (itemId == R.id.action_report_view_user_detail_activity) {
-            Intent reportIntent = new Intent(this, LinkResolverActivity.class);
-            reportIntent.setData(Uri.parse("https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/what-should-i-do-if-i-see-something-i"));
-            startActivity(reportIntent);
             return true;
         } else if (itemId == R.id.action_block_user_view_user_detail_activity) {
             if (mAccessToken == null) {
