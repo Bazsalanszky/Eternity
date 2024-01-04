@@ -1343,4 +1343,6 @@
     <string name="subscription_plan_description_monthly_999">Infinity</string>
     <string name="subscription_plan_description_monthly">Бронзова</string>
     <string name="subscription_plan_description_monthly_699">Платинова</string>
+    <string name="token_expired_message">"Термін дії токена закінчився. Оскільки Eternity не зберігає Ваш пароль, Вам потрібно повторно ввійти вручну! "</string>
+    <string name="token_expired">Токен недійсний</string>
 </resources>
