@@ -1100,4 +1100,22 @@
     <string name="settings_collapse_post_section_title">Poszt szekció összecsukása</string>
     <string name="settings_hide_subscribed_communities_sections_title">Feliratkozások szekció elrejtése</string>
     <string name="settings_separate_post_and_comments_in_portrait_mode_title">Posztok és kommentek szétválasztása álló módban</string>
+    <string name="settings_miscellaneous_dangerous_group_title">Veszélyes</string>
+    <string name="action_add_to_home_screen">Hozzáadás a kezdőképernyőhöz</string>
+    <string name="subscription_activity_label">Feliratkozások</string>
+    <string name="confirm_delete_all_recent_searches">Biztos, hogy törölni szeretné a keresési előzményeit?</string>
+    <string name="settings_experimental_feature">Kísérleti funkció</string>
+    <string name="settings_hide_comment_awards_title">Komment Díjak elrejtése</string>
+    <string name="settings_custom_title_font_family_title">Egyedi cím betűtípus</string>
+    <string name="settings_hide_text_post_content">Szöveges posztok tartalmának elrejtése</string>
+    <string name="settings_custom_content_font_family_title">Egyedi tartalom betűtípus</string>
+    <string name="comment_filter_preference_activity_label">Komment szűrő</string>
+    <string name="settings_show_author_avatar_title">Szerző profilképének megjelenítése</string>
+    <string name="settings_legacy_autoplay_video_controller_ui_title">Korábbi videovezérlő felhasználói felület</string>
+    <string name="settings_link_handler_value_internal_browser">Beépített böngésző</string>
+    <string name="confirm">Megerősítés</string>
+    <string name="settings_fixed_height_preview_in_card_title">Fix magasságú kártyák</string>
+    <string name="customize_comment_filter_activity_label">Komment szűrő személyre szabása</string>
+    <string name="settings_reddit_user_agreement_title">Lemmy felhasználói megegyezés</string>
+    <string name="settings_custom_font_family_title">Egyedi betűtípus</string>
 </resources>
