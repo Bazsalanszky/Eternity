@@ -558,7 +558,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             touchHelper.attachToRecyclerView((mCommentsRecyclerView == null ? mRecyclerView : mCommentsRecyclerView));
         }
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refresh());
+        mSwipeRefreshLayout.setOnRefreshListener(() -> refresh(true, true));
 
         mSmoothScroller = new LinearSmoothScroller(activity) {
             @Override
