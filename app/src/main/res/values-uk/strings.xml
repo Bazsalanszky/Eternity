@@ -312,7 +312,6 @@
     <string name="settings_volume_keys_navigate_posts_title">Пересуватися дописами клавішами гучності</string>
     <string name="settings_mute_video_title">Глушити відео</string>
     <string name="settings_mute_nsfw_video_title">Глушити відео НБДР</string>
-    <string name="settings_automatically_try_redgifs_title">Автоматично спробувати отримати доступ до Redgifs, якщо відео на Gfycat видалено.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ігнорувати панель пересування у відеопрогравачі</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Не дозволяти відеоконтролеру мати додаткове поле</string>
     <string name="settings_confirm_to_exit">Підтверджувати вихід</string>
@@ -714,7 +713,6 @@
     <string name="notifications">Сповіщення</string>
     <string name="messages">Повідомлення</string>
     <string name="message">Повідомлення</string>
-    <string name="fetch_gfycat_video_failed">Не вдалося отримати відеозапис Gfycat</string>
     <string name="fetch_redgifs_video_failed">Не вдалося отримати відеозапис Redgifs</string>
     <string name="fetching_video_info_please_wait">Отримання відомостей про відео. Зачекайте.</string>
     <string name="error_fetching_imgur_media">Неможливо завантажити зображення</string>
@@ -735,7 +733,6 @@
     <string name="set_to_lock_screen">Установити на екран блокування</string>
     <string name="set_to_both">Установити для обох</string>
     <string name="default_font_font_preview">Типово</string>
-    <string name="load_video_in_redgifs">Спробувати завантажити відеозапис на Redgifs</string>
     <string name="top_score">%1$s балів</string>
     <string name="login_activity_2fa_prompt">Якщо у Вас увімкнено 2-факторну автентифікацію, Вам треба заповнити поле «Токен 2FA». Якщо ні — залиште його порожнім</string>
     <string name="submit_crosspost_activity_label">Передопис</string>
@@ -1340,4 +1337,10 @@
     <string name="settings_credits_original_app_description">"Infinity створив редитор u/Hostilenemy "</string>
     <string name="original_app">Оригінальний застосунок для Reddit</string>
     <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">URL вибраного Вами сервера Lemmy (з https:// або без нього)</string>
+    <string name="subscription_plan_description_monthly_499">Золота — ідеальний вибір!</string>
+    <string name="subscription_plan_description_monthly_399">Срібна</string>
+    <string name="subscription_plan_description_monthly_899">Діамантова</string>
+    <string name="subscription_plan_description_monthly_999">Infinity</string>
+    <string name="subscription_plan_description_monthly">Бронзова</string>
+    <string name="subscription_plan_description_monthly_699">Платинова</string>
 </resources>

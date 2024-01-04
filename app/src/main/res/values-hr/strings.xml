@@ -326,7 +326,6 @@
     <string name="settings_mute_video_title">Isključi ton na videozapisima</string>
     <string name="settings_mute_nsfw_video_title">Isključi ton na NSFW videozapisima</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Automatski pokušaj pristupiti Redgifs ako su videozapisi na Gfycatu uklonjeni.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ignoriraj navigacijsku traku u video playeru</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Onemogući dodatnu marginu na video kontroleru</string>
     <string name="settings_confirm_to_exit">Potvrdi izlaz</string>
@@ -739,7 +738,6 @@
     <string name="notifications">Obavijesti</string>
     <string name="messages">Poruke</string>
     <string name="message">Poruka</string>
-    <string name="fetch_gfycat_video_failed">Dohvaćanje Gfycat videozapisa nije uspjelo</string>
     <string name="fetch_redgifs_video_failed">Dohvaćanje Redgifs videozapisa nije uspjelo</string>
     <string name="fetching_video_info_please_wait">Dohvaćanje informacija o videozapisu. Molim pričekajte.</string>
     <string name="error_fetching_imgur_media">Nije moguće učitati slike</string>
@@ -761,7 +759,6 @@
     <string name="set_to_lock_screen">Postavi na Zaključni zaslon</string>
     <string name="set_to_both">Postavi na oboje</string>
     <string name="default_font_font_preview">Zadano</string>
-    <string name="load_video_in_redgifs">Pokušajte učitati video na Redgifs</string>
     <string name="top_score">%1$s boda/ova</string>
     <string name="login_activity_2fa_prompt">Ukoliko imate omogućenu 2-faktorsku autentikaciju, upišite zaporku na sljedeći način:&lt;zaporka&gt;:&lt;2FA kod&gt;. Primjer: vašazaporka:123456</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>

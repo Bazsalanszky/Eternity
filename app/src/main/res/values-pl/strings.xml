@@ -313,7 +313,6 @@
     <string name="settings_mute_video_title">Wycisz filmy</string>
     <string name="settings_mute_nsfw_video_title">Wycisz wideo NSFW</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Automatycznie próbuj uzyskać filmy z Redgifs, gdy są usunięte z Gfycat.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Ignoruj pasek nawigacji w odtwarzaczu wideo</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Zapobiegaj posiadaniu dodatkowego marginesu przez kontroler wideo</string>
     <string name="settings_confirm_to_exit">Potwierdź aby wyjść</string>
@@ -720,7 +719,6 @@
     <string name="notifications">Powiadomienia</string>
     <string name="messages">Wiadomości</string>
     <string name="message">Wiadomość</string>
-    <string name="fetch_gfycat_video_failed">Nie udało się pobrać filmu z Gfycat</string>
     <string name="fetch_redgifs_video_failed">Nie udało się pobrać filmu z Redgifs</string>
     <string name="fetching_video_info_please_wait">Pobieranie informacji o filmie. Proszę czekać.</string>
     <string name="error_fetching_imgur_media">Nie można załadować obrazów</string>
@@ -742,7 +740,6 @@
     <string name="set_to_lock_screen">Ustaw na ekranie blokady</string>
     <string name="set_to_both">Ustaw na obu</string>
     <string name="default_font_font_preview">Domyślnie</string>
-    <string name="load_video_in_redgifs">Spróbuj załadować film na Redgifs</string>
     <string name="top_score">%1$s punktów</string>
     <string name="login_activity_2fa_prompt">Jeśli masz włączone uwierzytelnianie dwuskładnikowe, wpisz swoje hasło w następujący sposób: &lt;hasło&gt;:&lt;kod 2FA&gt;</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>

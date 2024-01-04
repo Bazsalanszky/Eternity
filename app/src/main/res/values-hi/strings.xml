@@ -333,7 +333,6 @@ Behavior -->
     <!-- Are those commands or a state? Like 'search' is a state in 'search opration' but is a command in 'search something'. Hindi has different appraoch for these two. -->
     <string name="settings_mute_nsfw_video_title">मौन NSFW वीडियोज</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">स्वतः ही Redgifs खोलने का प्रयास यदि Gfycat पर वीडियोज हटा दी गयी हों।</string>
     <string name="settings_video_player_ignore_nav_bar_title">वीडियो प्लेयर में नेवीगेशन बार का छिपना</string>
     <string name="settings_video_player_ignore_nav_bar_summary">वीडियो कंट्रोलर द्वारा अतिरिक्त हाशिया लेने पर रोक</string>
     <string name="settings_confirm_to_exit">एप छोड़ने की पुष्टि</string>
@@ -748,7 +747,6 @@ Behavior -->
     <string name="notifications">अधिसूचनाएं</string>
     <string name="messages">संदेश</string>
     <string name="message">संदेश</string>
-    <string name="fetch_gfycat_video_failed">Gfycat वीडियो प्राप्ति सफल</string>
     <string name="fetch_redgifs_video_failed">Redgifs वीडियो प्राप्ति असफल</string>
     <string name="fetching_video_info_please_wait">वीडियो इनफो प्राप्त हो रहा है। कृपया प्रतीक्षा करें।</string>
     <string name="error_fetching_imgur_media">चित्र लोड नहीं हो सका</string>
@@ -770,7 +768,6 @@ Behavior -->
     <string name="set_to_lock_screen">लक स्क्रीन पे सेट करे</string>
     <string name="set_to_both">दोनो पे ही सेट करे</string>
     <string name="default_font_font_preview">पूर्वनिर्धारित</string>
-    <string name="load_video_in_redgifs">वीडियो रेडगिफ्स पर लोड करने कि कोशिश करे</string>
     <string name="top_score">%1$s अंक</string>
     <string name="login_activity_2fa_prompt">अगार आपका 2-कदाम प्रमाणीकरण चालू है, तो कृपिया आपना पासबर्ड(चाबी) निम्ना लिखित तरीके से दिजीये: &lt;पासबर्ड&gt;:&lt;2FA code&gt;</string>
     <string name="submit_crosspost_activity_label">क्रॉसपोस्ट</string>

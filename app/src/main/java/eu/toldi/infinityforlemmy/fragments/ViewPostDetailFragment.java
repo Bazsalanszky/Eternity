@@ -167,9 +167,6 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @Named("reveddit")
     Retrofit revedditRetrofit;
     @Inject
-    @Named("gfycat")
-    Retrofit mGfycatRetrofit;
-    @Inject
     @Named("redgifs")
     Retrofit mRedgifsRetrofit;
     @Inject
@@ -624,7 +621,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             setupMenu();
 
             mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
-                    this, mExecutor, mCustomThemeWrapper, mRetrofit, mGfycatRetrofit,
+                    this, mExecutor, mCustomThemeWrapper, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mRedditDataRoomDatabase, mGlide,
                     mSeparatePostAndComments, mAccessToken, mAccountName, mPost, mLocale,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostDetailsSharedPreferences,
@@ -1361,7 +1358,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         mPost = post;
                         mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
                                 ViewPostDetailFragment.this, mExecutor, mCustomThemeWrapper,
-                                mRetrofit, mGfycatRetrofit, mRedgifsRetrofit,
+                                mRetrofit, mRedgifsRetrofit,
                                 mStreamableApiProvider, mRedditDataRoomDatabase, mGlide, mSeparatePostAndComments,
                                 mAccessToken, mAccountName, mPost, mLocale, mSharedPreferences,
                                 mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences,

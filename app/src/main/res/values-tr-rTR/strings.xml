@@ -320,7 +320,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_mute_video_title">Videoları Sessize Al</string>
     <string name="settings_mute_nsfw_video_title">NSFW Videolarını Sessize Al</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Gfycat\'teki Videolar Kaldırılmışsa Otomatik Olarak Redgif\'lere Erişmeyi Dene.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Video Oynatıcısındaki Navigasyon Çubuğunu Yoksay</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Video Denetleyicisinde Fazladan Kenar Olmasını Önle</string>
     <string name="settings_confirm_to_exit">Çıkışı Doğrula</string>
@@ -726,7 +725,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="notifications">Bildirimler</string>
     <string name="messages">Mesajlar</string>
     <string name="message">Mesaj</string>
-    <string name="fetch_gfycat_video_failed">Gfycat video\'su alınamadı</string>
     <string name="fetch_redgifs_video_failed">Redgifs video\'su alınamadı</string>
     <string name="fetching_video_info_please_wait">Video bilgisi alınıyor. Lütfen bekleyin.</string>
     <string name="error_fetching_imgur_media">Görüntüler yüklenemedi</string>
@@ -748,7 +746,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="set_to_lock_screen">Kilit Ekranına Ayarla</string>
     <string name="set_to_both">İkisine de Ayarla</string>
     <string name="default_font_font_preview">Varsayılan</string>
-    <string name="load_video_in_redgifs">Videoyu Redgifs\'e yüklemeyi deneyin</string>
     <string name="top_score">%1$s puan</string>
     <string name="login_activity_2fa_prompt">2 faktörlü kimlik doğrulamasını etkinleştirdiyseniz, lütfen şifrenizi aşağıdaki gibi yazınız: &lt;parola&gt;: &lt;2FA code&gt;</string>
     <string name="submit_crosspost_activity_label">Çapraz Gönderi</string>

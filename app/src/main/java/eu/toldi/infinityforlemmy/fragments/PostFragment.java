@@ -187,9 +187,6 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
     @Named("oauth")
     Retrofit mOauthRetrofit;
     @Inject
-    @Named("gfycat")
-    Retrofit mGfycatRetrofit;
-    @Inject
     @Named("redgifs")
     Retrofit mRedgifsRetrofit;
     @Inject
@@ -468,7 +465,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             sortType = new SortType(st == null ? SortType.Type.TOP_ALL : st,sortTime != null ? SortType.Time.valueOf(sortTime) : null);
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SEARCH_POST, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -543,7 +540,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_SUBREDDIT_POST_BASE + subredditName, defaultPostLayout);
 
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, displaySubredditName,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -612,7 +609,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                     defaultPostLayout);
 
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -678,7 +675,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_USER_POST_BASE + username, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -740,7 +737,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_FRONT_PAGE_POST, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -799,7 +796,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_MULTI_REDDIT_POST_BASE + multiRedditPath, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,
@@ -855,7 +852,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             sortType = newSortType(sort, sortTime);
             postLayout = mPostLayoutSharedPreferences.getInt(SharedPreferencesUtils.POST_LAYOUT_FRONT_PAGE_POST, defaultPostLayout);
 
-            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit, mGfycatRetrofit,
+            mAdapter = new PostRecyclerViewAdapter(activity, this, mExecutor, mRetrofit,
                     mRedgifsRetrofit, mStreamableApiProvider, mCustomThemeWrapper, locale,
                     accessToken, accountName, postType, postLayout, true,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostHistorySharedPreferences,

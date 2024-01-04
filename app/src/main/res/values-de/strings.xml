@@ -324,7 +324,6 @@
     <string name="settings_mute_video_title">Videos stummschalten</string>
     <string name="settings_mute_nsfw_video_title">NSFW-Videos stummschalten</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Automatisch versuchen, Redgifs abzurufen, falls Videos auf Gfycat entfernt wurden.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Navigationsleiste im Video-Player ignorieren</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Kein extra Rand beim Video-Controller</string>
     <string name="settings_confirm_to_exit">Verlassen bestätigen</string>
@@ -744,7 +743,6 @@
     <string name="notifications">Benachrichtigungen</string>
     <string name="messages">Nachrichten</string>
     <string name="message">Nachricht</string>
-    <string name="fetch_gfycat_video_failed">Abruf des Gfycat-Videos fehlgeschlagen</string>
     <string name="fetch_redgifs_video_failed">Abruf des Redgifs-Videos fehlgeschlagen</string>
     <string name="fetching_video_info_please_wait">Lade Video-Info. Bitte warten.</string>
     <string name="error_fetching_imgur_media">Kann Bilder nicht laden</string>
@@ -768,7 +766,6 @@
     <string name="set_to_lock_screen">Auf dem Sperrbildschirm setzen</string>
     <string name="set_to_both">Auf beiden setzen</string>
     <string name="default_font_font_preview">Standard</string>
-    <string name="load_video_in_redgifs">Versuche Video von Redgifs zu laden</string>
     <string name="top_score">%1$s Punkte</string>
     <string name="login_activity_2fa_prompt">Sofern du Zwei-Faktor-Authentifizierung aktiviert hast, trage den Code im 2FA-Feld ein. Ansonsten leer lassen</string>
     <string name="submit_crosspost_activity_label">Crossposten</string>

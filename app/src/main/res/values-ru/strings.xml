@@ -319,7 +319,6 @@
     <string name="settings_mute_video_title">Видео без звука</string>
     <string name="settings_mute_nsfw_video_title">NSFW-видео без звука</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Пытаться использовать Redgifs, если видео на Gfycat удалены.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Не использовать панель навигации в видеоплеере</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Предотвратить случайные нажатия</string>
     <string name="settings_confirm_to_exit">Подтверждать выход</string>
@@ -723,7 +722,6 @@
     <string name="notifications">Уведомления</string>
     <string name="messages">Сообщения</string>
     <string name="message">Сообщение</string>
-    <string name="fetch_gfycat_video_failed">Невозможно получить видео Gfycat</string>
     <string name="fetch_redgifs_video_failed">Невозможно получить видео Redgifs</string>
     <string name="fetching_video_info_please_wait">Получение информации о видео. Пожалуйста, подождите.</string>
     <string name="error_fetching_imgur_media">Невозможно загрузить изображения</string>
@@ -744,7 +742,6 @@
     <string name="set_to_lock_screen">Установить на экран блокировки</string>
     <string name="set_to_both">Установить на оба экрана</string>
     <string name="default_font_font_preview">По умолчанию</string>
-    <string name="load_video_in_redgifs">Попробуйте загрузить видео на Redgifs</string>
     <string name="top_score">%1$s пойнтов</string>
     <string name="login_activity_2fa_prompt">Если у вас включена двухфакторная аутентификация, введите 2FA токен в поле. Иначе оставьте его пустым</string>
     <string name="submit_crosspost_activity_label">Кросспост</string>
@@ -967,7 +964,7 @@
     <string name="theme_item_current_user_color_detail">Применяется к: текущий пользователь в комментариях</string>
     <string name="exclude_domains_hint">Исключить домены</string>
     <string name="anonymous_front_page_no_subscriptions">Начните с присоединения к сообществу!</string>
-    <string name="backup_settings_success">Настройки успешно экспортированы в выбранную папку. Пароль созданного zip-архива – 123321. Пожалуйста, не изменяйте zip-файл.</string>
+    <string name="backup_settings_success">Настройки успешно экспортированы в выбранную папку.</string>
     <string name="create_zip_in_destination_directory_failed">Невозможно создать zip-архив с резервной копией в выбранной папке</string>
     <string name="backup_some_settings_failed">Невозможно создать резервную копию некоторых настроек, но другие были успешно экспортированы в выбранную папку</string>
     <string name="restore_settings_success">Настройки успешно восстановлены. Перезапустите приложение, чтобы увидеть изменения.</string>
@@ -1278,7 +1275,6 @@
     <string name="settings_easier_to_watch_in_full_screen_title">Удобнее просматривать в полном экране</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
     <string name="i_understand">Понятно</string>
-
     <string name="settings_hide_community_and_user_instance">Не показывать сообщество и сервер пользователя</string>
     <string name="settings_show_display_name_instead_of_user_name">Показывать сообщество и отображать имена пользователей</string>
     <string name="active_users_number_detail">%1$,d активных пользователей</string>
@@ -1288,4 +1284,56 @@
     <string name="icon_original_label">Классическая иконка</string>
     <string name="settings_credits_new_icon">Новая иконка (Космический Lemmy)</string>
     <string name="settings_credits_new_icon_summary">от David Gerla</string>
+    <string name="duplicate_comment_filter_dialog_message">Перезаписать его\?</string>
+    <string name="comment_filter_usage_embedded_more_count">и ещё %1$d</string>
+    <string name="comment_filter_preference_activity_label">Фильтр комментариев</string>
+    <string name="action_add_to_home_screen">Добавить на главный экран</string>
+    <string name="subscription_activity_label">Подписка</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="post_filter_usage_embedded_subreddit_all">Всем сообществам</string>
+    <string name="weekly">Еженедельно</string>
+    <string name="important_info_title">Пожалуйста, войдите в учётную запись заново</string>
+    <string name="restore_subscription_purchase_details">Подписка уже оплачена\?</string>
+    <string name="subscription_plan_description_monthly_399">Серебряный</string>
+    <string name="confirm_delete_all_recent_searches">Вы точно хотите удалить все недавние поисковые запросы\?</string>
+    <string name="post_filter_usage_embedded_user_all">Всем пользователям</string>
+    <string name="subscription_plan_description_monthly_499">Золотой - Отличный выбор!</string>
+    <string name="settings_comment_filter_title">Фильтр комментариев</string>
+    <string name="comment_filter_requires_a_name">Как назвать этот фильтр\?</string>
+    <string name="monthly">Ежемесячно</string>
+    <string name="subscription_plan_description_monthly_699">Платиновый</string>
+    <string name="post_layout_card_3">Разметка карты 3</string>
+    <string name="duplicate_comment_filter_dialog_title">«%1$s» уже существует</string>
+    <string name="billing_error_billing_unavailable">Служба оплаты недоступна на этом устройстве.</string>
+    <string name="settings_credits_original_app_description">"Infinity - разработка u/Hostilenemy "</string>
+    <string name="customize_comment_filter_activity_label">Настроить фильтр комментариев</string>
+    <string name="restore_subscription_purchase">Восстановить покупку подписки</string>
+    <string name="thank_you_for_subscription">Спасибо за подписку</string>
+    <string name="subscription_plan_description_monthly_899">Алмазный</string>
+    <string name="post_filter_usage_embedded_multireddit_all">Всем мультисообществам</string>
+    <string name="click_to_apply_post_filter">Коснитесь здесь, чтобы применить к каким-нибудь лентам</string>
+    <string name="post_filter_usage_embedded_more_count">и ещё %1$d</string>
+    <string name="yearly">Ежегодно</string>
+    <string name="billing_error_developer_error">Разработчик допустил некоторые ошибки. Это не ваша вина.</string>
+    <string name="billing_error_error">Критическая ошибка при работе с API.</string>
+    <string name="billing_error_user_canceled">Оплата отменена пользователем.</string>
+    <string name="subscription_plan_description_monthly">Бронзовый</string>
+    <string name="comment_filter_applied_to_all_subreddits">Применяется ко всем сообществам</string>
+    <string name="billing_error_item_unavailable">Запрошенный товар недоступен для покупки.</string>
+    <string name="comment_filter_name_hint">Название фильтра комментариев</string>
+    <string name="connecting_to_billing_system">Подключение к системе платежей. Пожалуйста, подождите.</string>
+    <string name="billing_error_feature_not_supported">Необходимый функционал не поддерживается Play Store на данном устройстве.</string>
+    <string name="acknowledging_subscription">Проверка наличия подписки. Пожалуйста, подождите.</string>
+    <string name="connect_to_billing_system_failed">Не удалось подключиться к системе платежей</string>
+    <string name="subscription_plan_description_monthly_999">Infinity</string>
+    <string name="excludes_strings_hint">Исключить ключевые слова (слово1,слово2)</string>
+    <string name="billing_error_item_already_owned">Покупка не удалась, т.к. вы уже владеете этим товаром.</string>
+    <string name="billing_error_service_unavailable">В данный момент служба недоступна.</string>
+    <string name="continue_to_app">Продолжить в приложении</string>
+    <string name="apply_to">Применять ко</string>
+    <string name="acknowledge_purchase_failed">Не удалось проверить покупку</string>
+    <string name="welcome_to_infinity">Добро пожаловать в Infinity для Reddit — новое измерение просмотра Reddit!</string>
+    <string name="acknowledgement_purchase_failed_description">Упс.. при проверке вашей покупки возникла ошибка. Если эта проблема не решится за три дня, вы получите возврат автоматически.
+\nНе переживайте, вы по-прежнему можете использовать Infinity для Reddit.</string>
+    <string name="billing_error_network_error">При произведении операции произошла ошибка сети.</string>
 </resources>

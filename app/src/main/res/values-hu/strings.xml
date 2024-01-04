@@ -309,7 +309,6 @@
     <string name="settings_mute_video_title">Videók némítása</string>
     <string name="settings_mute_nsfw_video_title">NSFW videók némítása</string>
     <!-- Fuzzy -->
-    <string name="settings_automatically_try_redgifs_title">Próbálja autómatikusan elérni a Redgifeket, ha a videók Gfycat-en el vannak távolítva.</string>
     <string name="settings_video_player_ignore_nav_bar_title">Navigációs sáv ignorálása videó lejátszóban</string>
     <string name="settings_video_player_ignore_nav_bar_summary">Annak megelőzése, hogy a videó kontrollernek extra szegélye legyen</string>
     <string name="settings_confirm_to_exit">Kilépés megerősítése</string>
@@ -717,7 +716,6 @@
     <string name="notifications">Értesítések</string>
     <string name="messages">Üzenetek</string>
     <string name="message">Üzenet</string>
-    <string name="fetch_gfycat_video_failed">Gfycat videó megszerzése nem sikerült</string>
     <string name="fetch_redgifs_video_failed">Redgifs videó megszerzése nem sikerült</string>
     <string name="fetching_video_info_please_wait">Videó infó megszerzése. Kérlek várj.</string>
     <string name="error_fetching_imgur_media">Nem lehet betölteni a képeket</string>
@@ -738,7 +736,6 @@
     <string name="set_to_lock_screen">Beállítva zárolt képernyőre</string>
     <string name="set_to_both">Beállítva mindettőre</string>
     <string name="default_font_font_preview">Alapértelmezett</string>
-    <string name="load_video_in_redgifs">Próbáld meg betölteni a videót Redgifs-en</string>
     <string name="top_score">%1$s pont</string>
     <string name="login_activity_2fa_prompt">Ha a két faktoros azonosítás be van kapcsolva, kérlek írd be a jelszavad így: &lt;jelszó&gt;:&lt;2FA kód&gt;. Például: jelszavad:123456</string>
     <string name="submit_crosspost_activity_label">Crossposzt</string>

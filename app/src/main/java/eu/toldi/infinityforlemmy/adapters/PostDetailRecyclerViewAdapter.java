@@ -58,7 +58,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Provider;
 
-import eu.toldi.infinityforlemmy.FetchGfycatOrRedgifsVideoLinks;
+import eu.toldi.infinityforlemmy.FetchRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
@@ -78,7 +78,6 @@ import eu.toldi.infinityforlemmy.activities.ViewRedditGalleryActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewVideoActivity;
-import eu.toldi.infinityforlemmy.apis.GfycatAPI;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
 import eu.toldi.infinityforlemmy.asynctasks.LoadSubredditIcon;
@@ -140,7 +139,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private ViewPostDetailFragment mFragment;
     private Executor mExecutor;
     private RetrofitHolder mRetrofit;
-    private Retrofit mGfycatRetrofit;
     private Retrofit mRedgifsRetrofit;
     private final Provider<StreamableAPI> mStreamableApiProvider;
     private RedditDataRoomDatabase mRedditDataRoomDatabase;
@@ -166,7 +164,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private boolean mMuteAutoplayingVideos;
     private double mStartAutoplayVisibleAreaOffset;
     private boolean mMuteNSFWVideo;
-    private boolean mAutomaticallyTryRedgifs;
     private boolean mDataSavingMode;
     private boolean mDisableImagePreview;
     private boolean mOnlyDisablePreviewInVideoAndGifPosts;
@@ -227,7 +224,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
     public PostDetailRecyclerViewAdapter(BaseActivity activity, ViewPostDetailFragment fragment,
                                          Executor executor, CustomThemeWrapper customThemeWrapper,
-                                         RetrofitHolder retrofit, Retrofit gfycatRetrofit,
+                                         RetrofitHolder retrofit,
                                          Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
                                          RedditDataRoomDatabase redditDataRoomDatabase, RequestManager glide,
                                          boolean separatePostAndComments, String accessToken,
@@ -242,7 +239,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mFragment = fragment;
         mExecutor = executor;
         mRetrofit = retrofit;
-        mGfycatRetrofit = gfycatRetrofit;
         mRedgifsRetrofit = redgifsRetrofit;
         mStreamableApiProvider = streamableApiProvider;
         mRedditDataRoomDatabase = redditDataRoomDatabase;
@@ -335,7 +331,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 sharedPreferences.getInt(SharedPreferencesUtils.START_AUTOPLAY_VISIBLE_AREA_OFFSET_LANDSCAPE, 50) / 100.0;
 
         mMuteNSFWVideo = sharedPreferences.getBoolean(SharedPreferencesUtils.MUTE_NSFW_VIDEO, false);
-        mAutomaticallyTryRedgifs = sharedPreferences.getBoolean(SharedPreferencesUtils.AUTOMATICALLY_TRY_REDGIFS, true);
 
         String dataSavingModeString = sharedPreferences.getString(SharedPreferencesUtils.DATA_SAVING_MODE, SharedPreferencesUtils.DATA_SAVING_MODE_OFF);
         if (dataSavingModeString.equals(SharedPreferencesUtils.DATA_SAVING_MODE_ALWAYS)) {
@@ -704,45 +699,43 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     ((PostDetailBaseVideoAutoplayViewHolder) holder).setVolume((mMuteAutoplayingVideos || (mPost.isNSFW() && mMuteNSFWVideo)) ? 0f : 1f);
                 }
 
-                if (mPost.isGfycat() || mPost.isRedgifs() && !mPost.isLoadGfycatOrStreamableVideoSuccess()) {
-                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
-                            mPost.isGfycat() ? mGfycatRetrofit.create(GfycatAPI.class).getGfycatData(mPost.getGfycatId()) :
-                                    mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(mPost.getGfycatId());
-                    FetchGfycatOrRedgifsVideoLinks.fetchGfycatOrRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
-                            ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
-                            mPost.isGfycat(), mAutomaticallyTryRedgifs,
-                            new FetchGfycatOrRedgifsVideoLinks.FetchGfycatOrRedgifsVideoLinksListener() {
+                if (mPost.isRedgifs() && !mPost.isLoadVideoSuccess()) {
+                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
+                            mRedgifsRetrofit.create(RedgifsAPI.class).getRedgifsData(mPost.getRedgifsId());
+                    FetchRedgifsVideoLinks.fetchRedgifsVideoLinksInRecyclerViewAdapter(mExecutor, new Handler(),
+                            ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
+                            new FetchRedgifsVideoLinks.FetchRedgifsVideoLinksListener() {
                                 @Override
                                 public void success(String webm, String mp4) {
                                     mPost.setVideoDownloadUrl(mp4);
                                     mPost.setVideoUrl(mp4);
-                                    mPost.setLoadGfyOrStreamableVideoSuccess(true);
+                                    mPost.setLoadVideoSuccess(true);
                                     ((PostDetailBaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(mPost.getVideoUrl()));
                                 }
 
                                 @Override
                                 public void failed(int errorCode) {
-                                    ((PostDetailBaseVideoAutoplayViewHolder) holder).mErrorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                    ((PostDetailBaseVideoAutoplayViewHolder) holder).mErrorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                 }
                             });
-                } else if(mPost.isStreamable() && !mPost.isLoadGfycatOrStreamableVideoSuccess()) {
-                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall =
+                } else if(mPost.isStreamable() && !mPost.isLoadVideoSuccess()) {
+                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall =
                             mStreamableApiProvider.get().getStreamableData(mPost.getStreamableShortCode());
                     FetchStreamableVideo.fetchStreamableVideoInRecyclerViewAdapter(mExecutor, new Handler(),
-                            ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall,
+                            ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall,
                             new FetchStreamableVideo.FetchStreamableVideoListener() {
                                 @Override
                                 public void success(StreamableVideo streamableVideo) {
                                     StreamableVideo.Media media = streamableVideo.mp4 == null ? streamableVideo.mp4Mobile : streamableVideo.mp4;
                                     mPost.setVideoDownloadUrl(media.url);
                                     mPost.setVideoUrl(media.url);
-                                    mPost.setLoadGfyOrStreamableVideoSuccess(true);
+                                    mPost.setLoadVideoSuccess(true);
                                     ((PostDetailBaseVideoAutoplayViewHolder) holder).bindVideoUri(Uri.parse(mPost.getVideoUrl()));
                                 }
 
                                 @Override
                                 public void failed() {
-                                    ((PostDetailBaseVideoAutoplayViewHolder) holder).mErrorLoadingGfycatImageView.setVisibility(View.VISIBLE);
+                                    ((PostDetailBaseVideoAutoplayViewHolder) holder).mErrorLoadingVideoImageView.setVisibility(View.VISIBLE);
                                 }
                             });
                 } else {
@@ -1143,11 +1136,11 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             ((PostDetailBaseViewHolder) holder).contentMarkdownView.setVisibility(View.GONE);
 
             if (holder instanceof PostDetailBaseVideoAutoplayViewHolder) {
-                if (((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall != null && !((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.isCanceled()) {
-                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall.cancel();
-                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchGfycatOrStreamableVideoCall = null;
+                if (((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall != null && !((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.isCanceled()) {
+                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.cancel();
+                    ((PostDetailBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall = null;
                 }
-                ((PostDetailBaseVideoAutoplayViewHolder) holder).mErrorLoadingGfycatImageView.setVisibility(View.GONE);
+                ((PostDetailBaseVideoAutoplayViewHolder) holder).mErrorLoadingVideoImageView.setVisibility(View.GONE);
                 ((PostDetailBaseVideoAutoplayViewHolder) holder).muteButton.setVisibility(View.GONE);
                 if (!((PostDetailBaseVideoAutoplayViewHolder) holder).isManuallyPaused) {
                     ((PostDetailBaseVideoAutoplayViewHolder) holder).resetVolume();
@@ -1778,11 +1771,11 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     }
 
     class PostDetailBaseVideoAutoplayViewHolder extends PostDetailBaseViewHolder implements ToroPlayer {
-        public Call<String> fetchGfycatOrStreamableVideoCall;
+        public Call<String> fetchStreamableVideoCall;
         AspectRatioFrameLayout aspectRatioFrameLayout;
         PlayerView playerView;
         GifImageView previewImageView;
-        ImageView mErrorLoadingGfycatImageView;
+        ImageView mErrorLoadingVideoImageView;
         ImageView muteButton;
         ImageView fullscreenButton;
         ImageView pauseButton;
@@ -1815,7 +1808,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                                                      AspectRatioFrameLayout aspectRatioFrameLayout,
                                                      PlayerView playerView,
                                                      GifImageView previewImageView,
-                                                     ImageView errorLoadingGfycatImageView,
+                                                     ImageView errorLoadingVideoImageView,
                                                      ImageView muteButton,
                                                      ImageView fullscreenButton,
                                                      ImageView pauseButton,
@@ -1859,7 +1852,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
             this.aspectRatioFrameLayout = aspectRatioFrameLayout;
             this.previewImageView = previewImageView;
-            this.mErrorLoadingGfycatImageView = errorLoadingGfycatImageView;
+            this.mErrorLoadingVideoImageView = errorLoadingVideoImageView;
             this.playerView = playerView;
             this.muteButton = muteButton;
             this.fullscreenButton = fullscreenButton;
@@ -1890,17 +1883,10 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     if (mPost.isImgur()) {
                         intent.setData(Uri.parse(mPost.getVideoUrl()));
                         intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_IMGUR);
-                    } else if (mPost.isGfycat()) {
-                        intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                        intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, mPost.getGfycatId());
-                        if (mPost.isLoadGfycatOrStreamableVideoSuccess()) {
-                            intent.setData(Uri.parse(mPost.getVideoUrl()));
-                            intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, mPost.getVideoDownloadUrl());
-                        }
                     } else if (mPost.isRedgifs()) {
                         intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                        intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, mPost.getGfycatId());
-                        if (mPost.isLoadGfycatOrStreamableVideoSuccess()) {
+                        intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, mPost.getRedgifsId());
+                        if (mPost.isLoadVideoSuccess()) {
                             intent.setData(Uri.parse(mPost.getVideoUrl()));
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_DOWNLOAD_URL, mPost.getVideoDownloadUrl());
                         }
@@ -2095,7 +2081,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     binding.aspectRatioFrameLayoutItemPostDetailVideoAutoplay,
                     binding.playerViewItemPostDetailVideoAutoplay,
                     binding.previewImageViewItemPostDetailVideoAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostDetailVideoAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostDetailVideoAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.exo_pause),
@@ -2133,7 +2119,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     binding.aspectRatioFrameLayoutItemPostDetailVideoAutoplay,
                     binding.playerViewItemPostDetailVideoAutoplay,
                     binding.previewImageViewItemPostDetailVideoAutoplay,
-                    binding.errorLoadingGfycatImageViewItemPostDetailVideoAutoplay,
+                    binding.errorLoadingVideoImageViewItemPostDetailVideoAutoplay,
                     binding.getRoot().findViewById(R.id.mute_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.fullscreen_exo_playback_control_view),
                     binding.getRoot().findViewById(R.id.exo_pause),
@@ -2196,12 +2182,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                         if (mPost.isImgur()) {
                             intent.setData(Uri.parse(mPost.getVideoUrl()));
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_IMGUR);
-                        } else if (mPost.isGfycat()) {
-                            intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, mPost.getGfycatId());
                         } else if (mPost.isRedgifs()) {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, mPost.getGfycatId());
+                            intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, mPost.getRedgifsId());
                         } else if (mPost.isStreamable()) {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_STREAMABLE);
                             intent.putExtra(ViewVideoActivity.EXTRA_STREAMABLE_SHORT_CODE, mPost.getStreamableShortCode());
@@ -2382,12 +2365,9 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 if (mPost != null) {
                     if (mPost.getPostType() == Post.VIDEO_TYPE) {
                         Intent intent = new Intent(mActivity, ViewVideoActivity.class);
-                        if (mPost.isGfycat()) {
-                            intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_GFYCAT);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, mPost.getGfycatId());
-                        } else if (mPost.isRedgifs()) {
+                        if (mPost.isRedgifs()) {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_REDGIFS);
-                            intent.putExtra(ViewVideoActivity.EXTRA_GFYCAT_ID, mPost.getGfycatId());
+                            intent.putExtra(ViewVideoActivity.EXTRA_REDGIFS_ID, mPost.getRedgifsId());
                         } else if (mPost.isStreamable()) {
                             intent.putExtra(ViewVideoActivity.EXTRA_VIDEO_TYPE, ViewVideoActivity.VIDEO_TYPE_STREAMABLE);
                             intent.putExtra(ViewVideoActivity.EXTRA_STREAMABLE_SHORT_CODE, mPost.getStreamableShortCode());
