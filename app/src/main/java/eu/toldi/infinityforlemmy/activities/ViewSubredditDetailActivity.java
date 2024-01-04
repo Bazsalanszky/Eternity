@@ -392,6 +392,14 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
+        if (mAccessToken != null) {
+            mRetrofit.setAccessToken(mAccessToken);
+        }
+        String instance = (mAccessToken == null) ? mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI) : mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
+        if (instance != null) {
+            mRetrofit.setBaseURL(instance);
+        }
+
         if (savedInstanceState == null) {
             mMessageFullname = getIntent().getIntExtra(EXTRA_MESSAGE_FULLNAME, 0);
             mNewAccountName = getIntent().getStringExtra(EXTRA_NEW_ACCOUNT_NAME);
