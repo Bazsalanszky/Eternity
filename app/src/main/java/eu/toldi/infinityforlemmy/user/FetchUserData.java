@@ -107,6 +107,33 @@ public class FetchUserData {
         });
     }
 
+    public static void validateAuthToken(Retrofit retrofit, ValidateAuthTokenListener validateAuthTokenListener) {
+        LemmyAPI api = retrofit.create(LemmyAPI.class);
+
+        Call<String> validateAuthToken = api.userValidateAuth();
+        validateAuthToken.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
+                if (response.isSuccessful()) {
+                    validateAuthTokenListener.onValidateAuthTokenSuccess();
+                } else {
+                    validateAuthTokenListener.onValidateAuthTokenFailed();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                validateAuthTokenListener.onValidateAuthTokenFailed();
+            }
+        });
+    }
+
+    public interface ValidateAuthTokenListener {
+        void onValidateAuthTokenSuccess();
+
+        void onValidateAuthTokenFailed();
+    }
+
     public interface FetchUserUnreadCountListener {
         void onFetchUserUnreadCountSuccess(int unreadCount);
 

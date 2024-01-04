@@ -248,6 +248,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     private int fabOption;
     private int inboxCount;
 
+    private boolean mBearerTokenUsed = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.installSplashScreen(this);
@@ -340,7 +342,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mRetrofit.setAccessToken(mAccessToken);
-
+        mBearerTokenUsed = mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true);
 
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
         mAccountQualifiedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
@@ -374,6 +376,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                 mRetrofit.setBaseURL(instancePreference);
                 this.recreate();
             }
+        } else {
+            checkUserToken();
         }
     }
 
@@ -1078,6 +1082,34 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                             mFetchSubscriptionsSuccess = false;
                         }
                     });
+        }
+    }
+
+    private void checkUserToken() {
+        if (mBearerTokenUsed) {
+            FetchUserData.validateAuthToken(mRetrofit.getRetrofit(), new FetchUserData.ValidateAuthTokenListener() {
+                @Override
+                public void onValidateAuthTokenSuccess() {
+                }
+
+                @Override
+                public void onValidateAuthTokenFailed() {
+                    // Alert user that the token is invalid and they need to re-login
+                    new MaterialAlertDialogBuilder(MainActivity.this, R.style.MaterialAlertDialogTheme)
+                            .setTitle(R.string.token_expired)
+                            .setMessage(R.string.token_expired_message)
+                            .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                // Username without instance
+                                String username = mAccountName.substring(0, mAccountQualifiedName.indexOf("@"));
+                                intent.putExtra(LoginActivity.EXTRA_INPUT_USERNAME, username);
+                                intent.putExtra(LoginActivity.EXTRA_INPUT_INSTANCE, mRetrofit.getBaseURL());
+                                startActivity(intent);
+                            })
+                            .setCancelable(false)
+                            .show();
+                }
+            });
         }
     }
 

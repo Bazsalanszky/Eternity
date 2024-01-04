@@ -67,6 +67,9 @@ public class LoginActivity extends BaseActivity {
     private static final String ENABLE_DOM_STATE = "EDS";
     private static final String IS_AGREE_TO_USER_AGGREMENT_STATE = "IATUAS";
 
+    public static final String EXTRA_INPUT_USERNAME = "INPUT_USERNAME";
+    public static final String EXTRA_INPUT_INSTANCE = "INPUT_INSTANCE";
+
     @BindView(R.id.coordinator_layout_login_activity)
     CoordinatorLayout coordinatorLayout;
     @BindView(R.id.appbar_layout_login_activity)
@@ -147,6 +150,17 @@ public class LoginActivity extends BaseActivity {
         if (savedInstanceState != null) {
             enableDom = savedInstanceState.getBoolean(ENABLE_DOM_STATE);
             isAgreeToUserAgreement = savedInstanceState.getBoolean(IS_AGREE_TO_USER_AGGREMENT_STATE);
+        }
+
+        // Get username and instance from intent
+        Intent intent = getIntent();
+        String username_intent = intent.getStringExtra(EXTRA_INPUT_USERNAME);
+        String instance_intent = intent.getStringExtra(EXTRA_INPUT_INSTANCE);
+        if (username_intent != null) {
+            username_input.setText(username_intent);
+        }
+        if (instance_intent != null) {
+            instance_input.setText(instance_intent);
         }
 
         LemmyVerseFetchInstances.INSTANCE.fetchInstances(mLemmyVerseRetrofit, new FetchInstancesListener() {

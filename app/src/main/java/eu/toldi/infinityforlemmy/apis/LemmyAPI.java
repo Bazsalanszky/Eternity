@@ -66,6 +66,9 @@ public interface LemmyAPI {
     @GET("api/v3/user/unread_count")
     Call<MessageCount> userUnreadCount(@NonNull @Query("auth") String access_token);
 
+    @GET("api/v3/user/validate_auth")
+    Call<String> userValidateAuth();
+
     @Headers("Content-Type: application/json")
     @POST("api/v3/user/mention/mark_as_read")
     Call<String> userMentionMarkAsRead(@Body ReadMessageDTO params);
