@@ -1144,31 +1144,32 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                             mFetchUserInfoSuccess = false;
                         }
                     });
-
-            FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), mAccessToken, new FetchSiteInfo.FetchSiteInfoListener() {
-                @Override
-                public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
-                    String[] version = siteInfo.getVersion().split("\\.");
-                    if (version.length > 0) {
-                        Log.d("MainActvity", "Lemmy Version: " + version[0] + "." + version[1]);
-                        int majorVersion = Integer.parseInt(version[0]);
-                        int minorVersion = Integer.parseInt(version[1]);
-                        if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
-                            mRetrofit.setAccessToken(mAccessToken);
-                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
-                            checkUserToken();
-                        } else {
-                            mRetrofit.setAccessToken(null);
-                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
+            if (mAccessToken != null) {
+                FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), mAccessToken, new FetchSiteInfo.FetchSiteInfoListener() {
+                    @Override
+                    public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+                        String[] version = siteInfo.getVersion().split("\\.");
+                        if (version.length > 0) {
+                            Log.d("MainActvity", "Lemmy Version: " + version[0] + "." + version[1]);
+                            int majorVersion = Integer.parseInt(version[0]);
+                            int minorVersion = Integer.parseInt(version[1]);
+                            if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
+                                mRetrofit.setAccessToken(mAccessToken);
+                                mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
+                                checkUserToken();
+                            } else {
+                                mRetrofit.setAccessToken(null);
+                                mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFetchSiteInfoFailed() {
+                    @Override
+                    public void onFetchSiteInfoFailed() {
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
