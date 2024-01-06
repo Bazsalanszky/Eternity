@@ -11,6 +11,7 @@ import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteInfo;
+import eu.toldi.infinityforlemmy.user.MyUserInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class SwitchAccount {
@@ -33,7 +34,7 @@ public class SwitchAccount {
             retrofitHolder.setAccessToken(null);
             FetchSiteInfo.fetchSiteInfo(retrofitHolder.getRetrofit(), account.getAccessToken(), new FetchSiteInfo.FetchSiteInfoListener() {
                 @Override
-                public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+                public void onFetchSiteInfoSuccess(SiteInfo siteInfo, MyUserInfo myUserInfo) {
                     boolean canDownvote = siteInfo.isEnable_downvotes();
                     currentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, canDownvote).apply();
                     String[] version = siteInfo.getVersion().split("\\.");
@@ -49,7 +50,7 @@ public class SwitchAccount {
                 }
 
                 @Override
-                public void onFetchSiteInfoFailed() {
+                public void onFetchSiteInfoFailed(boolean parseFailed) {
                     Log.e("SwitchAccount", "Failed to fetch site info");
                     currentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true).apply();
                 }

@@ -1,6 +1,9 @@
 package eu.toldi.infinityforlemmy.site;
 
+import org.json.JSONException;
+
 import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.user.MyUserInfo;
 import retrofit2.Retrofit;
 
 public class FetchSiteInfo {
@@ -11,24 +14,29 @@ public class FetchSiteInfo {
                     @Override
                     public void onResponse(retrofit2.Call<String> call, retrofit2.Response<String> response) {
                         if (response.isSuccessful()) {
-                            String siteInfoJson = response.body();
-                            SiteInfo siteInfo = SiteInfo.parseSiteInfo(siteInfoJson);
-                            fetchSiteInfoListener.onFetchSiteInfoSuccess(siteInfo);
+                            try {
+                                String siteInfoJson = response.body();
+                                SiteInfo siteInfo = SiteInfo.parseSiteInfo(siteInfoJson);
+                                MyUserInfo myUserInfo = MyUserInfo.parseFromSiteInfo(siteInfoJson);
+                                fetchSiteInfoListener.onFetchSiteInfoSuccess(siteInfo, myUserInfo);
+                            } catch (JSONException e) {
+                                fetchSiteInfoListener.onFetchSiteInfoFailed(true);
+                            }
                         } else {
-                            fetchSiteInfoListener.onFetchSiteInfoFailed();
+                            fetchSiteInfoListener.onFetchSiteInfoFailed(false);
                         }
                     }
 
                     @Override
                     public void onFailure(retrofit2.Call<String> call, Throwable t) {
-                        fetchSiteInfoListener.onFetchSiteInfoFailed();
+                        fetchSiteInfoListener.onFetchSiteInfoFailed(false);
                     }
                 }
         );
     }
 
     public interface FetchSiteInfoListener {
-        void onFetchSiteInfoSuccess(SiteInfo siteInfo);
-        void onFetchSiteInfoFailed();
+        void onFetchSiteInfoSuccess(SiteInfo siteInfo, MyUserInfo myUserInfo);
+        void onFetchSiteInfoFailed(boolean parseFailed);
     }
 }

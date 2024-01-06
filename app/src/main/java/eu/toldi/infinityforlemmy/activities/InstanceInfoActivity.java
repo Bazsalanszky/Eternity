@@ -42,6 +42,7 @@ import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteStatistics;
 import eu.toldi.infinityforlemmy.user.BasicUserInfo;
+import eu.toldi.infinityforlemmy.user.MyUserInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.Markwon;
@@ -170,7 +171,7 @@ public class InstanceInfoActivity extends BaseActivity {
     private void fetchInstanceInfo() {
         FetchSiteInfo.fetchSiteInfo(mRetorifitHolder.getRetrofit(), null, new FetchSiteInfo.FetchSiteInfoListener() {
             @Override
-            public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+            public void onFetchSiteInfoSuccess(SiteInfo siteInfo, MyUserInfo myUserInfo) {
                 mLoadingConstraintLayout.setVisibility(View.GONE);
                 toolbar.setTitle(siteInfo.getName());
                 if (siteInfo.getSidebar() != null) {
@@ -197,7 +198,7 @@ public class InstanceInfoActivity extends BaseActivity {
             }
 
             @Override
-            public void onFetchSiteInfoFailed() {
+            public void onFetchSiteInfoFailed(boolean parseFailed) {
 
             }
         });

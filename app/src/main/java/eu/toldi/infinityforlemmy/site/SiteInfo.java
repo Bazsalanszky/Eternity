@@ -79,45 +79,40 @@ public class SiteInfo {
         return version;
     }
 
-    public static SiteInfo parseSiteInfo(String siteInfoJson) {
-        try {
-            JSONObject siteInfo = new JSONObject(siteInfoJson);
-            JSONObject siteView = siteInfo.getJSONObject("site_view");
-            JSONObject site = siteView.getJSONObject("site");
-            JSONObject localSite = siteView.getJSONObject("local_site");
+    public static SiteInfo parseSiteInfo(String siteInfoJson) throws JSONException {
+        JSONObject siteInfo = new JSONObject(siteInfoJson);
+        JSONObject siteView = siteInfo.getJSONObject("site_view");
+        JSONObject site = siteView.getJSONObject("site");
+        JSONObject localSite = siteView.getJSONObject("local_site");
 
-            int id = site.getInt("id");
-            String name = site.getString("name");
-            String sidebar = null;
-            if (site.has("sidebar"))
-                sidebar = site.getString("sidebar");
-            String version = siteInfo.getString("version");
+        int id = site.getInt("id");
+        String name = site.getString("name");
+        String sidebar = null;
+        if (site.has("sidebar"))
+            sidebar = site.getString("sidebar");
+        String version = siteInfo.getString("version");
 
-            String description = null;
-            if (site.has("description"))
-                description = site.getString("description");
+        String description = null;
+        if (site.has("description"))
+            description = site.getString("description");
 
-            boolean enable_downvotes = localSite.getBoolean("enable_downvotes");
-            boolean enable_nsfw = localSite.getBoolean("enable_nsfw");
-            boolean community_creation_admin_only = localSite.getBoolean("community_creation_admin_only");
+        boolean enable_downvotes = localSite.getBoolean("enable_downvotes");
+        boolean enable_nsfw = localSite.getBoolean("enable_nsfw");
+        boolean community_creation_admin_only = localSite.getBoolean("community_creation_admin_only");
 
-            JSONObject counts = siteView.getJSONObject("counts");
-            List<BasicUserInfo> admins = new ArrayList<>();
-            if (siteInfo.has("admins")) {
-                JSONArray adminsJson = siteInfo.getJSONArray("admins");
-                for (int i = 0; i < adminsJson.length(); i++) {
-                    JSONObject adminJson = adminsJson.getJSONObject(i).getJSONObject("person");
-                    admins.add(new BasicUserInfo(adminJson.getInt("id"), adminJson.getString("name"),
-                            LemmyUtils.actorID2FullName(adminJson.getString("actor_id")), adminJson.optString("avatar ", ""),
-                            adminJson.optString("display_name", adminJson.getString("name")))
-                    );
-                }
+        JSONObject counts = siteView.getJSONObject("counts");
+        List<BasicUserInfo> admins = new ArrayList<>();
+        if (siteInfo.has("admins")) {
+            JSONArray adminsJson = siteInfo.getJSONArray("admins");
+            for (int i = 0; i < adminsJson.length(); i++) {
+                JSONObject adminJson = adminsJson.getJSONObject(i).getJSONObject("person");
+                admins.add(new BasicUserInfo(adminJson.getInt("id"), adminJson.getString("name"),
+                        LemmyUtils.actorID2FullName(adminJson.getString("actor_id")), adminJson.optString("avatar ", ""),
+                        adminJson.optString("display_name", adminJson.getString("name")))
+                );
             }
-
-            return new SiteInfo(id, name, version, sidebar, description, enable_downvotes, enable_nsfw, community_creation_admin_only, admins, SiteStatistics.parseSiteStatistics(counts));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
         }
+
+        return new SiteInfo(id, name, version, sidebar, description, enable_downvotes, enable_nsfw, community_creation_admin_only, admins, SiteStatistics.parseSiteStatistics(counts));
     }
 }
