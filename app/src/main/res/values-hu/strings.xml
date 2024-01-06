@@ -1036,7 +1036,7 @@
     <string name="sort_time_6hours">6 óra</string>
     <string name="user_login">Bejelentkezés</string>
     <string name="user_password">Jelszó</string>
-    <string name="user_username">Felhasználónév</string>
+    <string name="user_username">Felhasználónév vagy email cím</string>
     <string name="instance_url">Példány címe</string>
     <string name="i_understand">Megértettem</string>
     <string name="go_to_settings">Beállítások</string>
