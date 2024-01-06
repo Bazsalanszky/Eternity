@@ -242,6 +242,9 @@ public class LoginActivity extends BaseActivity {
                                                         if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
                                                             mRetrofit.setAccessToken(accessToken);
                                                             mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
+                                                        } else {
+                                                            mRetrofit.setAccessToken(null);
+                                                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
                                                         }
                                                     }
                                                 }

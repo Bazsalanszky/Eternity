@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -119,6 +120,8 @@ import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
 import eu.toldi.infinityforlemmy.post.PostPagingSource;
 import eu.toldi.infinityforlemmy.readpost.InsertReadPost;
+import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
+import eu.toldi.infinityforlemmy.site.SiteInfo;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
@@ -1138,7 +1141,32 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
                         @Override
                         public void onFetchUserDataFailed() {
-                    mFetchUserInfoSuccess = false;
+                            mFetchUserInfoSuccess = false;
+                        }
+                    });
+
+            FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), mAccessToken, new FetchSiteInfo.FetchSiteInfoListener() {
+                @Override
+                public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+                    String[] version = siteInfo.getVersion().split("\\.");
+                    if (version.length > 0) {
+                        Log.d("MainActvity", "Lemmy Version: " + version[0] + "." + version[1]);
+                        int majorVersion = Integer.parseInt(version[0]);
+                        int minorVersion = Integer.parseInt(version[1]);
+                        if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
+                            mRetrofit.setAccessToken(mAccessToken);
+                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
+                            checkUserToken();
+                        } else {
+                            mRetrofit.setAccessToken(null);
+                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFetchSiteInfoFailed() {
+
                 }
             });
         }
