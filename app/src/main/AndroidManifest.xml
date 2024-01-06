@@ -59,10 +59,10 @@
             android:parentActivityName=".activities.SettingsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="false" />
+
         <activity
-            android:name=".activities.HistoryActivity"
-            android:exported="false"
-            android:label="@string/history_activity_label"
+            android:name=".activities.BlockedThingListingActivity"
+            android:label="@string/blocks"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.Slidable" />
         <activity
