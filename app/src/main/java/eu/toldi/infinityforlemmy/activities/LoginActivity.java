@@ -39,7 +39,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import eu.toldi.infinityforlemmy.FetchMyInfo;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
@@ -55,6 +54,7 @@ import eu.toldi.infinityforlemmy.lemmyverse.LemmyInstance;
 import eu.toldi.infinityforlemmy.lemmyverse.LemmyVerseFetchInstances;
 import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteInfo;
+import eu.toldi.infinityforlemmy.user.MyUserInfo;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -217,67 +217,58 @@ public class LoginActivity extends BaseActivity {
                         try {
                             JSONObject responseJSON = new JSONObject(accountResponse);
                             String accessToken = responseJSON.getString("jwt");
-                            mRetrofit.setAccessToken(null);
+                            mRetrofit.setAccessToken(accessToken);
 
-                            FetchMyInfo.fetchAccountInfo(mRetrofit.getRetrofit(), mRedditDataRoomDatabase, username,
-                                    accessToken, new FetchMyInfo.FetchMyInfoListener() {
-                                        @Override
-                                        public void onFetchMyInfoSuccess(String name, String display_name, String profileImageUrl, String bannerImageUrl) {
-                                            FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), accessToken, new FetchSiteInfo.FetchSiteInfoListener() {
-                                                @Override
-                                                public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
-                                                    boolean canDownvote = siteInfo.isEnable_downvotes();
-                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name, display_name, accessToken, profileImageUrl, bannerImageUrl, authCode, finalInstance, canDownvote, mRedditDataRoomDatabase.accountDao(),
-                                                            () -> {
-                                                                Intent resultIntent = new Intent();
-                                                                setResult(Activity.RESULT_OK, resultIntent);
-                                                                finish();
-                                                            });
-                                                    mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, canDownvote).apply();
-                                                    String[] version = siteInfo.getVersion().split("\\.");
-                                                    if (version.length > 0) {
-                                                        Log.d("SwitchAccount", "Lemmy Version: " + version[0] + "." + version[1]);
-                                                        int majorVersion = Integer.parseInt(version[0]);
-                                                        int minorVersion = Integer.parseInt(version[1]);
-                                                        if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
-                                                            mRetrofit.setAccessToken(accessToken);
-                                                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
-                                                        } else {
-                                                            mRetrofit.setAccessToken(null);
-                                                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
-                                                        }
-                                                    }
-                                                }
+                            FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), accessToken, new FetchSiteInfo.FetchSiteInfoListener() {
+                                @Override
+                                public void onFetchSiteInfoSuccess(SiteInfo siteInfo, MyUserInfo myUserInfo) {
+                                    if (myUserInfo == null) {
+                                        finish();
+                                        Toast.makeText(LoginActivity.this, R.string.parse_user_info_error, Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
 
-                                                @Override
-                                                public void onFetchSiteInfoFailed() {
-                                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), name,display_name, accessToken,  profileImageUrl, bannerImageUrl, authCode, finalInstance,true, mRedditDataRoomDatabase.accountDao(),
-                                                            () -> {
-                                                                Intent resultIntent = new Intent();
-                                                                setResult(Activity.RESULT_OK, resultIntent);
-                                                                finish();
-                                                            });
-                                                    mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, true).apply();
-                                                }
+                                    boolean canDownvote = siteInfo.isEnable_downvotes();
+                                    ParseAndInsertNewAccount.parseAndInsertNewAccount(mExecutor, new Handler(), myUserInfo.getQualifiedName(), myUserInfo.getDisplayName(), accessToken, myUserInfo.getProfileImageUrl(), myUserInfo.getBannerImageUrl(), authCode, finalInstance, canDownvote, mRedditDataRoomDatabase.accountDao(),
+                                            () -> {
+                                                Intent resultIntent = new Intent();
+                                                setResult(Activity.RESULT_OK, resultIntent);
+                                                finish();
                                             });
-                                            mCurrentAccountSharedPreferences.edit().putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
-                                                    .putString(SharedPreferencesUtils.ACCOUNT_NAME, display_name)
-                                                    .putString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, name)
-                                                    .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,finalInstance)
-                                                    .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, profileImageUrl).apply();
+                                    mCurrentAccountSharedPreferences.edit()
+                                            .putString(SharedPreferencesUtils.ACCESS_TOKEN, accessToken)
+                                            .putString(SharedPreferencesUtils.ACCOUNT_NAME, myUserInfo.getDisplayName())
+                                            .putString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, myUserInfo.getQualifiedName())
+                                            .putString(SharedPreferencesUtils.ACCOUNT_INSTANCE,finalInstance)
+                                            .putString(SharedPreferencesUtils.ACCOUNT_IMAGE_URL, myUserInfo.getProfileImageUrl())
+                                            .putBoolean(SharedPreferencesUtils.CAN_DOWNVOTE, canDownvote).apply();
+                                    String[] version = siteInfo.getVersion().split("\\.");
+                                    if (version.length > 0) {
+                                        Log.d("SwitchAccount", "Lemmy Version: " + version[0] + "." + version[1]);
+                                        int majorVersion = Integer.parseInt(version[0]);
+                                        int minorVersion = Integer.parseInt(version[1]);
+                                        if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
+                                            mRetrofit.setAccessToken(accessToken);
+                                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
+                                        } else {
+                                            mRetrofit.setAccessToken(null);
+                                            mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
                                         }
+                                    }
+                                }
 
-                                        @Override
-                                        public void onFetchMyInfoFailed(boolean parseFailed) {
-                                            if (parseFailed) {
-                                                Toast.makeText(LoginActivity.this, R.string.parse_user_info_error, Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
-                                            }
-
-                                            finish();
-                                        }
-                                    });
+                                @Override
+                                public void onFetchSiteInfoFailed(boolean parseFailed) {
+                                    if (parseFailed) {
+                                        finish();
+                                        Toast.makeText(LoginActivity.this, R.string.parse_user_info_error, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        progressBar.setVisibility(ProgressBar.GONE);
+                                        loginButton.setEnabled(true);
+                                        Toast.makeText(LoginActivity.this, R.string.cannot_fetch_user_info, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }

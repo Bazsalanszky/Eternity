@@ -128,6 +128,7 @@ import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditViewModel;
 import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserData;
 import eu.toldi.infinityforlemmy.user.FetchUserData;
+import eu.toldi.infinityforlemmy.user.MyUserInfo;
 import eu.toldi.infinityforlemmy.user.UserData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import eu.toldi.infinityforlemmy.utils.CustomThemeSharedPreferencesUtils;
@@ -1147,7 +1148,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             if (mAccessToken != null) {
                 FetchSiteInfo.fetchSiteInfo(mRetrofit.getRetrofit(), mAccessToken, new FetchSiteInfo.FetchSiteInfoListener() {
                     @Override
-                    public void onFetchSiteInfoSuccess(SiteInfo siteInfo) {
+                    public void onFetchSiteInfoSuccess(SiteInfo siteInfo, MyUserInfo myUserInfo) {
                         String[] version = siteInfo.getVersion().split("\\.");
                         if (version.length > 0) {
                             Log.d("MainActvity", "Lemmy Version: " + version[0] + "." + version[1]);
@@ -1165,7 +1166,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                     }
 
                     @Override
-                    public void onFetchSiteInfoFailed() {
+                    public void onFetchSiteInfoFailed(boolean parseFailed) {
 
                     }
                 });

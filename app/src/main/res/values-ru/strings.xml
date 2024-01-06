@@ -203,7 +203,7 @@
     <string name="sort_new">Новое</string>
     <string name="sort_random">Случайное</string>
     <string name="sort_rising">Набирающее популярность</string>
-    <string name="sort_top">Топовое</string>
+    <string name="sort_top">Лучшее</string>
     <string name="sort_controversial">Спорное</string>
     <string name="sort_relevance">Релевантное</string>
     <string name="sort_comments">Комментарии</string>
@@ -1336,4 +1336,7 @@
     <string name="acknowledgement_purchase_failed_description">Упс.. при проверке вашей покупки возникла ошибка. Если эта проблема не решится за три дня, вы получите возврат автоматически.
 \nНе переживайте, вы по-прежнему можете использовать Infinity для Reddit.</string>
     <string name="billing_error_network_error">При произведении операции произошла ошибка сети.</string>
+    <string name="token_expired_message">"Срок действия вашего токена истёк. Поскольку Eternity не хранит ваш пароль, вам придётся снова войти вручную! "</string>
+    <string name="token_expired">Срок действия токена истёк</string>
+    <string name="sort_scaled">Раздутое</string>
 </resources>
