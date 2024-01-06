@@ -62,10 +62,8 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.NavigationWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.GoBackToMainPageEvent;
-import eu.toldi.infinityforlemmy.events.RefreshMultiRedditsEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.PostFragment;
-import eu.toldi.infinityforlemmy.multireddit.DeleteMultiReddit;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
 import eu.toldi.infinityforlemmy.post.MarkPostAsRead;
 import eu.toldi.infinityforlemmy.post.Post;
@@ -592,7 +590,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
 
     private void showSortTypeBottomSheetFragment() {
         if (mFragment instanceof PostFragment) {
-            SortTypeBottomSheetFragment sortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(true, ((PostFragment) mFragment).getSortType());
+            SortTypeBottomSheetFragment sortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_MULTICOMMUNITY, ((PostFragment) mFragment).getSortType());
             sortTypeBottomSheetFragment.show(getSupportFragmentManager(), sortTypeBottomSheetFragment.getTag());
         }
     }
@@ -678,7 +676,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
                         -> {
                     Utils.hideKeyboard(this);
                     Intent subredditIntent = new Intent(this, ViewSubredditDetailActivity.class);
-                    subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_SUBREDDIT_NAME_KEY, thingEditText.getText().toString());
+                    subredditIntent.putExtra(ViewSubredditDetailActivity.EXTRA_COMMUNITY_FULL_NAME_KEY, thingEditText.getText().toString());
                     startActivity(subredditIntent);
                 })
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {
@@ -699,7 +697,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
             if (i == EditorInfo.IME_ACTION_DONE) {
                 Utils.hideKeyboard(this);
                 Intent userIntent = new Intent(this, ViewUserDetailActivity.class);
-                userIntent.putExtra(ViewUserDetailActivity.EXTRA_USER_NAME_KEY, thingEditText.getText().toString());
+                userIntent.putExtra(ViewUserDetailActivity.EXTRA_QUALIFIED_USER_NAME_KEY, thingEditText.getText().toString());
                 startActivity(userIntent);
                 return true;
             }
@@ -764,6 +762,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
             Intent editIntent = new Intent(this, EditMultiRedditActivity.class);
             editIntent.putExtra(EditMultiRedditActivity.EXTRA_MULTI_PATH, multiPath);
             startActivity(editIntent);
+            finish();
             return true;
         } else if (itemId == R.id.action_delete_view_multi_reddit_detail_activity) {
             new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
@@ -771,30 +770,13 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
                     .setMessage(R.string.delete_multi_reddit_dialog_message)
                     .setPositiveButton(R.string.delete, (dialogInterface, i)
                             -> {
-                        if (mAccessToken == null) {
-                            DeleteMultiredditInDatabase.deleteMultiredditInDatabase(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountName, multiPath,
-                                    () -> {
-                                        Toast.makeText(this, R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    });
-                        } else {
-                            DeleteMultiReddit.deleteMultiReddit(mExecutor, new Handler(), mOauthRetrofit, mRedditDataRoomDatabase,
-                                    mAccessToken, mAccountName, multiPath, new DeleteMultiReddit.DeleteMultiRedditListener() {
-                                        @Override
-                                        public void success() {
-                                            Toast.makeText(ViewMultiRedditDetailActivity.this,
-                                                    R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show();
-                                            EventBus.getDefault().post(new RefreshMultiRedditsEvent());
-                                            finish();
-                                        }
 
-                                        @Override
-                                        public void failed() {
-                                            Toast.makeText(ViewMultiRedditDetailActivity.this,
-                                                    R.string.delete_multi_reddit_failed, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }
+                        DeleteMultiredditInDatabase.deleteMultiredditInDatabase(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountName, multiPath,
+                                () -> {
+                                    Toast.makeText(this, R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show();
+                                    finish();
+                                });
+
                     })
                     .setNegativeButton(R.string.cancel, null)
                     .show();

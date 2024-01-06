@@ -37,8 +37,6 @@ public class UserThingSortTypeBottomSheetFragment extends LandscapeExpandedRound
     TextView hotTypeTextView;
     @BindView(R.id.top_type_text_view_user_thing_sort_type_bottom_sheet_fragment)
     TextView topTypeTextView;
-    @BindView(R.id.controversial_type_text_view_user_thing_sort_type_bottom_sheet_fragment)
-    TextView controversialTypeTextView;
     private BaseActivity activity;
 
     public UserThingSortTypeBottomSheetFragment() {
@@ -95,12 +93,6 @@ public class UserThingSortTypeBottomSheetFragment extends LandscapeExpandedRound
             dismiss();
         });
 
-       /* controversialTypeTextView.setOnClickListener(view -> {
-            if (activity != null) {
-                ((SortTypeSelectionCallback) activity).sortTypeSelected(SortType.Type.CONTROVERSIAL.name());
-            }
-            dismiss();
-        });*/
 
         if (activity.typeface != null) {
             Utils.setFontToAllTextViews(rootView, activity.typeface);

@@ -29,7 +29,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 import eu.toldi.infinityforlemmy.FragmentCommunicator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
@@ -45,6 +44,7 @@ import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
 import eu.toldi.infinityforlemmy.multireddit.MultiRedditViewModel;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 import retrofit2.Retrofit;
 
 public class MultiRedditListingFragment extends Fragment implements FragmentCommunicator {
@@ -111,9 +111,9 @@ public class MultiRedditListingFragment extends Fragment implements FragmentComm
         String accessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
         boolean isGettingMultiredditInfo = getArguments().getBoolean(EXTRA_IS_GETTING_MULTIREDDIT_INFO, false);
 
-        if (accessToken == null) {
-            mSwipeRefreshLayout.setEnabled(false);
-        }
+
+        mSwipeRefreshLayout.setEnabled(false);
+
 
         mGlide = Glide.with(this);
 
@@ -122,7 +122,7 @@ public class MultiRedditListingFragment extends Fragment implements FragmentComm
         MultiRedditListingRecyclerViewAdapter adapter = new MultiRedditListingRecyclerViewAdapter(mActivity,
                 mExecutor, mOauthRetrofit, mRedditDataRoomDatabase, mCustomThemeWrapper, accessToken,
                 new MultiRedditListingRecyclerViewAdapter.OnItemClickListener() {
-            @Override
+                    @Override
             public void onClick(MultiReddit multiReddit) {
                 if (mActivity instanceof MultiredditSelectionActivity) {
                     ((MultiredditSelectionActivity) mActivity).getSelectedMultireddit(multiReddit);

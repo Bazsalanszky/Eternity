@@ -18,7 +18,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,10 +28,10 @@ import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.adapters.SelectedSubredditsRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.bottomsheetfragments.SelectSubredditsOrUsersOptionsBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
 public class SelectedSubredditsAndUsersActivity extends BaseActivity implements ActivityToolbarInterface {
@@ -62,7 +61,7 @@ public class SelectedSubredditsAndUsersActivity extends BaseActivity implements 
     CustomThemeWrapper mCustomThemeWrapper;
     private LinearLayoutManagerBugFixed linearLayoutManager;
     private SelectedSubredditsRecyclerViewAdapter adapter;
-    private ArrayList<String> subreddits;
+    private ArrayList<SubredditWithSelection> subreddits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +85,11 @@ public class SelectedSubredditsAndUsersActivity extends BaseActivity implements 
         setToolbarGoToTop(toolbar);
 
         if (savedInstanceState != null) {
-            subreddits = savedInstanceState.getStringArrayList(SELECTED_SUBREDDITS_STATE);
+            subreddits = savedInstanceState.getParcelableArrayList(SELECTED_SUBREDDITS_STATE);
         } else {
-            subreddits = getIntent().getStringArrayListExtra(EXTRA_SELECTED_SUBREDDITS);
+            subreddits = getIntent().getParcelableArrayListExtra(EXTRA_SELECTED_SUBREDDITS);
         }
 
-        Collections.sort(subreddits);
 
         adapter = new SelectedSubredditsRecyclerViewAdapter(this, mCustomThemeWrapper, subreddits);
         linearLayoutManager = new LinearLayoutManagerBugFixed(this);
@@ -110,8 +108,7 @@ public class SelectedSubredditsAndUsersActivity extends BaseActivity implements 
         });
 
         fab.setOnClickListener(view -> {
-            SelectSubredditsOrUsersOptionsBottomSheetFragment selectSubredditsOrUsersOptionsBottomSheetFragment = new SelectSubredditsOrUsersOptionsBottomSheetFragment();
-            selectSubredditsOrUsersOptionsBottomSheetFragment.show(getSupportFragmentManager(), selectSubredditsOrUsersOptionsBottomSheetFragment.getTag());
+            selectSubreddits();
         });
     }
 
@@ -158,7 +155,7 @@ public class SelectedSubredditsAndUsersActivity extends BaseActivity implements 
                     if (subreddits == null) {
                         subreddits = new ArrayList<>();
                     }
-                    subreddits = data.getStringArrayListExtra(SubredditMultiselectionActivity.EXTRA_RETURN_SELECTED_SUBREDDITS);
+                    subreddits = data.getParcelableArrayListExtra(SubredditMultiselectionActivity.EXTRA_RETURN_SELECTED_SUBREDDITS);
                     adapter.addSubreddits(subreddits);
                 }
             } else if (requestCode == USER_SELECTION_REQUEST_CODE) {
@@ -176,7 +173,7 @@ public class SelectedSubredditsAndUsersActivity extends BaseActivity implements 
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if (adapter != null) {
-            outState.putStringArrayList(SELECTED_SUBREDDITS_STATE, adapter.getSubreddits());
+            outState.putParcelableArrayList(SELECTED_SUBREDDITS_STATE, adapter.getSubreddits());
         }
     }
 

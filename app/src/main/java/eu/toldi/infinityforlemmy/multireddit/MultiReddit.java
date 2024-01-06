@@ -12,6 +12,7 @@ import androidx.room.Ignore;
 import java.util.ArrayList;
 
 import eu.toldi.infinityforlemmy.account.Account;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 
 @Entity(tableName = "multi_reddits", primaryKeys = {"path", "username"},
         foreignKeys = @ForeignKey(entity = Account.class, parentColumns = "username",
@@ -48,7 +49,7 @@ public class MultiReddit implements Parcelable {
     @ColumnInfo(name = "is_favorite")
     private boolean isFavorite;
     @Ignore
-    private ArrayList<String> subreddits;
+    private ArrayList<SubredditWithSelection> subreddits;
 
     public MultiReddit(@NonNull String path, @NonNull String displayName, @NonNull String name,
                        String description, String copiedFrom, String iconUrl, String visibility,
@@ -72,7 +73,7 @@ public class MultiReddit implements Parcelable {
     public MultiReddit(@NonNull String path, @NonNull String displayName, @NonNull String name,
                        String description, String copiedFrom, String iconUrl, String visibility,
                        @NonNull String owner, int nSubscribers, long createdUTC, boolean over18,
-                       boolean isSubscriber, boolean isFavorite, ArrayList<String> subreddits) {
+                       boolean isSubscriber, boolean isFavorite, ArrayList<SubredditWithSelection> subreddits) {
         this.displayName = displayName;
         this.name = name;
         this.description = description;
@@ -104,7 +105,7 @@ public class MultiReddit implements Parcelable {
         isSubscriber = in.readByte() != 0;
         isFavorite = in.readByte() != 0;
         subreddits = new ArrayList<>();
-        in.readStringList(subreddits);
+        in.readList(subreddits, SubredditWithSelection.class.getClassLoader());
     }
 
     public static final Creator<MultiReddit> CREATOR = new Creator<>() {
@@ -226,11 +227,11 @@ public class MultiReddit implements Parcelable {
         isFavorite = favorite;
     }
 
-    public ArrayList<String> getSubreddits() {
+    public ArrayList<SubredditWithSelection> getSubreddits() {
         return subreddits;
     }
 
-    public void setSubreddits(ArrayList<String> subreddits) {
+    public void setSubreddits(ArrayList<SubredditWithSelection> subreddits) {
         this.subreddits = subreddits;
     }
 
@@ -254,6 +255,6 @@ public class MultiReddit implements Parcelable {
         parcel.writeByte((byte) (over18 ? 1 : 0));
         parcel.writeByte((byte) (isSubscriber ? 1 : 0));
         parcel.writeByte((byte) (isFavorite ? 1 : 0));
-        parcel.writeStringList(subreddits);
+        parcel.writeList(subreddits);
     }
 }

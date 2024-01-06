@@ -4,7 +4,6 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,7 @@ import java.util.concurrent.Executor;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,21 +62,22 @@ public class CreateMultiReddit {
 
     public static void anonymousCreateMultiReddit(Executor executor, Handler handler,
                                                   RedditDataRoomDatabase redditDataRoomDatabase,
+                                                  String accountName,
                                                   String multipath, String name, String description,
-                                                  List<String> subreddits,
+                                                  List<SubredditWithSelection> subreddits,
                                                   CreateMultiRedditListener createMultiRedditListener) {
         executor.execute(() -> {
             if (!redditDataRoomDatabase.accountDao().isAnonymousAccountInserted()) {
                 redditDataRoomDatabase.accountDao().insert(Account.getAnonymousAccount());
             }
             redditDataRoomDatabase.multiRedditDao().insert(new MultiReddit(multipath, name, name, description,
-                    null, null, "private", "-", 0, System.currentTimeMillis(), true, false, false));
-            List<AnonymousMultiredditSubreddit> anonymousMultiredditSubreddits = new ArrayList<>();
-            for (String s : subreddits) {
-                anonymousMultiredditSubreddits.add(new AnonymousMultiredditSubreddit(multipath, s));
+                    null, null, "private", accountName, 0, System.currentTimeMillis(), true, false, false));
+            /*List<AnonymousMultiredditSubreddit> anonymousMultiredditSubreddits = new ArrayList<>();
+            for (SubredditWithSelection s : subreddits) {
+                anonymousMultiredditSubreddits.add(new AnonymousMultiredditSubreddit(multipath, s.getQualifiedName()));
             }
             redditDataRoomDatabase.anonymousMultiredditSubredditDao().insertAll(anonymousMultiredditSubreddits);
-
+*/
             handler.post(createMultiRedditListener::success);
         });
     }

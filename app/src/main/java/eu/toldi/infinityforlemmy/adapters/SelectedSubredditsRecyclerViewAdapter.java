@@ -16,13 +16,14 @@ import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 
 public class SelectedSubredditsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private BaseActivity activity;
     private CustomThemeWrapper customThemeWrapper;
-    private ArrayList<String> subreddits;
+    private ArrayList<SubredditWithSelection> subreddits;
 
-    public SelectedSubredditsRecyclerViewAdapter(BaseActivity activity, CustomThemeWrapper customThemeWrapper, ArrayList<String> subreddits) {
+    public SelectedSubredditsRecyclerViewAdapter(BaseActivity activity, CustomThemeWrapper customThemeWrapper, ArrayList<SubredditWithSelection> subreddits) {
         this.activity = activity;
         this.customThemeWrapper = customThemeWrapper;
         if (subreddits == null) {
@@ -42,7 +43,7 @@ public class SelectedSubredditsRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof SubredditViewHolder) {
-            ((SubredditViewHolder) holder).subredditNameTextView.setText(subreddits.get(holder.getBindingAdapterPosition()));
+            ((SubredditViewHolder) holder).subredditNameTextView.setText(subreddits.get(holder.getBindingAdapterPosition()).getQualifiedName());
             ((SubredditViewHolder) holder).deleteButton.setOnClickListener(view -> {
                 subreddits.remove(holder.getBindingAdapterPosition());
                 notifyItemRemoved(holder.getBindingAdapterPosition());
@@ -55,18 +56,22 @@ public class SelectedSubredditsRecyclerViewAdapter extends RecyclerView.Adapter<
         return subreddits.size();
     }
 
-    public void addSubreddits(ArrayList<String> newSubreddits) {
+    public void addSubreddits(ArrayList<SubredditWithSelection> newSubreddits) {
         int oldSize = subreddits.size();
-        subreddits.addAll(newSubreddits);
+        for (SubredditWithSelection subreddit : newSubreddits) {
+            if (!subreddits.contains(subreddit)) {
+                subreddits.add(subreddit);
+            }
+        }
         notifyItemRangeInserted(oldSize, newSubreddits.size());
     }
 
     public void addUserInSubredditType(String username) {
-        subreddits.add(username);
-        notifyItemInserted(subreddits.size());
+        /*subreddits.add(username);
+        notifyItemInserted(subreddits.size());*/
     }
 
-    public ArrayList<String> getSubreddits() {
+    public ArrayList<SubredditWithSelection> getSubreddits() {
         return subreddits;
     }
 

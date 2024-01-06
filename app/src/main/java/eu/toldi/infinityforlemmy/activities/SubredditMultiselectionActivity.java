@@ -37,13 +37,14 @@ import eu.toldi.infinityforlemmy.ActivityToolbarInterface;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.adapters.SubredditMultiselectionRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditViewModel;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
-import retrofit2.Retrofit;
 
 public class SubredditMultiselectionActivity extends BaseActivity implements ActivityToolbarInterface {
 
@@ -70,8 +71,8 @@ public class SubredditMultiselectionActivity extends BaseActivity implements Act
     @BindView(R.id.error_text_view_subscribed_subreddits_multiselection_activity)
     TextView mErrorTextView;
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+    @Named("no_oauth")
+    RetrofitHolder mRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -131,7 +132,7 @@ public class SubredditMultiselectionActivity extends BaseActivity implements Act
 
         mSwipeRefreshLayout.setEnabled(false);
 
-        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, "-");
+        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, "-");
 
         bindView();
     }
@@ -177,7 +178,7 @@ public class SubredditMultiselectionActivity extends BaseActivity implements Act
         } else if (itemId == R.id.action_save_subreddit_multiselection_activity) {
             if (mAdapter != null) {
                 Intent returnIntent = new Intent();
-                returnIntent.putStringArrayListExtra(EXTRA_RETURN_SELECTED_SUBREDDITS,
+                returnIntent.putExtra(EXTRA_RETURN_SELECTED_SUBREDDITS,
                         mAdapter.getAllSelectedSubreddits());
                 setResult(RESULT_OK, returnIntent);
             }
@@ -198,12 +199,12 @@ public class SubredditMultiselectionActivity extends BaseActivity implements Act
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SUBREDDIT_SEARCH_REQUEST_CODE && resultCode == RESULT_OK && data != null && mAdapter != null) {
             Intent returnIntent = new Intent();
-            ArrayList<String> selectedSubreddits = mAdapter.getAllSelectedSubreddits();
-            ArrayList<String> searchedSubreddits = data.getStringArrayListExtra(SearchActivity.RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES);
+            ArrayList<SubredditWithSelection> selectedSubreddits = mAdapter.getAllSelectedSubreddits();
+            ArrayList<SubredditWithSelection> searchedSubreddits = data.getParcelableArrayListExtra(SearchActivity.RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES);
             if (searchedSubreddits != null) {
                 selectedSubreddits.addAll(searchedSubreddits);
             }
-            returnIntent.putStringArrayListExtra(EXTRA_RETURN_SELECTED_SUBREDDITS, selectedSubreddits);
+            returnIntent.putParcelableArrayListExtra(EXTRA_RETURN_SELECTED_SUBREDDITS, selectedSubreddits);
             setResult(RESULT_OK, returnIntent);
             finish();
         }

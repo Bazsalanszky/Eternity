@@ -17,12 +17,17 @@ import androidx.paging.PagingConfig;
 import androidx.paging.PagingData;
 import androidx.paging.PagingDataTransforms;
 import androidx.paging.PagingLiveData;
+import androidx.paging.PagingSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
+import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.multicommunity.MulticommunityPagingSource;
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
@@ -230,8 +235,8 @@ public class PostViewModel extends ViewModel {
         currentlyReadPostIdsLiveData.setValue(true);
     }
 
-    public PostPagingSource returnPagingSoruce() {
-        PostPagingSource paging3PagingSource;
+    public PagingSource returnPagingSoruce() {
+        PagingSource paging3PagingSource;
         switch (postType) {
             case PostPagingSource.TYPE_FRONT_PAGE:
                 paging3PagingSource = new PostPagingSource(executor, retrofit, accessToken, accountName,
@@ -239,11 +244,15 @@ public class PostViewModel extends ViewModel {
                         postFilter, readPostList, name, postEnricher);
                 break;
             case PostPagingSource.TYPE_SUBREDDIT:
-            case PostPagingSource.TYPE_MULTI_REDDIT:
-            case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
                 paging3PagingSource = new PostPagingSource(executor, retrofit, accessToken, accountName,
                         sharedPreferences, postFeedScrolledPositionSharedPreferences, name, postType,
                         sortType, postFilter, readPostList, postEnricher);
+                break;
+            case PostPagingSource.TYPE_MULTI_REDDIT:
+            case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
+                String[] communities = (name != null) ? name.split(Pattern.quote(",")) : new String[0];
+                paging3PagingSource = new MulticommunityPagingSource(retrofit.getRetrofit().create(LemmyAPI.class), List.of(communities), accessToken,
+                        sortType, executor, postFilter, (readPostList != null) ? readPostList : new ArrayList<>(), postEnricher);
                 break;
             case PostPagingSource.TYPE_SEARCH:
                 paging3PagingSource = new PostPagingSource(executor, retrofit, accessToken, accountName,
@@ -380,12 +389,12 @@ public class PostViewModel extends ViewModel {
             this.executor = executor;
             this.retrofit = retrofit;
             this.sharedPreferences = sharedPreferences;
-            // TODO is this used? because it is getting overwritten with opt
+
             this.name = concatenatedSubredditNames;
             this.postType = postType;
             this.sortType = sortType;
             this.postFilter = postFilter;
-            this.name = opt;
+
             this.postEnricher = postEnricher;
         }
 

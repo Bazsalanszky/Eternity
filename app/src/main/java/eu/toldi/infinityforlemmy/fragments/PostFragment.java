@@ -435,7 +435,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
 
         postType = getArguments().getInt(EXTRA_POST_TYPE);
 
-        mSwipeRefreshLayout.setEnabled(mSharedPreferences.getBoolean(SharedPreferencesUtils.PULL_TO_REFRESH, true) && postType != PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE);
+        mSwipeRefreshLayout.setEnabled(mSharedPreferences.getBoolean(SharedPreferencesUtils.PULL_TO_REFRESH, true));
         mSwipeRefreshLayout.setOnRefreshListener(this::refresh);
 
         accessToken = getArguments().getString(EXTRA_ACCESS_TOKEN);
@@ -597,7 +597,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             String sortTime = null;
 
             sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_MULTI_REDDIT_POST_BASE + multiRedditPath,
-                    SortType.Type.HOT.name());
+                    SortType.Type.NEW.name());
             if (sort.equals(SortType.Type.TOP.name())) {
                 sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_MULTI_REDDIT_POST_BASE + multiRedditPath,
                         SortType.Time.ALL.name());
@@ -728,7 +728,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             nameOfUsage = PostFilterUsage.NO_USAGE;
             subredditName = getArguments().getString(EXTRA_NAME);
 
-            String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SUBREDDIT_POST_BASE + "-", SortType.Type.HOT.name());
+            String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_SUBREDDIT_POST_BASE + "-", SortType.Type.NEW.name());
             String sortTime = null;
             if (sort.equals(SortType.Type.TOP.name())) {
                 sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_SUBREDDIT_POST_BASE + "-", SortType.Time.ALL.name());
@@ -967,7 +967,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                                         this.postFilter = postFilter;
                                         postFilter.allowNSFW = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean(SharedPreferencesUtils.NSFW_BASE, false);
                                         this.concatenatedSubredditNames = concatenatedSubredditNames;
-                                        showErrorView(R.string.anonymous_homepage_not_implemented);
+                                        //showErrorView(R.string.anonymous_homepage_not_implemented);
+                                        initializeAndBindPostViewModelForAnonymous(concatenatedSubredditNames);
                                     }
                                 });
                     } else {
@@ -1009,7 +1010,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
                                     if (activity != null && !activity.isFinishing() && !activity.isDestroyed() && !isDetached()) {
                                         postFilter.allowNSFW = !mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_NSFW_FOREVER, false) && mNsfwAndSpoilerSharedPreferences.getBoolean(SharedPreferencesUtils.NSFW_BASE, false);
                                         this.concatenatedSubredditNames = concatenatedSubredditNames;
-                                        showErrorView(R.string.anonymous_homepage_not_implemented);
+                                        //showErrorView(R.string.anonymous_homepage_not_implemented);
+                                        initializeAndBindPostViewModelForAnonymous(concatenatedSubredditNames);
                                     }
                                 });
                     } else {

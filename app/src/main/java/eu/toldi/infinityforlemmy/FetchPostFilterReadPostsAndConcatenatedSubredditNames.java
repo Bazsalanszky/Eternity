@@ -49,7 +49,7 @@ public class FetchPostFilterReadPostsAndConcatenatedSubredditNames {
             if (anonymousSubscribedSubreddits != null && !anonymousSubscribedSubreddits.isEmpty()) {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (SubscribedSubredditData s : anonymousSubscribedSubreddits) {
-                    stringBuilder.append(s.getName()).append("+");
+                    stringBuilder.append(s.getQualified_name()).append(",");
                 }
                 if (stringBuilder.length() > 0) {
                     stringBuilder.deleteCharAt(stringBuilder.length() - 1);

@@ -55,8 +55,10 @@ import eu.toldi.infinityforlemmy.recentsearchquery.RecentSearchQuery;
 import eu.toldi.infinityforlemmy.recentsearchquery.RecentSearchQueryViewModel;
 import eu.toldi.infinityforlemmy.subreddit.ParseSubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
 import retrofit2.Call;
@@ -190,9 +192,9 @@ public class SearchActivity extends BaseActivity {
             if (searchOnlySubreddits) {
                 Intent returnIntent = new Intent();
                 if (getIntent().getBooleanExtra(EXTRA_IS_MULTI_SELECTION, false)) {
-                    ArrayList<String> subredditNameList = new ArrayList<>();
-                    subredditNameList.add(subredditData.getName());
-                    returnIntent.putStringArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, subredditNameList);
+                    ArrayList<SubredditWithSelection> subredditNameList = new ArrayList<>();
+                    subredditNameList.add(new SubredditWithSelection(subredditData.getName(), subredditData.getIconUrl(), LemmyUtils.actorID2FullName(subredditData.getActorId())));
+                    returnIntent.putParcelableArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, subredditNameList);
                 } else {
                     returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_NAME, new SubscribedSubredditData(subredditData));
                     returnIntent.putExtra(EXTRA_RETURN_SUBREDDIT_ICON_URL, subredditData.getIconUrl());

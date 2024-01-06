@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 
 public class ParseMultiReddit {
@@ -47,10 +48,8 @@ public class ParseMultiReddit {
         boolean isFavorited = singleMultiRedditJSON.getBoolean(JSONUtils.IS_FAVORITED_KEY);
 
         JSONArray subredditsArray = singleMultiRedditJSON.getJSONArray(JSONUtils.SUBREDDITS_KEY);
-        ArrayList<String> subreddits = new ArrayList<>();
-        for (int j = 0; j < subredditsArray.length(); j++) {
-            subreddits.add(subredditsArray.getJSONObject(j).getString(JSONUtils.NAME_KEY));
-        }
+        ArrayList<SubredditWithSelection> subreddits = new ArrayList<>();
+
 
         return new MultiReddit(path, displayName, name, description, copiedFrom,
                 iconUrl, visibility, owner, nSubscribers, createdUTC, over18, isSubscriber,

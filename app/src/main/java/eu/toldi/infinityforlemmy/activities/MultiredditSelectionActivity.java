@@ -117,7 +117,7 @@ public class MultiredditSelectionActivity extends BaseActivity implements Activi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState == null) {
             bindView(true);

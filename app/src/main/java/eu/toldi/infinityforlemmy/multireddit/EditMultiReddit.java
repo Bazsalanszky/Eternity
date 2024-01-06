@@ -11,6 +11,7 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,16 +49,14 @@ public class EditMultiReddit {
 
     public static void anonymousEditMultiReddit(Executor executor, Handler handler,
                                                 RedditDataRoomDatabase redditDataRoomDatabase,
-                                                MultiReddit multiReddit,
+                                                MultiReddit multiReddit, String oldPath,
                                                 EditMultiRedditListener editMultiRedditListener) {
         executor.execute(() -> {
             ArrayList<AnonymousMultiredditSubreddit> anonymousMultiredditSubreddits = new ArrayList<>();
-            ArrayList<String> subreddits = multiReddit.getSubreddits();
+            ArrayList<SubredditWithSelection> subreddits = multiReddit.getSubreddits();
+            redditDataRoomDatabase.multiRedditDao().anonymousDeleteMultiReddit(oldPath);
             redditDataRoomDatabase.multiRedditDao().insert(multiReddit);
-            for (String s : subreddits) {
-                anonymousMultiredditSubreddits.add(new AnonymousMultiredditSubreddit(multiReddit.getPath(), s));
-            }
-            redditDataRoomDatabase.anonymousMultiredditSubredditDao().insertAll(anonymousMultiredditSubreddits);
+
             handler.post(editMultiRedditListener::success);
         });
     }

@@ -14,8 +14,9 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
-import eu.toldi.infinityforlemmy.utils.JSONUtils;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
+import eu.toldi.infinityforlemmy.utils.JSONUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,16 +50,14 @@ public class FetchMultiRedditInfo {
 
     public static void anonymousFetchMultiRedditInfo(Executor executor, Handler handler,
                                                      RedditDataRoomDatabase redditDataRoomDatabase,
-                                                     String multipath,
+                                                     String multipath, String accountName,
                                                      FetchMultiRedditInfoListener fetchMultiRedditInfoListener) {
         executor.execute(() -> {
-            MultiReddit multiReddit = redditDataRoomDatabase.multiRedditDao().getMultiReddit(multipath, "-");
+            MultiReddit multiReddit = redditDataRoomDatabase.multiRedditDao().getMultiReddit(multipath, accountName);
             ArrayList<AnonymousMultiredditSubreddit> anonymousMultiredditSubreddits =
                     (ArrayList<AnonymousMultiredditSubreddit>) redditDataRoomDatabase.anonymousMultiredditSubredditDao().getAllAnonymousMultiRedditSubreddits(multipath);
-            ArrayList<String> subredditNames = new ArrayList<>();
-            for (AnonymousMultiredditSubreddit a : anonymousMultiredditSubreddits) {
-                subredditNames.add(a.getSubredditName());
-            }
+            ArrayList<SubredditWithSelection> subredditNames = new ArrayList<>();
+
             multiReddit.setSubreddits(subredditNames);
             handler.post(() -> fetchMultiRedditInfoListener.success(multiReddit));
         });
@@ -93,11 +92,9 @@ public class FetchMultiRedditInfo {
                 boolean over18 = object.getBoolean(JSONUtils.OVER_18_KEY);
                 boolean isSubscriber = object.getBoolean(JSONUtils.IS_SUBSCRIBER_KEY);
                 boolean isFavorite = object.getBoolean(JSONUtils.IS_FAVORITED_KEY);
-                ArrayList<String> subreddits = new ArrayList<>();
+                ArrayList<SubredditWithSelection> subreddits = new ArrayList<>();
                 JSONArray subredditsArray = object.getJSONArray(JSONUtils.SUBREDDITS_KEY);
-                for (int i = 0; i < subredditsArray.length(); i++) {
-                    subreddits.add(subredditsArray.getJSONObject(i).getString(JSONUtils.NAME_KEY));
-                }
+
 
                 multiReddit = new MultiReddit(path, displayName, name, description, copiedFrom, iconUrl,
                         visibility, owner, nSubscribers, createdUTC, over18, isSubscriber, isFavorite,

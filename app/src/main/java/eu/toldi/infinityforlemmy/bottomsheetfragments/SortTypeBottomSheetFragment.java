@@ -29,11 +29,20 @@ import eu.toldi.infinityforlemmy.utils.Utils;
  */
 public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomSheetDialogFragment {
 
-    public static final String EXTRA_NO_BEST_TYPE = "ENBT";
     public static final String EXTRA_CURRENT_SORT_TYPE = "ECST";
 
+    public static final String EXTRA_PAGE_TYPE = "EPT";
+
+    public static final int PAGE_TYPE_FRONT_PAGE = 0;
+    public static final int PAGE_TYPE_COMMUNITY = 1;
+    public static final int PAGE_TYPE_USER = 2;
+    public static final int PAGE_TYPE_SEARCH = 3;
+    public static final int PAGE_TYPE_MULTICOMMUNITY = 4;
+    public static final int PAGE_TYPE_ANONYMOUS_FRONT_PAGE = 5;
+
+
     @BindView(R.id.best_type_text_view_sort_type_bottom_sheet_fragment)
-    TextView bestTypeTextView;
+    TextView activeTypeTextView;
     @BindView(R.id.hot_type_text_view_sort_type_bottom_sheet_fragment)
     TextView hotTypeTextView;
     @BindView(R.id.new_type_text_view_sort_type_bottom_sheet_fragment)
@@ -55,10 +64,10 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
         // Required empty public constructor
     }
 
-    public static SortTypeBottomSheetFragment getNewInstance(boolean isNoBestType, SortType currentSortType) {
+    public static SortTypeBottomSheetFragment getNewInstance(int pageType, SortType currentSortType) {
         SortTypeBottomSheetFragment fragment = new SortTypeBottomSheetFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(EXTRA_NO_BEST_TYPE, isNoBestType);
+        bundle.putInt(EXTRA_PAGE_TYPE, pageType);
         bundle.putString(EXTRA_CURRENT_SORT_TYPE, currentSortType.getType().fullName);
         fragment.setArguments(bundle);
         return fragment;
@@ -75,18 +84,27 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         }
 
-        if (getArguments().getBoolean(EXTRA_NO_BEST_TYPE)) {
-            bestTypeTextView.setVisibility(View.GONE);
-        } else {
-            bestTypeTextView.setOnClickListener(view -> {
-                ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.ACTIVE));
-                dismiss();
-            });
+        int pageType = getArguments().getInt(EXTRA_PAGE_TYPE, PAGE_TYPE_USER);
+
+        switch (pageType) {
+
+            case PAGE_TYPE_MULTICOMMUNITY:
+            case PAGE_TYPE_USER:
+            case PAGE_TYPE_ANONYMOUS_FRONT_PAGE:
+                activeTypeTextView.setVisibility(View.GONE);
+                hotTypeTextView.setVisibility(View.GONE);
+                break;
+
+            default:
+            case PAGE_TYPE_COMMUNITY:
+            case PAGE_TYPE_FRONT_PAGE:
+
+                break;
         }
 
         String currentSortType = getArguments().getString(EXTRA_CURRENT_SORT_TYPE);
         if (currentSortType.equals(SortType.Type.ACTIVE.fullName)) {
-            bestTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(bestTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+            activeTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(activeTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.HOT.fullName)) {
             hotTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(hotTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.NEW.fullName)) {
@@ -100,6 +118,11 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
         } else if (currentSortType.equals(SortType.Type.CONTROVERSIAL.fullName)) {
             controversialTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(controversialTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
+
+        activeTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.ACTIVE));
+            dismiss();
+        });
 
         hotTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.HOT));

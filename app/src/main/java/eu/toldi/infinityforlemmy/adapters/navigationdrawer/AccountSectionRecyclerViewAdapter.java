@@ -24,8 +24,8 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
 
     private static final int VIEW_TYPE_MENU_GROUP_TITLE = 1;
     private static final int VIEW_TYPE_MENU_ITEM = 2;
-    private static final int ACCOUNT_SECTION_ITEMS = 4;
-    private static final int ANONYMOUS_ACCOUNT_SECTION_ITEMS = 1;
+    private static final int ACCOUNT_SECTION_ITEMS = 5;
+    private static final int ANONYMOUS_ACCOUNT_SECTION_ITEMS = 2;
 
     private BaseActivity baseActivity;
     private int inboxCount;
@@ -113,6 +113,10 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
                             baseActivity.startActivity(intent);
                         });
                         break;
+                    case 4:
+                        stringId = R.string.multi_reddit;
+                        drawableId = R.drawable.ic_multi_reddit_24dp;
+                        break;
                     default:
                         stringId = R.string.account_saved_thing_activity_label;
                         drawableId = R.drawable.ic_outline_bookmarks_24dp;
@@ -124,6 +128,10 @@ public class AccountSectionRecyclerViewAdapter extends RecyclerView.Adapter<Recy
                     case 1:
                         stringId = R.string.subscriptions;
                         drawableId = R.drawable.ic_subscritptions_bottom_app_bar_24dp;
+                        break;
+                    case 2:
+                        stringId = R.string.multi_reddit;
+                        drawableId = R.drawable.ic_multi_reddit_24dp;
                         break;
                     default:
                         stringId = R.string.anonymous_account_instance;

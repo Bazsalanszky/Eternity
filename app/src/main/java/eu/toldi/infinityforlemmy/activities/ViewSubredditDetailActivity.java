@@ -1214,7 +1214,7 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
     private void displaySortTypeBottomSheetFragment() {
         Fragment fragment = fragmentManager.findFragmentByTag("f0");
         if (fragment instanceof PostFragment) {
-            SortTypeBottomSheetFragment sortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(true, ((PostFragment) fragment).getSortType());
+            SortTypeBottomSheetFragment sortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_COMMUNITY, ((PostFragment) fragment).getSortType());
             sortTypeBottomSheetFragment.show(fragmentManager, sortTypeBottomSheetFragment.getTag());
         }
     }

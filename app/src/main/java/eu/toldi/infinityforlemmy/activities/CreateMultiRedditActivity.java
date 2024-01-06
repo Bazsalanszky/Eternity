@@ -34,13 +34,13 @@ import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
+import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.multireddit.CreateMultiReddit;
-import eu.toldi.infinityforlemmy.multireddit.MultiRedditJSONModel;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
-import retrofit2.Retrofit;
 
 public class CreateMultiRedditActivity extends BaseActivity {
 
@@ -71,8 +71,8 @@ public class CreateMultiRedditActivity extends BaseActivity {
     @BindView(R.id.select_subreddit_text_view_create_multi_reddit_activity)
     TextView selectSubredditTextView;
     @Inject
-    @Named("oauth")
-    Retrofit mOauthRetrofit;
+    @Named("no_oauth")
+    RetrofitHolder mRetrofit;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -87,14 +87,14 @@ public class CreateMultiRedditActivity extends BaseActivity {
     Executor mExecutor;
     private String mAccessToken;
     private String mAccountName;
-    private ArrayList<String> mSubreddits;
+    private ArrayList<SubredditWithSelection> mSubreddits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ((Infinity) getApplication()).getAppComponent().inject(this);
 
         setImmersiveModeNotApplicable();
-        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_multi_reddit);
 
@@ -114,10 +114,10 @@ public class CreateMultiRedditActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, "-");
+        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, "-");
 
+        visibilityLinearLayout.setVisibility(View.GONE);
         if (mAccessToken == null) {
-            visibilityLinearLayout.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 nameEditText.setImeOptions(nameEditText.getImeOptions() | EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING);
                 descriptionEditText.setImeOptions(descriptionEditText.getImeOptions() | EditorInfoCompat.IME_FLAG_NO_PERSONALIZED_LEARNING);
@@ -125,7 +125,7 @@ public class CreateMultiRedditActivity extends BaseActivity {
         }
 
         if (savedInstanceState != null) {
-            mSubreddits = savedInstanceState.getStringArrayList(SELECTED_SUBREDDITS_STATE);
+            mSubreddits = savedInstanceState.getParcelableArrayList(SELECTED_SUBREDDITS_STATE);
         } else {
             mSubreddits = new ArrayList<>();
         }
@@ -135,7 +135,7 @@ public class CreateMultiRedditActivity extends BaseActivity {
     private void bindView() {
         selectSubredditTextView.setOnClickListener(view -> {
             Intent intent = new Intent(CreateMultiRedditActivity.this, SelectedSubredditsAndUsersActivity.class);
-            intent.putStringArrayListExtra(SelectedSubredditsAndUsersActivity.EXTRA_SELECTED_SUBREDDITS, mSubreddits);
+            intent.putParcelableArrayListExtra(SelectedSubredditsAndUsersActivity.EXTRA_SELECTED_SUBREDDITS, mSubreddits);
             startActivityForResult(intent, SUBREDDIT_SELECTION_REQUEST_CODE);
         });
     }
@@ -159,42 +159,29 @@ public class CreateMultiRedditActivity extends BaseActivity {
                 return true;
             }
 
-            if (mAccessToken != null) {
-                String jsonModel = new MultiRedditJSONModel(nameEditText.getText().toString(), descriptionEditText.getText().toString(),
-                        visibilitySwitch.isChecked(), mSubreddits).createJSONModel();
-                CreateMultiReddit.createMultiReddit(mOauthRetrofit, mRedditDataRoomDatabase, mAccessToken,
-                        "/user/" + mAccountName + "/m/" + nameEditText.getText().toString(),
-                        jsonModel, new CreateMultiReddit.CreateMultiRedditListener() {
-                            @Override
-                            public void success() {
-                                finish();
-                            }
-
-                            @Override
-                            public void failed(int errorCode) {
-                                if (errorCode == 409) {
-                                    Snackbar.make(coordinatorLayout, R.string.duplicate_multi_reddit, Snackbar.LENGTH_SHORT).show();
-                                } else {
-                                    Snackbar.make(coordinatorLayout, R.string.create_multi_reddit_failed, Snackbar.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            } else {
-                CreateMultiReddit.anonymousCreateMultiReddit(mExecutor, new Handler(), mRedditDataRoomDatabase,
-                        "/user/-/m/" + nameEditText.getText().toString(),
-                        nameEditText.getText().toString(), descriptionEditText.getText().toString(),
-                        mSubreddits, new CreateMultiReddit.CreateMultiRedditListener() {
-                            @Override
-                            public void success() {
-                                finish();
-                            }
-
-                            @Override
-                            public void failed(int errorType) {
-                                //Will not be called
-                            }
-                        });
+            // Create a list of community qualified names seperated by a comma
+            StringBuilder subredditList = new StringBuilder();
+            String prefix = "";
+            for (SubredditWithSelection s : mSubreddits) {
+                subredditList.append(prefix);
+                prefix = ",";
+                subredditList.append(s.getQualifiedName());
             }
+
+            CreateMultiReddit.anonymousCreateMultiReddit(mExecutor, new Handler(), mRedditDataRoomDatabase,
+                    mAccountName, subredditList.toString(),
+                    nameEditText.getText().toString(), descriptionEditText.getText().toString(),
+                    mSubreddits, new CreateMultiReddit.CreateMultiRedditListener() {
+                        @Override
+                        public void success() {
+                            finish();
+                        }
+
+                        @Override
+                        public void failed(int errorType) {
+                            //Will not be called
+                        }
+                    });
         }
         return false;
     }
@@ -204,7 +191,7 @@ public class CreateMultiRedditActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SUBREDDIT_SELECTION_REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
-                mSubreddits = data.getStringArrayListExtra(
+                mSubreddits = data.getParcelableArrayListExtra(
                         SubredditMultiselectionActivity.EXTRA_RETURN_SELECTED_SUBREDDITS);
             }
         }
@@ -213,7 +200,7 @@ public class CreateMultiRedditActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putStringArrayList(SELECTED_SUBREDDITS_STATE, mSubreddits);
+        outState.putParcelableArrayList(SELECTED_SUBREDDITS_STATE, mSubreddits);
     }
 
     @Override

@@ -63,7 +63,6 @@ import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.FollowedUsersListingFragment;
 import eu.toldi.infinityforlemmy.fragments.MultiRedditListingFragment;
 import eu.toldi.infinityforlemmy.fragments.SubscribedSubredditsListingFragment;
-import eu.toldi.infinityforlemmy.multireddit.DeleteMultiReddit;
 import eu.toldi.infinityforlemmy.multireddit.FetchMyMultiReddits;
 import eu.toldi.infinityforlemmy.multireddit.MultiReddit;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
@@ -236,7 +235,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setOffscreenPageLimit(1);
-        if (viewPager.getCurrentItem() != 2) {
+        if (viewPager.getCurrentItem() != 1) {
             fab.hide();
         }
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -247,7 +246,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                     fab.hide();
                 } else {
                     lockSwipeRightToGoBack();
-                    if (position != 2) {
+                    if (position != 1) {
                         fab.hide();
                     } else {
                         fab.show();
@@ -258,7 +257,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         tabLayout.setupWithViewPager(viewPager);
 
         if (showMultiReddits) {
-            viewPager.setCurrentItem(2, false);
+            viewPager.setCurrentItem(1, false);
         }
 
         loadSubscriptions(false);
@@ -386,7 +385,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
             FetchMyMultiReddits.fetchMyMultiReddits(mOauthRetrofit, mAccessToken, new FetchMyMultiReddits.FetchMyMultiRedditsListener() {
                 @Override
                 public void success(ArrayList<MultiReddit> multiReddits) {
-                    InsertMultireddit.insertMultireddits(mExecutor, new Handler(), mRedditDataRoomDatabase, multiReddits, mAccountName, () -> {
+                    InsertMultireddit.insertMultireddits(mExecutor, new Handler(), mRedditDataRoomDatabase, multiReddits, mAccountQualifiedName, () -> {
                         mInsertMultiredditSuccess = true;
                         sectionsPagerAdapter.stopMultiRedditRefreshProgressbar();
                     });
@@ -408,27 +407,11 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                 .setMessage(R.string.delete_multi_reddit_dialog_message)
                 .setPositiveButton(R.string.delete, (dialogInterface, i)
                         -> {
-                    if (mAccessToken == null) {
-                        DeleteMultiredditInDatabase.deleteMultiredditInDatabase(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountName, multiReddit.getPath(),
-                                () -> Toast.makeText(SubscribedThingListingActivity.this,
-                                        R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show());
-                    } else {
-                        DeleteMultiReddit.deleteMultiReddit(mExecutor, new Handler(), mOauthRetrofit, mRedditDataRoomDatabase,
-                                mAccessToken, mAccountName, multiReddit.getPath(), new DeleteMultiReddit.DeleteMultiRedditListener() {
-                                    @Override
-                                    public void success() {
-                                        Toast.makeText(SubscribedThingListingActivity.this,
-                                                R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show();
-                                        //loadMultiReddits();
-                                    }
 
-                                    @Override
-                                    public void failed() {
-                                        Toast.makeText(SubscribedThingListingActivity.this,
-                                                R.string.delete_multi_reddit_failed, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
+                    DeleteMultiredditInDatabase.deleteMultiredditInDatabase(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountQualifiedName, multiReddit.getPath(),
+                            () -> Toast.makeText(SubscribedThingListingActivity.this,
+                                    R.string.delete_multi_reddit_success, Toast.LENGTH_SHORT).show());
+
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
@@ -484,7 +467,7 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                default:
+
                 case 0: {
                     SubscribedSubredditsListingFragment fragment = new SubscribedSubredditsListingFragment();
                     Bundle bundle = new Bundle();
@@ -495,12 +478,20 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                     fragment.setArguments(bundle);
                     return fragment;
                 }
+                default: {
+                    MultiRedditListingFragment fragment = new MultiRedditListingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(MultiRedditListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+                    bundle.putString(MultiRedditListingFragment.EXTRA_ACCOUNT_NAME, mAccountName == null ? "-" : mAccountQualifiedName);
+                    fragment.setArguments(bundle);
+                    return fragment;
+                }
             }
         }
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
 
         @Override
@@ -509,8 +500,6 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
                 case 0:
                     return Utils.getTabTextWithCustomFont(typeface, getString(R.string.communities));
                 case 1:
-                    return Utils.getTabTextWithCustomFont(typeface, getString(R.string.users));
-                case 2:
                     return Utils.getTabTextWithCustomFont(typeface, getString(R.string.multi_reddits));
             }
 
@@ -523,8 +512,6 @@ public class SubscribedThingListingActivity extends BaseActivity implements Acti
             Fragment fragment = (Fragment) super.instantiateItem(container, position);
             if (position == 0) {
                 subscribedSubredditsListingFragment = (SubscribedSubredditsListingFragment) fragment;
-            } else if (position == 1) {
-                followedUsersListingFragment = (FollowedUsersListingFragment) fragment;
             } else {
                 multiRedditListingFragment = (MultiRedditListingFragment) fragment;
             }

@@ -9,21 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
+import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 
 public class SubredditWithSelection implements Parcelable {
-    private String name;
-    private String iconUrl;
+    private final String name;
+    private final String iconUrl;
+
+    private final String qualifiedName;
     private boolean selected;
 
-    public SubredditWithSelection(String name, String iconUrl) {
+    public SubredditWithSelection(String name, String iconUrl, String qualifiedName) {
         this.name = name;
         this.iconUrl = iconUrl;
+        this.qualifiedName = qualifiedName;
         selected = false;
     }
 
     protected SubredditWithSelection(Parcel in) {
         name = in.readString();
         iconUrl = in.readString();
+        qualifiedName = in.readString();
         selected = in.readByte() != 0;
     }
 
@@ -51,6 +56,10 @@ public class SubredditWithSelection implements Parcelable {
         return selected;
     }
 
+    public String getQualifiedName() {
+        return qualifiedName;
+    }
+
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
@@ -59,14 +68,14 @@ public class SubredditWithSelection implements Parcelable {
             List<SubscribedSubredditData> subscribedSubredditData) {
         ArrayList<SubredditWithSelection> subredditWithSelections = new ArrayList<>();
         for (SubscribedSubredditData s : subscribedSubredditData) {
-            subredditWithSelections.add(new SubredditWithSelection(s.getName(), s.getIconUrl()));
+            subredditWithSelections.add(new SubredditWithSelection(s.getName(), s.getIconUrl(), s.getQualified_name()));
         }
 
         return subredditWithSelections;
     }
 
     public static SubredditWithSelection convertSubreddit(SubredditData subreddit) {
-        return new SubredditWithSelection(subreddit.getName(), subreddit.getIconUrl());
+        return new SubredditWithSelection(subreddit.getName(), subreddit.getIconUrl(), LemmyUtils.actorID2FullName(subreddit.getActorId()));
     }
 
     public int compareName(SubredditWithSelection subredditWithSelection) {
@@ -82,7 +91,7 @@ public class SubredditWithSelection implements Parcelable {
         if (!(obj instanceof SubredditWithSelection)) {
             return false;
         } else {
-            return this.getName().compareToIgnoreCase(((SubredditWithSelection) obj).getName()) == 0;
+            return this.getQualifiedName().compareToIgnoreCase(((SubredditWithSelection) obj).getQualifiedName()) == 0;
         }
     }
 
@@ -95,6 +104,7 @@ public class SubredditWithSelection implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
         parcel.writeString(iconUrl);
+        parcel.writeString(qualifiedName);
         parcel.writeByte((byte) (selected ? 1 : 0));
     }
 }

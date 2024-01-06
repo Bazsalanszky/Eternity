@@ -371,19 +371,16 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
         } else if (itemId == R.id.action_sort_filtered_thing_activity) {
             switch (postType) {
                 case PostPagingSource.TYPE_FRONT_PAGE:
-                    SortTypeBottomSheetFragment bestSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(false, mFragment.getSortType());
+                case PostPagingSource.TYPE_SUBREDDIT:
+                case PostPagingSource.TYPE_MULTI_REDDIT:
+                case PostPagingSource.TYPE_ANONYMOUS_MULTIREDDIT:
+                case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
+                    SortTypeBottomSheetFragment bestSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(postType, mFragment.getSortType());
                     bestSortTypeBottomSheetFragment.show(getSupportFragmentManager(), bestSortTypeBottomSheetFragment.getTag());
                     break;
                 case PostPagingSource.TYPE_SEARCH:
                     SearchPostSortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SearchPostSortTypeBottomSheetFragment.getNewInstance(mFragment.getSortType());
                     searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
-                    break;
-                case PostPagingSource.TYPE_SUBREDDIT:
-                case PostPagingSource.TYPE_MULTI_REDDIT:
-                case PostPagingSource.TYPE_ANONYMOUS_MULTIREDDIT:
-                case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
-                    SortTypeBottomSheetFragment sortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(true, mFragment.getSortType());
-                    sortTypeBottomSheetFragment.show(getSupportFragmentManager(), sortTypeBottomSheetFragment.getTag());
                     break;
                 case PostPagingSource.TYPE_USER:
                     UserThingSortTypeBottomSheetFragment userThingSortTypeBottomSheetFragment = UserThingSortTypeBottomSheetFragment.getNewInstance(mFragment.getSortType());

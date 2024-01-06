@@ -19,12 +19,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 
 public class SubredditMultiselectionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -53,6 +53,7 @@ public class SubredditMultiselectionRecyclerViewAdapter extends RecyclerView.Ada
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof SubscribedSubredditViewHolder) {
             ((SubscribedSubredditViewHolder) holder).nameTextView.setText(subscribedSubreddits.get(position).getName());
+            ((SubscribedSubredditViewHolder) holder).instanceTextView.setText(subscribedSubreddits.get(position).getQualifiedName().substring(subscribedSubreddits.get(position).getQualifiedName().indexOf("@")));
             glide.load(subscribedSubreddits.get(position).getIconUrl())
                     .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(72, 0)))
                     .error(glide.load(R.drawable.subreddit_default_icon)
@@ -91,11 +92,11 @@ public class SubredditMultiselectionRecyclerViewAdapter extends RecyclerView.Ada
         notifyDataSetChanged();
     }
 
-    public ArrayList<String> getAllSelectedSubreddits() {
-        ArrayList<String> selectedSubreddits = new ArrayList<>();
+    public ArrayList<SubredditWithSelection> getAllSelectedSubreddits() {
+        ArrayList<SubredditWithSelection> selectedSubreddits = new ArrayList<>();
         for (SubredditWithSelection s : subscribedSubreddits) {
             if (s.isSelected()) {
-                selectedSubreddits.add(s.getName());
+                selectedSubreddits.add(s);
             }
         }
         return selectedSubreddits;
@@ -107,6 +108,9 @@ public class SubredditMultiselectionRecyclerViewAdapter extends RecyclerView.Ada
         GifImageView iconImageView;
         @BindView(R.id.name_text_view_item_subscribed_subreddit_multiselection)
         TextView nameTextView;
+
+        @BindView(R.id.instance_text_view_item_subscribed_subreddit_multiselection)
+        TextView instanceTextView;
         @BindView(R.id.checkbox_item_subscribed_subreddit_multiselection)
         CheckBox checkBox;
 
@@ -115,10 +119,12 @@ public class SubredditMultiselectionRecyclerViewAdapter extends RecyclerView.Ada
             this.itemView = itemView;
             ButterKnife.bind(this, itemView);
             nameTextView.setTextColor(primaryTextColor);
+            instanceTextView.setTextColor(primaryTextColor);
             checkBox.setButtonTintList(ColorStateList.valueOf(colorAccent));
 
             if (activity.typeface != null) {
                 nameTextView.setTypeface(activity.typeface);
+                instanceTextView.setTypeface(activity.typeface);
             }
         }
     }
