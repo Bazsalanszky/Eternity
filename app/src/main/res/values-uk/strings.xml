@@ -1205,7 +1205,7 @@
     <string name="action_more_options">Більше налаштувань</string>
     <string name="history">Історія</string>
     <string name="anonymous_homepage_not_implemented">Анонімну домашню сторінку ще не реалізовано</string>
-    <string name="user_username">Ім\'я користувача</string>
+    <string name="user_username">Ім\'я користувача або email</string>
     <string name="upload_image">Завантажити зображення</string>
     <string name="settings_hide_community_and_user_instance">Ховати спільноту і сервер користувача</string>
     <string name="settings_show_display_name_instead_of_user_name">Показувати спільноту і відображувані імена користувачів</string>
