@@ -1235,7 +1235,7 @@
     <string name="i_understand">Chápu</string>
     <string name="instance_url">URL instance</string>
     <string name="instance_url_hint">Adresa URL vaší preferované instance Lemmy s nebo bez předpony https://</string>
-    <string name="user_username">Uživatelské jméno</string>
+    <string name="user_username">Uživatelské jméno nebo e-mail</string>
     <string name="user_password">Heslo</string>
     <string name="user_2fa_token">Token 2FA (pokud je potřeba)</string>
     <string name="user_login">Přihlásit se</string>
@@ -1350,4 +1350,6 @@
     <string name="token_expired_message">"Váš token vypršel. Jelikož Eternity neukládá vaše hesla, budete se muset znovu ručně přihlásit! "</string>
     <string name="token_expired">Token vypršel</string>
     <string name="sort_scaled">Škálované</string>
+    <string name="sort_new_comments">Nové komentáře</string>
+    <string name="sort_most_comments">Nejvíce komentářů</string>
 </resources>
