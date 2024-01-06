@@ -1321,4 +1321,6 @@
     <string name="sort_scaled">Scaled</string>
     <string name="token_expired">Token Expired</string>
     <string name="token_expired_message">"Your token has been expired. As Eternity does not store your password, you need to manually log back in! "</string>
+    <string name="sort_most_comments">Most Comments</string>
+    <string name="sort_new_comments">New Comments</string>
 </resources>

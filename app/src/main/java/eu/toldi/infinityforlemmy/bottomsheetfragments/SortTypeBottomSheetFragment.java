@@ -58,6 +58,12 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
     @BindView(R.id.controversial_type_text_view_sort_type_bottom_sheet_fragment)
     TextView controversialTypeTextView;
 
+    @BindView(R.id.most_comments_type_text_view_sort_type_bottom_sheet_fragment)
+    TextView mostCommentsTypeTextView;
+
+    @BindView(R.id.new_comments_type_text_view_sort_type_bottom_sheet_fragment)
+    TextView newCommentsTypeTextView;
+
     private BaseActivity activity;
 
     public SortTypeBottomSheetFragment() {
@@ -93,6 +99,10 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             case PAGE_TYPE_ANONYMOUS_FRONT_PAGE:
                 activeTypeTextView.setVisibility(View.GONE);
                 hotTypeTextView.setVisibility(View.GONE);
+                scaledTypeTextView.setVisibility(View.GONE);
+                controversialTypeTextView.setVisibility(View.GONE);
+                mostCommentsTypeTextView.setVisibility(View.GONE);
+                newCommentsTypeTextView.setVisibility(View.GONE);
                 break;
 
             default:
@@ -117,6 +127,10 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             scaledTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(scaledTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         } else if (currentSortType.equals(SortType.Type.CONTROVERSIAL.fullName)) {
             controversialTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(controversialTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+        } else if (currentSortType.equals(SortType.Type.MOST_COMMENTS.fullName)) {
+            mostCommentsTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(mostCommentsTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
+        } else if (currentSortType.equals(SortType.Type.NEW_COMMENTS.fullName)) {
+            newCommentsTypeTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(newCommentsTypeTextView.getCompoundDrawablesRelative()[0], null, AppCompatResources.getDrawable(activity, R.drawable.ic_round_check_circle_day_night_24dp), null);
         }
 
         activeTypeTextView.setOnClickListener(view -> {
@@ -151,6 +165,16 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
 
         controversialTypeTextView.setOnClickListener(view -> {
             ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.CONTROVERSIAL));
+            dismiss();
+        });
+
+        mostCommentsTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.MOST_COMMENTS));
+            dismiss();
+        });
+
+        newCommentsTypeTextView.setOnClickListener(view -> {
+            ((SortTypeSelectionCallback) activity).sortTypeSelected(new SortType(SortType.Type.NEW_COMMENTS));
             dismiss();
         });
 

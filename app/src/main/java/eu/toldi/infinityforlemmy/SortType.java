@@ -35,8 +35,8 @@ public class SortType {
         NEW("New", "New"),
         OLD("Old", "Old"),
         TOP("Top", "Top"),
-        MOST_COMMENTS("MostCommentes", "Most Commentes"),
-        NEW_COMMENTS("NewCommentes", "New Commentes"),
+        MOST_COMMENTS("MostComments", "Most Comments"),
+        NEW_COMMENTS("NewComments", "New Comments"),
 
         TOP_HOUR("TopHour", "Top"),
         TOP_SIX_HOURS("TopSixHour", "Top"),
