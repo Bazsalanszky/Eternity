@@ -12,6 +12,7 @@ import eu.toldi.infinityforlemmy.post.Post
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher
 import eu.toldi.infinityforlemmy.postfilter.PostFilter
 import eu.toldi.infinityforlemmy.utils.MultiCommunityUtils.sortByNewest
+import eu.toldi.infinityforlemmy.utils.MultiCommunityUtils.sortByOldest
 import eu.toldi.infinityforlemmy.utils.MultiCommunityUtils.sortByScore
 import retrofit2.HttpException
 import retrofit2.Response
@@ -77,6 +78,10 @@ class MulticommunityPagingSource(
                 val sorted = when (sortType.type) {
                     SortType.Type.NEW -> {
                         sortByNewest(combinedPosts)
+                    }
+
+                    SortType.Type.OLD -> {
+                        sortByOldest(combinedPosts)
                     }
 
                     SortType.Type.TOP_ALL, SortType.Type.TOP_YEAR, SortType.Type.TOP_NINE_MONTHS, SortType.Type.TOP_SIX_MONTHS, SortType.Type.TOP_THREE_MONTHS, SortType.Type.TOP_MONTH, SortType.Type.TOP_WEEK, SortType.Type.TOP_DAY, SortType.Type.TOP_TWELVE_HOURS, SortType.Type.TOP_SIX_HOURS, SortType.Type.TOP_HOUR
