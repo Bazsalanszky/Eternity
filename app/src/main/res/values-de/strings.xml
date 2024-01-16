@@ -196,7 +196,7 @@
     <string name="error_loading_rules_without_retry">Fehler beim Laden der Regeln</string>
     <string name="search_in">Suchen in</string>
     <string name="all_communities">Alle Subreddits</string>
-    <string name="sort_best">Beste</string>
+    <string name="sort_best">Aktiv</string>
     <string name="sort_hot">Beliebt</string>
     <string name="sort_new">Neu</string>
     <string name="sort_random">Zufällig</string>
