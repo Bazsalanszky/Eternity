@@ -208,7 +208,7 @@
     <string name="sort_relevance">Релевантное</string>
     <string name="sort_comments">Комментарии</string>
     <string name="sort_activity">Активность</string>
-    <string name="sort_confidence">Доверенное</string>
+    <string name="sort_confidence">Надёжное</string>
     <string name="sort_old">Старые</string>
     <string name="sort_qa">ЧаВО</string>
     <string name="sort_live">Непрерывно</string>
@@ -1214,7 +1214,7 @@
     <string name="image_index_in_gallery">%1$d/%2$d</string>
     <string name="go_to_settings">Настройки</string>
     <string name="instance_url">URL сервера</string>
-    <string name="user_username">Логин</string>
+    <string name="user_username">Имя пользователя или почта</string>
     <string name="user_password">Пароль</string>
     <string name="user_2fa_token">2FA токен (если есть)</string>
     <string name="user_login">Войти</string>
@@ -1339,4 +1339,6 @@
     <string name="token_expired_message">"Срок действия вашего токена истёк. Поскольку Eternity не хранит ваш пароль, вам придётся снова войти вручную! "</string>
     <string name="token_expired">Срок действия токена истёк</string>
     <string name="sort_scaled">Раздутое</string>
+    <string name="sort_new_comments">Новые комментарии</string>
+    <string name="sort_most_comments">Больше всего комментариев</string>
 </resources>
