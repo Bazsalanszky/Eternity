@@ -97,9 +97,9 @@
 \nНажмите для повтора.</string>
     <string name="no_messages">Пусто</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Карма: %1$d</string>
+    <string name="karma_info">Карма: %1$,d</string>
     <string name="karma_info_user_detail">Карма:
-\n%1$d (%2$d + %3$d)</string>
+\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">День торта:
 \n%1$s</string>
     <string name="since">Создан:</string>
@@ -114,7 +114,7 @@
     <string name="gilded">Позолоченные</string>
     <string name="settings">Настройки</string>
     <string name="subscribers_number_detail">%1$,d подписчиков</string>
-    <string name="online_subscribers_number_detail">Онлайн: %1$d</string>
+    <string name="online_subscribers_number_detail">Онлайн: %1$,d</string>
     <string name="cannot_fetch_community_info">Невозможно получить информацию о сообществе</string>
     <string name="cannot_fetch_user_info">Невозможно получить информацию о пользователе</string>
     <string name="cannot_fetch_sidebar">Невозможно получить боковую панель</string>
@@ -1341,4 +1341,19 @@
     <string name="sort_scaled">Раздутое</string>
     <string name="sort_new_comments">Новые комментарии</string>
     <string name="sort_most_comments">Больше всего комментариев</string>
+    <string name="load_subscription_options">Загрузить варианты подписки</string>
+    <string name="subscription_prompt">Прежде чем вы погрузитесь в бесчисленные возможности, которые предлагает это приложение, я хочу открыто и честно рассказать о значительных изменениях, которые я внедрил, чтобы обеспечить вам наилучшее обслуживание.
+\n
+\nС этого момента вам понадобится ежемесячная подписка для доступа к API Reddit в Infinity для Reddit, и это связано с тем, что Reddit начал взимать плату за доступ к API с 1 июля 2023 года.
+\n
+\nВсе уровни работают одинаково. Если вы хотите поддерживать Infinity, вы можете подписаться на более высокий уровень. Большая часть денег нижнего уровня уходит в Reddit.</string>
+    <string name="original_app">Оригинальное приложение Reddit</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">Адрес предпочитаемого вами сервера Lemmy с или без префикса https://</string>
+    <string name="important_info">Infinity для Reddit с подпиской использует новый ключ API от Reddit, и вам придется повторно войти в систему, чтобы продолжить использование приложения.
+\n
+\nПросто откройте панель навигации, щелкните по заголовку своей учетной записи и выберите «Добавить учетную запись», чтобы снова войти в Reddit, используя ту же учетную запись. В противном случае Infinity может вообще не загружать посты. Приносим извинения за неудобства.</string>
+    <string name="billing_error_service_disconnected">Приложение не подключено к службе Play Store через библиотеку оплаты Google Play.</string>
+    <string name="theme_item_read_post_filled_card_view_background_color_detail">Применяется к: Фону прочитанного сообщения в виде заполненной карточки</string>
+    <string name="theme_item_filled_card_view_background_color">Цвет фона заполненной цветом карты</string>
+    <string name="theme_item_filled_card_view_background_color_detail">Применимо к: фону публикации в виде заполненной карточки, некоторым полям редактирования текста</string>
 </resources>
