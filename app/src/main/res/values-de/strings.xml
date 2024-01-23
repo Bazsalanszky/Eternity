@@ -1323,4 +1323,7 @@
     <string name="icon_original_label">Originales Symbol</string>
     <string name="settings_credits_new_icon">Neues App Symbol (Cosmic Lemmy)</string>
     <string name="settings_credits_new_icon_summary">Erstellt von David Gerla</string>
+    <string name="comment_filter_preference_activity_label">Kommentar Filter</string>
+    <string name="confirm">Bestätigen</string>
+    <string name="customize_comment_filter_activity_label">Kommentar Filter anpassen</string>
 </resources>
