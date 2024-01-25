@@ -1356,4 +1356,6 @@
     <string name="theme_item_read_post_filled_card_view_background_color_detail">Применяется к: Фону прочитанного сообщения в виде заполненной карточки</string>
     <string name="theme_item_filled_card_view_background_color">Цвет фона заполненной цветом карты</string>
     <string name="theme_item_filled_card_view_background_color_detail">Применимо к: фону публикации в виде заполненной карточки, некоторым полям редактирования текста</string>
+    <string name="settings_hide_fab_in_post_feed">Скрыть FAB в ленте постов</string>
+    <string name="use_circular_fab">Использовать кругый FAB</string>
 </resources>
