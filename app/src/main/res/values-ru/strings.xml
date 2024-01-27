@@ -149,7 +149,7 @@
     <string name="error_getting_message">Невозможно получить сообщение</string>
     <string name="message_username_required">А кому вы хотите отправить это сообщение\?</string>
     <string name="message_subject_required">Сообщение должно содержать тему</string>
-    <string name="message_content_required">А написать содержимое\?</string>
+    <string name="message_content_required">Вам нужно что-то сказать получателю</string>
     <string name="sending_message">Отправляем</string>
     <string name="send_message_success">Сообщение отправлено</string>
     <string name="send_message_failed">Невозможно отправить это сообщение</string>
@@ -500,7 +500,7 @@
     <string name="theme_item_color_primary_dark">Основной тёмный цвет</string>
     <string name="theme_item_color_primary_dark_detail">Применяется к: панель статуса</string>
     <string name="theme_item_color_accent">Акцент цвета</string>
-    <string name="theme_item_color_accent_detail">Применяется к: панель выполнения и т.д.</string>
+    <string name="theme_item_color_accent_detail">Применяется к: Шкале прогресса и т.д.</string>
     <string name="theme_item_color_primary_light_theme">Основной цвет светлой темы</string>
     <string name="theme_item_color_primary_light_theme_detail">Применяется к: фон плавающей кнопки действия</string>
     <string name="theme_item_primary_text_color">Цвет основного текста</string>
@@ -1250,7 +1250,7 @@
     <string name="unblock_community_success">Сообщество разблокировано!</string>
     <string name="unblock_community_failed">Не удалось разблокировать сообщество</string>
     <string name="instance_info">О сервере</string>
-    <string name="theme_name_nightfox">Nightfox</string>
+    <string name="theme_name_nightfox">Ночной лис</string>
     <string name="exo_controls_volume_off_description">Выкл. звук</string>
     <string name="admins">Администраторы</string>
     <string name="blocked_communities">Заблокированные сообщества</string>
@@ -1259,7 +1259,7 @@
     <string name="community_number_detail">%1$,d сообществ</string>
     <string name="blocks">Блокировки</string>
     <string name="action_unblock_user">Разблокировать пользователя</string>
-    <string name="theme_name_dayfox">Dayfox</string>
+    <string name="theme_name_dayfox">Дневной лис</string>
     <string name="unblock_user_success">Разблокирован</string>
     <string name="unblock_user_failed">Не удалось разблокировать пользователя</string>
     <string name="handle_link">Обработать ссылку</string>
@@ -1273,7 +1273,7 @@
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Делиться ссылками на своём сервере вместо изначального.</string>
     <string name="share_links_on_your_local_instance">Делиться ссылками на своём сервере</string>
     <string name="settings_easier_to_watch_in_full_screen_title">Удобнее просматривать в полном экране</string>
-    <string name="theme_name_carbonfox">Carbonfox</string>
+    <string name="theme_name_carbonfox">Углеродный лис</string>
     <string name="i_understand">Понятно</string>
     <string name="settings_hide_community_and_user_instance">Не показывать сообщество и сервер пользователя</string>
     <string name="settings_show_display_name_instead_of_user_name">Показывать сообщество и отображать имена пользователей</string>
