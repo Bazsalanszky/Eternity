@@ -1212,4 +1212,8 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="post_count_detail">%1$,d publicaciones</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Mostrar menos opciones de la barra de herramientas a partir de</string>
     <string name="comment_count_detail">%1$,d comentarios</string>
+    <string name="settings_comment_divider_type">Tipo de divisor de comentarios</string>
+    <string name="settings_comment_filter_title">Filtro de comentarios</string>
+    <string name="settings_hide_fab_in_post_feed">Ocultar FAB (botón flotante) en el feed de publicaciones</string>
+    <string name="post_layout_card_3">Diseño de tarjeta 3</string>
 </resources>
