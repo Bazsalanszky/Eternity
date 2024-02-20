@@ -635,7 +635,7 @@
     <string name="theme_item_unread_message_background_color">未读消息背景色</string>
     <string name="theme_item_unread_message_background_color_detail">应用于：未读消息背景色</string>
     <string name="theme_item_divider_color">分隔线颜色</string>
-    <string name="theme_item_divider_color_detail">适用于：评论分隔线、提交帖子页面的分隔线等</string>
+    <string name="theme_item_divider_color_detail">适用于：评论分隔线、提交帖子页面的分隔线等。</string>
     <string name="theme_item_vote_and_reply_unavailable_button_color">投票和回复不可用按钮颜色</string>
     <string name="theme_item_vote_and_reply_unavailable_button_color_detail">应用于：投票和回复按钮（不可用）</string>
     <string name="theme_item_comment_vertical_bar_color_1">评论垂直辅助线颜色 1</string>
@@ -996,7 +996,7 @@
     <string name="exclude_domains_hint">排除域名</string>
     <string name="anonymous_front_page_no_subscriptions">立刻加入一个版块并开始浏览！</string>
     <!-- Fuzzy -->
-    <string name="backup_settings_success">成功将设置导出到目标文件夹</string>
+    <string name="backup_settings_success">成功将设置导出到目标文件夹。</string>
     <string name="create_zip_in_destination_directory_failed">无法在目标文件夹创建备份压缩包</string>
     <string name="backup_some_settings_failed">部分设置无法备份，但其他设置已成功导出到目标文件夹</string>
     <string name="restore_settings_success">成功恢复设置，重启应用以查看更改。</string>
@@ -1251,7 +1251,7 @@
     <string name="settings_always_show_child_comment_count_title">始终显示子评论的数量</string>
     <string name="settings_reddit_video_default_resolution">Lemmy 视频默认分辨率</string>
     <string name="settings_comment_filter_title">评论过滤器</string>
-    <string name="settings_hide_upvote_ratio_title">隐藏支持率</string>
+    <string name="settings_hide_upvote_ratio_title">隐藏顶帖率</string>
     <string name="settings_hide_text_post_content">隐藏文字帖内容</string>
     <string name="settings_post_feed_max_resolution_title">帖子列表预览最大分辨率（宽 * 高）</string>
     <string name="settings_hide_fab_in_post_feed">在帖子列表中隐藏 FAB</string>
@@ -1309,7 +1309,7 @@
     <string name="billing_error_item_unavailable">无法购买请求的产品。</string>
     <string name="settings_hide_user_instance">隐藏用户实例</string>
     <string name="admins">管理员</string>
-    <string name="moderators">协管员</string>
+    <string name="moderators">版主</string>
     <string name="action_unblock_user">取消屏蔽用户</string>
     <string name="blocked_users">屏蔽的用户</string>
     <string name="blocked_communities">屏蔽的板块</string>
@@ -1344,4 +1344,28 @@
     <string name="sort_new_comments">新评论</string>
     <string name="sort_most_comments">最多评论</string>
     <string name="user_username">用户名或电子邮箱</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">首选的 Lemmy 实例 URL，带或不带 https:// 前缀</string>
+    <string name="theme_item_filled_card_view_background_color">填充卡片视图背景色</string>
+    <string name="block_user_success">已屏蔽</string>
+    <string name="no_activity_found_for_external_browser">没有应用能处理在外部应用打开中的操作</string>
+    <string name="unblock_user_success">已取消屏蔽</string>
+    <string name="theme_item_read_post_filled_card_view_background_color_detail">应用于：填充卡片视图中已读帖子的背景</string>
+    <string name="settings_credits_new_icon_summary">由 David Gerla 创作</string>
+    <string name="settings_easier_to_watch_in_full_screen_title">更易于全屏观看</string>
+    <string name="theme_item_read_post_filled_card_view_background_color">已读帖子填充卡片视图背景色</string>
+    <string name="theme_item_filled_card_view_background_color_detail">应用于：填充卡片视图中帖子的背景、某些可编辑的文本字段</string>
+    <string name="click_to_apply_post_filter">点击此处将其应用到帖子列表</string>
+    <string name="reddit_gallery_item_caption_hint">说明文字（最多 180 字符）</string>
+    <string name="exo_controls_volume_off_description">关闭音频</string>
+    <string name="monthly">每月</string>
+    <string name="yearly">每年</string>
+    <string name="weekly">每周</string>
+    <string name="instance_url_hint">首选的 Lemmy 实例 URL，带或不带 https:// 前缀</string>
+    <string name="user_2fa_token">两步验证令牌（如需要）</string>
+    <string name="acknowledgement_purchase_failed_description">糟糕，在确认购买时出现了错误。如果此问题持续三天，您将自动获得退款。
+\n别担心，您仍然可以享受 Infinity for Reddit 的乐趣。</string>
+    <string name="important_info">Infinity for Reddit 订阅版使用 Reddit 提供的新 API 密钥，必须重新登录才能继续使用。
+\n
+\n只需打开导航抽屉，点击账户标题并选择 \"添加账户\"，即可使用同一账户重新登录 Reddit。否则，Infinity 可能根本无法加载帖子。很抱歉给您带来不便。</string>
+    <string name="settings_show_display_name_instead_of_user_name">展示板块和用户的显示名称</string>
 </resources>
