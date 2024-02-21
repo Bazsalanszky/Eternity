@@ -1343,7 +1343,7 @@
     <string name="confirm_delete_all_recent_searches">Bist du sicher, dass du alle vorherigen Suchanfragen löschen möchtest?</string>
     <string name="settings_comment_filter_title">Kommentarfilter</string>
     <string name="post_layout_card_3">Kartenlayout 3</string>
-    <string name="theme_item_read_post_filled_card_view_background_color">Hintergrundfarbe ausgefüllte Kartenansicht Beitrag lesen</string>
+    <string name="theme_item_read_post_filled_card_view_background_color">Hintergrundfarbe eines gelesenen Beitrags in der ausgefüllten Kartenansicht</string>
     <string name="theme_item_read_post_filled_card_view_background_color_detail">Angewendet auf: Hintergrund eines gelesenen Beitrags in einer ausgefüllten Kartenansicht</string>
     <string name="excludes_strings_hint">Schlüsselwörter ausschließen (wort1,wort2)</string>
     <string name="comment_filter_name_hint">Kommentarfilter-Name</string>
