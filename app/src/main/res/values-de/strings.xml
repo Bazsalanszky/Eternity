@@ -999,7 +999,7 @@
     <string name="exclude_domains_hint">Domains ausschließen</string>
     <string name="anonymous_front_page_no_subscriptions">Beginne, indem du einem Subreddit beitrittst!</string>
     <!-- Fuzzy -->
-    <string name="backup_settings_success">Die Einstellungen wurden erfolgreich in den Zielordner exportiert. Das Passwort der generierten ZIP-Datei ist 123321. Die ZIP-Datei bitte nicht bearbeiten.</string>
+    <string name="backup_settings_success">Die Einstellungen wurden erfolgreich in den Zielordner exportiert.</string>
     <string name="create_zip_in_destination_directory_failed">Konnte keine ZIP-Datei im Zielordner erstellen</string>
     <string name="backup_some_settings_failed">Nicht alle Einstellungen konnten exportiert werden, aber alle anderen wurden erfolgreich in den Zielordner exportiert</string>
     <string name="restore_settings_success">Einstellungen erfolgreich wiederhergestellt. Starte die Anwendung neu, um die Änderungen zu sehen.</string>
@@ -1287,7 +1287,7 @@
     <string name="denied_notification_permission">Berechtigung für Benachrichtigungen wurde nicht erteilt</string>
     <string name="go_to_settings">Einstellungen</string>
     <string name="instance_url">Instanz URL</string>
-    <string name="user_username">Benutzername</string>
+    <string name="user_username">Benutzername oder E-Mail</string>
     <string name="settings_easier_to_watch_in_full_screen_title">Leichtere Wiedergabe im Vollbildmodus</string>
     <string name="block_user_success">Blockiert</string>
     <string name="block_user_failed">Nutzer konnte nicht blockiert werden</string>
@@ -1326,4 +1326,74 @@
     <string name="comment_filter_preference_activity_label">Kommentar Filter</string>
     <string name="confirm">Bestätigen</string>
     <string name="customize_comment_filter_activity_label">Kommentar Filter anpassen</string>
+    <string name="subscription_activity_label">Abonnement</string>
+    <string name="action_add_to_home_screen">Zum Startbildschirm hinzufügen</string>
+    <string name="comment_filter_applied_to_all_subreddits">Auf alle Communitys angewendet</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">Der URL deiner bevorzugten Lemmy-Instanz mit oder ohne den Präfix https://</string>
+    <string name="post_filter_usage_embedded_more_count">und %1$d weitere</string>
+    <string name="monthly">Monatlich</string>
+    <string name="original_app">Die originale Reddit-App</string>
+    <string name="sort_most_comments">Meistkommentiert</string>
+    <string name="welcome_to_infinity">Willkommen zu Infinity für Reddit, dein Zugang zu einer völlig neuen Dimension des Stöberns auf Reddit!</string>
+    <string name="theme_item_filled_card_view_background_color">Ausgefüllte Kartenansicht Hintergrundfarbe</string>
+    <string name="apply_to">Anwenden auf</string>
+    <string name="post_filter_usage_embedded_subreddit_all">Alle Communitys</string>
+    <string name="post_filter_usage_embedded_user_all">Alle Benutzer</string>
+    <string name="post_filter_usage_embedded_multireddit_all">Alle Multicommunitys</string>
+    <string name="confirm_delete_all_recent_searches">Bist du sicher, dass du alle vorherigen Suchanfragen löschen möchtest?</string>
+    <string name="settings_comment_filter_title">Kommentarfilter</string>
+    <string name="post_layout_card_3">Kartenlayout 3</string>
+    <string name="theme_item_read_post_filled_card_view_background_color">Hintergrundfarbe ausgefüllte Kartenansicht Beitrag lesen</string>
+    <string name="theme_item_read_post_filled_card_view_background_color_detail">Angewendet auf: Hintergrund eines gelesenen Beitrags in einer ausgefüllten Kartenansicht</string>
+    <string name="excludes_strings_hint">Schlüsselwörter ausschließen (wort1,wort2)</string>
+    <string name="comment_filter_name_hint">Kommentarfilter-Name</string>
+    <string name="comment_filter_requires_a_name">Wie lautet der name dieses Kommentarfilters?</string>
+    <string name="duplicate_comment_filter_dialog_title">„%1$s“ existiert bereits</string>
+    <string name="duplicate_comment_filter_dialog_message">Überschreiben?</string>
+    <string name="comment_filter_usage_embedded_more_count">und %1$d mehr</string>
+    <string name="yearly">Jährlich</string>
+    <string name="weekly">Wöchentlich</string>
+    <string name="billing_error_developer_error">Die Entwickler haben ein paar Fehler gemacht. nicht deine Schuld.</string>
+    <string name="billing_error_error">Fataler Fehler während der API-Aktion.</string>
+    <string name="billing_error_item_already_owned">Der Kauf ist fehlgeschlagen, da das Objekt bereits besessen wird.</string>
+    <string name="billing_error_item_unavailable">Das gewählte Produkt steht nicht zum Verkauf.</string>
+    <string name="billing_error_network_error">Während der Operation ist ein Netzwerkfehler aufgetreten.</string>
+    <string name="billing_error_service_unavailable">Der Service ist derzeit nicht verfügbar.</string>
+    <string name="billing_error_user_canceled">Transaktion wurde durch den Benutzer abgebrochen.</string>
+    <string name="subscription_plan_description_monthly">Bronze</string>
+    <string name="subscription_plan_description_monthly_399">Silber</string>
+    <string name="subscription_plan_description_monthly_499">Gold – Perfekte Wahl!</string>
+    <string name="subscription_plan_description_monthly_699">Platin</string>
+    <string name="subscription_plan_description_monthly_899">Diamant</string>
+    <string name="subscription_plan_description_monthly_999">Unbegrenzt</string>
+    <string name="connect_to_billing_system_failed">Verbindung zum Bezahlsystem fehlgeschlagen</string>
+    <string name="connecting_to_billing_system">Verbinde zum Bezahlsystem. Bitte warten.</string>
+    <string name="thank_you_for_subscription">Vielen Dank für dein Abonnement</string>
+    <string name="load_subscription_options">Lade Abonnementsoptionen</string>
+    <string name="continue_to_app">Weiter zur App</string>
+    <string name="restore_subscription_purchase_details">Bereits für das Abonnement bezahlt?</string>
+    <string name="restore_subscription_purchase">Abonnementskauf wieder herstellen</string>
+    <string name="important_info_title">Bitte neu am Account anmelden</string>
+    <string name="billing_error_service_disconnected">Die App ist nicht über die Google-Play-Bezahlbibliothek mit dem Play Store verbunden.</string>
+    <string name="acknowledgement_purchase_failed_description">Huch, es gab einen Fehler bei der Bestätigung deines Kaufs. Wenn das Problem für länger als drei Tage besteht, erhältst du automatisch eine Rückerstattung.
+\nKeine Sorge, du kannst Infinity für Reddit dennoch genießen.</string>
+    <string name="token_expired">Token abgelaufen</string>
+    <string name="sort_new_comments">Neue Kommentare</string>
+    <string name="click_to_apply_post_filter">Zum Anwenden auf einige Post-Feeds hier klicken</string>
+    <string name="billing_error_billing_unavailable">Bezahldienst auf Gerät nicht verfügbar.</string>
+    <string name="billing_error_feature_not_supported">Das angefragte Feature wird vom Play Store auf diesem Gerät nicht unterstützt.</string>
+    <string name="acknowledge_purchase_failed">Kann kauf nicht bestätigen</string>
+    <string name="token_expired_message">"Dein Token ist abgelaufen. Da Eternity dein Passwort nicht speichert, musst du dich manuell neu anmelden! "</string>
+    <string name="acknowledging_subscription">Bestätige dein Abonnement. Bitte warten.</string>
+    <string name="settings_credits_original_app_description">"Infinity wurde von u/Hostilenemy erstellt "</string>
+    <string name="sort_scaled">Skaliert</string>
+    <string name="important_info">Infinity für Reddit benutzt mit Abonnement einen neuen API-Schlüssel von Reddit und du musst dich neu anmelden um die App zu benutzen.
+\n
+\nÖffne einfach die Navigationsleiste, tippe auf den Kontotitel und wähle „Konto hinzufügen“ um dich mit dem gleichen Account noch mal bei Reddit anzumelden. Ansonsten könnte Infinity gar keine Beiträge laden. Entschuldigung für die Unannehmlichkeiten.</string>
+    <string name="theme_item_filled_card_view_background_color_detail">Angewendet auf: Hintergrund eines Beitrags in einer ausgefüllten Kartenansicht, einige Textfelder</string>
+    <string name="subscription_prompt">Bevor du in die zahllosen Möglichkeiten eintauchst, die diese App bietet, möchte ich offen und transparent über eine wichtige Änderung sprechen die ich eingeführt habe um den bestmöglichen Service für dich zu gewährleisten.
+\n
+\nVon nun an benötigst du ein monatliches Abonnement, um auf die Reddit-API in Infinity für Reddit zuzugreifen. Der Grund dafür ist, dass Reddit seit dem 1. Juli 2023 Gebühren für den API-Zugang erhebt.
+\n
+\nAlle Stufen funktionieren auf die gleiche Weise. Wenn du Infinity unterstützen möchtest, kannst du eine höhere Stufe abonnieren. Der größte Teil des Geldes der niedrigsten Stufe geht an Reddit.</string>
 </resources>
