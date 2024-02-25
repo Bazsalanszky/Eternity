@@ -1346,4 +1346,5 @@
     <string name="token_expired_message">"Термін дії токена закінчився. Оскільки Eternity не зберігає Ваш пароль, Вам потрібно повторно ввійти вручну! "</string>
     <string name="token_expired">Токен недійсний</string>
     <string name="sort_new_comments">Нові коментарі</string>
+    <string name="sort_most_comments">Найбільше коментарів</string>
 </resources>
