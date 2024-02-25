@@ -1181,4 +1181,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="action_open_external_browser">Tarayıcı içinde aç</string>
     <string name="action_more_options">Daha Fazla Seçenekler</string>
     <string name="history">Geçmiş</string>
+    <string name="post_poll_activity_label">Anket</string>
+    <string name="subscription_activity_label">Abonelik</string>
 </resources>
