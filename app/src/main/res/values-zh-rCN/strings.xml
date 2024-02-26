@@ -384,7 +384,7 @@
     <string name="settings_community_summary">!eternityapp@lemdro.id</string>
     <string name="settings_share_title">分享</string>
     <string name="settings_share_summary">如果您喜欢此应用，可以分享给其他人</string>
-    <string name="settings_version_title">Infinity For Reddit</string>
+    <string name="settings_version_title">Eternity</string>
     <string name="settings_version_summary">版本 %s</string>
     <string name="settings_category_customization_title">自定义</string>
     <string name="settings_customize_light_theme_title">明亮主题</string>
@@ -447,8 +447,8 @@
     <string name="error_getting_multi_reddit_data">获取聚合版块数据错误</string>
     <string name="error_loading_multi_reddit_list">无法同步聚合版块</string>
     <string name="error_loading_subscriptions">无法同步订阅</string>
-    <string name="share_this_app">快来试试 Infinity for Reddit，一个很棒的 Reddit 客户端！
-\nhttps://play.google.com/store/apps/details\?id=eu.toldi.infinityforlemmy</string>
+    <string name="share_this_app">快来试试 Eternity，一个很棒的 Lemmy 客户端！
+\nhttps://play.google.com/store/apps/details?id=eu.toldi.infinityforlemmy</string>
     <string name="error_getting_community_name">获取版块名称错误</string>
     <string name="share_post_link">分享帖子链接</string>
     <string name="share_image_link">分享图片链接</string>
@@ -1368,4 +1368,5 @@
 \n
 \n只需打开导航抽屉，点击账户标题并选择 \"添加账户\"，即可使用同一账户重新登录 Reddit。否则，Infinity 可能根本无法加载帖子。很抱歉给您带来不便。</string>
     <string name="settings_show_display_name_instead_of_user_name">展示板块和用户的显示名称</string>
+    <string name="original_app">原版 Reddit 应用</string>
 </resources>
