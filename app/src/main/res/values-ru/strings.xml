@@ -349,10 +349,10 @@
     <string name="settings_content_font_summary">Содержимое</string>
     <string name="settings_font_family_title">Семейство шрифтов</string>
     <string name="settings_title_font_family_title">Семейство шрифтов заголовка</string>
-    <string name="settings_content_font_family_title">Семейство шрифтов содержания</string>
+    <string name="settings_content_font_family_title">Семейство шрифтов содержимого</string>
     <string name="settings_font_size_title">Размер шрифта</string>
     <string name="settings_title_font_size_title">Размер шрифта заголовка</string>
-    <string name="settings_content_font_size_title">Размер шрифта содержания</string>
+    <string name="settings_content_font_size_title">Размер шрифта содержимого</string>
     <string name="settings_enable_nsfw_title">Включить NSFW</string>
     <string name="settings_blur_nsfw_title">Размытие изображений NSFW</string>
     <string name="settings_blur_spoiler_title">Размывать изображения под спойлером</string>
@@ -761,7 +761,7 @@
     <string name="settings_show_tab_names">Показать заголовок вкладок</string>
     <string name="settings_more_tabs_summary">Больше вкладок</string>
     <string name="settings_more_tabs_info_summary">Включение следующих параметров вызовет непредвиденное поведение:
-\nВкладки могут потерять все содержимое после переключения на другие. Это то же, что и обновление страницы.</string>
+\nВкладки могут потерять всё содержимое после переключения на другие. Это то же самое, что и обновление страницы.</string>
     <string name="settings_more_tabs_show_favorite_subscribed_communities_title">Показать избранные сообщества из подписок</string>
     <string name="settings_more_tabs_show_subscribed_communities_title">Показывать сообщества из подписок</string>
     <string name="settings_download_location_title">Папка для загрузок</string>
@@ -899,7 +899,7 @@
     <string name="exclude_communities_hint">Исключить сообщества (например: memes,AskLemmy)</string>
     <string name="exclude_users_hint">Исключить пользователей (например: Hostilenemy,random)</string>
     <string name="exclude_flairs_hint">Исключить флейры (например: flair1,flair2)</string>
-    <string name="contain_flairs_hint">Содержит флейры (например: flair1,flair2)</string>
+    <string name="contain_flairs_hint">Содержать флейры (например: flair1,flair2)</string>
     <string name="min_vote_hint">Минимум голосов (-1: без ограничений)</string>
     <string name="max_vote_hint">Максимум голосов (-1: без ограничений)</string>
     <string name="min_comments_hint">Минимум комментариев (-1: без ограничений)</string>
@@ -992,7 +992,7 @@
     <string name="exclude_community">Исключить это сообщество</string>
     <string name="exclude_user">Исключить этого пользователя</string>
     <string name="exclude_flair">Исключить этот флейр</string>
-    <string name="contain_flair">Содержит флейр</string>
+    <string name="contain_flair">Содержать флейр</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Исключить домен</string>
     <string name="suggest_title">Предложить название</string>
@@ -1097,10 +1097,10 @@
     <string name="go_to_top">Наверх</string>
     <string name="title_contains_strings_hint">Название: содержит ключевые слова (ключ1,ключ2)</string>
     <string name="title_contains_regex_hint">Название: содержит регулярное выражение</string>
-    <string name="contain_domains_hint">Содержат домены</string>
+    <string name="contain_domains_hint">Содержать домены</string>
     <string name="anonymous_multireddit_no_community">У этого мультисообщества нет сообщества!</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">Ошибка извлечения видео v.redd.it: невозможно получить URL видео</string>
-    <string name="contain_domain">Содержат этот домен</string>
+    <string name="contain_domain">Содержать этот домен</string>
     <string name="lock_screen_text">Эй, там!!!</string>
     <string name="app_lock_timeout_immediately">Немедленно</string>
     <string name="app_lock_timeout_1_min">1 минута</string>
@@ -1155,9 +1155,9 @@
     <string name="settings_require_authentication_to_show_accounts">Для отображения аккаунтов необходима аутентификация</string>
     <string name="settings_custom_font_family_title">Пользовательское семейство шрифтов</string>
     <string name="settings_custom_title_font_family_title">Пользовательское семейство шрифтов заголовка</string>
-    <string name="settings_custom_content_font_family_title">Пользовательское семейство шрифтов содержания</string>
+    <string name="settings_custom_content_font_family_title">Пользовательское семейство шрифтов содержимого</string>
     <string name="settings_fixed_height_preview_in_card_title">Фиксированная высота карточки</string>
-    <string name="settings_hide_text_post_content">Скрыть содержание текстового поста</string>
+    <string name="settings_hide_text_post_content">Скрыть содержимое текстового поста</string>
     <string name="settings_hide_comment_awards_title">Скрыть награды за комментарии</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Показывать меньше параметров панели инструментов, начиная с</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Уровень %1$d</string>
@@ -1166,7 +1166,7 @@
     <string name="settings_always_show_child_comment_count_title">Всегда показывать количество дочерних комментариев</string>
     <string name="settings_hide_upvote_ratio_title">Скрыть соотношение голосов</string>
     <string name="settings_miscellaneous_dangerous_group_title">Опасно</string>
-    <string name="settings_post_feed_max_resolution_warning_title">Можно увеличивать это значение, чтобы показывать предварительный просмотр в более высоком разрешении, но приложение может аварийно закрываться.</string>
+    <string name="settings_post_feed_max_resolution_warning_title">Чтобы показывать предпросмотр в более высоком разрешении, это значение можно увеличить, но приложение может неожиданно вылетать.</string>
     <string name="settings_post_feed_max_resolution_title">Максимальное разрешение предросмотра постов (ширина × высота)</string>
     <string name="settings_reddit_video_default_resolution">Разрешение видео Reddit по умолчанию</string>
     <string name="select_a_ttf_font">Выберите TTF-файл шрифта</string>
