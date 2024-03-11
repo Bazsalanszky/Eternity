@@ -3,13 +3,13 @@
     <string name="login_activity_label">ログイン</string>
     <string name="comment_activity_label">コメントを送信</string>
     <string name="comment_activity_label_is_replying">返信</string>
-    <string name="post_text_activity_label">テキスト</string>
-    <string name="community_selection_activity_label">Subredditを選択</string>
+    <string name="post_text_activity_label">テキストを投稿</string>
+    <string name="community_selection_activity_label">コミュニティーを選択</string>
     <string name="post_link_activity_label">リンク</string>
     <string name="post_image_activity_label">画像</string>
     <string name="post_video_activity_label">動画</string>
     <string name="rules_activity_label">ルール</string>
-    <string name="search_community_activity_label">Subreddit</string>
+    <string name="search_community_activity_label">コミュニティー</string>
     <string name="edit_post_activity_label">投稿を編集</string>
     <string name="edit_comment_activity_label">コメントを編集</string>
     <string name="view_message_activity_label">受信トレイ</string>
@@ -22,7 +22,7 @@
     <string name="customize_theme_activity_create_theme_label">テーマを作成</string>
     <string name="theme_preview_activity_label">テーマをプレビュー</string>
     <string name="edit_multi_reddit_activity_label">カスタムフィードを編集</string>
-    <string name="selected_subeddits_activity_label">選択したSubreddit</string>
+    <string name="selected_subeddits_activity_label">選択したコミュニティー</string>
     <string name="report_activity_label">通報</string>
     <string name="view_imgur_media_activity_image_label">画像 %1$d/%2$d</string>
     <string name="view_imgur_media_activity_video_label">動画 %1$d/%2$d</string>
@@ -119,7 +119,7 @@
     <string name="gilded">アワードを贈った投稿</string>
     <string name="settings">設定</string>
     <string name="subscribers_number_detail">登録者数: %1$,d</string>
-    <string name="online_subscribers_number_detail">オンライン: %1$,d</string>
+    <string name="online_subscribers_number_detail">%1$,d 名がオンライン</string>
     <string name="cannot_fetch_community_info">Subredditの情報が取得できませんでした</string>
     <string name="cannot_fetch_user_info">ユーザー情報が取得できませんでした</string>
     <string name="cannot_fetch_sidebar">サイドバー情報が取得できませんでした</string>
@@ -1065,4 +1065,19 @@
     <string name="app_lock_timeout_6_hours">6時間</string>
     <string name="app_lock_timeout_12_hours">12時間</string>
     <string name="app_lock_timeout_24_hours">24時間</string>
+    <string name="post_gallery_activity_label">ギャラリー</string>
+    <string name="edit_profile_activity_label">プロフィールを編集</string>
+    <string name="post_poll_activity_label">投票</string>
+    <string name="history_activity_label">履歴</string>
+    <string name="comment_filter_preference_activity_label">コメントをフィルター</string>
+    <string name="customize_comment_filter_activity_label">コメントフィルターをカスタマイズ</string>
+    <string name="action_open_external_browser">ブラウザーで開く</string>
+    <string name="action_delete_logs">ログを削除</string>
+    <string name="trending">今のトレンド</string>
+    <string name="post_count_detail">%1$,d 件の投稿</string>
+    <string name="comment_count_detail">%1$,d 件のコメント</string>
+    <string name="active_users_number_detail">%1$,d 名のアクティブユーザー</string>
+    <string name="user_number_detail">%1$,d 名のユーザー</string>
+    <string name="community_number_detail">%1$,d コミュニティー</string>
+    <string name="action_block_user">ユーザーをブロック</string>
 </resources>
