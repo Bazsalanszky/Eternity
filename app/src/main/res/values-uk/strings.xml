@@ -158,7 +158,7 @@
     <string name="post_failed">Не вдалося це опублікувати</string>
     <string name="error_processing_image">Помилка обробки зображення</string>
     <string name="error_processing_video">Помилка обробки відеозапису</string>
-    <string name="download_started">Завантаження розпочато. Перевіряйте поступ у сповіщеннях.</string>
+    <string name="download_started">Завантаження розпочато. Перевіряйте прогрес у сповіщеннях.</string>
     <string name="comment_load_more_comments">Завантажити більше коментарів</string>
     <string name="comment_load_more_comments_failed">Не вдалося завантажити. Натисніть, щоб повторити.</string>
     <string name="loading">Завантаження</string>
@@ -491,7 +491,7 @@
     <string name="theme_item_color_primary_dark">Основний темний колір</string>
     <string name="theme_item_color_primary_dark_detail">Задіяно до: Рядок стану</string>
     <string name="theme_item_color_accent">Акцент кольору</string>
-    <string name="theme_item_color_accent_detail">Задіяно до: Панель поступу тощо</string>
+    <string name="theme_item_color_accent_detail">Задіяно до: Індикатор прогресу тощо</string>
     <string name="theme_item_color_primary_light_theme">Основний колір світлої теми</string>
     <string name="theme_item_color_primary_light_theme_detail">Задіяно до: Тло кнопок і плаваючої кнопки дії</string>
     <string name="theme_item_primary_text_color">Колір основного тексту</string>
@@ -546,8 +546,8 @@
     <string name="theme_item_toolbar_primary_text_and_icon_color_detail">Задіяно до: Основний текст і значки на панелі засобів</string>
     <string name="theme_item_toolbar_secondary_text_color">Колір додаткового тексту панелі засобів</string>
     <string name="theme_item_toolbar_secondary_text_color_detail">Задіяно до: Додатковий текст на панелі засобів</string>
-    <string name="theme_item_circular_progress_bar_background_color">Колір тла кільцевої шкали поступу</string>
-    <string name="theme_item_circular_progress_bar_background_color_detail">Задіяно до: Тло кругової шкали поступу</string>
+    <string name="theme_item_circular_progress_bar_background_color">Колір тла кругової шкали прогресу</string>
+    <string name="theme_item_circular_progress_bar_background_color_detail">Задіяно до: Тло кругової шкали прогресу</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background">Колір тла вигляду вкладки в розгорнутій панелі засобів</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_tab_background_detail">Задіяно до: Тло вигляду вкладки (розгорнута панель засобів)</string>
     <string name="theme_item_tab_layout_with_expanded_collapsing_toolbar_text_color">Колір тексту вигляду вкладки в розгорнутій панелі засобів</string>
