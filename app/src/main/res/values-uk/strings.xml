@@ -1347,4 +1347,5 @@
     <string name="token_expired">Токен недійсний</string>
     <string name="sort_new_comments">Нові коментарі</string>
     <string name="sort_most_comments">Найбільше коментарів</string>
+    <string name="sort_scaled">Масштабоване</string>
 </resources>
