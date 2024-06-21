@@ -575,10 +575,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             }
             mMessageFullname = getArguments().getInt(EXTRA_MESSAGE_FULLNAME);
 
-            if (isSingleCommentThreadMode) {
-                sortType = loadSortType();
-                activity.setTitle(sortType.fullName);
-            }
+
+            sortType = loadSortType();
+            activity.setTitle(sortType.fullName);
+
         } else {
             if (sortType != null) {
                 activity.setTitle(sortType.fullName);
