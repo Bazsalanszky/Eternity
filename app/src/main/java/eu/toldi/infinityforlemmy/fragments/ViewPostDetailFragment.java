@@ -1399,6 +1399,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
 
                                 ViewPostDetailFragment.this.children = children;
+                                hasMoreChildren = false;
+                                mCommentsAdapter.addComments(expandedComments, hasMoreChildren);
                             }
 
 
