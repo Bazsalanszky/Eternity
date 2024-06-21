@@ -38,10 +38,4 @@
         app:title="@string/settings_user_default_sort_time_title"
         app:useSimpleSummaryProvider="true" />
 
-    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
-        app:defaultValue="false"
-        app:key="respect_subreddit_recommended_comment_sort_type"
-        app:title="@string/settings_respect_community_recommended_comment_sort_type_title"
-        app:summary="@string/settings_respect_community_recommended_comment_sort_type_summary" />
-
 </PreferenceScreen>
