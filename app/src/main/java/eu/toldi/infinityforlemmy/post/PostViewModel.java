@@ -180,7 +180,7 @@ public class PostViewModel extends ViewModel {
                                 post -> !post.isRead() || !currentlyReadPostIdsLiveData.getValue()))), ViewModelKt.getViewModelScope(this));
 
         currentlyReadPostIdsLiveData.setValue(postHistorySharedPreferences != null
-                && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false));
+                && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false) && !userWhere.equals(PostPagingSource.USER_WHERE_SAVED));
     }
 
     public PostViewModel(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,
