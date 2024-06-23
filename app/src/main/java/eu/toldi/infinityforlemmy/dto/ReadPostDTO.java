@@ -3,11 +3,13 @@ package eu.toldi.infinityforlemmy.dto;
 public class ReadPostDTO {
 
     private int post_id;
+    private int[] post_ids;
     private boolean read;
     private String auth;
 
     public ReadPostDTO(int post_id, boolean read, String auth) {
         this.post_id = post_id;
+        this.post_ids = new int[]{post_id};
         this.read = read;
         this.auth = auth;
     }
