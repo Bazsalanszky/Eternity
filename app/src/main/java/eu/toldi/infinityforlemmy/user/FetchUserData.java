@@ -116,9 +116,10 @@ public class FetchUserData {
             public void onResponse(@NonNull Call<String> call, @NonNull retrofit2.Response<String> response) {
                 if (response.isSuccessful()) {
                     validateAuthTokenListener.onValidateAuthTokenSuccess();
-                } else {
+                } else if (response.code() == 401) { // Unauthorized = token is invalid
                     validateAuthTokenListener.onValidateAuthTokenFailed();
                 }
+                // Other errors are ignored, e.g. server failure
             }
 
             @Override
