@@ -1,7 +1,6 @@
 package eu.toldi.infinityforlemmy.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import androidx.core.view.inputmethod.EditorInfoCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -112,8 +110,6 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
 
     private String mAccountQualifiedName;
     private boolean mInsertSuccess = false;
-    private boolean mInsertMultiredditSuccess = false;
-    private boolean showMultiReddits = false;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private Menu mMenu;
 
@@ -169,9 +165,6 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
 
         if (savedInstanceState != null) {
             mInsertSuccess = savedInstanceState.getBoolean(INSERT_SUBSCRIBED_SUBREDDIT_STATE);
-            mInsertMultiredditSuccess = savedInstanceState.getBoolean(INSERT_MULTIREDDIT_STATE);
-        } else {
-            showMultiReddits = getIntent().getBooleanExtra(EXTRA_SHOW_MULTIREDDITS, false);
         }
 
         if (mAccessToken == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -218,37 +211,12 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
     }
 
     private void initializeViewPagerAndLoadSubscriptions() {
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(this, CreateMultiRedditActivity.class);
-            startActivity(intent);
-        });
+        fab.hide();
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setOffscreenPageLimit(2);
-        if (viewPager.getCurrentItem() != 2) {
-            fab.hide();
-        }
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    unlockSwipeRightToGoBack();
-                    fab.hide();
-                } else {
-                    lockSwipeRightToGoBack();
-                    if (position != 2) {
-                        fab.hide();
-                    } else {
-                        fab.show();
-                    }
-                }
-            }
-        });
-        tabLayout.setupWithViewPager(viewPager);
 
-        if (showMultiReddits) {
-            viewPager.setCurrentItem(2, false);
-        }
+        tabLayout.setupWithViewPager(viewPager);
 
         loadBlocks(false);
     }
@@ -305,7 +273,6 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(INSERT_SUBSCRIBED_SUBREDDIT_STATE, mInsertSuccess);
-        outState.putBoolean(INSERT_MULTIREDDIT_STATE, mInsertMultiredditSuccess);
     }
 
     @Override
