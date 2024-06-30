@@ -1352,4 +1352,6 @@
     <string name="sort_scaled">Škálované</string>
     <string name="sort_new_comments">Nové komentáře</string>
     <string name="sort_most_comments">Nejvíce komentářů</string>
+    <string name="no_blocked_instances">Žádné blokované instance</string>
+    <string name="instances">Instance</string>
 </resources>
