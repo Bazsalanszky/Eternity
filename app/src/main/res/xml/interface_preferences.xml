@@ -93,9 +93,5 @@
         app:key="show_statistics"
         app:title="@string/settings_show_statistics" />
 
-    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
-        app:defaultValue="true"
-        app:key="show_score"
-        app:title="@string/settings_show_post_and_comment_score" />
 
 </PreferenceScreen>

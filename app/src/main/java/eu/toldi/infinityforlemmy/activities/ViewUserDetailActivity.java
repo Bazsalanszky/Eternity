@@ -189,21 +189,11 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     @BindView(R.id.comment_count_text_view_view_user_detail_activity)
     TextView commentCountTextView;
 
-    @BindView(R.id.upvote_count_post_text_view_view_user_detail_activity)
-    TextView upvoteCountPostTextView;
-
-    @BindView(R.id.upvote_count_comment_text_view_view_user_detail_activity)
-    TextView upvoteCountCommentTextView;
-
     @BindView(R.id.posts_count_icon_image_view_view_user_detail_activity)
     ImageView postsCountIconImageView;
     @BindView(R.id.comments_count_icon_image_view_view_user_detail_activity)
     ImageView commentsCountIconImageView;
 
-    @BindView(R.id.upvote_count_posts_icon_image_view_view_user_detail_activity)
-    ImageView postUpvoteCountIconImageView;
-    @BindView(R.id.upvote_count_comments_icon_image_view_view_user_detail_activity)
-    ImageView commentUpvoteCountIconImageView;
     @BindView(R.id.account_created_cake_icon_image_view_view_user_detail_activity)
     ImageView accountCreatedCakeIconImageView;
 
@@ -262,7 +252,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
     private String description;
 
     private boolean showStatistics;
-    private boolean showScore;
     private boolean subscriptionReady = false;
     private boolean mFetchUserInfoSuccess = false;
     private int expandedTabTextColor;
@@ -328,7 +317,6 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         lockBottomAppBar = mSharedPreferences.getBoolean(SharedPreferencesUtils.LOCK_BOTTOM_APP_BAR, false);
 
         showStatistics = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_STATISTICS, true);
-        showScore = mSharedPreferences.getBoolean(SharedPreferencesUtils.SHOW_POST_AND_COMMENT_SCORE, true);
 
         if (savedInstanceState == null) {
             mMessageId = getIntent().getIntExtra(EXTRA_MESSAGE_FULLNAME, 0);
@@ -631,17 +619,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                 UserStats userStats = mUserData.getStats();
                 if (userStats != null && showStatistics) {
                     userStatisticsBlock.setVisibility(View.VISIBLE);
-                    postCountTextView.setText(String.valueOf(userStats.getPostCount()));
-                    commentCountTextView.setText(String.valueOf(userStats.getCommentCount()));
-                    if (showScore) {
-                        upvoteCountPostTextView.setText(String.valueOf(userStats.getPostScore()));
-                        upvoteCountCommentTextView.setText(String.valueOf(userStats.getCommentScore()));
-                    } else {
-                        upvoteCountPostTextView.setVisibility(View.GONE);
-                        upvoteCountCommentTextView.setVisibility(View.GONE);
-                        postUpvoteCountIconImageView.setVisibility(View.GONE);
-                        commentUpvoteCountIconImageView.setVisibility(View.GONE);
-                    }
+                    postCountTextView.setText(getString(R.string.post_count_detail, userStats.getPostCount()));
+                    commentCountTextView.setText(getString(R.string.comment_count_detail, userStats.getCommentCount()));
                 }
 
                 if (userData.getDescription() == null || userData.getDescription().equals("")) {
@@ -711,9 +690,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         subscribedColor = mCustomThemeWrapper.getSubscribed();
         userNameTextView.setTextColor(mCustomThemeWrapper.getUsername());
         postCountTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
-        upvoteCountPostTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         commentCountTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
-        upvoteCountCommentTextView.setTextColor(mCustomThemeWrapper.getPrimaryTextColor());
         postsCountIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         commentsCountIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
         accountCreatedCakeIconImageView.setColorFilter(mCustomThemeWrapper.getPrimaryTextColor(), PorterDuff.Mode.SRC_IN);
@@ -726,9 +703,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         if (typeface != null) {
             userNameTextView.setTypeface(typeface);
             postCountTextView.setTypeface(typeface);
-            upvoteCountPostTextView.setTypeface(typeface);
             commentCountTextView.setTypeface(typeface);
-            upvoteCountCommentTextView.setTypeface(typeface);
             cakedayTextView.setTypeface(typeface);
             subscribeUserChip.setTypeface(typeface);
             descriptionTextView.setTypeface(typeface);
