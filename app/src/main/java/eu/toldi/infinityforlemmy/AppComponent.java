@@ -74,6 +74,7 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.AccountChooserBottomSheetF
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CommentMoreBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FlairBottomSheetFragment;
 import eu.toldi.infinityforlemmy.fragments.BlockedCommunitiesListingFragment;
+import eu.toldi.infinityforlemmy.fragments.BlockedInstancesListingFragment;
 import eu.toldi.infinityforlemmy.fragments.BlockedUsersListingFragment;
 import eu.toldi.infinityforlemmy.fragments.CommentsListingFragment;
 import eu.toldi.infinityforlemmy.fragments.FollowedUsersListingFragment;
@@ -317,6 +318,8 @@ public interface AppComponent {
     void inject(BlockedCommunitiesListingFragment blockedCommunitiesListingFragment);
 
     void inject(BlockedUsersListingFragment blockedUsersListingFragment);
+
+    void inject(BlockedInstancesListingFragment blockedInstancesListingFragment);
 
     void inject(CommentMoreBottomSheetFragment commentMoreBottomSheetFragment);
 

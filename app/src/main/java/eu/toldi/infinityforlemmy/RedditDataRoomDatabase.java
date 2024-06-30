@@ -15,6 +15,8 @@ import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.account.AccountDao;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityDao;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceDao;
+import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserDao;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
@@ -47,7 +49,7 @@ import eu.toldi.infinityforlemmy.user.UserData;
 @Database(entities = {Account.class, SubredditData.class, SubscribedSubredditData.class, UserData.class,
         SubscribedUserData.class, MultiReddit.class, CustomTheme.class, RecentSearchQuery.class,
         ReadPost.class, PostFilter.class, PostFilterUsage.class, AnonymousMultiredditSubreddit.class,
-        BlockedUserData.class, BlockedCommunityData.class, CommentFilter.class, CommentFilterUsage.class}, version = 28)
+        BlockedUserData.class, BlockedCommunityData.class, BlockedInstanceData.class, CommentFilter.class, CommentFilterUsage.class}, version = 30)
 public abstract class RedditDataRoomDatabase extends RoomDatabase {
 
     public static RedditDataRoomDatabase create(final Context context) {
@@ -58,7 +60,9 @@ public abstract class RedditDataRoomDatabase extends RoomDatabase {
                         MIGRATION_9_10, MIGRATION_10_11, MIGRATION_11_12, MIGRATION_12_13,
                         MIGRATION_13_14, MIGRATION_14_15, MIGRATION_15_16, MIGRATION_16_17,
                         MIGRATION_17_18, MIGRATION_18_19, MIGRATION_19_20, MIGRATION_20_21,
-                        MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24, MIGRATION_24_25, MIGRATION_25_26, MIGRATION_26_27, MIGRATION_27_28)
+                        MIGRATION_21_22, MIGRATION_22_23, MIGRATION_23_24, MIGRATION_24_25,
+                        MIGRATION_25_26, MIGRATION_26_27, MIGRATION_27_28, MIGRATION_28_29,
+                        MIGRATION_29_30)
                 .build();
     }
 
@@ -71,6 +75,8 @@ public abstract class RedditDataRoomDatabase extends RoomDatabase {
     public abstract BlockedUserDao blockedUserDao();
 
     public abstract BlockedCommunityDao blockedCommunityDao();
+
+    public abstract BlockedInstanceDao blockedInstanceDao();
 
     public abstract UserDao userDao();
 
@@ -443,6 +449,25 @@ public abstract class RedditDataRoomDatabase extends RoomDatabase {
                     "(name TEXT NOT NULL PRIMARY KEY, max_vote INTEGER NOT NULL, min_vote INTEGER NOT NULL, exclude_strings TEXT, exclude_users TEXT)");
             database.execSQL("CREATE TABLE comment_filter_usage (name TEXT NOT NULL, usage INTEGER NOT NULL, " +
                     "name_of_usage TEXT NOT NULL, PRIMARY KEY(name, usage, name_of_usage), FOREIGN KEY(name) REFERENCES comment_filter(name) ON DELETE CASCADE)");
+        }
+    };
+
+    private static final Migration MIGRATION_28_29 = new Migration(28, 29) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE blocked_instances" +
+                    "(domain TEXT, id INTEGER NOT NULL, account_name TEXT NOT NULL, PRIMARY KEY( id, account_name))");
+
+        }
+    };
+
+    private static final Migration MIGRATION_29_30 = new Migration(29, 30) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            // Alter table "blocked_instances" to add new columns "instance_name" and "icon"
+            database.execSQL("ALTER TABLE blocked_instances ADD COLUMN instance_name TEXT");
+            database.execSQL("ALTER TABLE blocked_instances ADD COLUMN icon TEXT");
+
         }
     };
 }

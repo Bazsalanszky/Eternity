@@ -51,6 +51,7 @@ import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.account.FetchBlockedThings;
 import eu.toldi.infinityforlemmy.asynctasks.InsertBlockedThings;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.ViewPagerBugFixed;
@@ -58,6 +59,7 @@ import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.GoBackToMainPageEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.BlockedCommunitiesListingFragment;
+import eu.toldi.infinityforlemmy.fragments.BlockedInstancesListingFragment;
 import eu.toldi.infinityforlemmy.fragments.BlockedUsersListingFragment;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 import eu.toldi.infinityforlemmy.utils.Utils;
@@ -316,9 +318,9 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
         if (mAccessToken != null && !(!forceLoad && mInsertSuccess)) {
             FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
                 @Override
-                public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities) {
+                public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities, List<BlockedInstanceData> blockedInstances) {
                     InsertBlockedThings.insertBlockedThings(mExecutor, new Handler(), mRedditDataRoomDatabase, mAccountQualifiedName,
-                            blockedCommunities, blockedUsers, () -> {
+                            blockedCommunities, blockedUsers, blockedInstances, () -> {
                                 mInsertSuccess = true;
                                 sectionsPagerAdapter.stopRefreshProgressbar();
                             });
@@ -396,12 +398,20 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
                     fragment.setArguments(bundle);
                     return fragment;
                 }
+                case 2: {
+                    BlockedInstancesListingFragment fragment = new BlockedInstancesListingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(BlockedInstancesListingFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
+                    bundle.putString(BlockedInstancesListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+                    fragment.setArguments(bundle);
+                    return fragment;
+                }
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -412,7 +422,7 @@ public class BlockedThingListingActivity extends BaseActivity implements Activit
                 case 1:
                     return Utils.getTabTextWithCustomFont(typeface, getString(R.string.users));
                 case 2:
-                    return Utils.getTabTextWithCustomFont(typeface, getString(R.string.multi_reddits));
+                    return Utils.getTabTextWithCustomFont(typeface, getString(R.string.instances));
             }
 
             return null;

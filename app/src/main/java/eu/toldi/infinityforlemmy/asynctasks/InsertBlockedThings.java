@@ -12,6 +12,7 @@ import java.util.concurrent.Executor;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityDao;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserDao;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 
@@ -22,6 +23,7 @@ public class InsertBlockedThings {
                                            RedditDataRoomDatabase redditDataRoomDatabase, @Nullable String accountName,
                                            List<BlockedCommunityData> blockedCommunityDataList,
                                            List<BlockedUserData> blockedUserDataDataList,
+                                           List<BlockedInstanceData> blockedInstanceDataList,
 
                                            InsertBlockedThingListener insertSubscribedThingListener) {
         executor.execute(() -> {
@@ -65,6 +67,23 @@ public class InsertBlockedThings {
 
                 for (BlockedUserData s : blockedUserDataDataList) {
                     blockedUserDao.insert(s);
+                }
+            }
+
+            if (blockedInstanceDataList != null) {
+                List<BlockedInstanceData> existingBlockedInstanceDataList =
+                        redditDataRoomDatabase.blockedInstanceDao().getAllInstanceInstancesList(accountName);
+                Collections.sort(blockedInstanceDataList, (subscribedInstanceData, t1) -> subscribedInstanceData.getDomain().compareToIgnoreCase(t1.getDomain()));
+                List<String> unblockedInstances = new ArrayList<>();
+                compareTwoBlockedInstanceList(blockedInstanceDataList, existingBlockedInstanceDataList,
+                        unblockedInstances);
+
+                for (String unblocked : unblockedInstances) {
+                    redditDataRoomDatabase.blockedInstanceDao().deleteInstanceUser(unblocked, accountName);
+                }
+
+                for (BlockedInstanceData s : blockedInstanceDataList) {
+                    redditDataRoomDatabase.blockedInstanceDao().insert(s);
                 }
             }
 
@@ -118,6 +137,32 @@ public class InsertBlockedThings {
                 }
                 if (newSubscribedUsers.get(newIndex).getName().compareToIgnoreCase(old.getName()) > 0) {
                     unsubscribedUserNames.add(old.getQualifiedName());
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void compareTwoBlockedInstanceList(List<BlockedInstanceData> newBlockedInstances,
+                                                      List<BlockedInstanceData> oldBlockedInstances,
+                                                      List<String> unblockedInstances) {
+        int newIndex = 0;
+        for (int oldIndex = 0; oldIndex < oldBlockedInstances.size(); oldIndex++) {
+            if (newIndex >= newBlockedInstances.size()) {
+                for (; oldIndex < oldBlockedInstances.size(); oldIndex++) {
+                    unblockedInstances.add(oldBlockedInstances.get(oldIndex).getDomain());
+                }
+                return;
+            }
+
+            BlockedInstanceData old = oldBlockedInstances.get(oldIndex);
+            for (; newIndex < newBlockedInstances.size(); newIndex++) {
+                if (newBlockedInstances.get(newIndex).getDomain().compareToIgnoreCase(old.getDomain()) == 0) {
+                    newIndex++;
+                    break;
+                }
+                if (newBlockedInstances.get(newIndex).getDomain().compareToIgnoreCase(old.getDomain()) > 0) {
+                    unblockedInstances.add(old.getDomain());
                     break;
                 }
             }

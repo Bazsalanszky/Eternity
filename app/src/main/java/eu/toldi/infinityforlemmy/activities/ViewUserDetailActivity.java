@@ -83,6 +83,7 @@ import eu.toldi.infinityforlemmy.asynctasks.AddSubredditOrUserToMultiReddit;
 import eu.toldi.infinityforlemmy.asynctasks.CheckIsFollowingUser;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CopyTextBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.FABMoreOptionsBottomSheetFragment;
@@ -1179,7 +1180,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                     FetchBlockedThings.fetchBlockedThings(mRetrofit.getRetrofit(), mAccessToken, mAccountQualifiedName, new FetchBlockedThings.FetchBlockedThingsListener() {
 
                         @Override
-                        public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities) {
+                        public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities, List<BlockedInstanceData> blockedInstances) {
                             for (BlockedUserData blockedUserData : blockedUsers) {
                                 if (blockedUserData.getQualifiedName().equals(qualifiedName)) {
                                     isBlocked = true;

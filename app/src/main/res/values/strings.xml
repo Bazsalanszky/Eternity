@@ -1323,4 +1323,6 @@
     <string name="token_expired_message">"Your token has been expired. As Eternity does not store your password, you need to manually log back in! "</string>
     <string name="sort_most_comments">Most Comments</string>
     <string name="sort_new_comments">New Comments</string>
+    <string name="instances">Instances</string>
+    <string name="no_blocked_instances">No blocked instances</string>
 </resources>
