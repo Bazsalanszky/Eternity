@@ -1359,4 +1359,6 @@
     <string name="settings_hide_fab_in_post_feed">Скрыть FAB в ленте постов</string>
     <string name="use_circular_fab">Использовать кругый FAB</string>
     <string name="theme_item_read_post_filled_card_view_background_color">Цвет фона просмотренных постов с залитой карточкой</string>
+    <string name="no_blocked_instances">Нет заблокированных серверов</string>
+    <string name="instances">Серверы</string>
 </resources>
