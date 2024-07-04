@@ -14,6 +14,7 @@ A Lemmy client for Android written in Java. It's a fork of the [Infinity for Red
 
 [![status-badge](https://ci.codeberg.org/api/badges/12474/status.svg)](https://ci.codeberg.org/repos/12474)
 [![Liberapay patrons](https://img.shields.io/liberapay/patrons/bazsalanszky)](https://liberapay.com/Bazsalanszky)
+[![Lemmy Community](https://img.shields.io/lemmy/eternityapp@lemdro.id?style=flat-square&logo=lemmy&label=lemmy)](https://lemdro.id/c/eternityapp)
 
 <a href="https://codeberg.org/Bazsalanszky/Eternity/issues">Report a Bug</a>
 
