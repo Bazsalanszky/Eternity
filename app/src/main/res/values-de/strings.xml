@@ -1396,4 +1396,6 @@
 \nVon nun an benötigst du ein monatliches Abonnement, um auf die Reddit-API in Infinity für Reddit zuzugreifen. Der Grund dafür ist, dass Reddit seit dem 1. Juli 2023 Gebühren für den API-Zugang erhebt.
 \n
 \nAlle Stufen funktionieren auf die gleiche Weise. Wenn du Infinity unterstützen möchtest, kannst du eine höhere Stufe abonnieren. Der größte Teil des Geldes der niedrigsten Stufe geht an Reddit.</string>
+    <string name="instances">Instanzen</string>
+    <string name="no_blocked_instances">Keine Instanzen blockiert</string>
 </resources>
