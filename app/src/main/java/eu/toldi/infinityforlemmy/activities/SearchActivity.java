@@ -470,7 +470,7 @@ public class SearchActivity extends BaseActivity {
             } else if (requestCode == SUBREDDIT_SEARCH_REQUEST_CODE) {
                 Intent returnIntent = new Intent();
                 if (getIntent().getBooleanExtra(EXTRA_IS_MULTI_SELECTION, false)) {
-                    returnIntent.putStringArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, data.getStringArrayListExtra(SearchSubredditsResultActivity.RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES));
+                    returnIntent.putParcelableArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, data.getParcelableArrayListExtra(SearchSubredditsResultActivity.RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES));
                 } else {
                     SubscribedSubredditData communityData = data.getParcelableExtra(SearchSubredditsResultActivity.EXTRA_RETURN_SUBREDDIT_NAME);
                     String iconUrl = data.getStringExtra(SearchSubredditsResultActivity.EXTRA_RETURN_SUBREDDIT_ICON_URL);

@@ -35,6 +35,7 @@ import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.fragments.SubredditListingFragment;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
@@ -171,9 +172,9 @@ public class SearchSubredditsResultActivity extends BaseActivity implements Acti
             return true;
         } else if (item.getItemId() == R.id.action_save_search_subreddits_result_activity) {
             if (mFragment != null) {
-                ArrayList<String> selectedSubredditNames = ((SubredditListingFragment) mFragment).getSelectedSubredditNames();
+                ArrayList<SubredditWithSelection> selectedSubredditNames = ((SubredditListingFragment) mFragment).getSelectedSubredditNames();
                 Intent returnIntent = new Intent();
-                returnIntent.putStringArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, selectedSubredditNames);
+                returnIntent.putParcelableArrayListExtra(RETURN_EXTRA_SELECTED_SUBREDDIT_NAMES, selectedSubredditNames);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }

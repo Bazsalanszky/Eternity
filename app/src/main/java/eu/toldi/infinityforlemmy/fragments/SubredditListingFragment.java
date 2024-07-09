@@ -48,6 +48,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subreddit.SubredditListingViewModel;
+import eu.toldi.infinityforlemmy.subreddit.SubredditWithSelection;
 import eu.toldi.infinityforlemmy.utils.LemmyUtils;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
 
@@ -263,17 +264,17 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         return sortType;
     }
 
-    public ArrayList<String> getSelectedSubredditNames() {
+    public ArrayList<SubredditWithSelection> getSelectedSubredditNames() {
         if (mSubredditListingViewModel != null) {
             List<SubredditData> allSubreddits = mSubredditListingViewModel.getSubreddits().getValue();
             if (allSubreddits == null) {
                 return null;
             }
 
-            ArrayList<String> selectedSubreddits = new ArrayList<>();
+            ArrayList<SubredditWithSelection> selectedSubreddits = new ArrayList<>();
             for (SubredditData s : allSubreddits) {
                 if (s.isSelected()) {
-                    selectedSubreddits.add(s.getName());
+                    selectedSubreddits.add(new SubredditWithSelection(s.getName(), s.getIconUrl(), LemmyUtils.actorID2FullName(s.getActorId())));
                 }
             }
             return selectedSubreddits;
