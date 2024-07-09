@@ -108,6 +108,7 @@ public class SortTypeBottomSheetFragment extends LandscapeExpandedRoundedBottomS
             default:
             case PAGE_TYPE_COMMUNITY:
             case PAGE_TYPE_FRONT_PAGE:
+            case PAGE_TYPE_SEARCH:
 
                 break;
         }

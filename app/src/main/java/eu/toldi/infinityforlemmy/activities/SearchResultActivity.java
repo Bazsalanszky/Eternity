@@ -62,6 +62,7 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.RandomBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SearchPostSortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SearchUserAndSubredditSortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTimeBottomSheetFragment;
+import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.ChangeNSFWEvent;
@@ -336,7 +337,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                 case SharedPreferencesUtils.OTHER_ACTIVITIES_BOTTOM_APP_BAR_FAB_CHANGE_SORT_TYPE: {
                     Fragment fragment = sectionsPagerAdapter.getCurrentFragment();
                     if (fragment instanceof PostFragment) {
-                        SearchPostSortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SearchPostSortTypeBottomSheetFragment.getNewInstance(((PostFragment) fragment).getSortType());
+                        SortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_SEARCH,((PostFragment) fragment).getSortType());
                         searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
                     }
                     break;
@@ -402,7 +403,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
     private void displaySortTypeBottomSheetFragment() {
         Fragment fragment = sectionsPagerAdapter.getCurrentFragment();
         if (fragment instanceof PostFragment) {
-            SearchPostSortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SearchPostSortTypeBottomSheetFragment.getNewInstance(((PostFragment) fragment).getSortType());
+            SortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_SEARCH,((PostFragment) fragment).getSortType());
             searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
         } else {
             if (fragment instanceof SubredditListingFragment) {
