@@ -601,7 +601,6 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setText('@' + mPost.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
                 ((PostDetailBaseViewHolder) holder).mCommunityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
                 ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mPost.isModerator() || mPost.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
-                ((PostDetailBaseViewHolder) holder).userTextView.setText(mPost.getAuthor());
             }
 
             if (mPost.isModerator() || mPost.isAdmin()) {
