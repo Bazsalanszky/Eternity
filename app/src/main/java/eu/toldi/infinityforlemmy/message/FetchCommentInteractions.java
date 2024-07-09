@@ -31,7 +31,7 @@ public class FetchCommentInteractions {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject commentInteractionObject = jsonArray.getJSONObject(i);
                                     Comment comment = ParseComment.parseSingleComment(commentInteractionObject);
-                                    boolean isRead = !commentInteractionObject.getJSONObject("comment_reply").getBoolean("read");
+                                    boolean isRead = commentInteractionObject.getJSONObject("comment_reply").getBoolean("read");
                                     int id = commentInteractionObject.getJSONObject("comment_reply").getInt("id");
                                     commentInteractions.add(new CommentInteraction(id, comment, isRead));
                                 }

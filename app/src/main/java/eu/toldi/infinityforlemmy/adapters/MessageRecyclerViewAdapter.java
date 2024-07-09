@@ -156,7 +156,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
             CommentInteraction message = getItem(holder.getBindingAdapterPosition());
             if (message != null) {
 
-                if (message.isRead()) {
+                if (!message.isRead()) {
                     if (markAllMessagesAsRead) {
                         message.markAsRead();
                     } else {
