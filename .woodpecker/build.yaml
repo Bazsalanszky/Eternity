@@ -23,7 +23,7 @@ steps:
         from_secret: GITEA_ACCESS_TOKEN
       target: main
       prerelease: true
-      note: "This is an alpha release. Expect many bugs and unfinished features!"
+      note: "Pending release notes..."
     when:
       event: [ tag ]
 when:
