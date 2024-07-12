@@ -67,6 +67,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.events.ChangeNSFWEvent;
 import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
+import eu.toldi.infinityforlemmy.fragments.CommentsListingFragment;
 import eu.toldi.infinityforlemmy.fragments.PostFragment;
 import eu.toldi.infinityforlemmy.fragments.SubredditListingFragment;
 import eu.toldi.infinityforlemmy.fragments.UserListingFragment;
@@ -272,6 +273,9 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                 case 2:
                     Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.users));
                     break;
+                case 3:
+                    Utils.setTitleWithCustomFontToTab(typeface, tab, getString(R.string.comments));
+                    break;
             }
         }).attach();
         fixViewPager2Sensitivity(viewPager2);
@@ -407,13 +411,14 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
             searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
         } else {
             if (fragment instanceof SubredditListingFragment) {
-                SearchUserAndSubredditSortTypeBottomSheetFragment searchUserAndSubredditSortTypeBottomSheetFragment
-                        = SearchUserAndSubredditSortTypeBottomSheetFragment.getNewInstance(viewPager2.getCurrentItem(), ((SubredditListingFragment) fragment).getSortType());
-                searchUserAndSubredditSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchUserAndSubredditSortTypeBottomSheetFragment.getTag());
+                SortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_SEARCH,((SubredditListingFragment) fragment).getSortType());
+                searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
             } else if (fragment instanceof UserListingFragment) {
-                SearchUserAndSubredditSortTypeBottomSheetFragment searchUserAndSubredditSortTypeBottomSheetFragment
-                        = SearchUserAndSubredditSortTypeBottomSheetFragment.getNewInstance(viewPager2.getCurrentItem(), ((UserListingFragment) fragment).getSortType());
-                searchUserAndSubredditSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchUserAndSubredditSortTypeBottomSheetFragment.getTag());
+                SortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_SEARCH,((UserListingFragment) fragment).getSortType());
+                searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
+            } else if (fragment instanceof CommentsListingFragment) {
+                SortTypeBottomSheetFragment searchPostSortTypeBottomSheetFragment = SortTypeBottomSheetFragment.getNewInstance(SortTypeBottomSheetFragment.PAGE_TYPE_SEARCH,((CommentsListingFragment) fragment).getSortType());
+                searchPostSortTypeBottomSheetFragment.show(getSupportFragmentManager(), searchPostSortTypeBottomSheetFragment.getTag());
             }
         }
     }
@@ -473,7 +478,6 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
         if (sectionsPagerAdapter != null) {
             sectionsPagerAdapter.changeSortType(sortType);
         }
-
     }
 
     @Override
@@ -792,13 +796,22 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                     mFragment.setArguments(bundle);
                     return mFragment;
                 }
-                default: {
+                case 2: {
                     UserListingFragment mFragment = new UserListingFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString(UserListingFragment.EXTRA_QUERY, mQuery);
                     bundle.putBoolean(UserListingFragment.EXTRA_IS_GETTING_USER_INFO, false);
                     bundle.putString(UserListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
                     bundle.putString(UserListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                    mFragment.setArguments(bundle);
+                    return mFragment;
+                }
+                default: {
+                    CommentsListingFragment mFragment = new CommentsListingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(CommentsListingFragment.EXTRA_SEARCH_QUERY, mQuery);
+                    bundle.putString(CommentsListingFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
+                    bundle.putString(CommentsListingFragment.EXTRA_ACCOUNT_NAME, mAccountName);
                     mFragment.setArguments(bundle);
                     return mFragment;
                 }
@@ -826,8 +839,18 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
 
         void changeSortType(SortType sortType) {
             Fragment fragment = getCurrentFragment();
+
             if (fragment instanceof PostFragment) {
                 ((PostFragment) fragment).changeSortType(sortType);
+                displaySortTypeInToolbar();
+            } else if (fragment instanceof SubredditListingFragment) {
+                ((SubredditListingFragment) fragment).changeSortType(sortType);
+                displaySortTypeInToolbar();
+            } else if (fragment instanceof UserListingFragment) {
+                ((UserListingFragment) fragment).changeSortType(sortType);
+                displaySortTypeInToolbar();
+            } else if (fragment instanceof CommentsListingFragment) {
+                ((CommentsListingFragment) fragment).changeSortType(sortType);
                 displaySortTypeInToolbar();
             }
         }
@@ -871,6 +894,8 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                 ((SubredditListingFragment) fragment).goBackToTop();
             } else if (fragment instanceof UserListingFragment) {
                 ((UserListingFragment) fragment).goBackToTop();
+            } else if (fragment instanceof CommentsListingFragment) {
+                ((CommentsListingFragment) fragment).goBackToTop();
             }
         }
 
@@ -884,6 +909,9 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                 Utils.displaySortTypeInToolbar(sortType, toolbar);
             } else if (fragment instanceof UserListingFragment) {
                 SortType sortType = ((UserListingFragment) fragment).getSortType();
+                Utils.displaySortTypeInToolbar(sortType, toolbar);
+            } else if (fragment instanceof CommentsListingFragment) {
+                SortType sortType = ((CommentsListingFragment) fragment).getSortType();
                 Utils.displaySortTypeInToolbar(sortType, toolbar);
             }
         }
@@ -904,7 +932,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
 
         @Override
         public int getItemCount() {
-            return 3;
+            return 4;
         }
     }
 

@@ -60,6 +60,7 @@ import eu.toldi.infinityforlemmy.utils.Utils;
 public class CommentsListingFragment extends Fragment implements FragmentCommunicator {
 
     public static final String EXTRA_USERNAME = "EN";
+    public static final String EXTRA_SEARCH_QUERY = "ESQ";
     public static final String EXTRA_ACCESS_TOKEN = "EAT";
     public static final String EXTRA_ACCOUNT_NAME = "EAN";
     public static final String EXTRA_ARE_SAVED_COMMENTS = "EISC";
@@ -266,6 +267,8 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
                     () -> mCommentViewModel.retryLoadingMore());
 
             String username = getArguments().getString(EXTRA_USERNAME);
+            String query = getArguments().getString(EXTRA_SEARCH_QUERY);
+
             String sort = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TYPE_USER_COMMENT, SortType.Type.NEW.name());
             if (sort.equals(SortType.Type.TOP.name())) {
                 String sortTime = mSortTypeSharedPreferences.getString(SharedPreferencesUtils.SORT_TIME_USER_COMMENT, SortType.Time.ALL.name());
@@ -293,7 +296,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
 
 
             factory = new CommentViewModel.Factory(mRetrofit.getRetrofit(),
-                    resources.getConfiguration().locale, mAccessToken, username, sortType,
+                    resources.getConfiguration().locale, mAccessToken, username, query,sortType,
                     getArguments().getBoolean(EXTRA_ARE_SAVED_COMMENTS));
 
 

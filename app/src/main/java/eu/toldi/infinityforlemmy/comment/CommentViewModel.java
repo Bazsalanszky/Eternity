@@ -23,9 +23,9 @@ public class CommentViewModel extends ViewModel {
     private LiveData<PagedList<Comment>> comments;
     private MutableLiveData<SortType> sortTypeLiveData;
 
-    public CommentViewModel(Retrofit retrofit, Locale locale, String accessToken, String username, SortType sortType,
+    public CommentViewModel(Retrofit retrofit, Locale locale, String accessToken, String username, String query, SortType sortType,
                             boolean areSavedComments) {
-        commentDataSourceFactory = new CommentDataSourceFactory(retrofit, locale, accessToken, username, sortType,
+        commentDataSourceFactory = new CommentDataSourceFactory(retrofit, locale, accessToken, username,query, sortType,
                 areSavedComments);
 
         initialLoadingState = Transformations.switchMap(commentDataSourceFactory.getCommentDataSourceLiveData(),
@@ -84,15 +84,17 @@ public class CommentViewModel extends ViewModel {
         private Locale locale;
         private String accessToken;
         private String username;
+        private String query;
         private SortType sortType;
         private boolean areSavedComments;
 
         public Factory(Retrofit retrofit, Locale locale, String accessToken, String username,
-                       SortType sortType, boolean areSavedComments) {
+                       String query, SortType sortType, boolean areSavedComments) {
             this.retrofit = retrofit;
             this.locale = locale;
             this.accessToken = accessToken;
             this.username = username;
+            this.query = query;
             this.sortType = sortType;
             this.areSavedComments = areSavedComments;
         }
@@ -100,7 +102,7 @@ public class CommentViewModel extends ViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new CommentViewModel(retrofit, locale, accessToken, username, sortType, areSavedComments);
+            return (T) new CommentViewModel(retrofit, locale, accessToken, username,query, sortType, areSavedComments);
         }
     }
 }

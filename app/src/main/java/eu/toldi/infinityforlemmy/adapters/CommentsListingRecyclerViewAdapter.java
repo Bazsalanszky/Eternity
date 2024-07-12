@@ -558,7 +558,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             comment.getScore() + comment.getVoteType()));
 
 
-                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.voteComment(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();
@@ -637,7 +637,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             comment.getScore() + comment.getVoteType()));
 
 
-                    VoteThing.votePost(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    VoteThing.voteComment(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
                         @Override
                         public void onVoteThingSuccess(int position1) {
                             int currentPosition = getBindingAdapterPosition();

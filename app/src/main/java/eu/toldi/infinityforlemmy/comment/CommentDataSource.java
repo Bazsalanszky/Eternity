@@ -29,6 +29,7 @@ public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
     @Nullable
     private String accessToken;
     private String username;
+    private String query;
     private SortType sortType;
     private boolean areSavedComments;
 
@@ -39,12 +40,13 @@ public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
     private LoadParams<Integer> params;
     private LoadCallback<Integer, Comment> callback;
 
-    CommentDataSource(Retrofit retrofit, Locale locale, @Nullable String accessToken, String username, SortType sortType,
-                      boolean areSavedComments) {
+    CommentDataSource(Retrofit retrofit, Locale locale, @Nullable String accessToken, String username,
+                      String query,SortType sortType, boolean areSavedComments) {
         this.retrofit = retrofit;
         this.locale = locale;
         this.accessToken = accessToken;
         this.username = username;
+        this.query = query;
         this.sortType = sortType;
         this.areSavedComments = areSavedComments;
         paginationNetworkStateLiveData = new MutableLiveData<>();
@@ -68,6 +70,68 @@ public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
         loadAfter(params, callback);
     }
 
+    @Override
+public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Comment> callback) {
+    updateNetworkState(initialLoadStateLiveData, NetworkState.LOADING);
+    LemmyAPI api = retrofit.create(LemmyAPI.class);
+    if (query != null && !query.isEmpty()) {
+        fetchComments(api.search(query, null, null, null,"Comments", sortType.getType().value,"All",1, 25, accessToken), callback, true);
+    } else {
+        fetchComments(api.getUserComments(username, sortType.getType().value, 1, 25, areSavedComments, accessToken), callback, true);
+    }
+}
+
+@Override
+public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Comment> callback) {
+    this.params = params;
+    updateNetworkState(paginationNetworkStateLiveData, NetworkState.LOADING);
+    LemmyAPI api = retrofit.create(LemmyAPI.class);
+    if (query != null && !query.isEmpty()) {
+        fetchComments(api.search(query, null, null, null,"Comments", sortType.getType().value,"All",params.key, 25, accessToken), callback, false);
+    } else {
+        fetchComments(api.getUserComments(username, sortType.getType().value, params.key, 25, areSavedComments, accessToken), callback, false);
+    }
+}
+
+private void fetchComments(Call<String> call, Object callback, boolean isInitialLoad) {
+    call.enqueue(new Callback<String>() {
+        @Override
+        public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+            if (response.isSuccessful()) {
+                new ParseCommentAsyncTask(response.body(), locale, new ParseCommentAsyncTask.ParseCommentAsyncTaskListener() {
+
+                    @Override
+                    public void parseSuccessful(ArrayList<Comment> comments, Integer page) {
+                        if (isInitialLoad) {
+                            ((LoadInitialCallback<Integer, Comment>) callback).onResult(comments, null, comments.isEmpty() ? null : 2);
+                            hasPostLiveData.postValue(!comments.isEmpty());
+                        } else {
+                            ((LoadCallback<Integer, Comment>) callback).onResult(comments, page);
+                        }
+                        updateNetworkState(isInitialLoad ? initialLoadStateLiveData : paginationNetworkStateLiveData, NetworkState.LOADED);
+                    }
+
+                    @Override
+                    public void parseFailed() {
+                        updateNetworkState(isInitialLoad ? initialLoadStateLiveData : paginationNetworkStateLiveData, new NetworkState(NetworkState.Status.FAILED, "Error parsing data"));
+                    }
+                }).execute();
+            } else {
+                updateNetworkState(isInitialLoad ? initialLoadStateLiveData : paginationNetworkStateLiveData, new NetworkState(NetworkState.Status.FAILED, "Error fetching data"));
+            }
+        }
+
+        @Override
+        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+            updateNetworkState(isInitialLoad ? initialLoadStateLiveData : paginationNetworkStateLiveData, new NetworkState(NetworkState.Status.FAILED, "Error fetching data"));
+        }
+    });
+}
+
+private void updateNetworkState(MutableLiveData<NetworkState> liveData, NetworkState state) {
+    liveData.postValue(state);
+}
+/*
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Comment> callback) {
         initialLoadStateLiveData.postValue(NetworkState.LOADING);
@@ -109,12 +173,12 @@ public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
             }
         });
     }
-
+*/
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Comment> callback) {
 
     }
-
+/*
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Comment> callback) {
         this.params = params;
@@ -154,7 +218,7 @@ public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
                 paginationNetworkStateLiveData.postValue(new NetworkState(NetworkState.Status.FAILED, "Error fetching data"));
             }
         });
-    }
+    }*/
 
     private static class ParseCommentAsyncTask extends AsyncTask<Void, ArrayList<Comment>, ArrayList<Comment>> {
         private Integer after;

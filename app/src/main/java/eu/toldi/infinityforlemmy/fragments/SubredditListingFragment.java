@@ -183,7 +183,14 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
         SubredditListingViewModel.Factory factory = new SubredditListingViewModel.Factory(
                 mRetrofit.getRetrofit(), query, sortType, accessToken, nsfw);
         mSubredditListingViewModel = new ViewModelProvider(this, factory).get(SubredditListingViewModel.class);
-        mSubredditListingViewModel.getSubreddits().observe(getViewLifecycleOwner(), subredditData -> mAdapter.submitList(subredditData));
+        mSubredditListingViewModel.getSubreddits().observe(getViewLifecycleOwner(), subredditData -> {
+            if (subredditData != null && !subredditData.isEmpty()) {
+                mAdapter.submitList(subredditData);
+            } else {
+                mAdapter.submitList(null);
+            }
+
+        });
 
         mSubredditListingViewModel.hasSubredditLiveData().observe(getViewLifecycleOwner(), hasSubreddit -> {
             mSwipeRefreshLayout.setRefreshing(false);

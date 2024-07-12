@@ -183,7 +183,15 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
         UserListingViewModel.Factory factory = new UserListingViewModel.Factory(mRetrofit.getRetrofit(), mQuery,
                 sortType, nsfw);
         mUserListingViewModel = new ViewModelProvider(this, factory).get(UserListingViewModel.class);
-        mUserListingViewModel.getUsers().observe(getViewLifecycleOwner(), UserData -> mAdapter.submitList(UserData));
+
+        mUserListingViewModel.getUsers().observe(getViewLifecycleOwner(), (UserData) -> {
+            if (UserData != null && !UserData.isEmpty()) {
+                mAdapter.submitList(UserData);
+            } else {
+                mAdapter.submitList(null);
+            }
+
+        });
 
         mUserListingViewModel.hasUser().observe(getViewLifecycleOwner(), hasUser -> {
             mSwipeRefreshLayout.setRefreshing(false);

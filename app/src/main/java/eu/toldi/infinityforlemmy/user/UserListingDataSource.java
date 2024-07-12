@@ -54,7 +54,7 @@ public class UserListingDataSource extends PageKeyedDataSource<Integer, UserData
                 new FetchUserData.FetchUserListingDataListener() {
                     @Override
                     public void onFetchUserListingDataSuccess(ArrayList<UserData> UserData, String after) {
-                        hasUserLiveData.postValue(UserData.size() != 0);
+                        hasUserLiveData.postValue(!UserData.isEmpty());
 
                         callback.onResult(UserData, null, 2);
                         initialLoadStateLiveData.postValue(NetworkState.LOADED);
