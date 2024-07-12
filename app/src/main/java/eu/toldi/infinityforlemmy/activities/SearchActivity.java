@@ -264,7 +264,7 @@ public class SearchActivity extends BaseActivity {
         });
 
         searchEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if ((actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH) || (event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN )) {
+            if ((actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_SEARCH) || (event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
                 if (!searchEditText.getText().toString().isEmpty()) {
                     search(searchEditText.getText().toString());
                     return true;
@@ -387,6 +387,11 @@ public class SearchActivity extends BaseActivity {
             intent.putExtra(SearchUsersResultActivity.EXTRA_QUERY, query);
             intent.putExtra(SearchUsersResultActivity.EXTRA_IS_MULTI_SELECTION, getIntent().getBooleanExtra(EXTRA_IS_MULTI_SELECTION, false));
             startActivityForResult(intent, USER_SEARCH_REQUEST_CODE);
+        } else if (query.startsWith("http://") || query.startsWith("https://")) {
+            Intent intent = new Intent(this, LinkResolverActivity.class);
+            intent.setData(Uri.parse(query));
+            startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
             intent.putExtra(SearchResultActivity.EXTRA_QUERY, query);
@@ -400,6 +405,7 @@ public class SearchActivity extends BaseActivity {
             }
             startActivity(intent);
             finish();
+
         }
     }
 
