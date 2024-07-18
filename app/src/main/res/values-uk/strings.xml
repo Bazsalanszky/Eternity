@@ -1351,4 +1351,9 @@
     <string name="instances">Сервери</string>
     <string name="no_blocked_instances">Немає заблокованих серверів</string>
     <string name="view_instance">Перегляд сервера</string>
+    <string name="block_instance_failed">Не вдалося заблокувати сервер</string>
+    <string name="block_instance_success">Сервер заблоковано!</string>
+    <string name="unblock_instance_success">Сервер розблоковано!</string>
+    <string name="action_block_instance">Заблокувати сервер</string>
+    <string name="action_unblock_instance">Розблокувати сервер</string>
 </resources>
