@@ -249,7 +249,8 @@ public class ParsePost {
 
                         post = new Post(id, communityInfo, author, postTimeMillis, title, permalink, downvotes, upvotes, postType, voteType,
                                 nComments, upvoteRatio, nsfw, locked, saved, deleted, distinguished, suggestedSort);
-
+                        Post.Preview preview = new Post.Preview(url, 0, 0, "", "");
+                        post.setPreviews(new ArrayList<>(List.of(preview)));
                         post.setVideoUrl(url);
                         post.setVideoDownloadUrl(url);
                     } else if (!url.equals("")) {
