@@ -107,7 +107,7 @@ public class SiteInfo {
             for (int i = 0; i < adminsJson.length(); i++) {
                 JSONObject adminJson = adminsJson.getJSONObject(i).getJSONObject("person");
                 admins.add(new BasicUserInfo(adminJson.getInt("id"), adminJson.getString("name"),
-                        LemmyUtils.actorID2FullName(adminJson.getString("actor_id")), adminJson.optString("avatar ", ""),
+                        LemmyUtils.actorID2FullName(adminJson.getString("actor_id")), adminJson.optString("avatar", ""),
                         adminJson.optString("display_name", adminJson.getString("name")))
                 );
             }
