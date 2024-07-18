@@ -1325,4 +1325,5 @@
     <string name="sort_new_comments">New Comments</string>
     <string name="instances">Instances</string>
     <string name="no_blocked_instances">No blocked instances</string>
+    <string name="view_instance">View Instance</string>
 </resources>

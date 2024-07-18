@@ -1321,6 +1321,11 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         } else if (itemId == R.id.action_add_to_home_screen_view_subreddit_detail_activity) {
             Bitmap icon = subredditIconBitmap == null ? decodeResource(getResources(), R.drawable.subreddit_default_icon) : subredditIconBitmap;
             return ShortcutManager.requestPinShortcut(this, qualifiedName, icon);
+        } else if (itemId == R.id.action_view_instance_view_subreddit_detail_activity) {
+            String instance = communityData.getActorId().split("/")[2];
+            Intent intent = new Intent(this,InstanceInfoActivity.class);
+            intent.putExtra(InstanceInfoActivity.INSTANCE_INFO_DOMAIN, instance);
+            startActivity(intent);
         }
         return false;
     }

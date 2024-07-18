@@ -60,4 +60,9 @@
         android:id="@+id/action_edit_profile_view_user_detail_activity"
         android:orderInCategory="11"
         android:title="@string/action_edit_profile" />
+
+    <item
+        android:id="@+id/action_view_instance_view_user_detail_activity"
+        android:orderInCategory="12"
+        android:title="@string/view_instance" />
 </menu>

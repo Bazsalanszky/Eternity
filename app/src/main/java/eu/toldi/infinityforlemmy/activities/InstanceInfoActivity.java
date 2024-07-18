@@ -50,8 +50,11 @@ import io.noties.markwon.MarkwonConfiguration;
 import io.noties.markwon.MarkwonPlugin;
 import io.noties.markwon.core.MarkwonTheme;
 import io.noties.markwon.recycler.MarkwonAdapter;
+import retrofit2.Retrofit;
 
 public class InstanceInfoActivity extends BaseActivity {
+
+    public static final String INSTANCE_INFO_DOMAIN = "instance_info_domain";
 
     @Inject
     @Named("default")
@@ -93,6 +96,8 @@ public class InstanceInfoActivity extends BaseActivity {
     private MarkwonAdapter mMarkwonAdapter;
     private Markwon mPostDetailMarkwon;
     private AdminRecyclerViewAdapter mAdminAdapter;
+    private Retrofit mRetrofit;
+    private String mInstanceDomain;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +109,21 @@ public class InstanceInfoActivity extends BaseActivity {
 
         setContentView(view);
         setSupportActionBar(mInstanceInfoActivityViewBinding.toolbarInstanceInfoActivity);
+
+        if (savedInstanceState != null) {
+            mInstanceDomain = savedInstanceState.getString(INSTANCE_INFO_DOMAIN);
+        } else {
+            mInstanceDomain = getIntent().getStringExtra(INSTANCE_INFO_DOMAIN);
+        }
+
+        if (mInstanceDomain == null) {
+            mRetrofit = mRetorifitHolder.getRetrofit();
+        } else {
+            String originalBaseUrl = mRetorifitHolder.getBaseURL();
+            mRetorifitHolder.setBaseURL("https://" + mInstanceDomain);
+            mRetrofit = mRetorifitHolder.getRetrofit();
+            mRetorifitHolder.setBaseURL(originalBaseUrl);
+        }
 
         setUpBindings();
         applyCustomTheme();
@@ -169,7 +189,7 @@ public class InstanceInfoActivity extends BaseActivity {
     }
 
     private void fetchInstanceInfo() {
-        FetchSiteInfo.fetchSiteInfo(mRetorifitHolder.getRetrofit(), null, new FetchSiteInfo.FetchSiteInfoListener() {
+        FetchSiteInfo.fetchSiteInfo(mRetrofit, null, new FetchSiteInfo.FetchSiteInfoListener() {
             @Override
             public void onFetchSiteInfoSuccess(SiteInfo siteInfo, MyUserInfo myUserInfo) {
                 mLoadingConstraintLayout.setVisibility(View.GONE);
@@ -263,5 +283,17 @@ public class InstanceInfoActivity extends BaseActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(INSTANCE_INFO_DOMAIN, mInstanceDomain);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mInstanceDomain = savedInstanceState.getString(INSTANCE_INFO_DOMAIN);
     }
 }

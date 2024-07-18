@@ -1,5 +1,7 @@
 package eu.toldi.infinityforlemmy.adapters;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
+import eu.toldi.infinityforlemmy.activities.InstanceInfoActivity;
 import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -145,9 +148,16 @@ public class BlockedInstancesRecyclerViewAdapter extends RecyclerView.Adapter<Re
             iconUrl = mBlockedInstanceData.get(viewHolder.getBindingAdapterPosition() - offset).getIcon();
         }
 
-        if (itemClickListener == null) {
-            // TODO: 2020-07-29 Add instance view page
-        }
+
+        ((InstanceViewHolder) viewHolder).itemView.setOnClickListener(view -> {
+            if (mBlockedInstanceData != null) {
+                BlockedInstanceData instanceData = mBlockedInstanceData.get(viewHolder.getBindingAdapterPosition());
+                Intent intent = new Intent(mActivity, InstanceInfoActivity.class);
+                intent.putExtra(InstanceInfoActivity.INSTANCE_INFO_DOMAIN, instanceData.getDomain());
+                mActivity.startActivity(intent);
+            }
+        });
+
 
         if (iconUrl == null || iconUrl.equals("")) {
             ((InstanceViewHolder) viewHolder).iconGifImageView.setVisibility(View.GONE);
