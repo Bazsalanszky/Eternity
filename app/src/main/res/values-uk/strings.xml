@@ -1350,4 +1350,5 @@
     <string name="sort_scaled">Масштабоване</string>
     <string name="instances">Сервери</string>
     <string name="no_blocked_instances">Немає заблокованих серверів</string>
+    <string name="view_instance">Перегляд сервера</string>
 </resources>
