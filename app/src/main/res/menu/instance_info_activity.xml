@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_block_instance_info"
+        android:orderInCategory="7"
+        android:title="@string/action_block_instance" />
+
+    <item
+        android:id="@+id/action_unblock_instance_info"
+        android:visible="false"
+        android:orderInCategory="7"
+        android:title="@string/action_unblock_instance"
+        />
+</menu>

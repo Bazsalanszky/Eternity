@@ -7,6 +7,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import eu.toldi.infinityforlemmy.dto.AccountLoginDTO;
 import eu.toldi.infinityforlemmy.dto.AuthDTO;
 import eu.toldi.infinityforlemmy.dto.BlockCommunityDTO;
+import eu.toldi.infinityforlemmy.dto.BlockInstanceDTO;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
 import eu.toldi.infinityforlemmy.dto.CommentVoteDTO;
 import eu.toldi.infinityforlemmy.dto.DeleteCommentDTO;
@@ -273,6 +274,11 @@ public interface LemmyAPI {
     @GET("api/v3/site")
     Call<String> getSiteInfo(
             @Query("auth") String auth
+    );
+
+    @POST("/api/v3/site/block")
+    Call<String> blockInstance(
+            @Body BlockInstanceDTO params
     );
 
     @GET("api/v3/private_message/list")

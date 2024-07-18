@@ -1324,7 +1324,8 @@ public class ViewSubredditDetailActivity extends BaseActivity implements SortTyp
         } else if (itemId == R.id.action_view_instance_view_subreddit_detail_activity) {
             String instance = communityData.getActorId().split("/")[2];
             Intent intent = new Intent(this,InstanceInfoActivity.class);
-            intent.putExtra(InstanceInfoActivity.INSTANCE_INFO_DOMAIN, instance);
+            intent.putExtra(InstanceInfoActivity.EXTRA_INSTANCE_DOMAIN, instance);
+            intent.putExtra(InstanceInfoActivity.EXTRA_INSTANCE_ID, communityData.getInstanceId());
             startActivity(intent);
         }
         return false;

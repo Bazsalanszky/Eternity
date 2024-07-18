@@ -8,10 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -32,12 +35,17 @@ import javax.inject.Named;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.account.FetchBlockedThings;
 import eu.toldi.infinityforlemmy.adapters.AdminRecyclerViewAdapter;
+import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
+import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
+import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
 import eu.toldi.infinityforlemmy.databinding.ActivityInstanceInfoBinding;
 import eu.toldi.infinityforlemmy.markdown.MarkdownUtils;
+import eu.toldi.infinityforlemmy.site.BlockInstance;
 import eu.toldi.infinityforlemmy.site.FetchSiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteInfo;
 import eu.toldi.infinityforlemmy.site.SiteStatistics;
@@ -54,7 +62,8 @@ import retrofit2.Retrofit;
 
 public class InstanceInfoActivity extends BaseActivity {
 
-    public static final String INSTANCE_INFO_DOMAIN = "instance_info_domain";
+    public static final String EXTRA_INSTANCE_DOMAIN = "instance_info_domain";
+    public static final String EXTRA_INSTANCE_ID = "instance_info_id";
 
     @Inject
     @Named("default")
@@ -66,6 +75,10 @@ public class InstanceInfoActivity extends BaseActivity {
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetorifitHolder;
+
+    @Inject
+    @Named("current_account")
+    SharedPreferences mCurrentAccountSharedPreferences;
 
     ActivityInstanceInfoBinding mInstanceInfoActivityViewBinding;
     private CoordinatorLayout coordinatorLayout;
@@ -98,6 +111,9 @@ public class InstanceInfoActivity extends BaseActivity {
     private AdminRecyclerViewAdapter mAdminAdapter;
     private Retrofit mRetrofit;
     private String mInstanceDomain;
+    private int mInstanceId;
+    private String mAccessToken;
+    private String mAccountName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,9 +127,11 @@ public class InstanceInfoActivity extends BaseActivity {
         setSupportActionBar(mInstanceInfoActivityViewBinding.toolbarInstanceInfoActivity);
 
         if (savedInstanceState != null) {
-            mInstanceDomain = savedInstanceState.getString(INSTANCE_INFO_DOMAIN);
+            mInstanceDomain = savedInstanceState.getString(EXTRA_INSTANCE_DOMAIN);
+            mInstanceId = savedInstanceState.getInt(EXTRA_INSTANCE_ID);
         } else {
-            mInstanceDomain = getIntent().getStringExtra(INSTANCE_INFO_DOMAIN);
+            mInstanceDomain = getIntent().getStringExtra(EXTRA_INSTANCE_DOMAIN);
+            mInstanceId = getIntent().getIntExtra(EXTRA_INSTANCE_ID, -1);
         }
 
         if (mInstanceDomain == null) {
@@ -124,6 +142,8 @@ public class InstanceInfoActivity extends BaseActivity {
             mRetrofit = mRetorifitHolder.getRetrofit();
             mRetorifitHolder.setBaseURL(originalBaseUrl);
         }
+        mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
+        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
 
         setUpBindings();
         applyCustomTheme();
@@ -277,23 +297,88 @@ public class InstanceInfoActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(INSTANCE_INFO_DOMAIN, mInstanceDomain);
+        outState.putString(EXTRA_INSTANCE_DOMAIN, mInstanceDomain);
+        outState.putInt(EXTRA_INSTANCE_ID, mInstanceId);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        mInstanceDomain = savedInstanceState.getString(INSTANCE_INFO_DOMAIN);
+        mInstanceDomain = savedInstanceState.getString(EXTRA_INSTANCE_DOMAIN);
+        mInstanceId = savedInstanceState.getInt(EXTRA_INSTANCE_ID);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.instance_info_activity, menu);
+        if (mInstanceDomain == null || mInstanceDomain.equalsIgnoreCase(mRetorifitHolder.getBaseURL().split("/")[2])) {
+            menu.findItem(R.id.action_block_instance_info).setVisible(false);
+            menu.findItem(R.id.action_unblock_instance_info).setVisible(false);
+            return true;
+        }
+        if (mAccessToken == null) {
+            menu.findItem(R.id.action_block_instance_info).setVisible(false);
+            menu.findItem(R.id.action_unblock_instance_info).setVisible(false);
+            return true;
+        }
+        FetchBlockedThings.fetchBlockedThings(mRetorifitHolder.getRetrofit(), mAccessToken, mAccountName, new FetchBlockedThings.FetchBlockedThingsListener() {
+
+            @Override
+            public void onFetchBlockedThingsSuccess(List<BlockedUserData> blockedUsers, List<BlockedCommunityData> blockedCommunities, List<BlockedInstanceData> blockedInstances) {
+                for (BlockedInstanceData blockedInstanceData : blockedInstances) {
+                    if (blockedInstanceData.getDomain().equals(mInstanceDomain)) {
+                        menu.findItem(R.id.action_block_instance_info).setVisible(false);
+                        menu.findItem(R.id.action_unblock_instance_info).setVisible(true);
+                        return;
+                    }
+                }
+                menu.findItem(R.id.action_block_instance_info).setVisible(true);
+                menu.findItem(R.id.action_unblock_instance_info).setVisible(false);
+            }
+
+            @Override
+            public void onFetchBlockedThingsFailure() {
+
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.action_block_instance_info) {
+            blockInstance(true);
+            return true;
+        } else if (item.getItemId() == R.id.action_unblock_instance_info) {
+            blockInstance(false);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void blockInstance(boolean blocked) {
+        BlockInstance.INSTANCE.blockInstance(mRetorifitHolder.getRetrofit(), mInstanceId, blocked, new BlockInstance.BlockInstanceResponse() {
+            @Override
+            public void onResponse() {
+                if (blocked) {
+                    applySnackBarTheme(Snackbar.make(coordinatorLayout, R.string.block_instance_success, Snackbar.LENGTH_SHORT)).show();
+                } else {
+                    applySnackBarTheme(Snackbar.make(coordinatorLayout, R.string.unblock_instance_success, Snackbar.LENGTH_SHORT)).show();
+                }
+
+                InstanceInfoActivity.this.invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(InstanceInfoActivity.this, R.string.block_instance_failed, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

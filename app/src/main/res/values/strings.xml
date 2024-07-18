@@ -1326,4 +1326,9 @@
     <string name="instances">Instances</string>
     <string name="no_blocked_instances">No blocked instances</string>
     <string name="view_instance">View Instance</string>
+    <string name="action_block_instance">Block Instance</string>
+    <string name="action_unblock_instance">Unblock Instance</string>
+    <string name="block_instance_failed">Failed to block instance</string>
+    <string name="block_instance_success">Instance Blocked!</string>
+    <string name="unblock_instance_success">Instance unblocked!</string>
 </resources>

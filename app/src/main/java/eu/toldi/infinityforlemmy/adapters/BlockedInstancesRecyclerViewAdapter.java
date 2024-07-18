@@ -1,6 +1,5 @@
 package eu.toldi.infinityforlemmy.adapters;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -153,7 +152,8 @@ public class BlockedInstancesRecyclerViewAdapter extends RecyclerView.Adapter<Re
             if (mBlockedInstanceData != null) {
                 BlockedInstanceData instanceData = mBlockedInstanceData.get(viewHolder.getBindingAdapterPosition());
                 Intent intent = new Intent(mActivity, InstanceInfoActivity.class);
-                intent.putExtra(InstanceInfoActivity.INSTANCE_INFO_DOMAIN, instanceData.getDomain());
+                intent.putExtra(InstanceInfoActivity.EXTRA_INSTANCE_DOMAIN, instanceData.getDomain());
+                intent.putExtra(InstanceInfoActivity.EXTRA_INSTANCE_ID, instanceData.getId());
                 mActivity.startActivity(intent);
             }
         });

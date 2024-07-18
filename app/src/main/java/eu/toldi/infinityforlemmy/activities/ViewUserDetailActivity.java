@@ -1326,7 +1326,8 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
         } else if (itemId == R.id.action_view_instance_view_user_detail_activity) {
             String instance = mUserData.getActorId().split("/")[2];
             Intent intent = new Intent(this, InstanceInfoActivity.class);
-            intent.putExtra(InstanceInfoActivity.INSTANCE_INFO_DOMAIN, instance);
+            intent.putExtra(InstanceInfoActivity.EXTRA_INSTANCE_DOMAIN, instance);
+            intent.putExtra(InstanceInfoActivity.EXTRA_INSTANCE_ID, mUserData.getInstanceId());
             startActivity(intent);
         }
         return false;
