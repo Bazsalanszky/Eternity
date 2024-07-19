@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.evernote.android.state.State;
 import com.google.android.material.card.MaterialCardView;
 
@@ -232,7 +233,7 @@ public class SidebarFragment extends Fragment {
             return true;
         };
         markwon = MarkdownUtils.createFullRedditMarkwon(activity,
-                miscPlugin, markdownColor, spoilerBackgroundColor, onLinkLongClickListener, mDisableImagePreview);
+                miscPlugin, markdownColor, spoilerBackgroundColor, Glide.with(activity.getApplication()), onLinkLongClickListener, mDisableImagePreview);
         markwonAdapter = MarkdownUtils.createTablesAdapter();
 
         linearLayoutManager = new LinearLayoutManagerBugFixed(activity);

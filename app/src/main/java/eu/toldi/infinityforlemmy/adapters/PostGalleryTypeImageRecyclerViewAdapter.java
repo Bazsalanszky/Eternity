@@ -18,17 +18,18 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 
-import io.noties.markwon.Markwon;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
 import eu.toldi.infinityforlemmy.databinding.ItemGalleryImageInPostFeedBinding;
 import eu.toldi.infinityforlemmy.post.Post;
+import io.noties.markwon.Markwon;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class PostGalleryTypeImageRecyclerViewAdapter extends RecyclerView.Adapter<PostGalleryTypeImageRecyclerViewAdapter.ImageViewHolder> {
     private RequestManager glide;
@@ -128,7 +129,7 @@ public class PostGalleryTypeImageRecyclerViewAdapter extends RecyclerView.Adapte
             return;
         }
 
-        RequestBuilder<Drawable> imageRequestBuilder = glide.load(galleryImages.get(index).url).listener(new RequestListener<>() {
+        RequestBuilder<Drawable> imageRequestBuilder = glide.load(galleryImages.get(index).url).override(1024).listener(new RequestListener<>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 holder.binding.progressBarItemGalleryImageInPostFeed.setVisibility(View.GONE);
@@ -144,10 +145,10 @@ public class PostGalleryTypeImageRecyclerViewAdapter extends RecyclerView.Adapte
             }
         });
         if (blurImage) {
-            imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10)))
+            imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10))).thumbnail(0.1f).downsample(DownsampleStrategy.CENTER_INSIDE).override(1024)
                     .into(holder.binding.imageViewItemGalleryImageInPostFeed);
         } else {
-            imageRequestBuilder.centerInside().downsample(saveMemoryCenterInisdeDownsampleStrategy).into(holder.binding.imageViewItemGalleryImageInPostFeed);
+            imageRequestBuilder.centerInside().downsample(saveMemoryCenterInisdeDownsampleStrategy).override(1024).thumbnail(0.1f).downsample(DownsampleStrategy.CENTER_INSIDE).into(holder.binding.imageViewItemGalleryImageInPostFeed);
         }
     }
 

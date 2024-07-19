@@ -221,7 +221,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             return true;
         };
         mCommentMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
-                miscPlugin, mCommentTextColor, commentSpoilerBackgroundColor, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
+                miscPlugin, mCommentTextColor, commentSpoilerBackgroundColor, mGlide, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         recycledViewPool = new RecyclerView.RecycledViewPool();
         mAccessToken = accessToken;
         mAccountQualifiedName = accountName;

@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.Locale;
@@ -170,7 +171,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
             return true;
         };
         mMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
-                miscPlugin, mCommentColor, commentSpoilerBackgroundColor, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
+                miscPlugin, mCommentColor, commentSpoilerBackgroundColor, Glide.with(mActivity.getApplication()), onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         recycledViewPool = new RecyclerView.RecycledViewPool();
     }
 

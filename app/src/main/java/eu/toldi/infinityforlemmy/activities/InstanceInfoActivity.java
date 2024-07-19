@@ -23,6 +23,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
@@ -190,7 +191,7 @@ public class InstanceInfoActivity extends BaseActivity {
         };
 
         mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(this,
-                miscPlugin, markdownColor, postSpoilerBackgroundColor, null, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
+                miscPlugin, markdownColor, postSpoilerBackgroundColor, Glide.with(getApplication()), null, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         mMarkwonAdapter = MarkdownUtils.createTablesAdapter();
         mContentMarkdownView.setAdapter(mMarkwonAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

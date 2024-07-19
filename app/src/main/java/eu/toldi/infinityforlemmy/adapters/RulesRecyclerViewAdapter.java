@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -84,7 +86,7 @@ public class RulesRecyclerViewAdapter extends RecyclerView.Adapter<RulesRecycler
             return true;
         };
         markwon = MarkdownUtils.createFullRedditMarkwon(activity,
-                miscPlugin, mPrimaryTextColor, spoilerBackgroundColor, onLinkLongClickListener, mDisableImagePreview);
+                miscPlugin, mPrimaryTextColor, spoilerBackgroundColor, Glide.with(activity.getApplication()), onLinkLongClickListener, mDisableImagePreview);
     }
 
     @NonNull

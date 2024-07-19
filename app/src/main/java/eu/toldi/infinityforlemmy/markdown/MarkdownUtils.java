@@ -7,6 +7,8 @@ import android.text.util.Linkify;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.RequestManager;
+
 import org.commonmark.ext.gfm.tables.TableBlock;
 
 import java.util.regex.Pattern;
@@ -37,7 +39,7 @@ public class MarkdownUtils {
     public static Markwon createFullRedditMarkwon(@NonNull Activity context,
                                                   @NonNull MarkwonPlugin miscPlugin,
                                                   int markdownColor,
-                                                  int spoilerBackgroundColor,
+                                                  int spoilerBackgroundColor, RequestManager mGlide,
                                                   @Nullable BetterLinkMovementMethod.OnLinkLongClickListener onLinkLongClickListener, boolean dataSaverEnabled) {
         Markwon result;
         if (dataSaverEnabled) {
@@ -58,7 +60,7 @@ public class MarkdownUtils {
                     .build();
         } else {
             result = Markwon.builder(context)
-                    .usePlugin(GlideImagesPlugin.create(context.getApplicationContext()))
+                    .usePlugin(GlideImagesPlugin.create(new GlideMarkdownLoader(mGlide)))
                     .usePlugin(MarkwonInlineParserPlugin.create(plugin -> {
                         plugin.excludeInlineProcessor(HtmlInlineProcessor.class);
                     }))

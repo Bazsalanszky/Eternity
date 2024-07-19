@@ -295,7 +295,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             return true;
         };
         mPostDetailMarkwon = MarkdownUtils.createFullRedditMarkwon(mActivity,
-                miscPlugin, markdownColor, postSpoilerBackgroundColor, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
+                miscPlugin, markdownColor, postSpoilerBackgroundColor, mGlide, onLinkLongClickListener, sharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
         mMarkwonAdapter = MarkdownUtils.createTablesAdapter();
 
         mSeparatePostAndComments = separatePostAndComments;
@@ -677,7 +677,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 ((PostDetailBaseVideoAutoplayViewHolder) holder).previewImageView.setVisibility(View.VISIBLE);
                 Post.Preview preview = getSuitablePreview(mPost.getPreviews());
                 if (preview != null) {
-                    mGlide.load(preview.getPreviewUrl()).centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                    mGlide.load(preview.getPreviewUrl()).centerInside().thumbnail(0.1f).downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
                         @Override
                         public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                             int width = resource.getIntrinsicWidth();
@@ -896,7 +896,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     });
 
             if (blurImage) {
-                imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10))).into(new CustomTarget<Drawable>() {
+                imageRequestBuilder.apply(RequestOptions.bitmapTransform(new BlurTransformation(50, 10))).thumbnail(0.1f).into(new CustomTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                         int width = resource.getIntrinsicWidth();
@@ -916,7 +916,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     }
                 });
             } else {
-                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).into(new CustomTarget<Drawable>() {
+                imageRequestBuilder.centerInside().downsample(mSaveMemoryCenterInsideDownsampleStrategy).thumbnail(0.1f).into(new CustomTarget<Drawable>() {
                     @Override
                     public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                         int width = resource.getIntrinsicWidth();
