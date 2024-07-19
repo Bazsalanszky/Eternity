@@ -1354,12 +1354,8 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
         }
 
         mFetchPostInfoLinearLayout.setOnClickListener(null);
-        if (accessToken != null) {
-            showErrorView(R.string.no_posts);
-        } else {
-            showErrorView(R.string.anonymous_homepage_not_implemented);
-        }
 
+        showErrorView(R.string.no_posts);
     }
 
     public void changeSortType(SortType sortType) {
