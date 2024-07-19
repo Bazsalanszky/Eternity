@@ -1330,4 +1330,6 @@
     <string name="block_instance_failed">Failed to block instance</string>
     <string name="block_instance_success">Instance Blocked!</string>
     <string name="unblock_instance_success">Instance unblocked!</string>
+    <string name="settings_dont_hide_saved_read_posts_automatically">Don\'t hide saved read posts automatically</string>
+    <string name="settings_dont_hide_your_own_read_posts_automatically">Don\'t hide your own read posts automatically</string>
 </resources>

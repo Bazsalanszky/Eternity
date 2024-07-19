@@ -317,7 +317,7 @@ public class FilteredPostsActivity extends BaseActivity implements SortTypeSelec
             bundle.putInt(PostFragment.EXTRA_POST_TYPE, postType);
             bundle.putParcelable(PostFragment.EXTRA_FILTER, postFilter);
             bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-            bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+            bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
             if (postType == PostPagingSource.TYPE_USER) {
                 bundle.putString(PostFragment.EXTRA_USER_NAME, name);
                 bundle.putString(PostFragment.EXTRA_USER_WHERE, userWhere);

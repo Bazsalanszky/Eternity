@@ -428,7 +428,7 @@ public class ViewMultiRedditDetailActivity extends BaseActivity implements SortT
         bundle.putString(PostFragment.EXTRA_NAME, multiPath);
         bundle.putInt(PostFragment.EXTRA_POST_TYPE, mAccessToken == null ? PostPagingSource.TYPE_ANONYMOUS_MULTIREDDIT : PostPagingSource.TYPE_MULTI_REDDIT);
         bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-        bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+        bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
         mFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout_view_multi_reddit_detail_activity, mFragment).commit();
     }

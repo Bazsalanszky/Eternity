@@ -81,7 +81,7 @@ public class SettingsActivity extends BaseActivity implements
 
         setSupportActionBar(binding.toolbarSettingsActivity);
 
-        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()

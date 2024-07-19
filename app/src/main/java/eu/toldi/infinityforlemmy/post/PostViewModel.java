@@ -178,9 +178,10 @@ public class PostViewModel extends ViewModel {
                         postPagingData -> PagingDataTransforms.filter(
                                 postPagingData, executor,
                                 post -> !post.isRead() || !currentlyReadPostIdsLiveData.getValue()))), ViewModelKt.getViewModelScope(this));
-
+        boolean dontHideSaved = postHistorySharedPreferences != null && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.DONT_HIDE_SAVED_READ_POSTS, false) && userWhere.equals(PostPagingSource.USER_WHERE_SAVED);
+        boolean dontHideOwn = postHistorySharedPreferences != null && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.DONT_HIDE_OWN_READ_POSTS, false) && name.equals(accountName);
         currentlyReadPostIdsLiveData.setValue(postHistorySharedPreferences != null
-                && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false) && !userWhere.equals(PostPagingSource.USER_WHERE_SAVED));
+                && postHistorySharedPreferences.getBoolean((accountName == null ? "" : accountName) + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false) && !dontHideSaved && !dontHideOwn);
     }
 
     public PostViewModel(Executor executor, RetrofitHolder retrofit, String accessToken, String accountName,

@@ -59,8 +59,6 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.FABMoreOptionsBottomSheetF
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostLayoutBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.RandomBottomSheetFragment;
-import eu.toldi.infinityforlemmy.bottomsheetfragments.SearchPostSortTypeBottomSheetFragment;
-import eu.toldi.infinityforlemmy.bottomsheetfragments.SearchUserAndSubredditSortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTimeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.SortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -781,7 +779,7 @@ public class SearchResultActivity extends BaseActivity implements SortTypeSelect
                     bundle.putString(PostFragment.EXTRA_QUERY, mQuery);
                     bundle.putString(PostFragment.EXTRA_TRENDING_SOURCE, getIntent().getStringExtra(EXTRA_TRENDING_SOURCE));
                     bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                    bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                    bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
                     mFragment.setArguments(bundle);
                     return mFragment;
                 }

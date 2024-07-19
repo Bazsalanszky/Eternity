@@ -56,6 +56,18 @@ public class PostHistoryFragment extends Fragment {
     TextView hideReadPostsAutomaticallyTextView;
     @BindView(R.id.hide_read_posts_automatically_switch_post_history_fragment)
     MaterialSwitch hideReadPostsAutomaticallySwitch;
+    @BindView(R.id.dont_hide_saved_read_posts_automatically_linear_layout_post_history_fragment)
+    LinearLayout dontHideSavedReadPostsAutomaticallyLinearLayout;
+    @BindView(R.id.dont_hide_saved_read_posts_automatically_text_view_post_history_fragment)
+    TextView dontHideSavedReadPostsAutomaticallyTextView;
+    @BindView(R.id.dont_hide_saved_read_posts_automatically_switch_post_history_fragment)
+    MaterialSwitch dontHideSavedReadPostsAutomaticallySwitch;
+    @BindView(R.id.dont_hide_own_read_posts_automatically_linear_layout_post_history_fragment)
+    LinearLayout dontHideOwnReadPostsAutomaticallyLinearLayout;
+    @BindView(R.id.dont_hide_own_read_posts_automatically_text_view_post_history_fragment)
+    TextView dontHideOwnReadPostsAutomaticallyTextView;
+    @BindView(R.id.dont_hide_own_read_posts_automatically_switch_post_history_fragment)
+    MaterialSwitch dontHideOwnReadPostsAutomaticallySwitch;
     @Inject
     @Named("post_history")
     SharedPreferences postHistorySharedPreferences;
@@ -100,6 +112,18 @@ public class PostHistoryFragment extends Fragment {
                 accountName + SharedPreferencesUtils.MARK_POSTS_AS_READ_ON_SCROLL_BASE, false));
         hideReadPostsAutomaticallySwitch.setChecked(postHistorySharedPreferences.getBoolean(
                 accountName + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, false));
+        dontHideSavedReadPostsAutomaticallySwitch.setChecked(postHistorySharedPreferences.getBoolean(
+                accountName + SharedPreferencesUtils.DONT_HIDE_SAVED_READ_POSTS, false));
+        dontHideOwnReadPostsAutomaticallySwitch.setChecked(postHistorySharedPreferences.getBoolean(
+                accountName + SharedPreferencesUtils.DONT_HIDE_OWN_READ_POSTS, false));
+
+        if (hideReadPostsAutomaticallySwitch.isChecked()) {
+            dontHideSavedReadPostsAutomaticallyLinearLayout.setVisibility(View.VISIBLE);
+            dontHideOwnReadPostsAutomaticallyLinearLayout.setVisibility(View.VISIBLE);
+        } else {
+            dontHideSavedReadPostsAutomaticallyLinearLayout.setVisibility(View.GONE);
+            dontHideOwnReadPostsAutomaticallyLinearLayout.setVisibility(View.GONE);
+        }
 
         markPostsAsReadLinearLayout.setOnClickListener(view -> {
             markPostsAsReadSwitch.performClick();
@@ -119,7 +143,24 @@ public class PostHistoryFragment extends Fragment {
 
         hideReadPostsAutomaticallyLinearLayout.setOnClickListener(view -> hideReadPostsAutomaticallySwitch.performClick());
 
-        hideReadPostsAutomaticallySwitch.setOnCheckedChangeListener((compoundButton, b) -> postHistorySharedPreferences.edit().putBoolean(accountName + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, b).apply());
+        hideReadPostsAutomaticallySwitch.setOnCheckedChangeListener((compoundButton, b) -> {
+            postHistorySharedPreferences.edit().putBoolean(accountName + SharedPreferencesUtils.HIDE_READ_POSTS_AUTOMATICALLY_BASE, b).apply();
+            if (b) {
+                dontHideSavedReadPostsAutomaticallyLinearLayout.setVisibility(View.VISIBLE);
+                dontHideOwnReadPostsAutomaticallyLinearLayout.setVisibility(View.VISIBLE);
+            } else {
+                dontHideSavedReadPostsAutomaticallyLinearLayout.setVisibility(View.GONE);
+                dontHideOwnReadPostsAutomaticallyLinearLayout.setVisibility(View.GONE);
+            }
+        });
+
+        dontHideSavedReadPostsAutomaticallyLinearLayout.setOnClickListener(view -> dontHideSavedReadPostsAutomaticallySwitch.performClick());
+
+        dontHideSavedReadPostsAutomaticallySwitch.setOnCheckedChangeListener((compoundButton, b) -> postHistorySharedPreferences.edit().putBoolean(accountName + SharedPreferencesUtils.DONT_HIDE_SAVED_READ_POSTS, b).apply());
+
+        dontHideOwnReadPostsAutomaticallyLinearLayout.setOnClickListener(view -> dontHideOwnReadPostsAutomaticallySwitch.performClick());
+
+        dontHideOwnReadPostsAutomaticallySwitch.setOnCheckedChangeListener((compoundButton, b) -> postHistorySharedPreferences.edit().putBoolean(accountName + SharedPreferencesUtils.DONT_HIDE_OWN_READ_POSTS, b).apply());
 
         return rootView;
     }
@@ -133,6 +174,8 @@ public class PostHistoryFragment extends Fragment {
         markPostsAsReadAfterVotingTextView.setTextColor(primaryTextColor);
         markPostsAsReadOnScrollTextView.setTextColor(primaryTextColor);
         hideReadPostsAutomaticallyTextView.setTextColor(primaryTextColor);
+        dontHideSavedReadPostsAutomaticallyTextView.setTextColor(primaryTextColor);
+        dontHideOwnReadPostsAutomaticallyTextView.setTextColor(primaryTextColor);
     }
 
     @Override

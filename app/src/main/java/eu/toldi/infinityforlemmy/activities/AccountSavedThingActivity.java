@@ -286,7 +286,7 @@ public class AccountSavedThingActivity extends BaseActivity implements ActivityT
                 bundle.putString(PostFragment.EXTRA_USER_NAME, mAccountQualifiedName);
                 bundle.putString(PostFragment.EXTRA_USER_WHERE, PostPagingSource.USER_WHERE_SAVED);
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
                 bundle.putBoolean(PostFragment.EXTRA_DISABLE_READ_POSTS, true);
                 fragment.setArguments(bundle);
                 return fragment;

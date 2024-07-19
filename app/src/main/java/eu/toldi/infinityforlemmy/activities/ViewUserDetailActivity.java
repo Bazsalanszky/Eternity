@@ -1765,7 +1765,7 @@ public class ViewUserDetailActivity extends BaseActivity implements SortTypeSele
                 bundle.putString(PostFragment.EXTRA_USER_NAME, qualifiedName);
                 bundle.putString(PostFragment.EXTRA_USER_WHERE, PostPagingSource.USER_WHERE_SUBMITTED);
                 bundle.putString(PostFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountName);
+                bundle.putString(PostFragment.EXTRA_ACCOUNT_NAME, mAccountQualifiedName);
                 fragment.setArguments(bundle);
                 return fragment;
             }

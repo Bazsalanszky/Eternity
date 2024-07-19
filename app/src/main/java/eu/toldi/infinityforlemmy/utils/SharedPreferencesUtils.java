@@ -358,6 +358,8 @@ public class SharedPreferencesUtils {
     public static final String MARK_POSTS_AS_READ_AFTER_VOTING_BASE = "_mark_posts_as_read_after_voting";
     public static final String MARK_POSTS_AS_READ_ON_SCROLL_BASE = "_mark_posts_as_read_on_scroll";
     public static final String HIDE_READ_POSTS_AUTOMATICALLY_BASE = "_hide_read_posts_automatically";
+    public static final String DONT_HIDE_SAVED_READ_POSTS = "dont_hide_saved_posts";
+    public static final String DONT_HIDE_OWN_READ_POSTS = "dont_hide_own_posts";
 
     public static final String CURRENT_ACCOUNT_SHARED_PREFERENCES_FILE = "eu.toldi.infinityforlemmy.current_account";
     public static final String ACCOUNT_NAME = "account_name";
