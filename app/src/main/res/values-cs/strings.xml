@@ -1354,4 +1354,10 @@
     <string name="sort_most_comments">Nejvíce komentářů</string>
     <string name="no_blocked_instances">Žádné blokované instance</string>
     <string name="instances">Instance</string>
+    <string name="view_instance">Zobrazit instanci</string>
+    <string name="action_block_instance">Zablokovat instanci</string>
+    <string name="action_unblock_instance">Odblokovat instanci</string>
+    <string name="block_instance_failed">Nepodařilo se zablokovat instanci</string>
+    <string name="block_instance_success">Instance zablokována!</string>
+    <string name="unblock_instance_success">Instance odblokována!</string>
 </resources>
