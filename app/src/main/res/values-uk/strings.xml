@@ -1355,4 +1355,6 @@
     <string name="unblock_instance_success">Сервер розблоковано!</string>
     <string name="action_block_instance">Заблокувати сервер</string>
     <string name="action_unblock_instance">Розблокувати сервер</string>
+    <string name="settings_dont_hide_your_own_read_posts_automatically">Не ховати власні прочитані дописи автоматично</string>
+    <string name="settings_dont_hide_saved_read_posts_automatically">Не ховати збережені прочитані дописи автоматично</string>
 </resources>
