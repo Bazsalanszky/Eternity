@@ -1178,7 +1178,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="settings_custom_content_font_family_title">Fuente Personalizada para el Contenido</string>
     <string name="post_poll_activity_label">Publicar Encuesta</string>
     <string name="action_create_github_issue">Abrir conflicto en Codeberg</string>
-    <string name="anonymous_homepage_not_implemented">Pantalla de Inicio Anónima aún no ha sido implementada</string>
     <string name="invalid_response">Respuesta invalida del servidor</string>
     <string name="invalid_username_or_password">Usuario o Contraseña invalido</string>
     <string name="voting_length">Tiempo de votación: %1$d dias</string>

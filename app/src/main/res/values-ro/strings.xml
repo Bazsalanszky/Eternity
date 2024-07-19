@@ -1271,7 +1271,6 @@
     <string name="block_community_success">Comunitate blocată!</string>
     <string name="separate_down_and_up_votes">Voturi separate pentru Jos și Sus</string>
     <string name="history">Istoric</string>
-    <string name="anonymous_homepage_not_implemented">Pagina anonimă de acasă nu este încă implementată</string>
     <string name="share_links_on_your_local_instance">Partajați link-uri pe instanța dvs. locală</string>
     <string name="error_unsupported_video">Media include piste video, dar niciuna nu pot fi redată de acest dispozitiv</string>
     <string name="settings_show_display_name_instead_of_user_name">Afișați comunitate și numele afișat de utilizator</string>

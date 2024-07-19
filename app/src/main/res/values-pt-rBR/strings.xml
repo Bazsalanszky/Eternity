@@ -1246,7 +1246,6 @@
     <string name="action_block_user">Bloquear usuário</string>
     <string name="action_create_github_issue">Reportar problema no Codeberg</string>
     <string name="action_more_options">Mais opções</string>
-    <string name="anonymous_homepage_not_implemented">A página inicial anônima ainda não foi implementada</string>
     <string name="history">História</string>
     <string name="invalid_response">Resposta inválida do servidor</string>
     <string name="invalid_username_or_password">Nome de usuário ou senha inválidos</string>

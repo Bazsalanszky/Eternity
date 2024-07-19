@@ -1179,7 +1179,6 @@
     <string name="history_activity_label">Historie</string>
     <string name="action_open_external_browser">Otevřít v prohlížeči</string>
     <string name="action_more_options">Další možnosti</string>
-    <string name="anonymous_homepage_not_implemented">Anonymní domovská stránka zatím není implementována</string>
     <string name="history">Historie</string>
     <string name="block_user">Zablokovat uživatele</string>
     <string name="settings_show_display_name_instead_of_user_name">Skrýt zobrazovaná jména komunity a uživatelů</string>

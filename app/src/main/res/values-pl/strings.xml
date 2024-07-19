@@ -1138,7 +1138,6 @@
     <string name="invalid_response">Nieprawidłowa odpowiedź serwera</string>
     <string name="user_number_detail">%1$,d użytkowników</string>
     <string name="settings_save_nsfw_media_in_different_folder_title">Zapisuj treści NSFW w innej lokacji</string>
-    <string name="anonymous_homepage_not_implemented">Anonimowe strony główne nie są jeszcze zaimplementowane</string>
     <string name="settings_enable_material_you_warning_summary">Upewnij się, że żaden z motywów nie jest nazwany
 \n\"Material You\",
 \n\"Material You Dark\" lub

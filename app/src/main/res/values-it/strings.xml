@@ -1150,7 +1150,6 @@
     <string name="settings_fixed_height_preview_in_card_title">Altezza della card fissa</string>
     <string name="settings_hide_text_post_content">Nascondi contenuto dei post di testo</string>
     <string name="settings_hide_comment_awards_title">Nascondi premi dei commenti</string>
-    <string name="anonymous_homepage_not_implemented">La pagina principale per gli utenti anonimi non è ancora stata implementata</string>
     <string name="two_options_required">Un sondaggio richiede almeno due o più opzioni!</string>
     <string name="no_activity_found_for_external_browser">Non ci sono app che possono gestire l\'azione di apertura in app esterna</string>
     <string name="settings_backup_settings_summary">La password del file di backup è \"123321\".</string>

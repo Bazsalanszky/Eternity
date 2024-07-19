@@ -1081,7 +1081,6 @@
     <string name="history_activity_label">História</string>
     <string name="action_block_user">Bloquear o utilizador</string>
     <string name="action_playback_speed">Velocidade de reprodução</string>
-    <string name="anonymous_homepage_not_implemented">Página inicial anónima ainda não está implementada</string>
     <string name="action_open_external_browser">Abrir no navegador</string>
     <string name="invalid_response">Resposta inválida do servidor</string>
     <string name="action_contact_mods">Contactar Moderadores</string>

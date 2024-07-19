@@ -985,7 +985,6 @@
     <string name="action_share_post_link">Poszt link megosztása</string>
     <string name="action_playback_speed">Lejátszási sebesség</string>
     <string name="action_more_options">További műveletek</string>
-    <string name="anonymous_homepage_not_implemented">Az Anonymous főoldal még nincs implementálva</string>
     <string name="history">Előzmények</string>
     <string name="inbox_with_count">Bejövő üzenetek (%1$,d)</string>
     <string name="trending">Felkapott</string>

@@ -1206,7 +1206,6 @@
     <string name="search_communities_error">Σφάλμα αναζήτησης κοινοτήτων.
 \nΠάτα για επανάληψη.</string>
     <string name="no_communities">Δε βρέθηκαν κοινότητες</string>
-    <string name="anonymous_homepage_not_implemented">Η ανώνυμη αρχική δεν έχει υλοποιηθεί ακόμα</string>
     <string name="active_users_number_detail">%1$,d Ενεργοί Χρήστες</string>
     <string name="comment_count_detail">%1$,d Σχόλια</string>
     <string name="user_number_detail">%1$,d Χρήστες</string>

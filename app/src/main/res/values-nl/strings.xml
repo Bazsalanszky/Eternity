@@ -1044,7 +1044,6 @@ not: "5 uren" -->
     <string name="action_playback_speed">Afspeelsnelheid</string>
     <string name="action_contact_mods">Contacteer moderators</string>
     <string name="action_more_options">Meer Opties</string>
-    <string name="anonymous_homepage_not_implemented">Anonieme homepagina is nog niet geïmplementeerd</string>
     <string name="invalid_response">Ongeldig antwoord van server ontvangen</string>
     <string name="voting_length">Tijd om te stemmen: %1$d days</string>
     <string name="two_options_required">Een goede peiling heeft twee of meer opties!</string>

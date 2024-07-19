@@ -429,7 +429,6 @@
     <string name="action_contact_mods">Ota yhteys modeihin</string>
     <string name="primary_text_preview">Ensisijainen teksti</string>
     <string name="theme_item_is_light_theme">Aseta vaaleaksi teemaksi</string>
-    <string name="anonymous_homepage_not_implemented">Anonyymia kotisivua ei ole vielä toteutettu</string>
     <string name="load_post_error">Virhe ladatessa tätä viestiä.
 \nNapauta yrittääksesi uudelleen.</string>
     <string name="message_subject_required">Viestillä tulee olla aihe</string>

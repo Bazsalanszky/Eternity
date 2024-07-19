@@ -1138,7 +1138,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="action_playback_speed">Vitesse de lecture</string>
     <string name="action_contact_mods">Contacter les modérateurs</string>
     <string name="action_more_options">Plus d’options</string>
-    <string name="anonymous_homepage_not_implemented">La page d\'accueil anonyme n\'est pas encore disponible</string>
     <string name="history">Historique</string>
     <string name="invalid_response">Réponse invalide du serveur</string>
     <string name="two_options_required">Un bon sondage a besoin de deux options ou plus !</string>

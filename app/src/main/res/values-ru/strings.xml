@@ -1195,7 +1195,6 @@
     <string name="history_activity_label">История</string>
     <string name="action_block_user">Заблокировать пользователя</string>
     <string name="action_more_options">Больше настроек</string>
-    <string name="anonymous_homepage_not_implemented">Анонимная домашняя страница пока не реализована</string>
     <string name="history">История</string>
     <string name="invalid_response">Неправильный ответ от сервера</string>
     <string name="invalid_username_or_password">Неправильный логин или пароль</string>
