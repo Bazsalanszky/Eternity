@@ -142,6 +142,8 @@ public class ParsePost {
         JSONObject creator = data.getJSONObject("creator");
         JSONObject community = data.getJSONObject("community");
         JSONObject counts = data.getJSONObject("counts");
+        boolean isModerator = data.getBoolean("creator_is_moderator");
+        boolean isAdmin = creator.optBoolean("admin") || data.optBoolean("creator_is_admin");
 
         int id = post.getInt("id");
         String fullName = post.getString("name");
@@ -182,7 +184,7 @@ public class ParsePost {
         boolean locked = post.getBoolean("locked");
         boolean saved = data.getBoolean("saved");
         boolean deleted = post.getBoolean("deleted");
-        String distinguished = creator.optBoolean("admin") ? "admin" : "";
+        String distinguished = (isModerator) ? "moderator" : (isAdmin) ? "admin" : "";
         String suggestedSort = "";
         ArrayList<Post.Preview> previews = new ArrayList<>();
         if (!post.isNull("thumbnail_url")) {
@@ -640,6 +642,19 @@ public class ParsePost {
 
 
         return post;
+    }
+
+    private boolean isModerator(JSONArray moderators, String username) {
+        for (int i = 0; i < moderators.length(); i++) {
+            try {
+                if (moderators.getJSONObject(i).getString("name").equals(username)) {
+                    return true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     public interface ParsePostsListingListener {

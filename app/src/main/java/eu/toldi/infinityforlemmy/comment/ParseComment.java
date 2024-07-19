@@ -292,6 +292,9 @@ public class ParseComment {
         JSONObject postObj = jsonObject.getJSONObject("post");
         JSONObject communityObj = jsonObject.getJSONObject("community");
         JSONObject countsObj = jsonObject.getJSONObject("counts");
+        boolean isModerator = jsonObject.optBoolean("creator_is_moderator");
+        boolean isAdmin = jsonObject.optBoolean("creator_is_admin");
+
 
         int id = commentObj.getInt("id");
         int postID = postObj.getInt("id");
@@ -342,7 +345,7 @@ public class ParseComment {
             }
         }
         boolean isSubmitter = creatorObj.getInt("id") == postObj.getInt("creator_id");
-        String distinguished = commentObj.getString("distinguished");
+        String distinguished = isModerator ? "moderator" : (isAdmin ? "admin" : "");
         String permalink = commentObj.getString("ap_id");
         String[] path = commentObj.getString("path").split(Pattern.quote("."));
 
