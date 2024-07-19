@@ -16,13 +16,13 @@ def getCommitVersionCode = { ->
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         applicationId "eu.toldi.infinityforlemmy"
         minSdk 21
-        targetSdk 33
-        versionCode 131
-        versionName "0.1.2"
+        targetSdk 34
+        versionCode 132
+        versionName "0.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
