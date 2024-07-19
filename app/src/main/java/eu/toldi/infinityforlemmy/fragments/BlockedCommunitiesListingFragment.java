@@ -137,7 +137,7 @@ public class BlockedCommunitiesListingFragment extends Fragment implements Fragm
             if (subscribedSubredditData == null || subscribedSubredditData.size() == 0) {
                 mRecyclerView.setVisibility(View.GONE);
                 mLinearLayout.setVisibility(View.VISIBLE);
-                mGlide.load(R.drawable.error_image).into(mImageView);
+                mGlide.load(R.mipmap.ic_launcher_round).into(mImageView);
             } else {
                 mLinearLayout.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);

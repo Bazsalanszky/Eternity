@@ -382,7 +382,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
             mSwipeRefreshLayout.setRefreshing(false);
             mFetchCommentInfoLinearLayout.setVisibility(View.VISIBLE);
             mFetchCommentInfoTextView.setText(stringResId);
-            mGlide.load(R.drawable.error_image).into(mFetchCommentInfoImageView);
+            mGlide.load(R.mipmap.ic_launcher_round).into(mFetchCommentInfoImageView);
         }
     }
 

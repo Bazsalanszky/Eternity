@@ -278,7 +278,7 @@ public class TrendingActivity extends BaseActivity {
 
     private void showErrorView(int stringId) {
         errorLinearLayout.setVisibility(View.VISIBLE);
-        mGlide.load(R.drawable.error_image).into(errorImageView);
+        mGlide.load(R.mipmap.ic_launcher_round).into(errorImageView);
         errorTextView.setText(stringId);
     }
 

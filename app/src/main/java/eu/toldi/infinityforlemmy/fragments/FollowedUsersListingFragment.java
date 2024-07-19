@@ -29,7 +29,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 import eu.toldi.infinityforlemmy.FragmentCommunicator;
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
@@ -41,6 +40,7 @@ import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
 import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserViewModel;
 import eu.toldi.infinityforlemmy.utils.SharedPreferencesUtils;
+import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 import retrofit2.Retrofit;
 
 
@@ -128,7 +128,7 @@ public class FollowedUsersListingFragment extends Fragment implements FragmentCo
             if (subscribedUserData == null || subscribedUserData.size() == 0) {
                 mRecyclerView.setVisibility(View.GONE);
                 mLinearLayout.setVisibility(View.VISIBLE);
-                mGlide.load(R.drawable.error_image).into(mImageView);
+                mGlide.load(R.mipmap.ic_launcher_round).into(mImageView);
             } else {
                 mLinearLayout.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);

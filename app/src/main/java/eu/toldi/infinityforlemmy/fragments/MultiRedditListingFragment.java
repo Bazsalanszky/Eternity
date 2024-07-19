@@ -164,7 +164,7 @@ public class MultiRedditListingFragment extends Fragment implements FragmentComm
             if (subscribedUserData == null || subscribedUserData.size() == 0) {
                 mRecyclerView.setVisibility(View.GONE);
                 mErrorLinearLayout.setVisibility(View.VISIBLE);
-                mGlide.load(R.drawable.error_image).into(mErrorImageView);
+                mGlide.load(R.mipmap.ic_launcher_round).into(mErrorImageView);
             } else {
                 mErrorLinearLayout.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);

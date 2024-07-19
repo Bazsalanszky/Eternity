@@ -162,7 +162,7 @@ public class PrivateMessageFragment extends Fragment implements FragmentCommunic
         mSwipeRefreshLayout.setRefreshing(false);
         mFetchMessageInfoLinearLayout.setVisibility(View.VISIBLE);
         mFetchMessageInfoTextView.setText(stringResId);
-        mGlide.load(R.drawable.error_image).into(mFetchMessageInfoImageView);
+        mGlide.load(R.mipmap.ic_launcher_round).into(mFetchMessageInfoImageView);
     }
 
     @Override

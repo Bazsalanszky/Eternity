@@ -259,7 +259,7 @@ public class WikiActivity extends BaseActivity {
         swipeRefreshLayout.setRefreshing(false);
         mFetchWikiInfoLinearLayout.setVisibility(View.VISIBLE);
         mFetchWikiInfoTextView.setText(stringResId);
-        mGlide.load(R.drawable.error_image).into(mFetchWikiInfoImageView);
+        mGlide.load(R.mipmap.ic_launcher_round).into(mFetchWikiInfoImageView);
     }
 
     @Override

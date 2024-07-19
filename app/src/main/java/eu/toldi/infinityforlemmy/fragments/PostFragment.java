@@ -1499,7 +1499,7 @@ public class PostFragment extends Fragment implements FragmentCommunicator {
             mSwipeRefreshLayout.setRefreshing(false);
             mFetchPostInfoLinearLayout.setVisibility(View.VISIBLE);
             mFetchPostInfoTextView.setText(stringResId);
-            mGlide.load(R.drawable.error_image).into(mFetchPostInfoImageView);
+            mGlide.load(R.mipmap.ic_launcher_round).into(mFetchPostInfoImageView);
         }
     }
 

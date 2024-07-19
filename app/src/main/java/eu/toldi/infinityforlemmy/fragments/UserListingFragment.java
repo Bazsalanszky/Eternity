@@ -237,7 +237,7 @@ public class UserListingFragment extends Fragment implements FragmentCommunicato
             mSwipeRefreshLayout.setRefreshing(false);
             mFetchUserListingInfoLinearLayout.setVisibility(View.VISIBLE);
             mFetchUserListingInfoTextView.setText(stringResId);
-            Glide.with(this).load(R.drawable.error_image).into(mFetchUserListingInfoImageView);
+            Glide.with(this).load(R.mipmap.ic_launcher_round).into(mFetchUserListingInfoImageView);
         }
     }
 

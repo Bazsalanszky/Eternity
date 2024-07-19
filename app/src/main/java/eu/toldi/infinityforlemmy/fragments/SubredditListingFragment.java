@@ -234,7 +234,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
             mSwipeRefreshLayout.setRefreshing(false);
             mFetchSubredditListingInfoLinearLayout.setVisibility(View.VISIBLE);
             mFetchSubredditListingInfoTextView.setText(stringResId);
-            Glide.with(this).load(R.drawable.error_image).into(mFetchSubredditListingInfoImageView);
+            Glide.with(this).load(R.mipmap.ic_launcher_round).into(mFetchSubredditListingInfoImageView);
         }
     }
 

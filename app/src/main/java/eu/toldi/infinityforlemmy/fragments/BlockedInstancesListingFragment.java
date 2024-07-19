@@ -122,7 +122,7 @@ public class BlockedInstancesListingFragment extends Fragment implements Fragmen
             if (blockedInstanceData == null || blockedInstanceData.size() == 0) {
                 mRecyclerView.setVisibility(View.GONE);
                 mLinearLayout.setVisibility(View.VISIBLE);
-                mGlide.load(R.drawable.error_image).into(mImageView);
+                mGlide.load(R.mipmap.ic_launcher_round).into(mImageView);
                 mErrorTextView.setText(R.string.no_blocked_instances);
             } else {
                 mLinearLayout.setVisibility(View.GONE);

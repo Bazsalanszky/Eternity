@@ -1595,7 +1595,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
         mFetchPostInfoLinearLayout.setVisibility(View.VISIBLE);
         mFetchPostInfoLinearLayout.setOnClickListener(view -> fetchPostAndCommentsById(subredditId));
         mFetchPostInfoTextView.setText(R.string.load_post_error);
-        mGlide.load(R.drawable.error_image).into(mFetchPostInfoImageView);
+        mGlide.load(R.mipmap.ic_launcher_round).into(mFetchPostInfoImageView);
     }
 
     private void showMessage(int resId) {
