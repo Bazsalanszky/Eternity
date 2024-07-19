@@ -138,7 +138,7 @@ public class SelectUserFlairActivity extends BaseActivity implements ActivityToo
                 flairEditText.requestFocus();
                 Utils.showKeyboard(this, new Handler(), flairEditText);
                 new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                        .setTitle(R.string.edit_flair)
+                        .setTitle("")
                         .setView(dialogView)
                         .setPositiveButton(R.string.ok, (dialogInterface, i)
                                 -> {
@@ -156,13 +156,13 @@ public class SelectUserFlairActivity extends BaseActivity implements ActivityToo
             } else {
                 if (userFlair == null) {
                     new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                            .setTitle(R.string.clear_user_flair)
+                            .setTitle("")
                             .setPositiveButton(R.string.yes, (dialogInterface, i) -> selectUserFlair(userFlair))
                             .setNegativeButton(R.string.no, null)
                             .show();
                 } else {
                     new MaterialAlertDialogBuilder(this, R.style.MaterialAlertDialogTheme)
-                            .setTitle(R.string.select_this_user_flair)
+                            .setTitle("")
                             .setMessage(userFlair.getText())
                             .setPositiveButton(R.string.yes, (dialogInterface, i) -> selectUserFlair(userFlair))
                             .setNegativeButton(R.string.no, null)
@@ -181,9 +181,9 @@ public class SelectUserFlairActivity extends BaseActivity implements ActivityToo
                     @Override
                     public void success() {
                         if (userFlair == null) {
-                            Toast.makeText(SelectUserFlairActivity.this, R.string.clear_user_flair_success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SelectUserFlairActivity.this, "", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(SelectUserFlairActivity.this, R.string.select_user_flair_success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SelectUserFlairActivity.this, "", Toast.LENGTH_SHORT).show();
                         }
                         finish();
                     }
@@ -192,9 +192,9 @@ public class SelectUserFlairActivity extends BaseActivity implements ActivityToo
                     public void failed(String errorMessage) {
                         if (errorMessage == null || errorMessage.equals("")) {
                             if (userFlair == null) {
-                                Snackbar.make(coordinatorLayout, R.string.clear_user_flair_success, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(coordinatorLayout, "", Snackbar.LENGTH_SHORT).show();
                             } else {
-                                Snackbar.make(coordinatorLayout, R.string.select_user_flair_success, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(coordinatorLayout, "", Snackbar.LENGTH_SHORT).show();
                             }
                         } else {
                             Snackbar.make(coordinatorLayout, errorMessage, Snackbar.LENGTH_SHORT).show();

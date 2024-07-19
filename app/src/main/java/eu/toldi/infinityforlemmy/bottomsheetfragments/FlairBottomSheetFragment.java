@@ -111,7 +111,7 @@ public class FlairBottomSheetFragment extends LandscapeExpandedBottomSheetDialog
                         progressBar.setVisibility(View.GONE);
                         if (flairs == null || flairs.size() == 0) {
                             errorTextView.setVisibility(View.VISIBLE);
-                            errorTextView.setText(R.string.no_flair);
+                            errorTextView.setText("");
                         } else {
                             errorTextView.setVisibility(View.GONE);
                             mAdapter.changeDataset(flairs);
@@ -122,7 +122,7 @@ public class FlairBottomSheetFragment extends LandscapeExpandedBottomSheetDialog
                     public void fetchFailed() {
                         progressBar.setVisibility(View.GONE);
                         errorTextView.setVisibility(View.VISIBLE);
-                        errorTextView.setText(R.string.error_loading_flairs);
+                        errorTextView.setText("");
                         errorTextView.setOnClickListener(view -> fetchFlairs());
                     }
                 });

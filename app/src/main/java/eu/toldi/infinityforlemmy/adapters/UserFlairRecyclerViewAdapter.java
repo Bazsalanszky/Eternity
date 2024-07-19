@@ -47,7 +47,6 @@ public class UserFlairRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof UserFlairViewHolder) {
             if (position == 0) {
-                ((UserFlairViewHolder) holder).userFlairHtmlTextView.setText(R.string.clear_user_flair);
                 ((UserFlairViewHolder) holder).editUserFlairImageView.setVisibility(View.GONE);
             } else {
                 UserFlair userFlair = userFlairs.get(holder.getBindingAdapterPosition() - 1);

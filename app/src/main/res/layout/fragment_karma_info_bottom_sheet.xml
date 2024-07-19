@@ -13,7 +13,7 @@
         android:paddingTop="16dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
-        android:text="@string/post_karma"
+        android:text=""
         android:textColor="?attr/primaryTextColor"
         android:textSize="?attr/font_default"
         android:fontFamily="?attr/font_family" />
@@ -37,7 +37,7 @@
         android:paddingTop="16dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
-        android:text="@string/comment_karma"
+        android:text=""
         android:textColor="?attr/primaryTextColor"
         android:textSize="?attr/font_default"
         android:fontFamily="?attr/font_family" />
@@ -61,7 +61,7 @@
         android:paddingTop="16dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
-        android:text="@string/awarder_karma"
+        android:text=""
         android:textColor="?attr/primaryTextColor"
         android:textSize="?attr/font_default"
         android:fontFamily="?attr/font_family" />
@@ -85,7 +85,7 @@
         android:paddingTop="16dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
-        android:text="@string/awardee_karma"
+        android:text=""
         android:textColor="?attr/primaryTextColor"
         android:textSize="?attr/font_default"
         android:fontFamily="?attr/font_family" />

@@ -117,7 +117,7 @@ public class GiveAwardActivity extends BaseActivity {
             View layout = inflater.inflate(R.layout.dialog_give_award, null);
             MaterialSwitch materialSwitch = layout.findViewById(R.id.switch_material_give_award_dialog);
             new MaterialAlertDialogBuilder(this)
-                    .setTitle(R.string.give_award_dialog_title)
+                    .setTitle("")
                     .setView(layout)
                     .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                         boolean isAnonymous = materialSwitch.isChecked();
@@ -138,10 +138,10 @@ public class GiveAwardActivity extends BaseActivity {
                                     public void failed(int code, String message) {
                                         View layout = inflater.inflate(R.layout.copy_text_material_dialog, null);
                                         TextView textView = layout.findViewById(R.id.text_view_copy_text_material_dialog);
-                                        String text = getString(R.string.give_award_error_message, code, message == null ? "" : message);
+                                        String text = "";
                                         textView.setText(text);
                                         new MaterialAlertDialogBuilder(GiveAwardActivity.this, R.style.CopyTextMaterialAlertDialogTheme)
-                                                .setTitle(R.string.give_award_failed)
+                                                .setTitle("")
                                                 .setView(layout)
                                                 .setPositiveButton(R.string.copy_all, (dialogInterface, i) -> {
                                                     ClipboardManager clipboard = (ClipboardManager) GiveAwardActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);

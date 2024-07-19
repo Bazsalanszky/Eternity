@@ -136,11 +136,7 @@
             android:name=".activities.FetchRandomSubredditOrPostActivity"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.GiveAwardActivity"
-            android:label="@string/give_award_activity_label"
-            android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/AppTheme.Slidable" />
+
         <activity
             android:name=".activities.SelectUserFlairActivity"
             android:parentActivityName=".activities.MainActivity"

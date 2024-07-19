@@ -71,7 +71,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Retrofit;
 
-public class SubmitCrosspostActivity extends BaseActivity implements FlairBottomSheetFragment.FlairSelectionCallback,
+public class SubmitCrosspostActivity extends BaseActivity implements
         AccountChooserBottomSheetFragment.AccountChooserListener {
 
     public static final String EXTRA_POST = "EP";
@@ -110,8 +110,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
     MaterialButton rulesButton;
     @BindView(R.id.divider_1_submit_crosspost_activity)
     View divider1;
-    @BindView(R.id.flair_custom_text_view_submit_crosspost_activity)
-    CustomTextView flairTextView;
     @BindView(R.id.nsfw_custom_text_view_submit_crosspost_activity)
     CustomTextView nsfwTextView;
     @BindView(R.id.divider_2_submit_crosspost_activity)
@@ -240,7 +238,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             if (subredditName != null) {
                 subredditNameTextView.setTextColor(primaryTextColor);
                 subredditNameTextView.setText(subredditName);
-                flairTextView.setVisibility(View.VISIBLE);
                 if (!loadSubredditIconSuccessful) {
                     loadSubredditIcon();
                 }
@@ -251,12 +248,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
                 mPostingSnackbar.show();
             }
 
-            if (flair != null) {
-                flairTextView.setText(flair.getText());
-                flairTextView.setBackgroundColor(flairBackgroundColor);
-                flairTextView.setBorderColor(flairBackgroundColor);
-                flairTextView.setTextColor(flairTextColor);
-            }
             if (isNSFW) {
                 nsfwTextView.setBackgroundColor(nsfwBackgroundColor);
                 nsfwTextView.setBorderColor(nsfwBackgroundColor);
@@ -342,27 +333,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             }
         });
 
-        flairTextView.setOnClickListener(view -> {
-            if (flair == null) {
-                flairSelectionBottomSheetFragment = new FlairBottomSheetFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(FlairBottomSheetFragment.EXTRA_ACCESS_TOKEN, mAccessToken);
-                if (subredditIsUser) {
-                    bundle.putString(FlairBottomSheetFragment.EXTRA_SUBREDDIT_NAME, "u_" + subredditName);
-                } else {
-                    bundle.putString(FlairBottomSheetFragment.EXTRA_SUBREDDIT_NAME, subredditName);
-                }
-                flairSelectionBottomSheetFragment.setArguments(bundle);
-                flairSelectionBottomSheetFragment.show(getSupportFragmentManager(), flairSelectionBottomSheetFragment.getTag());
-            } else {
-                flairTextView.setBackgroundColor(resources.getColor(android.R.color.transparent));
-                flairTextView.setTextColor(primaryTextColor);
-                flairTextView.setText(getString(R.string.flair));
-                flair = null;
-            }
-        });
-
-
         nsfwTextView.setOnClickListener(view -> {
             if (!isNSFW) {
                 nsfwTextView.setBackgroundColor(nsfwBackgroundColor);
@@ -442,7 +412,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
         spoilerTextColor = mCustomThemeWrapper.getSpoilerTextColor();
         nsfwBackgroundColor = mCustomThemeWrapper.getNsfwBackgroundColor();
         nsfwTextColor = mCustomThemeWrapper.getNsfwTextColor();
-        flairTextView.setTextColor(primaryTextColor);
         nsfwTextView.setTextColor(primaryTextColor);
         titleEditText.setTextColor(primaryTextColor);
         titleEditText.setHintTextColor(secondaryTextColor);
@@ -454,7 +423,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
             subredditNameTextView.setTypeface(typeface);
             rulesButton.setTypeface(typeface);
             receivePostReplyNotificationsTextView.setTypeface(typeface);
-            flairTextView.setTypeface(typeface);
             nsfwTextView.setTypeface(typeface);
             titleEditText.setTypeface(typeface);
         }
@@ -612,10 +580,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
                 subredditNameTextView.setText(subredditName);
                 displaySubredditIcon();
 
-                flairTextView.setVisibility(View.VISIBLE);
-                flairTextView.setBackgroundColor(resources.getColor(android.R.color.transparent));
-                flairTextView.setTextColor(primaryTextColor);
-                flairTextView.setText(getString(R.string.flair));
                 flair = null;
             }
         }
@@ -627,14 +591,6 @@ public class SubmitCrosspostActivity extends BaseActivity implements FlairBottom
         super.onDestroy();
     }
 
-    @Override
-    public void flairSelected(Flair flair) {
-        this.flair = flair;
-        flairTextView.setText(flair.getText());
-        flairTextView.setBackgroundColor(flairBackgroundColor);
-        flairTextView.setBorderColor(flairBackgroundColor);
-        flairTextView.setTextColor(flairTextColor);
-    }
 
     @Override
     public void onAccountSelected(Account account) {

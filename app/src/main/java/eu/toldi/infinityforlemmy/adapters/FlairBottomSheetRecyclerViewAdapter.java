@@ -52,7 +52,7 @@ public class FlairBottomSheetRecyclerViewAdapter extends RecyclerView.Adapter<Fl
                 flairEditText.requestFocus();
                 Utils.showKeyboard(activity, new Handler(), flairEditText);
                 new MaterialAlertDialogBuilder(activity, R.style.MaterialAlertDialogTheme)
-                        .setTitle(R.string.edit_flair)
+                        .setTitle("")
                         .setView(dialogView)
                         .setPositiveButton(R.string.ok, (dialogInterface, i)
                                 -> {

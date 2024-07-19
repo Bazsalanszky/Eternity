@@ -14,11 +14,6 @@
 
     <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
         app:defaultValue="false"
-        app:key="hide_post_flair"
-        app:title="@string/settings_hide_post_flair" />
-
-    <eu.toldi.infinityforlemmy.customviews.CustomFontSwitchPreference
-        app:defaultValue="false"
         app:key="hide_upvote_ratio"
         app:title="@string/settings_hide_upvote_ratio_title" />
 

@@ -147,7 +147,6 @@ public class PostFilterUsageListingActivity extends BaseActivity {
                 titleStringId = R.string.user;
                 break;
             case PostFilterUsage.MULTIREDDIT_TYPE:
-                textInputEditText.setHint(R.string.settings_tab_multi_reddit_name);
                 titleStringId = R.string.multi_reddit;
                 break;
         }

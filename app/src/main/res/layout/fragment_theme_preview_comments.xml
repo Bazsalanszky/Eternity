@@ -39,7 +39,6 @@
                         android:layout_height="?attr/font_default"
                         android:layout_marginEnd="4dp"
                         android:src="@drawable/ic_mic_14dp"
-                        app:layout_constraintBottom_toTopOf="@id/author_flair_text_view_theme_preview_comments_fragment"
                         app:layout_constraintEnd_toStartOf="@id/author_text_view_theme_preview_comments_fragment"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -50,29 +49,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:ellipsize="end"
+                        android:fontFamily="?attr/font_family"
                         android:maxLines="2"
                         android:text="@string/username_preview"
                         android:textSize="?attr/font_default"
-                        android:fontFamily="?attr/font_family"
-                        app:layout_constraintBottom_toTopOf="@id/author_flair_text_view_theme_preview_comments_fragment"
                         app:layout_constraintEnd_toStartOf="@+id/comment_time_text_view_theme_preview_comments_fragment"
                         app:layout_constraintStart_toEndOf="@id/author_type_image_view_theme_preview_comments_fragment"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/author_flair_text_view_theme_preview_comments_fragment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="@string/author_flair_preview"
-                        android:textSize="?attr/font_12"
-                        android:fontFamily="?attr/font_family"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/comment_time_text_view_theme_preview_comments_fragment"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/author_text_view_theme_preview_comments_fragment" />
 
                     <TextView
                         android:id="@+id/comment_time_text_view_theme_preview_comments_fragment"
@@ -261,7 +244,6 @@
                         android:layout_height="?attr/font_default"
                         android:layout_marginEnd="4dp"
                         android:src="@drawable/ic_mic_14dp"
-                        app:layout_constraintBottom_toTopOf="@id/author_flair_text_view_award_background_theme_preview_comments_fragment"
                         app:layout_constraintEnd_toStartOf="@id/author_text_view_award_background_theme_preview_comments_fragment"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -272,29 +254,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:ellipsize="end"
+                        android:fontFamily="?attr/font_family"
                         android:maxLines="2"
                         android:text="@string/username_preview"
                         android:textSize="?attr/font_default"
-                        android:fontFamily="?attr/font_family"
-                        app:layout_constraintBottom_toTopOf="@id/author_flair_text_view_award_background_theme_preview_comments_fragment"
                         app:layout_constraintEnd_toStartOf="@+id/comment_time_text_view_award_background_theme_preview_comments_fragment"
                         app:layout_constraintStart_toEndOf="@id/author_type_image_view_award_background_theme_preview_comments_fragment"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/author_flair_text_view_award_background_theme_preview_comments_fragment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="@string/author_flair_preview"
-                        android:textSize="?attr/font_12"
-                        android:fontFamily="?attr/font_family"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/comment_time_text_view_award_background_theme_preview_comments_fragment"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/author_text_view_award_background_theme_preview_comments_fragment" />
 
                     <TextView
                         android:id="@+id/comment_time_text_view_award_background_theme_preview_comments_fragment"

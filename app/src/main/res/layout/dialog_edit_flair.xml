@@ -12,7 +12,7 @@
         android:textColor="?attr/primaryTextColor"
         android:textSize="?attr/font_default"
         android:fontFamily="?attr/font_family"
-        android:hint="@string/flair"
+        android:hint=""
         android:maxLength="64" />
 
     <TextView

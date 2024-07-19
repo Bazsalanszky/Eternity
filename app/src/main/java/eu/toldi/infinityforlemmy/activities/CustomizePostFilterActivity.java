@@ -157,14 +157,7 @@ public class CustomizePostFilterActivity extends BaseActivity {
     TextInputEditText excludesUsersTextInputEditText;
     @BindView(R.id.add_users_image_view_customize_post_filter_activity)
     ImageView addUsersImageView;
-    @BindView(R.id.excludes_flairs_text_input_layout_customize_post_filter_activity)
-    TextInputLayout excludesFlairsTextInputLayout;
-    @BindView(R.id.excludes_flairs_text_input_edit_text_customize_post_filter_activity)
-    TextInputEditText excludesFlairsTextInputEditText;
-    @BindView(R.id.contains_flairs_text_input_layout_customize_post_filter_activity)
-    TextInputLayout containsFlairsTextInputLayout;
-    @BindView(R.id.contains_flairs_text_input_edit_text_customize_post_filter_activity)
-    TextInputEditText containsFlairsTextInputEditText;
+
     @BindView(R.id.exclude_domains_text_input_layout_customize_post_filter_activity)
     TextInputLayout excludeDomainsTextInputLayout;
     @BindView(R.id.exclude_domains_text_input_edit_text_customize_post_filter_activity)
@@ -189,14 +182,7 @@ public class CustomizePostFilterActivity extends BaseActivity {
     TextInputLayout maxCommentsTextInputLayout;
     @BindView(R.id.max_comments_text_input_edit_text_customize_post_filter_activity)
     TextInputEditText maxCommentsTextInputEditText;
-    @BindView(R.id.min_awards_text_input_layout_customize_post_filter_activity)
-    TextInputLayout minAwardsTextInputLayout;
-    @BindView(R.id.min_awards_text_input_edit_text_customize_post_filter_activity)
-    TextInputEditText minAwardsTextInputEditText;
-    @BindView(R.id.max_awards_text_input_layout_customize_post_filter_activity)
-    TextInputLayout maxAwardsTextInputLayout;
-    @BindView(R.id.max_awards_text_input_edit_text_customize_post_filter_activity)
-    TextInputEditText maxAwardsTextInputEditText;
+
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -323,16 +309,12 @@ public class CustomizePostFilterActivity extends BaseActivity {
         titleContainsRegexTextInputEditText.setText(postFilter.postTitleContainsRegex);
         excludesSubredditsTextInputEditText.setText(postFilter.excludeSubreddits);
         excludesUsersTextInputEditText.setText(postFilter.excludeUsers);
-        excludesFlairsTextInputEditText.setText(postFilter.excludeFlairs);
-        containsFlairsTextInputEditText.setText(postFilter.containFlairs);
         excludeDomainsTextInputEditText.setText(postFilter.excludeDomains);
         containDomainsTextInputEditText.setText(postFilter.containDomains);
         minVoteTextInputEditText.setText(Integer.toString(postFilter.minVote));
         maxVoteTextInputEditText.setText(Integer.toString(postFilter.maxVote));
         minCommentsTextInputEditText.setText(Integer.toString(postFilter.minComments));
         maxCommentsTextInputEditText.setText(Integer.toString(postFilter.maxComments));
-        minAwardsTextInputEditText.setText(Integer.toString(postFilter.minAwards));
-        maxAwardsTextInputEditText.setText(Integer.toString(postFilter.maxAwards));
 
         Intent intent = getIntent();
         String excludeSubreddit = intent.getStringExtra(EXTRA_EXCLUDE_SUBREDDIT);
@@ -353,18 +335,6 @@ public class CustomizePostFilterActivity extends BaseActivity {
                 excludesUsersTextInputEditText.append(",");
             }
             excludesUsersTextInputEditText.append(excludeUser);
-        }
-        if (excludeFlair != null && !excludeFlair.equals("")) {
-            if (!excludesFlairsTextInputEditText.getText().toString().equals("")) {
-                excludesFlairsTextInputEditText.append(",");
-            }
-            excludesFlairsTextInputEditText.append(excludeFlair);
-        }
-        if (containFlair != null && !containFlair.equals("")) {
-            if (!containsFlairsTextInputEditText.getText().toString().equals("")) {
-                containsFlairsTextInputEditText.append(",");
-            }
-            containsFlairsTextInputEditText.append(containFlair);
         }
         if (excludeDomain != null && !excludeDomain.equals("")) {
             if (!excludeDomainsTextInputEditText.getText().toString().equals("")) {
@@ -428,12 +398,6 @@ public class CustomizePostFilterActivity extends BaseActivity {
         excludesUsersTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
         excludesUsersTextInputEditText.setTextColor(primaryTextColor);
         addUsersImageView.setImageDrawable(Utils.getTintedDrawable(this, R.drawable.ic_add_24dp, primaryIconColor));
-        excludesFlairsTextInputLayout.setBoxStrokeColor(primaryTextColor);
-        excludesFlairsTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
-        excludesFlairsTextInputEditText.setTextColor(primaryTextColor);
-        containsFlairsTextInputLayout.setBoxStrokeColor(primaryTextColor);
-        containsFlairsTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
-        containsFlairsTextInputEditText.setTextColor(primaryTextColor);
         excludeDomainsTextInputLayout.setBoxStrokeColor(primaryTextColor);
         excludeDomainsTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
         excludeDomainsTextInputEditText.setTextColor(primaryTextColor);
@@ -452,13 +416,6 @@ public class CustomizePostFilterActivity extends BaseActivity {
         maxCommentsTextInputLayout.setBoxStrokeColor(primaryTextColor);
         maxCommentsTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
         maxCommentsTextInputEditText.setTextColor(primaryTextColor);
-        minAwardsTextInputLayout.setBoxStrokeColor(primaryTextColor);
-        minAwardsTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
-        minAwardsTextInputEditText.setTextColor(primaryTextColor);
-        maxAwardsTextInputLayout.setBoxStrokeColor(primaryTextColor);
-        maxAwardsTextInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(primaryTextColor));
-        maxAwardsTextInputEditText.setTextColor(primaryTextColor);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             nameTextInputEditText.setTextCursorDrawable(cursorDrawable);
             titleExcludesStringsTextInputEditText.setTextCursorDrawable(cursorDrawable);
@@ -467,16 +424,12 @@ public class CustomizePostFilterActivity extends BaseActivity {
             titleContainsRegexTextInputEditText.setTextCursorDrawable(cursorDrawable);
             excludesSubredditsTextInputEditText.setTextCursorDrawable(cursorDrawable);
             excludesUsersTextInputEditText.setTextCursorDrawable(cursorDrawable);
-            excludesFlairsTextInputEditText.setTextCursorDrawable(cursorDrawable);
-            containsFlairsTextInputEditText.setTextCursorDrawable(cursorDrawable);
             excludeDomainsTextInputEditText.setTextCursorDrawable(cursorDrawable);
             containDomainsTextInputEditText.setTextCursorDrawable(cursorDrawable);
             minVoteTextInputEditText.setTextCursorDrawable(cursorDrawable);
             maxVoteTextInputEditText.setTextCursorDrawable(cursorDrawable);
             minCommentsTextInputEditText.setTextCursorDrawable(cursorDrawable);
             maxCommentsTextInputEditText.setTextCursorDrawable(cursorDrawable);
-            minAwardsTextInputEditText.setTextCursorDrawable(cursorDrawable);
-            maxAwardsTextInputEditText.setTextCursorDrawable(cursorDrawable);
         } else {
             setCursorDrawableColor(nameTextInputEditText, primaryTextColor);
             setCursorDrawableColor(titleExcludesStringsTextInputEditText, primaryTextColor);
@@ -485,16 +438,12 @@ public class CustomizePostFilterActivity extends BaseActivity {
             setCursorDrawableColor(titleContainsRegexTextInputEditText, primaryTextColor);
             setCursorDrawableColor(excludesSubredditsTextInputEditText, primaryTextColor);
             setCursorDrawableColor(excludesUsersTextInputEditText, primaryTextColor);
-            setCursorDrawableColor(excludesFlairsTextInputEditText, primaryTextColor);
-            setCursorDrawableColor(containsFlairsTextInputEditText, primaryTextColor);
             setCursorDrawableColor(excludeDomainsTextInputEditText, primaryTextColor);
             setCursorDrawableColor(containDomainsTextInputEditText, primaryTextColor);
             setCursorDrawableColor(minVoteTextInputEditText, primaryTextColor);
             setCursorDrawableColor(maxVoteTextInputEditText, primaryTextColor);
             setCursorDrawableColor(minCommentsTextInputEditText, primaryTextColor);
             setCursorDrawableColor(maxCommentsTextInputEditText, primaryTextColor);
-            setCursorDrawableColor(minAwardsTextInputEditText, primaryTextColor);
-            setCursorDrawableColor(maxAwardsTextInputEditText, primaryTextColor);
         }
 
         if (typeface != null) {
@@ -639,8 +588,6 @@ public class CustomizePostFilterActivity extends BaseActivity {
         postFilter.minVote = minVoteTextInputEditText.getText() == null || minVoteTextInputEditText.getText().toString().equals("") ? -1 : Integer.parseInt(minVoteTextInputEditText.getText().toString());
         postFilter.maxComments = maxCommentsTextInputEditText.getText() == null || maxCommentsTextInputEditText.getText().toString().equals("") ? -1 : Integer.parseInt(maxCommentsTextInputEditText.getText().toString());
         postFilter.minComments = minCommentsTextInputEditText.getText() == null || minCommentsTextInputEditText.getText().toString().equals("") ? -1 : Integer.parseInt(minCommentsTextInputEditText.getText().toString());
-        postFilter.maxAwards = maxAwardsTextInputEditText.getText() == null || maxAwardsTextInputEditText.getText().toString().equals("") ? -1 : Integer.parseInt(maxAwardsTextInputEditText.getText().toString());
-        postFilter.minAwards = minAwardsTextInputEditText.getText() == null || minAwardsTextInputEditText.getText().toString().equals("") ? -1 : Integer.parseInt(minAwardsTextInputEditText.getText().toString());
         postFilter.postTitleExcludesRegex = titleExcludesRegexTextInputEditText.getText().toString();
         Pattern.compile(postFilter.postTitleExcludesRegex);
         postFilter.postTitleContainsRegex = titleContainsRegexTextInputEditText.getText().toString();
@@ -649,8 +596,6 @@ public class CustomizePostFilterActivity extends BaseActivity {
         postFilter.postTitleContainsStrings = titleContainsStringsTextInputEditText.getText().toString();
         postFilter.excludeSubreddits = excludesSubredditsTextInputEditText.getText().toString();
         postFilter.excludeUsers = excludesUsersTextInputEditText.getText().toString();
-        postFilter.excludeFlairs = excludesFlairsTextInputEditText.getText().toString();
-        postFilter.containFlairs = containsFlairsTextInputEditText.getText().toString();
         postFilter.excludeDomains = excludeDomainsTextInputEditText.getText().toString();
         postFilter.containDomains = containDomainsTextInputEditText.getText().toString();
         postFilter.containTextType = postTypeTextCheckBox.isChecked();

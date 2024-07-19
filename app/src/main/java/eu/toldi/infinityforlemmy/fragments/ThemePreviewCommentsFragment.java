@@ -44,7 +44,6 @@ public class ThemePreviewCommentsFragment extends Fragment {
         binding.authorTextViewThemePreviewCommentsFragment.setTextColor(customTheme.moderator);
         binding.commentTimeTextViewThemePreviewCommentsFragment.setTextColor(customTheme.secondaryTextColor);
         binding.commentMarkdownViewThemePreviewCommentsFragment.setTextColor(customTheme.commentColor);
-        binding.authorFlairTextViewThemePreviewCommentsFragment.setTextColor(customTheme.authorFlairTextColor);
         binding.dividerThemePreviewCommentsFragment.setBackgroundColor(customTheme.dividerColor);
         binding.upvoteButtonThemePreviewCommentsFragment.setIconTint(ColorStateList.valueOf(customTheme.commentIconAndInfoColor));
         binding.upvoteButtonThemePreviewCommentsFragment.setTextColor(customTheme.commentIconAndInfoColor);
@@ -59,7 +58,6 @@ public class ThemePreviewCommentsFragment extends Fragment {
         binding.authorTextViewAwardBackgroundThemePreviewCommentsFragment.setTextColor(customTheme.moderator);
         binding.commentTimeTextViewAwardBackgroundThemePreviewCommentsFragment.setTextColor(customTheme.secondaryTextColor);
         binding.commentMarkdownViewAwardBackgroundThemePreviewCommentsFragment.setTextColor(customTheme.commentColor);
-        binding.authorFlairTextViewAwardBackgroundThemePreviewCommentsFragment.setTextColor(customTheme.authorFlairTextColor);
         binding.dividerAwardBackgroundThemePreviewCommentsFragment.setBackgroundColor(customTheme.dividerColor);
         binding.upvoteButtonAwardBackgroundThemePreviewCommentsFragment.setIconTint(ColorStateList.valueOf(customTheme.commentIconAndInfoColor));
         binding.upvoteButtonAwardBackgroundThemePreviewCommentsFragment.setTextColor(customTheme.commentIconAndInfoColor);
@@ -77,12 +75,10 @@ public class ThemePreviewCommentsFragment extends Fragment {
         if (activity.typeface != null) {
             binding.authorTextViewThemePreviewCommentsFragment.setTypeface(activity.typeface);
             binding.commentTimeTextViewThemePreviewCommentsFragment.setTypeface(activity.typeface);
-            binding.authorFlairTextViewThemePreviewCommentsFragment.setTypeface(activity.typeface);
             binding.upvoteButtonThemePreviewCommentsFragment.setTypeface(activity.typeface);
 
             binding.authorTextViewAwardBackgroundThemePreviewCommentsFragment.setTypeface(activity.typeface);
             binding.commentTimeTextViewAwardBackgroundThemePreviewCommentsFragment.setTypeface(activity.typeface);
-            binding.authorFlairTextViewAwardBackgroundThemePreviewCommentsFragment.setTypeface(activity.typeface);
             binding.upvoteButtonAwardBackgroundThemePreviewCommentsFragment.setTypeface(activity.typeface);
 
             binding.authorTextViewFullyCollapsedThemePreviewCommentsFragment.setTypeface(activity.typeface);
