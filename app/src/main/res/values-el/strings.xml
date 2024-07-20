@@ -1345,4 +1345,12 @@
     <string name="settings_category_community_and_user_pages_title">Σελίδες Κοινοτήτων και Χρηστών</string>
     <string name="settings_show_post_and_comment_score">Εμφάνιση βαθμών ανάρτησης και σχολίων</string>
     <string name="user_username">Όνομα χρήστη ή email</string>
+    <string name="view_instance">Προβολή Οντότητας</string>
+    <string name="action_block_instance">Αποκλεισμός Οντότητας</string>
+    <string name="action_unblock_instance">Άρση αποκλεισμού Οντότητας</string>
+    <string name="block_instance_failed">Αποτυχία αποκλεισμού οντότητας</string>
+    <string name="block_instance_success">Η οντότητα αποκλείστηκε!</string>
+    <string name="unblock_instance_success">Η οντότητα δεν είναι αποκλεισμένη πλέον!</string>
+    <string name="settings_dont_hide_your_own_read_posts_automatically">Να μην γίνεται αυτόματη απόκρυψη των δικών σου αναγνωσμένων αναρτήσεων</string>
+    <string name="settings_dont_hide_saved_read_posts_automatically">Να μην γίνεται αυτόματη απόκρυψη αναγνωσμένων αναρτήσεων</string>
 </resources>
