@@ -193,7 +193,7 @@ public class MessageRecyclerViewAdapter extends PagedListAdapter<CommentInteract
                         mActivity.startActivity(intent);
                     }
 
-                    if (message.isRead()) {
+                    if (!message.isRead()) {
                         holder.itemView.setBackgroundColor(mMessageBackgroundColor);
 
 
