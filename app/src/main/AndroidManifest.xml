@@ -17,6 +17,7 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="22" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
 
     <uses-permission-sdk-23
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -158,6 +159,7 @@
         <service
             android:name=".services.DownloadMediaService"
             android:enabled="true"
+            android:foregroundServiceType="dataSync"
             android:exported="false" />
 
         <activity
@@ -175,6 +177,7 @@
         <service
             android:name=".services.DownloadRedditVideoService"
             android:enabled="true"
+            android:foregroundServiceType="dataSync"
             android:exported="false" />
 
         <activity
@@ -537,10 +540,12 @@
         <service
             android:name=".services.SubmitPostService"
             android:enabled="true"
+            android:foregroundServiceType="dataSync"
             android:exported="false" />
         <service
             android:name=".services.EditProfileService"
             android:enabled="true"
+            android:foregroundServiceType="dataSync"
             android:exported="false" />
 
         <receiver android:name=".broadcastreceivers.DownloadedMediaDeleteActionBroadcastReceiver" />
