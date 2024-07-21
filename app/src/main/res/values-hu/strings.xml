@@ -1117,4 +1117,12 @@
     <string name="customize_comment_filter_activity_label">Komment szűrő személyre szabása</string>
     <string name="settings_reddit_user_agreement_title">Lemmy felhasználói megegyezés</string>
     <string name="settings_custom_font_family_title">Egyedi betűtípus</string>
+    <string name="view_instance">Szerver megtekintése</string>
+    <string name="action_unblock_instance">Szerver tiltásának feloldása</string>
+    <string name="block_instance_failed">Szerver tiltása sikertelen</string>
+    <string name="action_block_instance">Szerver tiltása</string>
+    <string name="block_instance_success">Szerver tiltva!</string>
+    <string name="unblock_instance_success">Szerver tiltása feldoldva!</string>
+    <string name="settings_dont_hide_saved_read_posts_automatically">Ne rejtse el automatikusan az elmentett, olvasott bejegyzéseit</string>
+    <string name="settings_dont_hide_your_own_read_posts_automatically">Ne rejtse el automatikusan a saját, olvasott bejegyzéseit</string>
 </resources>
