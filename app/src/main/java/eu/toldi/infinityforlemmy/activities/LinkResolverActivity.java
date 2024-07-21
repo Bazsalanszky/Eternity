@@ -17,6 +17,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.browser.customtabs.CustomTabsService;
 
 import org.apache.commons.io.FilenameUtils;
+import org.greenrobot.eventbus.EventBus;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,10 +30,13 @@ import javax.inject.Named;
 
 import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
+import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.FetchComment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
+import eu.toldi.infinityforlemmy.events.SwitchAccountEvent;
 import eu.toldi.infinityforlemmy.post.FetchPost;
 import eu.toldi.infinityforlemmy.post.ObjectResolver;
 import eu.toldi.infinityforlemmy.post.Post;
@@ -70,6 +74,9 @@ public class LinkResolverActivity extends AppCompatActivity {
     CustomThemeWrapper mCustomThemeWrapper;
 
     @Inject
+    RedditDataRoomDatabase mRedditDataRoomDatabase;
+
+    @Inject
     ObjectResolver mObjectResolver;
 
     @Inject
@@ -87,6 +94,7 @@ public class LinkResolverActivity extends AppCompatActivity {
     PostEnricher postEnricher;
 
     private String mAccessToken;
+    private String mAccountQualifedName;
 
     private Uri getRedditUriByPath(String path) {
         if (path.charAt(0) != '/') {
@@ -102,6 +110,7 @@ public class LinkResolverActivity extends AppCompatActivity {
 
         ((Infinity) getApplication()).getAppComponent().inject(this);
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
+        mAccountQualifedName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME,null);
         if (mAccessToken != null) {
             String instance = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
             mRetrofit.setBaseURL(instance);
@@ -215,52 +224,17 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                                 startActivity(intent);
                             } else {
-                                boolean local = false;
-                                try {
-                                    URL baseURL = new URL(mRetrofit.getBaseURL());
-                                    if (baseURL.getHost().equalsIgnoreCase(uri.getHost())) {
-                                        local = true;
-                                        FetchPost.fetchPost(mExecutor, new Handler(), mRetrofit.getRetrofit(), segments.get(segments.size() - 1), mAccessToken, postEnricher, new FetchPost.FetchPostListener() {
-                                            @Override
-                                            public void fetchPostSuccess(Post post) {
-
-                                                Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, post.getId());
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                                startActivity(intent);
-                                            }
-
-                                            @Override
-                                            public void fetchPostFailed() {
-                                                Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        });
-                                    }
-                                } catch (MalformedURLException e) {
-                                    Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
-                                    finish();
+                                if (mAccountQualifedName == null || !mAccountQualifedName.equals(newAccountName)) {
+                                    SwitchAccount.switchAccount(mRedditDataRoomDatabase, mRetrofit, mCurrentAccountSharedPreferences,
+                                            mExecutor, new Handler(), newAccountName, newAccount -> {
+                                                EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
+                                                Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
+                                                openPost(uri, segments, messageFullname);
+                                            });
+                                } else {
+                                    openPost(uri, segments, messageFullname);
                                 }
-                                if (!local) {
-                                    mObjectResolver.resolvePost(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
-                                        @Override
-                                        public void onResolveObjectSuccess(Object p) {
-                                            Post post = (Post) p;
-                                            Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, post.getId());
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                            startActivity(intent);
-                                        }
 
-                                        @Override
-                                        public void onResolveObjectFailed() {
-                                            Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }
-                                    });
-                                }
                             }
                         } else if (uri.toString().matches(COMMENT_PATTERN)) {
                             if (mAccessToken == null) {
@@ -285,56 +259,17 @@ public class LinkResolverActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                boolean local = false;
-                                try {
-                                    URL baseURL = new URL(mRetrofit.getBaseURL());
-                                    if (baseURL.getHost().equalsIgnoreCase(uri.getHost())) {
-                                        local = true;
-                                        FetchComment.fetchSingleComment(mRetrofit.getRetrofit(), mAccessToken, Integer.parseInt(segments.get(segments.size() - 1)), new FetchComment.FetchCommentListener() {
-                                            @Override
-                                            public void onFetchCommentSuccess(ArrayList<Comment> comments, Integer parentId, ArrayList<Integer> moreChildrenIds) {
-                                                Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
-                                                Comment comment = comments.get(0);
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
-                                                intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_PARENT_ID, comment.getParentId());
-                                                startActivity(intent);
-                                            }
-
-                                            @Override
-                                            public void onFetchCommentFailed() {
-                                                Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        });
-                                    }
-                                } catch (MalformedURLException e) {
-                                    Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
-                                    finish();
+                                if (mAccountQualifedName == null || !mAccountQualifedName.equals(newAccountName)) {
+                                    SwitchAccount.switchAccount(mRedditDataRoomDatabase, mRetrofit, mCurrentAccountSharedPreferences,
+                                            mExecutor, new Handler(), newAccountName, newAccount -> {
+                                                EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
+                                                Toast.makeText(this, R.string.account_switched, Toast.LENGTH_SHORT).show();
+                                                openComment(uri, segments, messageFullname);
+                                            });
+                                } else {
+                                    openComment(uri, segments, messageFullname);
                                 }
-                                if (!local) {
-                                    mObjectResolver.resolveComment(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
-                                        @Override
-                                        public void onResolveObjectSuccess(Object c) {
-                                            Comment comment = (Comment) c;
-                                            Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
-                                            intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_PARENT_ID, comment.getParentId());
-                                            startActivity(intent);
-                                        }
 
-                                        @Override
-                                        public void onResolveObjectFailed() {
-                                            Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        }
-                                    });
-                                }
                             }
                         } else if (authority.equals("v.redd.it")) {
                             Intent intent = new Intent(this, ViewVideoActivity.class);
@@ -412,6 +347,104 @@ public class LinkResolverActivity extends AppCompatActivity {
 
         }
         finish();
+    }
+
+    private void openComment(Uri uri, List<String> segments, String messageFullname) {
+        boolean local = false;
+        try {
+            URL baseURL = new URL(mRetrofit.getBaseURL());
+            if (baseURL.getHost().equalsIgnoreCase(uri.getHost())) {
+                local = true;
+                FetchComment.fetchSingleComment(mRetrofit.getRetrofit(), mAccessToken, Integer.parseInt(segments.get(segments.size() - 1)), new FetchComment.FetchCommentListener() {
+                    @Override
+                    public void onFetchCommentSuccess(ArrayList<Comment> comments, Integer parentId, ArrayList<Integer> moreChildrenIds) {
+                        Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                        Comment comment = comments.get(0);
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_PARENT_ID, comment.getParentId());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFetchCommentFailed() {
+                        Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+            }
+        } catch (MalformedURLException e) {
+            Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        if (!local) {
+            mObjectResolver.resolveComment(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
+                @Override
+                public void onResolveObjectSuccess(Object c) {
+                    Comment comment = (Comment) c;
+                    Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, comment.getPostId());
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_ID, comment.getId());
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_SINGLE_COMMENT_PARENT_ID, comment.getParentId());
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onResolveObjectFailed() {
+                    Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }
+    }
+
+    private void openPost(Uri uri, List<String> segments, String messageFullname) {
+        boolean local = false;
+        try {
+            URL baseURL = new URL(mRetrofit.getBaseURL());
+            if (baseURL.getHost().equalsIgnoreCase(uri.getHost())) {
+                local = true;
+                FetchPost.fetchPost(mExecutor, new Handler(), mRetrofit.getRetrofit(), segments.get(segments.size() - 1), mAccessToken, postEnricher, new FetchPost.FetchPostListener() {
+                    @Override
+                    public void fetchPostSuccess(Post post) {
+
+                        Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, post.getId());
+                        intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void fetchPostFailed() {
+                        Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+            }
+        } catch (MalformedURLException e) {
+            Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        if (!local) {
+            mObjectResolver.resolvePost(uri.toString(), mAccessToken, new ObjectResolver.ObjectResolverListener() {
+                @Override
+                public void onResolveObjectSuccess(Object p) {
+                    Post post = (Post) p;
+                    Intent intent = new Intent(LinkResolverActivity.this, ViewPostDetailActivity.class);
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_POST_ID, post.getId());
+                    intent.putExtra(ViewPostDetailActivity.EXTRA_MESSAGE_FULLNAME, messageFullname);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onResolveObjectFailed() {
+                    Toast.makeText(getApplicationContext(), R.string.could_not_resolve_link, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }
     }
 
     private void deepLinkError(Uri uri) {

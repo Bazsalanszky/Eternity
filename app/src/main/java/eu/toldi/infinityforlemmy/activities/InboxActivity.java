@@ -156,7 +156,7 @@ public class InboxActivity extends BaseActivity implements ActivityToolbarInterf
         fragmentManager = getSupportFragmentManager();
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
-        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
+        mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_QUALIFIED_NAME, null);
 
         if (savedInstanceState != null) {
             mNewAccountName = savedInstanceState.getString(NEW_ACCOUNT_NAME_STATE);
