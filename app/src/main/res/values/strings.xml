@@ -1332,4 +1332,6 @@
     <string name="unblock_instance_success">Instance unblocked!</string>
     <string name="settings_dont_hide_saved_read_posts_automatically">Don\'t hide saved read posts automatically</string>
     <string name="settings_dont_hide_your_own_read_posts_automatically">Don\'t hide your own read posts automatically</string>
+    <string name="deleted_by_creator">deleted by creator</string>
+    <string name="removed_by_moderator">removed by moderator</string>
 </resources>

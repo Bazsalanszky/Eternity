@@ -51,6 +51,7 @@ public class Comment implements Parcelable {
     private boolean collapsed;
 
     private boolean isDeleted;
+    private boolean isRemoved;
     private boolean hasReply;
     private boolean saved;
     private boolean isExpanded;
@@ -69,7 +70,7 @@ public class Comment implements Parcelable {
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
                    String linkId, String communityName, String communityQualifiedName, Integer parentId, int downvotes, int upvotes,
                    int voteType, boolean isSubmitter, String distinguished, String permalink,
-                   int depth, boolean collapsed, boolean hasReply, boolean saved, boolean deleted, long edited, String[] path) {
+                   int depth, boolean collapsed, boolean hasReply, boolean saved, boolean deleted,boolean removed, long edited, String[] path) {
         this.id = id;
         this.postId = postId;
         this.author = author;
@@ -92,6 +93,7 @@ public class Comment implements Parcelable {
         this.hasReply = hasReply;
         this.saved = saved;
         this.isDeleted = deleted;
+        this.isRemoved = removed;
         this.isExpanded = false;
         this.hasExpandedBefore = false;
         this.editedTimeMillis = edited;
@@ -140,6 +142,8 @@ public class Comment implements Parcelable {
         hasReply = in.readByte() != 0;
         isExpanded = in.readByte() != 0;
         hasExpandedBefore = in.readByte() != 0;
+        isDeleted = in.readByte() != 0;
+        isRemoved = in.readByte() != 0;
         children = new ArrayList<>();
         in.readTypedList(children, Comment.CREATOR);
         moreChildrenIds = new ArrayList<>();
@@ -451,6 +455,8 @@ public class Comment implements Parcelable {
         parcel.writeByte((byte) (hasReply ? 1 : 0));
         parcel.writeByte((byte) (isExpanded ? 1 : 0));
         parcel.writeByte((byte) (hasExpandedBefore ? 1 : 0));
+        parcel.writeByte((byte) (isDeleted ? 1 : 0));
+        parcel.writeByte((byte) (isRemoved ? 1 : 0));
         parcel.writeTypedList(children);
         List<String> childrenIds = new ArrayList<>();
         if (moreChildrenIds != null) {
@@ -491,5 +497,17 @@ public class Comment implements Parcelable {
 
     public BasicUserInfo getAuthor() {
         return author;
+    }
+
+    public boolean isRemoved() {
+        return isRemoved;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public String getDistinguished() {
+        return distinguished;
     }
 }

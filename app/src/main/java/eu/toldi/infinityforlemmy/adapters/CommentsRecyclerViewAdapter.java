@@ -443,9 +443,15 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     ((CommentBaseViewHolder) holder).bottomConstraintLayout.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
                     ((CommentBaseViewHolder) holder).topScoreTextView.setVisibility(View.GONE);
                 }
+                String text = comment.getCommentMarkdown();
+                if (comment.isRemoved()) {
+                    text = "*"+mActivity.getString(R.string.removed_by_moderator)+"*";
+                } else if (comment.isDeleted()) {
+                    text = "*"+mActivity.getString(R.string.deleted_by_creator)+"*";
+                }
 
 
-                ((CommentBaseViewHolder) holder).mMarkwonAdapter.setMarkdown(mCommentMarkwon, comment.getCommentMarkdown());
+                ((CommentBaseViewHolder) holder).mMarkwonAdapter.setMarkdown(mCommentMarkwon,text);
                 // noinspection NotifyDataSetChanged
                 ((CommentBaseViewHolder) holder).mMarkwonAdapter.notifyDataSetChanged();
                 if (mHideDownvotes) {
