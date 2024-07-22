@@ -1361,4 +1361,6 @@
     <string name="unblock_instance_success">Instance odblokována!</string>
     <string name="settings_dont_hide_your_own_read_posts_automatically">Automaticky neskrývat vaše vlastní přečtené příspěvky</string>
     <string name="settings_dont_hide_saved_read_posts_automatically">Automaticky neskrývat uložené přečtené příspěvky</string>
+    <string name="removed_by_moderator">odstraněno moderátorem</string>
+    <string name="deleted_by_creator">odstraněno tvůrcem</string>
 </resources>
