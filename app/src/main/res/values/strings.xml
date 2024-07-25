@@ -992,7 +992,7 @@
     <string name="set_to_both">Set to Both</string>
     <string name="default_font_font_preview">Default</string>
     <string name="top_score">%1$s pts</string>
-    <string name="login_activity_2fa_prompt">If you have 2-factor authentication enabled, you need to fill the 2FA token filed. Leave empty otherwise</string>
+    <string name="login_activity_2fa_prompt">If you have 2-factor authentication enabled, you need to fill the 2FA token field. Leave empty otherwise</string>
     <string name="block_user">Block User</string>
     <string name="block_user_success">Blocked</string>
     <string name="block_user_failed">Failed to block user</string>
@@ -1316,7 +1316,7 @@
     <string name="settings_credits_new_icon_summary">Made by David Gerla</string>
     <string name="original_app">The original Reddit app</string>
     <string name="settings_credits_original_app_description">"Infinity was created by u/Hostilenemy "</string>
-    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">The URL of you prefered Lemmy instance with or without the https:// prefix</string>
+    <string name="the_url_of_you_prefered_lemmy_instance_with_or_without_the_https_prefix">The URL of you preferred Lemmy instance with or without the https:// prefix</string>
     <string name="sort_scaled">Scaled</string>
     <string name="token_expired">Token Expired</string>
     <string name="token_expired_message">"Your token has been expired. As Eternity does not store your password, you need to manually log back in! "</string>
