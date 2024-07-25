@@ -54,6 +54,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputEditText;
@@ -1112,6 +1113,11 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                             })
                             .setCancelable(false)
                             .show();
+                }
+
+                @Override
+                public void onCheckFailed(String message) {
+                    applySnackBarTheme(Snackbar.make(findViewById(android.R.id.content), getString(R.string.failed_to_check_token_validity,message), Snackbar.LENGTH_LONG)).show();
                 }
             });
         }

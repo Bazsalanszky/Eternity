@@ -124,7 +124,7 @@ public class FetchUserData {
 
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                validateAuthTokenListener.onValidateAuthTokenFailed();
+                validateAuthTokenListener.onCheckFailed(t.getMessage());
             }
         });
     }
@@ -133,6 +133,7 @@ public class FetchUserData {
         void onValidateAuthTokenSuccess();
 
         void onValidateAuthTokenFailed();
+        void onCheckFailed(String message);
     }
 
     public interface FetchUserUnreadCountListener {
