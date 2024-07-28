@@ -1359,4 +1359,5 @@
     <string name="settings_dont_hide_saved_read_posts_automatically">Не ховати збережені прочитані дописи автоматично</string>
     <string name="deleted_by_creator">видалено автором</string>
     <string name="removed_by_moderator">видалено модератором</string>
+    <string name="failed_to_check_token_validity">Не вдалося перевірити дійсність токена: %s</string>
 </resources>
