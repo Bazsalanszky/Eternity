@@ -1304,7 +1304,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/dFZKKms9HbrDGOlcgW9QTcwF.jpg -->
     <string name="go_to_settings">Paramètres</string>
     <string name="instance_info">Information sur l’instance</string>
     <string name="theme_name_nightfox">Nightfox</string>
-
     <string name="user_username">Nom d’utilisateur</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Partager les liens sur votre instance locale plutôt que sur l’instance de création originelle.</string>
     <string name="sort_time_3months">3 mois</string>
