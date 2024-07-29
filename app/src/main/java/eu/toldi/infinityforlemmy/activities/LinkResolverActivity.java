@@ -224,7 +224,7 @@ public class LinkResolverActivity extends AppCompatActivity {
                                 intent.putExtra(ViewPostDetailActivity.EXTRA_NEW_ACCOUNT_NAME, newAccountName);
                                 startActivity(intent);
                             } else {
-                                if (mAccountQualifedName == null || !mAccountQualifedName.equals(newAccountName)) {
+                                if (mAccountQualifedName == null || newAccountName != null && !mAccountQualifedName.equals(newAccountName)) {
                                     SwitchAccount.switchAccount(mRedditDataRoomDatabase, mRetrofit, mCurrentAccountSharedPreferences,
                                             mExecutor, new Handler(), newAccountName, newAccount -> {
                                                 EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
@@ -259,7 +259,7 @@ public class LinkResolverActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                if (mAccountQualifedName == null || !mAccountQualifedName.equals(newAccountName)) {
+                                if (mAccountQualifedName == null || newAccountName != null && !mAccountQualifedName.equals(newAccountName)) {
                                     SwitchAccount.switchAccount(mRedditDataRoomDatabase, mRetrofit, mCurrentAccountSharedPreferences,
                                             mExecutor, new Handler(), newAccountName, newAccount -> {
                                                 EventBus.getDefault().post(new SwitchAccountEvent(getClass().getName()));
