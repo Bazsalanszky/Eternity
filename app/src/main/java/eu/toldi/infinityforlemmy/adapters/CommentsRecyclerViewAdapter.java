@@ -43,6 +43,7 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.DualBadgeDrawable;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveComment;
@@ -155,6 +156,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private int mUsernameColor;
     private int mSubmitterColor;
     private int mModeratorColor;
+    private int mAdminColor;
     private int mCurrentUserColor;
     private int mAuthorFlairTextColor;
     private int mUpvotedColor;
@@ -271,6 +273,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mCommentBackgroundColor = customThemeWrapper.getCommentBackgroundColor();
         mSubmitterColor = customThemeWrapper.getSubmitter();
         mModeratorColor = customThemeWrapper.getModerator();
+        mAdminColor = customThemeWrapper.getAdmin();
         mCurrentUserColor = customThemeWrapper.getCurrentUser();
         mAuthorFlairTextColor = customThemeWrapper.getAuthorFlairTextColor();
         mUsernameColor = customThemeWrapper.getUsername();
@@ -392,11 +395,23 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     Drawable submitterDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_mic_14dp, mSubmitterColor);
                     ((CommentBaseViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(
                             submitterDrawable, null, null, null);
+                } else if (comment.isModerator() && comment.isAdmin()) {
+                    ((CommentBaseViewHolder) holder).authorTextView.setTextColor(mModeratorColor);
+                    Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
+                    Drawable adminDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mAdminColor);
+                    Drawable dualDrawable = new DualBadgeDrawable(adminDrawable, moderatorDrawable);
+                    ((CommentBaseViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(
+                            dualDrawable, null, null, null);
                 } else if (comment.isModerator()) {
                     ((CommentBaseViewHolder) holder).authorTextView.setTextColor(mModeratorColor);
                     Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
                     ((CommentBaseViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(
                             moderatorDrawable, null, null, null);
+                } else if (comment.isAdmin()) {
+                    ((CommentBaseViewHolder) holder).authorTextView.setTextColor(mAdminColor);
+                    Drawable adminDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mAdminColor);
+                    ((CommentBaseViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(
+                            adminDrawable, null, null, null);
                 } else if (comment.getAuthorQualifiedName().equals(mAccountQualifiedName)) {
                     ((CommentBaseViewHolder) holder).authorTextView.setTextColor(mCurrentUserColor);
                     Drawable currentUserDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_current_user_14dp, mCurrentUserColor);

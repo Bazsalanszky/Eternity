@@ -345,7 +345,7 @@ public class ParseComment {
             }
         }
         boolean isSubmitter = creatorObj.getInt("id") == postObj.getInt("creator_id");
-        String distinguished = isModerator ? "moderator" : (isAdmin ? "admin" : "");
+
         String permalink = commentObj.getString("ap_id");
         String[] path = commentObj.getString("path").split(Pattern.quote("."));
 
@@ -362,7 +362,7 @@ public class ParseComment {
         BasicUserInfo authorInfo = new BasicUserInfo(creatorObj.getInt("id"), author, authorQualifiedName, creatorObj.optString("avatar", ""), creatorObj.optString("display_name", author));
         Comment comment = new Comment(id, postID, authorInfo, linkAuthor, commentTimeMillis,
                 commentMarkdown, commentRawText, linkId, communityName, communityQualifiedName, parentId,
-                downvotes, upvotes, voteType, isSubmitter, distinguished, permalink, depth, collapsed, hasReply, saved, deleted,removed, edited, path);
+                downvotes, upvotes, voteType, isSubmitter, isModerator, isAdmin, permalink, depth, collapsed, hasReply, saved, deleted, removed, edited, path);
         int child_count = countsObj.getInt("child_count");
         comment.setChildCount(child_count);
         comment.setAuthorIconUrl(authorAvatar);

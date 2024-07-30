@@ -67,6 +67,7 @@ import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import eu.toldi.infinityforlemmy.DualBadgeDrawable;
 import eu.toldi.infinityforlemmy.FetchRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
@@ -198,6 +199,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private int mSubredditColor;
     private int mUsernameColor;
     private int mModeratorColor;
+    private int mAdminColor;
     private int mSpoilerBackgroundColor;
     private int mSpoilerTextColor;
     private int mFlairBackgroundColor;
@@ -365,6 +367,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mSubredditColor = customThemeWrapper.getSubreddit();
             mUsernameColor = customThemeWrapper.getUsername();
             mModeratorColor = customThemeWrapper.getModerator();
+            mAdminColor = customThemeWrapper.getAdmin();
             mSpoilerBackgroundColor = customThemeWrapper.getSpoilerBackgroundColor();
             mSpoilerTextColor = customThemeWrapper.getSpoilerTextColor();
             mFlairBackgroundColor = customThemeWrapper.getFlairBackgroundColor();
@@ -633,11 +636,30 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     ((PostBaseViewHolder) holder).communityInstanceTextView.setText('@' + post.getSubredditNamePrefixed().split(Pattern.quote("@"))[1]);
                     ((PostBaseViewHolder) holder).userInstanceTextView.setText('@' + post.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
                     ((PostBaseViewHolder) holder).communityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
-                    ((PostBaseViewHolder) holder).userInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(post.isModerator() || post.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
+                    ((PostBaseViewHolder) holder).userInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(post.isModerator() ? mModeratorColor : post.isAdmin() ? mAdminColor : mUsernameColor, 0.7f));
                 }
 
                 ((PostBaseViewHolder) holder).userTextView.setTextColor(
                         post.isModerator() || post.isAdmin() ? mModeratorColor : mUsernameColor);
+
+                if (post.isAdmin() && post.isModerator()) {
+                    ((PostBaseViewHolder) holder).userTextView.setTextColor(mModeratorColor);
+                    Drawable adminDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mAdminColor);
+                    Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
+                    Drawable dualBadge = new DualBadgeDrawable(adminDrawable, moderatorDrawable);
+                    ((PostBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(
+                            dualBadge, null, null, null);
+                } else if (post.isModerator()) {
+                    ((PostBaseViewHolder) holder).userTextView.setTextColor(mModeratorColor);
+                    Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
+                    ((PostBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(
+                            moderatorDrawable, null, null, null);
+                } else if (post.isAdmin()) {
+                    ((PostBaseViewHolder) holder).userTextView.setTextColor(mAdminColor);
+                    Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mAdminColor);
+                    ((PostBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(
+                            moderatorDrawable, null, null, null);
+                }
 
                 if (mDisplaySubredditName) {
                     if (authorPrefixed.equals(post.getSubredditNamePrefixed())) {
@@ -2538,6 +2560,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             }
             mGlide.clear(((PostBaseViewHolder) holder).iconGifImageView);
             ((PostBaseViewHolder) holder).titleTextView.setTextColor(mPostTitleColor);
+            ((PostBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             if (holder instanceof PostBaseVideoAutoplayViewHolder) {
                 ((PostBaseVideoAutoplayViewHolder) holder).mediaUri = null;
                 if (((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall != null && !((PostBaseVideoAutoplayViewHolder) holder).fetchStreamableVideoCall.isCanceled()) {

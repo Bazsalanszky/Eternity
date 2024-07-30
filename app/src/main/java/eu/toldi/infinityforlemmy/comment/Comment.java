@@ -44,7 +44,8 @@ public class Comment implements Parcelable {
     private int upvotes;
     private int voteType;
     private boolean isSubmitter;
-    private String distinguished;
+    private boolean isModerator;
+    private boolean isAdmin;
     private String permalink;
     private int depth;
     private int childCount;
@@ -69,7 +70,7 @@ public class Comment implements Parcelable {
     public Comment(int id, int postId, BasicUserInfo author, String linkAuthor,
                    long commentTimeMillis, String commentMarkdown, String commentRawText,
                    String linkId, String communityName, String communityQualifiedName, Integer parentId, int downvotes, int upvotes,
-                   int voteType, boolean isSubmitter, String distinguished, String permalink,
+                   int voteType, boolean isSubmitter, boolean isModerator, boolean isAdmin, String permalink,
                    int depth, boolean collapsed, boolean hasReply, boolean saved, boolean deleted,boolean removed, long edited, String[] path) {
         this.id = id;
         this.postId = postId;
@@ -86,7 +87,8 @@ public class Comment implements Parcelable {
         this.upvotes = upvotes;
         this.voteType = voteType;
         this.isSubmitter = isSubmitter;
-        this.distinguished = distinguished;
+        this.isModerator = isModerator;
+        this.isAdmin = isAdmin;
         this.permalink = permalink;
         this.depth = depth;
         this.collapsed = collapsed;
@@ -134,7 +136,8 @@ public class Comment implements Parcelable {
         upvotes = in.readInt();
         voteType = in.readInt();
         isSubmitter = in.readByte() != 0;
-        distinguished = in.readString();
+        isModerator = in.readByte() != 0;
+        isAdmin = in.readByte() != 0;
         permalink = in.readString();
         depth = in.readInt();
         childCount = in.readInt();
@@ -258,11 +261,11 @@ public class Comment implements Parcelable {
     }
 
     public boolean isModerator() {
-        return distinguished != null && distinguished.equals("moderator");
+        return isModerator;
     }
 
     public boolean isAdmin() {
-        return distinguished != null && distinguished.equals("admin");
+        return isAdmin;
     }
 
     public String getPermalink() {
@@ -447,7 +450,8 @@ public class Comment implements Parcelable {
         parcel.writeInt(upvotes);
         parcel.writeInt(voteType);
         parcel.writeByte((byte) (isSubmitter ? 1 : 0));
-        parcel.writeString(distinguished);
+        parcel.writeByte((byte) (isModerator ? 1 : 0));
+        parcel.writeByte((byte) (isAdmin ? 1 : 0));
         parcel.writeString(permalink);
         parcel.writeInt(depth);
         parcel.writeInt(childCount);
@@ -505,9 +509,5 @@ public class Comment implements Parcelable {
 
     public boolean isDeleted() {
         return isDeleted;
-    }
-
-    public String getDistinguished() {
-        return distinguished;
     }
 }

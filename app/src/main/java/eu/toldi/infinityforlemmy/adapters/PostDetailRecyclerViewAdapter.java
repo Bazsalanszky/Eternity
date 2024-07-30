@@ -58,6 +58,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Provider;
 
+import eu.toldi.infinityforlemmy.DualBadgeDrawable;
 import eu.toldi.infinityforlemmy.FetchRedgifsVideoLinks;
 import eu.toldi.infinityforlemmy.FetchStreamableVideo;
 import eu.toldi.infinityforlemmy.R;
@@ -195,6 +196,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private int mSubredditColor;
     private int mUsernameColor;
     private int mModeratorColor;
+    private int mAdminColor;
     private int mAuthorFlairTextColor;
     private int mSpoilerBackgroundColor;
     private int mSpoilerTextColor;
@@ -380,6 +382,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mSubredditColor = customThemeWrapper.getSubreddit();
         mUsernameColor = customThemeWrapper.getUsername();
         mModeratorColor = customThemeWrapper.getModerator();
+        mAdminColor = customThemeWrapper.getAdmin();
         mUpvotedColor = customThemeWrapper.getUpvoted();
         mDownvotedColor = customThemeWrapper.getDownvoted();
         mVoteAndReplyUnavailableVoteButtonColor = customThemeWrapper.getVoteAndReplyUnavailableButtonColor();
@@ -600,12 +603,23 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                 ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setText('@' + mPost.getAuthorNamePrefixed().split(Pattern.quote("@"))[1]);
                 ((PostDetailBaseViewHolder) holder).mCommunityInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mSubredditColor, 0.7f));
-                ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mPost.isModerator() || mPost.isAdmin() ? mModeratorColor : mUsernameColor, 0.7f));
+                ((PostDetailBaseViewHolder) holder).mUserInstanceTextView.setTextColor(CustomThemeWrapper.darkenColor(mPost.isModerator() ? mModeratorColor : mPost.isAdmin() ? mAdminColor : mUsernameColor, 0.7f));
             }
-
-            if (mPost.isModerator() || mPost.isAdmin()) {
+            if (mPost.isAdmin() && mPost.isModerator()) {
+                ((PostDetailBaseViewHolder) holder).userTextView.setTextColor(mModeratorColor);
+                Drawable adminDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mAdminColor);
+                Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
+                Drawable dualBadge = new DualBadgeDrawable(adminDrawable, moderatorDrawable);
+                ((PostDetailBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(
+                        dualBadge, null, null, null);
+            } else if (mPost.isModerator()) {
                 ((PostDetailBaseViewHolder) holder).userTextView.setTextColor(mModeratorColor);
                 Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mModeratorColor);
+                ((PostDetailBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(
+                        moderatorDrawable, null, null, null);
+            } else if (mPost.isAdmin()) {
+                ((PostDetailBaseViewHolder) holder).userTextView.setTextColor(mAdminColor);
+                Drawable moderatorDrawable = Utils.getTintedDrawable(mActivity, R.drawable.ic_verified_user_14dp, mAdminColor);
                 ((PostDetailBaseViewHolder) holder).userTextView.setCompoundDrawablesWithIntrinsicBounds(
                         moderatorDrawable, null, null, null);
             }

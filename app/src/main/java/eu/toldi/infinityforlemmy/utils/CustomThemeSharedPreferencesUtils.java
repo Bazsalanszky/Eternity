@@ -74,6 +74,7 @@ public class CustomThemeSharedPreferencesUtils {
     public static final String AUTHOR_FLAIR_TEXT_COLOR = "authorFlairTextColor";
     public static final String SUBMITTER = "submitter";
     public static final String MODERATOR = "moderator";
+    public static final String ADMIN = "admin";
     public static final String CURRENT_USER = "currentUser";
     public static final String SINGLE_COMMENT_THREAD_BACKGROUND_COLOR = "singleCommentThreadBackgroundColor";
     public static final String UNREAD_MESSAGE_BACKGROUND_COLOR = "unreadMessageBackgroundColor";
