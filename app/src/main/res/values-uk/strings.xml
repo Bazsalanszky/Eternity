@@ -969,7 +969,7 @@
     <string name="error_fetching_v_redd_it_video_cannot_get_post">Помилка отримання відеозапису з v.redd.it: Неможливо отримати допис</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post_id">Помилка отримання відеозапису з v.redd.it: Неможливо отримати ID допису</string>
     <string name="always_on">Завжди увімк.</string>
-    <string name="only_on_wifi">Лише через Wifi</string>
+    <string name="only_on_wifi">Лише через Wi-Fi</string>
     <string name="never">Ніколи</string>
     <string name="normal">Нормальний</string>
     <string name="extra_large">Дуже великий</string>
