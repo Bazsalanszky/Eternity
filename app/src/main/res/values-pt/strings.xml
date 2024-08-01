@@ -1110,7 +1110,7 @@
     <string name="settings_enable_fold_support_title">Ativar o suporte do telemóvel dobrável</string>
     <string name="settings_default_playback_speed_title">Velocidade de reprodução predefinida</string>
     <string name="settings_legacy_autoplay_video_controller_ui_title">Interface do controlador de vídeo antigo</string>
-    <string name="settings_pinch_to_zoom_video_title">Pinçar para ampliar vídeo</string>
+    <string name="settings_pinch_to_zoom_video_title">Pinçar para Ampliar Vídeo</string>
     <string name="settings_hide_text_post_content">Ocultar texto do conteúdo da publicação</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Mostrar menos opções da barra de ferramentas a partir de</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Nivel %1$d</string>
@@ -1276,4 +1276,26 @@
     <string name="settings_hide_user_instance">Ocultar instância do utilizador</string>
     <string name="share_links_on_your_local_instance_rather_than_the_original_creation_instance">Partilhar ligações na sua instância local em vez de na instância de criação original.</string>
     <string name="share_links_on_your_local_instance">Partilhar ligações na sua instância local</string>
+    <string name="post_layout_card_3">Layout de Card 3</string>
+    <string name="comment_filter_preference_activity_label">Filtro de Comentário</string>
+    <string name="action_add_to_home_screen">Adicionar à Tela Inicial</string>
+    <string name="confirm">Confirmar</string>
+    <string name="comment_filter_applied_to_all_subreddits">Aplicado em todas as comunidades</string>
+    <string name="customize_comment_filter_activity_label">Customizar Filtro de Comentário</string>
+    <string name="monthly">Mensal</string>
+    <string name="billing_error_billing_unavailable">Serviço de cobrança indisponível no dispositivo.</string>
+    <string name="confirm_delete_all_recent_searches">Você tem certeza que quer excluir todas as pesquisas recentes?</string>
+    <string name="settings_comment_filter_title">Filtro de Comentários</string>
+    <string name="apply_to">Aplicar à</string>
+    <string name="post_filter_usage_embedded_subreddit_all">Todas as Comunidades</string>
+    <string name="post_filter_usage_embedded_user_all">Todos os usuários</string>
+    <string name="post_filter_usage_embedded_multireddit_all">Todas as Multicomunidades</string>
+    <string name="post_filter_usage_embedded_more_count">e %1$d mais</string>
+    <string name="comment_filter_name_hint">Nome do Filtro de Comentário</string>
+    <string name="comment_filter_requires_a_name">Qual o nome deste filtro de comentários?</string>
+    <string name="duplicate_comment_filter_dialog_title">\'%1$s\' Já Existe</string>
+    <string name="comment_filter_usage_embedded_more_count">e %1$d mais</string>
+    <string name="error_unsupported_audio">Mídia possui trilhas de áudio, mas nenhuma é tocável neste dispositivo</string>
+    <string name="yearly">Anual</string>
+    <string name="weekly">Semanal</string>
 </resources>
