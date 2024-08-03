@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="comment_activity_label">Kommentar senden</string>
+    <string name="comment_activity_label_is_replying">Antwoadn</string>
+    <string name="post_text_activity_label">Text-Beitrog</string>
+    <string name="community_selection_activity_label">Wähle a Community</string>
+    <string name="post_link_activity_label">Link-Beitrog</string>
+    <string name="post_image_activity_label">Buidl-Beitrog</string>
+    <string name="post_video_activity_label">Video-Beitrog</string>
+    <string name="rules_activity_label">Regln</string>
+    <string name="search_community_activity_label">Communitis</string>
+    <string name="login_activity_label">Omeldn</string>
+</resources>
