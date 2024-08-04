@@ -170,6 +170,7 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
 
         String parentBodyMarkdown = intent.getStringExtra(EXTRA_COMMENT_PARENT_BODY_MARKDOWN_KEY);
         String parentBody = intent.getStringExtra(EXTRA_COMMENT_PARENT_BODY_KEY);
+        mGlide = Glide.with(getApplication());
         if (parentBodyMarkdown != null && !parentBodyMarkdown.equals("")) {
             binding.commentContentMarkdownView.setVisibility(View.VISIBLE);
             binding.commentContentMarkdownView.setNestedScrollingEnabled(false);
@@ -204,8 +205,6 @@ public class CommentActivity extends BaseActivity implements UploadImageEnabledA
                     builder.linkColor(linkColor);
                 }
             };
-
-            mGlide = Glide.with(getApplication());
 
             Markwon postBodyMarkwon = MarkdownUtils.createFullRedditMarkwon(this,
                     miscPlugin, parentTextColor, parentSpoilerBackgroundColor, mGlide, null, mSharedPreferences.getBoolean(SharedPreferencesUtils.DISABLE_IMAGE_PREVIEW, false));
