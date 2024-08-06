@@ -1,13 +1,13 @@
 steps:
   build:
-    image: alvrme/alpine-android:android-33-jdk11
+    image: android-34-jdk11:android-33-jdk11
     commands:
       - apk add --no-cache python3
       - ./gradlew :app:assembleRelease
     when:
       path: [ app/**, build.gradle ]
   sign:
-    image: alvrme/alpine-android:android-33-jdk11
+    image: alvrme/alpine-android:android-34-jdk11
     commands:
       - ./scripts/apk-sign.sh Eternity-signed.apk app/build/outputs/apk/release/app-release-unsigned.apk
     secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
