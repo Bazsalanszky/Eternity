@@ -1,6 +1,6 @@
 steps:
   build:
-    image: android-34-jdk11:android-33-jdk11
+    image: alvrme/alpine-android:android-34-jdk11
     commands:
       - apk add --no-cache python3
       - ./gradlew :app:assembleRelease
