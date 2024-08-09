@@ -256,13 +256,13 @@
         android:src="@drawable/ic_link"
         android:visibility="gone" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
         android:id="@+id/content_markdown_view_item_post_detail_gallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:visibility="gone"
         android:nestedScrollingEnabled="false" />
 

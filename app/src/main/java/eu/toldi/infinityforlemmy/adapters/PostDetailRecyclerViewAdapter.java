@@ -681,10 +681,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
             if (mPost.getSelfText() != null && !mPost.getSelfText().equals("")) {
                 ((PostDetailBaseViewHolder) holder).contentMarkdownView.setVisibility(View.VISIBLE);
-                ((PostDetailBaseViewHolder) holder).contentMarkdownView.setAdapter(mMarkwonAdapter);
-                mMarkwonAdapter.setMarkdown(mPostDetailMarkwon, mPost.getSelfText());
-                // noinspection NotifyDataSetChanged
-                mMarkwonAdapter.notifyDataSetChanged();
+                mPostDetailMarkwon.setMarkdown(((PostDetailBaseViewHolder) holder).contentMarkdownView,mPost.getSelfText());
             }
 
             if (holder instanceof PostDetailBaseVideoAutoplayViewHolder) {
@@ -1216,7 +1213,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         CustomTextView flairTextView;
         TextView awardsTextView;
         TextView upvoteRatioTextView;
-        RecyclerView contentMarkdownView;
+        TextView contentMarkdownView;
         ConstraintLayout bottomConstraintLayout;
         MaterialButton upvoteButton;
         TextView scoreTextView;
@@ -1248,7 +1245,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                          CustomTextView flairTextView,
                          TextView awardsTextView,
                          TextView upvoteRatioTextView,
-                         RecyclerView contentMarkdownView,
+                         TextView contentMarkdownView,
                          ConstraintLayout bottomConstraintLayout,
                          MaterialButton upvoteButton,
                          TextView scoreTextView,
@@ -1344,7 +1341,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 mActivity.startActivity(intent);
             });
 
-            contentMarkdownView.setLayoutManager(new SwipeLockLinearLayoutManager(mActivity, new SwipeLockInterface() {
+            /*contentMarkdownView.setLayoutManager(new SwipeLockLinearLayoutManager(mActivity, new SwipeLockInterface() {
                 @Override
                 public void lockSwipe() {
                     ((ViewPostDetailActivity) mActivity).lockSwipeRightToGoBack();
@@ -1354,7 +1351,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 public void unlockSwipe() {
                     ((ViewPostDetailActivity) mActivity).unlockSwipeRightToGoBack();
                 }
-            }));
+            }));*/
 
             upvoteButton.setOnClickListener(view -> {
                 if (mPost.isArchived()) {
@@ -1827,7 +1824,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                                                      ImageView pauseButton,
                                                      ImageView playButton,
                                                      DefaultTimeBar progressBar,
-                                                     RecyclerView contentMarkdownView,
+                                                     TextView contentMarkdownView,
                                                      ConstraintLayout bottomConstraintLayout,
                                                      MaterialButton upvoteButton,
                                                      TextView scoreTextView,
