@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">Seleziona tag NSFW</string>
     <string name="action_mark_spoiler">Seleziona tag Spoiler</string>
     <string name="action_unmark_spoiler">Deseleziona tag Spoiler</string>
-    <string name="action_edit_flair">Modifica flair</string>
     <string name="action_change_post_layout">Cambia disposizione post</string>
     <string name="action_save">Salva</string>
     <string name="action_edit_multi_reddit">Modifica Multireddit</string>
@@ -91,9 +90,6 @@
     <string name="load_messages_failed">Errore durante il caricamento messaggi. Tocca per riprovare.</string>
     <string name="no_messages">Vuoto</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Compleanno account:
 \n%1$s</string>
     <string name="since">Da:</string>
@@ -180,10 +176,7 @@
     <string name="video_is_processing">Video in elaborazione. Attendere...</string>
     <string name="image_is_processing">Immagine in elaborazione. Attendere.</string>
     <string name="gif_is_processing">Gif in elaborazione. Attendere...</string>
-    <string name="flair">Flair</string>
     <string name="spoiler">Spoiler</string>
-    <string name="no_flair">Nessun flair</string>
-    <string name="error_loading_flairs">Errore nel caricamento dei flair. Tocca per riprovare.</string>
     <string name="no_rule">Nessuna regola</string>
     <string name="error_loading_rules">Errore caricamento regole. Tocca per riprovare.</string>
     <string name="error_loading_rules_without_retry">Errore caricamento regole</string>
@@ -265,15 +258,11 @@
     <string name="mark_spoiler_failed">Seleziona spoiler non riuscito</string>
     <string name="unmark_spoiler_success">Deselezionato spoiler con successo</string>
     <string name="unmark_spoiler_failed">Deseleziona spoiler non riuscito</string>
-    <string name="update_flair_success">Flair aggiornato con successo</string>
-    <string name="update_flair_failed">Aggiorna flair fallito</string>
-    <string name="edit_flair">Modifica flair</string>
     <string name="only_allow_64_chars">Consentire solo meno di 64 caratteri</string>
     <string name="view_all_comments">Clicca qui per sfogliare tutti i commenti</string>
     <string name="notification_summary_account">Account</string>
     <string name="notification_summary_message">Nuovo messaggio</string>
     <string name="notification_summary_community">Subreddit</string>
-    <string name="notification_summary_award">Premio</string>
     <string name="notification_new_messages">%1$d Nuovi Messaggi</string>
     <string name="label_account">Account</string>
     <string name="label_post">Post</string>
@@ -396,7 +385,6 @@
     <string name="settings_tab_title">Titolo</string>
     <string name="settings_tab_post_type">Tipo</string>
     <string name="settings_tab_community_name">Nome Subreddit (Senza il prefisso r/)</string>
-    <string name="settings_tab_multi_reddit_name">Percorso MultiReddit (/user/tuousername/m/nometuomultireddit)</string>
     <string name="settings_tab_username">Username (Senza il prefisso u/)</string>
     <string name="no_developer_easter_egg">Niente impostazioni per sviluppatori qui!</string>
     <string name="no_link_available">Impossibile ottenere il link</string>
@@ -518,8 +506,6 @@
     <string name="theme_item_comment_background_color_detail">Applicato a: Sfondo dei commenti</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Colore di sfondo dei commenti totalmente compressi</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Applicato a: Sfondo dei commenti completamente compressi</string>
-    <string name="theme_item_awarded_comment_background_color">Colore di Sfondo del Commento Premiato</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Applicato a: Sfondo del Commento Premiato</string>
     <string name="theme_item_received_message_background_color">Colore di Sfondo del Messaggio Ricevuto</string>
     <string name="theme_item_received_message_background_color_detail">Applicato a: Sfondo messaggi privati ricevuti</string>
     <string name="theme_item_sent_message_background_color">Colore Sfondo Messaggio Inviato</string>
@@ -572,14 +558,6 @@
     <string name="theme_item_nsfw_background_color_detail">Applicato a: Sfondo del tag NSFW</string>
     <string name="theme_item_nsfw_text_color">Colore testo NSFW</string>
     <string name="theme_item_nsfw_text_color_detail">Applicato a: Colore testo del tag NSFW</string>
-    <string name="theme_item_flair_background_color">Colore Sfondo Flair</string>
-    <string name="theme_item_flair_background_color_detail">Applicato a: Sfondo del tag flair</string>
-    <string name="theme_item_flair_text_color">Colore Testo Flair</string>
-    <string name="theme_item_flair_text_color_detail">Applicato a: Colore testo del tag flair</string>
-    <string name="theme_item_awards_background_color">Colore di Sfondo Premiati</string>
-    <string name="theme_item_awards_background_color_detail">Applicato a: Sfondo del tag premiati</string>
-    <string name="theme_item_awards_text_color">Colore Testo Premiati</string>
-    <string name="theme_item_awards_text_color_detail">Applicato a: Colore testo del tag premiati</string>
     <string name="theme_item_archived_tint">Colore Icona Archiviato</string>
     <string name="theme_item_archived_tint_detail">Applicato a: Icona Archiviato</string>
     <string name="theme_item_locked_icon_tint">Colore Icona Bloccato</string>
@@ -597,8 +575,6 @@
     <string name="theme_item_username_color_detail">Applicato a: Username</string>
     <string name="theme_item_community_color">Colore Subreddit</string>
     <string name="theme_item_community_color_detail">Applicato a: Nome subreddit</string>
-    <string name="theme_item_author_flair_text_color">Colore Flair dell\'Autore</string>
-    <string name="theme_item_author_flair_text_color_detail">Applicato a: Flair dell\'autore nei commenti</string>
     <string name="theme_item_submitter_color">Mittente</string>
     <string name="theme_item_submitter_color_detail">Applicato a: Mittente nei commenti</string>
     <string name="theme_item_moderator_color">Moderatore</string>
@@ -684,14 +660,9 @@
     <string name="post_title_preview">Questo è un post</string>
     <string name="post_content_preview">Ci sono 10 tipi di persone al mondo: quelli che capiscono il codice binario, e quelli che non lo capiscono.</string>
     <string name="post_type_preview">POST</string>
-    <string name="flair_preview">Flair</string>
-    <string name="awards_preview">4 Premi</string>
-    <string name="author_flair_preview">Flair dell\'autore</string>
     <string name="comment_content_preview">Non mi fido molto delle statistiche, perché un uomo con la testa nel forno acceso e i piedi nel congelatore statisticamente ha una temperatura media.</string>
     <string name="edit_multi_reddit">Modifica multireddit</string>
     <string name="delete_multi_reddit">Cancella Multireddit</string>
-    <string name="n_awards">%1$,d premi</string>
-    <string name="one_award">1 Premio</string>
     <string name="report">Segnala</string>
     <string name="reporting">Segnala</string>
     <string name="report_successful">Segnalato</string>
@@ -730,10 +701,7 @@
     <string name="login_activity_2fa_prompt">Se hai attivato l\'autenticazione a due fattori, per favore inserisci la password come segue: &lt;password&gt;:&lt;codice per l\'autenticazione a due fattori&gt;.
 \nEsempio: latuapassword:123456</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
-    <string name="give_award_activity_label">Assegna Premio</string>
     <string name="action_crosspost">Crosspost</string>
-    <string name="action_select_user_flair">Seleziona flair utente</string>
-    <string name="action_give_award">Assegna Premio</string>
     <string name="posts">Post</string>
     <string name="only_for_logged_in_user">Solo per utenti connessi</string>
     <string name="settings_number_of_columns_in_post_feed_title">Il numero di colonne nel Feed dei post</string>
@@ -786,8 +754,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Download fallito: impossibile accedere alla destinazione</string>
     <string name="downloading_media_failed_cannot_download_media">Download fallito</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Download fallito: impossibile salvare il file nella destinazione</string>
-    <string name="select_user_flair_success">Flair utente selezionato</string>
-    <string name="select_this_user_flair">Seleziona questa flair utente\?</string>
     <string name="select_header_size">Seleziona dimensione intestazione</string>
     <string name="large">Grande</string>
     <string name="small">Piccolo</string>
@@ -800,12 +766,7 @@
     <string name="refresh">Ricarica</string>
     <string name="change_sort_type">Cambia il tipo di ordinamento</string>
     <string name="change_post_layout">Cambia il layout dei post</string>
-    <string name="give_award_dialog_title">Vuoi dare premio\?</string>
     <string name="anonymous">Anonimo</string>
-    <string name="give_award_error_message">Codice: %1$d/
-\n Messaggio: %2$s</string>
-    <string name="give_award_success">Premio conferito</string>
-    <string name="give_award_failed">Fallito</string>
     <string name="warning">Avvertimento</string>
     <string name="this_is_a_nsfw_community">Questo è un subreddit marcato NSFW</string>
     <string name="this_user_has_nsfw_content">Questo utente è marcato NSFW</string>
@@ -821,12 +782,10 @@
     <string name="random_nsfw_post">Post NSFW casuale</string>
     <string name="fetch_random_thing_failed">Riprova più tardi</string>
     <string name="downloading">Download in corso</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all e r/popular</string>
     <string name="settings_miscellaneous_title">Varie</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Rispetta ordinamento dei commenti consigliato dal sub</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Il tipo di ordinamento dei commenti non verrà salvato</string>
     <string name="settings_community_filter_category">Nascondi i Subreddit</string>
-    <string name="settings_community_filter_popular_and_all">In r/popular e r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Animazione di cattura dell\'UFO</string>
     <string name="select_video_quality">Scegli qualità video</string>
     <string name="settings_swipe_action_haptic_feedback_title">Feedback aptico</string>
@@ -886,14 +845,10 @@
     <string name="title_excludes_regex_hint">Escludi regex</string>
     <string name="exclude_communities_hint">Escludi subreddit (es. funny,AskReddit)</string>
     <string name="exclude_users_hint">Escludi utenti (es. Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Escludi flair (es. flair1,flair2)</string>
-    <string name="contain_flairs_hint">Contiene flair (es. flair1,flai2)</string>
     <string name="min_vote_hint">Voto minimo (-1: nessuna restrizione)</string>
     <string name="max_vote_hint">Voto massimo (-1: nessuna restrizione)</string>
     <string name="min_comments_hint">Commenti minimi (-1: nessuna restrizione)</string>
     <string name="max_comments_hint">Commenti massimi (-1: nessuna restrizione)</string>
-    <string name="min_awards_hint">Premi minimi (-1: nessuna restrizione)</string>
-    <string name="max_awards_hint">Premi massimi (-1: nessuna restrizione)</string>
     <string name="post_filter_name_hint">Nome filtro post</string>
     <string name="post_filter_requires_a_name">Come vuoi chiamare questo filtro post\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' esiste già</string>
@@ -917,7 +872,6 @@
     <string name="choose_a_user">Seleziona un utente</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Clicca per mostrare i media nel layout a galleria</string>
     <string name="settings_hide_post_type">Nascondi tipo di post</string>
-    <string name="settings_hide_the_number_of_awards">Nascondi numero di premi</string>
     <string name="settings_hide_community_and_user_prefix">Nascondi subreddit e prefisso utente</string>
     <string name="settings_hide_the_number_of_votes">Nascondi numero di voti</string>
     <string name="settings_hide_the_number_of_comments">Nascondi numero di commenti</string>
@@ -980,8 +934,6 @@
     <string name="select">Seleziona</string>
     <string name="exclude_community">Escludi questo subreddit</string>
     <string name="exclude_user">Escludi questo utente</string>
-    <string name="exclude_flair">Escludi questo flair</string>
-    <string name="contain_flair">Contiene questa flair</string>
     <string name="exclude_domain">Escludi questo dominio</string>
     <string name="suggest_title">Suggerisci titolo</string>
     <string name="suggest_title_failed">Impossibile suggerire un titolo</string>
@@ -989,7 +941,6 @@
     <string name="inbox_with_count">Posta (%1$,d)</string>
     <string name="comment_continue_thread">Continua thread</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Scorri verticalmente per tornare indietro dai media</string>
-    <string name="settings_hide_post_flair">Nascondi i flair dei post</string>
     <string name="settings_crash_reports_title">Rapporti sui crash</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Pericoloso</string>
     <string name="settings_disable_nsfw_forever_title">Disabilita permanentemente NSFW</string>
@@ -1149,11 +1100,9 @@
     <string name="settings_custom_content_font_family_title">Famiglia di caratteri del contenuto personalizzata</string>
     <string name="settings_fixed_height_preview_in_card_title">Altezza della card fissa</string>
     <string name="settings_hide_text_post_content">Nascondi contenuto dei post di testo</string>
-    <string name="settings_hide_comment_awards_title">Nascondi premi dei commenti</string>
     <string name="two_options_required">Un sondaggio richiede almeno due o più opzioni!</string>
     <string name="no_activity_found_for_external_browser">Non ci sono app che possono gestire l\'azione di apertura in app esterna</string>
     <string name="settings_backup_settings_summary">La password del file di backup è \"123321\".</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Nascondi karma dell\'accout</string>
     <string name="user_number_detail">Utenti: %1$,d</string>
     <string name="community_number_detail">Community: %1$,d</string>
     <string name="settings_miscellaneous_dangerous_group_title">Pericoloso</string>

@@ -55,7 +55,6 @@
     <string name="action_unmark_nsfw">Anulare marcaj NSFW</string>
     <string name="action_mark_spoiler">Marchează Spoiler</string>
     <string name="action_unmark_spoiler">Anulare marcaj Spoiler</string>
-    <string name="action_edit_flair">Modifică Insigna</string>
     <string name="action_change_post_layout">Modifică Aspectul Postării</string>
     <string name="action_save">Salvează</string>
     <string name="action_edit_multi_reddit">Modifică Multireddit</string>
@@ -100,10 +99,7 @@
     <string name="no_messages">Gol</string>
     <string name="nsfw">NSFW</string>
     <!-- Fuzzy -->
-    <string name="karma_info">Karma: %1$,d</string>
     <!-- Fuzzy -->
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Aniversare:
 \n%1$s</string>
     <string name="since">Din:</string>
@@ -192,11 +188,7 @@
     <string name="video_is_processing">Videoclipul este în curs de procesare. Te rugăm să aștepți.</string>
     <string name="image_is_processing">Imaginea este în curs de procesare. Te rugăm să aștepți.</string>
     <string name="gif_is_processing">Gif-ul este în curs de procesare. Te rugăm să aștepți.</string>
-    <string name="flair">Insignă</string>
     <string name="spoiler">Spoiler</string>
-    <string name="no_flair">Fără insignă</string>
-    <string name="error_loading_flairs">Eroare la încărcarea insignelor.
-\nAtinge pentru a reîncerca.</string>
     <!-- Fuzzy -->
     <string name="no_rule">Nu sunt reguli</string>
     <string name="error_loading_rules">Eroare la încărcarea regulilor.
@@ -279,15 +271,11 @@
     <string name="mark_spoiler_failed">Marcare ca spoiler eșuată</string>
     <string name="unmark_spoiler_success">Anulare marcaj spoiler reușită</string>
     <string name="unmark_spoiler_failed">Anulare marcaj spoiler eșuată</string>
-    <string name="update_flair_success">Actualizare insignă reușită</string>
-    <string name="update_flair_failed">Actualizare insignă eșuată</string>
-    <string name="edit_flair">Editează Insignă</string>
     <string name="only_allow_64_chars">Permis doar sub 64 de caractere</string>
     <string name="view_all_comments">Apasă aici pentru a citi toate comentariile</string>
     <string name="notification_summary_account">Cont</string>
     <string name="notification_summary_message">Mesaj Nou</string>
     <string name="notification_summary_community">Subreddit</string>
-    <string name="notification_summary_award">Premiu</string>
     <!-- Fuzzy -->
     <string name="notification_new_messages">%1$d Mesaje Noi</string>
     <string name="label_account">Cont</string>
@@ -413,7 +401,6 @@
     <string name="settings_tab_title">Titlu</string>
     <string name="settings_tab_post_type">Tip</string>
     <string name="settings_tab_community_name">Numele Subreddit-ului (fără prefixul r/)</string>
-    <string name="settings_tab_multi_reddit_name">Cale MultiReddit (/user/numeutilizator/m/numelemultiredditului)</string>
     <string name="settings_tab_username">Nume de Utilizator (fără prefixul u/)</string>
     <string name="no_developer_easter_egg">Aici nu există opțiuni pentru dezvoltatori</string>
     <string name="no_link_available">Nu s-a putut obține link-ul</string>
@@ -541,8 +528,6 @@
     <string name="theme_item_comment_background_color_detail">Aplicat pe: Fundalul comentariilor</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Culoarea de Fundal a Comentariilor Restrânse Complet</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Aplicat pe: Fundalul comentariilor restrânse complet</string>
-    <string name="theme_item_awarded_comment_background_color">Culoarea de Fundal a Comentariilor Premiate</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Aplicat pe: Fundalul comentariilor premiate</string>
     <string name="theme_item_received_message_background_color">Culoarea de Fundal a Mesajelor Primite</string>
     <string name="theme_item_received_message_background_color_detail">Aplicat pe: Fundalul mesajelor private primite</string>
     <string name="theme_item_sent_message_background_color">Culoarea de Fundal a Mesajelor Trimise</string>
@@ -595,14 +580,6 @@
     <string name="theme_item_nsfw_background_color_detail">Aplicat pe: Fundalul marcajului NSFW</string>
     <string name="theme_item_nsfw_text_color">Culoarea Textului NSFW</string>
     <string name="theme_item_nsfw_text_color_detail">Aplicat pe: Culoarea textului marcat NSFW</string>
-    <string name="theme_item_flair_background_color">Culoarea de Fundal a Insignei</string>
-    <string name="theme_item_flair_background_color_detail">Aplicat pe: Fundalul insignei</string>
-    <string name="theme_item_flair_text_color">Culoarea Textului Insignei</string>
-    <string name="theme_item_flair_text_color_detail">Aplicat pe: Culoarea textului insignei</string>
-    <string name="theme_item_awards_background_color">Culoarea de Fundal a Premiilor</string>
-    <string name="theme_item_awards_background_color_detail">Aplicat pe: Culoarea de fundal a marcajului cu premii</string>
-    <string name="theme_item_awards_text_color">Culoarea Textului Premiat</string>
-    <string name="theme_item_awards_text_color_detail">Aplicat pe: Culoarea textului marcat cu premii</string>
     <string name="theme_item_archived_tint">Culoarea Pictogramei de Arhivare</string>
     <string name="theme_item_archived_tint_detail">Aplicat pe: Pictograma arhivat</string>
     <string name="theme_item_locked_icon_tint">Culoarea Pictogramei Închis</string>
@@ -619,8 +596,6 @@
     <string name="theme_item_username_color_detail">Aplicat pe: Nume de utilizator</string>
     <string name="theme_item_community_color">Culoare Subreddit</string>
     <string name="theme_item_community_color_detail">Aplicat pe: Numele subreddit-ului</string>
-    <string name="theme_item_author_flair_text_color">Culoarea Insignei de Autor</string>
-    <string name="theme_item_author_flair_text_color_detail">Aplicat pe: Culoarea insignei de autor în comentarii</string>
     <string name="theme_item_submitter_color">Autor</string>
     <string name="theme_item_submitter_color_detail">Aplicat pe: Autor în comentarii</string>
     <string name="theme_item_moderator_color">Moderator</string>
@@ -710,16 +685,11 @@
     <string name="post_title_preview">Aceasta este o postare</string>
     <string name="post_content_preview">Această glumă despre gravitație puțin a învechit, dar mereu mă face să pic de râs.</string>
     <string name="post_type_preview">POSTARE</string>
-    <string name="flair_preview">Insignă</string>
-    <string name="awards_preview">4 Premii</string>
-    <string name="author_flair_preview">Insigna Autorului</string>
     <string name="comment_content_preview">I-am dat prietenii mele o felicitare în care am scris “Fă-te bine”.
 \nNu e bolnavă sau ceva de genul, dar cu siguranță ar putea să se facă bine.</string>
     <string name="edit_multi_reddit">Editează Multireddit</string>
     <string name="delete_multi_reddit">Șterge Multireddit</string>
     <!-- Fuzzy -->
-    <string name="n_awards">%1$,d Premii</string>
-    <string name="one_award">1 Premiu</string>
     <string name="report">Raportează</string>
     <string name="reporting">Se raportează</string>
     <string name="report_successful">Raportat</string>
@@ -757,10 +727,7 @@
     <string name="top_score">%1$s pct</string>
     <string name="login_activity_2fa_prompt">Dacă aveți autentificarea cu doi pași activată, va trebui să umpleți câmpul jetonului 2FA. Lăsați-l gol altfel</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
-    <string name="give_award_activity_label">Acordă un Premiu</string>
     <string name="action_crosspost">Crosspost</string>
-    <string name="action_select_user_flair">Selectează Insigna de Utilizator</string>
-    <string name="action_give_award">Acordă un Premiu</string>
     <string name="posts">Postări</string>
     <string name="only_for_logged_in_user">Doar pentru Utilizatorii Conectați</string>
     <string name="settings_number_of_columns_in_post_feed_title">Numărul de Coloane în Fluxul de Postări</string>
@@ -810,8 +777,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Descărcarea a eșuat: nu s-a putut accesa directorul de destinație</string>
     <string name="downloading_media_failed_cannot_download_media">Descărcare eșuată</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Descărcare eșuată: nu s-a putut salva fișierul în directorul de destinație</string>
-    <string name="select_user_flair_success">Insigna utilizatorului a fost selectată</string>
-    <string name="select_this_user_flair">Selectează această insignă de utilizator\?</string>
     <string name="select_header_size">Selectează Dimensiunea Antetului</string>
     <string name="large">Mare</string>
     <string name="small">Mică</string>
@@ -824,13 +789,8 @@
     <string name="refresh">Reîmprospătează</string>
     <string name="change_sort_type">Schimbă Tipul de Sortare</string>
     <string name="change_post_layout">Schimbă Aspectul Postării</string>
-    <string name="give_award_dialog_title">Acordă un premiu\?</string>
     <string name="anonymous">Anonim</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">Cod: %1$d/
-\nMesaj: %2$s</string>
-    <string name="give_award_success">Premiu acordat</string>
-    <string name="give_award_failed">A eșuat</string>
     <string name="warning">Avertisment</string>
     <string name="this_is_a_nsfw_community">Acesta este un subreddit NSFW.</string>
     <string name="this_user_has_nsfw_content">Acest utilizator are conținut NSFW</string>
@@ -846,12 +806,10 @@
     <string name="random_nsfw_post">Postare NSFW Aleatorie</string>
     <string name="fetch_random_thing_failed">Încearcă din nou mai târziu</string>
     <string name="downloading">Se descarcă</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all și r/popular</string>
     <string name="settings_miscellaneous_title">Diverse</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Respectă Tipul Recomandat de Subreddit pentru Sortarea Comentariilor</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Tipul de sortare a comentariilor nu va fi salvat</string>
     <string name="settings_community_filter_category">Ascunde Subreddit-urile</string>
-    <string name="settings_community_filter_popular_and_all">În r/popular și r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Animație de Capturare a OZN-urilor</string>
     <string name="select_video_quality">Selectează Calitatea Video</string>
     <string name="settings_swipe_action_haptic_feedback_title">Răspuns Tactil</string>
@@ -911,14 +869,10 @@
     <string name="title_excludes_regex_hint">Titlu: exclude regex</string>
     <string name="exclude_communities_hint">Exclude subreddit-uri (de ex. funny, AskReddit)</string>
     <string name="exclude_users_hint">Exclude utilizatori (de ex. Hostilenemy, random)</string>
-    <string name="exclude_flairs_hint">Exclude insigne (de ex. insigna1, insigna2)</string>
-    <string name="contain_flairs_hint">Să conțină insignele (de ex. insigna1, insigna2)</string>
     <string name="min_vote_hint">Votul minim (-1: fără restricții)</string>
     <string name="max_vote_hint">Votul maxim (-1: nicio restricție)</string>
     <string name="min_comments_hint">Comentarii minime (-1: nicio restricție)</string>
     <string name="max_comments_hint">Comentarii maxime (-1: nicio restricție)</string>
-    <string name="min_awards_hint">Premii minime (-1: nicio restricție)</string>
-    <string name="max_awards_hint">Premii maxime (-1: fără restricții)</string>
     <string name="post_filter_name_hint">Numele Filtrului de Postări</string>
     <string name="post_filter_requires_a_name">Care este numele acestui filtru de post\?</string>
     <string name="duplicate_post_filter_dialog_title">%1$s\' Există Deja</string>
@@ -942,7 +896,6 @@
     <string name="choose_a_user">Alege un utilizator</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Apăsă pentru a Afișa Fișierele Media din Galerie</string>
     <string name="settings_hide_post_type">Ascunde Tipul de Postare</string>
-    <string name="settings_hide_the_number_of_awards">Ascunde Numărul de Premii</string>
     <string name="settings_hide_community_and_user_prefix">Ascundeți prefixul comunităților și al utilizatorilor</string>
     <string name="settings_hide_the_number_of_votes">Ascunde Numărul de Voturi</string>
     <string name="settings_hide_the_number_of_comments">Ascunde Numărul de Comentarii</string>
@@ -1004,8 +957,6 @@
     <string name="select">Selectează</string>
     <string name="exclude_community">Exclude acest subreddit</string>
     <string name="exclude_user">Exclude acest utilizator</string>
-    <string name="exclude_flair">Exclude această insignă</string>
-    <string name="contain_flair">Conține această insignă</string>
     <string name="exclude_domain">Exclude acest domeniu</string>
     <string name="suggest_title">Sugerează un Titlul</string>
     <string name="suggest_title_failed">Nu s-a putut sugera un titlu</string>
@@ -1014,7 +965,6 @@
     <string name="inbox_with_count">Mesaje (%1$,d)</string>
     <string name="comment_continue_thread">Continuă firul</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Glisează pe Vertical pentru a vă Întoarce de la Imagine și Gif</string>
-    <string name="settings_hide_post_flair">Ascunde Insigna Postării</string>
     <string name="settings_crash_reports_title">Rapoarte de Eroare</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Periculos</string>
     <string name="settings_disable_nsfw_forever_title">Dezactivează NSFW pentru totdeauna</string>
@@ -1176,7 +1126,6 @@
     <string name="settings_custom_content_font_family_title">Familia de Fonturi Personalizată pentru Conținut</string>
     <string name="settings_fixed_height_preview_in_card_title">Înălțime Fixată în Aspect Card</string>
     <string name="settings_hide_text_post_content">Ascunde Conținutul Postărilor Text</string>
-    <string name="settings_hide_comment_awards_title">Ascunde Premiile Comentariilor</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Arată mai Puține Opțiuni din Bara de Instrumente Începând cu</string>
     <!-- Fuzzy -->
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Nivel %1$d</string>
@@ -1205,14 +1154,9 @@
     <string name="option_5_hint">Opțiunea 5</string>
     <string name="option_6_hint">Opțiunea 6</string>
     <string name="not_a_valid_number">Nu e o cifră validă</string>
-    <string name="post_karma">Karma de la Postări:</string>
-    <string name="comment_karma">Karma de la Comentarii:</string>
-    <string name="awarder_karma">Karma pentru Acordarea Premiilor:</string>
-    <string name="awardee_karma">Karma pentru Primirea Premiilor:</string>
     <string name="action_block_user">Blochează Utilizator</string>
     <string name="user_2fa_token">Jeton 2FA (dacă e necesar)</string>
     <string name="username_cannot_be_empty">Câmpul numelui de utilizator nu poate fi lăsat liber.</string>
-    <string name="clear_user_flair_success">Flair utilizator curățat</string>
     <string name="mark_post_as_read_failed">Eșec la marcarea postării ca citită</string>
     <string name="handle_link">Gestionare Link</string>
     <string name="invalid_username_or_password">Nume de utilizator sau parolă incorectă</string>
@@ -1222,7 +1166,6 @@
     <string name="exo_controls_volume_off_description">Volum Oprit</string>
     <string name="user_username">Nume de utilizator</string>
     <string name="settings_comment_divider_type">Tip Divizor Comentarii</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Ascundeți Karma de la Cont</string>
     <string name="denied_notification_permission">Permisiunea pentru notificări nu este acordată</string>
     <string name="community_number_detail">%1$,d Comunități</string>
     <string name="block_user">Blocați Utilizator</string>
@@ -1236,7 +1179,6 @@
     <string name="action_more_options">Mai multe opțiuni</string>
     <string name="blocked_communities">Comunități blocate</string>
     <string name="unblock_community_failed">Eșec la deblocarea comunității</string>
-    <string name="clear_user_flair">Curățați Flair</string>
     <string name="instance_url_hint">URL pentru instanța preferată de Lemmy cu sau fără prefixul https://</string>
     <string name="sort_time_12hours">12 Ore</string>
     <string name="settings_hide_community_and_user_instance">Ascundeți comunitate și instanță utilizator</string>

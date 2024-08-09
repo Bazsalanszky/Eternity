@@ -51,7 +51,6 @@
     <string name="action_unmark_nsfw">Desmarcar como NSFW</string>
     <string name="action_mark_spoiler">Marcar como Spoiler</string>
     <string name="action_unmark_spoiler">Desmarcar como Spoiler</string>
-    <string name="action_edit_flair">Editar etiqueta temática</string>
     <string name="action_change_post_layout">Cambiar diseño</string>
     <string name="action_save">Guardar</string>
     <string name="action_edit_multi_reddit">Editar multireddit</string>
@@ -96,9 +95,6 @@
 \nToca para reintentar.</string>
     <string name="no_messages">Vacío</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Cumpleaños:
 \n%1$s</string>
     <string name="since">Desde:</string>
@@ -187,11 +183,7 @@
     <string name="video_is_processing">Procesando vídeo. Por favor espera.</string>
     <string name="image_is_processing">Procesando imagen. Por favor espera.</string>
     <string name="gif_is_processing">Procesando GIF. Por favor espera.</string>
-    <string name="flair">Etiqueta temática</string>
     <string name="spoiler">Spoiler</string>
-    <string name="no_flair">No hay etiqueta temática</string>
-    <string name="error_loading_flairs">Error al cargar las etiquetas temáticas.
-\nToca para reintentar.</string>
     <string name="no_rule">Sin regla</string>
     <string name="error_loading_rules">Error al cargar las reglas.
 \nToca para reintentar.</string>
@@ -278,9 +270,6 @@
     <string name="unmark_spoiler_success">Se desmarcó como spoiler correctamente</string>
     <string name="unmark_spoiler_failed">No fue posible desmarcar como spoiler</string>
     <!-- Fuzzy -->
-    <string name="update_flair_success">Etiqueta Temática actualizada con éxito</string>
-    <string name="update_flair_failed">No fue posible actualizar la etiqueta temática</string>
-    <string name="edit_flair">Editar Etiqueta Temática</string>
     <string name="only_allow_64_chars">Permitir menos de 64 caracteres</string>
     <string name="view_all_comments">Toca aquí para ver todos los comentarios</string>
     <string name="notification_summary_account">Cuenta</string>
@@ -288,7 +277,6 @@
     <string name="notification_summary_community">Subreddit</string>
     <!-- Galardón means award
 Premio means prize, so it's better suited the first word instead of the second one -->
-    <string name="notification_summary_award">Galardón</string>
     <string name="notification_new_messages">%1$d Nuevos mensajes</string>
     <string name="label_account">Cuenta</string>
     <string name="label_post">Publicación</string>
@@ -413,7 +401,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="settings_tab_post_type">Tipo</string>
     <string name="settings_tab_community_name">Nombre del subreddit (sin el prefijo r/)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Nombre del multireddit (/user/tu-nombre-de-usuario/m/nombre-del-multireddit)</string>
     <string name="settings_tab_username">Nombre de usuario (sin el prefijo u/)</string>
     <string name="no_developer_easter_egg">No hay opciones de desarrollador aquí</string>
     <string name="no_link_available">No fue posible obtener el enlace</string>
@@ -538,8 +525,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="theme_item_comment_background_color_detail">Aplicado a: Fondo de comentarios</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Color del fondo de comentario completamente colapsado</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Aplicado a: Fondo de comentario completamente colapsado</string>
-    <string name="theme_item_awarded_comment_background_color">Color del fondo de comentario premiado</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Aplicado a: Fondo de comentarios premiados</string>
     <string name="theme_item_received_message_background_color">Color del fondo de mensajes recibidos</string>
     <string name="theme_item_received_message_background_color_detail">Aplicado a: Fondo de mensajes privados recibidos</string>
     <string name="theme_item_sent_message_background_color">Color del fondo de mensaje enviado</string>
@@ -593,14 +578,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="theme_item_nsfw_background_color_detail">Aplicado a: Fondo de la etiqueta NSFW</string>
     <string name="theme_item_nsfw_text_color">Color del texto de NSFW</string>
     <string name="theme_item_nsfw_text_color_detail">Aplicado a: Texto en la etiqueta de NSFW</string>
-    <string name="theme_item_flair_background_color">Color del fondo de la etiqueta temática</string>
-    <string name="theme_item_flair_background_color_detail">Aplicado a: Fondo de la etiqueta temática</string>
-    <string name="theme_item_flair_text_color">Color del texto de la etiqueta temática</string>
-    <string name="theme_item_flair_text_color_detail">Aplicado a: Texto de la etiqueta temática</string>
-    <string name="theme_item_awards_background_color">Color del fondo de premios</string>
-    <string name="theme_item_awards_background_color_detail">Aplicado a: Fondo de la etiqueta de premios</string>
-    <string name="theme_item_awards_text_color">Color del texto de premios</string>
-    <string name="theme_item_awards_text_color_detail">Aplicado a: Texto de la etiqueta de premios</string>
     <string name="theme_item_archived_tint">Color del ícono de archivado</string>
     <string name="theme_item_archived_tint_detail">Aplicado a: Ícono de archivado</string>
     <string name="theme_item_locked_icon_tint">Color del ícono de bloqueado</string>
@@ -617,8 +594,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="theme_item_username_color_detail">Aplicado a: Nombre de usuario</string>
     <string name="theme_item_community_color">Color de subreddit</string>
     <string name="theme_item_community_color_detail">Aplicado a: Nombre de subreddits</string>
-    <string name="theme_item_author_flair_text_color">Color de la etiqueta de autor temática</string>
-    <string name="theme_item_author_flair_text_color_detail">Aplicado a: Etiqueta de autor temática en los comentarios</string>
     <string name="theme_item_submitter_color">Autor</string>
     <string name="theme_item_submitter_color_detail">Aplicado a: Autor de la publicación en los comentarios</string>
     <string name="theme_item_moderator_color">Moderador</string>
@@ -713,15 +688,10 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="post_title_preview">Esto es un post</string>
     <string name="post_content_preview">Esta broma de la gravedad se está haciendo vieja, pero siempre caigo con ella.</string>
     <string name="post_type_preview">PUBLICACIÓN</string>
-    <string name="flair_preview">Etiqueta temática</string>
-    <string name="awards_preview">4 Premios</string>
-    <string name="author_flair_preview">Etiqueta de autor temática</string>
     <string name="comment_content_preview">Le compré a mi novia una tarjeta de \"Mejora pronto cariño\".
 \nNo está enferma ni nada, pero definitivamente podría mejorar.</string>
     <string name="edit_multi_reddit">Editar multireddit</string>
     <string name="delete_multi_reddit">Borrar multireddit</string>
-    <string name="n_awards">%1$,d Premios</string>
-    <string name="one_award">1 Premio</string>
     <string name="report">Reportar</string>
     <string name="reporting">Reportando</string>
     <string name="report_successful">Reportado</string>
@@ -759,10 +729,7 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="top_score">%1$s puntos</string>
     <string name="login_activity_2fa_prompt">Si tiene habilitada la autenticación de 2 factores, por favor escriba su contraseña como la siguiente: &lt;contraseña&gt;:&lt;código 2FA&gt;</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
-    <string name="give_award_activity_label">Premiar</string>
     <string name="action_crosspost">Crosspost</string>
-    <string name="action_select_user_flair">Seleccione categoría de usuario</string>
-    <string name="action_give_award">Premiar</string>
     <string name="posts">Publicaciones</string>
     <string name="only_for_logged_in_user">Solo para usuarios registrados</string>
     <string name="settings_number_of_columns_in_post_feed_title">El número de columnas en el feed de publicaciones</string>
@@ -812,8 +779,6 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Descarga fallida: directorio de destino inaccesible</string>
     <string name="downloading_media_failed_cannot_download_media">Descarga fallida</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Descarga fallida: no se puede guardar el archivo al directorio de destino</string>
-    <string name="select_user_flair_success">Etiqueta de usuario seleccionada</string>
-    <string name="select_this_user_flair">¿Seleccionar esta etiqueta de usuario\?</string>
     <string name="select_header_size">Seleccionar tamaño de encabezado</string>
     <string name="large">Grande</string>
     <string name="small">Pequeño</string>
@@ -826,16 +791,11 @@ Premio means prize, so it's better suited the first word instead of the second o
     <string name="refresh">Actualizar</string>
     <string name="change_sort_type">Cambiar orden</string>
     <string name="change_post_layout">Cambiar diseño</string>
-    <string name="give_award_dialog_title">¿Premiar\?</string>
     <string name="anonymous">Anónimo</string>
     <!-- Código: %1$d/
 Mensaje: %2$s
 
 https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
-    <string name="give_award_error_message">Código: %1$d/
-\nMensaje: %2$s</string>
-    <string name="give_award_success">Premiado</string>
-    <string name="give_award_failed">Falló</string>
     <string name="warning">Precaución</string>
     <string name="this_is_a_nsfw_community">Este es un subreddit NSFW.</string>
     <string name="this_user_has_nsfw_content">Este usuario tiene contenido NSFW</string>
@@ -852,13 +812,11 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="random_nsfw_post">Publicación NSFW aleatoria</string>
     <string name="fetch_random_thing_failed">Intente de nuevo después</string>
     <string name="downloading">Descargando</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all y r/popular</string>
     <string name="settings_miscellaneous_title">Misceláneo</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Respetar el orden de comentarios recomendado por el subreddit</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">La ordenación de los comentarios no se guardará</string>
     <!-- Ocultar Subreddits -->
     <string name="settings_community_filter_category">Ocultar subreddits</string>
-    <string name="settings_community_filter_popular_and_all">En r/popular y r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Animación de abducción OVNI</string>
     <string name="select_video_quality">Seleccione calidad del video</string>
     <string name="settings_swipe_action_haptic_feedback_title">Retroalimentación háptica</string>
@@ -918,14 +876,10 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="title_excludes_regex_hint">Título: Excluye Regex</string>
     <string name="exclude_communities_hint">Excluir subreddits (p.ej. funny, AskReddit)</string>
     <string name="exclude_users_hint">Excluir usuarios (p.ej. Hostilenemy, random)</string>
-    <string name="exclude_flairs_hint">Excluir etiquetas de usuario (p.ej. etiqueta1, etiqueta2)</string>
-    <string name="contain_flairs_hint">Contiene etiquetas (p.ej. etiqueta1, etiqueta2)</string>
     <string name="min_vote_hint">Votos mínimos (-1: sin restricción)</string>
     <string name="max_vote_hint">Votos máximos (-1: sin restricción)</string>
     <string name="min_comments_hint">Comentarios mínimos (-1: sin restricción)</string>
     <string name="max_comments_hint">Comentarios máximos (-1: sin restricción)</string>
-    <string name="min_awards_hint">Premios mínimos (-1: sin restricción)</string>
-    <string name="max_awards_hint">Premios máximos (-1: sin restricción)</string>
     <string name="post_filter_name_hint">Nombre de filtro de publicación</string>
     <string name="post_filter_requires_a_name">¿Cuál es el nombre de este filtro de publicaciones\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' Ya Existe</string>
@@ -949,7 +903,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="choose_a_user">Elige un usuario</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Pulsa para mostrar los medios en el diseño de galería</string>
     <string name="settings_hide_post_type">Ocultar el tipo de publicación</string>
-    <string name="settings_hide_the_number_of_awards">Ocultar el número de premios</string>
     <string name="settings_hide_community_and_user_prefix">Ocultar el prefijo de subreddit y de usuario</string>
     <string name="settings_hide_the_number_of_votes">Ocultar el número de votos</string>
     <string name="settings_hide_the_number_of_comments">Ocultar el número de comentarios</string>
@@ -1012,8 +965,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="select">Seleccionar</string>
     <string name="exclude_community">Excluir este subreddit</string>
     <string name="exclude_user">Excluir este usuario</string>
-    <string name="exclude_flair">Excluir esta etiqueta</string>
-    <string name="contain_flair">Contiene esta etiqueta</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Excluir dominio</string>
     <string name="suggest_title">Sugerir título</string>
@@ -1023,7 +974,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="comment_continue_thread">Continuar hilo</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Deslizar verticalmente para regresar desde imágenes o GIF</string>
-    <string name="settings_hide_post_flair">Ocultar la etiqueta de la publicación</string>
     <string name="settings_crash_reports_title">Informe de fallos</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Peligroso</string>
     <string name="settings_disable_nsfw_forever_title">Desactivar NSFW para siempre</string>
@@ -1173,7 +1123,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="action_open_external_browser">Abrir en el navegador</string>
     <string name="action_more_options">Mas Opciones</string>
     <string name="history">Historia</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Ocultar Karma de la Cuenta</string>
     <string name="settings_custom_title_font_family_title">Fuente Personalizada para el Titulo</string>
     <string name="settings_custom_content_font_family_title">Fuente Personalizada para el Contenido</string>
     <string name="post_poll_activity_label">Publicar Encuesta</string>
@@ -1194,7 +1143,6 @@ https://s3.eu-west-1.amazonaws.com/po-pub/i/hJAe7sMhrfJzqjhp9VkDQOVC.PNG -->
     <string name="community_number_detail">%1$,d comunidades</string>
     <string name="settings_hide_upvote_ratio_title">Ocultar proporción de votos positivos</string>
     <string name="confirm_delete_all_recent_searches">¿Estás seguro de que quieres borrar todas las consultas de búsqueda recientes?</string>
-    <string name="settings_hide_comment_awards_title">Ocultar premios de los comentarios</string>
     <string name="settings_hide_text_post_content">Ocultar el contenido de la publicación</string>
     <string name="settings_post_feed_max_resolution_warning_title">Aumenta el valor para mostrar vistas previas con mayor resolución, pero la aplicación puede bloquearse inesperadamente.</string>
     <string name="user_number_detail">%1$,d usuarios</string>

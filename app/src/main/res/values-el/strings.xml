@@ -47,7 +47,6 @@
     <string name="action_unmark_nsfw">"Αφαίρεση επισήμανσης NSFW"</string>
     <string name="action_mark_spoiler">Επισήμανση Σπόιλερ</string>
     <string name="action_unmark_spoiler">Αφαίρεση επισήμανσης Σπόιλερ</string>
-    <string name="action_edit_flair">Επεξεργασία Ετικέτας</string>
     <string name="action_change_post_layout">Αλλαγή Διάταξης Ανάρτησης</string>
     <string name="action_save">"Αποθήκευση"</string>
     <string name="action_edit_multi_reddit">Επεξεργασία Πολυκοινότητας</string>
@@ -88,9 +87,6 @@
 \nΠάτα για επανάληψη.</string>
     <string name="no_messages">"Κενό"</string>
     <string name="nsfw">"NSFW"</string>
-    <string name="karma_info">"Κάρμα: %1$,d"</string>
-    <string name="karma_info_user_detail">"Κάρμα:
-%1$,d (%2$d + %3$d)"</string>
     <string name="cakeday_info">Επέτειος:
 \n%1$s</string>
     <string name="since">"Από:"</string>
@@ -173,11 +169,7 @@
     <string name="video_is_processing">Επεξεργασία βίντεο. Παρακαλώ περίμενε.</string>
     <string name="image_is_processing">Επεξεργασία εικόνας. Παρακαλώ περίμενε.</string>
     <string name="gif_is_processing">Επεξεργασία gif. Παρακαλώ περίμενε.</string>
-    <string name="flair">"Ετικέτα"</string>
     <string name="spoiler">Σπόιλερ</string>
-    <string name="no_flair">"Χωρίς ετικέτα"</string>
-    <string name="error_loading_flairs">Σφάλμα φόρτωσης ετικετών.
-\nΠάτα για να δοκιμάσεις ξανά.</string>
     <string name="no_rule">"Χωρίς κανόνες"</string>
     <string name="error_loading_rules">Σφάλμα φόρτωσης κανόνων.
 \nΠάτα για να δοκιμάσεις ξανά.</string>
@@ -258,14 +250,10 @@
     <string name="mark_spoiler_failed">Η επισήμανση ως σπόιλερ απέτυχε</string>
     <string name="unmark_spoiler_success">Αφαίρεση επισήμανσης σπόιλερ επιτυχώς</string>
     <string name="unmark_spoiler_failed">Η αφαίρεση επισήμανσης σπόιλερ απέτυχε</string>
-    <string name="update_flair_success">Ενημέρωση ετικέτας επιτυχής</string>
-    <string name="update_flair_failed">Η ενημέρωση ετικέτας απέτυχε</string>
-    <string name="edit_flair">Επεξεργασία Ετικέτας</string>
     <string name="only_allow_64_chars">"Να επιτρέπονται μόνο λιγότεροι από 64 χαρακτήρες"</string>
     <string name="view_all_comments">Κάνε κλικ εδώ για να περιηγηθείς σε όλα τα σχόλια</string>
     <string name="notification_summary_account">"Λογαριασμός"</string>
     <string name="notification_summary_message">"Νέο Μήνυμα"</string>
-    <string name="notification_summary_award">"Βραβείο"</string>
     <string name="notification_new_messages">"%1$d Νέα Μηνύματα"</string>
     <string name="label_account">"Λογαριασμός"</string>
     <string name="label_post">"Ανάρτηση"</string>
@@ -384,8 +372,6 @@
     <string name="settings_tab_3_summary">"Καρτέλα 3"</string>
     <string name="settings_tab_title">"Τίτλος"</string>
     <string name="settings_tab_post_type">"Τύπος"</string>
-    <string name="settings_tab_multi_reddit_name">Διαδρομή Πολυκοινότητας
-\n(/user/yourusername/m/yourmulticommunityname) (μόνο πεζοί χαρακτήρες)</string>
     <string name="settings_tab_username">Όνομα χρήστη (Χωρίς πρόθεμα u/)</string>
     <string name="no_developer_easter_egg">"Δεν υπάρχουν λειτουργίες προγραμματιστή εδώ"</string>
     <string name="no_link_available">Δεν είναι δυνατή η ανάκτηση του συνδέσμου</string>
@@ -506,8 +492,6 @@
     <string name="theme_item_comment_background_color_detail">"Εφαρμόστηκε σε: Παρασκήνιο σχολίου"</string>
     <string name="theme_item_fully_collapsed_comment_background_color">"Χρώμα Παρασκηνίου Πλήρως Συμπτυγμένου Σχολίου"</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">"Εφαρμόστηκε σε: Παρασκήνιο πλήρως συμπτυγμένων σχολίων"</string>
-    <string name="theme_item_awarded_comment_background_color">"Χρώμα Παρασκηνίου Βραβευμένου Σχολίου"</string>
-    <string name="theme_item_awarded_comment_background_color_detail">"Εφαρμόστηκε σε: Παρασκήνιο βραβευμένων σχολίων"</string>
     <string name="theme_item_received_message_background_color">Χρώμα Παρασκηνίου Ληφθέντος Μηνύματος</string>
     <string name="theme_item_received_message_background_color_detail">"Εφαρμόστηκε σε: Παρασκήνιο ληφθέντων προσωπικών μηνυμάτων"</string>
     <string name="theme_item_sent_message_background_color">"Χρώμα Παρασκηνίου Απεσταλμένου Μηνύματος"</string>
@@ -560,14 +544,6 @@
     <string name="theme_item_nsfw_background_color_detail">"Εφαρμόστηκε σε: Παρασκήνιο της ετικέτας NSFW"</string>
     <string name="theme_item_nsfw_text_color">"Χρώμα κείμενου NSFW"</string>
     <string name="theme_item_nsfw_text_color_detail">"Εφαρμόστηκε σε: Χρώμα κειμένου της ετικέτας NSFW"</string>
-    <string name="theme_item_flair_background_color">Χρώμα Παρασκηνίου Ετικέτας</string>
-    <string name="theme_item_flair_background_color_detail">Εφαρμόστηκε σε: Παρασκήνιο της ετικέτας</string>
-    <string name="theme_item_flair_text_color">Χρώμα Κειμένου Ετικέτας</string>
-    <string name="theme_item_flair_text_color_detail">Εφαρμόστηκε σε: Χρώμα κειμένου της ετικέτας</string>
-    <string name="theme_item_awards_background_color">"Χρώμα Παρασκηνίου Βραβείων"</string>
-    <string name="theme_item_awards_background_color_detail">"Εφαρμόστηκε σε: Παρασκήνιο της ετικέτας βραβείων"</string>
-    <string name="theme_item_awards_text_color">"Χρώμα Κειμένου Βραβείων"</string>
-    <string name="theme_item_awards_text_color_detail">"Εφαρμόστηκε σε: Χρώμα κειμένου ετικέτας βραβείων"</string>
     <string name="theme_item_archived_tint">Χρώμα Εικονιδίου Αρχειοθέτησης</string>
     <string name="theme_item_archived_tint_detail">"Εφαρμόστηκε σε: Εικονίδιο αρχειοθέτησης"</string>
     <string name="theme_item_locked_icon_tint">Χρώμα Εικονιδίου Κλειδωμένο</string>
@@ -582,8 +558,6 @@
     <string name="theme_item_unsubscribed_color_detail">"Εφαρμόστηκε σε: Κουμπί Εγγραφής"</string>
     <string name="theme_item_username_color">Χρώμα Ονόματος Χρήστη</string>
     <string name="theme_item_username_color_detail">"Εφαρμόστηκε σε: Όνομα χρήστη"</string>
-    <string name="theme_item_author_flair_text_color">Χρώμα Ετικέτας Συντάκτη</string>
-    <string name="theme_item_author_flair_text_color_detail">Εφαρμόστηκε σε: Ετικέτα συντάκτη στα σχόλια</string>
     <string name="theme_item_submitter_color">"Καταχωρητής"</string>
     <string name="theme_item_submitter_color_detail">"Εφαρμόστηκε σε: Καταχωρητής στα σχόλια"</string>
     <string name="theme_item_moderator_color">"Συντονιστής"</string>
@@ -670,15 +644,10 @@
     <string name="post_title_preview">"Αυτό είναι μια ανάρτηση"</string>
     <string name="post_content_preview">Αυτό το αστείο με τη βαρύτητα έχει παλιώσει, αλλά ακόμα πέφτω κάτω απ\' τα γέλια.</string>
     <string name="post_type_preview">ΑΝΑΡΤΗΣΗ</string>
-    <string name="flair_preview">Ετικέτα</string>
-    <string name="awards_preview">"4 Βραβεία"</string>
-    <string name="author_flair_preview">Ετικέτα Συντάκτη</string>
     <string name="comment_content_preview">"Πήρα στη κοπέλα μου μια κάρτα «Γίνε καλύτερα».
 Δεν είναι άρρωστη ή κάτι, αλλά σίγουρα θα μπορούσε να γίνει καλύτερα."</string>
     <string name="edit_multi_reddit">Επεξεργασία Πολυκοινότητας</string>
     <string name="delete_multi_reddit">Διαγραφή Πολυκοινότητας</string>
-    <string name="n_awards">"%1$,d Βραβεία"</string>
-    <string name="one_award">"1 Βραβείο"</string>
     <string name="report">"Αναφορά"</string>
     <string name="reporting">"Αναφέρεται"</string>
     <string name="report_successful">"Αναφέρθηκε"</string>
@@ -714,10 +683,7 @@
     <string name="top_score">"%1$s βθμ"</string>
     <string name="login_activity_2fa_prompt">Αν έχεις ενεργή την ταυτοποίηση 2 παραγόντων, παρακαλώ πληκτρολόγησε τον κωδικό στο αντίστοιχο πεδίο. Αλλιώς, άσε κενό</string>
     <string name="submit_crosspost_activity_label">"Αναδημοσίευση"</string>
-    <string name="give_award_activity_label">Δώσε Βραβείο</string>
     <string name="action_crosspost">"Αναδημοσίευση"</string>
-    <string name="action_select_user_flair">Επιλογή Ετικέτας Χρήστη</string>
-    <string name="action_give_award">"Δώσε Βραβείο"</string>
     <string name="posts">"Αναρτήσεις"</string>
     <string name="only_for_logged_in_user">"Μόνο για Συνδεδεμένο Χρήστη"</string>
     <string name="settings_number_of_columns_in_post_feed_title">"Ο Αριθμός Στηλών Στη Ροή Αναρτήσεων"</string>
@@ -767,8 +733,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">"Η λήψη απέτυχε: δεν είναι δυνατή η πρόσβαση της διεύθυνσης προορισμού"</string>
     <string name="downloading_media_failed_cannot_download_media">"Η λήψη απέτυχε"</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">"Η λήψη απέτυχε: δεν είναι δυνατή η αποθήκευση του αρχείου στη διεύθυνση προορισμού"</string>
-    <string name="select_user_flair_success">Η ετικέτα χρήστη επιλέχθηκε</string>
-    <string name="select_this_user_flair">Επιλογή αυτής ετικέτας χρήστη;</string>
     <string name="select_header_size">"Επιλογή Μεγέθους Κεφαλίδας"</string>
     <string name="large">"Μεγάλο"</string>
     <string name="small">"Μικρό"</string>
@@ -781,12 +745,7 @@
     <string name="refresh">"Ανανέωση"</string>
     <string name="change_sort_type">Αλλαγή Τύπου Ταξινόμησης</string>
     <string name="change_post_layout">"Αλλαγή Διάταξης Ανάρτησης"</string>
-    <string name="give_award_dialog_title">"Να δωθεί Βραβείο;"</string>
     <string name="anonymous">"Ανώνυμος"</string>
-    <string name="give_award_error_message">Κωδικός: %1$d/
-\nΜήνυμα: %2$s</string>
-    <string name="give_award_success">"Το βραβείο δόθηκε"</string>
-    <string name="give_award_failed">"Απέτυχε"</string>
     <string name="warning">"Προειδοποίηση"</string>
     <string name="this_user_has_nsfw_content">"Αυτός ο χρήστης έχει περιεχόμενο NSFW"</string>
     <string name="dismiss">"Απόρριψη"</string>
@@ -852,14 +811,10 @@
     <string name="title_excludes_strings_hint">"Τίτλος: εκτός λέξεις-κλειδιά(κλειδι1,κλειδι2)"</string>
     <string name="title_excludes_regex_hint">"Τίτλος: εκτός regex"</string>
     <string name="exclude_users_hint">"Εξαίρεση χρηστών (πχ. Hostilenemy, random)"</string>
-    <string name="exclude_flairs_hint">Εξαίρεση ετικετών (πχ. ετικέτα1, ετικέτα2)</string>
-    <string name="contain_flairs_hint">Συμπερίληψη ετικετών (πχ ετικέτα1, ετικέτα2)</string>
     <string name="min_vote_hint">"Ελάχιστη ψήφος (-1: χωρίς περιορισμούς)"</string>
     <string name="max_vote_hint">Μέγιστη ψήφος (-1: χωρίς περιορισμούς)</string>
     <string name="min_comments_hint">"Ελάχιστα σχόλια (-1: χωρίς περιορισμούς)"</string>
     <string name="max_comments_hint">"Μέγιστα σχόλια (-1: χωρίς περιορισμούς)"</string>
-    <string name="min_awards_hint">"Ελάχιστα βραβεία (-1: χωρίς περιορισμούς)"</string>
-    <string name="max_awards_hint">"Μέγιστα βραβεία (-1: χωρίς περιορισμούς)"</string>
     <string name="post_filter_name_hint">"Όνομα Φίλτρου Ανάρτησης"</string>
     <string name="post_filter_requires_a_name">"Ποιο είναι το όνομα αυτού του φίλτρου ανάρτησης;"</string>
     <string name="duplicate_post_filter_dialog_title">«%1$s»Υπάρχει Ήδη</string>
@@ -879,7 +834,6 @@
     <string name="choose_a_user">Επέλεξε έναν χρήστη</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Κάνε κλικ για Εμφάνιση Πολυμέσων στη Διάταξη Συλλογής</string>
     <string name="settings_hide_post_type">"Απόκρυψη Τύπου Ανάρτησης"</string>
-    <string name="settings_hide_the_number_of_awards">"Απόκρυψη Αριθμού των Βραβείων"</string>
     <string name="settings_hide_the_number_of_votes">"Απόκρυψη Αριθμού Ψήφων"</string>
     <string name="settings_hide_the_number_of_comments">"Απόκρυψη Αριθμού Σχολίων"</string>
     <string name="post_layout_gallery">"Διάταξη Συλλογής"</string>
@@ -935,8 +889,6 @@
     <string name="downvote">"Αρνητική ψήφος"</string>
     <string name="select">"Επιλογή"</string>
     <string name="exclude_user">"Εξαίρεση αυτού του χρήστη"</string>
-    <string name="exclude_flair">Εξαίρεση αυτής της ετικέτας</string>
-    <string name="contain_flair">Συμπερίληψη αυτής της ετικέτας</string>
     <string name="exclude_domain">"Εξαίρεση αυτού του τομέα"</string>
     <string name="suggest_title">"Πρόταση Τίτλου"</string>
     <string name="suggest_title_failed">"Αποτυχία πρότασης τίτλου"</string>
@@ -944,7 +896,6 @@
     <string name="inbox_with_count">"Εισερχόμενα (%1$,d)"</string>
     <string name="comment_continue_thread">Συνέχισε το νήμα</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Σύρε Κάθετα για να Επιστρέψεις από μια Εικόνα ή Gif</string>
-    <string name="settings_hide_post_flair">Απόκρυψη Ετικέτας Ανάρτησης</string>
     <string name="settings_crash_reports_title">"Αναφορές Σφαλμάτων"</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">"Επικίνδυνο"</string>
     <string name="settings_disable_nsfw_forever_title">"Απενεργοποίηση NSFW για πάντα"</string>
@@ -1099,7 +1050,6 @@
     <string name="settings_custom_content_font_family_title">"Προσαρμοσμένη Γραμματοσειρά Περιεχομένου"</string>
     <string name="settings_fixed_height_preview_in_card_title">"Σταθερό Ύψος στην Κάρτα"</string>
     <string name="settings_hide_text_post_content">"Απόκρυψη Περιεχομένου Κειμένου Ανάρτησης"</string>
-    <string name="settings_hide_comment_awards_title">"Απόκρυψη Βραβείων Σχολίου"</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">"Εμφάνιση Λιγότερων Επιλογών Γραμμής Εργαλείων Ξεκινώντας από"</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Επίπεδο %1$d</string>
     <string name="settings_show_author_avatar_title">"Εμφάνιση Άβαταρ Συντάκτη"</string>
@@ -1127,15 +1077,9 @@
     <string name="option_5_hint">"Επιλογή 5"</string>
     <string name="option_6_hint">"Επιλογή 6"</string>
     <string name="not_a_valid_number">"Μη έγκυρος αριθμός"</string>
-    <string name="post_karma">"Κάρμα Αναρτήσεων:"</string>
-    <string name="comment_karma">"Κάρμα Σχολίων:"</string>
-    <string name="awarder_karma">"Κάρμα Βραβευτή:"</string>
-    <string name="awardee_karma">"Κάρμα Βραβευμένου:"</string>
     <string name="history_activity_label">"Ιστορικό"</string>
     <string name="history">"Ιστορικό"</string>
     <string name="settings_easier_to_watch_in_full_screen_title">"Ευκολότερο στη θέαση στην Πλήρη Οθόνη"</string>
-    <string name="clear_user_flair">Εκκαθάριση Ετικέτας</string>
-    <string name="clear_user_flair_success">Η ετικέτα χρήστη καθάρισε</string>
     <string name="extra_small">"Πολύ Μικρό"</string>
     <string name="handle_link">Χειρισμός Συνδέσμου</string>
     <string name="invalid_link">"Μη έγκυρος σύνδεσμος"</string>
@@ -1147,7 +1091,6 @@
     <string name="action_create_github_issue">Δημιουργία Codeberg Issue</string>
     <string name="action_more_options">Περισσότερες Επιλογές</string>
     <string name="settings_backup_settings_summary">"Ο κωδικός αρχείου αντιγράφου ασφαλείας είναι \"123321\"."</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">"Απόκρυψη Κάρμα Λογαριασμού"</string>
     <string name="settings_hide_fab_in_post_feed">"Απόκρυψη FAB στην ροή Αναρτήσεων"</string>
     <string name="settings_comment_divider_type">"Τύπος Διαχωριστή Σχολίων"</string>
     <string name="block_user">"Αποκλεισμός Χρήστη"</string>

@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">Забрати НБДР</string>
     <string name="action_mark_spoiler">Позначити як спойлер</string>
     <string name="action_unmark_spoiler">Забрати спойлер</string>
-    <string name="action_edit_flair">Змінити личку</string>
     <string name="action_change_post_layout">Змінити вигляд дописів</string>
     <string name="action_save">Зберегти</string>
     <string name="action_edit_multi_reddit">Змінити мультиспільноту</string>
@@ -94,9 +93,6 @@
 \nНатисніть, щоб повторити.</string>
     <string name="no_messages">Порожньо</string>
     <string name="nsfw">НБДР</string>
-    <string name="karma_info">Карма: %1$,d</string>
-    <string name="karma_info_user_detail">Карма:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">День торта:
 \n%1$s</string>
     <string name="since">Від:</string>
@@ -183,11 +179,7 @@
     <string name="video_is_processing">Відеозапис обробляється. Будь ласка, зачекайте.</string>
     <string name="image_is_processing">Зображення обробляється. Будь ласка, зачекайте.</string>
     <string name="gif_is_processing">GIF обробляється. Будь ласка, зачекайте.</string>
-    <string name="flair">Личка</string>
     <string name="spoiler">Спойлер</string>
-    <string name="no_flair">Без лички</string>
-    <string name="error_loading_flairs">Помилка завантаження личок.
-\nНатисніть, щоб повторити.</string>
     <string name="no_rule">Без правил</string>
     <string name="error_loading_rules">Помилка завантаження правил.
 \nНатисніть, щоб повторити.</string>
@@ -269,15 +261,11 @@
     <string name="mark_spoiler_failed">Не вдалося позначити як спойлер</string>
     <string name="unmark_spoiler_success">Успішно забрано позначку спойлера</string>
     <string name="unmark_spoiler_failed">Не вдалося забрати позначку спойлера</string>
-    <string name="update_flair_success">Личку успішно оновлено</string>
-    <string name="update_flair_failed">Не вдалося оновити личку</string>
-    <string name="edit_flair">Змінити личку</string>
     <string name="only_allow_64_chars">Дозволено лише не більше 64 знаків</string>
     <string name="view_all_comments">Клацніть тут, щоб переглянути всі коментарі</string>
     <string name="notification_summary_account">Обліковий запис</string>
     <string name="notification_summary_message">Нове повідомлення</string>
     <string name="notification_summary_community">Спільнота</string>
-    <string name="notification_summary_award">Нагорода</string>
     <string name="notification_new_messages">%1$d нових повідомлень</string>
     <string name="label_account">Обліковий запис</string>
     <string name="label_post">Допис</string>
@@ -400,7 +388,6 @@
     <string name="settings_tab_title">Назва</string>
     <string name="settings_tab_post_type">Тип</string>
     <string name="settings_tab_community_name">Назва спільноти (без частини «@сервер»)</string>
-    <string name="settings_tab_multi_reddit_name">Шлях мультиспільноти (/user/yourusername/m/yourmulticommunityname) (лише маленькі літери)</string>
     <string name="settings_tab_username">Ім\'я користувача (без префікса u/)</string>
     <string name="no_developer_easter_egg">Тут нема опцій розробника</string>
     <string name="no_link_available">Неможливо отримати посилання</string>
@@ -522,8 +509,6 @@
     <string name="theme_item_comment_background_color_detail">Задіяно до: Тло коментарів</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Колір тла повністю згорненого коментаря</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Задіяно до: Тло повністю згорнутих коментарів</string>
-    <string name="theme_item_awarded_comment_background_color">Колір тла коментаря з нагородою</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Задіяно до: Тло нагороджених коментарів</string>
     <string name="theme_item_received_message_background_color">Колір тла отриманого повідомлення</string>
     <string name="theme_item_received_message_background_color_detail">Задіяно до: Тло отриманих приватних повідомлень</string>
     <string name="theme_item_sent_message_background_color">Колір тла надісланого повідомлення</string>
@@ -576,14 +561,6 @@
     <string name="theme_item_nsfw_background_color_detail">Задіяно до: Тло позначки НБДР</string>
     <string name="theme_item_nsfw_text_color">Колір тексту НБДР</string>
     <string name="theme_item_nsfw_text_color_detail">Задіяно до: Колір тексту позначки НБДР</string>
-    <string name="theme_item_flair_background_color">Колір тла лички</string>
-    <string name="theme_item_flair_background_color_detail">Задіяно до: Тло лички</string>
-    <string name="theme_item_flair_text_color">Колір тексту лички</string>
-    <string name="theme_item_flair_text_color_detail">Задіяно до: Колір тексту лички</string>
-    <string name="theme_item_awards_background_color">Колір тла нагороди</string>
-    <string name="theme_item_awards_background_color_detail">Задіяно до: Тло позначки нагород</string>
-    <string name="theme_item_awards_text_color">Колір тексту нагороди</string>
-    <string name="theme_item_awards_text_color_detail">Задіяно до: Колір тексту позначки нагород</string>
     <string name="theme_item_archived_tint">Колір тексту заархівованого</string>
     <string name="theme_item_archived_tint_detail">Задіяно до: Значок «Заархівовано»</string>
     <string name="theme_item_locked_icon_tint">Колір значка замкненого</string>
@@ -600,8 +577,6 @@
     <string name="theme_item_username_color_detail">Задіяно до: Імʼя користувача</string>
     <string name="theme_item_community_color">Колір спільноти</string>
     <string name="theme_item_community_color_detail">Задіяно до: Назва спільноти</string>
-    <string name="theme_item_author_flair_text_color">Колір авторської лички</string>
-    <string name="theme_item_author_flair_text_color_detail">Задіяно до: Авторська личка в коментарях</string>
     <string name="theme_item_submitter_color">Надсилач</string>
     <string name="theme_item_submitter_color_detail">Задіяно до: Надсилач у коментарях</string>
     <string name="theme_item_moderator_color">Модератор</string>
@@ -690,15 +665,10 @@
     <string name="post_title_preview">Це допис</string>
     <string name="post_content_preview">Цей жарт про гравітацію трохи застарів, але я щоразу падаю від нього.</string>
     <string name="post_type_preview">ДОПИС</string>
-    <string name="flair_preview">Личка</string>
-    <string name="awards_preview">4 нагороди</string>
-    <string name="author_flair_preview">Авторська личка</string>
     <string name="comment_content_preview">Я дав своїй дівчині листівку «Поправляйся швидше».
 \nВона не хвора чи щось таке, але їй точно стане краще.</string>
     <string name="edit_multi_reddit">Змінити мультиспільноту</string>
     <string name="delete_multi_reddit">Видалити мультиспільноту</string>
-    <string name="n_awards">%1$,d нагород</string>
-    <string name="one_award">1 нагорода</string>
     <string name="report">Поскаржитися</string>
     <string name="reporting">Надсилання скарги</string>
     <string name="report_successful">Скаргу надіслано</string>
@@ -736,10 +706,7 @@
     <string name="top_score">%1$s балів</string>
     <string name="login_activity_2fa_prompt">Якщо у Вас увімкнено 2-факторну автентифікацію, Вам треба заповнити поле «Токен 2FA». Якщо ні — залиште його порожнім</string>
     <string name="submit_crosspost_activity_label">Передопис</string>
-    <string name="give_award_activity_label">Нагородити</string>
     <string name="action_crosspost">Передопис</string>
-    <string name="action_select_user_flair">Вибрати личку користувача</string>
-    <string name="action_give_award">Нагородити</string>
     <string name="posts">Дописи</string>
     <string name="only_for_logged_in_user">Лише для користувачів, що ввійшли</string>
     <string name="settings_number_of_columns_in_post_feed_title">Кількість стовпців у стрічці дописів</string>
@@ -789,8 +756,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Не вдалося завантажити: нема доступу до призначеного каталогу</string>
     <string name="downloading_media_failed_cannot_download_media">Не вдалося завантажити</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Не вдалося завантажити: файл не зберігається в призначений каталог</string>
-    <string name="select_user_flair_success">Вибрано личку користувача</string>
-    <string name="select_this_user_flair">Вибрати цю личку користувача\?</string>
     <string name="select_header_size">Вибрати розмір заголовка</string>
     <string name="large">Великий</string>
     <string name="small">Малий</string>
@@ -803,12 +768,7 @@
     <string name="refresh">Оновити</string>
     <string name="change_sort_type">Змінити тип сортування</string>
     <string name="change_post_layout">Змінити вигляд дописів</string>
-    <string name="give_award_dialog_title">Нагородити\?</string>
     <string name="anonymous">Анонімно</string>
-    <string name="give_award_error_message">Код: %1$d/
-\nПовідомлення: %2$s</string>
-    <string name="give_award_success">Нагороджено</string>
-    <string name="give_award_failed">Не вдалося</string>
     <string name="warning">Попередження</string>
     <string name="this_is_a_nsfw_community">Це спільнота НБДР.</string>
     <string name="this_user_has_nsfw_content">У цього користувача є вміст НБДР</string>
@@ -824,12 +784,10 @@
     <string name="random_nsfw_post">Випадковий допис НБДР</string>
     <string name="fetch_random_thing_failed">Спробуйте пізніше</string>
     <string name="downloading">Завантаження</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all і r/popular</string>
     <string name="settings_miscellaneous_title">Різне</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Дотримуватися рекомендованого спільнотою сортування коментарів</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Тип сортування коментарів не збережеться</string>
     <string name="settings_community_filter_category">Ховати спільноти</string>
-    <string name="settings_community_filter_popular_and_all">У r/popular і r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Анімація захоплення НЛО</string>
     <string name="select_video_quality">Вибрати якість відео</string>
     <string name="settings_swipe_action_haptic_feedback_title">Тактильний відгук</string>
@@ -889,14 +847,10 @@
     <string name="title_excludes_regex_hint">Заголовок: виключати регулярний вираз</string>
     <string name="exclude_communities_hint">Не враховувати спільноти (напр., memes,AskLemmy)</string>
     <string name="exclude_users_hint">Не враховувати користувачів (напр., Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Не враховувати лички (напр., личка1,личка2)</string>
-    <string name="contain_flairs_hint">Містить лички (напр., личка1,личка2)</string>
     <string name="min_vote_hint">Найменше голосів (-1: без обмежень)</string>
     <string name="max_vote_hint">Найбільше голосів (-1: без обмежень)</string>
     <string name="min_comments_hint">Найменше коментарів (-1: без обмежень)</string>
     <string name="max_comments_hint">Найбільше коментарів (-1: без обмежень)</string>
-    <string name="min_awards_hint">Найменше нагород (-1: необмежено)</string>
-    <string name="max_awards_hint">Найбільше нагород (-1: необмежено)</string>
     <string name="post_filter_name_hint">Назва фільтру дописів</string>
     <string name="post_filter_requires_a_name">Яка назва для цього фільтру дописів\?</string>
     <string name="duplicate_post_filter_dialog_title">«%1$s» вже існує</string>
@@ -920,7 +874,6 @@
     <string name="choose_a_user">Оберіть користувача</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Клацнути, щоб показати медіа у вигляді галереї</string>
     <string name="settings_hide_post_type">Ховати тип дописів</string>
-    <string name="settings_hide_the_number_of_awards">Ховати кількість нагород</string>
     <string name="settings_hide_community_and_user_prefix">Ховати префікс спільнот і користувачів</string>
     <string name="settings_hide_the_number_of_votes">Ховати кількість голосів</string>
     <string name="settings_hide_the_number_of_comments">Ховати кількість коментарів</string>
@@ -982,8 +935,6 @@
     <string name="select">Вибрати</string>
     <string name="exclude_community">Виключити цю спільноту</string>
     <string name="exclude_user">Виключити цього користувача</string>
-    <string name="exclude_flair">Виключити цю личку</string>
-    <string name="contain_flair">Містить цю личку</string>
     <string name="exclude_domain">Виключити цей домен</string>
     <string name="suggest_title">Пропонований заголовок</string>
     <string name="suggest_title_failed">Не вдалося запропонувати заголовок</string>
@@ -991,7 +942,6 @@
     <string name="inbox_with_count">Вхідні (%1$,d)</string>
     <string name="comment_continue_thread">Продовжити гілку</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Ковзніть вертикально, щоб вернутися назад від зображення або GIF</string>
-    <string name="settings_hide_post_flair">Ховати лички дописів</string>
     <string name="settings_crash_reports_title">Звіти про збої</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Небезпечно</string>
     <string name="settings_disable_nsfw_forever_title">Назавжди заборонити НБДР</string>
@@ -1147,7 +1097,6 @@
     <string name="settings_custom_content_font_family_title">Власне сімейство шрифтів для вмісту</string>
     <string name="settings_fixed_height_preview_in_card_title">Фіксована висота карток</string>
     <string name="settings_hide_text_post_content">Ховати текст вмісту дописів</string>
-    <string name="settings_hide_comment_awards_title">Ховати нагороди коментарів</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Показувати менше параметрів панелі засобів, починаючи з</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Рівень %1$d</string>
     <string name="settings_show_author_avatar_title">Показувати аватарку автора</string>
@@ -1175,10 +1124,6 @@
     <string name="option_5_hint">Варіант 5</string>
     <string name="option_6_hint">Варіант 6</string>
     <string name="not_a_valid_number">Неправильне число</string>
-    <string name="post_karma">Карма за дописи:</string>
-    <string name="comment_karma">Карма за коментарі:</string>
-    <string name="awarder_karma">Карма за нагородження:</string>
-    <string name="awardee_karma">Карма за отримання нагород:</string>
     <string name="comment_count_detail">%1$,d коментарів</string>
     <string name="user_2fa_token">Токен 2FA (якщо є)</string>
     <string name="history_activity_label">Історія</string>
@@ -1211,7 +1156,6 @@
     <string name="active_users_number_detail">%1$,d активних користувачів</string>
     <string name="post_count_detail">%1$,d дописів</string>
     <string name="invalid_response">Неправильна відповідь від сервера</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Сховати карму облікового запису</string>
     <string name="settings_backup_settings_summary">Пароль для файлу резервної копії — 123321.</string>
     <string name="settings_easier_to_watch_in_full_screen_title">Простіше переглядати в повноекранному режимі</string>
     <string name="block_user">Заблокувати користувача</string>
@@ -1219,8 +1163,6 @@
     <string name="block_user_failed">Не вдалося заблокувати користувача</string>
     <string name="edited_time">Змінено о %s</string>
     <string name="edited">Змінено</string>
-    <string name="clear_user_flair">Очистити личку</string>
-    <string name="clear_user_flair_success">Личку користувача очищено</string>
     <string name="extra_small">Дуже малий</string>
     <string name="error_unsupported_audio">Медіа містить звукову доріжку, проте її неможливо відтворити на цьому пристрої</string>
     <string name="invalid_link">Неправильне посилання</string>

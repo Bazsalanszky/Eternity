@@ -57,7 +57,6 @@
     <string name="action_unmark_nsfw">"NSFW 표기 해제"</string>
     <string name="action_mark_spoiler">"스포일러 표기"</string>
     <string name="action_unmark_spoiler">"스포일러 표기 해제"</string>
-    <string name="action_edit_flair">"플레어 편집"</string>
     <string name="action_change_post_layout">"글 레이아웃 변경"</string>
     <string name="action_save">"저장"</string>
     <string name="action_edit_multi_reddit">"멀티레딧 편집"</string>
@@ -99,13 +98,6 @@
 재시도하려면 탭하세요."</string>
     <string name="no_messages">"비어 있음"</string>
     <string name="nsfw">"NSFW"</string>
-
-    <!-- Fuzzy -->
-    <string name="karma_info">"카르마: %1$d"</string>
-
-    <!-- Fuzzy -->
-    <string name="karma_info_user_detail">"카르마:
-%1$d (%2$d + %3$d)"</string>
     <string name="cakeday_info">"케이크날:
 %1$s"</string>
     <string name="since">"가입:"</string>
@@ -194,11 +186,7 @@
     <string name="video_is_processing">"둥영상을 처리중입니다. 잠시만 기다려주세요."</string>
     <string name="image_is_processing">"사진을 처리중입니다. 잠시만 기다려주세요."</string>
     <string name="gif_is_processing">"Gif를 처리중입니다. 잠시만 기다려주세요."</string>
-    <string name="flair">"플레어"</string>
     <string name="spoiler">"스포일러"</string>
-    <string name="no_flair">"플레어 없음"</string>
-    <string name="error_loading_flairs">"플레어를 로드하는데 오류가 발생했습니다.
-재시도하려면 탭하세요."</string>
 
     <!-- Fuzzy -->
     <string name="no_rule">"규칙 없음"</string>
@@ -283,14 +271,10 @@
     <string name="mark_spoiler_failed">"스포일러 표기 실패"</string>
     <string name="unmark_spoiler_success">"성공적으로 스포일러 표기 해제"</string>
     <string name="unmark_spoiler_failed">"스포일러 표기 해제 실패"</string>
-    <string name="update_flair_success">"성공적으로 플레어 변경"</string>
-    <string name="update_flair_failed">"플레어 변경에 실패했습니다"</string>
-    <string name="edit_flair">"플레어 편집"</string>
     <string name="only_allow_64_chars">"64자 이하로만 허용"</string>
     <string name="view_all_comments">"여기를 눌러 모든 댓글을 확인하세요"</string>
     <string name="notification_summary_account">"계정"</string>
     <string name="notification_summary_message">"새로운 메시지"</string>
-    <string name="notification_summary_award">"수상"</string>
 
     <!-- Fuzzy -->
     <string name="notification_new_messages">"%1$d 개의 새 메세지"</string>
@@ -492,7 +476,6 @@
     <string name="action_create_github_issue">"깃허브 문제 생성"</string>
     <string name="action_more_options">"더많은 설정"</string>
     <string name="settings_backup_settings_summary">"백업 파일 비밀번호는 \"123321\"."</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">"계정 카르마 숨기기"</string>
     <string name="settings_hide_fab_in_post_feed">"게시글 피드에 FAB 숨기기"</string>
     <string name="block_user">"유저 차단"</string>
     <string name="block_user_success">"차단됨"</string>

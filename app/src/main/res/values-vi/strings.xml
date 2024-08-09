@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">Bỏ đánh dấu NSFW (18+)</string>
     <string name="action_mark_spoiler">Đánh dấu Spoiler</string>
     <string name="action_unmark_spoiler">Bỏ đánh dấu Spoiler</string>
-    <string name="action_edit_flair">Sửa tư cách</string>
     <string name="action_change_post_layout">Thay đổi bố cục bài đăng</string>
     <string name="action_save">Lưu</string>
     <string name="action_edit_multi_reddit">Sửa MultiReddit</string>
@@ -88,9 +87,6 @@
     <string name="load_messages_failed">Lỗi khi tải tin nhắn. Chạm để thử lại</string>
     <string name="no_messages">Không có tin nhắn</string>
     <string name="nsfw">NSFW (18+)</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Ngày bánh ga tô:
 \n%1$s</string>
     <string name="since">Từ khi</string>
@@ -179,11 +175,7 @@
     <string name="video_is_processing">Video đang xử lý. Vui lòng đợi.</string>
     <string name="image_is_processing">Hình ảnh đang xử lý. Vui lòng đợi.</string>
     <string name="gif_is_processing">Tệp Gif đang xử lý. Vui lòng đợi.</string>
-    <string name="flair">Tư cách</string>
     <string name="spoiler">Spoiler</string>
-    <string name="no_flair">Không có tư cách</string>
-    <string name="error_loading_flairs">Lỗi khi tải tư cách.
-\nNhấn để thử lại.</string>
     <string name="no_rule">Không có luật lệ</string>
     <string name="error_loading_rules">Lỗi khi tải qui định. Chạm để thử lại.</string>
     <string name="error_loading_rules_without_retry">Lỗi khi tải qui định</string>
@@ -271,15 +263,11 @@
     <!-- Fuzzy -->
     <string name="unmark_spoiler_success">Bỏ đánh dấu spoiler thành công</string>
     <string name="unmark_spoiler_failed">Bỏ đánh dấu spoiler thất bại</string>
-    <string name="update_flair_success">Cập nhật tư cách thành công</string>
-    <string name="update_flair_failed">Cập nhật tư cách thất bại</string>
-    <string name="edit_flair">Sửa tư cách</string>
     <string name="only_allow_64_chars">Chỉ cho phép ít hơn 64 ký tự</string>
     <string name="view_all_comments">Nhấn vào đây để xem tất cả các bình luận</string>
     <string name="notification_summary_account">Tài khoản</string>
     <string name="notification_summary_message">Tin nhắn mới</string>
     <string name="notification_summary_community">Subreddit</string>
-    <string name="notification_summary_award">Giải thưởng</string>
     <string name="notification_new_messages">%1$d Tin nhắn mới</string>
     <string name="label_account">Tài khoản</string>
     <string name="label_post">Bài đăng</string>
@@ -404,7 +392,6 @@
     <string name="settings_tab_post_type">Loại</string>
     <string name="settings_tab_community_name">Tên subreddit (Không có tiền tố r/)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Tên MultiReddit (/user/yourusername/m/yourmultiredditname)</string>
     <string name="settings_tab_username">Tên người dùng (Không có tiền tố u/)</string>
     <string name="no_developer_easter_egg">Không có tuỳ chọn cho nhà phát triển nào ở đây</string>
     <string name="no_link_available">Không thể lấy liên kết</string>
@@ -526,8 +513,6 @@
     <string name="theme_item_comment_background_color_detail">Áp dụng cho: Nền bình luận</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Màu nền bình luận được thu gọn hoàn toàn</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Áp dụng cho: Nền của bình luận được thu gọn hoàn toàn</string>
-    <string name="theme_item_awarded_comment_background_color">Màu nền bình luận được trao giải thưởng</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Áp dụng cho: Nền của bình luận được trao giải thưởng</string>
     <string name="theme_item_received_message_background_color">Màu nền tin nhắn được nhận</string>
     <string name="theme_item_received_message_background_color_detail">Áp dụng cho: Nền của tin nhắn riêng tư được nhận</string>
     <string name="theme_item_sent_message_background_color">Màu nền tin nhắn đã gửi</string>
@@ -580,14 +565,6 @@
     <string name="theme_item_nsfw_background_color_detail">Áp dụng cho: Nền của thẻ NSFW</string>
     <string name="theme_item_nsfw_text_color">Màu văn bản NSFW</string>
     <string name="theme_item_nsfw_text_color_detail">Áp dụng cho: Màu văn bản của thẻ NSFW</string>
-    <string name="theme_item_flair_background_color">Màu nền tư cách</string>
-    <string name="theme_item_flair_background_color_detail">Áp dụng cho: Nền của thẻ tư cách</string>
-    <string name="theme_item_flair_text_color">Màu văn bản tư cách</string>
-    <string name="theme_item_flair_text_color_detail">Áp dụng cho: Màu văn bản của thẻ tư cách</string>
-    <string name="theme_item_awards_background_color">Màu nền giải thưởng</string>
-    <string name="theme_item_awards_background_color_detail">Áp dụng cho: Nền của thẻ giải thưởng</string>
-    <string name="theme_item_awards_text_color">Màu văn bản giải thưởng</string>
-    <string name="theme_item_awards_text_color_detail">Áp dụng cho: Màu văn bản của thẻ giải thưởng</string>
     <string name="theme_item_archived_tint">Màu biểu tượng đã lưu trữ</string>
     <string name="theme_item_archived_tint_detail">Áp dụng cho: Biểu tượng đã lưu trữ</string>
     <string name="theme_item_locked_icon_tint">Màu biểu tượng đã khoá</string>
@@ -604,8 +581,6 @@
     <string name="theme_item_username_color_detail">Áp dụng cho: Tên người dùng</string>
     <string name="theme_item_community_color">Màu subreddit</string>
     <string name="theme_item_community_color_detail">Áp dụng cho: Tên subreddit</string>
-    <string name="theme_item_author_flair_text_color">Màu tư cách tác giả</string>
-    <string name="theme_item_author_flair_text_color_detail">Áp dụng cho: Tư cách tác giả trong mục bình luận</string>
     <string name="theme_item_submitter_color">Người gửi</string>
     <string name="theme_item_submitter_color_detail">Áp dụng cho: Người gửi trong mục bình luận</string>
     <string name="theme_item_moderator_color">Người điều hành</string>
@@ -694,15 +669,10 @@
     <string name="post_title_preview">Đây là một bài đăng</string>
     <string name="post_content_preview">Chuyện cười về trọng lực này đang trở nên hơi cũ rồi, nhưng mọi lần tôi đều thấy buồn cười.</string>
     <string name="post_type_preview">BÀI ĐĂNG</string>
-    <string name="flair_preview">Tư cách</string>
-    <string name="awards_preview">4 giải thưởng</string>
-    <string name="author_flair_preview">Tư cách tác giả</string>
     <string name="comment_content_preview">Tôi đã mua cho bạn gái một tấm thẻ \"Hãy sớm khá hơn\".
 \nCô ta không ốm hay gì cả, nhưng cô ấy chắc chắn có thể khá hơn.</string>
     <string name="edit_multi_reddit">Sửa Multireddit</string>
     <string name="delete_multi_reddit">Xoá Multireddit</string>
-    <string name="n_awards">%1$,d giải thưởng</string>
-    <string name="one_award">1 giải thưởng</string>
     <string name="report">Báo cáo</string>
     <string name="reporting">Đang báo cáo</string>
     <string name="report_successful">Đã báo cáo</string>
@@ -741,10 +711,7 @@
     <string name="login_activity_2fa_prompt">Nếu bạn đã bật xác thực 2 yếu tố, hãy vui lòng nhập mật khẩu như sau: &lt;mật khẩu&gt;:&lt;mã 2FA&gt;.
 \nVí dụ: yourpass:123456</string>
     <string name="submit_crosspost_activity_label">Đăng chéo</string>
-    <string name="give_award_activity_label">Cho giải thưởng</string>
     <string name="action_crosspost">Đăng chéo</string>
-    <string name="action_select_user_flair">Chọn tư cách người dùng</string>
-    <string name="action_give_award">Cho giải thưởng</string>
     <string name="posts">Bài đăng</string>
     <string name="only_for_logged_in_user">Chỉ cho người dùng đã đăng nhập</string>
     <string name="settings_number_of_columns_in_post_feed_title">Số lượng cột trong nguồn dữ liệu bài đăng</string>
@@ -797,8 +764,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Tải xuống thất bại: không thể truy cập thư mục đích</string>
     <string name="downloading_media_failed_cannot_download_media">Tải xuống thất bại</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Tải xuống thất bại: không thể lưu tệp vào thư mục đích</string>
-    <string name="select_user_flair_success">Tư cách người dùng đã được chọn</string>
-    <string name="select_this_user_flair">Chọn tư cách người dùng này\?</string>
     <string name="select_header_size">Chọn kích thước tiêu đề</string>
     <string name="large">Lớn</string>
     <string name="small">Nhỏ</string>
@@ -811,12 +776,7 @@
     <string name="refresh">Làm mới</string>
     <string name="change_sort_type">Thay đổi loại sắp xếp</string>
     <string name="change_post_layout">Thay đổi bố cục bài đăng</string>
-    <string name="give_award_dialog_title">Cho giải thưởng\?</string>
     <string name="anonymous">Vô danh</string>
-    <string name="give_award_error_message">Mã: %1$d/
-\nThông báo: %2$s</string>
-    <string name="give_award_success">Giải thưởng đã được cho</string>
-    <string name="give_award_failed">Thất bại</string>
     <string name="warning">Cảnh báo</string>
     <string name="this_is_a_nsfw_community">Đây là một subreddit NSFW.</string>
     <string name="this_user_has_nsfw_content">Người dùng này có nội dung NSFW</string>
@@ -832,12 +792,10 @@
     <string name="random_nsfw_post">Bài đăng NSFW ngẫu nhiên</string>
     <string name="fetch_random_thing_failed">Hãy thử lại sau</string>
     <string name="downloading">Đang tải xuống</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all và r/popular</string>
     <string name="settings_miscellaneous_title">Khác</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Tôn trọng loại sắp xếp bình luận được subreddit khuyên dùng</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Loại sắp xếp bình luận sẽ không được lưu</string>
     <string name="settings_community_filter_category">Ẩn subreddit</string>
-    <string name="settings_community_filter_popular_and_all">Trong r/popular và r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Hoạt ảnh UFO đang bắt lấy</string>
     <string name="select_video_quality">Chọn chất lượng video</string>
     <string name="settings_swipe_action_haptic_feedback_title">Phản hồi xúc giác</string>
@@ -897,14 +855,10 @@
     <string name="title_excludes_regex_hint">Tiêu đề: loại trừ biểu thức tìm kiếm</string>
     <string name="exclude_communities_hint">Loại trừ subreddit (vd: funny,AskReddit)</string>
     <string name="exclude_users_hint">Loại trừ người dùng (vd: Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Loại trừ tư cách (vd: flair1,flair2)</string>
-    <string name="contain_flairs_hint">Chứa tư cách (vd: flair1,flair2)</string>
     <string name="min_vote_hint">Vote tối thiểu (-1: không hạn chế)</string>
     <string name="max_vote_hint">Vote tối đa (-1: không hạn chế)</string>
     <string name="min_comments_hint">Bình luận tối thiểu (-1: không hạn chế)</string>
     <string name="max_comments_hint">Bình luận tối đa (-1: không hạn chế)</string>
-    <string name="min_awards_hint">Giải thưởng tối thiểu (-1: không hạn chế)</string>
-    <string name="max_awards_hint">Giải thưởng tối đa (-1: không hạn chế)</string>
     <string name="post_filter_name_hint">Tên bộ lọc bài đăng</string>
     <string name="post_filter_requires_a_name">Bộ lọc bài đăng này tên là gì\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' đã tồn tại</string>
@@ -928,7 +882,6 @@
     <string name="choose_a_user">Chọn người dùng</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Nhấn để hiện phương tiện trong bố cục thư viện</string>
     <string name="settings_hide_post_type">Ẩn loại bài đăng</string>
-    <string name="settings_hide_the_number_of_awards">Ẩn số lượng giải thưởng</string>
     <string name="settings_hide_community_and_user_prefix">Ẩn subreddit và tiền tố người dùng</string>
     <string name="settings_hide_the_number_of_votes">Ẩn số lượng vote</string>
     <string name="settings_hide_the_number_of_comments">Ẩn số lượng bình luận</string>
@@ -991,8 +944,6 @@
     <string name="select">Chọn</string>
     <string name="exclude_community">Loại trừ subreddit này</string>
     <string name="exclude_user">Loại trừ người dùng này</string>
-    <string name="exclude_flair">Loại trừ tư cách này</string>
-    <string name="contain_flair">Chứa tư cách này</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Loại trừ miền</string>
     <string name="suggest_title">Đề xuất tiêu đề</string>
@@ -1002,7 +953,6 @@
     <string name="comment_continue_thread">Tiếp tục thread</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Vuốt dọc để quay lại từ phương tiện</string>
-    <string name="settings_hide_post_flair">Ẩn tư cách bài đăng</string>
     <string name="settings_crash_reports_title">Báo cáo dừng đột ngột</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Nguy hiểm</string>
     <string name="settings_disable_nsfw_forever_title">Tắt NSFW mãi mãi</string>

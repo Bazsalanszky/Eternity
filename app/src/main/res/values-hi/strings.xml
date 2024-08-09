@@ -53,7 +53,6 @@
     <string name="action_unmark_nsfw">NSFW चिन्ह हटाएं</string>
     <string name="action_mark_spoiler">Spoiler चिन्ह लगाएं</string>
     <string name="action_unmark_spoiler">Spoiler चिन्ह हटाएं</string>
-    <string name="action_edit_flair">फ्लेयर संपादित करें</string>
     <string name="action_change_post_layout">पोस्ट आकर बदलें</string>
     <string name="action_save">सेव</string>
     <string name="action_edit_multi_reddit">मल्टीरैडिट संपादित करें</string>
@@ -97,9 +96,6 @@
 \nपुनः प्रयास के लिए यहां दबाएं।</string>
     <string name="no_messages">रिक्त</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">कर्म: %1$,d</string>
-    <string name="karma_info_user_detail">कर्म:
-\n%1$,d(%2$d + %3$d)</string>
     <string name="cakeday_info">केक दिवस:
 \n%1$s</string>
     <string name="since">से (समय):</string>
@@ -190,11 +186,7 @@
     <!-- Using For??
 Actually It Means स्वभाव In Hindi
 Behavior -->
-    <string name="flair">फ्लेयर</string>
     <string name="spoiler">स्पॉइलर</string>
-    <string name="no_flair">कोई फ्लेयर नहीं</string>
-    <string name="error_loading_flairs">फ्लेयर लोड होने में दिक्कत।
-\nयहां दबाएं।</string>
     <string name="no_rule">कोई नियम उप्लब्ध नहीं</string>
     <string name="error_loading_rules">नियम लोड होने में दिक्कत।
 \nयहां दबाएं।</string>
@@ -287,15 +279,11 @@ Behavior -->
     <string name="unmark_spoiler_success">Spoiler अचिह्नीकरण सफल</string>
     <string name="unmark_spoiler_failed">Spoiler अचिह्नीकरण असफल</string>
     <!-- Fuzzy -->
-    <string name="update_flair_success">फ्लेयर अद्यतन सफल</string>
-    <string name="update_flair_failed">फ्लेयर अद्यतन असफल</string>
-    <string name="edit_flair">फ्लेयर संपादित करें</string>
     <string name="only_allow_64_chars">केवल 64 से कम अक्षरों की अनुमति</string>
     <string name="view_all_comments">सभी टिप्पणियां देखने के लिए यहां दबाएं</string>
     <string name="notification_summary_account">खाता</string>
     <string name="notification_summary_message">नया संदेश</string>
     <string name="notification_summary_community">सबरैडिट</string>
-    <string name="notification_summary_award">पुरस्कार</string>
     <string name="notification_new_messages">%1$d नया संदेश</string>
     <string name="label_account">खाता</string>
     <string name="label_post">पोस्ट</string>
@@ -425,7 +413,6 @@ Behavior -->
     <string name="settings_tab_post_type">प्रकार</string>
     <string name="settings_tab_community_name">समुदाय का नाम (बिना @इंस्टेंस टैग के)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">मल्टीरैडिट का नाम (/यूजर/आपकायूजरनाम/m/आपकेमल्टीरैडिटकानाम)</string>
     <string name="settings_tab_username">यूजर का नाम (u/ उपसर्ग के बिना)</string>
     <string name="no_developer_easter_egg">यहां डिवेलपर के लिए कोई विकल्प नहीं है</string>
     <string name="no_link_available">लिंक प्रात नहीं किया जा सका</string>
@@ -548,8 +535,6 @@ Behavior -->
     <string name="theme_item_comment_background_color_detail">पर लागू होगा: टिप्पणी पृष्टभूमि</string>
     <string name="theme_item_fully_collapsed_comment_background_color">पूर्णतः संक्षिप्त टिप्पणियों की पृष्ठभूमि का रंग</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">पर लागू होगा: पूर्णतः संक्षिप्त टिप्पणियों की पृष्ठभूमि</string>
-    <string name="theme_item_awarded_comment_background_color">पुरस्कृत टिप्पणी के पीछे की भूमि का रंग</string>
-    <string name="theme_item_awarded_comment_background_color_detail">पर लागू होगा: पुरस्कृत टिप्पणियों के पीछे की भूमि पर</string>
     <string name="theme_item_received_message_background_color">प्राप्त संदेश की पृष्ठभूमि का रंग</string>
     <string name="theme_item_received_message_background_color_detail">पर लागू होगा: प्राप्त व्यक्तिगत संदेश की पृष्ठभूमि</string>
     <string name="theme_item_sent_message_background_color">भेजे गए संदेश की पृष्टभूमि का रंग</string>
@@ -602,14 +587,6 @@ Behavior -->
     <string name="theme_item_nsfw_background_color_detail">पर लागू होगा: NSFW टैग की पृष्टभूमि</string>
     <string name="theme_item_nsfw_text_color">NSFW टेक्स्ट रंग</string>
     <string name="theme_item_nsfw_text_color_detail">पर लागू होगा: NSFW टैग के टेक्स्ट का रंग</string>
-    <string name="theme_item_flair_background_color">फ्लेयर पृष्ठभूमि रंग</string>
-    <string name="theme_item_flair_background_color_detail">पर लागू होगा: फ्लेयर टैग की पृष्ठभूमि</string>
-    <string name="theme_item_flair_text_color">फ्लेयर टेक्स्ट रंग</string>
-    <string name="theme_item_flair_text_color_detail">पर लागू होगा: फ्लेयर टैग के टेक्स्ट का रंग</string>
-    <string name="theme_item_awards_background_color">पुरस्कृत टिप्पणियों के पीछे की भूमि का रंग</string>
-    <string name="theme_item_awards_background_color_detail">पर लागू होगा: पुरस्कार टैग की पीछे की भूमि</string>
-    <string name="theme_item_awards_text_color">पुरस्कार पाठ का रंग</string>
-    <string name="theme_item_awards_text_color_detail">पर लागू होगा: पुरस्कार टैग का टेक्स्ट रंग</string>
     <string name="theme_item_archived_tint">संग्रहित आइकन का रंग</string>
     <string name="theme_item_archived_tint_detail">पर लागू होगा: संग्रहित आइकन</string>
     <string name="theme_item_locked_icon_tint">बंद आइकन का रंग</string>
@@ -626,8 +603,6 @@ Behavior -->
     <string name="theme_item_username_color_detail">पर लागू होगा: यूजर का नाम</string>
     <string name="theme_item_community_color">सबरैडिट का रंग</string>
     <string name="theme_item_community_color_detail">पर लागू होगा: सबरैडिट का नाम</string>
-    <string name="theme_item_author_flair_text_color">रचयिता फ्लेयर का रंग</string>
-    <string name="theme_item_author_flair_text_color_detail">पर लागू होगा: टिप्पणियों में रचयिता फ्लेयर</string>
     <string name="theme_item_submitter_color">जमाकर्ता</string>
     <string name="theme_item_submitter_color_detail">पर लागू होगा: टिप्पणियों में जमाकर्ता</string>
     <string name="theme_item_moderator_color">नियंत्रक</string>
@@ -724,15 +699,10 @@ Behavior -->
     <string name="post_title_preview">यह एक पोस्ट है</string>
     <string name="post_content_preview">गुरुत्वाकर्षण वाला चुटकुला थोड़ा पुराना हो रहा है पर मैं हमेशा इसके जाल में गिर जाता हूँ।</string>
     <string name="post_type_preview">पोस्ट</string>
-    <string name="flair_preview">फ्लेयर</string>
-    <string name="awards_preview">4 पुरस्कार</string>
-    <string name="author_flair_preview">रचयिता फ्लेयर</string>
     <string name="comment_content_preview">मैंने अपनी प्रेमिका को एक \'जल्दी से अच्छी हो जाओ\' कार्ड दिया।
 \nवह बीमार नहीं है, लेकिन वह निश्चित रूप से अच्छी हो जाएगी।</string>
     <string name="edit_multi_reddit">मल्टीरैडिट्स संपादित करें</string>
     <string name="delete_multi_reddit">मल्टीरैडिट्स मिटा दें</string>
-    <string name="n_awards">%1$,d पुरस्कार</string>
-    <string name="one_award">1 पुरस्कार</string>
     <string name="report">रिपोर्ट</string>
     <string name="reporting">रिपोर्ट हो रही है</string>
     <string name="report_successful">रिपोर्ट कर दी गई</string>
@@ -771,10 +741,7 @@ Behavior -->
     <string name="top_score">%1$s अंक</string>
     <string name="login_activity_2fa_prompt">अगार आपका 2-कदाम प्रमाणीकरण चालू है, तो कृपिया आपना पासबर्ड(चाबी) निम्ना लिखित तरीके से दिजीये: &lt;पासबर्ड&gt;:&lt;2FA code&gt;</string>
     <string name="submit_crosspost_activity_label">क्रॉसपोस्ट</string>
-    <string name="give_award_activity_label">पुरस्कार दें</string>
     <string name="action_crosspost">क्रॉसपोस्ट</string>
-    <string name="action_select_user_flair">उपयोगकर्ता का फ्लेयर चुनें</string>
-    <string name="action_give_award">पुरस्कार दें</string>
     <string name="posts">पोस्ट्स</string>
     <string name="only_for_logged_in_user">केवल लाॅग्ड-इन उपयोगकर्ता के लिए</string>
     <string name="settings_number_of_columns_in_post_feed_title">पोस्ट फीड में स्तम्भों की संख्या</string>
@@ -826,8 +793,6 @@ Behavior -->
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">डाउनलोड असफल: गंतव्य डायरेक्टरी तक अभिगम असफल</string>
     <string name="downloading_media_failed_cannot_download_media">डाउनलोड असफल</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">डाउनलोड असफल: गंतव्य डायरेक्टरी में फाइल का संरक्षण असफल</string>
-    <string name="select_user_flair_success">यूजर फ्लेयर चुन लिया गया</string>
-    <string name="select_this_user_flair">इस यूजर फ्लेयर का चुनाव करना है\?</string>
     <string name="select_header_size">हेडर माप चुनें</string>
     <string name="large">बड़ा</string>
     <string name="small">छोटा</string>
@@ -840,13 +805,8 @@ Behavior -->
     <string name="refresh">ताजा करें</string>
     <string name="change_sort_type">क्रम प्रकार बदलें</string>
     <string name="change_post_layout">पोस्ट विन्यास बदलें</string>
-    <string name="give_award_dialog_title">पुरस्कार दें\?</string>
     <string name="anonymous">अज्ञात</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">कोड: %1$d/
-\n संदेश: %2$s</string>
-    <string name="give_award_success">पुरस्कार दे दिया गया</string>
-    <string name="give_award_failed">असफल</string>
     <string name="warning">चेतावनी</string>
     <string name="this_is_a_nsfw_community">यह एक NSFW सबरैडिट है।</string>
     <string name="this_user_has_nsfw_content">इस यूजर के पास NSFW सामग्री है</string>
@@ -864,12 +824,10 @@ Behavior -->
     <string name="random_nsfw_post">यादृच्छिक NSFW पोस्ट</string>
     <string name="fetch_random_thing_failed">बाद में पुनः प्रयास करें</string>
     <string name="downloading">डाउनलोड हो रहा है</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all एवं r/popular</string>
     <string name="settings_miscellaneous_title">विविध</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">सबरैडिट द्वारा संस्तुतित टिप्पणी क्रम प्रकार बनाए रखें</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">टिप्पणी क्रम प्रकार सरंक्षित नहीं किया जाएगा</string>
     <string name="settings_community_filter_category">सबरैडिट छुपाएं</string>
-    <string name="settings_community_filter_popular_and_all">r/popular एवं r/all में</string>
     <string name="settings_credits_ufo_capturing_animation_title">UFO बंदी बनाते हुए एनिमेशन</string>
     <string name="select_video_quality">वीडियो गुणवत्ता चुनें</string>
     <string name="settings_swipe_action_haptic_feedback_title">स्पर्श प्रतिपुष्टि</string>
@@ -924,15 +882,11 @@ Behavior -->
     <string name="history_activity_label">इतिहास</string>
     <string name="edit_profile_activity_label">प्रोफ़ाइल संपादित करें</string>
     <string name="post_poll_activity_label">मतदान पोस्ट</string>
-    <string name="settings_hide_comment_awards_title">टिप्पणी पुरस्कार छिपाएँ</string>
-    <string name="min_awards_hint">न्यूनतम पुरस्कार (-1: कोई प्रतिबंध नहीं)</string>
-    <string name="max_awards_hint">अधिकतम पुरस्कार (-1: कोई प्रतिबंध नहीं)</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post">v.redd.it वीडियो लाने में दिक्कत: पोस्ट नहीं मिल सका</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_post_id">v.redd.it वीडियो लाने में दिक्कत: पोस्ट आईडी नहीं मिल सकी</string>
     <string name="error_parse_trending_search">रुझान वाली खोजों को पार्स करना विफल रहा।
 \nपुन: प्रयास करने के लिए दबाए।</string>
     <string name="post_gallery_activity_label">गैलरी पोस्ट</string>
-    <string name="settings_hide_the_number_of_awards">पुरस्कारों की संख्या छिपाएँ</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_redirect_url">v.redd.it वीडियो लाने में दिक्कत: रीडायरेक्ट यूआरएल नहीं मिल सका</string>
     <string name="error_fetching_v_redd_it_video_cannot_get_video_url">v.redd.it वीडियो लाने में दिक्कत: वीडियो यूआरएल नहीं मिल सका</string>
     <string name="error_fetch_trending_search">रुझान वाली खोजें प्राप्त करना विफल रहा।

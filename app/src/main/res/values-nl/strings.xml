@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">Demarkeren als NSFW</string>
     <string name="action_mark_spoiler">Markeren als leeswaarshuwing</string>
     <string name="action_unmark_spoiler">Demarkeren als leeswaarschuwing</string>
-    <string name="action_edit_flair">Flair bewerken</string>
     <string name="action_change_post_layout">Andere berichtindeling kiezen</string>
     <string name="action_save">Opslaan</string>
     <string name="action_edit_multi_reddit">MultiReddit bewerken</string>
@@ -91,9 +90,6 @@
 \nDruk om opnieuw te proberen.</string>
     <string name="no_messages">Leeg</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Taartdag:
 \n%1$s</string>
     <string name="since">Sinds:</string>
@@ -181,11 +177,7 @@
     <string name="video_is_processing">Bezig met verwerken van video…</string>
     <string name="image_is_processing">Bezig met verwerken van afbeelding…</string>
     <string name="gif_is_processing">Bezig met verwerken van gif-bestand…</string>
-    <string name="flair">Flair</string>
     <string name="spoiler">Leeswaarschuwing</string>
-    <string name="no_flair">Geen flair</string>
-    <string name="error_loading_flairs">De flairs kunnen niet worden geladen.
-\nDruk om opnieuw te proberen.</string>
     <string name="no_rule">Geen regel</string>
     <string name="error_loading_rules">De regels kunnen niet worden geladen.
 \nDruk om opnieuw te proberen.</string>
@@ -268,15 +260,11 @@
     <string name="mark_spoiler_failed">Het voorzien van een leeswaarschuwing is mislukt</string>
     <string name="unmark_spoiler_success">Het bericht is niet meer voorzien van een leeswaarschuwing</string>
     <string name="unmark_spoiler_failed">Het verwijderen van de leeswaarschuwing is mislukt</string>
-    <string name="update_flair_success">De flair is bijgewerkt</string>
-    <string name="update_flair_failed">Het bijwerken is mislukt</string>
-    <string name="edit_flair">Flair aanpassen</string>
     <string name="only_allow_64_chars">Niet meer dan 64 tekens toestaan</string>
     <string name="view_all_comments">Druk hier om alle reacties te tonen</string>
     <string name="notification_summary_account">Account</string>
     <string name="notification_summary_message">Nieuw bericht</string>
     <string name="notification_summary_community">Gemeenschap</string>
-    <string name="notification_summary_award">Prijs</string>
     <string name="notification_new_messages">%1$d nieuwe berichten</string>
     <string name="label_account">Account</string>
     <string name="label_post">Bericht</string>
@@ -403,7 +391,6 @@
     <string name="settings_tab_post_type">Type</string>
     <string name="settings_tab_community_name">Gemeenschapsnaam (zonder r/-voorvoegsel)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Multiredditnaam (/user/gebruikersnaam/m/mijnmultiredditnaam)</string>
     <string name="settings_tab_username">Gebruikersnaam (zonder u/-voorvoegsel)</string>
     <string name="no_developer_easter_egg">Er zijn hier geen ontwikkelaarsopties</string>
     <string name="no_link_available">De link kan niet worden opgehaald</string>
@@ -530,8 +517,6 @@ not: "5 uren" -->
     <string name="theme_item_comment_background_color_detail">Wordt toegepast op reactie-achtergronden</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Achtergrondkleur van ingeklapte reacties</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Wordt toegepast op ingeklapte reacties</string>
-    <string name="theme_item_awarded_comment_background_color">Achtergrondkleur van bekroonde reacties</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Wordt toegepast op bekroonde reacties</string>
     <string name="theme_item_received_message_background_color">Achtergrondkleur van ontvangen berichten</string>
     <string name="theme_item_received_message_background_color_detail">Wordt toegepast op ontvangen privéberichten</string>
     <string name="theme_item_sent_message_background_color">Achtergrondkleur van verzonden berichten</string>
@@ -584,14 +569,6 @@ not: "5 uren" -->
     <string name="theme_item_nsfw_background_color_detail">Wordt toegepast op de achtergrond van het NSFW-label</string>
     <string name="theme_item_nsfw_text_color">NSFW-tekstkleur</string>
     <string name="theme_item_nsfw_text_color_detail">Wordt toegepast op de tekst van het NSFW-label</string>
-    <string name="theme_item_flair_background_color">Flair-achtergrondkleur</string>
-    <string name="theme_item_flair_background_color_detail">Wordt toegepast op de achtergrond van het flair-label</string>
-    <string name="theme_item_flair_text_color">Flair-tekstkleur</string>
-    <string name="theme_item_flair_text_color_detail">Wordt toegepast op de tekst van het flair-label</string>
-    <string name="theme_item_awards_background_color">Prijs-achtergrondkleur</string>
-    <string name="theme_item_awards_background_color_detail">Wordt toegepast op de achtergrond van bekroonde reacties</string>
-    <string name="theme_item_awards_text_color">Prijs-tekstkleur</string>
-    <string name="theme_item_awards_text_color_detail">Wordt toegepast op de tekst van bekroonde reacties</string>
     <string name="theme_item_archived_tint">Pictogramkleur van gearchiveerd bericht</string>
     <string name="theme_item_archived_tint_detail">Wordt toegepast op pictogrammen van gearchiveerde berichten</string>
     <string name="theme_item_locked_icon_tint">Pictogramkleur van vergrendelde berichten</string>
@@ -608,8 +585,6 @@ not: "5 uren" -->
     <string name="theme_item_username_color_detail">Wordt toegepast op de gebruikersnaam</string>
     <string name="theme_item_community_color">Gemeenschapskleur</string>
     <string name="theme_item_community_color_detail">Wordt toegepast op de gemeenschapsnaam</string>
-    <string name="theme_item_author_flair_text_color">Flairkleur van auteur</string>
-    <string name="theme_item_author_flair_text_color_detail">Wordt toegepast op auteurflair van reacties</string>
     <string name="theme_item_submitter_color">Indiener</string>
     <string name="theme_item_submitter_color_detail">Wordt toegepast op de indiener van reacties</string>
     <string name="theme_item_moderator_color">Moderator</string>
@@ -698,15 +673,10 @@ not: "5 uren" -->
     <string name="post_title_preview">Dit is een post</string>
     <string name="post_content_preview">Deze zwaartekrachtgrap wordt een beetje oud, maar ik trap er elke keer in.</string>
     <string name="post_type_preview">Post</string>
-    <string name="flair_preview">Flair</string>
-    <string name="awards_preview">4 Awards</string>
-    <string name="author_flair_preview">Auteur Flair</string>
     <string name="comment_content_preview">Ik heb voor mijn vriendin een beterschapskaartje.
 \nZe is niet ziek of zo, maar ze kan zeker beter worden.</string>
     <string name="edit_multi_reddit">Wijzig Multireddit</string>
     <string name="delete_multi_reddit">Verwijder Multireddit</string>
-    <string name="n_awards">%1$,d Awards</string>
-    <string name="one_award">1 Award</string>
     <string name="report">Meld</string>
     <string name="reporting">Aan het melden</string>
     <string name="report_successful">Gemeld</string>
@@ -746,10 +716,7 @@ not: "5 uren" -->
     <string name="login_activity_2fa_prompt">Als je 2-factor authenticatie hebt ingeschakeld, typ dan je wachtwoord als volgt in: &lt;wachtwoord&gt;: &lt;2FA code&gt;.
 \nVoorbeeld: yourpass:123456</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
-    <string name="give_award_activity_label">Geef Award</string>
     <string name="action_crosspost">Crosspost</string>
-    <string name="action_select_user_flair">Selecteer Gebruikersflair</string>
-    <string name="action_give_award">Geef Award</string>
     <string name="posts">Posts</string>
     <string name="only_for_logged_in_user">Alleen voor ingelogde gebruikers</string>
     <string name="settings_number_of_columns_in_post_feed_title">Het Aantal Kolommen in de Postfeed</string>
@@ -803,8 +770,6 @@ not: "5 uren" -->
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Download mislukt: geen toegang tot de bestemmingsmap</string>
     <string name="downloading_media_failed_cannot_download_media">Download mislukt</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Downloaden mislukt: kan het bestand niet opslaan in de bestemmingsmap</string>
-    <string name="select_user_flair_success">Gebruikersflair geselecteerd</string>
-    <string name="select_this_user_flair">Selecteer deze gebruikersflair\?</string>
     <string name="select_header_size">Selecteer Koptekstgrootte</string>
     <string name="large">Groot</string>
     <string name="small">Klein</string>
@@ -817,13 +782,8 @@ not: "5 uren" -->
     <string name="refresh">Ververs</string>
     <string name="change_sort_type">Wijzig het sorteertype</string>
     <string name="change_post_layout">Wijzig het postlayout</string>
-    <string name="give_award_dialog_title">Geef Award\?</string>
     <string name="anonymous">Anoniem</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">Code: %1$d/
-\nBericht: %2$s</string>
-    <string name="give_award_success">Award gegeven</string>
-    <string name="give_award_failed">Mislukt</string>
     <string name="warning">Waarschuwing</string>
     <string name="this_is_a_nsfw_community">Dit is een NSFW gemeenschap.</string>
     <string name="this_user_has_nsfw_content">Deze gebruiker heeft NSFW inhoud</string>
@@ -841,12 +801,10 @@ not: "5 uren" -->
     <string name="random_nsfw_post">Willekeurige NSFW Post</string>
     <string name="fetch_random_thing_failed">Probeer later opnieuw</string>
     <string name="downloading">Downloaden</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all en r/popular</string>
     <string name="settings_miscellaneous_title">Diversen</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Respecteer door Gemeenschap Aanbevolen Sorteertype voor Reacties</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Het sorteertype voor reacties wordt niet opgeslagen</string>
     <string name="settings_community_filter_category">Verberg Gemeenschappen</string>
-    <string name="settings_community_filter_popular_and_all">In r/popular en r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">UFO ontvoering animatie</string>
     <string name="select_video_quality">Selecteer Videokwaliteit</string>
     <string name="settings_swipe_action_haptic_feedback_title">Haptische Feedback</string>
@@ -895,7 +853,6 @@ not: "5 uren" -->
     <string name="filter_posts">Filter Posts</string>
     <string name="only_nsfw">Alleen NSFW</string>
     <string name="only_spoiler">Alleen Spoiler</string>
-    <string name="contain_flairs_hint">Bevat flair (vb. flair1, flair2)</string>
     <string name="min_vote_hint">Min stem (-1: geen restrictie)</string>
     <string name="max_vote_hint">Max stem (-1: geen restrictie)</string>
     <string name="min_comments_hint">Min reacties (-1: geen restrictie)</string>
@@ -923,7 +880,6 @@ not: "5 uren" -->
     <string name="choose_a_user">Kies een gebruiker</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Klik om Media in Gallerij Lay-Out te Tonen</string>
     <string name="settings_hide_post_type">Verberg Post Type</string>
-    <string name="settings_hide_the_number_of_awards">Verberg het Aantal Awards</string>
     <string name="settings_hide_the_number_of_votes">Verberg het Aantal Stemmen</string>
     <string name="settings_hide_the_number_of_comments">Verberg het aantal reacties</string>
     <string name="post_layout_gallery">Gallerij Lay-Out</string>
@@ -969,8 +925,6 @@ not: "5 uren" -->
     <string name="select">Selecteer</string>
     <string name="exclude_community">Sluit deze gemeenschap uit</string>
     <string name="exclude_user">Sluit deze gebruiker uit</string>
-    <string name="exclude_flair">Sluit deze flair uit</string>
-    <string name="contain_flair">Bevat deze flair</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Sluit Domein uit</string>
     <string name="suggest_title">Titel voorstellen</string>
@@ -979,7 +933,6 @@ not: "5 uren" -->
     <string name="inbox_with_count">Postvak IN</string>
     <string name="comment_continue_thread">Ga verder met draad</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Omhoog swipen om terug te gaan van foto\'s en gif\'s</string>
-    <string name="settings_hide_post_flair">Verberg Post Flair</string>
     <string name="settings_crash_reports_title">Crashrapporten</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Gevaarlijk</string>
     <string name="settings_disable_nsfw_forever_title">NSFW voor altijd uitschakelen</string>
@@ -1055,7 +1008,6 @@ not: "5 uren" -->
     <string name="settings_hide_community_and_user_prefix">Verberg Community en Gebruiker voorvoegsel</string>
     <string name="exclude_communities_hint">Sluit gemeenschap uit (bijv. memes, AskLemmy)</string>
     <string name="exclude_users_hint">Sluit gebruikers uit (bijv. Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Sluit flairs uit (bijv. flair1,flair2)</string>
     <string name="contain_domain">Bevat dit domein</string>
     <string name="reddit_gallery_item_url_hint">Url</string>
     <string name="invalid_username_or_password">Ongeldige gebruikersnaam of wachtwoord</string>

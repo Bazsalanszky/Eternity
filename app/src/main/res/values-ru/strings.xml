@@ -53,7 +53,6 @@
     <string name="action_unmark_nsfw">Убрать отметку NSFW</string>
     <string name="action_mark_spoiler">Отметить как спойлер</string>
     <string name="action_unmark_spoiler">Убрать отметку спойлер</string>
-    <string name="action_edit_flair">Изменить флейр</string>
     <string name="action_change_post_layout">Выбрать вид поста</string>
     <string name="action_save">Сохранить</string>
     <string name="action_edit_multi_reddit">Изменить мультисообщество</string>
@@ -97,9 +96,6 @@
 \nНажмите для повтора.</string>
     <string name="no_messages">Пусто</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Карма: %1$,d</string>
-    <string name="karma_info_user_detail">Карма:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">День торта:
 \n%1$s</string>
     <string name="since">Создан:</string>
@@ -187,11 +183,7 @@
     <string name="video_is_processing">Видео обрабатывается. Пожалуйста, подождите.</string>
     <string name="image_is_processing">Изображение обрабатывается. Пожалуйста, подождите.</string>
     <string name="gif_is_processing">GIF обрабатывается. Пожалуйста, подождите.</string>
-    <string name="flair">Флейр</string>
     <string name="spoiler">Спойлер</string>
-    <string name="no_flair">Нет флейра</string>
-    <string name="error_loading_flairs">Ошибка загрузки флейров.
-\nНажмите, чтобы перезагрузить.</string>
     <string name="no_rule">Правил нет</string>
     <string name="error_loading_rules">Ошибка загрузки правил.
 \nНажмите, чтобы перезагрузить.</string>
@@ -275,15 +267,11 @@
     <string name="mark_spoiler_failed">Невозможно отметить как спойлер</string>
     <string name="unmark_spoiler_success">Отметка спойлера снята успешно</string>
     <string name="unmark_spoiler_failed">Невозможно снять отметку спойлера</string>
-    <string name="update_flair_success">Флейр успешно обновлён</string>
-    <string name="update_flair_failed">Невозможно обновить флейр</string>
-    <string name="edit_flair">Изменить флейр</string>
     <string name="only_allow_64_chars">Допускается не более 64 символов</string>
     <string name="view_all_comments">Нажмите здесь, чтобы посмотреть все комментарии</string>
     <string name="notification_summary_account">Аккаунт</string>
     <string name="notification_summary_message">Новое сообщение</string>
     <string name="notification_summary_community">Сообщество</string>
-    <string name="notification_summary_award">Награда</string>
     <string name="notification_new_messages">%1$d новых сообщений</string>
     <string name="label_account">Аккаунт</string>
     <string name="label_post">Пост</string>
@@ -408,7 +396,6 @@
     <string name="settings_tab_post_type">Тип</string>
     <string name="settings_tab_community_name">Название сообщества (без префикса @)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Путь мультисообщества (/user/yourusername/m/yourmulticommunityname)</string>
     <string name="settings_tab_username">Имя пользователя (без префикса u/)</string>
     <string name="no_developer_easter_egg">Здесь нет настроек для разработчика</string>
     <string name="no_link_available">Не могу получить ссылку</string>
@@ -531,8 +518,6 @@
     <string name="theme_item_comment_background_color_detail">Применяется к фону комментариев</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Цвет фона полностью свёрнутых комментариев</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Применяется к фону свёрнутых комментариев</string>
-    <string name="theme_item_awarded_comment_background_color">Цвет фона награждённых комментариев</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Применяется к фону награждённых комментариев</string>
     <string name="theme_item_received_message_background_color">Цвет фона полученных сообщений</string>
     <string name="theme_item_received_message_background_color_detail">Применяется к фону полученных личных сообщений</string>
     <string name="theme_item_sent_message_background_color">Цвет фона отправленных сообщений</string>
@@ -585,14 +570,6 @@
     <string name="theme_item_nsfw_background_color_detail">Применяется к цвету фона отметки NSFW</string>
     <string name="theme_item_nsfw_text_color">Цвет текста NSFW</string>
     <string name="theme_item_nsfw_text_color_detail">Применяется к цвету текста отметки NSFW</string>
-    <string name="theme_item_flair_background_color">Цвет фона флейра</string>
-    <string name="theme_item_flair_background_color_detail">Применяется к фону флейра</string>
-    <string name="theme_item_flair_text_color">Цвет флейра</string>
-    <string name="theme_item_flair_text_color_detail">Применяется к цвету текста флейра</string>
-    <string name="theme_item_awards_background_color">Цвет фона наград</string>
-    <string name="theme_item_awards_background_color_detail">Применяется к фону награды</string>
-    <string name="theme_item_awards_text_color">Цвет текста награды</string>
-    <string name="theme_item_awards_text_color_detail">Применяется к цвету текста награды</string>
     <string name="theme_item_archived_tint">Цвет значка архивного поста</string>
     <string name="theme_item_archived_tint_detail">Применяется к значку архивного поста</string>
     <string name="theme_item_locked_icon_tint">Цвет значка блокировки</string>
@@ -609,8 +586,6 @@
     <string name="theme_item_username_color_detail">Применяется к именам пользователей</string>
     <string name="theme_item_community_color">Цвет сообщества</string>
     <string name="theme_item_community_color_detail">Применяется к названиям сообществ</string>
-    <string name="theme_item_author_flair_text_color">Цвет автора флейра</string>
-    <string name="theme_item_author_flair_text_color_detail">Применяется к авторскому флеру в комментариях</string>
     <string name="theme_item_submitter_color">Отправитель</string>
     <string name="theme_item_submitter_color_detail">Применяется к отправителям в комментариях</string>
     <string name="theme_item_moderator_color">Модератор</string>
@@ -699,15 +674,10 @@
     <string name="post_title_preview">Это пост</string>
     <string name="post_content_preview">Эта шутка о гравитации уже устарела, но я каждый раз попадаюсь на неё.</string>
     <string name="post_type_preview">ПОСТ</string>
-    <string name="flair_preview">Флейр</string>
-    <string name="awards_preview">4 награды</string>
-    <string name="author_flair_preview">Флейр автора</string>
     <string name="comment_content_preview">Я подарил своей девушке карточку «Поправляйся скорее».
 \nОна не больна или что-то вроде того, но определённо может поправиться.</string>
     <string name="edit_multi_reddit">Изменить мультисообщество</string>
     <string name="delete_multi_reddit">Удалить мультисообщество</string>
-    <string name="n_awards">%1$,d наград</string>
-    <string name="one_award">1 награда</string>
     <string name="report">Пожаловаться</string>
     <string name="reporting">Жалоба отправляется</string>
     <string name="report_successful">Жалоба отправлена</string>
@@ -745,10 +715,7 @@
     <string name="top_score">%1$s пойнтов</string>
     <string name="login_activity_2fa_prompt">Если у вас включена двухфакторная аутентификация, введите 2FA токен в поле. Иначе оставьте его пустым</string>
     <string name="submit_crosspost_activity_label">Кросспост</string>
-    <string name="give_award_activity_label">Наградить</string>
     <string name="action_crosspost">Кросспост</string>
-    <string name="action_select_user_flair">Установить флейр пользователя</string>
-    <string name="action_give_award">Выдать награду</string>
     <string name="posts">Посты</string>
     <string name="only_for_logged_in_user">Для авторизовавшихся пользователей</string>
     <string name="settings_number_of_columns_in_post_feed_title">Количество столбцов в ленте постов</string>
@@ -798,8 +765,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Ошибка при скачивании: невозможно получить доступ к папке</string>
     <string name="downloading_media_failed_cannot_download_media">Ошибка при скачивании</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Ошибка при скачивании: невозможно сохранить файл в целевую папку</string>
-    <string name="select_user_flair_success">Флейр пользователя выбран</string>
-    <string name="select_this_user_flair">Выбрать флейр пользователя\?</string>
     <string name="select_header_size">Выбрать размер заголовка</string>
     <string name="large">Крупный</string>
     <string name="small">Мелкий</string>
@@ -812,12 +777,7 @@
     <string name="refresh">Обновить</string>
     <string name="change_sort_type">Изменить тип сортировки</string>
     <string name="change_post_layout">Изменить макет поста</string>
-    <string name="give_award_dialog_title">Выдать награду\?</string>
     <string name="anonymous">Аноним</string>
-    <string name="give_award_error_message">Код: %1$d/
-\nСообщение: %2$s</string>
-    <string name="give_award_success">Награда выдана</string>
-    <string name="give_award_failed">Ошибка</string>
     <string name="warning">Предупреждение</string>
     <string name="this_is_a_nsfw_community">Это NSFW-сообщество.</string>
     <string name="this_user_has_nsfw_content">У пользователя есть NSFW-контент</string>
@@ -833,12 +793,10 @@
     <string name="random_nsfw_post">Случайный NSFW-пост</string>
     <string name="fetch_random_thing_failed">Попробуйте позже</string>
     <string name="downloading">Скачивание</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all и r/popular</string>
     <string name="settings_miscellaneous_title">Прочее</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Учитывать рекомендуемый тип сортировки сообщества</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Тип сортировки комментариев не будет сохранен</string>
     <string name="settings_community_filter_category">Спрятать сообщества</string>
-    <string name="settings_community_filter_popular_and_all">В r/popular и r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Анимация захвата НЛО</string>
     <string name="select_video_quality">Выбрать качество видео</string>
     <string name="settings_swipe_action_haptic_feedback_title">Тактильная отдача</string>
@@ -898,14 +856,10 @@
     <string name="title_excludes_regex_hint">Заголовок: исключая регулярное выражение</string>
     <string name="exclude_communities_hint">Исключить сообщества (например: memes,AskLemmy)</string>
     <string name="exclude_users_hint">Исключить пользователей (например: Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Исключить флейры (например: flair1,flair2)</string>
-    <string name="contain_flairs_hint">Содержать флейры (например: flair1,flair2)</string>
     <string name="min_vote_hint">Минимум голосов (-1: без ограничений)</string>
     <string name="max_vote_hint">Максимум голосов (-1: без ограничений)</string>
     <string name="min_comments_hint">Минимум комментариев (-1: без ограничений)</string>
     <string name="max_comments_hint">Максимум комментариев (-1: без ограничений)</string>
-    <string name="min_awards_hint">Минимум наград (-1: без ограничений)</string>
-    <string name="max_awards_hint">Максимум наград (-1: без ограничений)</string>
     <string name="post_filter_name_hint">Название фильтра постов</string>
     <string name="post_filter_requires_a_name">Как называется этот фильтр постов\?</string>
     <string name="duplicate_post_filter_dialog_title">«%1$s» уже существует</string>
@@ -929,7 +883,6 @@
     <string name="choose_a_user">Выберите пользователя</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Открывать мультимедиа нажатием в режиме галереи</string>
     <string name="settings_hide_post_type">Скрыть тип поста</string>
-    <string name="settings_hide_the_number_of_awards">Скрыть количество наград</string>
     <string name="settings_hide_community_and_user_prefix">Скрыть префикс сообщества и пользователя</string>
     <string name="settings_hide_the_number_of_votes">Скрыть количество голосов</string>
     <string name="settings_hide_the_number_of_comments">Скрыть количество комментариев</string>
@@ -991,8 +944,6 @@
     <string name="select">Выбрать</string>
     <string name="exclude_community">Исключить это сообщество</string>
     <string name="exclude_user">Исключить этого пользователя</string>
-    <string name="exclude_flair">Исключить этот флейр</string>
-    <string name="contain_flair">Содержать флейр</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Исключить домен</string>
     <string name="suggest_title">Предложить название</string>
@@ -1002,7 +953,6 @@
     <string name="comment_continue_thread">Продолжить обсуждение</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Смахивать вертикально для закрытия изображения или GIF</string>
-    <string name="settings_hide_post_flair">Скрыть флейр поста</string>
     <string name="settings_crash_reports_title">Отчёты о сбоях</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Опасные</string>
     <string name="settings_disable_nsfw_forever_title">Отключить NSFW навсегда</string>
@@ -1158,7 +1108,6 @@
     <string name="settings_custom_content_font_family_title">Пользовательское семейство шрифтов содержимого</string>
     <string name="settings_fixed_height_preview_in_card_title">Фиксированная высота карточки</string>
     <string name="settings_hide_text_post_content">Скрыть содержимое текстового поста</string>
-    <string name="settings_hide_comment_awards_title">Скрыть награды за комментарии</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Показывать меньше параметров панели инструментов, начиная с</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Уровень %1$d</string>
     <string name="settings_show_author_avatar_title">Показывать аватар автора</string>
@@ -1186,10 +1135,6 @@
     <string name="option_5_hint">Вариант 5</string>
     <string name="option_6_hint">Вариант 6</string>
     <string name="not_a_valid_number">Неправильное число</string>
-    <string name="post_karma">Карма поста:</string>
-    <string name="comment_karma">Карма комментария:</string>
-    <string name="awarder_karma">Карма наградителя:</string>
-    <string name="awardee_karma">Карма награждённого:</string>
     <string name="extra_small">Очень маленький</string>
     <string name="invalid_link">Неправильная ссылка</string>
     <string name="history_activity_label">История</string>
@@ -1203,8 +1148,6 @@
     <string name="block_user">Заблокировать пользователя</string>
     <string name="block_user_success">Заблокирован</string>
     <string name="block_user_failed">Не удалось заблокировать пользователя</string>
-    <string name="clear_user_flair">Очистить флейр</string>
-    <string name="clear_user_flair_success">Флейр пользователя очищен</string>
     <string name="edited">Отредактирован</string>
     <string name="edited_time">Отредактирован в %s</string>
     <string name="error_unsupported_audio">Медиафайл содержит аудиодорожку, но она не поддерживается на этом устройстве</string>
@@ -1279,7 +1222,6 @@
     <string name="active_users_number_detail">%1$,d активных пользователей</string>
     <string name="post_count_detail">%1$,d записей</string>
     <string name="comment_count_detail">%1$,d комментариев</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Скрыть карму аккаунта</string>
     <string name="icon_original_label">Классическая иконка</string>
     <string name="settings_credits_new_icon">Новая иконка (Космический Lemmy)</string>
     <string name="settings_credits_new_icon_summary">от David Gerla</string>

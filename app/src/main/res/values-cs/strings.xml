@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">Zrušit označení jako NSFW</string>
     <string name="action_mark_spoiler">Označit jako spoiler</string>
     <string name="action_unmark_spoiler">Zrušit označení jako spoiler</string>
-    <string name="action_edit_flair">Upravit štítek</string>
     <string name="action_change_post_layout">Změnit rozložení příspěvků</string>
     <string name="action_save">Uložit</string>
     <string name="action_edit_multi_reddit">Upravit multireddit</string>
@@ -94,9 +93,6 @@
 \nŤukněte pro opakování.</string>
     <string name="no_messages">Prázdné</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Dortový den:
 \n%1$s</string>
     <string name="since">Od:</string>
@@ -184,11 +180,7 @@
     <string name="video_is_processing">Probíhá zpracování videa. Čekejte prosím.</string>
     <string name="image_is_processing">Probíhá zpracování obrázku. Čekejte prosím.</string>
     <string name="gif_is_processing">Probíhá zpracování GIFu. Čekejte prosím.</string>
-    <string name="flair">Štítek</string>
     <string name="spoiler">Spoiler</string>
-    <string name="no_flair">Žádný štítek</string>
-    <string name="error_loading_flairs">Chyba při načítání štítků.
-\nŤukněte pro opakování.</string>
     <string name="no_rule">Žádná pravidla</string>
     <string name="error_loading_rules">Chyba při načítání pravidel.
 \nŤukněte pro opakování.</string>
@@ -271,15 +263,11 @@
     <string name="mark_spoiler_failed">Označení jako spoiler selhalo</string>
     <string name="unmark_spoiler_success">Zrušení označení jako spoiler selhalo</string>
     <string name="unmark_spoiler_failed">Odznačení spoileru selhalo</string>
-    <string name="update_flair_success">Štítek úspěšně aktualizován</string>
-    <string name="update_flair_failed">Aktualizace štítku selhala</string>
-    <string name="edit_flair">Upravit štítek</string>
     <string name="only_allow_64_chars">Povoleno pouze méně než 64 znaků</string>
     <string name="view_all_comments">Klikněte sem pro prohlížení všech komentářů</string>
     <string name="notification_summary_account">Účet</string>
     <string name="notification_summary_message">Nová zpráva</string>
     <string name="notification_summary_community">Subreddit</string>
-    <string name="notification_summary_award">Ocenění</string>
     <string name="notification_new_messages">%1$d nových zpráv</string>
     <string name="label_account">Účet</string>
     <string name="label_post">Příspěvek</string>
@@ -403,7 +391,6 @@
     <string name="settings_tab_post_type">Typ</string>
     <string name="settings_tab_community_name">Název subredditu (bez předpony r/)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Název multiredditu (/user/vašejméno/m/názevmultiredditu)</string>
     <string name="settings_tab_username">Uživatelské jméno (bez předpony u/)</string>
     <string name="no_developer_easter_egg">Tady nejsou žádné vývojářské možnosti</string>
     <string name="no_link_available">Nelze získat odkaz</string>
@@ -525,8 +512,6 @@
     <string name="theme_item_comment_background_color_detail">Použito na: pozadí komentářů</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Barva pozadí plně sbalených komentářů</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Použito na: pozadí plně sbalených komentářů</string>
-    <string name="theme_item_awarded_comment_background_color">Barva pozadí oceněného komentáře</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Použito na: pozadí oceněných komentářů</string>
     <string name="theme_item_received_message_background_color">Barva pozadí obdržené zprávy</string>
     <string name="theme_item_received_message_background_color_detail">Použito na: pozadí obdržených soukromých zpráv</string>
     <string name="theme_item_sent_message_background_color">Barva pozadí odeslané zprávy</string>
@@ -579,14 +564,6 @@
     <string name="theme_item_nsfw_background_color_detail">Použito na: pozadí štítku NSFW</string>
     <string name="theme_item_nsfw_text_color">Barva textu NSFW</string>
     <string name="theme_item_nsfw_text_color_detail">Použito na: barvu textu štítku NSFW</string>
-    <string name="theme_item_flair_background_color">Barva pozadí štítku</string>
-    <string name="theme_item_flair_background_color_detail">Použito na: pozadí štítku</string>
-    <string name="theme_item_flair_text_color">Barva textu štítku</string>
-    <string name="theme_item_flair_text_color_detail">Použito na: barva textu štítku</string>
-    <string name="theme_item_awards_background_color">Barva pozadí ocenění</string>
-    <string name="theme_item_awards_background_color_detail">Použito na: pozadí štítku ocenění</string>
-    <string name="theme_item_awards_text_color">Barva textu ocenění</string>
-    <string name="theme_item_awards_text_color_detail">Použito na: barvu textu štítku ocenění</string>
     <string name="theme_item_archived_tint">Barva ikony archivování</string>
     <string name="theme_item_archived_tint_detail">Použito na: ikonu archivování</string>
     <string name="theme_item_locked_icon_tint">Barva ikony uzamčení</string>
@@ -603,8 +580,6 @@
     <string name="theme_item_username_color_detail">Použito na: uživatelské jméno</string>
     <string name="theme_item_community_color">Barva subredditu</string>
     <string name="theme_item_community_color_detail">Použito na: název subredditu</string>
-    <string name="theme_item_author_flair_text_color">Barva štítku autora</string>
-    <string name="theme_item_author_flair_text_color_detail">Použito na: štítek autora v komentářích</string>
     <string name="theme_item_submitter_color">Odesílatel</string>
     <string name="theme_item_submitter_color_detail">Použito na: odesílatel v komentářích</string>
     <string name="theme_item_moderator_color">Modetáror</string>
@@ -693,15 +668,10 @@
     <string name="post_title_preview">Toto je příspěvek</string>
     <string name="post_content_preview">Římský voják přijde s přáteli do baru a zvedne dva prsty: „Pět piv, prosím!“</string>
     <string name="post_type_preview">PŘÍSPĚVEK</string>
-    <string name="flair_preview">Štítek</string>
-    <string name="awards_preview">4 ocenění</string>
-    <string name="author_flair_preview">Štítek autora</string>
     <string name="comment_content_preview">Jak poznáte, že je krab opilý\?
 \nChodí popředu.</string>
     <string name="edit_multi_reddit">Upravit multireddit</string>
     <string name="delete_multi_reddit">Odstranit multireddit</string>
-    <string name="n_awards">%1$,d ocenění</string>
-    <string name="one_award">1 ocenění</string>
     <string name="report">Nahlásit</string>
     <string name="reporting">Nahlašování</string>
     <string name="report_successful">Nahlášeno</string>
@@ -739,10 +709,7 @@
     <string name="top_score">%1$s bodů</string>
     <string name="login_activity_2fa_prompt">Pokud máte zapnuté dvoufaktorové ověřování, vyplňte pole tokenu 2FA. V opačném případě jej ponechte prázdné</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
-    <string name="give_award_activity_label">Dát ocenění</string>
     <string name="action_crosspost">Crosspost</string>
-    <string name="action_select_user_flair">Vybrat uživatelský štítek</string>
-    <string name="action_give_award">Dát ocenění</string>
     <string name="posts">Příspěvky</string>
     <string name="only_for_logged_in_user">Pouze pro přihlášeného uživatele</string>
     <string name="settings_number_of_columns_in_post_feed_title">Počet sloupců v příspěvcích</string>
@@ -792,8 +759,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Stahování selhalo: nelze přistupovat k cílovému adresáři</string>
     <string name="downloading_media_failed_cannot_download_media">Stahování selhalo</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Stahování selhalo: nelze uložit soubor do cílového adresáře</string>
-    <string name="select_user_flair_success">Vybrané uživatelské štítky</string>
-    <string name="select_this_user_flair">Vybrat tento uživatelský štítek\?</string>
     <string name="select_header_size">Vybrat velikost záhlaví</string>
     <string name="large">Velká</string>
     <string name="small">Malá</string>
@@ -806,12 +771,7 @@
     <string name="refresh">Obnovit</string>
     <string name="change_sort_type">Změnit typ řazení</string>
     <string name="change_post_layout">Změnit rozložení příspěvků</string>
-    <string name="give_award_dialog_title">Dát ocenění\?</string>
     <string name="anonymous">Anonymní</string>
-    <string name="give_award_error_message">Kód: %1$d/
-\nZpráva: %2$s</string>
-    <string name="give_award_success">Ocenění uděleno</string>
-    <string name="give_award_failed">Selhání</string>
     <string name="warning">Varování</string>
     <string name="this_is_a_nsfw_community">Toto je NSFW subreddit.</string>
     <string name="this_user_has_nsfw_content">Tento uživatel má NSFW obsah</string>
@@ -827,12 +787,10 @@
     <string name="random_nsfw_post">Náhodný NSFW příspěvek</string>
     <string name="fetch_random_thing_failed">Zkuste to znovu později</string>
     <string name="downloading">Stahování</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all a r/popular</string>
     <string name="settings_miscellaneous_title">Různé</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Respektovat doporučené řazení komentářů subredditu</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Typ řazení komentářů nebude uložen</string>
     <string name="settings_community_filter_category">Skrýt subreddity</string>
-    <string name="settings_community_filter_popular_and_all">V r/popular a r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">Animace chycení UFO</string>
     <string name="select_video_quality">Vybrat kvalitu videa</string>
     <string name="settings_swipe_action_haptic_feedback_title">Haptická zpětná vazba</string>
@@ -892,14 +850,10 @@
     <string name="title_excludes_regex_hint">Název: vyloučení regexu</string>
     <string name="exclude_communities_hint">Vyloučit subreddity (např. funny,AskReddit)</string>
     <string name="exclude_users_hint">Vyloučit uživatele (např. Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Vyloučit štítky (např. štítek1,štítek2)</string>
-    <string name="contain_flairs_hint">Obsahuje štítky (např. štítek1,štítek2)</string>
     <string name="min_vote_hint">Min. počet hlasů (-1: žádné omezení)</string>
     <string name="max_vote_hint">Max. počet hlasů (-1: žádné omezení)</string>
     <string name="min_comments_hint">Min. počet komentářů (-1: žádné omezení)</string>
     <string name="max_comments_hint">Max. počet komentářů (-1: žádné omezení)</string>
-    <string name="min_awards_hint">Min. počet ocenění (-1: žádné omezení)</string>
-    <string name="max_awards_hint">Max. počet ocenění (-1: žádné omezení)</string>
     <string name="post_filter_name_hint">Název filtru příspěvků</string>
     <string name="post_filter_requires_a_name">Jak se jmenuje tento filtr příspěvků\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' již existuje</string>
@@ -923,7 +877,6 @@
     <string name="choose_a_user">Vybrat uživatele</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Klikněte pro zobrazení médií v rozložení galerie</string>
     <string name="settings_hide_post_type">Skrýt typ příspěvků</string>
-    <string name="settings_hide_the_number_of_awards">Skrýt počet ocenění</string>
     <string name="settings_hide_community_and_user_prefix">Skrýt předponu subredditů a uživatelů</string>
     <string name="settings_hide_the_number_of_votes">Skrýt počet hlasů</string>
     <string name="settings_hide_the_number_of_comments">Skrýt počet komentářů</string>
@@ -985,8 +938,6 @@
     <string name="select">Vybrat</string>
     <string name="exclude_community">Vyloučit tento subreddit</string>
     <string name="exclude_user">Vyloučit tohoto uživatele</string>
-    <string name="exclude_flair">Vyloučit tento štítek</string>
-    <string name="contain_flair">Obsahovat tento štítek</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Vyloučit doménu</string>
     <string name="suggest_title">Navrhnout název</string>
@@ -995,7 +946,6 @@
     <string name="inbox_with_count">Pošta (%1$,d)</string>
     <string name="comment_continue_thread">Pokračovat ve vlákně</string>
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Posunout vertikálně pro návrat zpět z obrázku a GIFu</string>
-    <string name="settings_hide_post_flair">Skrýt štítek příspěvku</string>
     <string name="settings_crash_reports_title">Hlášení o pádech</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Nebezpečné</string>
     <string name="settings_disable_nsfw_forever_title">Permanentně zakázat NSFW</string>
@@ -1143,7 +1093,6 @@
     <string name="action_create_github_issue">Vytvořit problém na Codebergu</string>
     <string name="settings_backup_settings_summary">Heslo k souboru se zálohami je „123321“.</string>
     <string name="comment_count_detail">%1$,d komentářů</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Skrýt karmu účtu</string>
     <string name="voting_length">Délka hlasování: %1$d dní</string>
     <string name="settings_custom_content_font_family_title">Vlastní rodina písem obsahu</string>
     <string name="two_options_required">Správná anketa potřebuje alespoň dvě možnosti!</string>
@@ -1155,8 +1104,6 @@
     <string name="settings_hide_fab_in_post_feed">Skrýt akční tlačítko v kanálu příspěvků</string>
     <string name="block_user_success">Zablokován</string>
     <string name="block_user_failed">Nepodařilo se zablokovat uživatele</string>
-    <string name="clear_user_flair">Odstranit štítek</string>
-    <string name="clear_user_flair_success">Uživatelský štítek odstraněn</string>
     <string name="extra_small">Extra malé</string>
     <string name="select_a_ttf_font">Vyberte soubor s písmem ttf</string>
     <string name="unable_to_load_font">Nepodařilo se načíst vlastní písmo</string>
@@ -1191,7 +1138,6 @@
     <string name="settings_custom_title_font_family_title">Vlastní rodina písem nadpisů</string>
     <string name="settings_fixed_height_preview_in_card_title">Pevná výška v kartě</string>
     <string name="settings_hide_text_post_content">Skrýt obsah textových příspěvků</string>
-    <string name="settings_hide_comment_awards_title">Skrýt ocenění komentářů</string>
     <string name="settings_show_fewer_toolbar_options_threshold_title">Zobrazit méně možností nástrojové lišty počínaje</string>
     <string name="settings_show_fewer_toolbar_options_threshold_summary">Úroveň %1$d</string>
     <string name="settings_show_author_avatar_title">Zobrazit avatar autora</string>
@@ -1217,10 +1163,6 @@
     <string name="option_5_hint">Možnost 5</string>
     <string name="option_6_hint">Možnost 6</string>
     <string name="not_a_valid_number">Není platné číslo</string>
-    <string name="post_karma">Karma příspěvků:</string>
-    <string name="comment_karma">Karma komentářů:</string>
-    <string name="awarder_karma">Karma oceňovatele:</string>
-    <string name="awardee_karma">Karma z ocenění:</string>
     <string name="handle_link">Zpracovat odkaz</string>
     <string name="invalid_link">Neplatný odkaz</string>
     <string name="error_unsupported_video">Médium zahrnuje stopy videa, žádné ale nelze na tomto zařízení přehrát</string>

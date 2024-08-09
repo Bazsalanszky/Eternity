@@ -74,17 +74,13 @@
     <string name="import_theme">Tuo teema</string>
     <string name="view_imgur_media_activity_video_label">Video %1$d/%2$d</string>
     <string name="settings_share_summary">Jaa tämä sovellus muille, jos pidät sen käyttämisestä</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Piilota tilin karma</string>
     <string name="search_only_communities_hint">Etsi yhteisöjä</string>
     <string name="action_edit_multi_reddit">Muokkaa moniyhteisöä</string>
-    <string name="give_award_activity_label">Anna palkinto</string>
     <string name="theme_item_background_color">Taustaväri</string>
     <string name="settings_show_comment_divider_title">Näytä kommenttijakaja</string>
     <string name="sort_comments">Kommentit</string>
     <string name="community_number_detail">%1$,d yhteisöä</string>
     <string name="no_posts">Viestejä ei löytynyt</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="post_video_activity_label">Videon sisältävä viesti</string>
     <string name="settings_default_post_layout">Viestin oletusasettelu</string>
     <string name="settings_default_playback_speed_title">Toiston oletusnopeus</string>
@@ -148,7 +144,6 @@
     <string name="settings_customize_amoled_theme_title">Amoled-teema</string>
     <string name="set_to_lock_screen">Aseta lukitusnäytölle</string>
     <string name="display_name_hint">Näytä omalla profiilisivulla</string>
-    <string name="post_karma">Viestikarma:</string>
     <string name="option_4_hint">Valinta 4</string>
     <string name="settings_tab_count">Välilehtien määrä</string>
     <string name="settings_hide_community_description_title">Piilota yhteisön kuvaus</string>
@@ -262,7 +257,6 @@
     <string name="i_understand">Ymmärrän</string>
     <string name="theme_item_button_text_color">Painikkeen tekstin väri</string>
     <string name="ok">OK</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all ja r/popular</string>
     <string name="open_link">Avaa linkki</string>
     <string name="sort_new">Uusi</string>
     <string name="elapsed_time_minutes_ago">%1$d minuuttia</string>
@@ -296,7 +290,6 @@
     <string name="settings_advanced_master_title">Lisäasetukset</string>
     <string name="small">Pieni</string>
     <string name="notifications">Ilmoitukset</string>
-    <string name="karma_info">Karma: %1$,d</string>
     <string name="elapsed_time_years_ago">%1$d vuotta</string>
     <string name="voting_length">Äänestyksen kesto: %1$d päivää</string>
     <string name="settings_show_divider_in_compact_layout">Näytä jakaja</string>
@@ -362,7 +355,6 @@
     <string name="unfollow_failed">Seuraamisen lopettaminen epäonnistui</string>
     <string name="choose_a_user">Valitse käyttäjä</string>
     <string name="option_3_hint">Valinta 3</string>
-    <string name="give_award_success">Palkinto annettu</string>
     <string name="no_more_posts">Ei enempää viestejä</string>
     <string name="user_themes">Omat teemat</string>
     <string name="sort_time_6months">6 kuukautta</string>
@@ -386,7 +378,6 @@
     <string name="sort_time_6hours">6 tuntia</string>
     <string name="app_lock_timeout_1_hour">1 tunti</string>
     <string name="settings_swipe_action_title">Pyyhkäisyn toiminto</string>
-    <string name="action_give_award">Anna palkinto</string>
     <string name="bottom_sheet_post_gallery">Galleria</string>
     <string name="theme_name_hint">Teeman nimi</string>
     <string name="no_users">Käyttäjiä ei löytynyt</string>
@@ -489,7 +480,6 @@
 \nNapauta yrittääksesi uudelleen.</string>
     <string name="send_message_content_hint">Viesti</string>
     <string name="lock_screen_text">Hei sinä siellä!</string>
-    <string name="notification_summary_award">Palkinto</string>
     <string name="nsfw">NSFW</string>
     <string name="disable_nsfw">Poista NSFW käytöstä</string>
     <string name="save_comment">Tallenna</string>
@@ -547,7 +537,6 @@
     <string name="error_loading_subscriptions">Tilauksia ei voi synkronoida</string>
     <string name="copy_text">Kopioi</string>
     <string name="message_username_required">Kenelle haluat lähettää tämän viestin\?</string>
-    <string name="give_award_failed">Epäonnistui</string>
     <string name="display_name_text">Näyttönimi</string>
     <string name="copy_all_markdown">Kopioi kaikki Markdownina</string>
     <string name="post_link_hint">URL-osoite</string>
@@ -563,7 +552,6 @@
     <string name="share">Jaa</string>
     <string name="all_communities">Kaikki yhteisöt</string>
     <string name="label_reddit">Lemmy</string>
-    <string name="comment_karma">Kommenttikarma:</string>
     <string name="post_count_detail">%1$,d viestiä</string>
     <string name="exit_app">Poistutaanko\?</string>
     <string name="settings_open_source_title">Avoin lähdekoodi</string>
@@ -709,7 +697,6 @@
     <string name="settings_collapse_reddit_section_title">Supista Lemmy-osio</string>
     <string name="settings_hide_the_number_of_comments">Piilota kommenttien lukumäärä</string>
     <string name="settings_hide_the_number_of_votes">Piilota äänien lukumäärä</string>
-    <string name="settings_hide_the_number_of_awards">Piilota palkintojen lukumäärä</string>
     <string name="settings_enable_search_history_title">Käytä hakuhistoriaa</string>
     <string name="settings_collapse_post_section_title">Supista viestiosio</string>
     <string name="settings_collapse_subscribed_communities_section_title">Supista tilattujen yhteisöjen osio</string>
@@ -735,8 +722,6 @@
     <string name="downloading_media_finished">Ladattu</string>
     <string name="report_reason_not_selected">Et ole valinnut syytä</string>
     <string name="report_reason_general_spam">Se on roskapostia</string>
-    <string name="n_awards">%1$,d palkintoa</string>
-    <string name="one_award">1 palkinto</string>
     <string name="anonymous">Anonyymi</string>
     <string name="comment_filter_requires_a_name">Mikä on tämän kommenttisuodattimen nimi?</string>
     <string name="post_filter_usage_embedded_user_all">Kaikki käyttäjät</string>

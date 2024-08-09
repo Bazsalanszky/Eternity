@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">取消标记 NSFW</string>
     <string name="action_mark_spoiler">标记为剧透</string>
     <string name="action_unmark_spoiler">取消标记剧透</string>
-    <string name="action_edit_flair">编辑头衔</string>
     <string name="action_change_post_layout">改变帖子布局</string>
     <string name="action_save">保存</string>
     <string name="action_edit_multi_reddit">编辑聚合版块</string>
@@ -88,9 +87,6 @@
     <string name="load_messages_failed">信息加载失败，请点击重试。</string>
     <string name="no_messages">空</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">声望：%1$,d</string>
-    <string name="karma_info_user_detail">声望：
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">注册日：
 \n%1$s</string>
     <string name="since">创建于：</string>
@@ -181,10 +177,7 @@
     <string name="video_is_processing">正在处理视频，请稍候。</string>
     <string name="image_is_processing">正在处理图片，请稍候。</string>
     <string name="gif_is_processing">正在处理动图，请稍候。</string>
-    <string name="flair">头衔</string>
     <string name="spoiler">剧透</string>
-    <string name="no_flair">无头衔</string>
-    <string name="error_loading_flairs">头衔加载错误，请点击重试。</string>
     <string name="no_rule">无规则</string>
     <string name="error_loading_rules">规则加载错误，请点击重试。</string>
     <string name="error_loading_rules_without_retry">规则加载错误</string>
@@ -267,15 +260,11 @@
     <string name="mark_spoiler_failed">标记剧透失败</string>
     <string name="unmark_spoiler_success">取消标记剧透成功</string>
     <string name="unmark_spoiler_failed">取消标记剧透失败</string>
-    <string name="update_flair_success">更新头衔成功</string>
-    <string name="update_flair_failed">更新头衔失败</string>
-    <string name="edit_flair">编辑头衔</string>
     <string name="only_allow_64_chars">只允许少于 64 个字符</string>
     <string name="view_all_comments">点此查看所有评论</string>
     <string name="notification_summary_account">账户</string>
     <string name="notification_summary_message">新消息</string>
     <string name="notification_summary_community">版块</string>
-    <string name="notification_summary_award">奖励</string>
     <string name="notification_new_messages">%1$d 条新消息</string>
     <string name="label_account">账户</string>
     <string name="label_post">帖子</string>
@@ -406,7 +395,6 @@
     <string name="settings_tab_post_type">类型</string>
     <string name="settings_tab_community_name">版块名称（不带 r/ 前缀）</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">聚合版块名称（/user/您的用户名/m/您的聚合版块名称）</string>
     <string name="settings_tab_username">用户名（不带 u/ 前缀）</string>
     <string name="no_developer_easter_egg">这里没有开发者选项</string>
     <string name="no_link_available">无法获取链接</string>
@@ -539,8 +527,6 @@
     <string name="theme_item_fully_collapsed_comment_background_color_detail">应用于：完全折叠的评论背景</string>
     <!-- “Awarded”暂时翻译为“被赞赏的” -->
     <!-- Fuzzy -->
-    <string name="theme_item_awarded_comment_background_color">获奖评论的背景颜色</string>
-    <string name="theme_item_awarded_comment_background_color_detail">应用于：获奖评论的背景</string>
     <string name="theme_item_received_message_background_color">已接收消息的背景颜色</string>
     <string name="theme_item_received_message_background_color_detail">应用于：已接收私人消息的背景</string>
     <string name="theme_item_sent_message_background_color">已发送消息的背景色</string>
@@ -598,14 +584,6 @@
     <string name="theme_item_nsfw_background_color_detail">应用于：NSFW 标签的背景</string>
     <string name="theme_item_nsfw_text_color">NSFW 文字颜色</string>
     <string name="theme_item_nsfw_text_color_detail">应用于：NSFW 标签的文字颜色</string>
-    <string name="theme_item_flair_background_color">头衔背景色</string>
-    <string name="theme_item_flair_background_color_detail">应用于：头衔标签的背景</string>
-    <string name="theme_item_flair_text_color">头衔文字颜色</string>
-    <string name="theme_item_flair_text_color_detail">应用于：头衔标签的文字颜色</string>
-    <string name="theme_item_awards_background_color">奖励背景色</string>
-    <string name="theme_item_awards_background_color_detail">应用于：奖励标签的背景</string>
-    <string name="theme_item_awards_text_color">奖励文字颜色</string>
-    <string name="theme_item_awards_text_color_detail">应用于：奖励标签的文字颜色</string>
     <string name="theme_item_archived_tint">已存档图标的颜色</string>
     <string name="theme_item_archived_tint_detail">应用于：已存档图标</string>
     <string name="theme_item_locked_icon_tint">已锁定图标的颜色</string>
@@ -623,8 +601,6 @@
     <string name="theme_item_community_color">版块颜色</string>
     <string name="theme_item_community_color_detail">应用于：版块名称</string>
     <!-- What is “Author Flair”？ -->
-    <string name="theme_item_author_flair_text_color">作者头衔颜色</string>
-    <string name="theme_item_author_flair_text_color_detail">应用于：评论中的作者头衔</string>
     <string name="theme_item_submitter_color">楼主</string>
     <string name="theme_item_submitter_color_detail">应用于：评论中的楼主</string>
     <string name="theme_item_moderator_color">版主</string>
@@ -715,15 +691,10 @@
     <string name="post_title_preview">这是一个帖子</string>
     <string name="post_content_preview">这个引人入胜的笑话有点老了，但我每次都为之倾倒。</string>
     <string name="post_type_preview">帖子</string>
-    <string name="flair_preview">头衔</string>
-    <string name="awards_preview">4 个奖励</string>
-    <string name="author_flair_preview">作者头衔</string>
     <string name="comment_content_preview">我送给我的女朋友一张“早日康复”的贺卡。
 \n她没有生病或遇到任何问题，但是她肯定会好起来的。</string>
     <string name="edit_multi_reddit">编辑聚合版块</string>
     <string name="delete_multi_reddit">删除聚合版块</string>
-    <string name="n_awards">%1$,d 个奖励</string>
-    <string name="one_award">1 个奖励</string>
     <string name="report">举报</string>
     <string name="reporting">正在举报</string>
     <string name="report_successful">已举报</string>
@@ -763,10 +734,7 @@
     <string name="top_score">%1$s 分</string>
     <string name="login_activity_2fa_prompt">如果启用了两步验证，请输入两步验证令牌，否则留空</string>
     <string name="submit_crosspost_activity_label">转发</string>
-    <string name="give_award_activity_label">给予奖励</string>
     <string name="action_crosspost">转发</string>
-    <string name="action_select_user_flair">选择用户头衔</string>
-    <string name="action_give_award">给予奖励</string>
     <string name="posts">帖子</string>
     <string name="only_for_logged_in_user">仅登录用户可用</string>
     <string name="settings_number_of_columns_in_post_feed_title">帖子列表页面的列数</string>
@@ -823,8 +791,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">下载失败：无法访问目标目录</string>
     <string name="downloading_media_failed_cannot_download_media">下载失败</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">下载失败：无法将文件保存至目标目录</string>
-    <string name="select_user_flair_success">用户头衔已选中</string>
-    <string name="select_this_user_flair">选择此用户头衔吗？</string>
     <string name="select_header_size">选择标题大小</string>
     <string name="large">大</string>
     <string name="small">小</string>
@@ -838,13 +804,8 @@
     <string name="refresh">刷新</string>
     <string name="change_sort_type">更改排序类型</string>
     <string name="change_post_layout">更改帖子布局</string>
-    <string name="give_award_dialog_title">给予奖励？</string>
     <string name="anonymous">匿名</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">错误代码：%1$d/
-\n错误信息：%2$s</string>
-    <string name="give_award_success">奖励已赠送</string>
-    <string name="give_award_failed">失败</string>
     <string name="warning">警告</string>
     <string name="this_is_a_nsfw_community">这是一个 NSFW 版块。</string>
     <string name="this_user_has_nsfw_content">该用户有 NSFW 内容</string>
@@ -862,12 +823,10 @@
     <string name="random_nsfw_post">随机 NSFW 帖子</string>
     <string name="fetch_random_thing_failed">请稍后重试</string>
     <string name="downloading">正在下载</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all 和 r/popular 版块</string>
     <string name="settings_miscellaneous_title">杂项</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">首选版块推荐的评论排序类型</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">评论排序类型将不会被保存</string>
     <string name="settings_community_filter_category">隐藏版块</string>
-    <string name="settings_community_filter_popular_and_all">在 r/all 和 r/popular 版块</string>
     <string name="settings_credits_ufo_capturing_animation_title">开屏 UFO 动画</string>
     <string name="select_video_quality">选择视频质量</string>
     <string name="settings_swipe_action_haptic_feedback_title">触觉反馈</string>
@@ -928,14 +887,10 @@
     <string name="title_excludes_regex_hint">标题：排除正则表达式</string>
     <string name="exclude_communities_hint">排除版块（例如 funny,AskReddit）</string>
     <string name="exclude_users_hint">排除用户（例如 Hostilenemy,random）</string>
-    <string name="exclude_flairs_hint">排除头衔（例如 头衔1,头衔2）</string>
-    <string name="contain_flairs_hint">包含头衔（例如 头衔1,头衔2）</string>
     <string name="min_vote_hint">最少投票数（-1: 无限制）</string>
     <string name="max_vote_hint">最多投票数（-1: 无限制）</string>
     <string name="min_comments_hint">最少评论数（-1: 无限制）</string>
     <string name="max_comments_hint">最多评论数（-1: 无限制）</string>
-    <string name="min_awards_hint">最少奖励数（-1: 无限制）</string>
-    <string name="max_awards_hint">最多奖励数（-1: 无限制）</string>
     <string name="post_filter_name_hint">帖子过滤器名称</string>
     <string name="post_filter_requires_a_name">该帖子过滤器的名称是什么？</string>
     <string name="duplicate_post_filter_dialog_title">“%1$s”已经存在</string>
@@ -959,7 +914,6 @@
     <string name="choose_a_user">选择一个用户</string>
     <string name="settings_click_to_show_media_in_gallery_layout">点击在相册布局中显示媒体</string>
     <string name="settings_hide_post_type">隐藏帖子类型</string>
-    <string name="settings_hide_the_number_of_awards">隐藏奖励数量</string>
     <string name="settings_hide_community_and_user_prefix">隐藏版块与用户前缀</string>
     <string name="settings_hide_the_number_of_votes">隐藏投票数</string>
     <string name="settings_hide_the_number_of_comments">隐藏评论数</string>
@@ -1023,8 +977,6 @@
     <string name="select">选择</string>
     <string name="exclude_community">排除此版块</string>
     <string name="exclude_user">排除此用户</string>
-    <string name="exclude_flair">排除此头衔</string>
-    <string name="contain_flair">包含此头衔</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">排除域名</string>
     <string name="suggest_title">推荐标题</string>
@@ -1034,7 +986,6 @@
     <string name="comment_continue_thread">继续帖子</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">垂直滑动离开媒体界面</string>
-    <string name="settings_hide_post_flair">隐藏帖子头衔</string>
     <string name="settings_crash_reports_title">崩溃报告</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">危险</string>
     <string name="settings_disable_nsfw_forever_title">永久禁用 NSFW</string>
@@ -1223,7 +1174,6 @@
     <string name="share_links_on_your_local_instance">在本地实例上分享链接</string>
     <string name="settings_hide_community_and_user_instance">隐藏板块与用户实例</string>
     <string name="settings_post_feed_max_resolution_warning_title">增大该值可显示更高分辨率的预览，但应用程序可能会意外崩溃。</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">隐藏账户声望</string>
     <string name="billing_error_feature_not_supported">当前设备上的 Play Store 不支持请求的功能。</string>
     <string name="welcome_to_infinity">欢迎来到 Infinity for Reddit，将为您带来全新的 Reddit 浏览体验！</string>
     <string name="billing_error_service_disconnected">该应用未通过 Google Play 结算库连接到 Play Store 服务。</string>
@@ -1255,12 +1205,9 @@
     <string name="settings_post_feed_max_resolution_title">帖子列表预览最大分辨率（宽 * 高）</string>
     <string name="settings_hide_fab_in_post_feed">在帖子列表中隐藏 FAB</string>
     <string name="settings_comment_divider_type">评论分隔线类型</string>
-    <string name="settings_hide_comment_awards_title">隐藏评论奖励</string>
     <string name="theme_name_nightfox">Nightfox</string>
     <string name="theme_name_carbonfox">Carbonfox</string>
     <string name="edited_time">编辑于 %s</string>
-    <string name="clear_user_flair">清除头衔</string>
-    <string name="clear_user_flair_success">用户头衔已清除</string>
     <string name="edited">已编辑</string>
     <string name="post_filter_usage_embedded_user_all">所有用户</string>
     <string name="comment_filter_name_hint">评论过滤器名称</string>
@@ -1286,9 +1233,7 @@
     <string name="invalid_regex">正则表达式模式无效</string>
     <string name="no_more_posts">没有更多帖子了</string>
     <string name="billing_error_network_error">操作过程中出现网络错误。</string>
-    <string name="comment_karma">评论声望：</string>
     <string name="not_a_valid_number">不是有效数字</string>
-    <string name="post_karma">帖子声望：</string>
     <string name="handle_link">处理链接</string>
     <string name="error_unsupported_video">媒体包含视频轨道，但该设备无法播放任何视频轨道</string>
     <string name="error_unsupported_audio">媒体包含音轨，但该设备无法播放任何音轨</string>

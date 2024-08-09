@@ -95,13 +95,6 @@
 மறுமுயல தட்டுக."</string>
     <string name="no_messages">"காலி"</string>
     <string name="nsfw">"NSFW"</string>
-
-    <!-- Fuzzy -->
-    <string name="karma_info">"கர்மம்: %1$d"</string>
-
-    <!-- Fuzzy -->
-    <string name="karma_info_user_detail">"கர்மம்:
-%1$d (%2$d + %3$d)"</string>
     <string name="cakeday_info">"https://crowdin.com/"</string>
     <string name="profile">"சுயவிவரம்"</string>
     <string name="subscriptions">"குழுசேர்வுகள்"</string>
@@ -267,7 +260,6 @@
     <string name="view_all_comments">"எல்லா கருத்துகளையும் உலாவ இங்குச் சொடுக்கு"</string>
     <string name="notification_summary_account">"கணக்கு"</string>
     <string name="notification_summary_message">"புதிய தகவல்"</string>
-    <string name="notification_summary_award">"விருது"</string>
 
     <!-- Fuzzy -->
     <string name="notification_new_messages">"%1$d புதிய தகவல்கள்"</string>
@@ -452,8 +444,6 @@
     <string name="theme_item_post_type_background_color">"இடுகை வகை பின்புல நிறம்"</string>
     <string name="theme_item_post_type_text_color">"இடுகை வகை உரை நிறம்"</string>
     <string name="theme_item_nsfw_background_color">"NSFW பின்புல நிறம்"</string>
-    <string name="theme_item_awards_background_color">"விருதுகள் பின்புல நிறம்"</string>
-    <string name="theme_item_awards_text_color">"விருதுகள் உரை நிறம்"</string>
     <string name="theme_item_archived_tint">"காப்பகமானவை படவுரு நிறம்"</string>
     <string name="theme_item_locked_icon_tint">"பூட்டப்பட்டது படவுரு நிறம்"</string>
     <string name="theme_item_crosspost_icon_tint">"குறுக்கிடுகை படவுரு நிறம்"</string>
@@ -502,13 +492,10 @@
     <string name="primary_text_preview">"முதன்மை உரை"</string>
     <string name="post_title_preview">"இது ஓர் இடுகை"</string>
     <string name="post_type_preview">"இடுகை"</string>
-    <string name="awards_preview">"4 விருதுகள்"</string>
     <string name="edit_multi_reddit">"பல்ரெட்டிட்டைத் திருத்து"</string>
     <string name="delete_multi_reddit">"பல்ரெட்டிட்டை அழி"</string>
 
     <!-- Fuzzy -->
-    <string name="n_awards">"%1$d விருதுகள்"</string>
-    <string name="one_award">"1 விருது"</string>
     <string name="report">"புகாரளி"</string>
     <string name="reporting">"புகாரளிக்கிறது"</string>
     <string name="report_successful">"புகாரளிக்கப்பட்டது"</string>
@@ -533,9 +520,7 @@
     <string name="set_to_both">"இரண்டிர்க்கும் அமை"</string>
     <string name="default_font_font_preview">"இயல்புநிலை"</string>
     <string name="submit_crosspost_activity_label">"குறுக்கிடுகை"</string>
-    <string name="give_award_activity_label">"விருதளி"</string>
     <string name="action_crosspost">"குறுக்கிடுகையிடு"</string>
-    <string name="action_give_award">"விருதளி"</string>
     <string name="posts">"இடுகைகள்"</string>
     <string name="only_for_logged_in_user">"உள்துழைந்த பயனர்களுக்கு மட்டும்"</string>
     <string name="restart_app_see_changes">"மாற்றங்களைப் காண செயலியை மறுதுவக்கு"</string>
@@ -575,10 +560,7 @@
     <string name="refresh">"புத்துணர்வூட்டு"</string>
     <string name="change_sort_type">"வகைப்படுத்தல் வகையை மாற்று"</string>
     <string name="change_post_layout">"இடுகை தளவமைப்பை மாற்று"</string>
-    <string name="give_award_dialog_title">"விருதளிக்கவா?"</string>
     <string name="anonymous">"அநாமதேய"</string>
-    <string name="give_award_success">"விருது அளிக்கப்பட்டது"</string>
-    <string name="give_award_failed">"தோல்வியுற்றது"</string>
     <string name="warning">"எச்சரிக்கை"</string>
     <string name="this_user_has_nsfw_content">"இப்பயனர் NSFW உள்ளடக்கம் கொண்டுள்ளார்"</string>
     <string name="dismiss">"நிராகரி"</string>
@@ -630,7 +612,6 @@
     <string name="read_all_messages_failed">"எல்லா தகவல்களையும் வாசிக்க இயலவில்லை"</string>
     <string name="choose_a_user">"பயனரைத் தெரிவுசெய்"</string>
     <string name="settings_hide_post_type">"இடுகை வகையை மறை"</string>
-    <string name="settings_hide_the_number_of_awards">"விருது எண்ணிக்கையை மறை"</string>
     <string name="settings_hide_the_number_of_votes">"வாக்கெண்ணிக்கையை மறை"</string>
     <string name="settings_hide_the_number_of_comments">"கருத்தெண்ணிக்கையை மறை"</string>
     <string name="post_layout_gallery">"காட்சியக தளவமைப்பு"</string>

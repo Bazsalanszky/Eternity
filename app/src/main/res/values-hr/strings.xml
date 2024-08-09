@@ -52,7 +52,6 @@
     <string name="action_unmark_nsfw">Odznači kao NSFW</string>
     <string name="action_mark_spoiler">Označi kao Spojler</string>
     <string name="action_unmark_spoiler">Odznači kao Spojler</string>
-    <string name="action_edit_flair">Uredi Flair</string>
     <string name="action_change_post_layout">Promijeni raspored objave</string>
     <string name="action_save">Spremi</string>
     <string name="action_edit_multi_reddit">Uredi multireddit</string>
@@ -96,9 +95,6 @@
 \nDodirnite za ponovni pokušaj.</string>
     <string name="no_messages">Prazno</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Cake dan:
 \n%1$s</string>
     <string name="since">Od:</string>
@@ -187,11 +183,7 @@
     <string name="video_is_processing">Obrada fotografije. Molim pričekajte.</string>
     <string name="image_is_processing">Obrada slike. Molim pričekajte.</string>
     <string name="gif_is_processing">Obrada gif-a. Molim pričekajte.</string>
-    <string name="flair">Flair</string>
     <string name="spoiler">Spojler</string>
-    <string name="no_flair">Nema Flaira</string>
-    <string name="error_loading_flairs">Pogreška pri učitavanju Flairova.
-\nDodirnite za ponovni pokušaj.</string>
     <string name="no_rule">Nema pravila</string>
     <string name="error_loading_rules">Pogreška pri učitavanju pravila.
 \nDodirnite za ponovni pokušaj.</string>
@@ -281,15 +273,11 @@
     <string name="unmark_spoiler_success">Uspješno odznačeno kao Spojler</string>
     <string name="unmark_spoiler_failed">Odznačavanje kao Spojler nije uspjelo</string>
     <!-- Fuzzy -->
-    <string name="update_flair_success">Flair uspješno ažuriran</string>
-    <string name="update_flair_failed">Flair nije ažuriran</string>
-    <string name="edit_flair">Uredi Flair</string>
     <string name="only_allow_64_chars">Dopusti manje od 64 znaka</string>
     <string name="view_all_comments">Dodirnite ovdje da biste vidjeli sve komentare</string>
     <string name="notification_summary_account">Račun</string>
     <string name="notification_summary_message">Nova poruka</string>
     <string name="notification_summary_community">Podreddit</string>
-    <string name="notification_summary_award">Nagrada</string>
     <string name="notification_new_messages">%1$d Nove/ih poruke/a</string>
     <string name="label_account">Račun</string>
     <string name="label_post">Objava</string>
@@ -417,7 +405,6 @@
     <string name="settings_tab_post_type">Tip</string>
     <string name="settings_tab_community_name">Ime podreddita (bez r/ prefiksa)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Ime multireddita (/korisnik/vašeime/m/vašemultiredditime</string>
     <string name="settings_tab_username">Korisničko ime (bez u/ prefiksa)</string>
     <string name="no_developer_easter_egg">Ovdje nema razvijačkih postavki</string>
     <string name="no_link_available">Poveznica nije dostupna</string>
@@ -539,8 +526,6 @@
     <string name="theme_item_comment_background_color_detail">Primijenjeno na: Pozadinu komentara</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Boja pozadine potpuno smanjenog komentara</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Primijenjeno na: Pozadinu potpuno smanjenih komentara</string>
-    <string name="theme_item_awarded_comment_background_color">Boja pozadine nagrađenog komentara</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Primijenjeno na: Pozadinu nagrađenih komentara</string>
     <string name="theme_item_received_message_background_color">Boja pozadine primljene poruke</string>
     <string name="theme_item_received_message_background_color_detail">Primijenjeno na: Pozadinu primljene privatne poruke</string>
     <string name="theme_item_sent_message_background_color">Boja pozadine poslane poruke</string>
@@ -593,14 +578,6 @@
     <string name="theme_item_nsfw_background_color_detail">Primijenjeno na: Pozadinu NSFW znaka</string>
     <string name="theme_item_nsfw_text_color">Boja teksta NSFW znaka</string>
     <string name="theme_item_nsfw_text_color_detail">Primijenjeno na: Boju teksta NSFW znaka</string>
-    <string name="theme_item_flair_background_color">Boja pozadine Flair znaka</string>
-    <string name="theme_item_flair_background_color_detail">Primijenjeno na: Pozadinu Flair znaka</string>
-    <string name="theme_item_flair_text_color">Boja teksta Flair znaka</string>
-    <string name="theme_item_flair_text_color_detail">Primijenjeno na: Boju teksta Flair znaka</string>
-    <string name="theme_item_awards_background_color">Boja pozadine znaka nagrada</string>
-    <string name="theme_item_awards_background_color_detail">Primijenjeno na: Pozadinu znaka nagrada</string>
-    <string name="theme_item_awards_text_color">Boja teksta znaka nagrada</string>
-    <string name="theme_item_awards_text_color_detail">Primijenjeno na: Boju teksta znaka nagrada</string>
     <string name="theme_item_archived_tint">Boja ikone arhiviranog</string>
     <string name="theme_item_archived_tint_detail">Primijenjeno na: Ikonu arhiviranog</string>
     <string name="theme_item_locked_icon_tint">Boja ikone za zaključano</string>
@@ -617,8 +594,6 @@
     <string name="theme_item_username_color_detail">Primijenjeno na: Korisničko ime</string>
     <string name="theme_item_community_color">Boja podreddita</string>
     <string name="theme_item_community_color_detail">Primijenjeno na: Ime podreddita</string>
-    <string name="theme_item_author_flair_text_color">Boja autorskog Flaira</string>
-    <string name="theme_item_author_flair_text_color_detail">Primijenjeno na: Autorski Flair</string>
     <string name="theme_item_submitter_color">Podnosilac</string>
     <string name="theme_item_submitter_color_detail">Primijenjeno na: Podnosilca u komentarima</string>
     <string name="theme_item_moderator_color">Moderator</string>
@@ -715,15 +690,10 @@
     <string name="post_title_preview">Ovo je objava</string>
     <string name="post_content_preview">Ova fora s gravitacijom je prastara, ali svaki but padnem na nju.</string>
     <string name="post_type_preview">OBJAVA</string>
-    <string name="flair_preview">Flair</string>
-    <string name="awards_preview">4 nagrade</string>
-    <string name="author_flair_preview">Autorski Flair</string>
     <string name="comment_content_preview">Djevojka mi je rekla da ju uopće ne razumijem.
 \nNije mi jasno kako to misli.</string>
     <string name="edit_multi_reddit">Uredi Multireddit</string>
     <string name="delete_multi_reddit">Obriši Multireddit</string>
-    <string name="n_awards">%1$,d Nagrade/a</string>
-    <string name="one_award">1 Nagrada</string>
     <string name="report">Prijavi</string>
     <string name="reporting">Prijavljivanje</string>
     <string name="report_successful">Prijavljeno</string>
@@ -762,10 +732,7 @@
     <string name="top_score">%1$s boda/ova</string>
     <string name="login_activity_2fa_prompt">Ukoliko imate omogućenu 2-faktorsku autentikaciju, upišite zaporku na sljedeći način:&lt;zaporka&gt;:&lt;2FA kod&gt;. Primjer: vašazaporka:123456</string>
     <string name="submit_crosspost_activity_label">Crosspost</string>
-    <string name="give_award_activity_label">Nagradi</string>
     <string name="action_crosspost">Crosspost</string>
-    <string name="action_select_user_flair">Odaberi Flair</string>
-    <string name="action_give_award">Nagradi</string>
     <string name="posts">Objave</string>
     <string name="only_for_logged_in_user">Samo za prijavljene korisnike</string>
     <string name="settings_number_of_columns_in_post_feed_title">Broj stupaca u feed-u objava</string>
@@ -818,8 +785,6 @@
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">Preuzimanje neuspješno:nije moguće pristupiti odredišnom direktoriju</string>
     <string name="downloading_media_failed_cannot_download_media">Preuzimanje neuspješno</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">Preuzimanje neuspješno: nije moguće spremiti datoteku u odredišni direktorij</string>
-    <string name="select_user_flair_success">Korisnički flair odabran</string>
-    <string name="select_this_user_flair">Odabrati ovaj korisnički flair\?</string>
     <string name="select_header_size">Odaberi veličinu zaglavlja</string>
     <string name="large">Veliko</string>
     <string name="small">Malo</string>
@@ -832,13 +797,8 @@
     <string name="refresh">Osvježi</string>
     <string name="change_sort_type">Promijeni tip redosljeda</string>
     <string name="change_post_layout">Promjeni raspored objava</string>
-    <string name="give_award_dialog_title">Nagraditi\?</string>
     <string name="anonymous">Anonimno</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">Kod: %1$d/
-\nPoruka: %2$s</string>
-    <string name="give_award_success">Nagrađeno</string>
-    <string name="give_award_failed">Nagrađivanje nije uspjelo</string>
     <string name="warning">Upozorenje</string>
     <string name="this_is_a_nsfw_community">Ovo je NSFW podreddit.</string>
     <string name="this_user_has_nsfw_content">Ovaj korisnik ima NSFW sadržaj</string>
@@ -856,12 +816,10 @@
     <string name="random_nsfw_post">Nasumična NSFW objava</string>
     <string name="fetch_random_thing_failed">Pokušajte ponovno kasnije</string>
     <string name="downloading">Preuzimanje</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all i r/popular</string>
     <string name="settings_miscellaneous_title">Razno</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">Poštuj tip sortiranja komentara preporučen na podredditu</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Tip sortiranja komentara neće biti spremljen</string>
     <string name="settings_community_filter_category">Sakrij podreddite</string>
-    <string name="settings_community_filter_popular_and_all">U r/popular i r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">UFO Capturing Animation</string>
     <string name="select_video_quality">Odaberi kvalitetu videa</string>
     <string name="settings_swipe_action_haptic_feedback_title">Haptična povratna informacija</string>
@@ -923,13 +881,10 @@
     <string name="title_excludes_regex_hint">Naslov: isključuje regex</string>
     <string name="exclude_communities_hint">Isključi podreddite (npr. funny,AskReddit)</string>
     <string name="exclude_users_hint">Iskjuči korisnike (npr. Hostilenemy,random)</string>
-    <string name="exclude_flairs_hint">Isključi flairove (npr. flair1,flair2)</string>
     <string name="min_vote_hint">Min. glas (-1: bez zabrane)</string>
     <string name="max_vote_hint">Max. glas (-1: bez zabrane)</string>
     <string name="min_comments_hint">Min. komentara (-1: bez zabrane)</string>
     <string name="max_comments_hint">Max. komentara (-1: bez zabrane)</string>
-    <string name="min_awards_hint">Min. nagrada (-1: bez zabrane)</string>
-    <string name="max_awards_hint">Max. nagrada (-1: bez zabrane)</string>
     <string name="post_filter_requires_a_name">Koje je ime filtera objave\?</string>
     <string name="duplicate_post_filter_dialog_message">Poništi\?</string>
     <string name="post_filter_usage_home">Home</string>
@@ -939,7 +894,6 @@
     <string name="choose_a_user">Odaberi korisnika</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Klikni da prikažeš medij u obliku galerije</string>
     <string name="settings_hide_post_type">Sakrij vrstu objave</string>
-    <string name="settings_hide_the_number_of_awards">Sakrij broj nagrada</string>
     <string name="settings_hide_the_number_of_votes">Sakrij broj glasanja</string>
     <string name="settings_hide_the_number_of_comments">Sakrij broj komentara</string>
     <string name="post_layout_gallery">Izgled galerije</string>

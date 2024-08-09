@@ -50,7 +50,6 @@
     <string name="action_unmark_nsfw">NSFW Kaldır</string>
     <string name="action_mark_spoiler">Spoiler İşaretle</string>
     <string name="action_unmark_spoiler">Spoiler Kaldır</string>
-    <string name="action_edit_flair">Etiketi Düzenle</string>
     <string name="action_change_post_layout">Gönderi Düzenini Değiştir</string>
     <string name="action_save">Kaydet</string>
     <string name="action_edit_multi_reddit">MultirReddit\'i Düzenle</string>
@@ -94,9 +93,6 @@
 \nTekrar denemek için tıklayın.</string>
     <string name="no_messages">Boş</string>
     <string name="nsfw">NSFW</string>
-    <string name="karma_info">Karma: %1$,d</string>
-    <string name="karma_info_user_detail">Karma:
-\n%1$,d (%2$d + %3$d)</string>
     <string name="cakeday_info">Üyelik tarihi:
 \n%1$s</string>
     <!-- Since Turkish is an agglutinative lang, there is no good translation.
@@ -188,11 +184,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="video_is_processing">Video işleniyor. Lütfen bekleyin.</string>
     <string name="image_is_processing">Görüntü işleniyor. Lütfen bekleyin.</string>
     <string name="gif_is_processing">Gif işleniyor. Lütfen bekleyin.</string>
-    <string name="flair">Etiket</string>
     <string name="spoiler">Spoiler</string>
-    <string name="no_flair">Hiç etiket yok</string>
-    <string name="error_loading_flairs">Etiketler yüklenirken hata oluştu.
-\nTekrar denemek için tıklayın.</string>
     <string name="no_rule">Hiç kural yok</string>
     <string name="error_loading_rules">Kurallar yüklenirken hata oluştu.
 \nTekrar denemek için tıklayın.</string>
@@ -276,15 +268,11 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="mark_spoiler_failed">Spoiller işaretlenemedi</string>
     <string name="unmark_spoiler_success">Spoiller işareti başarıyla kaldırıldı</string>
     <string name="unmark_spoiler_failed">Spoiler işareti kaldırılamadı</string>
-    <string name="update_flair_success">Etiket başarıyla güncellendi</string>
-    <string name="update_flair_failed">Etiket güncellenemedi</string>
-    <string name="edit_flair">Rozeti Düzenle</string>
     <string name="only_allow_64_chars">Yalnızca 64 karakterden azına izin verilir</string>
     <string name="view_all_comments">Tüm yorumlara göz atmak için burayı tıklayın</string>
     <string name="notification_summary_account">Hesap</string>
     <string name="notification_summary_message">Yeni Mesaj</string>
     <string name="notification_summary_community">Subreddit</string>
-    <string name="notification_summary_award">Ödül</string>
     <string name="notification_new_messages">%1$d Yeni Mesaj</string>
     <string name="label_account">Hesap</string>
     <string name="label_post">Gönderi</string>
@@ -412,7 +400,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="settings_tab_post_type">Tür</string>
     <string name="settings_tab_community_name">Subreddit Adı (r/ öneksiz)</string>
     <!-- Fuzzy -->
-    <string name="settings_tab_multi_reddit_name">Multireddit Adı (/user/kullanıcıadın/m/multiredditadın)</string>
     <string name="settings_tab_username">Kullanıcı adı (u/ öneksiz)</string>
     <string name="no_developer_easter_egg">Burada geliştirici seçeneği yok</string>
     <string name="no_link_available">Bağlantı alınamıyor</string>
@@ -534,8 +521,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="theme_item_comment_background_color_detail">Uygulandığı yer: Yorum arka planı</string>
     <string name="theme_item_fully_collapsed_comment_background_color">Tam Daraltılmış Yorum Arka Plan Rengi</string>
     <string name="theme_item_fully_collapsed_comment_background_color_detail">Uygulandığı yer: Tam daraltılmış yorumların arka planı</string>
-    <string name="theme_item_awarded_comment_background_color">Ödüllü Yorum Arka Plan Rengi</string>
-    <string name="theme_item_awarded_comment_background_color_detail">Uygulandığı yer: Ödüllü yorumların arka planı</string>
     <string name="theme_item_received_message_background_color">Alınan Mesaj Arka Plan Rengi</string>
     <string name="theme_item_received_message_background_color_detail">Uygulandığı yer: Alınan özel mesajların arka planı</string>
     <string name="theme_item_sent_message_background_color">Gönderilen Mesaj Arka Plan Rengi</string>
@@ -588,14 +573,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="theme_item_nsfw_background_color_detail">Uygulandığı yer: NSFW etiketinin arka planı</string>
     <string name="theme_item_nsfw_text_color">NSFW metin rengi</string>
     <string name="theme_item_nsfw_text_color_detail">Uygulandığı yer: NSFW etiketinin metin rengi</string>
-    <string name="theme_item_flair_background_color">Etiket Arka Plan Rengi</string>
-    <string name="theme_item_flair_background_color_detail">Uygulandığı yer: Etiket etiketinin arka planı</string>
-    <string name="theme_item_flair_text_color">Etiket Metin Rengi</string>
-    <string name="theme_item_flair_text_color_detail">Uygulandığı yer: Etiket etiketinin metin rengi</string>
-    <string name="theme_item_awards_background_color">Ödüller Arka Plan Rengi</string>
-    <string name="theme_item_awards_background_color_detail">Uygulandığı yer: Ödül etiketinin arka planı</string>
-    <string name="theme_item_awards_text_color">Ödüller Metin Rengi</string>
-    <string name="theme_item_awards_text_color_detail">Uygulandığı yer: Ödül etiketinin metin rengi</string>
     <string name="theme_item_archived_tint">Arşiv Simgesi Rengi</string>
     <string name="theme_item_archived_tint_detail">Uygulandığı yer: Arşivle simgesi</string>
     <string name="theme_item_locked_icon_tint">Kilitli Simgesi Rengi</string>
@@ -612,8 +589,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="theme_item_username_color_detail">Uygulandığı yer: Kullanıcı adı</string>
     <string name="theme_item_community_color">Subreddit Rengi</string>
     <string name="theme_item_community_color_detail">Uygulandığı yer: Subreddit adı</string>
-    <string name="theme_item_author_flair_text_color">Yazar Rozeti Rengi</string>
-    <string name="theme_item_author_flair_text_color_detail">Uygulandığı yer: Yazar rozetli yorumlar</string>
     <string name="theme_item_submitter_color">Gönderen</string>
     <string name="theme_item_submitter_color_detail">Uygulandığı yer: Yorumlardaki gönderen</string>
     <string name="theme_item_moderator_color">Moderatör</string>
@@ -702,15 +677,10 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="post_title_preview">Bu bir gönderidir</string>
     <string name="post_content_preview">Bu yerçekimi şakası biraz eskimeye başlasada ona her seferinde düşüyorum.</string>
     <string name="post_type_preview">GÖNDERİ</string>
-    <string name="flair_preview">Etiket</string>
-    <string name="awards_preview">4 Ödül</string>
-    <string name="author_flair_preview">Yazar Rozeti</string>
     <string name="comment_content_preview">Kız arkadaşıma üstünde \"yakında iyileşmen dileğiyle\" yazan bir kart aldım.
 \nHasta falan değildi, ama kesinlikle iyileşmeliydi.</string>
     <string name="edit_multi_reddit">Multireddit\'i Düzenle</string>
     <string name="delete_multi_reddit">Multireddit\'i Sil</string>
-    <string name="n_awards">%1$,d Ödül</string>
-    <string name="one_award">1 Ödül</string>
     <string name="report">Bildir</string>
     <string name="reporting">Bildiriliyor</string>
     <string name="report_successful">Bildirildi</string>
@@ -749,10 +719,7 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="top_score">%1$s puan</string>
     <string name="login_activity_2fa_prompt">2 faktörlü kimlik doğrulamasını etkinleştirdiyseniz, lütfen şifrenizi aşağıdaki gibi yazınız: &lt;parola&gt;: &lt;2FA code&gt;</string>
     <string name="submit_crosspost_activity_label">Çapraz Gönderi</string>
-    <string name="give_award_activity_label">Ödül Ver</string>
     <string name="action_crosspost">Çapraz Gönderi</string>
-    <string name="action_select_user_flair">Kullanıcı Rozetini Seç</string>
-    <string name="action_give_award">Ödül Ver</string>
     <string name="posts">Gönderiler</string>
     <string name="only_for_logged_in_user">Sadece Oturum Açmış Kullanıcılar için</string>
     <string name="settings_number_of_columns_in_post_feed_title">Gönderi Akışındaki Sütun Sayısı</string>
@@ -805,8 +772,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="downloading_image_or_gif_failed_cannot_get_destination_directory">İndirme başarısız: hedef dizine erişilemiyor</string>
     <string name="downloading_media_failed_cannot_download_media">İndirme başarısız</string>
     <string name="downloading_media_failed_cannot_save_to_destination_directory">İndirme başarısız: dosya hedef dizine kaydedilemiyor</string>
-    <string name="select_user_flair_success">Kullanıcı rozeti seçildi</string>
-    <string name="select_this_user_flair">Bu kullanıcı rozeti seçilsin mi\?</string>
     <string name="select_header_size">Başlık Boyutunu Seç</string>
     <string name="large">Büyük</string>
     <string name="small">Küçük</string>
@@ -819,13 +784,8 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="refresh">Yenile</string>
     <string name="change_sort_type">Sıralama Türünü Değiştir</string>
     <string name="change_post_layout">Gönderi Düzenini Değiştir</string>
-    <string name="give_award_dialog_title">Ödül Verilsin mi\?</string>
     <string name="anonymous">Anonim</string>
     <!-- Fuzzy -->
-    <string name="give_award_error_message">Kod: %1$d/
-\nMesaj: %2$s</string>
-    <string name="give_award_success">Ödül verildi</string>
-    <string name="give_award_failed">İşlem Başarısız Oldu</string>
     <string name="warning">Uyarı</string>
     <string name="this_is_a_nsfw_community">Bu bir NSFW subredditidir.</string>
     <string name="this_user_has_nsfw_content">Bu kullanıcının NSFW içeriği var</string>
@@ -843,12 +803,10 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="random_nsfw_post">Rastgele NSFW Gönderisi</string>
     <string name="fetch_random_thing_failed">Daha sonra tekrar deneyin</string>
     <string name="downloading">İndiriliyor</string>
-    <string name="community_filter_popular_and_all_activity_label">r/all ve r/popular</string>
     <string name="settings_miscellaneous_title">Diğer</string>
     <string name="settings_respect_community_recommended_comment_sort_type_title">İlgili Subreddit Önerilen Yorum Sıralaması Türü</string>
     <string name="settings_respect_community_recommended_comment_sort_type_summary">Yorum sıralaması türü kaydedilmez</string>
     <string name="settings_community_filter_category">Subredditleri Gizle</string>
-    <string name="settings_community_filter_popular_and_all">r/popular ve r/all</string>
     <string name="settings_credits_ufo_capturing_animation_title">UFO Yakalama Animasyonu</string>
     <string name="select_video_quality">Video Kalitesini Seç</string>
     <string name="settings_swipe_action_haptic_feedback_title">Dokunsal Geribildirim</string>
@@ -910,14 +868,10 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="title_excludes_regex_hint">Başlık: ifadeyi hariç tut</string>
     <string name="exclude_communities_hint">Subredditleri hariç tut (örn: Burdurland, SorReddite)</string>
     <string name="exclude_users_hint">Kullanıcıları hariç tut (örn: KerimDemirkaynak, rastgele)</string>
-    <string name="exclude_flairs_hint">Etiketleri hariç tut (örn: etiket 1, etiket 2)</string>
-    <string name="contain_flairs_hint">Etiketleri kapsa (örn: etiket 1, etiket 2)</string>
     <string name="min_vote_hint">Minimum oy (-1: kısıtlama yok)</string>
     <string name="max_vote_hint">Maksimum oy (-1: kısıtlama yok)</string>
     <string name="min_comments_hint">Minimum yorum (-1: kısıtlama yok)</string>
     <string name="max_comments_hint">Maksimum yorum (-1: kısıtlama yok)</string>
-    <string name="min_awards_hint">Minimum ödül (-1: kısıtlama yok)</string>
-    <string name="max_awards_hint">Maksimum ödül (-1: kısıtlama yok)</string>
     <string name="post_filter_name_hint">Gönderi Filtresi Adı</string>
     <string name="post_filter_requires_a_name">Bu gönderi filtresinin adı nedir\?</string>
     <string name="duplicate_post_filter_dialog_title">\'%1$s\' Zaten Var</string>
@@ -941,7 +895,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="choose_a_user">Bir kullanıcı seç</string>
     <string name="settings_click_to_show_media_in_gallery_layout">Medyayı Galeri Düzeninde Göstermek İçin Tıkla</string>
     <string name="settings_hide_post_type">Gönderi Türünü Gizle</string>
-    <string name="settings_hide_the_number_of_awards">Ödül Sayısını Gizle</string>
     <string name="settings_hide_community_and_user_prefix">Subreddit ve Kullanıcı Önekini Gizle</string>
     <string name="settings_hide_the_number_of_votes">Oy Sayısını Gizle</string>
     <string name="settings_hide_the_number_of_comments">Yorum Sayısını Gizle</string>
@@ -1005,8 +958,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="select">Seç</string>
     <string name="exclude_community">Bu subreddit\'i hariç tut</string>
     <string name="exclude_user">Bu kullanıcıyı hariç tut</string>
-    <string name="exclude_flair">Bu etiketi hariç tut</string>
-    <string name="contain_flair">Bu etiketi içer</string>
     <!-- Fuzzy -->
     <string name="exclude_domain">Alan Adını Hariç Tut</string>
     <string name="suggest_title">Başlık Öner</string>
@@ -1016,7 +967,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="comment_continue_thread">Konuya devam et</string>
     <!-- Fuzzy -->
     <string name="settings_swipe_vertically_to_go_back_from_media_title">Resim ve GIF\'ten Geri Dönmek İçin Dikey Kaydır</string>
-    <string name="settings_hide_post_flair">Gönderi Etiketini Gizle</string>
     <string name="settings_crash_reports_title">Kilitlenme Raporları</string>
     <string name="settings_nsfw_and_spoiler_dangerous_group_title">Sakıncalı</string>
     <string name="settings_disable_nsfw_forever_title">NSFW\'yi Her Zaman Devre Dışı Bırak</string>
@@ -1168,7 +1118,6 @@ This translation does it work well in this kinda format. People use "since" in s
     <string name="invalid_username_or_password">Yanlış kullanıcı adı veya şifre</string>
     <string name="two_options_required">İyi bir anketin iki veya daha fazla seçeneğe ihtiyacı vardır!</string>
     <string name="settings_backup_settings_summary">Yedek dosyanın şifresi \"123321\".</string>
-    <string name="settings_navigation_drawer_enable_hide_karma_title">Hesap Karmasını Gizle</string>
     <string name="settings_custom_title_font_family_title">Özel Başlık Yazı Tipi Ailesi</string>
     <string name="user_number_detail">%1$,d Kullanıcı</string>
     <string name="community_number_detail">%1$,d Topluluk</string>
