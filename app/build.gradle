@@ -21,8 +21,8 @@ android {
         applicationId "eu.toldi.infinityforlemmy"
         minSdk 21
         targetSdk 34
-        versionCode 135
-        versionName "0.2.0"
+        versionCode 136
+        versionName "0.2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
