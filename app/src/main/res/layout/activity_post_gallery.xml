@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.libRG.CustomTextView
+                <eu.toldi.infinityforlemmy.CustomTextView
                     android:id="@+id/nsfw_custom_text_view_post_gallery_activity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

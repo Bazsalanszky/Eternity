@@ -41,7 +41,7 @@
         app:flChildSpacingForLastRow="align"
         app:flRowSpacing="8dp">
 
-        <com.libRG.CustomTextView
+        <eu.toldi.infinityforlemmy.CustomTextView
             android:id="@+id/type_text_view_item_post_card_2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:lib_setRoundedView="true"
             app:lib_setShape="rectangle" />
 
-        <com.libRG.CustomTextView
+        <eu.toldi.infinityforlemmy.CustomTextView
             android:id="@+id/spoiler_custom_text_view_item_post_card_2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             app:lib_setRoundedView="true"
             app:lib_setShape="rectangle" />
 
-        <com.libRG.CustomTextView
+        <eu.toldi.infinityforlemmy.CustomTextView
             android:id="@+id/nsfw_text_view_item_post_card_2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             app:lib_setRoundedView="true"
             app:lib_setShape="rectangle" />
 
-        <com.libRG.CustomTextView
+        <eu.toldi.infinityforlemmy.CustomTextView
             android:id="@+id/flair_custom_text_view_item_post_card_2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
             app:lib_setRoundedView="true"
             app:lib_setShape="rectangle" />
 
-        <com.libRG.CustomTextView
+        <eu.toldi.infinityforlemmy.CustomTextView
             android:id="@+id/awards_text_view_item_post_card_2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -49,4 +49,13 @@
         <attr name="backgroundColor" format="color"/>
         <attr name="cardViewBackgroundColor" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="CustomTextView">
+        <attr name="lib_setRadius" format="dimension" />
+        <attr name="lib_setRoundedView" format="boolean" />
+        <attr name="lib_setShape" format="enum">
+            <enum name="rectangle" value="0"/>
+            <enum name="oval" value="1"/>
+        </attr>
+    </declare-styleable>
 </resources>

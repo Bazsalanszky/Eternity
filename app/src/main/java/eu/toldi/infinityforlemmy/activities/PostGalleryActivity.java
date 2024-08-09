@@ -39,7 +39,7 @@ import com.google.android.material.divider.MaterialDivider;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.libRG.CustomTextView;
+import eu.toldi.infinityforlemmy.CustomTextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

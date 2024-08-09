@@ -54,7 +54,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.TimeBar;
 import com.google.android.material.button.MaterialButton;
 import com.google.common.collect.ImmutableList;
-import com.libRG.CustomTextView;
+import eu.toldi.infinityforlemmy.CustomTextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -2897,7 +2897,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
         ImageView stickiedPostImageView;
         TextView postTimeTextView;
         TextView titleTextView;
-        CustomTextView typeTextView;
+        eu.toldi.infinityforlemmy.CustomTextView typeTextView;
         ImageView archivedImageView;
         ImageView lockedImageView;
         ImageView crosspostImageView;
@@ -2932,7 +2932,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ImageView stickiedPostImageView,
                          TextView postTimeTextView,
                          TextView titleTextView,
-                         CustomTextView typeTextView,
+                         eu.toldi.infinityforlemmy.CustomTextView typeTextView,
                          ImageView archivedImageView,
                          ImageView lockedImageView,
                          ImageView crosspostImageView,
@@ -3506,7 +3506,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                          ImageView stickiedPostImageView,
                          TextView postTimeTextView,
                          TextView titleTextView,
-                         CustomTextView typeTextView,
+                         eu.toldi.infinityforlemmy.CustomTextView typeTextView,
                          ImageView archivedImageView,
                          ImageView lockedImageView,
                          ImageView crosspostImageView,
@@ -3580,7 +3580,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                         ImageView stickiedPostImageView,
                                         TextView postTimeTextView,
                                         TextView titleTextView,
-                                        CustomTextView typeTextView,
+                                        eu.toldi.infinityforlemmy.CustomTextView typeTextView,
                                         ImageView crosspostImageView,
                                         ImageView archivedImageView,
                                         ImageView lockedImageView,
@@ -4038,7 +4038,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                       ImageView stickiedPostImageView,
                                       TextView postTimeTextView,
                                       TextView titleTextView,
-                                      CustomTextView typeTextView,
+                                      eu.toldi.infinityforlemmy.CustomTextView typeTextView,
                                       ImageView archivedImageView,
                                       ImageView lockedImageView,
                                       ImageView crosspostImageView,
@@ -5357,7 +5357,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                              ImageView stickiedPostImageView,
                                              TextView postTimeTextView,
                                              TextView titleTextView,
-                                             CustomTextView typeTextView,
+                                             eu.toldi.infinityforlemmy.CustomTextView typeTextView,
                                              ImageView crosspostImageView,
                                              ImageView archivedImageView,
                                              ImageView lockedImageView,
