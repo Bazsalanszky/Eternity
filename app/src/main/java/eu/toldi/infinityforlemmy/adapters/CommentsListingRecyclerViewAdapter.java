@@ -203,10 +203,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 } else {
                     ((CommentBaseViewHolder) holder).commentTimeTextView.setText(Utils.getFormattedTime(mLocale, comment.getCommentTimeMillis(), mTimeFormatPattern));
                 }
-
-                ((CommentViewHolder) holder).markwonAdapter.setMarkdown(mMarkwon, comment.getCommentMarkdown());
-                // noinspection NotifyDataSetChanged
-                ((CommentBaseViewHolder) holder).markwonAdapter.notifyDataSetChanged();
+                mMarkwon.setMarkdown(((CommentBaseViewHolder) holder).commentMarkdownView, comment.getCommentMarkdown());
 
                 String commentText = Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                         comment.getScore() + comment.getVoteType());
@@ -254,8 +251,6 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
         if (holder instanceof CommentBaseViewHolder) {
             ((CommentBaseViewHolder) holder).authorFlairTextView.setText("");
             ((CommentBaseViewHolder) holder).authorFlairTextView.setVisibility(View.GONE);
-            ((CommentBaseViewHolder) holder).awardsTextView.setText("");
-            ((CommentBaseViewHolder) holder).awardsTextView.setVisibility(View.GONE);
             ((CommentBaseViewHolder) holder).upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
             ((CommentBaseViewHolder) holder).upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
             ((CommentBaseViewHolder) holder).scoreTextView.setTextColor(mCommentIconAndInfoColor);
@@ -327,8 +322,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
         TextView authorTextView;
         TextView authorFlairTextView;
         TextView commentTimeTextView;
-        TextView awardsTextView;
-        RecyclerView commentMarkdownView;
+        TextView commentMarkdownView;
         ConstraintLayout bottomConstraintLayout;
         MaterialButton upvoteButton;
         TextView scoreTextView;
@@ -338,7 +332,6 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
         MaterialButton saveButton;
         MaterialButton replyButton;
         View commentDivider;
-        CustomMarkwonAdapter markwonAdapter;
 
         CommentBaseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -348,8 +341,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                          TextView authorTextView,
                          TextView authorFlairTextView,
                          TextView commentTimeTextView,
-                         TextView awardsTextView,
-                         RecyclerView commentMarkdownView,
+                         TextView commentMarkdownView,
                          ConstraintLayout bottomConstraintLayout,
                          MaterialButton upvoteButton,
                          TextView scoreTextView,
@@ -365,7 +357,6 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
             this.authorTextView = authorTextView;
             this.authorFlairTextView = authorFlairTextView;
             this.commentTimeTextView = commentTimeTextView;
-            this.awardsTextView = awardsTextView;
             this.commentMarkdownView = commentMarkdownView;
             this.bottomConstraintLayout = bottomConstraintLayout;
             this.upvoteButton = upvoteButton;
@@ -430,14 +421,12 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 authorTextView.setTypeface(mActivity.typeface);
                 authorFlairTextView.setTypeface(mActivity.typeface);
                 commentTimeTextView.setTypeface(mActivity.typeface);
-                awardsTextView.setTypeface(mActivity.typeface);
                 upvoteButton.setTypeface(mActivity.typeface);
             }
             itemView.setBackgroundColor(mCommentBackgroundColor);
             authorTextView.setTextColor(mUsernameColor);
             authorFlairTextView.setTextColor(mAuthorFlairColor);
             commentTimeTextView.setTextColor(mSecondaryTextColor);
-            awardsTextView.setTextColor(mSecondaryTextColor);
             upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
             scoreTextView.setTextColor(mCommentIconAndInfoColor);
             downvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
@@ -495,7 +484,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 }
             });
 
-            commentMarkdownView.setRecycledViewPool(recycledViewPool);
+
             LinearLayoutManagerBugFixed linearLayoutManager = new SwipeLockLinearLayoutManager(mActivity, new SwipeLockInterface() {
                 @Override
                 public void lockSwipe() {
@@ -507,18 +496,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                     mActivity.unlockSwipeRightToGoBack();
                 }
             });
-            commentMarkdownView.setLayoutManager(linearLayoutManager);
-            markwonAdapter = MarkdownUtils.createCustomTablesAdapter();
-            markwonAdapter.setOnClickListener(view -> {
-                if (view instanceof SpoilerOnClickTextView) {
-                    if (((SpoilerOnClickTextView) view).isSpoilerOnClick()) {
-                        ((SpoilerOnClickTextView) view).setSpoilerOnClick(false);
-                        return;
-                    }
-                }
-                itemView.callOnClick();
-            });
-            commentMarkdownView.setAdapter(markwonAdapter);
+
 
             upvoteButton.setOnClickListener(view -> {
                 if (mAccessToken == null) {
@@ -739,7 +717,6 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                     binding.authorTextViewItemPostComment,
                     binding.authorFlairTextViewItemPostComment,
                     binding.commentTimeTextViewItemPostComment,
-                    binding.awardsTextViewItemComment,
                     binding.commentMarkdownViewItemPostComment,
                     binding.bottomConstraintLayoutItemPostComment,
                     binding.upvoteButtonItemPostComment,

@@ -465,10 +465,8 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     text = "*"+mActivity.getString(R.string.deleted_by_creator)+"*";
                 }
 
+                mCommentMarkwon.setMarkdown(((CommentBaseViewHolder) holder).commentMarkdownView,text);
 
-                ((CommentBaseViewHolder) holder).mMarkwonAdapter.setMarkdown(mCommentMarkwon,text);
-                // noinspection NotifyDataSetChanged
-                ((CommentBaseViewHolder) holder).mMarkwonAdapter.notifyDataSetChanged();
                 if (mHideDownvotes) {
                     ((CommentBaseViewHolder) holder).downvoteButton.setVisibility(View.GONE);
                     ((CommentBaseViewHolder) holder).downvoteTextView.setVisibility(View.GONE);
@@ -1180,8 +1178,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             ((CommentBaseViewHolder) holder).authorTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             mGlide.clear(((CommentBaseViewHolder) holder).authorIconImageView);
             ((CommentBaseViewHolder) holder).topScoreTextView.setTextColor(mSecondaryTextColor);
-            ((CommentBaseViewHolder) holder).awardsTextView.setText("");
-            ((CommentBaseViewHolder) holder).awardsTextView.setVisibility(View.GONE);
             ((CommentBaseViewHolder) holder).expandButton.setVisibility(View.GONE);
             ((CommentBaseViewHolder) holder).upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
             ((CommentBaseViewHolder) holder).upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
@@ -1231,8 +1227,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         TextView authorFlairTextView;
         TextView commentTimeTextView;
         TextView topScoreTextView;
-        TextView awardsTextView;
-        RecyclerView commentMarkdownView;
+        TextView commentMarkdownView;
         TextView editedTextView;
         ConstraintLayout bottomConstraintLayout;
         MaterialButton upvoteButton;
@@ -1246,7 +1241,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         MaterialButton replyButton;
         CommentIndentationView commentIndentationView;
         View commentDivider;
-        CustomMarkwonAdapter mMarkwonAdapter;
 
         CommentBaseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -1258,8 +1252,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                          TextView authorFlairTextView,
                          TextView commentTimeTextView,
                          TextView topScoreTextView,
-                         TextView awardsTextView,
-                         RecyclerView commentMarkdownView,
+                         TextView commentMarkdownView,
                          TextView editedTextView,
                          ConstraintLayout bottomConstraintLayout,
                          MaterialButton upvoteButton,
@@ -1279,7 +1272,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             this.authorFlairTextView = authorFlairTextView;
             this.commentTimeTextView = commentTimeTextView;
             this.topScoreTextView = topScoreTextView;
-            this.awardsTextView = awardsTextView;
             this.commentMarkdownView = commentMarkdownView;
             this.editedTextView = editedTextView;
             this.bottomConstraintLayout = bottomConstraintLayout;
@@ -1357,7 +1349,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 authorFlairTextView.setTypeface(mActivity.typeface);
                 topScoreTextView.setTypeface(mActivity.typeface);
                 editedTextView.setTypeface(mActivity.typeface);
-                awardsTextView.setTypeface(mActivity.typeface);
+
                 scoreTextView.setTypeface(mActivity.typeface);
                 downvoteTextView.setTypeface(mActivity.typeface);
                 expandButton.setTypeface(mActivity.typeface);
@@ -1370,7 +1362,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 ((ConstraintLayout.LayoutParams) authorFlairTextView.getLayoutParams()).leftMargin = 0;
             }
 
-            commentMarkdownView.setRecycledViewPool(recycledViewPool);
+
             LinearLayoutManagerBugFixed linearLayoutManager = new SwipeLockLinearLayoutManager(mActivity, new SwipeLockInterface() {
                 @Override
                 public void lockSwipe() {
@@ -1382,9 +1374,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     ((ViewPostDetailActivity) mActivity).unlockSwipeRightToGoBack();
                 }
             });
-            commentMarkdownView.setLayoutManager(linearLayoutManager);
-            mMarkwonAdapter = MarkdownUtils.createCustomTablesAdapter();
-            commentMarkdownView.setAdapter(mMarkwonAdapter);
 
             itemView.setBackgroundColor(mCommentBackgroundColor);
             authorTextView.setTextColor(mUsernameColor);
@@ -1393,7 +1382,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             topScoreTextView.setTextColor(mSecondaryTextColor);
             downvoteTextView.setTextColor(mSecondaryTextColor);
             editedTextView.setTextColor(mSecondaryTextColor);
-            awardsTextView.setTextColor(mSecondaryTextColor);
             commentDivider.setBackgroundColor(mDividerColor);
             upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
             scoreTextView.setTextColor(mCommentIconAndInfoColor);
@@ -1814,41 +1802,19 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     View.OnLongClickListener hideToolbarOnLongClickListener = view -> hideToolbar();
                     itemView.setOnLongClickListener(hideToolbarOnLongClickListener);
                     commentTimeTextView.setOnLongClickListener(hideToolbarOnLongClickListener);
-                    mMarkwonAdapter.setOnLongClickListener(v -> {
-                        if (v instanceof TextView) {
-                            if (((TextView) v).getSelectionStart() == -1 && ((TextView) v).getSelectionEnd() == -1) {
-                                hideToolbar();
-                            }
-                        }
+                    commentMarkdownView.setOnLongClickListener(v -> {
+                        hideToolbar();
                         return true;
                     });
                 }
-                mMarkwonAdapter.setOnClickListener(v -> {
-                    if (v instanceof SpoilerOnClickTextView) {
-                        if (((SpoilerOnClickTextView) v).isSpoilerOnClick()) {
-                            ((SpoilerOnClickTextView) v).setSpoilerOnClick(false);
-                            return;
-                        }
-                    }
-                    expandComments();
-                });
                 itemView.setOnClickListener(view -> expandComments());
             } else {
                 if (mCommentToolbarHideOnClick) {
-                    mMarkwonAdapter.setOnClickListener(view -> {
-                        if (view instanceof SpoilerOnClickTextView) {
-                            if (((SpoilerOnClickTextView) view).isSpoilerOnClick()) {
-                                ((SpoilerOnClickTextView) view).setSpoilerOnClick(false);
-                                return;
-                            }
-                        }
-                        hideToolbar();
-                    });
                     View.OnClickListener hideToolbarOnClickListener = view -> hideToolbar();
                     itemView.setOnClickListener(hideToolbarOnClickListener);
                     commentTimeTextView.setOnClickListener(hideToolbarOnClickListener);
                 }
-                mMarkwonAdapter.setOnLongClickListener(view -> {
+                commentMarkdownView.setOnLongClickListener(view -> {
                     if (view instanceof TextView) {
                         if (((TextView) view).getSelectionStart() == -1 && ((TextView) view).getSelectionEnd() == -1) {
                             expandComments();
@@ -1896,7 +1862,6 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     binding.authorFlairTextViewItemPostComment,
                     binding.commentTimeTextViewItemPostComment,
                     binding.topScoreTextViewItemPostComment,
-                    binding.awardsTextViewItemComment,
                     binding.commentMarkdownViewItemPostComment,
                     binding.editedTextViewItemPostComment,
                     binding.bottomConstraintLayoutItemPostComment,
