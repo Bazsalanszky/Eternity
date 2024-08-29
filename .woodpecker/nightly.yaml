@@ -6,12 +6,12 @@ clone:
 
 steps:
   build:
-    image: alvrme/alpine-android:android-34-jdk11
+    image: alvrme/alpine-android:android-34-jdk17
     commands:
       - apk add --no-cache python3
       - ./gradlew :app:assembleNightly
   sign:
-    image: alvrme/alpine-android:android-34-jdk11
+    image: alvrme/alpine-android:android-34-jdk17
     commands:
       - ./scripts/apk-sign.sh eu.toldi.infinityforlemmy.nightly.apk app/build/outputs/apk/nightly/eu.toldi.infinityforlemmy.nightly.apk
     secrets: [ APK_KS_PASS, APK_KS, APK_KS_ALIAS ]
