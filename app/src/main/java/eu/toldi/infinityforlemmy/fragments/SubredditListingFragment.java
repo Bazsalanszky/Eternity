@@ -239,7 +239,7 @@ public class SubredditListingFragment extends Fragment implements FragmentCommun
     }
 
     public void changeSortType(SortType sortType) {
-        mSortTypeSharedPreferences.edit().putString(SharedPreferencesUtils.SORT_TYPE_SEARCH_SUBREDDIT, sortType.getType().name()).apply();
+        mSortTypeSharedPreferences.edit().putString(SharedPreferencesUtils.SORT_TYPE_SEARCH_SUBREDDIT, sortType.getType().value).apply();
         mSubredditListingViewModel.changeSortType(sortType);
         this.sortType = sortType;
     }
