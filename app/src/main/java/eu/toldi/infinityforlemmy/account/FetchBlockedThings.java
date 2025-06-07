@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.blockedcommunity.BlockedCommunityData;
 import eu.toldi.infinityforlemmy.blockedinstances.BlockedInstanceData;
 import eu.toldi.infinityforlemmy.blockeduser.BlockedUserData;
@@ -21,9 +21,9 @@ import retrofit2.Retrofit;
 public class FetchBlockedThings {
 
     public static void fetchBlockedThings(Retrofit mRetrofit, String accessToken, String accountName, FetchBlockedThingsListener fetchBlockedThingsListener) {
-        LemmyAPI lemmyAPI = mRetrofit.create(LemmyAPI.class);
+        LemmyBetaAPI lemmyBetaAPI = mRetrofit.create(LemmyBetaAPI.class);
 
-        Call<String> call = lemmyAPI.getSiteInfo(accessToken);
+        Call<String> call = lemmyBetaAPI.getSiteInfo(accessToken);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {

@@ -12,7 +12,7 @@ import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.utils.JSONUtils;
 
 public class ParseUserData {
-    static void parseUserData(RedditDataRoomDatabase redditDataRoomDatabase, String response,
+    public static void parseUserData(RedditDataRoomDatabase redditDataRoomDatabase, String response,
                               ParseUserDataListener parseUserDataListener) {
         new ParseUserDataAsyncTask(redditDataRoomDatabase, response, parseUserDataListener).execute();
     }
@@ -69,7 +69,7 @@ public class ParseUserData {
         return new UserData(account_id, userName, title, iconImageUrl, isBanned, cakeday, actor_id, isLocal, isDeleted, isAdmin, isBot, instance_id, userStats);
     }
 
-    interface ParseUserDataListener {
+    public interface ParseUserDataListener {
         void onParseUserDataSuccess(UserData userData, int inboxCount);
 
         void onParseUserDataFailed();

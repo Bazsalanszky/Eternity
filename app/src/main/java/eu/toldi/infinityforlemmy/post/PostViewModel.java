@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.multicommunity.MulticommunityPagingSource;
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
@@ -252,7 +252,7 @@ public class PostViewModel extends ViewModel {
             case PostPagingSource.TYPE_MULTI_REDDIT:
             case PostPagingSource.TYPE_ANONYMOUS_FRONT_PAGE:
                 String[] communities = (name != null) ? name.split(Pattern.quote(",")) : new String[0];
-                paging3PagingSource = new MulticommunityPagingSource(retrofit.getRetrofit().create(LemmyAPI.class), List.of(communities), accessToken,
+                paging3PagingSource = new MulticommunityPagingSource(retrofit.getRetrofit().create(LemmyBetaAPI.class), List.of(communities), accessToken,
                         sortType, executor, postFilter, (readPostList != null) ? readPostList : new ArrayList<>(), postEnricher);
                 break;
             case PostPagingSource.TYPE_SEARCH:

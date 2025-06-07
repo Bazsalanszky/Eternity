@@ -32,6 +32,7 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.FetchComment;
@@ -88,6 +89,9 @@ public class LinkResolverActivity extends AppCompatActivity {
     RetrofitHolder mRetrofit;
 
     @Inject
+    ApiHandlerProvider apiHandlerProvider;
+
+    @Inject
     Executor mExecutor;
 
     @Inject
@@ -116,6 +120,7 @@ public class LinkResolverActivity extends AppCompatActivity {
             mRetrofit.setBaseURL(instance);
             if (mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true)) {
                 mRetrofit.setAccessToken(mAccessToken);
+                apiHandlerProvider.setAccessToken(mAccessToken);
             }
         }
 

@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.ParseComment;
 import retrofit2.Call;
@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 
 public class FetchCommentInteractions {
     public static void fetchReplies(Retrofit retrofit, Integer page, boolean unreadOnly, String auth, FetchCommentInteractionsListener fetchMessagesListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         api.userReplies("New", page, 25, unreadOnly, auth).enqueue(
                 new Callback<String>() {
@@ -55,7 +55,7 @@ public class FetchCommentInteractions {
     }
 
     static void fetchMentions(Retrofit retrofit, Integer page, boolean unreadOnly, String auth, FetchCommentInteractionsListener fetchMessagesListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         api.userMentions("New", page, 25, unreadOnly, auth).enqueue(
                 new Callback<String>() {

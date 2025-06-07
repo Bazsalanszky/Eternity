@@ -11,6 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.comment.LemmyCommentAPI;
 import eu.toldi.infinityforlemmy.post.LemmyPostAPI;
 import eu.toldi.infinityforlemmy.privatemessage.LemmyPrivateMessageAPI;
@@ -56,6 +57,12 @@ abstract class NetworkModule {
     @Singleton
     static RetrofitHolder provideBaseRetrofitHolder(@Named("base") OkHttpClient okHttpClient) {
         return new RetrofitHolder(okHttpClient);
+    }
+
+    @Provides
+    @Singleton
+    static ApiHandlerProvider provideApiHandlerProvider(@Named("base") OkHttpClient okHttpClient) {
+        return new ApiHandlerProvider(okHttpClient);
     }
 
     /*@Provides

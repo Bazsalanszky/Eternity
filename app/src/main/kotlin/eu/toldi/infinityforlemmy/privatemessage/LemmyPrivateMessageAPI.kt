@@ -1,7 +1,7 @@
 package eu.toldi.infinityforlemmy.privatemessage
 
 import eu.toldi.infinityforlemmy.RetrofitHolder
-import eu.toldi.infinityforlemmy.apis.LemmyAPI
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI
 import eu.toldi.infinityforlemmy.dto.PrivateMessageDTO
 import eu.toldi.infinityforlemmy.dto.PrivateMessageReadDTO
 import eu.toldi.infinityforlemmy.utils.LemmyUtils
@@ -17,7 +17,7 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
         limit: Int = 25,
         unreadOnly: Boolean = false
     ) {
-        val api = retrofitHolder.retrofit.create(LemmyAPI::class.java)
+        val api = retrofitHolder.retrofit.create(LemmyBetaAPI::class.java)
         api.privateMessagesList(page, limit, unreadOnly, auth).enqueue(
             object : retrofit2.Callback<String> {
                 override fun onResponse(
@@ -51,7 +51,7 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
         privateMessageId: Int,
         listener: PrivateMessageMarkedAsReadListener
     ) {
-        val api = retrofitHolder.retrofit.create(LemmyAPI::class.java)
+        val api = retrofitHolder.retrofit.create(LemmyBetaAPI::class.java)
         api.privateMessageMarkAsRead(PrivateMessageReadDTO(privateMessageId, auth, true)).enqueue(
             object : retrofit2.Callback<String> {
                 override fun onResponse(
@@ -78,7 +78,7 @@ class LemmyPrivateMessageAPI(val retrofitHolder: RetrofitHolder) {
         content: String,
         listener: PrivateMessageSentListener
     ) {
-        val api = retrofitHolder.retrofit.create(LemmyAPI::class.java)
+        val api = retrofitHolder.retrofit.create(LemmyBetaAPI::class.java)
 
         api.privateMessageSend(PrivateMessageDTO(recipientId, content, auth)).enqueue(
             object : retrofit2.Callback<String> {

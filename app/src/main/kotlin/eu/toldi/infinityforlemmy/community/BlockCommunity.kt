@@ -1,6 +1,6 @@
 package eu.toldi.infinityforlemmy.community
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI
 import eu.toldi.infinityforlemmy.dto.BlockCommunityDTO
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +15,7 @@ object BlockCommunity {
         auth: String,
         blockCommunityListener: BlockCommunityListener
     ) {
-        val api = retrofit.create(LemmyAPI::class.java)
+        val api = retrofit.create(LemmyBetaAPI::class.java)
         api.communityBlock(BlockCommunityDTO(communityId, true, auth))?.enqueue(
             object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
@@ -39,7 +39,7 @@ object BlockCommunity {
         auth: String,
         blockCommunityListener: BlockCommunityListener
     ) {
-        val api = retrofit.create(LemmyAPI::class.java)
+        val api = retrofit.create(LemmyBetaAPI::class.java)
         api.communityBlock(BlockCommunityDTO(communityId, false, auth))?.enqueue(
             object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {

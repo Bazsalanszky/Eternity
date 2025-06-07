@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
+
 import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +25,7 @@ public class FetchComment {
                                      @Nullable String accessToken, Integer article,
                                      Integer commentId, SortType.Type sortType, boolean expandChildren,
                                      Integer page, CommentFilter commentFilter, FetchCommentListener fetchCommentListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
         Call<String> comments;
 
         comments = api.getComments("All", sortType.value, 8, page, 25, null, null, article, commentId, false, accessToken);
@@ -66,7 +67,7 @@ public class FetchComment {
                                         @Nullable String accessToken, int article,
                                         int commentId, SortType.Type sortType, boolean expandChildren,
                                         Integer page, FetchMoreCommentListener fetchMoreCommentListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
         Call<String> moreComments;
 
         moreComments = api.getComments("All", sortType.value, 8, page, 25, null, null, article, commentId, false, accessToken);
@@ -105,7 +106,7 @@ public class FetchComment {
 
     public static void fetchSingleComment(Retrofit retrofit, @Nullable String accessToken, int commentId,
                                           FetchCommentListener fetchCommentListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
         Call<String> comment = api.getComment(commentId, accessToken);
         comment.enqueue(new Callback<String>() {
             @Override

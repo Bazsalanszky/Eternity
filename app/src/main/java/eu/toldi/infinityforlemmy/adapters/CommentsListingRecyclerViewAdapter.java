@@ -33,21 +33,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.R;
-import eu.toldi.infinityforlemmy.SaveComment;
-import eu.toldi.infinityforlemmy.SaveThing;
-import eu.toldi.infinityforlemmy.VoteThing;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewSubredditDetailActivity;
+import eu.toldi.infinityforlemmy.apis.apihandler.ApiHandler;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CommentMoreBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.CommentIndentationView;
-import eu.toldi.infinityforlemmy.customviews.CustomMarkwonAdapter;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
-import eu.toldi.infinityforlemmy.customviews.SpoilerOnClickTextView;
 import eu.toldi.infinityforlemmy.customviews.SwipeLockInterface;
 import eu.toldi.infinityforlemmy.customviews.SwipeLockLinearLayoutManager;
 import eu.toldi.infinityforlemmy.databinding.ItemCommentBinding;
@@ -80,6 +76,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
     };
     private BaseActivity mActivity;
     private Retrofit retrofit;
+    private ApiHandler apiHandler;
     private Locale mLocale;
     private Markwon mMarkwon;
     private RecyclerView.RecycledViewPool recycledViewPool;
@@ -106,13 +103,14 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
     private NetworkState networkState;
     private RetryLoadingMoreCallback mRetryLoadingMoreCallback;
 
-    public CommentsListingRecyclerViewAdapter(BaseActivity activity, Retrofit oauthRetrofit,
+    public CommentsListingRecyclerViewAdapter(BaseActivity activity, Retrofit oauthRetrofit,ApiHandler apiHandler,
                                               CustomThemeWrapper customThemeWrapper, Locale locale,
                                               SharedPreferences sharedPreferences, String accessToken,
                                               String accountName, RetryLoadingMoreCallback retryLoadingMoreCallback) {
         super(DIFF_CALLBACK);
         mActivity = activity;
         retrofit = oauthRetrofit;
+        this.apiHandler = apiHandler;
         mCommentColor = customThemeWrapper.getCommentColor();
         int commentSpoilerBackgroundColor = mCommentColor | 0xFF000000;
         mLocale = locale;
@@ -536,40 +534,39 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                     scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                             comment.getScore() + comment.getVoteType()));
 
+                    apiHandler.voteComment(comment.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
+                                @Override
+                                public void onVoteThingSuccess() {
+                                    int currentPosition = getBindingAdapterPosition();
+                                    if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
+                                        comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
+                                        if (currentPosition == position) {
+                                            upvoteButton.setIconResource(R.drawable.ic_upvote_filled_24dp);
+                                            upvoteButton.setIconTint(ColorStateList.valueOf(mUpvotedColor));
+                                            scoreTextView.setTextColor(mUpvotedColor);
+                                        }
+                                    } else {
+                                        comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
+                                        if (currentPosition == position) {
+                                            upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
+                                            upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
+                                            scoreTextView.setTextColor(mCommentIconAndInfoColor);
+                                        }
+                                    }
 
-                    VoteThing.voteComment(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
-                        @Override
-                        public void onVoteThingSuccess(int position1) {
-                            int currentPosition = getBindingAdapterPosition();
-                            if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
-                                comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
-                                if (currentPosition == position) {
-                                    upvoteButton.setIconResource(R.drawable.ic_upvote_filled_24dp);
-                                    upvoteButton.setIconTint(ColorStateList.valueOf(mUpvotedColor));
-                                    scoreTextView.setTextColor(mUpvotedColor);
+                                    if (currentPosition == position) {
+                                        downvoteButton.setIconResource(R.drawable.ic_downvote_24dp);
+                                        downvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
+
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                comment.getScore() + comment.getVoteType()));
+                                    }
                                 }
-                            } else {
-                                comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
-                                if (currentPosition == position) {
-                                    upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
-                                    upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
-                                    scoreTextView.setTextColor(mCommentIconAndInfoColor);
+
+                                @Override
+                                public void onVoteThingFail() {
                                 }
-                            }
-
-                            if (currentPosition == position) {
-                                downvoteButton.setIconResource(R.drawable.ic_downvote_24dp);
-                                downvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
-
-                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                        comment.getScore() + comment.getVoteType()));
-                            }
-                        }
-
-                        @Override
-                        public void onVoteThingFail(int position) {
-                        }
-                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
+                            });
                 }
             });
 
@@ -616,9 +613,9 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             comment.getScore() + comment.getVoteType()));
 
 
-                    VoteThing.voteComment(mActivity, retrofit, mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandler.voteComment(comment.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
@@ -645,9 +642,9 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                         }
-                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -658,10 +655,10 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                 }
                 Comment comment = getItem(position);
                 if (comment != null) {
-                    SaveComment saveComment = new SaveComment();
+
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        saveComment.unsaveThing(retrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        apiHandler.unsaveComment(comment.getId(), mAccessToken, new ApiHandler.SaveCommentListener()  {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
@@ -672,7 +669,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             }
 
                             @Override
-                            public void failed() {
+                            public void onFailure() {
                                 comment.setSaved(true);
                                 if (getBindingAdapterPosition() == position) {
                                     saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
@@ -682,7 +679,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                         });
                     } else {
                         comment.setSaved(true);
-                        saveComment.saveThing(retrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        apiHandler.saveComment(comment.getId(), mAccessToken, new ApiHandler.SaveCommentListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(true);
@@ -693,7 +690,7 @@ public class CommentsListingRecyclerViewAdapter extends PagedListAdapter<Comment
                             }
 
                             @Override
-                            public void failed() {
+                            public void onFailure() {
                                 comment.setSaved(false);
                                 if (getBindingAdapterPosition() == position) {
                                     saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);

@@ -2,7 +2,7 @@ package eu.toldi.infinityforlemmy.user;
 
 import androidx.annotation.NonNull;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.dto.UserBlockDTO;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,7 +17,7 @@ public class BlockUser {
     }
 
     public static void blockUser(Retrofit retrofit, String accessToken, int userID, boolean block, BlockUserListener blockUserListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
         api.userBlock(new UserBlockDTO(userID, block, accessToken)).enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

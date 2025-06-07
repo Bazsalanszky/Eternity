@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.message.MessageCount;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +19,7 @@ public class FetchUserData {
 
     public static void fetchUserData(RedditDataRoomDatabase redditDataRoomDatabase, Retrofit retrofit,
                                      String accessToken, String userName, FetchUserDataListener fetchUserDataListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         Call<String> userInfo;
         if (redditDataRoomDatabase == null) {
@@ -56,7 +56,7 @@ public class FetchUserData {
 
     public static void fetchUserListingData(Retrofit retrofit, String query, Integer page, SortType.Type sortType, boolean nsfw,
                                             FetchUserListingDataListener fetchUserListingDataListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         Call<String> userInfo = api.search(query, null, null, null, "Users", sortType.value, "All", page, 25, null);
         userInfo.enqueue(new Callback<>() {
@@ -87,7 +87,7 @@ public class FetchUserData {
     }
 
     public static void fetchUnreadCount(Retrofit retrofit, String accessToken, FetchUserUnreadCountListener fetchUserUnreadCountListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         Call<MessageCount> userUnreadCount = api.userUnreadCount(accessToken);
         userUnreadCount.enqueue(new Callback<>() {
@@ -108,7 +108,7 @@ public class FetchUserData {
     }
 
     public static void validateAuthToken(Retrofit retrofit, ValidateAuthTokenListener validateAuthTokenListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         Call<String> validateAuthToken = api.userValidateAuth();
         validateAuthToken.enqueue(new Callback<>() {

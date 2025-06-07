@@ -63,12 +63,12 @@ import eu.toldi.infinityforlemmy.LoadingMorePostsStatus;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.SaveComment;
-import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.SortTypeSelectionCallback;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.apihandler.ApiHandler;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -138,6 +138,8 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
+    @Inject
+    ApiHandlerProvider apiHandlerProvider;
     @Inject
     RedditDataRoomDatabase mRedditDataRoomDatabase;
     @Inject
@@ -456,10 +458,10 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
     }
 
     public void saveComment(@NonNull Comment comment, int position) {
-        SaveComment saveComment = new SaveComment();
+
         if (comment.isSaved()) {
             comment.setSaved(false);
-            saveComment.unsaveThing(mOauthRetrofit, mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+            apiHandlerProvider.getApiHandler().unsaveComment(comment.getId(),mAccessToken, new ApiHandler.SaveCommentListener() {
                 @Override
                 public void success() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
@@ -470,7 +472,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                 }
 
                 @Override
-                public void failed() {
+                public void onFailure() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
                     if (fragment != null) {
                         fragment.saveComment(position, true);
@@ -480,7 +482,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
             });
         } else {
             comment.setSaved(true);
-            saveComment.saveThing(mRetrofit.getRetrofit(), mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+            apiHandlerProvider.getApiHandler().saveComment(comment.getId(), mAccessToken,new ApiHandler.SaveCommentListener() {
                 @Override
                 public void success() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
@@ -491,7 +493,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
                 }
 
                 @Override
-                public void failed() {
+                public void onFailure() {
                     ViewPostDetailFragment fragment = sectionsPagerAdapter.getCurrentFragment();
                     if (fragment != null) {
                         fragment.saveComment(position, false);
@@ -537,7 +539,7 @@ public class ViewPostDetailActivity extends BaseActivity implements SortTypeSele
             int nextPage = posts.size() / 25 + 1;
 
             mExecutor.execute(() -> {
-                LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
+                LemmyBetaAPI api = mRetrofit.getRetrofit().create(LemmyBetaAPI.class);
                 Call<String> call;
 
                 switch (postType) {

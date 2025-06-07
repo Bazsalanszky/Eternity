@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.subreddit.SubredditData;
 import eu.toldi.infinityforlemmy.subscribedsubreddit.SubscribedSubredditData;
 import eu.toldi.infinityforlemmy.subscribeduser.SubscribedUserData;
@@ -19,7 +19,7 @@ public class FetchSubscribedThing {
                                             final ArrayList<SubscribedUserData> subscribedUserData,
                                             final ArrayList<SubredditData> subredditData,
                                             final FetchSubscribedThingListener fetchSubscribedThingListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         Call<String> subredditDataCall = api.listCommunities("Subscribed",null,page,null,accessToken);
         subredditDataCall.enqueue(new Callback<String>() {

@@ -74,10 +74,7 @@ import eu.toldi.infinityforlemmy.MarkPostAsReadInterface;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
-import eu.toldi.infinityforlemmy.SavePost;
-import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.StreamableVideo;
-import eu.toldi.infinityforlemmy.VoteThing;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.FilteredPostsActivity;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
@@ -89,6 +86,8 @@ import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewVideoActivity;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
+import eu.toldi.infinityforlemmy.apis.apihandler.ApiHandler;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.ShareLinkBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.AspectRatioGifImageView;
@@ -171,6 +170,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private SharedPreferences mCurrentAccountSharedPreferences;
     private Executor mExecutor;
     private RetrofitHolder retrofit;
+    private ApiHandlerProvider apiHandlerProvider;
     private Retrofit mRedgifsRetrofit;
     private Provider<StreamableAPI> mStreamableApiProvider;
     private String mAccessToken;
@@ -267,7 +267,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
     private boolean canPlayVideo = true;
     private RecyclerView.RecycledViewPool mGalleryRecycledViewPool;
 
-    public PostRecyclerViewAdapter(BaseActivity activity, PostFragment fragment, Executor executor, RetrofitHolder retrofit,
+    public PostRecyclerViewAdapter(BaseActivity activity, PostFragment fragment, Executor executor, RetrofitHolder retrofit, ApiHandlerProvider apiHandler,
                                    Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
                                    CustomThemeWrapper customThemeWrapper, Locale locale,
                                    String accessToken, String accountName, int postType, int postLayout, boolean displaySubredditName,
@@ -283,6 +283,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
             mCurrentAccountSharedPreferences = currentAccountSharedPreferences;
             mExecutor = executor;
             this.retrofit = retrofit;
+            this.apiHandlerProvider = apiHandler;
             mRedgifsRetrofit = redgifsRetrofit;
             mStreamableApiProvider = streamableApiProvider;
             mAccessToken = accessToken;
@@ -3212,10 +3213,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                             scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                         }
                     }
-
-                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandlerProvider.getApiHandler().votePost(post.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 post.setVoteType(1);
@@ -3252,7 +3252,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                             Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                             post.setVoteType(previousVoteType);
                             if (getBindingAdapterPosition() == position) {
@@ -3268,7 +3268,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -3342,9 +3342,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandlerProvider.getApiHandler().votePost(post.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 post.setVoteType(-1);
@@ -3386,7 +3386,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                             Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                             post.setVoteType(previousVoteType);
                             if (getBindingAdapterPosition() == position) {
@@ -3402,7 +3402,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -3419,11 +3419,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         Toast.makeText(mActivity, R.string.login_first, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    SavePost savePost = new SavePost();
+
                     if (post.isSaved()) {
                         saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        savePost.unsaveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
-                                new SaveThing.SaveThingListener() {
+                        apiHandlerProvider.getApiHandler().unsavePost(post.getId(),mAccessToken,
+                                new ApiHandler.SavePostListener() {
                                     @Override
                                     public void success() {
                                         post.setSaved(false);
@@ -3435,7 +3435,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     }
 
                                     @Override
-                                    public void failed() {
+                                    public void onFailure() {
                                         post.setSaved(true);
                                         if (getBindingAdapterPosition() == position) {
                                             saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
@@ -3446,8 +3446,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 });
                     } else {
                         saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
-                        savePost.saveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
-                                new SaveThing.SaveThingListener() {
+                        apiHandlerProvider.getApiHandler().savePost(post.getId(),mAccessToken,
+                                new ApiHandler.SavePostListener() {
                                     @Override
                                     public void success() {
                                         post.setSaved(true);
@@ -3459,7 +3459,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     }
 
                                     @Override
-                                    public void failed() {
+                                    public void onFailure() {
                                         post.setSaved(false);
                                         if (getBindingAdapterPosition() == position) {
                                             saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
@@ -4641,9 +4641,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandlerProvider.getApiHandler().votePost(post.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 post.setVoteType(1);
@@ -4673,7 +4673,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                             Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                             post.setVoteType(previousVoteType);
                             if (getBindingAdapterPosition() == position) {
@@ -4689,7 +4689,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -4756,9 +4756,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
                     }
 
-                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandlerProvider.getApiHandler().votePost(post.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 post.setVoteType(-1);
@@ -4798,7 +4798,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                             Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                             post.setVoteType(previousVoteType);
                             if (getBindingAdapterPosition() == position) {
@@ -4814,7 +4814,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -4832,11 +4832,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                 }
                 Post post = getItem(position);
                 if (post != null) {
-                    SavePost postSave = new SavePost();
+
                     if (post.isSaved()) {
                         saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        postSave.unsaveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
-                                new SaveThing.SaveThingListener() {
+                        apiHandlerProvider.getApiHandler().unsavePost(post.getId(),mAccessToken,
+                                new ApiHandler.SavePostListener() {
                                     @Override
                                     public void success() {
                                         post.setSaved(false);
@@ -4848,7 +4848,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     }
 
                                     @Override
-                                    public void failed() {
+                                    public void onFailure() {
                                         post.setSaved(true);
                                         if (getBindingAdapterPosition() == position) {
                                             saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
@@ -4859,8 +4859,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 });
                     } else {
                         saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
-                        postSave.saveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
-                                new SaveThing.SaveThingListener() {
+                        apiHandlerProvider.getApiHandler().savePost( post.getId(),mAccessToken,
+                                new ApiHandler.SavePostListener() {
                                     @Override
                                     public void success() {
                                         post.setSaved(true);
@@ -4872,7 +4872,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     }
 
                                     @Override
-                                    public void failed() {
+                                    public void onFailure() {
                                         post.setSaved(false);
                                         if (getBindingAdapterPosition() == position) {
                                             saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
@@ -6122,9 +6122,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
 
-                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandlerProvider.getApiHandler().votePost(post.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 post.setVoteType(1);
@@ -6154,7 +6154,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                             Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                             post.setVoteType(previousVoteType);
                             if (getBindingAdapterPosition() == position) {
@@ -6170,7 +6170,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -6226,10 +6226,9 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                     if (!mHideTheNumberOfVotes) {
                         scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, post.getScore() + post.getVoteType()));
                     }
-
-                    VoteThing.votePost(mActivity, retrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    apiHandlerProvider.getApiHandler().votePost(post.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 post.setVoteType(-1);
@@ -6260,7 +6259,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                             Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
                             post.setVoteType(previousVoteType);
                             if (getBindingAdapterPosition() == position) {
@@ -6276,7 +6275,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
 
                             EventBus.getDefault().post(new PostUpdateEventToPostDetailFragment(post));
                         }
-                    }, post.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -6293,11 +6292,11 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                         Toast.makeText(mActivity, R.string.login_first, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    SavePost savePost = new SavePost();
+
                     if (post.isSaved()) {
                         saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
-                        savePost.unsaveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
-                                new SaveThing.SaveThingListener() {
+                        apiHandlerProvider.getApiHandler().unsavePost(post.getId(),mAccessToken,
+                                new ApiHandler.SavePostListener() {
                                     @Override
                                     public void success() {
                                         post.setSaved(false);
@@ -6309,7 +6308,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     }
 
                                     @Override
-                                    public void failed() {
+                                    public void onFailure() {
                                         post.setSaved(true);
                                         if (getBindingAdapterPosition() == position) {
                                             saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
@@ -6320,8 +6319,8 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                 });
                     } else {
                         saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
-                        savePost.saveThing(retrofit.getRetrofit(), mAccessToken, post.getId(),
-                                new SaveThing.SaveThingListener() {
+                        apiHandlerProvider.getApiHandler().savePost(post.getId(),mAccessToken,
+                                new ApiHandler.SavePostListener() {
                                     @Override
                                     public void success() {
                                         post.setSaved(true);
@@ -6333,7 +6332,7 @@ public class PostRecyclerViewAdapter extends PagingDataAdapter<Post, RecyclerVie
                                     }
 
                                     @Override
-                                    public void failed() {
+                                    public void onFailure() {
                                         post.setSaved(false);
                                         if (getBindingAdapterPosition() == position) {
                                             saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);

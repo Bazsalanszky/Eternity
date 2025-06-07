@@ -65,10 +65,7 @@ import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SaveMemoryCenterInisdeDownsampleStrategy;
-import eu.toldi.infinityforlemmy.SavePost;
-import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.StreamableVideo;
-import eu.toldi.infinityforlemmy.VoteThing;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.FilteredPostsActivity;
@@ -81,6 +78,7 @@ import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewVideoActivity;
 import eu.toldi.infinityforlemmy.apis.RedgifsAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
+import eu.toldi.infinityforlemmy.apis.apihandler.ApiHandler;
 import eu.toldi.infinityforlemmy.asynctasks.LoadSubredditIcon;
 import eu.toldi.infinityforlemmy.asynctasks.LoadUserData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CopyTextBottomSheetFragment;
@@ -89,8 +87,6 @@ import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.AspectRatioGifImageView;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
-import eu.toldi.infinityforlemmy.customviews.SwipeLockInterface;
-import eu.toldi.infinityforlemmy.customviews.SwipeLockLinearLayoutManager;
 import eu.toldi.infinityforlemmy.databinding.ItemPostDetailGalleryBinding;
 import eu.toldi.infinityforlemmy.databinding.ItemPostDetailImageAndGifAutoplayBinding;
 import eu.toldi.infinityforlemmy.databinding.ItemPostDetailLinkBinding;
@@ -140,6 +136,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
     private ViewPostDetailFragment mFragment;
     private Executor mExecutor;
     private RetrofitHolder mRetrofit;
+    private ApiHandler apiHandler;
     private Retrofit mRedgifsRetrofit;
     private final Provider<StreamableAPI> mStreamableApiProvider;
     private RedditDataRoomDatabase mRedditDataRoomDatabase;
@@ -226,7 +223,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
     public PostDetailRecyclerViewAdapter(BaseActivity activity, ViewPostDetailFragment fragment,
                                          Executor executor, CustomThemeWrapper customThemeWrapper,
-                                         RetrofitHolder retrofit,
+                                         RetrofitHolder retrofit, ApiHandler apiHandler1,
                                          Retrofit redgifsRetrofit, Provider<StreamableAPI> streamableApiProvider,
                                          RedditDataRoomDatabase redditDataRoomDatabase, RequestManager glide,
                                          boolean separatePostAndComments, String accessToken,
@@ -241,6 +238,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         mFragment = fragment;
         mExecutor = executor;
         mRetrofit = retrofit;
+        apiHandler = apiHandler1;
         mRedgifsRetrofit = redgifsRetrofit;
         mStreamableApiProvider = streamableApiProvider;
         mRedditDataRoomDatabase = redditDataRoomDatabase;
@@ -1406,65 +1404,64 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 }
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
+                apiHandler.votePost(mPost.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
+                            @Override
+                            public void onVoteThingSuccess() {
+                                if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
+                                    mPost.setVoteType(1);
+                                    upvoteButton.setIconResource(R.drawable.ic_upvote_filled_24dp);
+                                    upvoteButton.setIconTint(ColorStateList.valueOf(mUpvotedColor));
+                                    scoreTextView.setTextColor(mUpvotedColor);
+                                } else {
+                                    mPost.setVoteType(0);
+                                    upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
+                                    upvoteButton.setIconTint(ColorStateList.valueOf(mPostIconAndInfoColor));
+                                    scoreTextView.setTextColor(mPostIconAndInfoColor);
+                                }
 
-                VoteThing.votePost(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
-                    @Override
-                    public void onVoteThingSuccess() {
-                        if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
-                            mPost.setVoteType(1);
-                            upvoteButton.setIconResource(R.drawable.ic_upvote_filled_24dp);
-                            upvoteButton.setIconTint(ColorStateList.valueOf(mUpvotedColor));
-                            scoreTextView.setTextColor(mUpvotedColor);
-                        } else {
-                            mPost.setVoteType(0);
-                            upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
-                            upvoteButton.setIconTint(ColorStateList.valueOf(mPostIconAndInfoColor));
-                            scoreTextView.setTextColor(mPostIconAndInfoColor);
-                        }
+                                downvoteButton.setIconResource(R.drawable.ic_downvote_24dp);
+                                downvoteButton.setIconTint(ColorStateList.valueOf(mPostIconAndInfoColor));
+                                if (!mHideTheNumberOfVotes) {
+                                    if (mSeperateUpvoteAndDownvote) {
+                                        int upvotes = (mPost.getVoteType() == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                                        int downvotes = (mPost.getVoteType() == -1) ? mPost.getDownvotes() + 1 : Math.max(mPost.getDownvotes(), 0);
+                                        ;
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                        mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                mPost.getScore() + mPost.getVoteType()));
+                                    }
+                                }
 
-                        downvoteButton.setIconResource(R.drawable.ic_downvote_24dp);
-                        downvoteButton.setIconTint(ColorStateList.valueOf(mPostIconAndInfoColor));
-                        if (!mHideTheNumberOfVotes) {
-                            if (mSeperateUpvoteAndDownvote) {
-                                int upvotes = (mPost.getVoteType() == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
-                                int downvotes = (mPost.getVoteType() == -1) ? mPost.getDownvotes() + 1 : Math.max(mPost.getDownvotes(), 0);
-                                ;
-                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
-                                mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
-                            } else {
-                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                        mPost.getScore() + mPost.getVoteType()));
+                                mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
                             }
-                        }
 
-                        mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
-                    }
+                            @Override
+                            public void onVoteThingFail() {
+                                Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
+                                mPost.setVoteType(previousVoteType);
+                                if (!mHideTheNumberOfVotes) {
+                                    if (mSeperateUpvoteAndDownvote) {
+                                        int upvotes = (previousVoteType == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
+                                        int downvotes = (previousVoteType == -1) ? mPost.getDownvotes() - 1 : Math.max(mPost.getDownvotes(), 0);
+                                        ;
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
+                                        mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
+                                    } else {
+                                        scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
+                                                mPost.getScore() + previousVoteType));
+                                    }
+                                }
+                                upvoteButton.setIcon(previousUpvoteButtonDrawable);
+                                upvoteButton.setIconTint(ColorStateList.valueOf(previousUpvoteButtonTextColor));
+                                scoreTextView.setTextColor(previousScoreTextViewColor);
+                                downvoteButton.setIcon(previousDownvoteButtonDrawable);
+                                downvoteButton.setIconTint(ColorStateList.valueOf(previousDownvoteButtonTextColor));
 
-                    @Override
-                    public void onVoteThingFail() {
-                        Toast.makeText(mActivity, R.string.vote_failed, Toast.LENGTH_SHORT).show();
-                        mPost.setVoteType(previousVoteType);
-                        if (!mHideTheNumberOfVotes) {
-                            if (mSeperateUpvoteAndDownvote) {
-                                int upvotes = (previousVoteType == 1) ? mPost.getUpvotes() + 1 : mPost.getUpvotes();
-                                int downvotes = (previousVoteType == -1) ? mPost.getDownvotes() - 1 : Math.max(mPost.getDownvotes(), 0);
-                                ;
-                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, upvotes));
-                                mDownvoteTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes, downvotes));
-                            } else {
-                                scoreTextView.setText(Utils.getNVotes(mShowAbsoluteNumberOfVotes,
-                                        mPost.getScore() + previousVoteType));
+                                mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
                             }
-                        }
-                        upvoteButton.setIcon(previousUpvoteButtonDrawable);
-                        upvoteButton.setIconTint(ColorStateList.valueOf(previousUpvoteButtonTextColor));
-                        scoreTextView.setTextColor(previousScoreTextViewColor);
-                        downvoteButton.setIcon(previousDownvoteButtonDrawable);
-                        downvoteButton.setIconTint(ColorStateList.valueOf(previousDownvoteButtonTextColor));
-
-                        mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
-                    }
-                }, mPost.getId(), newVoteType);
+                });
             });
 
             scoreTextView.setOnClickListener(view -> {
@@ -1528,8 +1525,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                 }
 
                 mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
-
-                VoteThing.votePost(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingWithoutPositionListener() {
+                apiHandler.votePost(mPost.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                     @Override
                     public void onVoteThingSuccess() {
                         if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
@@ -1590,7 +1586,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
                         mPostDetailRecyclerViewAdapterCallback.updatePost(mPost);
                     }
-                }, mPost.getId(), newVoteType);
+                });
             });
 
             if (!mHideTheNumberOfComments) {
@@ -1628,11 +1624,11 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                     Toast.makeText(mActivity, R.string.login_first, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                SavePost savePost = new SavePost();
+
                 if (mPost.isSaved()) {
                     this.saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
-                    savePost.unsaveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
-                            new SaveThing.SaveThingListener() {
+                    apiHandler.unsavePost(mPost.getId(),mAccessToken,
+                            new ApiHandler.SavePostListener() {
                                 @Override
                                 public void success() {
                                     mPost.setSaved(false);
@@ -1642,7 +1638,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                                 }
 
                                 @Override
-                                public void failed() {
+                                public void onFailure() {
                                     mPost.setSaved(true);
                                     PostDetailBaseViewHolder.this.saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
                                     Toast.makeText(mActivity, R.string.post_unsaved_failed, Toast.LENGTH_SHORT).show();
@@ -1651,8 +1647,10 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                             });
                 } else {
                     this.saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
-                    savePost.saveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
-                            new SaveThing.SaveThingListener() {
+
+
+                    apiHandler.savePost(mPost.getId(),mAccessToken,
+                            new ApiHandler.SavePostListener() {
                                 @Override
                                 public void success() {
                                     mPost.setSaved(true);
@@ -1662,7 +1660,7 @@ public class PostDetailRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
                                 }
 
                                 @Override
-                                public void failed() {
+                                public void onFailure() {
                                     mPost.setSaved(false);
                                     PostDetailBaseViewHolder.this.saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);
                                     Toast.makeText(mActivity, R.string.post_saved_failed, Toast.LENGTH_SHORT).show();

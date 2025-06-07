@@ -43,7 +43,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 
-public interface LemmyAPI {
+public interface LemmyBetaAPI {
     @Headers("Content-Type: application/json")
     @POST("api/v3/user/login")
     Call<String> userLogin(@Body AccountLoginDTO params);

@@ -47,6 +47,7 @@ import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.adapters.CommentsListingRecyclerViewAdapter;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.comment.CommentViewModel;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
@@ -99,6 +100,8 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
     CustomThemeWrapper customThemeWrapper;
     @Inject
     Executor mExecutor;
+    @Inject
+    ApiHandlerProvider apiHandlerProvider;
     private String mAccessToken;
     private RequestManager mGlide;
     private BaseActivity mActivity;
@@ -261,7 +264,7 @@ public class CommentsListingFragment extends Fragment implements FragmentCommuni
             mLinearLayoutManager = new LinearLayoutManagerBugFixed(mActivity);
             mCommentRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-            mAdapter = new CommentsListingRecyclerViewAdapter(mActivity, mRetrofit.getRetrofit(), customThemeWrapper,
+            mAdapter = new CommentsListingRecyclerViewAdapter(mActivity, mRetrofit.getRetrofit(), apiHandlerProvider.getApiHandler(), customThemeWrapper,
                     getResources().getConfiguration().locale, mSharedPreferences,
                     getArguments().getString(EXTRA_ACCESS_TOKEN), getArguments().getString(EXTRA_ACCOUNT_NAME),
                     () -> mCommentViewModel.retryLoadingMore());

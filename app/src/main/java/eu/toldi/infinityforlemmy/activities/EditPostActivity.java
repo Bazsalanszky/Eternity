@@ -55,7 +55,7 @@ import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
 import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.adapters.MarkdownBottomBarRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UploadedImagesBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
@@ -308,7 +308,7 @@ public class EditPostActivity extends BaseActivity implements UploadImageEnabled
             isSubmitting = true;
 
             Snackbar.make(coordinatorLayout, R.string.posting, Snackbar.LENGTH_SHORT).show();
-            mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), titleEditText.getText().toString(), (linkEditText.getText().toString().isEmpty()) ? null : linkEditText.getText().toString(), contentEditText.getText().toString(), mPost.isNSFW(), null, mAccessToken))
+            mRetrofit.getRetrofit().create(LemmyBetaAPI.class).postUpdate(new EditPostDTO(mPost.getId(), titleEditText.getText().toString(), (linkEditText.getText().toString().isEmpty()) ? null : linkEditText.getText().toString(), contentEditText.getText().toString(), mPost.isNSFW(), null, mAccessToken))
                     .enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

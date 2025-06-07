@@ -2,14 +2,14 @@ package eu.toldi.infinityforlemmy.site;
 
 import org.json.JSONException;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.user.MyUserInfo;
 import retrofit2.Retrofit;
 
 public class FetchSiteInfo {
 
     public static void fetchSiteInfo(Retrofit retrofit, String accesToken, FetchSiteInfoListener fetchSiteInfoListener) {
-        retrofit.create(LemmyAPI.class).getSiteInfo(accesToken).enqueue(
+        retrofit.create(LemmyBetaAPI.class).getSiteInfo(accesToken).enqueue(
                 new retrofit2.Callback<String>() {
                     @Override
                     public void onResponse(retrofit2.Call<String> call, retrofit2.Response<String> response) {

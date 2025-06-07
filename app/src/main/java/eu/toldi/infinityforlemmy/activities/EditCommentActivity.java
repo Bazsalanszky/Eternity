@@ -45,7 +45,7 @@ import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.UploadImageEnabledActivity;
 import eu.toldi.infinityforlemmy.UploadedImage;
 import eu.toldi.infinityforlemmy.adapters.MarkdownBottomBarRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UploadedImagesBottomSheetFragment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
@@ -227,7 +227,7 @@ public class EditCommentActivity extends BaseActivity implements UploadImageEnab
 
             String content = contentEditText.getText().toString();
 
-            retrofit.getRetrofit().create(LemmyAPI.class).commentEdit(new EditCommentDTO(mCommentId, content, null, null, mAccessToken))
+            retrofit.getRetrofit().create(LemmyBetaAPI.class).commentEdit(new EditCommentDTO(mCommentId, content, null, null, mAccessToken))
                     .enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

@@ -46,15 +46,13 @@ import butterknife.ButterKnife;
 import eu.toldi.infinityforlemmy.DualBadgeDrawable;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.SaveComment;
-import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.VoteThing;
 import eu.toldi.infinityforlemmy.activities.BaseActivity;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.activities.ViewUserDetailActivity;
+import eu.toldi.infinityforlemmy.apis.apihandler.ApiHandler;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.CommentMoreBottomSheetFragment;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.UrlMenuBottomSheetFragment;
 import eu.toldi.infinityforlemmy.comment.Comment;
@@ -62,9 +60,7 @@ import eu.toldi.infinityforlemmy.comment.FetchComment;
 import eu.toldi.infinityforlemmy.commentfilter.CommentFilter;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.CommentIndentationView;
-import eu.toldi.infinityforlemmy.customviews.CustomMarkwonAdapter;
 import eu.toldi.infinityforlemmy.customviews.LinearLayoutManagerBugFixed;
-import eu.toldi.infinityforlemmy.customviews.SpoilerOnClickTextView;
 import eu.toldi.infinityforlemmy.customviews.SwipeLockInterface;
 import eu.toldi.infinityforlemmy.customviews.SwipeLockLinearLayoutManager;
 import eu.toldi.infinityforlemmy.databinding.ItemCommentBinding;
@@ -101,6 +97,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private ViewPostDetailFragment mFragment;
     private Executor mExecutor;
     private RetrofitHolder mRetrofit;
+    private ApiHandler mApiHandler;
     private Retrofit mOauthRetrofit;
     private Markwon mCommentMarkwon;
     private String mAccessToken;
@@ -173,7 +170,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public CommentsRecyclerViewAdapter(BaseActivity activity, ViewPostDetailFragment fragment,
                                        CustomThemeWrapper customThemeWrapper,
-                                       Executor executor, RetrofitHolder retrofit,
+                                       Executor executor, RetrofitHolder retrofit, ApiHandler apiHandler,
                                        String accessToken, String accountName,
                                        Post post, Locale locale, Integer singleCommentId,
                                        boolean isSingleCommentThreadMode,
@@ -184,6 +181,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         mFragment = fragment;
         mExecutor = executor;
         mRetrofit = retrofit;
+        mApiHandler = apiHandler;
         mGlide = Glide.with(activity.getApplicationContext());
         mSecondaryTextColor = customThemeWrapper.getSecondaryTextColor();
         mCommentTextColor = customThemeWrapper.getCommentColor();
@@ -1516,31 +1514,31 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                         comment.getScore() + comment.getVoteType())));
                     }
 
-                    VoteThing.voteComment(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    mApiHandler.voteComment(comment.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_UPVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_UPVOTE);
-                                if (currentPosition == position) {
+                               // if (currentPosition == position) {
                                     upvoteButton.setIconResource(R.drawable.ic_upvote_filled_24dp);
                                     upvoteButton.setIconTint(ColorStateList.valueOf(mUpvotedColor));
                                     scoreTextView.setTextColor(mUpvotedColor);
                                     topScoreTextView.setTextColor(mUpvotedColor);
                                     downvoteTextView.setTextColor(mCommentIconAndInfoColor);
-                                }
+                                //}
                             } else {
                                 comment.setVoteType(Comment.VOTE_TYPE_NO_VOTE);
-                                if (currentPosition == position) {
+                              //  if (currentPosition == position) {
                                     upvoteButton.setIconResource(R.drawable.ic_upvote_24dp);
                                     upvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
                                     scoreTextView.setTextColor(mCommentIconAndInfoColor);
                                     topScoreTextView.setTextColor(mSecondaryTextColor);
                                     downvoteTextView.setTextColor(mCommentIconAndInfoColor);
-                                }
+                               // }
                             }
 
-                            if (currentPosition == position) {
+                            //if (currentPosition == position) {
                                 downvoteButton.setIconResource(R.drawable.ic_downvote_24dp);
                                 downvoteButton.setIconTint(ColorStateList.valueOf(mCommentIconAndInfoColor));
                                 if (!mHideTheNumberOfVotes) {
@@ -1559,13 +1557,13 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                                             Utils.getNVotes(mShowAbsoluteNumberOfVotes,
                                                     comment.getScore() + comment.getVoteType())));
                                 }
-                            }
+                           // }
                         }
 
                         @Override
-                        public void onVoteThingFail(int position) {
+                        public void onVoteThingFail() {
                         }
-                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -1637,9 +1635,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     }
 
                     int position = getBindingAdapterPosition();
-                    VoteThing.voteComment(mActivity, mRetrofit.getRetrofit(), mAccessToken, new VoteThing.VoteThingListener() {
+                    mApiHandler.voteComment(comment.getId(), newVoteType, mAccessToken, new ApiHandler.VoteListener() {
                         @Override
-                        public void onVoteThingSuccess(int position1) {
+                        public void onVoteThingSuccess() {
                             int currentPosition = getBindingAdapterPosition();
                             if (newVoteType == Integer.parseInt(APIUtils.DIR_DOWNVOTE)) {
                                 comment.setVoteType(Comment.VOTE_TYPE_DOWNVOTE);
@@ -1686,9 +1684,9 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         }
 
                         @Override
-                        public void onVoteThingFail(int position1) {
+                        public void onVoteThingFail() {
                         }
-                    }, comment.getId(), newVoteType, getBindingAdapterPosition());
+                    });
                 }
             });
 
@@ -1696,10 +1694,10 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                 Comment comment = getCurrentComment(this);
                 if (comment != null) {
                     int position = getBindingAdapterPosition();
-                    SaveComment saveComment = new SaveComment();
+
                     if (comment.isSaved()) {
                         comment.setSaved(false);
-                        saveComment.unsaveThing(mRetrofit.getRetrofit(), mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        mApiHandler.unsaveComment(comment.getId(),mAccessToken, new ApiHandler.SaveCommentListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(false);
@@ -1710,7 +1708,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                             }
 
                             @Override
-                            public void failed() {
+                            public void onFailure() {
                                 comment.setSaved(true);
                                 if (getBindingAdapterPosition() == position) {
                                     saveButton.setIconResource(R.drawable.ic_bookmark_grey_24dp);
@@ -1720,7 +1718,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                         });
                     } else {
                         comment.setSaved(true);
-                        saveComment.saveThing(mRetrofit.getRetrofit(), mAccessToken, comment.getId(), new SaveThing.SaveThingListener() {
+                        mApiHandler.saveComment(comment.getId(),mAccessToken, new ApiHandler.SaveCommentListener() {
                             @Override
                             public void success() {
                                 comment.setSaved(true);
@@ -1731,7 +1729,7 @@ public class CommentsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                             }
 
                             @Override
-                            public void failed() {
+                            public void onFailure() {
                                 comment.setSaved(false);
                                 if (getBindingAdapterPosition() == position) {
                                     saveButton.setIconResource(R.drawable.ic_bookmark_border_grey_24dp);

@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 
 public class FetchSubredditData {
     public static void fetchSubredditData(Retrofit retrofit, String subredditName, String accessToken, final FetchSubredditDataListener fetchSubredditDataListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
         Call<String> subredditData;
         subredditData = api.communityInfo(subredditName, accessToken);
@@ -47,7 +47,7 @@ public class FetchSubredditData {
 
     static void fetchSubredditListingData(Retrofit retrofit, String query, Integer page, SortType.Type sortType, String accessToken,
                                           boolean nsfw, final FetchSubredditListingDataListener fetchSubredditListingDataListener) {
-        LemmyAPI api = retrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
 
 
         Call<String> subredditDataCall = api.search(query, null, null, null, "Communities", sortType.value, "All", page, 25, accessToken);

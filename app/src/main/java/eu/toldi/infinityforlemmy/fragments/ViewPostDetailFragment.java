@@ -77,8 +77,6 @@ import eu.toldi.infinityforlemmy.Infinity;
 import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.SavePost;
-import eu.toldi.infinityforlemmy.SaveThing;
 import eu.toldi.infinityforlemmy.SortType;
 import eu.toldi.infinityforlemmy.activities.CommentActivity;
 import eu.toldi.infinityforlemmy.activities.EditPostActivity;
@@ -87,8 +85,10 @@ import eu.toldi.infinityforlemmy.activities.SubmitCrosspostActivity;
 import eu.toldi.infinityforlemmy.activities.ViewPostDetailActivity;
 import eu.toldi.infinityforlemmy.adapters.CommentsRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.adapters.PostDetailRecyclerViewAdapter;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.apis.StreamableAPI;
+import eu.toldi.infinityforlemmy.apis.apihandler.ApiHandler;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.asynctasks.LoadUserData;
 import eu.toldi.infinityforlemmy.bottomsheetfragments.PostCommentSortTypeBottomSheetFragment;
 import eu.toldi.infinityforlemmy.comment.Comment;
@@ -160,6 +160,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
+    @Inject
+    ApiHandlerProvider apiHandlerProvider;
     @Inject
     @Named("pushshift")
     Retrofit pushshiftRetrofit;
@@ -619,13 +621,13 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             setupMenu();
 
             mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
-                    this, mExecutor, mCustomThemeWrapper, mRetrofit,
+                    this, mExecutor, mCustomThemeWrapper, mRetrofit, apiHandlerProvider.getApiHandler(),
                     mRedgifsRetrofit, mStreamableApiProvider, mRedditDataRoomDatabase, mGlide,
                     mSeparatePostAndComments, mAccessToken, mAccountName, mPost, mLocale,
                     mSharedPreferences, mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences, mPostDetailsSharedPreferences,
                     mExoCreator, post -> EventBus.getDefault().post(new PostUpdateEventToPostList(mPost, postListPosition)));
             mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
-                    this, mCustomThemeWrapper, mExecutor, mRetrofit,
+                    this, mCustomThemeWrapper, mExecutor, mRetrofit, apiHandlerProvider.getApiHandler(),
                     mAccessToken, mAccountQualifiedName, mPost, mLocale, mSingleCommentId
                     , isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                     new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
@@ -959,11 +961,10 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
             return true;
         } else if (itemId == R.id.action_save_view_post_detail_fragment) {
             if (mPost != null && mAccessToken != null) {
-                SavePost savePost = new SavePost();
                 if (mPost.isSaved()) {
                     item.setIcon(mUnsavedIcon);
-                    savePost.unsaveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
-                            new SaveThing.SaveThingListener() {
+                    apiHandlerProvider.getApiHandler().unsavePost(mPost.getId(),mAccessToken,
+                            new ApiHandler.SavePostListener() {
                                 @Override
                                 public void success() {
                                     if (isAdded()) {
@@ -975,7 +976,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 }
 
                                 @Override
-                                public void failed() {
+                                public void onFailure() {
                                     if (isAdded()) {
                                         mPost.setSaved(true);
                                         item.setIcon(mSavedIcon);
@@ -986,8 +987,8 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                             });
                 } else {
                     item.setIcon(mSavedIcon);
-                    savePost.saveThing(mRetrofit.getRetrofit(), mAccessToken, mPost.getId(),
-                            new SaveThing.SaveThingListener() {
+                    apiHandlerProvider.getApiHandler().savePost(mPost.getId(),mAccessToken,
+                            new ApiHandler.SavePostListener() {
                                 @Override
                                 public void success() {
                                     if (isAdded()) {
@@ -999,7 +1000,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 }
 
                                 @Override
-                                public void failed() {
+                                public void onFailure() {
                                     if (isAdded()) {
                                         mPost.setSaved(false);
                                         item.setIcon(mUnsavedIcon);
@@ -1355,7 +1356,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                         mPost = post;
                         mPostAdapter = new PostDetailRecyclerViewAdapter(activity,
                                 ViewPostDetailFragment.this, mExecutor, mCustomThemeWrapper,
-                                mRetrofit, mRedgifsRetrofit,
+                                mRetrofit, apiHandlerProvider.getApiHandler(),mRedgifsRetrofit,
                                 mStreamableApiProvider, mRedditDataRoomDatabase, mGlide, mSeparatePostAndComments,
                                 mAccessToken, mAccountName, mPost, mLocale, mSharedPreferences,
                                 mCurrentAccountSharedPreferences, mNsfwAndSpoilerSharedPreferences,
@@ -1368,7 +1369,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
                                 pages_loaded++;
                                 mCommentsAdapter = new CommentsRecyclerViewAdapter(activity,
                                         ViewPostDetailFragment.this, mCustomThemeWrapper, mExecutor,
-                                        mRetrofit, mAccessToken, mAccountQualifiedName, mPost, mLocale,
+                                        mRetrofit, apiHandlerProvider.getApiHandler(), mAccessToken, mAccountQualifiedName, mPost, mLocale,
                                         mSingleCommentId, isSingleCommentThreadMode, mSharedPreferences, mCurrentAccountSharedPreferences,
                                         new CommentsRecyclerViewAdapter.CommentRecyclerViewAdapterCallback() {
                                             @Override
@@ -1613,7 +1614,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         Map<String, String> params = new HashMap<>();
         params.put(APIUtils.ID_KEY, mPost.getFullName());
-        mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), mPost.getTitle(), mPost.getUrl(), mPost.getSelfText(), true, null, mAccessToken))
+        mRetrofit.getRetrofit().create(LemmyBetaAPI.class).postUpdate(new EditPostDTO(mPost.getId(), mPost.getTitle(), mPost.getUrl(), mPost.getSelfText(), true, null, mAccessToken))
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
@@ -1651,7 +1652,7 @@ public class ViewPostDetailFragment extends Fragment implements FragmentCommunic
 
         Map<String, String> params = new HashMap<>();
         params.put(APIUtils.ID_KEY, mPost.getFullName());
-        mRetrofit.getRetrofit().create(LemmyAPI.class).postUpdate(new EditPostDTO(mPost.getId(), mPost.getTitle(), mPost.getUrl(), mPost.getSelfText(), false, null, mAccessToken))
+        mRetrofit.getRetrofit().create(LemmyBetaAPI.class).postUpdate(new EditPostDTO(mPost.getId(), mPost.getTitle(), mPost.getUrl(), mPost.getSelfText(), false, null, mAccessToken))
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {

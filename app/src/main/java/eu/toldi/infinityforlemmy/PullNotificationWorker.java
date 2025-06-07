@@ -30,7 +30,7 @@ import javax.inject.Named;
 import eu.toldi.infinityforlemmy.account.Account;
 import eu.toldi.infinityforlemmy.activities.InboxActivity;
 import eu.toldi.infinityforlemmy.activities.LinkResolverActivity;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.ParseComment;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
@@ -182,7 +182,7 @@ public class PullNotificationWorker extends Worker {
         if (retryCount < 0) {
             return null;
         }
-        Call<String> call = mRetrofit.getRetrofit().create(LemmyAPI.class).userReplies("New", 1, 25, true, account.getAccessToken());
+        Call<String> call = mRetrofit.getRetrofit().create(LemmyBetaAPI.class).userReplies("New", 1, 25, true, account.getAccessToken());
         Response<String> response = call.execute();
 
         if (response.isSuccessful()) {

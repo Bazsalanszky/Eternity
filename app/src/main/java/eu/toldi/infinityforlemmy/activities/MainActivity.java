@@ -90,6 +90,7 @@ import eu.toldi.infinityforlemmy.account.AccountViewModel;
 import eu.toldi.infinityforlemmy.adapters.SubredditAutocompleteRecyclerViewAdapter;
 import eu.toldi.infinityforlemmy.adapters.navigationdrawer.NavigationDrawerRecyclerViewMergedAdapter;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.provider.ApiHandlerProvider;
 import eu.toldi.infinityforlemmy.asynctasks.InsertSubscribedThings;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchAccount;
 import eu.toldi.infinityforlemmy.asynctasks.SwitchToAnonymousMode;
@@ -182,6 +183,8 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
     @Inject
     @Named("no_oauth")
     RetrofitHolder mRetrofit;
+    @Inject
+    ApiHandlerProvider apiHandlerProvider;
     @Inject
     @Named("oauth")
     Retrofit mOauthRetrofit;
@@ -347,6 +350,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
 
         mAccessToken = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCESS_TOKEN, null);
         mRetrofit.setAccessToken(mAccessToken);
+        apiHandlerProvider.setAccessToken(mAccessToken);
         mBearerTokenUsed = mCurrentAccountSharedPreferences.getBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true);
 
         mAccountName = mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_NAME, null);
@@ -354,6 +358,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
         String instance = (mAccessToken == null) ? mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI) : mCurrentAccountSharedPreferences.getString(SharedPreferencesUtils.ACCOUNT_INSTANCE, null);
         if (instance != null) {
             mRetrofit.setBaseURL(instance);
+            apiHandlerProvider.setBaseUrl(instance);
         }
 
         if (savedInstanceState != null) {
@@ -379,6 +384,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
             String instancePreference = mSharedPreferences.getString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, APIUtils.API_BASE_URI);
             if (!instancePreference.startsWith(mRetrofit.getBaseURL())) {
                 mRetrofit.setBaseURL(instancePreference);
+                apiHandlerProvider.setBaseUrl(instancePreference);
                 this.recreate();
             }
         } else {
@@ -1162,10 +1168,12 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                             int minorVersion = Integer.parseInt(version[1]);
                             if (majorVersion > 0 || (majorVersion == 0 && minorVersion >= 19)) {
                                 mRetrofit.setAccessToken(mAccessToken);
+                                apiHandlerProvider.setAccessToken(mAccessToken);
                                 mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, true).apply();
                                 checkUserToken();
                             } else {
                                 mRetrofit.setAccessToken(null);
+                                apiHandlerProvider.setAccessToken(null);
                                 mCurrentAccountSharedPreferences.edit().putBoolean(SharedPreferencesUtils.BEARER_TOKEN_AUTH, false).apply();
                             }
                         }
@@ -1519,6 +1527,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                     url = urlObj.getProtocol() + "://" + urlObj.getHost() + "/";
                     mSharedPreferences.edit().putString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, url).apply();
                     mRetrofit.setBaseURL(url);
+                    apiHandlerProvider.setBaseUrl(url);
                     sectionsPagerAdapter.getCurrentFragment().refresh();
                 } catch (MalformedURLException e) {
                     thingEditText.setError("Invalid URL");
@@ -1548,6 +1557,7 @@ public class MainActivity extends BaseActivity implements SortTypeSelectionCallb
                         url = urlObj.getProtocol() + "://" + urlObj.getHost() + "/";
                         mSharedPreferences.edit().putString(SharedPreferencesUtils.ANONYMOUS_ACCOUNT_INSTANCE, url).apply();
                         mRetrofit.setBaseURL(url);
+                        apiHandlerProvider.setBaseUrl(url);
                         sectionsPagerAdapter.getCurrentFragment().refresh();
                     } catch (MalformedURLException e) {
                         thingEditText.setError("Invalid URL");

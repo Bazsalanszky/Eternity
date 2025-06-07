@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.Flair;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.dto.SubmitPostDTO;
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -68,7 +68,7 @@ public class SubmitPost {
                                    boolean receivePostReplyNotifications, String kind,
                                    @Nullable String posterUrl, PostEnricher postEnricher,
                                    SubmitPostListener submitPostListener) {
-        LemmyAPI api = oauthRetrofit.create(LemmyAPI.class);
+        LemmyBetaAPI api = oauthRetrofit.create(LemmyBetaAPI.class);
 
 
         Call<String> submitPostCall = api.postCreate(new SubmitPostDTO(title, communityId, posterUrl, content, null, isNSFW, null, accessToken));

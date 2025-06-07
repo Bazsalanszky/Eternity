@@ -1,7 +1,7 @@
 package eu.toldi.infinityforlemmy.post;
 
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.dto.ReadPostDTO;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,9 +15,9 @@ public class MarkPostAsRead {
     }
 
     private void setPostAsRead(int post_id, boolean markAsRead, String auth, MarkPostAsReadListener markPostAsReadListener) {
-        LemmyAPI lemmyAPI = retrofitHolder.getRetrofit().create(LemmyAPI.class);
+        LemmyBetaAPI lemmyBetaAPI = retrofitHolder.getRetrofit().create(LemmyBetaAPI.class);
 
-        lemmyAPI.postRead(new ReadPostDTO(post_id, markAsRead, auth)).enqueue(new Callback<String>() {
+        lemmyBetaAPI.postRead(new ReadPostDTO(post_id, markAsRead, auth)).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()

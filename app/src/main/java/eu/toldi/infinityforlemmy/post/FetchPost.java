@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.apis.RedditAPI;
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import retrofit2.Call;
@@ -19,7 +19,7 @@ public class FetchPost {
                                  PostEnricher postEnricher, FetchPostListener fetchPostListener) {
         Call<String> postCall;
         // Use LemmyAPI.postInfo() instead of RedditAPI.getPost()
-        postCall = retrofit.create(LemmyAPI.class).postInfo(Integer.parseInt(id), null, accessToken);
+        postCall = retrofit.create(LemmyBetaAPI.class).postInfo(Integer.parseInt(id), null, accessToken);
 
         postCall.enqueue(new Callback<>() {
             @Override

@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -43,7 +43,7 @@ public class UploadImageUtils {
         RequestBody fileBody = RequestBody.create(byteArray, MediaType.parse("application/octet-stream"));
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("images[]", "post_image.jpg", fileBody);
 
-        LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
+        LemmyBetaAPI api = mRetrofit.getRetrofit().create(LemmyBetaAPI.class);
         Call<String> uploadMedia = api.uploadImage("jwt=" + accessToken, fileToUpload);
         Response<String> uploadMediaResponse = uploadMedia.execute();
         if (uploadMediaResponse.isSuccessful()) {

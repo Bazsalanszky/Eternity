@@ -44,7 +44,7 @@ import eu.toldi.infinityforlemmy.R;
 import eu.toldi.infinityforlemmy.RedditDataRoomDatabase;
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.adapters.CustomArrayAdapter;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.asynctasks.ParseAndInsertNewAccount;
 import eu.toldi.infinityforlemmy.customtheme.CustomThemeWrapper;
 import eu.toldi.infinityforlemmy.customviews.slidr.Slidr;
@@ -196,7 +196,7 @@ public class LoginActivity extends BaseActivity {
             Log.i("LoginActivity", "Instance: " + instance);
             AccountLoginDTO accountLoginDTO = new AccountLoginDTO(username, password_input.getText().toString(), token_2fa_input.getText().toString());
             mRetrofit.setBaseURL(instance);
-            LemmyAPI api = mRetrofit.getRetrofit().create(LemmyAPI.class);
+            LemmyBetaAPI api = mRetrofit.getRetrofit().create(LemmyBetaAPI.class);
             Call<String> accessTokenCall = api.userLogin(accountLoginDTO);
             String finalInstance = instance;
             accessTokenCall.enqueue(new Callback<String>() {

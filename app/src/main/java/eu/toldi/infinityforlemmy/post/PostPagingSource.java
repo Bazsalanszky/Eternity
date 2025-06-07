@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 import eu.toldi.infinityforlemmy.RetrofitHolder;
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher;
 import eu.toldi.infinityforlemmy.postfilter.PostFilter;
 import eu.toldi.infinityforlemmy.utils.MultiCommunityUtils;
@@ -169,7 +169,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
     @NonNull
     @Override
     public ListenableFuture<LoadResult<Integer, Post>> loadFuture(@NonNull LoadParams<Integer> loadParams) {
-        LemmyAPI api = retrofit.getRetrofit().create(LemmyAPI.class);
+        LemmyBetaAPI api = retrofit.getRetrofit().create(LemmyBetaAPI.class);
         switch (postType) {
 
             case TYPE_FRONT_PAGE:
@@ -220,7 +220,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
         }
     }
 
-    private ListenableFuture<LoadResult<Integer, Post>> loadHomePosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadHomePosts(@NonNull LoadParams<Integer> loadParams, LemmyBetaAPI api) {
         ListenableFuture<Response<String>> bestPost;
         Integer page;
         if (loadParams.getKey() == null) {
@@ -249,7 +249,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<Integer, Post>> loadSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyBetaAPI api) {
         ListenableFuture<Response<String>> subredditPost;
 
         subredditPost = api.getPostsListenableFuture(null, sortType.getType().value, loadParams.getKey(), 25, null, subredditOrUserName, false, accessToken);
@@ -265,7 +265,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<Integer, Post>> loadUserPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadUserPosts(@NonNull LoadParams<Integer> loadParams, LemmyBetaAPI api) {
         ListenableFuture<Response<String>> userPosts;
         userPosts = api.getUserPostsListenableFuture(subredditOrUserName, sortType.getType().value, loadParams.getKey(), 25, userWhere.equals(USER_WHERE_SAVED), accessToken);
 
@@ -280,7 +280,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
                 IOException.class, LoadResult.Error::new, executor);
     }
 
-    private ListenableFuture<LoadResult<Integer, Post>> loadSearchPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadSearchPosts(@NonNull LoadParams<Integer> loadParams, LemmyBetaAPI api) {
         ListenableFuture<Response<String>> searchPosts;
 
         searchPosts = api.searchLive(query, null, subredditOrUserName, null, "Posts", sortType.getType().value, "All", loadParams.getKey(), 25, accessToken);
@@ -298,7 +298,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
 
     Map<String, List<Post>> undisplayedPosts = new HashMap<>();
 
-    private ListenableFuture<LoadResult<Integer, Post>> loadMultipleSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api, List<String> communities) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadMultipleSubredditPosts(@NonNull LoadParams<Integer> loadParams, LemmyBetaAPI api, List<String> communities) {
         List<ListenableFuture<LoadResult<Integer, Post>>> futures = new ArrayList<>();
         List<Post> combinedPostsFromCache = new ArrayList<>();
 
@@ -352,7 +352,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
                 }, executor);
     }
 
-    private ListenableFuture<LoadResult<Integer, Post>> fetchPostsFromCommunity(LemmyAPI api, LoadParams<Integer> loadParams, String community) {
+    private ListenableFuture<LoadResult<Integer, Post>> fetchPostsFromCommunity(LemmyBetaAPI api, LoadParams<Integer> loadParams, String community) {
 
         ListenableFuture<Response<String>> subredditPost;
 
@@ -390,7 +390,7 @@ public class PostPagingSource extends ListenableFuturePagingSource<Integer, Post
                 IOException.class, LoadResult.Error::new, executor);
     }*/
 
-    private ListenableFuture<LoadResult<Integer, Post>> loadAnonymousHomePosts(@NonNull LoadParams<Integer> loadParams, LemmyAPI api) {
+    private ListenableFuture<LoadResult<Integer, Post>> loadAnonymousHomePosts(@NonNull LoadParams<Integer> loadParams, LemmyBetaAPI api) {
         if (subredditOrUserName == null) {
             // Return empty list
             return Futures.immediateFuture(new LoadResult.Page<>(new ArrayList<>(), null, null));

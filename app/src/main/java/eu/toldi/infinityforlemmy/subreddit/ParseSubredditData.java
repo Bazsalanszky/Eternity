@@ -85,7 +85,7 @@ public class ParseSubredditData {
         return new SubredditData(id, name, title, description, removed, published, updated, deleted, isNSFW, actorId, local, iconUrl, bannerImageUrl, hidden, postingRestrictedToMods, instanceId, subscribers, blocked, stats);
     }
 
-    interface ParseSubredditDataListener {
+    public interface ParseSubredditDataListener {
         void onParseSubredditDataSuccess(SubredditData subredditData, int nCurrentOnlineSubscribers);
 
         void onParseSubredditDataFail();

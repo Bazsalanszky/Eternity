@@ -1,13 +1,13 @@
 package eu.toldi.infinityforlemmy.site
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI
 import eu.toldi.infinityforlemmy.dto.BlockInstanceDTO
 import retrofit2.Retrofit
 
 object BlockInstance {
     fun blockInstance(retrofit: Retrofit, instance_id: Int, block: Boolean, blockInstanceResponse: BlockInstanceResponse) {
-        val LemmyAPI = retrofit.create(LemmyAPI::class.java)
-        val response = LemmyAPI.blockInstance(BlockInstanceDTO(instance_id,block)).enqueue(
+        val LemmyBetaAPI = retrofit.create(LemmyBetaAPI::class.java)
+        val response = LemmyBetaAPI.blockInstance(BlockInstanceDTO(instance_id,block)).enqueue(
             object : retrofit2.Callback<String> {
                 override fun onResponse(call: retrofit2.Call<String>, response: retrofit2.Response<String>) {
                     if (response.isSuccessful) {

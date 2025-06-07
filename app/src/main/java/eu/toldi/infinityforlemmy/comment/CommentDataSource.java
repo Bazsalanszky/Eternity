@@ -16,7 +16,7 @@ import java.util.Locale;
 
 import eu.toldi.infinityforlemmy.NetworkState;
 import eu.toldi.infinityforlemmy.SortType;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,7 +73,7 @@ public class CommentDataSource extends PageKeyedDataSource<Integer, Comment> {
     @Override
 public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Comment> callback) {
     updateNetworkState(initialLoadStateLiveData, NetworkState.LOADING);
-    LemmyAPI api = retrofit.create(LemmyAPI.class);
+    LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
     if (query != null && !query.isEmpty()) {
         fetchComments(api.search(query, null, null, null,"Comments", sortType.getType().value,"All",1, 25, accessToken), callback, true);
     } else {
@@ -85,7 +85,7 @@ public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull Loa
 public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Comment> callback) {
     this.params = params;
     updateNetworkState(paginationNetworkStateLiveData, NetworkState.LOADING);
-    LemmyAPI api = retrofit.create(LemmyAPI.class);
+    LemmyBetaAPI api = retrofit.create(LemmyBetaAPI.class);
     if (query != null && !query.isEmpty()) {
         fetchComments(api.search(query, null, null, null,"Comments", sortType.getType().value,"All",params.key, 25, accessToken), callback, false);
     } else {

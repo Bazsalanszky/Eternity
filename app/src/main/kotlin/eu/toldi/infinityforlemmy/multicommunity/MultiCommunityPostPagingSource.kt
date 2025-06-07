@@ -6,7 +6,7 @@ import com.google.common.base.Function
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import eu.toldi.infinityforlemmy.SortType
-import eu.toldi.infinityforlemmy.apis.LemmyAPI
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI
 import eu.toldi.infinityforlemmy.post.ParsePost
 import eu.toldi.infinityforlemmy.post.Post
 import eu.toldi.infinityforlemmy.post.enrich.PostEnricher
@@ -21,7 +21,7 @@ import java.util.concurrent.Executor
 
 
 class MulticommunityPagingSource(
-    private val api: LemmyAPI,
+    private val api: LemmyBetaAPI,
     private val communities: List<String>,
     private val accessToken: String?,
     private val sortType: SortType,
@@ -133,7 +133,7 @@ class MulticommunityPagingSource(
     }
 
     private fun fetchPostsFromCommunity(
-        api: LemmyAPI,
+        api: LemmyBetaAPI,
         pageNumber: Int,
         community: String
     ): ListenableFuture<LoadResult<Int, Post>> {

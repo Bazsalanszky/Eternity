@@ -201,7 +201,7 @@ public class ParseComment {
         });
     }
 
-    static void parseSentComment(Executor executor, Handler handler, String response,
+    public static void parseSentComment(Executor executor, Handler handler, String response,
                                  ParseSentCommentListener parseSentCommentListener) {
         executor.execute(() -> {
             try {
@@ -432,7 +432,7 @@ public class ParseComment {
         void onParseCommentFailed();
     }
 
-    interface ParseSentCommentListener {
+    public interface ParseSentCommentListener {
         void onParseSentCommentSuccess(Comment comment);
 
         void onParseSentCommentFailed(@Nullable String errorMessage);

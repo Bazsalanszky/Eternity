@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import eu.toldi.infinityforlemmy.RetrofitHolder;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.comment.Comment;
 import eu.toldi.infinityforlemmy.comment.ParseComment;
 import retrofit2.Call;
@@ -22,9 +22,9 @@ public class ObjectResolver {
     }
 
     public void resolvePost(String query, String auth, ObjectResolverListener objectResolverListener) {
-        LemmyAPI lemmyAPI = retrofitHolder.getRetrofit().create(LemmyAPI.class);
+        LemmyBetaAPI lemmyBetaAPI = retrofitHolder.getRetrofit().create(LemmyBetaAPI.class);
 
-        Call<String> response = lemmyAPI.resolveObject(query, auth);
+        Call<String> response = lemmyBetaAPI.resolveObject(query, auth);
         response.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -52,9 +52,9 @@ public class ObjectResolver {
     }
 
     public void resolveComment(String query, String auth, ObjectResolverListener objectResolverListener) {
-        LemmyAPI lemmyAPI = retrofitHolder.getRetrofit().create(LemmyAPI.class);
+        LemmyBetaAPI lemmyBetaAPI = retrofitHolder.getRetrofit().create(LemmyBetaAPI.class);
 
-        Call<String> response = lemmyAPI.resolveObject(query, auth);
+        Call<String> response = lemmyBetaAPI.resolveObject(query, auth);
         response.enqueue(
                 new Callback<String>() {
                     @Override

@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.dto.DeleteCommentDTO;
 import eu.toldi.infinityforlemmy.dto.DeletePostDTO;
 import eu.toldi.infinityforlemmy.utils.APIUtils;
@@ -19,7 +19,7 @@ public class DeleteThing {
     public static void deletePost(Retrofit retrofit, int post_id, String accessToken, DeleteThingListener deleteThingListener) {
         Map<String, String> params = new HashMap<>();
         params.put(APIUtils.ID_KEY, String.valueOf(post_id));
-        retrofit.create(LemmyAPI.class).postDelete(new DeletePostDTO(post_id, true, accessToken)).enqueue(new Callback<String>() {
+        retrofit.create(LemmyBetaAPI.class).postDelete(new DeletePostDTO(post_id, true, accessToken)).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
@@ -39,7 +39,7 @@ public class DeleteThing {
     public static void deleteComment(Retrofit retrofit, int comment_id, String accessToken, DeleteThingListener deleteThingListener) {
         Map<String, String> params = new HashMap<>();
         params.put(APIUtils.ID_KEY, String.valueOf(comment_id));
-        retrofit.create(LemmyAPI.class).commentDelete(new DeleteCommentDTO(comment_id, true, accessToken)).enqueue(new Callback<String>() {
+        retrofit.create(LemmyBetaAPI.class).commentDelete(new DeleteCommentDTO(comment_id, true, accessToken)).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {

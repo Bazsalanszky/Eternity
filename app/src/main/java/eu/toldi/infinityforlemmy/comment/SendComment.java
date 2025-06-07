@@ -5,15 +5,11 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 import eu.toldi.infinityforlemmy.account.Account;
-import eu.toldi.infinityforlemmy.apis.LemmyAPI;
-import eu.toldi.infinityforlemmy.apis.RedditAPI;
+import eu.toldi.infinityforlemmy.apis.LemmyBetaAPI;
 import eu.toldi.infinityforlemmy.dto.CommentDTO;
-import eu.toldi.infinityforlemmy.utils.APIUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +23,7 @@ public class SendComment {
 
 
 
-        retrofit.create(LemmyAPI.class).postComment(new CommentDTO(commentMarkdown, post_id,parent_id, null,null,account.getAccessToken())).enqueue(new Callback<String>() {
+        retrofit.create(LemmyBetaAPI.class).postComment(new CommentDTO(commentMarkdown, post_id,parent_id, null,null,account.getAccessToken())).enqueue(new Callback<String>() {
             @Override
             public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
