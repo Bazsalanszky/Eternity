@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name" translatable="false">Eternity</string>
+    <string name="webview_load_failed">Page failed to load</string>
+    <string name="webview_load_failed_with_reason">Page failed to load: %1$s</string>
     <string name="login_activity_label">Login</string>
     <string name="search_activity_label" translatable="false"> </string>
     <string name="comment_activity_label">Send Comment</string>

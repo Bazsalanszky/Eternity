@@ -16,6 +16,8 @@ import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -104,6 +106,23 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 toolbar.setTitle(view.getTitle());
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request,
+                                        WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                if (request == null || !request.isForMainFrame()) {
+                    return;
+                }
+                CharSequence description = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && error != null && error.getDescription() != null
+                        ? error.getDescription()
+                        : "";
+                String message = description.length() > 0
+                        ? getString(R.string.webview_load_failed_with_reason, description)
+                        : getString(R.string.webview_load_failed);
+                Toast.makeText(WebViewActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         };
         webView.setWebViewClient(client);
